@@ -69,6 +69,7 @@
 --color-accent-blue: #4141E6;      /* Синий (stories, primary actions, buttons) */
 --color-accent-pink: #FC466B;      /* Розовый (stories, highlights) */
 --color-accent-purple: #7B61FF;    /* Фиолетовый (borders, decorative) */
+--color-accent-purple-dark: #7356BF; /* Темно-фиолетовый (cart buttons, add-to-cart CTAs) */
 --color-accent-orange: #F7B68A;    /* Оранжевый/персиковый (buttons, highlights) */
 --color-accent-red: #E24949;       /* Красный (price badges, alerts) */
 --color-accent-red-dark: #DD2476;  /* Темно-красный (градиенты) */
@@ -389,6 +390,39 @@
 - **Color**: #11BB8D (--color-status-online) для success state
 - **Emoji Support**: Да (например: "👍🏻")
 - **Использование**: Успешная валидация, позитивный feedback ("Good name 👍🏻")
+
+<!-- AI_SEARCH: product, card, title, catalog, shop -->
+#### Product Title (Card Title)
+- **Font Size**: 12px (0.75rem)
+- **Font Weight**: 400 (Regular)
+- **Font Family**: 'Archivo'
+- **Line Height**: 1.40 (16.8px)
+- **Color**: #09101D (--color-text-primary)
+- **Max Width**: 130px (с overflow ellipsis)
+- **Использование**: Заголовки товаров в карточках, названия продуктов в каталоге ("Kusmi Tea", "Nescafe Classic", "Bubuk Coffee")
+<!-- AI_RELATED: Price Display, Product Card, Star Rating -->
+
+<!-- AI_SEARCH: price, discount, strikethrough, old-price, sale -->
+#### Price Display (Old Price / Strikethrough)
+- **Font Size**: 9px (0.5625rem)
+- **Font Weight**: 600 (Semibold)
+- **Font Family**: 'Archivo'
+- **Line Height**: 1.40 (12.6px)
+- **Color**: #D9DDE2 (--color-bg-tertiary) - низкий контраст для старой цены
+- **Text Decoration**: line-through (зачеркнутый)
+- **Использование**: Старая цена в карточках товаров ("$3.95")
+<!-- AI_RELATED: Price Current, Product Card, Discount Badge -->
+
+<!-- AI_SEARCH: price, current, new-price, sale-price -->
+#### Price Display (Current Price)
+- **Font Size**: 13px (0.8125rem)
+- **Font Weight**: 600 (Semibold)
+- **Font Family**: 'Archivo'
+- **Line Height**: 1.40 (18.2px)
+- **Color**: #09101D (--color-text-primary)
+- **Max Width**: 48px
+- **Использование**: Текущая цена товара, цена со скидкой ("$2.95")
+<!-- AI_RELATED: Price Old, Product Card, Shopping Cart -->
 
 ---
 
@@ -1396,6 +1430,436 @@ Container: 375px width, 34px height
 - **Color**: Всегда #09101D для visibility на light backgrounds
 - **Position**: Центрирован горизонтально, 21px от верха контейнера
 - **Не перекрывать** контент или interactive elements
+
+---
+
+<!-- ============================================ -->
+<!-- AI_SECTION: Product Card Component          -->
+<!-- AI_SEARCH: product, catalog, shop, e-commerce, card, rating, price, cart -->
+<!-- AI_USE_CASE: e-commerce, shopping, catalog, grid, list -->
+<!-- ============================================ -->
+
+### 10. Product Card (E-Commerce Component)
+
+<!-- AI_COMPONENT: Product Card -->
+<!-- AI_SEARCH: product-card, catalog-card, shop-card, item-card -->
+<!-- AI_USE_CASE: product listing, catalog grid, shop layout, e-commerce -->
+<!-- AI_RELATED: Star Rating, Price Display, Add to Cart Button -->
+
+#### Product Card Specification
+
+**Спецификация из кода:**
+- **Card Size**: 140px × 230px
+- **Layout**: Vertical (Column)
+- **Spacing**: 10px between cards (horizontal)
+- **Container Padding**: 16px/10px
+- **Content Padding**: 5px all sides
+- **Vertical Spacing**: 5px (между секциями), 2px (между строками)
+
+**Image (Product Photo):**
+- **Size**: 140px × 143px (aspect ratio ~1:1)
+- **Border Radius**: 15px (--radius-badge)
+- **Fit**: cover
+- **Position**: Top of card
+- **Placeholder**: Background #D9DDE2 или image URL
+
+**Product Title:**
+- **Font**: 12px (0.75rem), weight 400, 'Archivo'
+- **Color**: #09101D (--color-text-primary)
+- **Max Width**: 130px
+- **Overflow**: ellipsis
+- **Line Height**: 1.40
+- **Spacing Top**: 5px from image
+
+**Star Rating:**
+- **Star Size**: 14×14
+- **Spacing**: 0 (no gap between stars)
+- **Count**: 5 stars
+- **Padding**: 1px each star
+- **Variants**: Filled (gold/yellow) или Empty (border outline)
+- **Spacing Top**: 2px from title
+
+**Price Section:**
+- **Layout**: Row with space-between
+- **Padding**: 5px vertical
+- **Spacing**: 5px between price and button
+- **Old Price**: 9px/600, #D9DDE2, strikethrough
+- **Current Price**: 13px/600, #09101D, max-width 48px
+- **Price Column Spacing**: Vertical stack (old над new)
+
+**Add to Cart Button:**
+- **Size**: 32×32
+- **Background**: #7356BF (--color-accent-purple-dark)
+- **Border Radius**: 100px (fully rounded)
+- **Padding**: 10px (icon становится 12×12)
+- **Icon Size**: 12×12 (plus icon или cart icon)
+- **Icon Color**: white
+- **Position**: Right side of price section
+
+**Структура Product Card:**
+
+```
+Card: 140×230
+├─ Image: 140×143
+│  ├─ Border Radius: 15px
+│  └─ Fit: cover
+│
+└─ Content: padding 5px
+   ├─ Spacing: 5px vertical
+   │
+   ├─ Title: 12px/400, max-width 130px
+   │  └─ Text: "Kusmi Tea", "Nescafe Classic"
+   │
+   ├─ Rating: 5 stars × 14×14
+   │  ├─ Spacing: 2px from title
+   │  └─ Stars: filled or empty
+   │
+   └─ Footer: padding 5px vertical
+      ├─ Price Column:
+      │  ├─ Old: $3.95, 9px/600, strikethrough, gray
+      │  └─ New: $2.95, 13px/600, black
+      │
+      └─ Cart Button: 32×32, purple, rounded
+         └─ Icon: 12×12, white, plus/cart
+```
+
+**CSS пример:**
+
+```css
+.product-card {
+  width: 140px;
+  height: 230px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.product-card__image {
+  width: 140px;
+  height: 143px;
+  border-radius: var(--radius-badge); /* 15px */
+  object-fit: cover;
+  background: var(--color-bg-tertiary); /* #D9DDE2 placeholder */
+}
+
+.product-card__content {
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.product-card__info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.product-card__title {
+  max-width: 130px;
+  font-family: 'Archivo';
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.40;
+  color: var(--color-text-primary); /* #09101D */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.product-card__rating {
+  display: flex;
+  gap: 0;
+  margin-top: 2px;
+}
+
+.product-card__star {
+  width: 14px;
+  height: 14px;
+  padding: 1px;
+}
+
+.product-card__star--filled {
+  color: #FFD700; /* gold */
+}
+
+.product-card__star--empty {
+  color: #D9DDE2; /* gray */
+  border: 1px solid #D9DDE2;
+}
+
+.product-card__footer {
+  padding: 5px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 5px;
+}
+
+.product-card__prices {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.product-card__price-old {
+  font-family: 'Archivo';
+  font-size: 9px;
+  font-weight: 600;
+  line-height: 1.40;
+  color: var(--color-bg-tertiary); /* #D9DDE2 */
+  text-decoration: line-through;
+}
+
+.product-card__price-current {
+  max-width: 48px;
+  font-family: 'Archivo';
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.40;
+  color: var(--color-text-primary); /* #09101D */
+}
+
+.product-card__cart-button {
+  width: 32px;
+  height: 32px;
+  padding: 10px;
+  background: var(--color-accent-purple-dark); /* #7356BF */
+  border-radius: 100px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 150ms ease;
+  flex-shrink: 0;
+}
+
+.product-card__cart-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 2px 8px rgba(115, 86, 191, 0.3);
+}
+
+.product-card__cart-button:active {
+  transform: scale(0.95);
+}
+
+.product-card__cart-icon {
+  width: 12px;
+  height: 12px;
+  color: white;
+}
+```
+
+**Grid Layout (Product Catalog):**
+
+```css
+.product-catalog {
+  padding: 10px 16px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* 2 columns on mobile 375px */
+.product-catalog {
+  display: grid;
+  grid-template-columns: repeat(2, 140px);
+  gap: 10px;
+  padding: 10px 16px;
+  justify-content: space-between;
+}
+
+/* Auto-fit для responsive */
+.product-catalog--responsive {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 140px);
+  gap: 10px;
+  padding: 10px 16px;
+}
+```
+
+**Usage Guidelines:**
+- **Card Width**: Всегда 140px для consistency
+- **Image Aspect**: 1:1 (square) для uniform grid
+- **Title Truncation**: Ellipsis для длинных названий
+- **Rating**: Опционально, можно скрыть если нет отзывов
+- **Price**: Старая цена опциональна (только для sale items)
+- **Cart Button**: Всегда фиолетовый #7356BF для брендинга
+- **Spacing**: 10px между карточками для breathing room
+- **Grid**: 2 колонки на mobile (375px), 3-4 на tablet/desktop
+<!-- AI_TIP: Use grid-template-columns: repeat(auto-fill, 140px) for responsive layout -->
+
+---
+
+<!-- ============================================ -->
+<!-- AI_SECTION: Star Rating Component            -->
+<!-- AI_SEARCH: rating, stars, review, score, 5-star -->
+<!-- AI_USE_CASE: product rating, reviews, feedback, score -->
+<!-- ============================================ -->
+
+### 11. Star Rating Component
+
+<!-- AI_COMPONENT: Star Rating -->
+<!-- AI_SEARCH: star-rating, 5-star, rating-stars, review-stars -->
+<!-- AI_USE_CASE: product reviews, ratings, feedback display, scores -->
+<!-- AI_RELATED: Product Card, Review System, Feedback -->
+
+#### Star Rating Specification
+
+**Спецификация из кода:**
+- **Star Size**: 14×14
+- **Star Padding**: 1px (внутренний padding)
+- **Spacing Between Stars**: 0 (вплотную друг к другу)
+- **Total Width**: 70px (5 stars × 14px)
+- **Count**: 5 stars (стандарт)
+- **Layout**: Horizontal row
+
+**Варианты Stars:**
+
+**1. Filled Star (Active)**
+```
+Size: 14×14
+Padding: 1px
+Color: #FFD700 (gold) или custom brand color
+Icon: Solid filled star
+Use Case: Rated stars, active rating
+```
+
+**2. Empty Star (Inactive)**
+```
+Size: 14×14
+Padding: 1px
+Color: #D9DDE2 (--color-bg-tertiary) gray
+Border: 1px solid #D9DDE2 (optional outline variant)
+Icon: Outline star or empty
+Use Case: Unrated stars, remaining rating
+```
+
+**3. Half Star (Partial Rating)**
+```
+Size: 14×14
+Padding: 1px
+Color: Left half gold, right half gray
+Icon: Half-filled star
+Use Case: 4.5, 3.5 ratings
+```
+
+**Структура Star Rating:**
+
+```
+Rating Container: display flex, gap 0
+├─ Star 1: 14×14, filled (gold)
+├─ Star 2: 14×14, filled (gold)
+├─ Star 3: 14×14, filled (gold)
+├─ Star 4: 14×14, filled (gold)
+└─ Star 5: 14×14, empty (gray/outline)
+```
+
+**CSS пример:**
+
+```css
+.star-rating {
+  display: flex;
+  gap: 0;
+  align-items: center;
+}
+
+.star-rating__star {
+  width: 14px;
+  height: 14px;
+  padding: 1px;
+  display: inline-block;
+}
+
+.star-rating__star--filled {
+  color: #FFD700; /* gold */
+}
+
+.star-rating__star--empty {
+  color: var(--color-bg-tertiary); /* #D9DDE2 */
+}
+
+.star-rating__star--empty-outline {
+  color: transparent;
+  border: 1px solid var(--color-bg-tertiary);
+  border-radius: 0;
+}
+
+.star-rating__star--half {
+  background: linear-gradient(90deg, #FFD700 50%, #D9DDE2 50%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Icon SVG or Font */
+.star-rating__star svg {
+  width: 12px;
+  height: 12px;
+}
+```
+
+**Interactive Star Rating (Clickable):**
+
+```css
+.star-rating--interactive .star-rating__star {
+  cursor: pointer;
+  transition: all 150ms ease;
+}
+
+.star-rating--interactive .star-rating__star:hover {
+  transform: scale(1.2);
+  color: #FFC700; /* brighter gold */
+}
+
+.star-rating--interactive .star-rating__star:active {
+  transform: scale(0.9);
+}
+```
+
+**Варианты Star Rating:**
+
+**1. Product Rating (Read-Only)**
+```html
+<div class="star-rating">
+  <span class="star-rating__star star-rating__star--filled">★</span>
+  <span class="star-rating__star star-rating__star--filled">★</span>
+  <span class="star-rating__star star-rating__star--filled">★</span>
+  <span class="star-rating__star star-rating__star--filled">★</span>
+  <span class="star-rating__star star-rating__star--empty">★</span>
+</div>
+```
+
+**2. Interactive Rating (User Input)**
+```html
+<div class="star-rating star-rating--interactive">
+  <button class="star-rating__star star-rating__star--filled">★</button>
+  <button class="star-rating__star star-rating__star--filled">★</button>
+  <button class="star-rating__star star-rating__star--filled">★</button>
+  <button class="star-rating__star star-rating__star--empty">★</button>
+  <button class="star-rating__star star-rating__star--empty">★</button>
+</div>
+```
+
+**3. With Rating Number**
+```html
+<div class="star-rating-with-number">
+  <div class="star-rating">...</div>
+  <span class="star-rating__number">4.2</span>
+  <span class="star-rating__count">(128)</span>
+</div>
+```
+
+**Usage Guidelines:**
+- **Star Count**: Всегда 5 stars (стандарт)
+- **Size**: 14×14 для compact cards, 16×16 или 20×20 для larger displays
+- **Color**: Gold #FFD700 стандарт, но можно использовать brand color
+- **Spacing**: No gap между звездами для compact look
+- **Read-Only vs Interactive**: Используйте spans для read-only, buttons для interactive
+- **Accessibility**: Добавьте aria-label="Rating: 4 out of 5 stars"
+- **Half Stars**: Опционально для более точных рейтингов
+<!-- AI_TIP: Use role="img" and aria-label for accessibility -->
+<!-- AI_RELATED: Product Card, Review Card, Feedback Form -->
 
 ---
 
