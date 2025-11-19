@@ -17,128 +17,47 @@
 
 ### Принципы дизайна
 
-- **Консистентность**: Единообразие визуальных элементов и паттернов взаимодействия во всех продуктах. Используйте одинаковые отступы, цвета и компоненты для схожих задач.
-- **Читаемость**: Приоритет контрасту и размерам шрифтов для обеспечения комфортного восприятия информации пользователями всех возрастов.
-- **Эффективность**: Минимизация когнитивной нагрузки через понятную иерархию информации и интуитивные паттерны навигации.
-- **Адаптивность**: Гибкость дизайна для работы на различных устройствах и разрешениях от мобильных телефонов до широких десктопных экранов.
+- **Консистентность**: Единообразие визуальных элементов и паттернов взаимодействия в мобильном приложении
+- **Читаемость**: Приоритет контрасту и размерам шрифтов, оптимизированным для мобильных экранов
+- **Эффективность**: Минимизация когнитивной нагрузки через понятную иерархию информации
+- **Адаптивность**: Дизайн, оптимизированный для мобильных устройств различных размеров
 
 ### Философия
 
-> Наша дизайн-система создана для построения современных, доступных и масштабируемых интерфейсов. Мы верим в силу консистентности и простоты, позволяя командам быстро создавать продукты высокого качества без необходимости заново изобретать базовые паттерны.
+> Дизайн-система для мобильных приложений, построенная на основе типографики Archivo и минималистичной цветовой палитре.
 
 ---
 
 ## Цветовая палитра
 
-### Primary Colors
+### Base Colors
 
 ```css
-/* Основной цвет бренда */
---color-primary: #3B82F6;
---color-primary-hover: #2563EB;
---color-primary-active: #1D4ED8;
---color-primary-light: #DBEAFE;
---color-primary-dark: #1E40AF;
-
-/* Вторичный цвет */
---color-secondary: #8B5CF6;
---color-secondary-hover: #7C3AED;
---color-secondary-active: #6D28D9;
+/* Основные цвета */
+--color-white: #FFFFFF;
+--color-black: #09101D;
 ```
 
-### Semantic Colors
+### Text Colors
 
 ```css
-/* Success / Trend Up */
---color-success: #10B981;
---color-success-bg: #D1FAE5;
---color-success-border: #6EE7B7;
-
-/* Error / Trend Down */
---color-error: #EF4444;
---color-error-bg: #FEE2E2;
---color-error-border: #FCA5A5;
-
-/* Warning / Hot */
---color-warning: #F59E0B;
---color-warning-bg: #FEF3C7;
---color-warning-border: #FCD34D;
-
-/* Info */
---color-info: #3B82F6;
---color-info-bg: #DBEAFE;
---color-info-border: #93C5FD;
+/* Текст из Tailwind CSS */
+--color-text-primary: #020617;     /* slate-950 */
+--color-text-secondary: #27272A;   /* zinc-800 */
 ```
 
-### Neutral Colors
+### Accent Colors
 
 ```css
-/* Text */
---color-text-primary: #111827;
---color-text-secondary: #6B7280;
---color-text-tertiary: #9CA3AF;
---color-text-disabled: #D1D5DB;
---color-text-inverse: #FFFFFF;
-
-/* Backgrounds */
---color-bg-primary: #FFFFFF;
---color-bg-secondary: #F9FAFB;
---color-bg-tertiary: #F3F4F6;
---color-bg-elevated: #FFFFFF;
---color-bg-overlay: rgba(0, 0, 0, 0.5);
-
-/* Stroke / Borders */
---color-border-primary: #E5E7EB;
---color-border-secondary: #D1D5DB;
---color-border-focus: #3B82F6;
---color-border-disabled: #F3F4F6;
-
-/* Shades */
---color-gray-50: #F9FAFB;
---color-gray-100: #F3F4F6;
---color-gray-200: #E5E7EB;
---color-gray-300: #D1D5DB;
---color-gray-400: #9CA3AF;
---color-gray-500: #6B7280;
---color-gray-600: #4B5563;
---color-gray-700: #374151;
---color-gray-800: #1F2937;
---color-gray-900: #111827;
+/* Акцентные цвета */
+--color-accent-blue: #1D4ED8;      /* blue-700 */
 ```
 
-### Chart Colors
+### Shadow Colors
 
 ```css
-/* Для графиков и визуализации данных */
---color-chart-1: #3B82F6;
---color-chart-2: #8B5CF6;
---color-chart-3: #EC4899;
---color-chart-4: #F59E0B;
---color-chart-5: #10B981;
---color-chart-6: #06B6D4;
---color-chart-7: #6366F1;
---color-chart-8: #F43F5E;
-```
-
-### Gradients
-
-```css
-/* Градиенты для специальных элементов */
---gradient-primary: linear-gradient(135deg, #667EEA 0%, #764BA2 100%);
---gradient-secondary: linear-gradient(135deg, #F093FB 0%, #F5576C 100%);
---gradient-accent: linear-gradient(135deg, #4FACFE 0%, #00F2FE 100%);
-```
-
-### Brand Icon Colors
-
-```css
-/* Цвета для иконок брендов и социальных сетей */
---color-brand-facebook: #1877F2;
---color-brand-twitter: #1DA1F2;
---color-brand-instagram: #E4405F;
---color-brand-linkedin: #0A66C2;
---color-brand-youtube: #FF0000;
---color-brand-github: #181717;
+/* Тени */
+--shadow-light: rgba(240, 241, 242, 1.00);  /* из кода: shadow-[0px_1px_1px_0px_rgba(240,241,242,1.00)] */
 ```
 
 ---
@@ -148,75 +67,100 @@
 ### Font Family
 
 ```css
---font-primary: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
---font-secondary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
---font-mono: 'JetBrains Mono', 'Fira Code', 'Monaco', 'Consolas', 'Courier New', monospace;
+--font-primary: 'Archivo', sans-serif;
 ```
+
+**Ссылка**: [Archivo on Google Fonts](https://fonts.google.com/specimen/Archivo#standard-styles)
+
+**Описание**: Archivo is a grotesque sans serif typeface family originally designed for highlights and headlines. This family is reminiscent of late nineteenth century American typefaces. The technical and aesthetic characteristics of the font are both crafted for high performance typography. It was designed to be used simultaneously in print and online platforms and supports over 200 world languages.
 
 ### Font Sizes
 
 ```css
---font-size-xs: 0.75rem;      /* 12px */
---font-size-sm: 0.875rem;     /* 14px */
---font-size-base: 1rem;       /* 16px */
---font-size-md: 1.125rem;     /* 18px */
---font-size-lg: 1.25rem;      /* 20px */
---font-size-xl: 1.5rem;       /* 24px */
---font-size-2xl: 1.875rem;    /* 30px */
---font-size-3xl: 2.25rem;     /* 36px */
---font-size-4xl: 3rem;        /* 48px */
---font-size-5xl: 3.75rem;     /* 60px */
+--font-size-10: 0.625rem;     /* 10px */
+--font-size-11: 0.6875rem;    /* 11px */
+--font-size-12: 0.75rem;      /* 12px */
+--font-size-13: 0.8125rem;    /* 13px */
+--font-size-14: 0.875rem;     /* 14px */
+--font-size-15: 0.9375rem;    /* 15px */
+--font-size-16: 1rem;         /* 16px */
+--font-size-18: 1.125rem;     /* 18px */
+--font-size-24: 1.5rem;       /* 24px */
+--font-size-26: 1.625rem;     /* 26px */
+--font-size-32: 2rem;         /* 32px */
 ```
 
 ### Font Weights
 
 ```css
---font-weight-thin: 100;
---font-weight-light: 300;
---font-weight-normal: 400;
+--font-weight-regular: 400;
 --font-weight-medium: 500;
 --font-weight-semibold: 600;
 --font-weight-bold: 700;
 --font-weight-extrabold: 800;
---font-weight-black: 900;
 ```
 
 ### Line Heights
 
 ```css
---line-height-tight: 1.25;
---line-height-snug: 1.375;
---line-height-normal: 1.5;
---line-height-relaxed: 1.625;
---line-height-loose: 2;
+--line-height-12: 0.75rem;    /* 12px */
+--line-height-16: 1rem;       /* 16px */
+--line-height-20: 1.25rem;    /* 20px */
+--line-height-24: 1.5rem;     /* 24px */
+--line-height-32: 2rem;       /* 32px */
+--line-height-36: 2.25rem;    /* 36px */
+--line-height-40: 2.5rem;     /* 40px */
+--line-height-50: 3.15rem;    /* 50.4px */
 ```
 
-### Text Styles
+### Text Styles (iOS Mobile)
 
-#### Headings
+#### Large Title
+- **Bold**: Font: 32px (2rem), Weight: 700, Line Height: 40px
+- **Regular**: Font: 32px (2rem), Weight: 400, Line Height: 40px
 
-- **H1**: Font: 48px/3rem, Weight: 700 (Bold), Line Height: 1.2, Letter Spacing: -0.02em
-- **H2**: Font: 36px/2.25rem, Weight: 700 (Bold), Line Height: 1.25, Letter Spacing: -0.01em
-- **H3**: Font: 30px/1.875rem, Weight: 600 (Semibold), Line Height: 1.3, Letter Spacing: -0.01em
-- **H4**: Font: 24px/1.5rem, Weight: 600 (Semibold), Line Height: 1.35, Letter Spacing: 0
-- **H5**: Font: 20px/1.25rem, Weight: 600 (Semibold), Line Height: 1.4, Letter Spacing: 0
-- **H6**: Font: 18px/1.125rem, Weight: 600 (Semibold), Line Height: 1.45, Letter Spacing: 0
+#### Title 1
+- **Bold**: Font: 26px (1.625rem), Weight: 700, Line Height: 36px
+- **Regular**: Font: 26px (1.625rem), Weight: 400, Line Height: 36px
 
-#### Body Text
+#### Title 2
+- **Bold**: Font: 24px (1.5rem), Weight: 700, Line Height: 32px
+- **Regular**: Font: 24px (1.5rem), Weight: 400, Line Height: 32px
 
-- **Body Large**: Font: 18px/1.125rem, Weight: 400 (Normal), Line Height: 1.625
-- **Body**: Font: 16px/1rem, Weight: 400 (Normal), Line Height: 1.5
-- **Body Small**: Font: 14px/0.875rem, Weight: 400 (Normal), Line Height: 1.5
-- **Caption**: Font: 12px/0.75rem, Weight: 400 (Normal), Line Height: 1.4, Color: text-secondary
+#### Title 3
+- **Medium**: Font: 18px (1.125rem), Weight: 500, Line Height: 24px
+- **Regular**: Font: 18px (1.125rem), Weight: 400, Line Height: 24px
 
-#### Tracking (Letter Spacing)
+#### Headline
+- **Bold**: Font: 16px (1rem), Weight: 700, Line Height: 24px
+- **Semibold Italic**: Font: 16px (1rem), Weight: 600, Style: Italic, Line Height: 24px
 
-```css
---letter-spacing-tight: -0.02em;
---letter-spacing-normal: 0;
---letter-spacing-wide: 0.02em;
---letter-spacing-wider: 0.05em;
-```
+#### Body
+- **Semibold**: Font: 16px (1rem), Weight: 600, Line Height: 24px
+- **Regular**: Font: 16px (1rem), Weight: 400, Line Height: 24px
+
+#### Callout
+- **Semibold**: Font: 15px (0.9375rem), Weight: 600, Line Height: 20px
+- **Regular**: Font: 15px (0.9375rem), Weight: 400, Line Height: 20px
+
+#### Subheadline
+- **Semibold**: Font: 14px (0.875rem), Weight: 600, Line Height: 20px
+- **Regular**: Font: 14px (0.875rem), Weight: 400, Line Height: 20px
+
+#### Footnote
+- **Medium**: Font: 13px (0.8125rem), Weight: 500, Line Height: 20px
+- **Regular**: Font: 13px (0.8125rem), Weight: 400, Line Height: 20px
+
+#### Caption 1
+- **Medium**: Font: 12px (0.75rem), Weight: 500, Line Height: 16px
+- **Regular**: Font: 12px (0.75rem), Weight: 400, Line Height: 16px
+
+#### Caption 2
+- **Semibold**: Font: 11px (0.6875rem), Weight: 600, Line Height: 16px
+- **Regular**: Font: 11px (0.6875rem), Weight: 400, Line Height: 16px
+
+#### Caption 3
+- **Semibold**: Font: 10px (0.625rem), Weight: 600, Line Height: 12px
 
 ---
 
