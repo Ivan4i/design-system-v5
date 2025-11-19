@@ -65,9 +65,11 @@ MaterialApp(
 --color-text-tertiary: #747B84;    /* Color(0xFF747B84) - серый текст для описаний (из View2) */
 --color-text-dark: #2A2B2F;        /* Color(0xFF2A2B2F) - темный текст для активной цены (из View2) */
 --color-text-subtitle: #414249;    /* Color(0xFF414249) - subtitle text (из ImagePlaceholders) */
---color-text-description: #23262B; /* Color(0xFF23262B) - description text (из ImagePlaceholders) */
+--color-text-description: #23262B; /* Color(0xFF23262B) - description text (из ImagePlaceholders, welcome title) */
 --color-text-white: #FFFFFF;       /* Colors.white - белый текст */
 --color-text-blue: #4141E6;        /* Color(0xFF4141E6) - синий текст для акцентов */
+--color-text-label-light: #3309101D; /* rgba(09101D, 0.20) - очень светлый для labels */
+--color-text-muted: #6609101D;     /* rgba(09101D, 0.40) - приглушенный для hint text */
 ```
 
 ### Primary Colors
@@ -85,6 +87,11 @@ MaterialApp(
 --color-accent-purple: #7B61FF;    /* Color(0xFF7B61FF) - фиолетовый для borders */
 --color-accent-blue-dark: #0B24FB; /* Color(0xFF0B24FB) - темно-синий для outlined buttons */
 --color-accent-gold: #FFC043;      /* Color(0xFFFFC043) - золотой/желтый для toast buttons и actions */
+--color-accent-blue-primary: #2E5AAC; /* Color(0xFF2E5AAC) - синий для auth buttons и primary actions */
+--color-accent-green: #05944F;     /* Color(0xFF05944F) - зеленый для links и primary buttons */
+--color-accent-facebook: #4C69AB;  /* Color(0xFF4C69AB) - facebook blue (darker) */
+--color-accent-facebook-light: #425993; /* Color(0xFF425993) - facebook blue (lighter) */
+--color-accent-google: #5384EC;    /* Color(0xFF5384EC) - google blue */
 ```
 
 ### Background Colors
@@ -93,6 +100,9 @@ MaterialApp(
 /* Фоны для компонентов из Flutter кода */
 --color-bg-dark: #12202F;          /* Темный фон scaffold */
 --color-bg-toast: #09101D;         /* Color(0xFF09101D) - темный фон toast/snackbar */
+--color-bg-auth-dark: #373940;     /* Color(0xFF373940) - темно-серый для кнопок авторизации */
+--color-bg-input-light: #FAFAFB;   /* Color(0xFFFAFAFB) - ультра-светлый фон для inputs */
+--color-bg-tab: #F4F6F9;           /* Color(0xFFF4F6F9) - светлый фон для tabs/segmented control */
 --color-bg-light: #F4F6F9;         /* Светлый фон кнопок и карточек */
 --color-bg-primary: #4141E6;       /* Фон primary кнопок и rating badge */
 --color-bg-disabled: #D9DDE2;      /* Фон disabled состояний */
@@ -2035,6 +2045,366 @@ Container(
 
 ---
 
+## Screens / Готовые UI блоки
+
+Готовые целостные экраны и UI блоки, которые можно гибко адаптировать под требования бэкенда. Эти блоки служат базовыми паттернами, в которые можно добавлять дополнительные поля или элементы при разработке.
+
+### Auth Screens (из StartScreensLight)
+
+Комплект экранов авторизации и регистрации в светлой теме.
+
+#### 1. Welcome Screen / Landing
+
+**Из StartScreensLight - первый экран (375x600)**
+
+Стартовый экран приветствия с градиентом и кнопками авторизации через социальные сети.
+
+- **Screen Size**: 375x600px
+- **Border Radius**: 30px
+- **Clip**: antiAlias
+- **Background**: Colors.white
+
+**Gradient Overlay**:
+- **Type**: LinearGradient
+- **Begin**: Alignment(0.50, -0.00) - horizontal center, top
+- **End**: Alignment(0.50, 1.00) - horizontal center, bottom
+- **Colors**:
+  - White с alpha: 0 (прозрачный сверху)
+  - White с alpha: 0.70 (полупрозрачный середина)
+  - White (непрозрачный снизу)
+- **Direction**: Вертикальный градиент от прозрачного к белому
+
+**Content Section** (padding: top 10, left/right 16, bottom 50):
+- **Column Spacing**: 20px между title и subtitle
+- **Title**:
+  - Text: "Welcome to Appka \nStudio"
+  - Width: 343px
+  - Font: Archivo, 32px, weight: 700
+  - Color: #23262B (--color-text-description)
+  - Alignment: center
+  - Line Height: 1.40
+- **Subtitle**:
+  - Text: "Design made simple for your business,\nidea, app and more"
+  - Width: 343px
+  - Font: Archivo, 15px, weight: 600
+  - Color: #09101D (--color-text-primary)
+  - Alignment: center
+  - Line Height: 1.40
+
+**Buttons Section** (padding-top: 30, spacing: 10px):
+1. **Apple Button** (Continue with Apple):
+   - Background: Colors.white
+   - Height: 44px
+   - Padding: horizontal: 16px, vertical: 10px
+   - Border Radius: 15px
+   - Icon: 20x20px (Apple logo), padding: 2px, radius: 100px
+   - Text: "Continue with Apple", Archivo 16px weight 600, color: #09101D
+   - Icon-Text Spacing: 8px
+
+2. **Facebook Button** (Sign in with Facebook):
+   - Background: #4C69AB (--color-accent-facebook)
+   - Height: 44px
+   - Padding: horizontal: 16px, vertical: 10px
+   - Border Radius: 15px
+   - Icon: 20x20px (Facebook logo)
+   - Text: "Sign in with Facebook", Archivo 16px weight 600, color: white
+   - Icon-Text Spacing: 8px
+
+3. **Sign Up Button**:
+   - Background: #373940 (--color-bg-auth-dark)
+   - Height: 44px
+   - Padding: horizontal: 16px, vertical: 10px
+   - Border Radius: 15px
+   - Text: "Sign up", Archivo 16px weight 600, color: white
+
+4. **Log In Button** (Ghost):
+   - Background: transparent
+   - Height: 44px
+   - Padding: horizontal: 16px, vertical: 10px
+   - Border Radius: 15px
+   - Text: "Log in", Archivo 14px weight 600, color: #09101D
+
+**Home Indicator** (bottom):
+- Width: 134px
+- Height: 5px
+- Background: #09101D
+- Border Radius: 100px
+- Position: center, 21px from bottom
+
+**Structure**:
+```
+Screen Container (375x600, radius: 30):
+  - Stack:
+    - Gradient Overlay (full width/height):
+      - Column (align: end):
+        - Content Section (padding: 10/16/50):
+          - Column (spacing: 20):
+            - Title (343px, 32px weight 700, center)
+            - Subtitle (343px, 15px weight 600, center)
+        - Buttons Section (padding-top: 30):
+          - Column (spacing: 10):
+            - Apple Button (44px, white bg, icon 20x20)
+            - Facebook Button (44px, #4C69AB bg)
+            - Sign Up Button (44px, #373940 bg)
+            - Log In Button (44px, transparent bg)
+        - Home Indicator (134x5, #09101D, bottom: 21)
+```
+
+**Usage**: Стартовый экран для приложений с авторизацией через социальные сети.
+
+**Гибкость**: Можно добавить дополнительные OAuth providers (Google, Twitter), изменить порядок кнопок, добавить Skip button.
+
+---
+
+#### 2. Login Screen
+
+**Из StartScreensLight - второй экран (375x522)**
+
+Экран входа с email/password и валидацией пароля.
+
+- **Screen Size**: 375x522px
+- **Border Radius**: 30px
+- **Background**: Colors.white
+
+**Top Bar** (height: 44px):
+- **Login Link**:
+  - Text: "Login"
+  - Font: Archivo, 13px, weight: 600
+  - Color: #2E5AAC (--color-accent-blue-primary)
+  - Position: right-aligned, padding: 16px
+
+**Email Field** (top: 88px, padding: horizontal 16, vertical 5, spacing: 8px):
+- **Label**:
+  - Text: "Email"
+  - Font: Archivo, 13px, weight: 600
+  - Color: rgba(09101D, 0.20) = #3309101D (--color-text-label-light)
+- **Input**:
+  - Height: 46px
+  - Padding: left 16px, right 20px
+  - Background: #FAFAFB (--color-bg-input-light)
+  - Border Radius: 15px
+  - Clip: antiAlias
+  - Text: "you@awesome.com", Archivo 15px weight 400, #09101D
+  - Spacing: 15px между text и right icons
+
+**Password Field** (top: 170px, padding-top: 10, horizontal 16, vertical 5, spacing: 8px):
+- **Label**:
+  - Text: "Password"
+  - Font: Archivo, 13px, weight: 600
+  - Color: rgba(09101D, 0.20) = #3309101D
+- **Input**:
+  - Height: 46px
+  - Padding: left 16px, right 20px
+  - Background: #FAFAFB
+  - Border Radius: 15px
+  - Clip: antiAlias
+  - Text: "••••••••••••••••••••", Archivo 16px weight 400, #09101D
+  - Cursor: 2x16px (typing state)
+  - Icons (right side): 2 icons 20x20px
+    - Eye icon (password visibility toggle)
+    - Clear icon
+    - Spacing: 20px между иконками
+
+**Password Requirements** (4 items, starting at top: 262px):
+- **Layout**: Icon 24x24 left + Text right, padding-right: 5px
+- **Icon Container**: 24x24px, padding: 5px, radius: 100px
+  - Inner Icon: 16.80x16.80px (positioned -1.40, -1.40)
+- **Text**: Width: 314px, Archivo 11px weight 400, color: rgba(09101D, 0.40) = #6609101D
+- **Requirements**:
+  1. "Minimum 8 characters"
+  2. "One uppercase and lowercase character"
+  3. "One number"
+  4. "One special character"
+- **Spacing**: vertically positioned at 262, 296, 320, 344px
+
+**Agreement Toggle** (top: 378px, padding: top 5, bottom 10):
+- **Toggle Switch**:
+  - Width: 51px
+  - Background: #11BB8D (--color-success) - active state
+  - Border Radius: 40px
+  - Knob: 31x31px, white bg, 2px border #11BB8D, radius: 40px
+  - Position: aligned to end (right side)
+- **Agreement Text** (width: 272px):
+  - Font: Archivo, 11px, weight: 400/600 (mixed)
+  - Color: #414249 (--color-text-subtitle)
+  - Spacing: 20px between text and toggle
+  - Text: "Yes, I am a U.S. Resident, 18 years or older, and agree to the [Program Agreement], [Privacy Policy] and [Auto Debit Authorization]."
+  - Links: underlined, weight: 600
+
+**Confirm Button** (top: 458px, padding: vertical 10):
+- Background: #2E5AAC (--color-accent-blue-primary)
+- Height: 44px
+- Padding: horizontal: 16px, vertical: 10px, inner: horizontal 10px
+- Border Radius: 15px
+- Text: "Confirm & Continue", Archivo 14px weight 600, white
+
+**Structure**:
+```
+Screen Container (375x522, radius: 30):
+  - Stack:
+    - Top Bar (44px):
+      - Login Link (right-aligned, 13px weight 600, #2E5AAC)
+    - Email Field (top: 88):
+      - Label (13px weight 600, rgba 0.20)
+      - Input (46px, bg #FAFAFB, radius 15)
+    - Password Field (top: 170):
+      - Label (13px weight 600, rgba 0.20)
+      - Input (46px, bg #FAFAFB, 2 icons 20x20)
+    - Requirements List (top: 262-344):
+      - 4x Requirement Items (icon 24x24 + text 11px)
+    - Agreement Toggle (top: 378):
+      - Text (272px width) + Toggle (51px, #11BB8D)
+    - Confirm Button (top: 458):
+      - Button (44px, #2E5AAC, white text)
+```
+
+**Usage**: Экран входа с валидацией пароля и согласием с условиями.
+
+**Гибкость**: Можно добавить "Forgot password" link, дополнительные поля (username, phone), убрать или добавить требования к паролю, изменить текст согласия.
+
+---
+
+#### 3. Sign Up Screen
+
+**Из StartScreensLight - третий экран (375x646)**
+
+Экран регистрации с переключателем Email/Phone Number и OAuth кнопками.
+
+- **Screen Size**: 375x646px
+- **Border Radius**: 30px
+- **Background**: Colors.white
+
+**Top Bar** (height: 44px):
+- **Back Button**:
+  - Icon: 24x24px, padding: 2px, radius: 100px
+  - Position: left side, padding: horizontal 16px, vertical 10px
+  - Inner Icon: 24x24px (positioned -2, -2)
+
+**Title** (top: 88px, padding: left/right 16, bottom 10):
+- Text: "Sign up"
+- Font: Archivo, 32px, weight: 700
+- Color: #09101D (--color-text-primary)
+- Width: 343px (full width minus padding)
+- Height: 44px
+
+**Segmented Control / Tabs** (top: 142px, height: 46px, padding: top 10, left/right 17, bottom 5):
+- **Container**:
+  - Background: #F4F6F9 (--color-bg-tab)
+  - Padding: 2px
+  - Border Radius: 8px
+  - Height: 27px (inner)
+- **Active Tab**:
+  - Background: Colors.white
+  - Border Radius: 8px
+  - Text: "Email", Archivo 13px weight 600, #09101D, center aligned
+- **Inactive Tab**:
+  - Background: transparent
+  - Text: "Phone Number", Archivo 13px weight 600, #09101D, center aligned
+- **Layout**: Two equal segments (Expanded)
+
+**Email Input** (top: 188px, padding-top: 10):
+- **Container**:
+  - Height: 56px
+  - Padding: left 16px, right 20px
+  - Border: 1px solid #D9DDE2 (--color-bg-disabled)
+  - Border Radius: 15px
+  - Clip: antiAlias
+- **Placeholder**:
+  - Text: "Enter your email"
+  - Font: Archivo, 16px, weight: 400
+  - Color: #414249 (--color-text-subtitle)
+
+**Agreement Text** (top: 264px, padding: top 5, left/right 16, bottom 10):
+- Width: 343px
+- Font: Archivo, 12px, weight: 400
+- Color: #09101D (--color-text-primary)
+- Text: "By continuing you agree to the Appka [Term of Service] and [Privacy Policy]"
+- Links: color #05944F (--color-accent-green)
+
+**Continue Button** (top: 313px, padding: vertical 10):
+- Background: #05944F (--color-accent-green)
+- Height: 52px
+- Padding: horizontal: 16px, vertical: 10px, inner: horizontal 10px
+- Border Radius: 15px
+- Text: "Continue", Archivo 16px weight 600, white
+
+**Divider** (top: 385px):
+- Text: "or"
+- Font: Archivo, 13px, weight: 600
+- Color: #09101D
+- Alignment: center
+- Width: 343px
+
+**OAuth Buttons** (top: 403px, 470px, 532px, spacing: 5px/10px):
+1. **Apple Button** (top: 403px):
+   - Background: #09101D (--color-bg-toast)
+   - Height: 52px
+   - Padding: 16/10, inner: 10px
+   - Border Radius: 15px
+   - Icon: 24x24px, padding: 2px
+   - Text: "Continue with Apple", Archivo 15px weight 600, white
+   - Icon-Text Spacing: 8px
+
+2. **Facebook Button** (top: 470px):
+   - Background: #425993 (--color-accent-facebook-light)
+   - Height: 52px
+   - Padding: 16/10, inner: 10px
+   - Border Radius: 15px
+   - Icon: 24x24px, padding: 2px
+   - Text: "Continue with Facebook", Archivo 15px weight 600, white
+   - Icon-Text Spacing: 8px
+
+3. **Google Button** (top: 532px):
+   - Background: #5384EC (--color-accent-google)
+   - Height: 52px
+   - Padding: 16/10, inner: 10px
+   - Border Radius: 15px
+   - Icon: 24x24px, padding: 2px
+   - Text: "Continue with Google", Archivo 15px weight 600, white
+   - Icon-Text Spacing: 8px
+
+**Bottom Link** (top: 594px):
+- Height: 52px
+- Padding: horizontal: 16px, vertical: 10px, inner: horizontal 10px
+- Border Radius: 15px (container)
+- Text: "or Login or continue as guest"
+  - "or " - Archivo 13px weight 600, #09101D
+  - "Login or continue as guest" - Archivo 13px weight 600, #05944F (green link)
+
+**Structure**:
+```
+Screen Container (375x646, radius: 30):
+  - Stack:
+    - Top Bar (44px):
+      - Back Button (24x24 icon, left)
+    - Title (top: 88):
+      - "Sign up" (32px weight 700, #09101D)
+    - Segmented Control (top: 142):
+      - Container (#F4F6F9, radius 8, height 27):
+        - Email Tab (active, white bg)
+        - Phone Number Tab (inactive)
+    - Email Input (top: 188):
+      - Input (56px height, border 1px #D9DDE2)
+    - Agreement Text (top: 264):
+      - Text (12px, green links)
+    - Continue Button (top: 313):
+      - Button (52px, #05944F green)
+    - Divider (top: 385):
+      - "or" (13px weight 600, center)
+    - OAuth Buttons:
+      - Apple (top: 403, 52px, #09101D)
+      - Facebook (top: 470, 52px, #425993)
+      - Google (top: 532, 52px, #5384EC)
+    - Bottom Link (top: 594):
+      - "or Login or continue as guest" (green link)
+```
+
+**Usage**: Экран регистрации с выбором метода (email/phone) и OAuth providers.
+
+**Гибкость**: Можно переключить на Phone Number tab (добавить Phone Input component), добавить дополнительные поля (name, username), убрать или добавить OAuth providers (Twitter, LinkedIn, Microsoft), изменить текст согласия, добавить капчу.
+
+---
+
 ## Состояния
 
 ### Interactive States
@@ -2180,6 +2550,24 @@ Container(
 --toast-message-width-undo: 250px;      /* Message width (with undo button) */
 --toast-message-width-button: 231px;    /* Message width (with single button) */
 --toast-message-width-icon-button: 210px; /* Message width (icon + button) */
+
+/* Auth Screens Sizes из StartScreensLight */
+--screen-mobile-width: 375px;           /* Стандартная ширина mobile screen */
+--screen-border-radius: 30px;           /* Border radius для screens */
+--screen-welcome-height: 600px;         /* Welcome screen height */
+--screen-login-height: 522px;           /* Login screen height */
+--screen-signup-height: 646px;          /* Sign up screen height */
+--auth-button-height-small: 44px;       /* Auth button height (welcome, login) */
+--auth-button-height-large: 52px;       /* Auth button height (sign up) */
+--auth-input-height-small: 46px;        /* Input height (login screen) */
+--auth-input-height-large: 56px;        /* Input height (sign up screen) */
+--auth-icon-small: 20px;                /* Icon size (welcome, password icons) */
+--auth-icon-medium: 24px;               /* Icon size (sign up, requirements) */
+--auth-toggle-width: 51px;              /* Toggle switch width */
+--auth-toggle-knob: 31px;               /* Toggle switch knob size */
+--auth-tab-height: 27px;                /* Segmented control height */
+--home-indicator-width: 134px;          /* Home indicator width */
+--home-indicator-height: 5px;           /* Home indicator height */
 ```
 
 ### Flutter-Specific Properties (из кода)
@@ -2248,9 +2636,60 @@ Container(
 
 ## Версионирование и обновления
 
-**Текущая версия**: v5.4.0
+**Текущая версия**: v5.5.0
 
 ### Changelog
+
+#### v5.5.0 (2025-11-19)
+- Добавлен новый раздел **Screens / Готовые UI блоки** с комплектом Auth Screens из StartScreensLight:
+  - **3 готовых экрана авторизации** в светлой теме с гибкой адаптацией под требования бэкенда
+  - **Welcome Screen / Landing** (375x600px):
+    - LinearGradient фон (white alpha 0 → 0.70 → 1)
+    - Title: "Welcome to Appka Studio", 32px weight 700, #23262B, center
+    - Subtitle: 15px weight 600, #09101D, center
+    - 4 кнопки: Apple (white bg), Facebook (#4C69AB), Sign Up (#373940), Log in (ghost)
+    - Button height: 44px, icon 20x20px, spacing 10px
+    - Home indicator: 134x5px, #09101D, radius 100px
+  - **Login Screen** (375x522px):
+    - Email field: height 46px, bg #FAFAFB, label rgba(09101D, 0.20)
+    - Password field: height 46px, password dots, 2 icons 20x20px
+    - 4 password requirements: icon 24x24 + text 11px rgba(09101D, 0.40)
+    - Toggle switch: 51x31px, bg #11BB8D (active), knob white with 2px border
+    - Agreement text: 272px width, 11px weight 400/600, underlined links
+    - Confirm button: 44px height, #2E5AAC bg, "Confirm & Continue"
+  - **Sign Up Screen** (375x646px):
+    - Back button: icon 24x24px
+    - Title: "Sign up", 32px weight 700
+    - Segmented control: bg #F4F6F9, height 27px, radius 8px, active tab white
+    - Email input: height 56px, border 1px #D9DDE2
+    - Agreement text: 12px weight 400, green links #05944F
+    - Continue button: 52px height, #05944F green bg
+    - Divider: "or", 13px weight 600, center
+    - 3 OAuth buttons: Apple (#09101D), Facebook (#425993), Google (#5384EC)
+    - Button height: 52px, icon 24x24px, text 15px weight 600
+    - Bottom link: "or Login or continue as guest" с green link
+  - **Гибкость**: Все экраны можно адаптировать - добавить/убрать поля, изменить OAuth providers, переключить Email/Phone tab
+- **Новые accent colors**:
+  - #2E5AAC - синий для auth buttons и primary actions
+  - #05944F - зеленый для links и primary buttons
+  - #4C69AB - facebook blue (darker)
+  - #425993 - facebook blue (lighter)
+  - #5384EC - google blue
+- **Новые background colors**:
+  - #373940 - темно-серый для кнопок авторизации
+  - #FAFAFB - ультра-светлый фон для inputs
+- **Новые text colors**:
+  - rgba(09101D, 0.20) = #3309101D - очень светлый для labels
+  - rgba(09101D, 0.40) = #6609101D - приглушенный для hint text
+- **Новые component sizes**:
+  - Screen widths: 375px (mobile standard)
+  - Screen heights: 600px (welcome), 522px (login), 646px (sign up)
+  - Screen border radius: 30px
+  - Auth buttons: 44px (welcome/login), 52px (sign up)
+  - Auth inputs: 46px (login), 56px (sign up)
+  - Toggle switch: 51x31px
+  - Tab height: 27px
+  - Home indicator: 134x5px
 
 #### v5.4.0 (2025-11-19)
 - Добавлен компонент Toast / Snackbar из Toast:
