@@ -33,41 +33,63 @@
 ### Base Colors
 
 ```css
-/* Основные цвета */
+/* Основные цвета из Flutter кода */
 --color-white: #FFFFFF;
---color-black: #09101D;
+--color-black: #000000;
+--color-black-text: #09101D;       /* Основной цвет текста */
+```
+
+### Primary Colors
+
+```css
+/* Основной акцентный цвет из Flutter */
+--color-primary: #4141E6;          /* Основной синий/фиолетовый цвет */
+--color-primary-light: rgba(11, 36, 251, 0.1); /* #0B24FB с opacity 0.1 */
 ```
 
 ### Text Colors
 
 ```css
-/* Текст из Tailwind CSS */
---color-text-primary: #020617;     /* slate-950 */
---color-text-secondary: #27272A;   /* zinc-800 */
-```
-
-### Accent Colors
-
-```css
-/* Акцентные цвета */
---color-accent-blue: #1D4ED8;      /* blue-700 */
---color-accent-purple: #7B61FF;    /* Фиолетовый из Flutter кода */
+/* Цвета текста из Flutter кода */
+--color-text-primary: #09101D;     /* Основной черный текст */
+--color-text-secondary: #414249;   /* Серый текст */
+--color-text-tertiary: #747B84;    /* Вторичный серый текст */
+--color-text-dark: #23262B;        /* Темный текст */
+--color-text-dark-2: #2A2B2F;      /* Темный текст вариант 2 */
 ```
 
 ### Background Colors
 
 ```css
-/* Фоны для компонентов */
---color-bg-light: #F4F6F9;         /* Светлый фон */
---color-bg-card-light: #D9DDE2;    /* Светлая карточка */
+/* Фоны для компонентов из Flutter кода */
+--color-bg-light: #F4F6F9;         /* Светлый фон (основной) */
+--color-bg-card-light: #D9DDE2;    /* Светлая карточка/разделитель */
+--color-bg-divider: #EAEEF2;       /* Цвет разделителей */
 --color-bg-card-dark: #23262B;     /* Темная карточка */
+```
+
+### Gradient Colors
+
+```css
+/* Instagram-like градиент из Flutter кода */
+--gradient-instagram-start: #833AB4;   /* Фиолетовый */
+--gradient-instagram-mid: #FD1D1D;     /* Красный */
+--gradient-instagram-end: #FCB045;     /* Оранжевый */
+```
+
+**Применение градиента:**
+```css
+background: linear-gradient(90deg,
+  var(--gradient-instagram-start) 0%,
+  var(--gradient-instagram-mid) 50%,
+  var(--gradient-instagram-end) 100%);
 ```
 
 ### Shadow Colors
 
 ```css
-/* Тени */
---shadow-light: rgba(240, 241, 242, 1.00);
+/* Тени из Flutter кода */
+--shadow-default: rgba(0, 0, 0, 0.05);      /* 0x0C000000 */
 --shadow-text: rgba(0, 0, 0, 0.40);         /* Тень для текста */
 --shadow-box: rgba(0, 0, 0, 0.40);          /* Тень для контейнеров */
 ```
@@ -92,6 +114,9 @@
 ### Font Sizes
 
 ```css
+/* Размеры шрифтов из Flutter кода */
+--font-size-6: 0.375rem;      /* 6px */
+--font-size-7: 0.4375rem;     /* 7px */
 --font-size-10: 0.625rem;     /* 10px */
 --font-size-11: 0.6875rem;    /* 11px */
 --font-size-12: 0.75rem;      /* 12px */
@@ -100,7 +125,9 @@
 --font-size-15: 0.9375rem;    /* 15px */
 --font-size-16: 1rem;         /* 16px */
 --font-size-18: 1.125rem;     /* 18px */
+--font-size-19: 1.1875rem;    /* 19px */
 --font-size-22: 1.375rem;     /* 22px - для номеров карт */
+--font-size-23: 1.4375rem;    /* 23px */
 --font-size-24: 1.5rem;       /* 24px */
 --font-size-26: 1.625rem;     /* 26px */
 --font-size-32: 2rem;         /* 32px */
@@ -181,9 +208,15 @@
 ### Letter Spacing
 
 ```css
---letter-spacing-1: 0.0625rem;    /* 1px */
---letter-spacing-2: 0.125rem;     /* 2px */
---letter-spacing-2-59: 0.162rem;  /* 2.59px - для номеров карт */
+/* Межбуквенные интервалы из Flutter кода */
+--letter-spacing-0-21: 0.01313rem;  /* 0.21px */
+--letter-spacing-0-33: 0.02063rem;  /* 0.33px */
+--letter-spacing-0-46: 0.02875rem;  /* 0.46px */
+--letter-spacing-0-58: 0.03625rem;  /* 0.58px */
+--letter-spacing-0-70: 0.04375rem;  /* 0.70px */
+--letter-spacing-1: 0.0625rem;      /* 1px */
+--letter-spacing-2: 0.125rem;       /* 2px */
+--letter-spacing-2-59: 0.162rem;    /* 2.59px - для номеров карт */
 ```
 
 ### OCR-A Text Styles (для карточек и цифровых данных)
@@ -209,41 +242,54 @@
 ### Spacing Scale
 
 ```css
+/* Отступы из Flutter кода (padding/margin) */
 --space-0: 0;
---space-1: 0.25rem;   /* 4px */
---space-2: 0.5rem;    /* 8px */
---space-3: 0.75rem;   /* 12px */
---space-4: 1rem;      /* 16px */
---space-5: 1.25rem;   /* 20px */
---space-6: 1.5rem;    /* 24px */
---space-7: 1.75rem;   /* 28px - из Flutter spacing: 7 */
---space-8: 2rem;      /* 32px */
---space-10: 2.5rem;   /* 40px */
---space-12: 3rem;     /* 48px */
---space-16: 4rem;     /* 64px */
---space-20: 5rem;     /* 80px */
---space-24: 6rem;     /* 96px */
+--space-0-5: 0.125rem;   /* 2px */
+--space-1: 0.25rem;      /* 4px */
+--space-1-25: 0.3125rem; /* 5px */
+--space-1-5: 0.375rem;   /* 6px */
+--space-2: 0.5rem;       /* 8px */
+--space-2-5: 0.625rem;   /* 10px */
+--space-3: 0.75rem;      /* 12px */
+--space-3-25: 0.8125rem; /* 13px */
+--space-4: 1rem;         /* 16px */
+--space-5: 1.25rem;      /* 20px */
+--space-6: 1.5rem;       /* 24px */
+--space-7: 1.75rem;      /* 28px */
+--space-8: 2rem;         /* 32px */
+--space-10: 2.5rem;      /* 40px */
+--space-12: 3rem;        /* 48px */
+--space-16: 4rem;        /* 64px */
+--space-20: 5rem;        /* 80px */
+--space-24: 6rem;        /* 96px */
+--space-167: 10.4375rem; /* 167px - для центрирования элементов */
 ```
 
 ### Border Radius
 
 ```css
+/* Радиусы скругления из Flutter кода */
 --radius-none: 0;
---radius-sm: 0.25rem;     /* 4px */
---radius-base: 0.5rem;    /* 8px */
---radius-md: 0.75rem;     /* 12px */
---radius-lg: 0.9375rem;   /* 15px - из Flutter кода (основной для карточек) */
---radius-xl: 1rem;        /* 16px */
---radius-2xl: 1.25rem;    /* 20px */
---radius-3xl: 1.5rem;     /* 24px */
---radius-full: 9999px;
+--radius-xs: 0.125rem;     /* 2px */
+--radius-sm: 0.5rem;       /* 8px */
+--radius-md: 0.6875rem;    /* 11px */
+--radius-base: 0.75rem;    /* 12px */
+--radius-lg: 0.9375rem;    /* 15px - основной для кнопок и карточек */
+--radius-xl: 1.25rem;      /* 20px */
+--radius-2xl: 1.875rem;    /* 30px - для больших контейнеров */
+--radius-3xl: 2.5rem;      /* 40px */
+--radius-full: 9999px;     /* Полный круг */
 ```
 
 ### Shadows
 
-#### Card Shadows
+#### Shadows из Flutter кода
 
 ```css
+/* Основная тень из Flutter BoxShadow */
+--shadow-primary: 0 -2px 4px 0 rgba(0, 0, 0, 0.05);
+
+/* Стандартные тени */
 --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
 --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
 --shadow-base: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
@@ -290,17 +336,92 @@
 ### Opacity Scale
 
 ```css
+/* Прозрачность из Flutter кода */
 --opacity-0: 0;
---opacity-10: 0.1;
---opacity-20: 0.2;
---opacity-30: 0.3;
---opacity-40: 0.4;
+--opacity-10: 0.1;     /* Используется в коде */
+--opacity-20: 0.2;     /* Используется в коде */
+--opacity-25: 0.25;    /* Используется в коде */
+--opacity-30: 0.3;     /* Используется в коде */
+--opacity-40: 0.4;     /* Используется в коде */
 --opacity-50: 0.5;
 --opacity-60: 0.6;
 --opacity-70: 0.7;
 --opacity-80: 0.8;
 --opacity-90: 0.9;
 --opacity-100: 1;
+```
+
+---
+
+## Размеры компонентов из Flutter
+
+### Mobile Screen
+
+```css
+/* Размеры экрана из Flutter кода */
+--screen-width: 375px;     /* Ширина мобильного экрана (iPhone) */
+--screen-height: 812px;    /* Высота мобильного экрана */
+```
+
+### Buttons (из Flutter кода)
+
+```css
+/* Высота кнопок */
+--button-height-sm: 36px;      /* Маленькая кнопка */
+--button-height-md: 44px;      /* Основная высота кнопок */
+--button-height-lg: 48px;      /* Большая кнопка */
+
+/* Горизонтальный padding кнопок */
+--button-padding-x: 16px;      /* Основной padding */
+--button-padding-y: 10px;      /* Вертикальный padding */
+```
+
+### Avatars (из Flutter кода)
+
+```css
+/* Размеры аватаров */
+--avatar-xs: 28px;        /* Badge аватар */
+--avatar-sm: 40px;        /* Маленький аватар */
+--avatar-md: 48px;        /* Средний аватар */
+--avatar-lg: 56px;        /* Большой аватар */
+```
+
+### Icons (из Flutter кода)
+
+```css
+/* Размеры иконок */
+--icon-xs: 12px;
+--icon-sm: 16px;
+--icon-md: 20px;
+--icon-lg: 24px;
+--icon-xl: 32px;
+```
+
+### Containers & Panels
+
+```css
+/* Высота элементов */
+--status-bar-height: 44px;     /* Высота status bar */
+--handle-height: 3px;          /* Высота handle для bottom sheets */
+--handle-width: 40px;          /* Ширина handle */
+--divider-height: 1px;         /* Высота разделителя */
+--home-indicator: 5px;         /* Высота home indicator */
+--home-indicator-width: 134px; /* Ширина home indicator */
+```
+
+### Spacing между элементами
+
+```css
+/* Spacing из Flutter кода (spacing property) */
+--spacing-2: 2px;
+--spacing-5: 5px;
+--spacing-7: 7px;
+--spacing-8: 8px;
+--spacing-10: 10px;
+--spacing-12: 12px;
+--spacing-15: 15px;
+--spacing-16: 16px;
+--spacing-70: 70px;  /* Между элементами в Row */
 ```
 
 ---
@@ -845,9 +966,20 @@
 
 ## Версионирование и обновления
 
-**Текущая версия**: v5.0.0
+**Текущая версия**: v5.0.1
 
 ### Changelog
+
+#### v5.0.1 (2025-11-19)
+- Обновлены цвета из реального Flutter кода
+- Добавлены все размеры шрифтов (6px - 32px)
+- Добавлены letterSpacing значения из кода (0.21px - 2.59px)
+- Обновлены Border Radius значения (2px - 100px)
+- Расширены Spacing значения с дробными размерами
+- Добавлены реальные размеры компонентов из Flutter
+- Добавлен Instagram-like градиент
+- Добавлены размеры мобильного экрана (375x812)
+- Добавлены размеры кнопок, аватаров и иконок из кода
 
 #### v5.0.0 (2025-11-19)
 - Первая версия дизайн-системы
