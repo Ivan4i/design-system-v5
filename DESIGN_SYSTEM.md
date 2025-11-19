@@ -173,6 +173,9 @@
 --gradient-ring-1: linear-gradient(90deg, #F09819 0%, #EDDE5D 100%);
 --gradient-ring-2: linear-gradient(90deg, #FC466B 0%, #3F5EFB 100%);
 --gradient-ring-3: linear-gradient(90deg, #833AB4 0%, #FD1D1D 50%, #FCB045 100%);
+
+/* Градиенты для overlay на изображениях */
+--gradient-overlay-dark: linear-gradient(180deg, rgba(196, 196, 196, 0) 0%, rgba(29, 29, 29, 0.5) 100%);
 ```
 
 ### Brand Icon Colors
@@ -316,10 +319,12 @@
 --radius-lg: 0.5rem;      /* 8px */
 --radius-lg-plus: 0.6875rem; /* 11px */
 --radius-xl: 0.75rem;     /* 12px */
---radius-xl-plus: 0.9375rem; /* 15px */
+--radius-xl-plus: 0.875rem; /* 14px */
+--radius-xl-2: 0.9375rem; /* 15px */
 --radius-2xl: 1rem;       /* 16px */
 --radius-2xl-plus: 1.25rem; /* 20px */
 --radius-3xl: 1.875rem;   /* 30px */
+--radius-3xl-2: 2rem;     /* 32px */
 --radius-3xl-plus: 2.5rem; /* 40px */
 --radius-4xl: 5rem;       /* 80px */
 --radius-5xl: 6.25rem;    /* 100px */
