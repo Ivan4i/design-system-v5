@@ -155,6 +155,7 @@
 --gradient-primary: linear-gradient(135deg, #667EEA 0%, #764BA2 100%);
 --gradient-secondary: linear-gradient(135deg, #F093FB 0%, #F5576C 100%);
 --gradient-accent: linear-gradient(135deg, #4FACFE 0%, #00F2FE 100%);
+--gradient-instagram: linear-gradient(90deg, #833AB4 0%, #FD1D1D 50%, #FCB045 100%); /* Из Basic кода - Live badge */
 ```
 
 ### Brand Icon Colors
@@ -197,6 +198,7 @@
 --font-size-lg: 1.25rem;      /* 20px */
 --font-size-xl: 1.5rem;       /* 24px */
 --font-size-2xl: 1.875rem;    /* 30px */
+--font-size-2xl-plus: 2rem;   /* 32px - из Basic кода (profile title) */
 --font-size-3xl: 2.25rem;     /* 36px */
 --font-size-4xl: 3rem;        /* 48px */
 --font-size-5xl: 3.75rem;     /* 60px */
@@ -345,6 +347,13 @@
 ```css
 /* Из TabBar кода - subtle top border shadow */
 --shadow-tabbar: 0 -1px 0 0 #F0F1F2;
+```
+
+#### Badge Shadow
+
+```css
+/* Из Basic кода - subtle badge shadow */
+--shadow-badge: 0 1px 1px 0 rgba(0, 0, 0, 0.4);
 ```
 
 ### Borders
@@ -1448,6 +1457,190 @@ Spacing: 10px between items
 
 ---
 
+### 25. User Profile Cards
+
+Компонент User Profile Cards с различными вариантами отображения профиля пользователя, извлеченный из Flutter приложения Basic.
+
+#### Variant 1: Basic Profile Card
+
+**Container:**
+- **Width**: Full width
+- **Background**: White (color-bg-primary)
+- **Padding**: Right: 10px, Left: 16px, Vertical: 12px
+- **Clip Behavior**: antiAlias
+
+**Avatar:**
+- **Container Size**: 56px × 56px
+- **Image Size**: 48px × 48px
+- **Border Radius**: 40px (circular)
+- **Background**: #D9DDE2 (color-text-disabled) - placeholder
+- **Position**: Offset 4px from container edges
+
+**Badge (Bottom-Right):**
+- **Container**: 20px × 20px, border-radius 15px
+- **Inner Badge**: 14px × 14px
+- **Background**: #4141E6 (color-accent)
+- **Border**: 1px solid white
+- **Border Radius**: 20px (circular)
+- **Icon Container**: 12px × 12px, padding 2px
+- **Position**: Left: 0, Top: 36px (bottom of avatar)
+
+**Profile Text:**
+- **Title**: "Hi, I'm Jack"
+  - Font: Archivo
+  - Size: 32px (font-size-2xl-plus)
+  - Weight: 700 (bold)
+  - Color: #09101D (color-text-primary)
+  - Line Height: 1.40
+- **Subtitle**: "And I've joined in 2021. Feel free to ask me any questions ✌🏻"
+  - Font: Archivo
+  - Size: 14px (font-size-sm)
+  - Weight: 400 (normal)
+  - Color: #414249 (color-text-muted)
+  - Line Height: 1.40
+
+#### Variant 2: Avatar Group / Row
+
+**Container:**
+- **Width**: Full width
+- **Padding**: Horizontal: 16px, Vertical: 10px
+- **Clip Behavior**: antiAlias
+
+**Avatar Row Configuration:**
+- **Spacing**: 5px vertical between avatars
+- **Layout**: Horizontal row
+- **Items**: 5 avatars displayed
+
+**Avatar Types:**
+
+**Empty Avatar (Placeholder):**
+- **Size**: 48px × 48px
+- **Border**: 1.2px solid #D9DDE2 (color-text-disabled)
+- **Border Radius**: 40px (circular)
+- **Position**: Offset 4px from 56px container
+
+**Avatar with Image:**
+- **Container**: 56px × 56px
+- **Image**: 48px × 48px
+- **Border Radius**: 40px (circular)
+- **Background**: #D9DDE2 placeholder
+
+**Avatar with Badge (Top-Right):**
+- **Avatar**: 48px × 48px, radius 40px
+- **Badge Container**: 20px × 20px
+- **Badge**: 20px × 20px (outer), 14px inner with icon
+- **Badge Background**: #23262B (color-text-dark)
+- **Badge Border**: 1px solid white
+- **Badge Border Radius**: 20px (circular)
+- **Shadow**: 0 1px 1px 0 rgba(0, 0, 0, 0.4) (shadow-badge)
+- **Position**: Left: 36px, Top: 0 (top-right corner)
+
+#### Variant 3: Profile Card with Live Badge and Toggle
+
+**Container:**
+- **Background**: None (transparent)
+- **Layout**: Full width row
+
+**Avatar with Live Badge:**
+- **Avatar**: 56px × 56px container, 48px × 48px image
+- **Border Radius**: 40px (circular)
+- **Position**: Offset 4px
+
+**Live Badge:**
+- **Size**: 28px × 14px
+- **Padding**: Horizontal: 4px, Vertical: 2px
+- **Background**: Instagram gradient (gradient-instagram)
+  - Colors: #833AB4 → #FD1D1D → #FCB045
+  - Direction: Horizontal (90deg)
+- **Border**: 1px solid white
+- **Border Radius**: 12px (radius-xl)
+- **Text**: "Live"
+  - Font: Archivo
+  - Size: 10px (font-size-2xs)
+  - Weight: 600 (semibold)
+  - Color: White (color-text-inverse)
+  - Line Height: 1.40
+- **Position**: Left: 0, Top: 36px (bottom of avatar)
+
+**Profile Text:**
+- **Username**: "@mikkey"
+  - Font: Archivo
+  - Size: 16px (font-size-base)
+  - Weight: 700 (bold)
+  - Color: #09101D (color-text-primary)
+  - Line Height: 1.40
+- **Description**: "100+ Playlists on Napster"
+  - Font: Archivo
+  - Size: 12px (font-size-xs)
+  - "100+": Weight 700 (bold), Color #414249
+  - " Playlists on Napster": Weight 400 (normal), Color #414249
+  - Line Height: 1.40
+
+**Toggle Switch:**
+- **Container**: 52px × 31px
+- **Background**: #4141E6 (color-accent)
+- **Border Radius**: 40px (circular)
+- **Knob**: 31px × 31px
+- **Knob Background**: White
+- **Knob Border**: 2px solid #4141E6
+- **Knob Border Radius**: 40px (circular)
+- **Position**: Aligned right (end of row)
+- **State**: Active/On (knob on the right)
+
+#### Layout Structure:
+
+**Profile Card Layout:**
+```
+┌─────────────────────────────────────────┐
+│ [Avatar]  Title (32px bold)             │
+│  +Badge   Subtitle (14px normal)        │
+└─────────────────────────────────────────┘
+Padding: 16px left, 10px right, 12px vertical
+```
+
+**Avatar Group Layout:**
+```
+┌─────────────────────────────────────────┐
+│ [A] [A] [A] [A] [A]                     │
+│      +Badge variations                  │
+└─────────────────────────────────────────┘
+Padding: 16px horizontal, 10px vertical
+Spacing: 5px between avatars
+```
+
+**Profile with Live & Toggle:**
+```
+┌─────────────────────────────────────────┐
+│ [Avatar]  @username          [Toggle]   │
+│  +Live    Description text              │
+└─────────────────────────────────────────┘
+```
+
+#### Badge Positions:
+
+- **Bottom-Right**: Left: 0-36px from avatar left, Top: 36px from avatar top
+- **Top-Right**: Left: 36px from avatar left, Top: 0 from avatar top
+
+#### Use Cases:
+
+1. **User Profiles**: Display user information with avatar and bio
+2. **Live Streaming**: Indicate live status with gradient badge
+3. **Avatar Groups**: Show multiple users in a compact row
+4. **Settings Toggle**: Profile cards with interactive controls
+5. **Social Features**: Online status, notifications badges
+
+#### Best Practices:
+
+- Use 56×56px container for avatars (48×48px actual image with 4px offset)
+- Badge sizes: 14px for small indicators, 20px for icon badges
+- Keep profile titles under 50 characters for readability
+- Use Instagram gradient for Live badges to indicate real-time activity
+- Toggle switches should be 52×31px for optimal touch targets
+- Avatar placeholder background: #D9DDE2 (disabled color)
+- Maintain 1px white border on badges for visibility on all backgrounds
+
+---
+
 ## Как использовать эту дизайн-систему
 
 ### Для дизайнеров
@@ -1475,9 +1668,30 @@ Spacing: 10px between items
 
 ## Версионирование и обновления
 
-**Текущая версия**: v5.4.0
+**Текущая версия**: v5.5.0
 
 ### Changelog
+
+#### v5.5.0 (2025-11-19)
+- Добавлены данные из Basic компонента Flutter (User Profile Cards)
+- Добавлены новые design tokens:
+  - Font size: 32px (font-size-2xl-plus) для заголовков профиля
+  - Instagram gradient: #833AB4 → #FD1D1D → #FCB045 для Live badges
+  - Badge shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.4)
+- Добавлен компонент User Profile Cards с 3 вариантами:
+  - Basic Profile Card: Avatar 56×56px (48×48px image), title 32px, subtitle 14px
+  - Avatar Group/Row: Horizontal row из 5 аватаров с различными badge вариантами
+  - Profile Card with Live Badge and Toggle: Live badge с Instagram gradient, toggle switch 52×31px
+- Avatar спецификации:
+  - Container: 56×56px, Image: 48×48px, Offset: 4px
+  - Border radius: 40px (circular)
+  - Placeholder background: #D9DDE2
+- Badge позиции и размеры:
+  - Bottom-right: 20×20px container, 14×14px badge
+  - Top-right: 20×20px с shadow, accent/dark background
+- Toggle Switch: 52×31px container, 31×31px knob, accent color background
+- Live Badge: 28×14px с Instagram gradient, white border, 12px radius
+- Документированы use cases и best practices для User Profile Cards
 
 #### v5.4.0 (2025-11-19)
 - Добавлены данные из StoriesTextOutside компонента Flutter
