@@ -65,6 +65,7 @@
 /* Акцентные цвета из Flutter кода */
 --color-primary: #4141E6;            /* Основной синий (кнопки) */
 --color-accent-blue: #4141E6;
+--color-accent-purple: #7B61FF;      /* Фиолетовый акцент (borders) */
 --color-accent-green: #11BB8D;       /* Зеленый акцент (border) */
 --color-accent-green-light: #0C11BB8D;  /* Зеленый с прозрачностью */
 --color-accent-pink: #FC466B;        /* Розовый градиент */
@@ -98,6 +99,15 @@
 --color-border-focus: #4141E6;
 --color-border-success: #11BB8D;
 --color-border-pink: #FC466B;
+--color-border-purple: #7B61FF;
+```
+
+### Divider Colors
+
+```css
+/* Цвета разделителей из Flutter кода */
+--color-divider-light: #EAEEF2;      /* Светлый divider (1px) */
+--color-divider-thick: #F4F6F9;      /* Толстый divider (10px) */
 ```
 
 ### Chart Colors
@@ -149,6 +159,7 @@
 --font-size-26: 1.625rem;     /* 26px */
 --font-size-27: 1.6875rem;    /* 27px - иконки клавиатуры */
 --font-size-32: 2rem;         /* 32px */
+--font-size-72: 4.5rem;       /* 72px - крупные заголовки */
 ```
 
 ### Font Weights
@@ -158,7 +169,7 @@
 --font-weight-medium: 500;
 --font-weight-semibold: 600;
 --font-weight-bold: 700;
---font-weight-extrabold: 800;
+--font-weight-extrabold: 800;  /* Из Flutter кода для крупных заголовков */
 ```
 
 ### Line Heights
@@ -172,6 +183,7 @@
 --line-height-36: 2.25rem;    /* 36px */
 --line-height-40: 2.5rem;     /* 40px */
 --line-height-50: 3.15rem;    /* 50.4px */
+--line-height-70: 0.70;       /* 70% - для крупных заголовков */
 --line-height-140: 1.40;      /* 140% - основной из Flutter кода */
 ```
 
@@ -617,7 +629,88 @@
 
 ---
 
-### 5. Forms
+### 5. Dividers (из Flutter кода)
+
+#### Thin Divider (1px)
+
+- **Height**: 1px
+- **Width**: 100% (full width)
+- **Color**: #EAEEF2
+- **Padding**: 5px vertical (контейнер)
+- **Margin**: 0
+- **Usage**: Разделение секций контента
+
+**Варианты с отступами:**
+```
+No indent: 0px left padding
+Level 1:   16px left padding
+Level 2:   36px left padding
+Level 3:   52px left padding
+Level 4:   74px left padding
+Level 5:   84px left padding
+```
+
+#### Thick Divider (10px)
+
+- **Height**: 10px
+- **Width**: 100% (full width)
+- **Color**: #F4F6F9
+- **Padding**: 0
+- **Margin**: 0
+- **Usage**: Сильное визуальное разделение секций
+
+#### Divider Container
+
+**Example Container:**
+- **Width**: 475px (или responsive)
+- **Padding**: 50px all sides
+- **Border**: 1px solid #7B61FF
+- **Border Radius**: 15px
+- **Background**: transparent
+- **Spacing between dividers**: 42px
+
+#### Text Style для заголовка секции Divider
+
+- **Font Size**: 72px
+- **Font Weight**: 800 (extrabold)
+- **Line Height**: 0.70 (70%)
+- **Color**: #09101D
+- **Font Family**: Archivo
+
+#### Использование
+
+```css
+/* Thin divider */
+.divider-thin {
+  width: 100%;
+  height: 1px;
+  background: #EAEEF2;
+  padding: 5px 0;
+}
+
+/* Thick divider */
+.divider-thick {
+  width: 100%;
+  height: 10px;
+  background: #F4F6F9;
+}
+
+/* С отступом (Level 1) */
+.divider-indent-1 {
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+/* С отступом (Level 2) */
+.divider-indent-2 {
+  padding-left: 36px;
+  padding-right: 16px;
+}
+```
+
+---
+
+### 6. Forms
 
 #### Form Layout
 
@@ -1302,9 +1395,26 @@ decoration: BoxDecoration(
 
 ## Версионирование и обновления
 
-**Текущая версия**: v5.2.0
+**Текущая версия**: v5.3.0
 
 ### Changelog
+
+#### v5.3.0 (2025-11-19)
+- **Dividers (Разделители)**: Добавлена полная спецификация разделителей
+  - Thin Divider: 1px height, #EAEEF2 color
+  - Thick Divider: 10px height, #F4F6F9 color
+  - Indent levels: 0px, 16px, 36px, 52px, 74px, 84px
+  - Container: 475px width, 50px padding, 1px border #7B61FF
+- **Цвета**: Добавлены новые цвета
+  - Accent purple: #7B61FF (фиолетовый для границ)
+  - Divider light: #EAEEF2
+  - Divider thick: #F4F6F9
+  - Border purple: #7B61FF
+- **Типографика**: Расширены размеры шрифтов
+  - Font size 72px для крупных заголовков
+  - Font weight 800 (extrabold)
+  - Line height 0.70 (70%)
+  - Использование: заголовки секций "Divider"
 
 #### v5.2.0 (2025-11-19)
 - **Charts (Графики)**: Добавлена полная спецификация графиков
