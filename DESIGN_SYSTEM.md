@@ -2018,6 +2018,51 @@ Container(
 
 ---
 
+### 21. Group/Event Header (из SocialLight)
+
+#### Header Bar
+
+- **Height**: 44px
+- **Icon Button**: 24x24px (with 2px padding = 20px actual)
+- **Padding**: horizontal 16px (left icon section)
+
+#### Avatar Stack
+
+- **Avatar Container**: 40x40px
+- **Avatar Image**: 32x32px (positioned at 4, 4)
+- **Avatar Border**: 4px solid white
+- **Border Radius**: 30px (container), 40px (avatar)
+- **Spacing**: 10px between avatars
+
+#### Letter Avatar
+
+- **Container**: 40x40px (with 4px white border)
+- **Inner Size**: 32x32px
+- **Text**: 16px, weight: 600, white
+- **Background**: #7CC5D6 (cyan)
+
+#### Group Info
+
+- **Title**: 18px, weight: 700, #09101D
+- **Subtitle**: 12px, weight: 400, #09101D
+- **Subtitle Width**: 343px
+- **Spacing**: 5px vertical
+
+#### Action Chips
+
+- **Chip Height**: 24px
+- **Border Radius**: 11px
+- **Padding**: 6px (left or right depending on icon position)
+- **Spacing**: 10px between chips
+- **Text**: 11px, weight: 400
+- **Icon Container**: 24x24px (6px padding)
+- **Icon Size**: 14.40x14.40px (actual icon)
+- **Chip States**:
+  - Active: #23262B background, white text
+  - Inactive: #F4F6F9 background, dark text
+
+---
+
 ### 16. Special Effects
 
 #### Focus Ring
@@ -2620,6 +2665,154 @@ Screen Container (375px width, radius: 30):
 
 **Гибкость**: Можно добавить/убрать stories, изменить размер аватаров, добавить имена под аватарами, изменить badges (например добавить count badge для multiple stories), изменить gradient цвета, добавить "Add Story" button в начале списка.
 
+#### Group/Event Header
+
+**Из SocialLight - Group header with member avatars**
+
+Заголовок группы или события с аватарами участников, информацией и action chips.
+
+- **Screen Width**: 375px (mobile)
+- **Border Radius**: 30px
+- **Background**: Colors.white
+- **Clip**: antiAlias
+
+**Top Navigation Bar** (height: 44px):
+- **Background**: transparent (empty stack)
+- **Time Element** (position: left 21, top 12):
+  - Size: 54x21px
+  - Border Radius: 32px
+
+**Header Bar with Avatars** (height: 44px):
+- **Background**: Colors.white
+- **Padding**: right 16px
+- **Layout**: Row, space-between
+
+- **Left Section** (icon button):
+  - Container height: 44px
+  - Padding: horizontal 16px
+  - Border radius: 12px
+  - Icon: 24x24px (padding 2px)
+  - Icon inner: 20x20px actual content
+
+- **Right Section** (member avatars):
+  - **Avatar Stack**: Horizontal row with 4 avatars
+  - **Spacing**: 10px between avatars
+  - **Avatar Container**: 40x40px
+    - Border: 4px solid white (#FFFFFF)
+    - Border Radius: 30px
+  - **Avatar Image**: 32x32px (positioned at 4, 4)
+    - Border Radius: 40px
+    - Background Placeholder: #D9DDE2 (--color-bg-disabled)
+    - NetworkImage: 32x32px, fit: cover
+
+- **Letter Avatar** (initials):
+  - Container: 40x40px (4px white border)
+  - Inner: 32x32px at (4, 4)
+  - Background: #7CC5D6 (--color-accent-cyan)
+  - Border Radius: 40px
+  - Text: "J" (single letter)
+    - Font: Archivo, 16px, weight: 600
+    - Color: white
+    - Position: top 9px (vertical center)
+    - Text Align: center
+
+**Group Info Section**:
+- **Padding**: horizontal 16px
+- **Spacing**: 5px vertical between elements
+- **Background**: Colors.white
+
+- **Title**:
+  - Text: "Crossfit on Bali"
+  - Font: Archivo, 18px, weight: 700
+  - Color: #09101D (--color-text-primary)
+  - Line height: 1.40
+
+- **Subtitle/Metadata**:
+  - Text: "4 weeks ・ 5.042 members"
+  - Width: 343px
+  - Font: Archivo, 12px, weight: 400
+  - Color: #09101D (--color-text-primary)
+  - Line height: 1.40
+  - Separator: "・" (bullet character)
+
+**Action Chips Section**:
+- **Padding**: top 10px, left/right 16px, bottom 20px
+- **Background**: Colors.white
+- **Layout**: Horizontal Row
+- **Spacing**: 10px between chips
+
+**Chip Variants** (height: 24px):
+
+1. **Active/Selected Chip** (date picker):
+   - Height: 24px
+   - Padding: left 6px
+   - Background: #23262B (--color-text-dark)
+   - Border Radius: 11px
+   - Layout: text + icon (close)
+   - Text: "Aug 31"
+     - Font: Archivo, 11px, weight: 400
+     - Color: white
+   - Icon Container: 24x24px, padding: 6px, radius: 100px
+     - Icon: 14.40x14.40px (close/X icon, positioned -1.20, -1.20)
+
+2. **Secondary Chip** (category/tag):
+   - Height: 24px
+   - Padding: left 6px
+   - Background: #F4F6F9 (--color-bg-secondary)
+   - Border Radius: 11px
+   - Layout: text + icon (close)
+   - Text: "Conferencing"
+     - Font: Archivo, 11px, weight: 400
+     - Color: #23262B (--color-text-dark)
+   - Icon Container: 24x24px, padding: 6px, radius: 100px
+     - Icon: 14.40x14.40px (close/X icon)
+
+3. **Action Chip** (icon + text):
+   - Height: 24px
+   - Padding: right 6px
+   - Background: #F4F6F9 (--color-bg-secondary)
+   - Border Radius: 11px
+   - Layout: icon + text
+   - Icon Container: 24x24px, padding: 6px, radius: 100px
+     - Icon: 14.40x14.40px (share icon, positioned -1.20, -1.20)
+   - Text: "Share"
+     - Font: Archivo, 11px, weight: 400
+     - Color: #09101D (--color-text-primary)
+
+**Structure**:
+```
+Screen Container (375px width, radius: 30):
+  - Top Navigation Bar (44px height):
+    - Time Element (54x21, left 21, top 12)
+  - Header Bar (44px height, white bg):
+    - Left: Icon Button (24x24 icon, padding 16px)
+    - Right: Avatar Stack (padding right 16):
+      - Row (spacing: 10):
+        - Avatar 1: NetworkImage (40x40 container, 32x32 image, 4px white border)
+        - Avatar 2: Letter "J" on #7CC5D6 bg (40x40, 32x32)
+        - Avatar 3: NetworkImage (40x40, 32x32)
+        - Avatar 4: NetworkImage (40x40, 32x32)
+  - Group Info (padding: 16px horizontal):
+    - Column (spacing: 5):
+      - Title: "Crossfit on Bali" (18px weight 700, #09101D)
+      - Subtitle: "4 weeks ・ 5.042 members" (12px weight 400, #09101D)
+  - Action Chips (padding: 10/16/20):
+    - Row (spacing: 10):
+      - Chip 1: "Aug 31" + close icon (#23262B bg, white text, 24px)
+      - Chip 2: "Conferencing" + close icon (#F4F6F9 bg, #23262B text, 24px)
+      - Chip 3: share icon + "Share" (#F4F6F9 bg, #09101D text, 24px)
+```
+
+**Chip States**:
+- **Active/Selected**: #23262B background, white text
+- **Inactive/Default**: #F4F6F9 background, dark text (#23262B or #09101D)
+- **Icon Position**: Can be left (before text) or right (after text)
+- **Close Button**: 14.40x14.40px X icon in 24x24px container
+
+**Usage**: Заголовок группы/события для социальных приложений, сообществ, чатов. Показывает участников, метаданные и доступные actions/filters.
+
+**Гибкость**: Можно изменить количество аватаров (добавить "+5" badge для большего числа), изменить metadata (добавить location, время события), добавить/убрать chips (tags, categories, filters), изменить chip icons, добавить кнопку "Join" или "Leave", добавить progress bar для event duration.
+
 ---
 
 ## Состояния
@@ -2853,9 +3046,53 @@ Screen Container (375px width, radius: 30):
 
 ## Версионирование и обновления
 
-**Текущая версия**: v5.6.0
+**Текущая версия**: v5.7.0
 
 ### Changelog
+
+#### v5.7.0 (2025-11-19)
+- Добавлен компонент **Group/Event Header** в раздел Social Components из SocialLight:
+  - **Заголовок группы/события** с аватарами участников, метаданными и action chips
+  - **Header Bar** (44px height):
+    - Left: Icon button (24x24px icon with 2px padding)
+    - Right: Avatar stack (4 members)
+  - **Avatar Stack**:
+    - Container: 40x40px
+    - Avatar: 32x32px (positioned at 4, 4)
+    - Border: 4px solid white
+    - Border radius: 30px (container), 40px (avatar)
+    - Spacing: 10px between avatars
+  - **Letter Avatar** (initials):
+    - Background: #7CC5D6 (cyan)
+    - Text: "J", 16px weight 600, white
+    - Positioned at top: 9px for vertical centering
+  - **Group Info**:
+    - Title: "Crossfit on Bali", 18px weight 700, #09101D
+    - Subtitle: "4 weeks ・ 5.042 members", 12px weight 400, #09101D
+    - Separator: "・" (bullet character)
+    - Spacing: 5px vertical
+  - **Action Chips** (24px height):
+    - Active chip: #23262B bg, white text, "Aug 31" + close icon
+    - Secondary chip: #F4F6F9 bg, #23262B text, "Conferencing" + close icon
+    - Action chip: #F4F6F9 bg, #09101D text, share icon + "Share"
+    - Border radius: 11px
+    - Text: 11px weight 400
+    - Icon: 14.40x14.40px in 24x24px container
+    - Spacing: 10px between chips
+  - **Гибкость**: Можно изменить количество аватаров (добавить "+5" badge), изменить metadata (location, время), добавить/убрать chips, изменить icons, добавить кнопку "Join"/"Leave", добавить progress bar
+- **Новые component sizes**:
+  - Group header bar: 44px height
+  - Member avatar container: 40x40px
+  - Member avatar image: 32x32px
+  - Avatar border: 4px white
+  - Letter avatar text: 16px
+  - Group title: 18px
+  - Group subtitle: 12px
+  - Action chip: 24px height, 11px radius
+  - Chip text: 11px
+  - Chip icon: 14.40x14.40px
+  - Avatar spacing: 10px
+  - Chip spacing: 10px
 
 #### v5.6.0 (2025-11-19)
 - Добавлен раздел **Social Components / Социальные компоненты** с Stories/Status Row из SocialLight:
