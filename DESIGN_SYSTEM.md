@@ -69,13 +69,24 @@
 --color-accent-blue: #4141E6;      /* Синий (stories, primary actions, buttons) */
 --color-accent-pink: #FC466B;      /* Розовый (stories, highlights) */
 --color-accent-purple: #7B61FF;    /* Фиолетовый (borders, decorative) */
+--color-accent-orange: #F7B68A;    /* Оранжевый/персиковый (buttons, highlights) */
+--color-accent-red: #E24949;       /* Красный (price badges, alerts) */
+--color-accent-red-dark: #DD2476;  /* Темно-красный (градиенты) */
+--color-accent-orange-bright: #FF512F; /* Яркий оранжевый (градиенты) */
+```
+
+### Text Colors (Light on Dark)
+
+```css
+/* Светлый текст на темных кнопках */
+--color-text-light-secondary: #EAEEF2; /* Светлый вторичный текст (на темных кнопках) */
 ```
 
 ### Status Colors
 
 ```css
 /* Статусные цвета */
---color-status-online: #11BB8D;    /* Зеленый (online indicator) */
+--color-status-online: #11BB8D;    /* Зеленый (online indicator, buttons) */
 --color-status-success: #10B981;
 --color-status-error: #EF4444;
 --color-status-warning: #F59E0B;
@@ -824,6 +835,567 @@ Border: none
 - **Outlined**: Alternative actions, filters, selections
 - **Ghost**: Tertiary actions, minimal visual weight
 - **Icon Button**: Compact actions, toolbars, navigation
+
+#### Standard Button (Full-Width 44px)
+
+**Спецификация из кода:**
+- **Height**: 44px (стандартная iOS высота)
+- **Width**: Full width (375px container - 32px padding = 343px)
+- **Padding**: 16px horizontal, 10px vertical
+- **Border Radius**: 15px (--radius-badge) или 10px или 30px (pill variant)
+- **Typography**:
+  - Font: 14px (0.875rem)
+  - Weight: 600 (Semibold)
+  - Font Family: 'Archivo'
+  - Line Height: 1.40 (19.6px)
+
+**Варианты Standard Button:**
+
+**1. Primary Green (Success)**
+```
+Height: 44px
+Background: #11BB8D (--color-status-online)
+Text Color: #FFFFFF (white)
+Border Radius: 15px
+Padding: 16px/10px
+Use Case: Success actions, positive confirmations ("Log in", "Confirm")
+```
+
+**2. Primary Black**
+```
+Height: 44px
+Background: #09101D (--color-text-primary)
+Text Color: #FFFFFF (white)
+Border Radius: 10px or 30px
+Padding: 16px/10px
+Use Case: Primary CTA, main actions ("Get Started")
+```
+
+**3. Primary Blue**
+```
+Height: 44px
+Background: #4141E6 (--color-accent-blue)
+Text Color: #FFFFFF (white)
+Border Radius: 30px (pill style)
+Padding: 16px/10px
+Use Case: Primary actions, sign up flows
+```
+
+**4. Secondary Light (Inactive)**
+```
+Height: 44px
+Background: #F4F6F9 (--color-bg-secondary)
+Text Color: #09101D (--color-text-primary) or #4141E6 (--color-accent-blue)
+Border Radius: 10px or 30px
+Padding: 10px vertical
+Use Case: Secondary actions, alternative options ("Log In")
+```
+
+**5. Small Button (36px)**
+```
+Height: 36px
+Background: #F7B68A (--color-accent-orange)
+Text Color: #FFFFFF (white)
+Border Radius: 15px
+Padding: 16px/10px
+Font Size: 11px (0.6875rem)
+Font Weight: 600
+Icon: 16×16 (optional, with 8px spacing)
+Use Case: Compact CTAs, inline actions ("View my order")
+```
+
+**CSS пример (Standard Button):**
+
+```css
+.button-standard {
+  width: 100%;
+  height: 44px;
+  padding: 10px 16px;
+  border-radius: var(--radius-badge); /* 15px */
+  font-family: 'Archivo';
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.40;
+  border: none;
+  cursor: pointer;
+  transition: all 150ms ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button-standard--green {
+  background: var(--color-status-online); /* #11BB8D */
+  color: white;
+}
+
+.button-standard--black {
+  background: var(--color-text-primary); /* #09101D */
+  color: white;
+  border-radius: 10px;
+}
+
+.button-standard--blue {
+  background: var(--color-accent-blue); /* #4141E6 */
+  color: white;
+  border-radius: 30px;
+}
+
+.button-standard--secondary {
+  background: var(--color-bg-secondary); /* #F4F6F9 */
+  color: var(--color-text-primary); /* #09101D */
+  border-radius: 10px;
+}
+
+.button-standard--secondary-blue {
+  background: var(--color-bg-secondary); /* #F4F6F9 */
+  color: var(--color-accent-blue); /* #4141E6 */
+  border-radius: 30px;
+}
+
+.button-standard--small {
+  height: 36px;
+  background: var(--color-accent-orange); /* #F7B68A */
+  color: white;
+  font-size: 11px;
+}
+
+.button-standard__icon {
+  width: 16px;
+  height: 16px;
+  margin-left: 8px;
+}
+```
+
+#### Gradient Button
+
+**Спецификация из кода:**
+- **Height**: 44px
+- **Width**: Full width
+- **Padding**: 16px horizontal, 10px vertical
+- **Border Radius**: 15px (--radius-badge)
+- **Gradient**: Linear horizontal (#FF512F → #DD2476)
+- **Typography**: 14px, weight 600, white color
+- **Shadow**: 0 2px 10px rgba(0,0,0,0.3) (optional)
+
+**Варианты Gradient Button:**
+
+**1. Red-Pink Gradient (Default)**
+```
+Background: linear-gradient(90deg, #FF512F 0%, #DD2476 100%)
+Text Color: #FFFFFF
+Border Radius: 15px
+Shadow: none (default) or 0 2px 10px rgba(0,0,0,0.3)
+Use Case: Premium features, pricing CTAs ("$ 86.99/Year", "Add To Cart")
+```
+
+**2. With Shadow (Elevated)**
+```
+Background: linear-gradient(90deg, #FF512F 0%, #DD2476 100%)
+Text Color: #FFFFFF
+Border Radius: 15px
+Shadow: 0 2px 10px rgba(0,0,0,0.3)
+Blur Radius: 10px
+Spread Radius: 0
+Offset: 0px, 2px
+Color: rgba(0, 0, 0, 0.3) - 30% opacity
+Use Case: Floating buttons, prominent CTAs
+```
+
+**Структура Gradient Button:**
+
+```
+Button: 44px height, full width
+├─ Gradient Background: #FF512F → #DD2476
+├─ Padding: 16px/10px
+├─ Content Row: justify-content space-between or start
+│  ├─ Text: 14px, weight 600, white
+│  └─ Badge (optional): 20px height, white bg
+│     └─ Badge Text: 11px, weight 600, colored
+│
+└─ Shadow (optional): 0 2px 10px rgba(0,0,0,0.3)
+```
+
+**CSS пример (Gradient Button):**
+
+```css
+.button-gradient {
+  width: 100%;
+  height: 44px;
+  padding: 10px 16px;
+  border-radius: var(--radius-badge); /* 15px */
+  background: linear-gradient(90deg, var(--color-accent-orange-bright) 0%, var(--color-accent-red-dark) 100%);
+  /* #FF512F → #DD2476 */
+  font-family: 'Archivo';
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.40;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: all 150ms ease;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.button-gradient--elevated {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.button-gradient:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+}
+
+.button-gradient:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+```
+
+#### Button with Inline Badge
+
+**Спецификация из кода:**
+- **Badge Height**: 20px
+- **Badge Padding**: 10px horizontal, 5px vertical
+- **Badge Border Radius**: 12px
+- **Badge Typography**: 11px (0.6875rem), weight 600
+- **Badge Spacing**: 8px from text
+- **Badge Background**: white (on colored buttons)
+
+**Варианты Button Badge:**
+
+**1. Price Badge (Gradient Button)**
+```
+Background: white
+Text Color: #FF512F (matches gradient start) or #E24949 (--color-accent-red)
+Font Size: 11px
+Font Weight: 600
+Border Radius: 12px
+Padding: 5px 10px
+Height: 20px
+Use Case: Pricing, discounts ("Save 23%", "$ 2.39")
+```
+
+**2. Discount Badge (White on Gradient)**
+```
+Background: white
+Text Color: #FF512F (orange-red from gradient)
+Content: "Save 23%", "- 50%"
+Position: Right side of button text
+Spacing: 8px from text
+```
+
+**Структура Button with Badge:**
+
+```
+Button: 44px height, gradient background
+└─ Content Row: spacing 8px
+   ├─ Main Text: "$ 86.99/Year", "Add To Cart"
+   └─ Badge: 20px height, white bg
+      ├─ Background: white
+      ├─ Border Radius: 12px
+      ├─ Padding: 5px 10px
+      └─ Text: 11px/600, colored (#FF512F or #E24949)
+```
+
+**CSS пример (Button Badge):**
+
+```css
+.button__badge {
+  height: 20px;
+  padding: 5px 10px;
+  background: white;
+  border-radius: 12px;
+  font-family: 'Archivo';
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.40;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 8px;
+}
+
+.button__badge--price-red {
+  color: var(--color-accent-red); /* #E24949 */
+}
+
+.button__badge--price-orange {
+  color: var(--color-accent-orange-bright); /* #FF512F */
+}
+
+/* Full button example with badge */
+.button-with-badge {
+  width: 100%;
+  height: 44px;
+  padding: 10px 16px;
+  border-radius: 15px;
+  background: linear-gradient(90deg, #FF512F 0%, #DD2476 100%);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+}
+
+.button-with-badge__content {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+```
+
+#### Multi-Line Button (Two-Line Text)
+
+**Спецификация из кода:**
+- **Height**: 44px
+- **Background**: #09101D (black)
+- **Border Radius**: 10px
+- **Padding**: 16px horizontal, 10px vertical
+- **Content Layout**: Icon + Two-line text + Counter/Badge
+
+**Text Specifications:**
+- **Top Line (Label)**: 10px (0.625rem), weight 600, #EAEEF2 (--color-text-light-secondary)
+- **Bottom Line (Main)**: 14px (0.875rem), weight 600, white
+- **Text Align**: center
+- **Line Height**: 1.40 for both
+
+**Elements:**
+- **Left Icon**: 20×20 (padding 2px)
+- **Right Counter**: 20px width, 16px font, weight 700, white
+- **Layout**: space-between (justify-content)
+
+**Структура Multi-Line Button:**
+
+```
+Button: 44px height, black background
+└─ Content Row: justify-content space-between
+   ├─ Left Icon: 20×20
+   ├─ Text Center (expanded):
+   │  ├─ Top Line: "View Cart", 10px/600, #EAEEF2
+   │  └─ Bottom Line: "Nike", 14px/600, white
+   └─ Right Counter: "1", 16px/700, white, 20px width
+```
+
+**CSS пример (Multi-Line Button):**
+
+```css
+.button-multiline {
+  width: 100%;
+  height: 44px;
+  padding: 10px 16px;
+  background: var(--color-text-primary); /* #09101D */
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.button-multiline__icon {
+  width: 20px;
+  height: 20px;
+  padding: 2px;
+  flex-shrink: 0;
+}
+
+.button-multiline__text {
+  flex: 1;
+  text-align: center;
+  line-height: 1.40;
+}
+
+.button-multiline__text-top {
+  font-family: 'Archivo';
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--color-text-light-secondary); /* #EAEEF2 */
+  display: block;
+}
+
+.button-multiline__text-main {
+  font-family: 'Archivo';
+  font-size: 14px;
+  font-weight: 600;
+  color: white;
+  display: block;
+}
+
+.button-multiline__counter {
+  width: 20px;
+  font-family: 'Archivo';
+  font-size: 16px;
+  font-weight: 700;
+  color: white;
+  text-align: right;
+  flex-shrink: 0;
+}
+```
+
+#### Dual Button Layout (Split Buttons)
+
+**Спецификация из кода:**
+- **Container Padding**: 16px horizontal, 5px vertical
+- **Layout**: Row with space-between
+- **Spacing**: 10px between buttons
+- **Height**: 44px (both buttons)
+
+**Left Button (Secondary):**
+- **Width**: Auto (content-based, ~111px)
+- **Background**: #F4F6F9 (gray)
+- **Text Color**: #09101D or #4141E6
+- **Border Radius**: 10px or 30px
+- **Text**: "Log In"
+
+**Right Button (Primary):**
+- **Width**: Fixed 123px
+- **Background**: #09101D (black) or #4141E6 (blue)
+- **Text Color**: white
+- **Border Radius**: 10px or 30px
+- **Text**: "Get Started"
+
+**Варианты Dual Layout:**
+
+**1. Black + Gray (Squared - 10px radius)**
+```
+Left: Gray #F4F6F9, text black, border-radius 10px
+Right: Black #09101D, text white, width 123px, border-radius 10px
+```
+
+**2. Blue + Gray (Pill - 30px radius)**
+```
+Left: Gray #F4F6F9, text blue #4141E6, border-radius 30px
+Right: Blue #4141E6, text white, width 123px, border-radius 30px
+```
+
+**CSS пример (Dual Button Layout):**
+
+```css
+.button-dual-container {
+  padding: 5px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.button-dual__left {
+  height: 44px;
+  padding: 10px;
+  background: var(--color-bg-secondary); /* #F4F6F9 */
+  border-radius: 10px; /* or 30px for pill */
+  font-family: 'Archivo';
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.button-dual__left--squared {
+  border-radius: 10px;
+  color: var(--color-text-primary); /* #09101D */
+}
+
+.button-dual__left--pill {
+  border-radius: 30px;
+  color: var(--color-accent-blue); /* #4141E6 */
+}
+
+.button-dual__right {
+  width: 123px;
+  height: 44px;
+  padding: 10px 16px;
+  border-radius: 10px; /* or 30px */
+  font-family: 'Archivo';
+  font-size: 14px;
+  font-weight: 600;
+  color: white;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button-dual__right--black {
+  background: var(--color-text-primary); /* #09101D */
+  border-radius: 10px;
+}
+
+.button-dual__right--blue {
+  background: var(--color-accent-blue); /* #4141E6 */
+  border-radius: 30px;
+}
+```
+
+**Usage Guidelines (Extended):**
+- **Full-Width Standard**: Main CTAs, form submissions, primary actions
+- **Gradient**: Premium features, pricing, special offers, high-impact CTAs
+- **With Shadow**: Floating actions, sticky bottom buttons, elevated CTAs
+- **With Badge**: Pricing display, discounts, special offers, cart items
+- **Multi-Line**: Shopping cart, product info, contextual actions
+- **Dual Layout**: Authentication flows, choice between two primary actions
+- **Small 36px**: Inline actions, compact spaces, secondary CTAs
+
+---
+
+### 9. Home Indicator (iOS)
+
+#### Home Indicator Specification
+
+**Спецификация из кода:**
+- **Size**: 134px × 5px
+- **Background**: #09101D (--color-text-primary)
+- **Border Radius**: 100px (fully rounded pill)
+- **Position**: Centered horizontally, 21px from top of 34px container
+- **Container Height**: 34px
+- **Использование**: iOS home indicator для apps без physical home button
+
+**Структура Home Indicator:**
+
+```
+Container: 375px width, 34px height
+└─ Indicator: 134×5, centered
+   ├─ Position: left 121px, top 21px (centered)
+   ├─ Background: #09101D (black)
+   └─ Border Radius: 100px
+```
+
+**CSS пример:**
+
+```css
+.home-indicator-container {
+  width: 100%;
+  height: 34px;
+  position: relative;
+}
+
+.home-indicator {
+  width: 134px;
+  height: 5px;
+  background: var(--color-text-primary); /* #09101D */
+  border-radius: 100px;
+  position: absolute;
+  left: 50%;
+  top: 21px;
+  transform: translateX(-50%);
+}
+```
+
+**Usage Guidelines:**
+- **Always include** под sticky bottom buttons для iOS apps
+- **Height**: Всегда 34px для consistent spacing
+- **Color**: Всегда #09101D для visibility на light backgrounds
+- **Position**: Центрирован горизонтально, 21px от верха контейнера
+- **Не перекрывать** контент или interactive elements
 
 ---
 
