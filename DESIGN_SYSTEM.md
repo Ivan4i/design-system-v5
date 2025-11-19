@@ -156,6 +156,7 @@
 --color-accent-4: #221874;
 --color-accent-5: #7CC5D6;
 --color-accent-6: #E24949;
+--color-accent-7: #7B61FF;
 ```
 
 ### Gradients
@@ -189,11 +190,13 @@
 --font-primary: 'Archivo', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
 --font-secondary: 'Archivo', -apple-system, BlinkMacSystemFont, sans-serif;
 --font-mono: 'JetBrains Mono', 'Fira Code', 'Monaco', 'Consolas', 'Courier New', monospace;
+--font-ocr: 'OCR-A', 'Courier New', monospace;
 ```
 
 ### Font Sizes
 
 ```css
+--font-size-2xs: 0.6875rem;   /* 11px */
 --font-size-xs: 0.75rem;      /* 12px */
 --font-size-sm: 0.875rem;     /* 14px */
 --font-size-base: 1rem;       /* 16px */
@@ -275,9 +278,11 @@
 --space-8: 2rem;      /* 32px */
 --space-10: 2.5rem;   /* 40px */
 --space-12: 3rem;     /* 48px */
+--space-12-5: 3.125rem; /* 50px */
 --space-16: 4rem;     /* 64px */
 --space-20: 5rem;     /* 80px */
 --space-24: 6rem;     /* 96px */
+--space-25: 6.25rem;  /* 100px */
 ```
 
 ### Border Radius
@@ -322,6 +327,12 @@
 --shadow-hover-sm: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
 --shadow-hover-md: 0 8px 16px 0 rgba(0, 0, 0, 0.12);
 --shadow-hover-lg: 0 12px 24px 0 rgba(0, 0, 0, 0.15);
+```
+
+#### Text Shadows
+
+```css
+--shadow-text-sm: 0 1px 1px rgba(0, 0, 0, 0.4);
 ```
 
 ### Borders
