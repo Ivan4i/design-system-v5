@@ -34,14 +34,14 @@
 
 ```css
 /* Основной цвет бренда */
---color-primary: #3B82F6;
+--color-primary: #4141E6;
 --color-primary-hover: #2563EB;
 --color-primary-active: #1D4ED8;
 --color-primary-light: #DBEAFE;
 --color-primary-dark: #1E40AF;
 
 /* Вторичный цвет */
---color-secondary: #8B5CF6;
+--color-secondary: #7B61FF;
 --color-secondary-hover: #7C3AED;
 --color-secondary-active: #6D28D9;
 ```
@@ -50,7 +50,7 @@
 
 ```css
 /* Success / Trend Up */
---color-success: #10B981;
+--color-success: #11BB8D;
 --color-success-bg: #D1FAE5;
 --color-success-border: #6EE7B7;
 
@@ -75,7 +75,7 @@
 ```css
 /* Text */
 --color-text-primary: #09101D;
---color-text-secondary: #6B7280;
+--color-text-secondary: #747B84;
 --color-text-tertiary: #9CA3AF;
 --color-text-disabled: #D1D5DB;
 --color-text-inverse: #FFFFFF;
@@ -157,17 +157,19 @@
 ### Font Sizes
 
 ```css
---font-size-xs: 0.75rem;      /* 12px */
---font-size-sm: 0.875rem;     /* 14px */
---font-size-base: 1rem;       /* 16px */
---font-size-md: 1.125rem;     /* 18px */
---font-size-lg: 1.25rem;      /* 20px */
---font-size-xl: 1.5rem;       /* 24px */
---font-size-2xl: 1.875rem;    /* 30px */
---font-size-3xl: 2.25rem;     /* 36px */
---font-size-4xl: 3rem;        /* 48px */
---font-size-5xl: 3.75rem;     /* 60px */
---font-size-6xl: 4.5rem;      /* 72px - Display/Elevations заголовки */
+--font-size-xs: 0.75rem;       /* 12px */
+--font-size-13: 0.8125rem;     /* 13px - для мелких subtitle */
+--font-size-sm: 0.875rem;      /* 14px */
+--font-size-15: 0.9375rem;     /* 15px - для subtitle */
+--font-size-base: 1rem;        /* 16px */
+--font-size-md: 1.125rem;      /* 18px */
+--font-size-lg: 1.25rem;       /* 20px */
+--font-size-xl: 1.5rem;        /* 24px */
+--font-size-2xl: 1.875rem;     /* 30px */
+--font-size-3xl: 2.25rem;      /* 36px */
+--font-size-4xl: 3rem;         /* 48px */
+--font-size-5xl: 3.75rem;      /* 60px */
+--font-size-6xl: 4.5rem;       /* 72px - Display/Elevations заголовки */
 ```
 
 ### Font Weights
@@ -228,32 +230,42 @@
 
 ```css
 --space-0: 0;
---space-1: 0.25rem;   /* 4px */
---space-2: 0.5rem;    /* 8px */
---space-3: 0.75rem;   /* 12px */
---space-4: 1rem;      /* 16px */
---space-5: 1.25rem;   /* 20px */
---space-6: 1.5rem;    /* 24px */
---space-8: 2rem;      /* 32px */
---space-10: 2.5rem;   /* 40px */
---space-12: 3rem;     /* 48px */
---space-16: 4rem;     /* 64px */
---space-20: 5rem;     /* 80px */
---space-24: 6rem;     /* 96px */
+--space-1: 0.25rem;    /* 4px */
+--space-1-25: 0.3125rem; /* 5px - мелкие отступы */
+--space-1-5: 0.375rem; /* 6px - мелкие отступы */
+--space-2: 0.5rem;     /* 8px */
+--space-2-5: 0.625rem; /* 10px - между элементами */
+--space-3: 0.75rem;    /* 12px */
+--space-4: 1rem;       /* 16px */
+--space-5: 1.25rem;    /* 20px */
+--space-6: 1.5rem;     /* 24px */
+--space-8: 2rem;       /* 32px */
+--space-10: 2.5rem;    /* 40px */
+--space-12: 3rem;      /* 48px */
+--space-12-5: 3.125rem; /* 50px - NavBar spacing */
+--space-16: 4rem;      /* 64px */
+--space-20: 5rem;      /* 80px */
+--space-24: 6rem;      /* 96px */
+--space-25: 6.25rem;   /* 100px - основной padding */
 ```
 
 ### Border Radius
 
 ```css
 --radius-none: 0;
---radius-sm: 0.125rem;    /* 2px */
---radius-base: 0.25rem;   /* 4px */
---radius-md: 0.375rem;    /* 6px */
---radius-lg: 0.5rem;      /* 8px */
---radius-xl: 0.75rem;     /* 12px */
---radius-2xl: 1rem;       /* 16px */
---radius-3xl: 1.875rem;   /* 30px - для карточек с elevations */
---radius-4xl: 6.25rem;    /* 100px - для контейнеров */
+--radius-sm: 0.125rem;      /* 2px */
+--radius-base: 0.25rem;     /* 4px */
+--radius-md: 0.375rem;      /* 6px */
+--radius-lg: 0.5rem;        /* 8px */
+--radius-10: 0.625rem;      /* 10px - для небольших элементов */
+--radius-xl: 0.75rem;       /* 12px */
+--radius-15: 0.9375rem;     /* 15px - для NavBar карточек */
+--radius-2xl: 1rem;         /* 16px */
+--radius-20: 1.25rem;       /* 20px - для индикаторов */
+--radius-3xl: 1.875rem;     /* 30px - для карточек с elevations */
+--radius-40: 2.5rem;        /* 40px - для аватаров */
+--radius-80: 5rem;          /* 80px - для больших контейнеров */
+--radius-4xl: 6.25rem;      /* 100px - для основных контейнеров */
 --radius-full: 9999px;
 ```
 
@@ -548,6 +560,59 @@
 
 ### 7. Navigation
 
+#### NavBar Component (44px height)
+
+- **Container**:
+  - Padding: 100px (основной контейнер)
+  - Border Radius: 80px (radius-80)
+  - Background: white
+  - Spacing: 50px между секциями
+
+- **Inner Card**:
+  - Padding: 50px (horizontal), 40px (vertical)
+  - Border Radius: 15px (radius-15)
+  - Border: 1px solid #4141E6 (синий) или #7B61FF (фиолетовый)
+  - Background: white или #F4F6F9 (secondary background)
+  - Spacing: 50px между элементами
+
+- **Item Height**: 44px (стандартная высота для всех элементов)
+- **Item Padding**:
+  - Horizontal: 16px
+  - Vertical: 10px
+  - Custom: 10px (top/bottom), 16px (left/right) для иконок
+
+- **Typography**:
+  - Title (крупный): 32px, weight 700, line-height 1.40
+  - Title (средний): 24px, weight 700, line-height 1.40
+  - Title (малый): 16px, weight 700, line-height 1.40
+  - Subtitle: 14px, weight 400, line-height 1.40, color #414249 или #747B84
+  - Action: 16px, weight 700, color #4141E6
+  - Label: 16px, weight 400, color #4141E6
+  - Name: 14px, weight 600, line-height 1.40
+
+- **Avatar Sizes**:
+  - Large: 40px × 40px (32px image + 4px offset)
+  - Small: 32px × 32px (24px image + 4px offset)
+  - Border Radius: 40px (круглые)
+  - Placeholder: background #D9DDE2
+
+- **Status Indicator**:
+  - Size: 12px × 12px
+  - Border Radius: 20px
+  - Border: 2px-3px solid white
+  - Color: #11BB8D (success green)
+  - Padding: 4px (horizontal), 2px (vertical)
+
+- **Icon Sizes**:
+  - Standard: 24px × 24px
+  - Small: 20px × 20px
+  - Container padding: 2px
+
+- **Spacing between elements**:
+  - Large: 50px
+  - Medium: 10px, 8px
+  - Small: 6px, 5px
+
 #### Main Navigation
 
 - **Height**: 64px
@@ -597,19 +662,25 @@
 
 #### Sizes
 
-- **XS**: 24px × 24px
-- **Small**: 32px × 32px
-- **Medium**: 40px × 40px
+- **XS**: 24px × 24px (image 24px + 4px offset в контейнере 32px)
+- **Small**: 32px × 32px (image 24px + 4px offset в контейнере 32px)
+- **Medium**: 40px × 40px (image 32px + 4px offset в контейнере 40px)
 - **Large**: 48px × 48px
 - **XL**: 64px × 64px
 - **2XL**: 96px × 96px
 
 #### Styles
 
-- **Border Radius**: radius-full (circle) или radius-md (rounded square)
+- **Border Radius**: 40px (radius-40) для круглых аватаров
 - **Border**: 2px solid white (для группировки)
-- **Placeholder**: Background: color-gray-300, Icon/Initials: color-gray-600
-- **Status Indicator**: Size: 25% of avatar, Border: 2px solid white, Position: bottom-right
+- **Placeholder**: Background: #D9DDE2 (color-gray-300), Icon/Initials: color-gray-600
+- **Container**: Offset 4px от краев для правильного позиционирования
+- **Status Indicator**:
+  - Size: 12px × 12px
+  - Border: 2px-3px solid white
+  - Border Radius: 20px (radius-20)
+  - Position: встроен в контейнер аватара
+  - Color: #11BB8D (success green)
 
 ---
 
@@ -858,13 +929,16 @@
 - **Sizes**:
   - XS: 12px
   - SM: 16px
-  - Base: 20px
-  - MD: 24px
+  - Base: 20px (используется в NavBar)
+  - MD: 24px (стандартный размер в NavBar)
   - LG: 32px
   - XL: 48px
+- **Container Padding**: 2px для иконок 24px
 - **Stroke Width**: 1.5px (regular), 2px (medium), 2.5px (bold)
 - **Style**: Outline (default), Solid (emphasis)
 - **Color**: Inherit from parent или explicit (color-text-primary, color-text-secondary)
+- **Border Radius**: 100px (radius-full) для круглых контейнеров иконок
+- **Positioning**: Offset -2px (top/left) для правильного выравнивания в некоторых случаях
 
 ### Common Icons
 
