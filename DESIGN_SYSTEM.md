@@ -16,6 +16,7 @@
 12. [Input Fields](#input-fields)
 13. [Snackbars & Toasts](#snackbars--toasts)
 14. [Mobile Screens & Layouts](#mobile-screens--layouts)
+15. [Shopping & Orders](#shopping--orders)
 
 ---
 
@@ -4746,6 +4747,1058 @@ Segments автоматически распределяются равноме�
 
 ---
 
+## Shopping & Orders
+
+Модульная система компонентов для e-commerce приложений: списки товаров, корзина покупок, подтверждение заказа. Все компоненты можно комбинировать и расширять в зависимости от требований backend и бизнес-логики.
+
+### Принцип модульности
+
+**Каждый экран покупок состоит из переиспользуемых блоков:**
+- Section Header (заголовок + описание)
+- Icon Action Buttons (круглые кнопки с иконками)
+- Product List Items (товары с изображением и инфо)
+- Quantity Stepper (контрол изменения количества)
+- List Dividers (разделители между элементами)
+
+Эти блоки можно свободно комбинировать, добавлять или удалять для создания различных экранов: корзина, список заказов, подтверждение, история покупок и т.д.
+
+### Container Specifications
+
+```css
+/* Screen Container */
+--shopping-screen-width: 375px;
+--shopping-screen-border-radius: 30px;
+--shopping-screen-bg: #FFFFFF;
+--shopping-screen-padding-v: 30px;
+
+/* Content Padding */
+--shopping-content-padding-h: 16px;  /* Standard horizontal padding */
+--shopping-action-padding-h: 32px;   /* For action buttons row */
+```
+
+### Typography System
+
+```css
+/* Section Header Typography */
+--shopping-header-title: 700 24px/1.40 'Archivo';
+--shopping-header-title-color: #09101D;
+--shopping-header-subtitle: 400 14px/1.40 'Archivo';
+--shopping-header-subtitle-color: #747B84;  /* Gray subtitle text */
+--shopping-header-subtitle-width: 343px;     /* Max width for readability */
+
+/* Product Typography */
+--shopping-product-title: 600 15px/1.40 'Archivo';
+--shopping-product-title-color: #09101D;
+--shopping-product-price: 600 13px/1.40 'Archivo';
+--shopping-product-price-color: #09101D;
+--shopping-product-meta: 400 14px/1.40 'Archivo';
+--shopping-product-meta-color: #414249;      /* Dark gray for quantity/weight */
+
+/* Action Button Typography */
+--shopping-action-label: 600 13px/1.40 'Archivo';
+--shopping-action-label-color: #09101D;
+
+/* Stepper Typography */
+--shopping-stepper-number: 500 12px/1.40 'Archivo';
+--shopping-stepper-number-color: #2A2B2F;    /* Dark text for numbers */
+```
+
+**Новые цвета для палитры:**
+```css
+--color-subtitle-gray: #747B84;     /* Для subtitles и secondary text */
+--color-meta-gray: #414249;         /* Для quantity/weight информации */
+--color-stepper-text: #2A2B2F;      /* Для чисел в stepper */
+--color-divider-line: #EAEEEF2;     /* Для разделительных линий */
+```
+
+### 1. Section Header Component
+
+Centered title и subtitle для заголовков секций (Order confirmed, Your Cart, и т.д.)
+
+**Specifications:**
+```css
+/* Container */
+--section-header-padding-h: 16px;
+--section-header-padding-v: 10px;
+--section-header-spacing: 5px;      /* Between title and subtitle */
+--section-header-bg: #FFFFFF;
+
+/* Title */
+--section-header-title-font: 700 24px/1.40 'Archivo';
+--section-header-title-color: #09101D;
+--section-header-title-align: center;
+
+/* Subtitle */
+--section-header-subtitle-font: 400 14px/1.40 'Archivo';
+--section-header-subtitle-color: #747B84;
+--section-header-subtitle-width: 343px;
+--section-header-subtitle-align: center;
+```
+
+**Visual Structure:**
+```
+┌─────────────────────────────────────────┐
+│           Section Header                │
+│  ┌───────────────────────────────────┐  │
+│  │     Order confirmed (24px/700)    │  │ ← Title
+│  ├───────────────────────────────────┤  │
+│  │ You can add or edit items until   │  │ ← Subtitle (343px width)
+│  │      shopping begins (14px/400)   │  │
+│  └───────────────────────────────────┘  │
+└─────────────────────────────────────────┘
+     Padding: 16px H × 10px V
+     Spacing: 5px between elements
+```
+
+### 2. Icon Action Buttons
+
+Круглые кнопки с иконкой сверху и текстовым label снизу. Используются для главных действий (Add items, Reshedule, More и т.д.)
+
+**Specifications:**
+```css
+/* Button Group Container */
+--action-buttons-padding-top: 10px;
+--action-buttons-padding-bottom: 20px;
+--action-buttons-padding-h: 32px;
+--action-buttons-spacing: 10px;              /* Between buttons */
+--action-buttons-distribution: space-between; /* Equal spacing */
+
+/* Single Button Container */
+--action-button-padding-top: 10px;
+--action-button-padding-h: 10px;
+--action-button-padding-bottom: 5px;
+--action-button-border-radius: 15px;
+--action-button-spacing: 5px;                /* Between icon and label */
+
+/* Icon Container - Active State */
+--action-icon-active-size: 44px;
+--action-icon-active-padding: 12px;          /* Icon 20px × 20px */
+--action-icon-active-bg: #4141E6;            /* Primary blue */
+--action-icon-active-border-radius: 30px;    /* Fully rounded */
+
+/* Icon Container - Inactive State */
+--action-icon-inactive-size: 44px;
+--action-icon-inactive-padding: 14px;        /* Icon 16px × 16px (smaller) */
+--action-icon-inactive-bg: #F4F6F9;          /* Light gray */
+--action-icon-inactive-border-radius: 30px;
+
+/* Label Text */
+--action-label-font: 600 13px/1.40 'Archivo';
+--action-label-color: #09101D;
+```
+
+**Visual Structure:**
+```
+┌──────────────────────────────────────────────────────────────────┐
+│              Action Buttons Row (padding 32px H)                 │
+│  ┌─────────────┐      ┌──────────────┐      ┌──────────────┐    │
+│  │  ┌───────┐  │      │  ┌────────┐  │      │  ┌────────┐  │    │
+│  │  │ 🎯    │  │      │  │  📅    │  │      │  │  ⋯     │  │    │
+│  │  │ 44px  │  │      │  │ 44px   │  │      │  │ 44px   │  │    │ ← Icon
+│  │  └───────┘  │      │  └────────┘  │      │  └────────┘  │    │   circles
+│  │ Add items  │      │ Reshedule   │      │   More      │    │ ← Labels
+│  │ (13px/600) │      │ (13px/600)  │      │ (13px/600)  │    │   (13px)
+│  └─────────────┘      └──────────────┘      └──────────────┘    │
+└──────────────────────────────────────────────────────────────────┘
+      Active (#4141E6)   Inactive (#F4F6F9)   Inactive (#F4F6F9)
+         Padding 12px       Padding 14px         Padding 14px
+```
+
+**States:**
+- **Active**: Background #4141E6 (primary blue), icon padding 12px (icon 20px)
+- **Inactive**: Background #F4F6F9 (light gray), icon padding 14px (icon 16px - меньше!)
+
+### 3. Product List Item
+
+Компонент для отображения товара в списке: изображение, название, цена/вес, quantity selector
+
+**Specifications:**
+```css
+/* List Item Layout */
+--product-item-padding-left: 16px;
+--product-item-padding-right: 16px;
+--product-item-bg: #FFFFFF;
+
+/* Product Image */
+--product-image-size: 40px;
+--product-image-border-radius: 15px;
+--product-image-bg: #F4F6F9;             /* Background for image container */
+--product-image-padding-v: 10px;
+--product-image-padding-right: 10px;
+
+/* Product Info Area */
+--product-info-padding-v: 12px;
+--product-info-width: 160px;             /* Max width for title/price */
+
+/* Product Title */
+--product-title-font: 600 15px/1.40 'Archivo';
+--product-title-color: #09101D;
+
+/* Product Details (Price + Meta) */
+--product-price-font: 600 13px/1.40 'Archivo';
+--product-price-color: #09101D;
+--product-meta-font: 400 14px/1.40 'Archivo';
+--product-meta-color: #414249;           /* Quantity/weight text */
+--product-meta-separator: ' ・ ';         /* Middle dot separator */
+
+/* Quantity Selector Positioning */
+--product-quantity-padding-h: 16px;
+```
+
+**Visual Structure:**
+```
+┌────────────────────────────────────────────────────────────────────┐
+│  [16] [Image] [10] │ Title + Price/Meta │ [16] [Stepper] [16]     │
+│  px   40×40   px   │   (Expanded)        │ px              px      │
+└────────────────────────────────────────────────────────────────────┘
+
+Detailed breakdown:
+┌────────────────────────────────────────────────────────────────────┐
+│ 16px │ ┌────┐ │ Toasts Bread (15px/600)         │ 16px │ ┌──────┐ │
+│      │ │🍞  │ │ $0.75 ・ 280 g                  │      │ │ - 1 +│ │
+│      │ └────┘ │ 13px/600   14px/400             │      │ └──────┘ │
+│      │ 40×40  │                                  │      │ Stepper  │
+└────────────────────────────────────────────────────────────────────┘
+         10px →     ← 160px max width →                 ← 16px
+```
+
+**Examples:**
+1. **Toasts Bread**: $0.75 ・ 280 g (quantity: 1)
+2. **Itambe Milk**: $0.95 ・ 33 Oz (quantity: 2)
+3. **Avocado**: $2.50 ・ 2 pcs (quantity: 1)
+
+### 4. Quantity Stepper Component
+
+Pill-shaped контрол для изменения количества товара с кнопками минус/плюс и числом посередине
+
+**Specifications:**
+```css
+/* Stepper Container */
+--stepper-padding: 2px;
+--stepper-border-radius: 20px;
+--stepper-bg: #F4F6F9;                   /* Light gray pill */
+--stepper-spacing: 15px;                 /* Between minus, number, plus */
+
+/* Minus/Plus Buttons */
+--stepper-button-size: 24px;
+--stepper-button-padding: 4px;           /* Icon size: 16px × 16px */
+--stepper-button-bg: #4141E6;            /* Primary blue */
+--stepper-button-border-radius: 20px;    /* Fully rounded */
+--stepper-button-icon-size: 16px;
+
+/* Number Display */
+--stepper-number-font: 500 12px/1.40 'Archivo';
+--stepper-number-color: #2A2B2F;
+--stepper-number-spacing: 2px;           /* Internal spacing */
+```
+
+**Visual Structure:**
+```
+┌─────────────────────────────────────┐
+│  Stepper (pill bg #F4F6F9)          │
+│  ┌────┐  [15px]  ┌──┐  [15px] ┌────┐│
+│  │ −  │          │ 1│          │ +  ││ ← Total height: 28px
+│  │24px│          └──┘          │24px││   (24px buttons + 2px padding × 2)
+│  └────┘   12px/500/2A2B2F      └────┘│
+│  #4141E6                       #4141E6
+└─────────────────────────────────────┘
+   Padding 4px                 Padding 4px
+   Icon 16×16                  Icon 16×16
+```
+
+**Layout breakdown:**
+- Outer padding: 2px
+- Minus button: 24px circle, blue (#4141E6), icon 16×16
+- Spacing: 15px
+- Number: 12px/500, color #2A2B2F
+- Spacing: 15px
+- Plus button: 24px circle, blue (#4141E6), icon 16×16
+
+### 5. List Dividers
+
+Разделительные линии между товарами в списке
+
+**Specifications:**
+```css
+/* Divider Container */
+--divider-container-padding-h: 16px;
+--divider-container-padding-v: 10px;
+--divider-inner-padding-v: 5px;
+
+/* Divider Line */
+--divider-line-height: 1px;
+--divider-line-color: #EAEEEF2;          /* Light gray line */
+--divider-line-width: 100%;
+```
+
+**Visual Structure:**
+```
+┌────────────────────────────────────────┐
+│  Padding 16px H × 10px V               │
+│    ┌────────────────────────────────┐  │
+│    │ Inner padding 5px V            │  │
+│    ├────────────────────────────────┤  │ ← 1px line (#EAEEEF2)
+│    │ Inner padding 5px V            │  │
+│    └────────────────────────────────┘  │
+└────────────────────────────────────────┘
+```
+
+### Complete Layout: Order Confirmation Screen
+
+**Полная структура экрана подтверждения заказа:**
+
+```
+┌───────────────────────────────────────────────────────┐
+│  Screen Container (375px, borderRadius 30px)          │
+│  Padding: 30px V                                      │
+│  ┌─────────────────────────────────────────────────┐  │
+│  │ Section Header (padding 16px H × 10px V)        │  │
+│  │   Order confirmed (24px/700, center)            │  │
+│  │   You can add or edit items... (14px/400)       │  │
+│  └─────────────────────────────────────────────────┘  │
+│  ┌─────────────────────────────────────────────────┐  │
+│  │ Action Buttons (padding 32px H, 10px T, 20px B) │  │
+│  │  [Add items]  [Reshedule]  [More]               │  │
+│  │   Active       Inactive     Inactive            │  │
+│  └─────────────────────────────────────────────────┘  │
+│  ┌─────────────────────────────────────────────────┐  │
+│  │ Product Item #1                                  │  │
+│  │  [🍞] Toasts Bread  $0.75 ・ 280 g  [- 1 +]     │  │
+│  └─────────────────────────────────────────────────┘  │
+│  ───────────────────────────────────────────────────  │ ← Divider
+│  ┌─────────────────────────────────────────────────┐  │
+│  │ Product Item #2                                  │  │
+│  │  [🥛] Itambe Milk  $0.95 ・ 33 Oz  [- 2 +]      │  │
+│  └─────────────────────────────────────────────────┘  │
+│  ───────────────────────────────────────────────────  │ ← Divider
+│  ┌─────────────────────────────────────────────────┐  │
+│  │ Product Item #3                                  │  │
+│  │  [🥑] Avocado  $2.50 ・ 2 pcs  [- 1 +]          │  │
+│  └─────────────────────────────────────────────────┘  │
+└───────────────────────────────────────────────────────┘
+```
+
+**Компоненты в этом layout:**
+1. Section Header (title + subtitle)
+2. Icon Action Buttons Row (3 кнопки)
+3. Product List Item × 3
+4. List Dividers × 2 (между товарами)
+
+### Modular Components Matrix
+
+Таблица показывает, какие компоненты используются в разных экранах и можно ли их добавлять:
+
+| Component              | Order Confirm | Shopping Cart | Order History | Can Add More? |
+|------------------------|---------------|---------------|---------------|---------------|
+| Section Header         | ✅            | ✅            | ✅            | ✅            |
+| Icon Action Buttons    | ✅ (3 шт)     | ✅ (2 шт)     | ❌            | ✅ Flexible   |
+| Product List Item      | ✅ (3 шт)     | ✅ (5+ шт)    | ✅ (10+ шт)   | ✅ Dynamic    |
+| Quantity Stepper       | ✅            | ✅            | ❌            | ✅ Conditional|
+| List Dividers          | ✅            | ✅            | ✅            | ✅ Auto       |
+| Total Price Section    | ❌            | ✅            | ✅            | ✅            |
+| Checkout Button        | ❌            | ✅            | ❌            | ✅            |
+
+**Гибкость:**
+- **Icon Action Buttons**: можно добавить 4-ю, 5-ю кнопку или убрать до 2-х
+- **Product List Items**: количество динамическое (от 1 до бесконечности)
+- **Quantity Stepper**: показывать только на редактируемых экранах
+- **List Dividers**: автоматически между каждым item
+
+### Extensibility Guide
+
+Практические примеры расширения компонентов для различных сценариев:
+
+#### Example 1: Добавление 4-й Action Button
+
+Если нужно добавить дополнительное действие (например, "Share order"), просто добавьте кнопку в Row:
+
+```html
+<div class="action-buttons">
+  <div class="action-button action-button--active">
+    <div class="action-icon action-icon--active">
+      <svg class="icon-20"><!-- Add icon --></svg>
+    </div>
+    <span class="action-label">Add items</span>
+  </div>
+  <div class="action-button">
+    <div class="action-icon action-icon--inactive">
+      <svg class="icon-16"><!-- Calendar icon --></svg>
+    </div>
+    <span class="action-label">Reshedule</span>
+  </div>
+  <div class="action-button">
+    <div class="action-icon action-icon--inactive">
+      <svg class="icon-16"><!-- More icon --></svg>
+    </div>
+    <span class="action-label">More</span>
+  </div>
+  <!-- NEW: 4-я кнопка -->
+  <div class="action-button">
+    <div class="action-icon action-icon--inactive">
+      <svg class="icon-16"><!-- Share icon --></svg>
+    </div>
+    <span class="action-label">Share</span>
+  </div>
+</div>
+```
+
+**Note:** При 4-х кнопках используйте `display: grid; grid-template-columns: repeat(4, 1fr);` вместо `justify-content: space-between`.
+
+#### Example 2: Добавление Total Price Section
+
+Если нужно показать итоговую цену (для корзины), добавьте секцию после списка товаров:
+
+```html
+<!-- After product list items -->
+<div class="divider-container">
+  <div class="divider-line"></div>
+</div>
+
+<!-- NEW: Total Price Section -->
+<div class="total-section">
+  <div class="total-row">
+    <span class="total-label">Subtotal</span>
+    <span class="total-value">$4.20</span>
+  </div>
+  <div class="total-row">
+    <span class="total-label">Delivery fee</span>
+    <span class="total-value">$2.99</span>
+  </div>
+  <div class="total-row total-row--final">
+    <span class="total-label total-label--bold">Total</span>
+    <span class="total-value total-value--bold">$7.19</span>
+  </div>
+</div>
+
+<div class="checkout-button-container">
+  <button class="button button--filled button--large">
+    Proceed to checkout
+  </button>
+</div>
+```
+
+**CSS для Total Section:**
+```css
+.total-section {
+  padding: 20px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.total-label {
+  font: 400 14px/1.40 'Archivo';
+  color: var(--color-black);
+}
+
+.total-value {
+  font: 600 14px/1.40 'Archivo';
+  color: var(--color-black);
+}
+
+.total-row--final {
+  padding-top: 12px;
+  border-top: 1px solid var(--color-divider-line);
+}
+
+.total-label--bold {
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.total-value--bold {
+  font-size: 18px;
+  color: var(--color-primary);
+}
+```
+
+#### Example 3: Убрать Quantity Stepper (для Order History)
+
+Если показываете историю заказов (не редактируемая), уберите stepper и покажите только количество:
+
+```html
+<div class="product-item">
+  <div class="product-image">
+    <img src="toast.jpg" alt="Toasts Bread">
+  </div>
+  <div class="product-info">
+    <div class="product-title">Toasts Bread</div>
+    <div class="product-details">
+      <span class="product-price">$0.75</span>
+      <span class="product-meta"> ・ 280 g</span>
+    </div>
+  </div>
+  <!-- REMOVE stepper, ADD quantity display -->
+  <div class="product-quantity-static">
+    <span class="quantity-text">Qty: 1</span>
+  </div>
+</div>
+```
+
+**CSS для Static Quantity:**
+```css
+.product-quantity-static {
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+}
+
+.quantity-text {
+  font: 500 13px/1.40 'Archivo';
+  color: var(--color-meta-gray);
+}
+```
+
+#### Example 4: Динамическое добавление товаров
+
+Товары в списке генерируются динамически из backend. При добавлении новых товаров автоматически добавляются dividers:
+
+```javascript
+// Example: Adding products dynamically
+const products = [
+  { name: 'Toasts Bread', price: 0.75, meta: '280 g', qty: 1, img: 'toast.jpg' },
+  { name: 'Itambe Milk', price: 0.95, meta: '33 Oz', qty: 2, img: 'milk.jpg' },
+  { name: 'Avocado', price: 2.50, meta: '2 pcs', qty: 1, img: 'avocado.jpg' },
+  // Backend добавил новый товар:
+  { name: 'Butter', price: 3.20, meta: '200 g', qty: 1, img: 'butter.jpg' }
+];
+
+const productList = document.getElementById('product-list');
+
+products.forEach((product, index) => {
+  // Add product item
+  const item = createProductItem(product);
+  productList.appendChild(item);
+
+  // Add divider (except after last item)
+  if (index < products.length - 1) {
+    const divider = createDivider();
+    productList.appendChild(divider);
+  }
+});
+```
+
+**Результат:** Система автоматически адаптируется под любое количество товаров.
+
+### CSS Implementation
+
+Complete CSS для всех компонентов Shopping & Orders:
+
+```css
+/* ==================== */
+/* Shopping Screen Container */
+/* ==================== */
+
+.shopping-screen {
+  width: 375px;
+  padding: 30px 0;
+  background: #FFFFFF;
+  border-radius: 30px;
+  overflow: hidden;
+}
+
+/* ==================== */
+/* Section Header */
+/* ==================== */
+
+.section-header {
+  padding: 10px 16px;
+  background: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.section-header__title {
+  font: 700 24px/1.40 'Archivo';
+  color: #09101D;
+  text-align: center;
+}
+
+.section-header__subtitle {
+  max-width: 343px;
+  font: 400 14px/1.40 'Archivo';
+  color: #747B84;
+  text-align: center;
+}
+
+/* ==================== */
+/* Action Buttons Row */
+/* ==================== */
+
+.action-buttons {
+  padding: 10px 32px 20px;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.action-button {
+  padding: 10px 10px 5px;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.action-button:hover {
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+/* Icon Container - Active State */
+.action-icon--active {
+  width: 44px;
+  height: 44px;
+  padding: 12px; /* Icon 20×20 */
+  background: #4141E6;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+/* Icon Container - Inactive State */
+.action-icon--inactive {
+  width: 44px;
+  height: 44px;
+  padding: 14px; /* Icon 16×16 */
+  background: #F4F6F9;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.action-icon--active svg {
+  width: 20px;
+  height: 20px;
+  color: #FFFFFF;
+}
+
+.action-icon--inactive svg {
+  width: 16px;
+  height: 16px;
+  color: #09101D;
+}
+
+.action-label {
+  font: 600 13px/1.40 'Archivo';
+  color: #09101D;
+}
+
+/* ==================== */
+/* Product List Item */
+/* ==================== */
+
+.product-item {
+  background: #FFFFFF;
+  display: flex;
+  align-items: center;
+}
+
+.product-item__spacer-left {
+  width: 16px;
+}
+
+.product-item__image-container {
+  padding: 10px 10px 10px 0;
+}
+
+.product-image {
+  width: 40px;
+  height: 40px;
+  background: #F4F6F9;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.product-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.product-info {
+  flex: 1;
+  padding: 12px 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.product-title {
+  max-width: 160px;
+  font: 600 15px/1.40 'Archivo';
+  color: #09101D;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.product-details {
+  max-width: 160px;
+  font: 400 14px/1.40 'Archivo';
+}
+
+.product-price {
+  font-weight: 600;
+  font-size: 13px;
+  color: #09101D;
+}
+
+.product-meta {
+  font-weight: 400;
+  font-size: 14px;
+  color: #414249;
+}
+
+.product-item__spacer-right {
+  width: 16px;
+}
+
+.product-item__quantity-container {
+  padding: 0 16px;
+}
+
+/* ==================== */
+/* Quantity Stepper */
+/* ==================== */
+
+.quantity-stepper {
+  padding: 2px;
+  background: #F4F6F9;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.stepper-button {
+  width: 24px;
+  height: 24px;
+  padding: 4px; /* Icon 16×16 */
+  background: #4141E6;
+  border-radius: 20px;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.stepper-button:hover {
+  background: #3333D1;
+}
+
+.stepper-button:active {
+  background: #2626BC;
+}
+
+.stepper-button svg {
+  width: 16px;
+  height: 16px;
+  color: #FFFFFF;
+}
+
+.stepper-number {
+  min-width: 16px;
+  font: 500 12px/1.40 'Archivo';
+  color: #2A2B2F;
+  text-align: center;
+}
+
+/* ==================== */
+/* List Divider */
+/* ==================== */
+
+.divider-container {
+  padding: 10px 16px;
+}
+
+.divider-line {
+  width: 100%;
+  height: 1px;
+  background: #EAEEEF2;
+}
+
+/* ==================== */
+/* Responsive Behaviors */
+/* ==================== */
+
+/* For 4 action buttons, use grid instead of space-between */
+.action-buttons--four-items {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  justify-items: center;
+}
+
+/* For very long product lists, add scroll */
+.product-list-container {
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+/* ==================== */
+/* Hover & Active States */
+/* ==================== */
+
+.product-item:hover {
+  background: rgba(0, 0, 0, 0.01);
+}
+
+.action-button--active .action-icon--inactive {
+  background: #4141E6;
+}
+
+.action-button--active .action-icon--inactive svg {
+  color: #FFFFFF;
+}
+```
+
+### Usage Examples
+
+#### Example 1: Basic Order Confirmation Screen
+
+```html
+<div class="shopping-screen">
+  <!-- Section Header -->
+  <div class="section-header">
+    <h2 class="section-header__title">Order confirmed</h2>
+    <p class="section-header__subtitle">
+      You can add or edit items until shopping begins
+    </p>
+  </div>
+
+  <!-- Action Buttons -->
+  <div class="action-buttons">
+    <div class="action-button action-button--active">
+      <div class="action-icon action-icon--active">
+        <svg class="icon-20"><!-- Plus icon --></svg>
+      </div>
+      <span class="action-label">Add items</span>
+    </div>
+    <div class="action-button">
+      <div class="action-icon action-icon--inactive">
+        <svg class="icon-16"><!-- Calendar icon --></svg>
+      </div>
+      <span class="action-label">Reshedule</span>
+    </div>
+    <div class="action-button">
+      <div class="action-icon action-icon--inactive">
+        <svg class="icon-16"><!-- More icon --></svg>
+      </div>
+      <span class="action-label">More</span>
+    </div>
+  </div>
+
+  <!-- Product List -->
+  <div class="product-list">
+    <!-- Item 1 -->
+    <div class="product-item">
+      <div class="product-item__spacer-left"></div>
+      <div class="product-item__image-container">
+        <div class="product-image">
+          <img src="toast.jpg" alt="Toasts Bread">
+        </div>
+      </div>
+      <div class="product-info">
+        <div class="product-title">Toasts Bread</div>
+        <div class="product-details">
+          <span class="product-price">$0.75</span>
+          <span class="product-meta"> ・ 280 g</span>
+        </div>
+      </div>
+      <div class="product-item__spacer-right"></div>
+      <div class="product-item__quantity-container">
+        <div class="quantity-stepper">
+          <button class="stepper-button" aria-label="Decrease quantity">
+            <svg><!-- Minus icon --></svg>
+          </button>
+          <span class="stepper-number">1</span>
+          <button class="stepper-button" aria-label="Increase quantity">
+            <svg><!-- Plus icon --></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Divider -->
+    <div class="divider-container">
+      <div class="divider-line"></div>
+    </div>
+
+    <!-- Item 2 -->
+    <div class="product-item">
+      <div class="product-item__spacer-left"></div>
+      <div class="product-item__image-container">
+        <div class="product-image">
+          <img src="milk.jpg" alt="Itambe Milk">
+        </div>
+      </div>
+      <div class="product-info">
+        <div class="product-title">Itambe Milk</div>
+        <div class="product-details">
+          <span class="product-price">$0.95</span>
+          <span class="product-meta"> ・ 33 Oz</span>
+        </div>
+      </div>
+      <div class="product-item__spacer-right"></div>
+      <div class="product-item__quantity-container">
+        <div class="quantity-stepper">
+          <button class="stepper-button" aria-label="Decrease quantity">
+            <svg><!-- Minus icon --></svg>
+          </button>
+          <span class="stepper-number">2</span>
+          <button class="stepper-button" aria-label="Increase quantity">
+            <svg><!-- Plus icon --></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Divider -->
+    <div class="divider-container">
+      <div class="divider-line"></div>
+    </div>
+
+    <!-- Item 3 -->
+    <div class="product-item">
+      <div class="product-item__spacer-left"></div>
+      <div class="product-item__image-container">
+        <div class="product-image">
+          <img src="avocado.jpg" alt="Avocado">
+        </div>
+      </div>
+      <div class="product-info">
+        <div class="product-title">Avocado</div>
+        <div class="product-details">
+          <span class="product-price">$2.50</span>
+          <span class="product-meta"> ・ 2 pcs</span>
+        </div>
+      </div>
+      <div class="product-item__spacer-right"></div>
+      <div class="product-item__quantity-container">
+        <div class="quantity-stepper">
+          <button class="stepper-button" aria-label="Decrease quantity">
+            <svg><!-- Minus icon --></svg>
+          </button>
+          <span class="stepper-number">1</span>
+          <button class="stepper-button" aria-label="Increase quantity">
+            <svg><!-- Plus icon --></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+#### Example 2: Shopping Cart with Total
+
+```html
+<div class="shopping-screen">
+  <!-- Section Header -->
+  <div class="section-header">
+    <h2 class="section-header__title">Shopping Cart</h2>
+    <p class="section-header__subtitle">
+      3 items ready for checkout
+    </p>
+  </div>
+
+  <!-- No Action Buttons in Cart view -->
+
+  <!-- Product List (same as above) -->
+  <div class="product-list">
+    <!-- Products here... -->
+  </div>
+
+  <!-- Total Section -->
+  <div class="divider-container">
+    <div class="divider-line"></div>
+  </div>
+
+  <div class="total-section">
+    <div class="total-row">
+      <span class="total-label">Subtotal</span>
+      <span class="total-value">$4.20</span>
+    </div>
+    <div class="total-row">
+      <span class="total-label">Delivery fee</span>
+      <span class="total-value">$2.99</span>
+    </div>
+    <div class="total-row total-row--final">
+      <span class="total-label total-label--bold">Total</span>
+      <span class="total-value total-value--bold">$7.19</span>
+    </div>
+  </div>
+
+  <!-- Checkout Button -->
+  <div class="checkout-button-container" style="padding: 0 16px 20px;">
+    <button class="button button--filled button--large" style="width: 100%; height: 52px;">
+      Proceed to checkout
+    </button>
+  </div>
+</div>
+```
+
+#### Example 3: Order History (Read-only)
+
+```html
+<div class="shopping-screen">
+  <!-- Section Header -->
+  <div class="section-header">
+    <h2 class="section-header__title">Order #12345</h2>
+    <p class="section-header__subtitle">
+      Delivered on March 15, 2025
+    </p>
+  </div>
+
+  <!-- No Action Buttons -->
+
+  <!-- Product List (without steppers) -->
+  <div class="product-list">
+    <div class="product-item">
+      <div class="product-item__spacer-left"></div>
+      <div class="product-item__image-container">
+        <div class="product-image">
+          <img src="toast.jpg" alt="Toasts Bread">
+        </div>
+      </div>
+      <div class="product-info">
+        <div class="product-title">Toasts Bread</div>
+        <div class="product-details">
+          <span class="product-price">$0.75</span>
+          <span class="product-meta"> ・ 280 g</span>
+        </div>
+      </div>
+      <!-- Static Quantity (no stepper) -->
+      <div class="product-quantity-static">
+        <span class="quantity-text">Qty: 1</span>
+      </div>
+    </div>
+
+    <!-- More items... -->
+  </div>
+
+  <!-- Total (same as cart) -->
+</div>
+```
+
+---
+
 ## Как использовать эту дизайн-систему
 
 ### Для дизайнеров
@@ -4773,9 +5826,65 @@ Segments автоматически распределяются равноме�
 
 ## Версионирование и обновления
 
-**Текущая версия**: v5.9.0
+**Текущая версия**: v5.10.0
 
 ### Changelog
+
+#### v5.10.0 (2025-11-19)
+- **Добавлена новая секция "Shopping & Orders"** - модульная система компонентов для e-commerce приложений:
+  - **Принцип модульности**: каждый экран покупок состоит из переиспользуемых блоков
+  - **Container Specifications**:
+    - Screen: 375px width, borderRadius 30px, padding 30px V
+    - Content padding: 16px H (standard), 32px H (action buttons)
+  - **Typography System**:
+    - Section Header Title: 24px / 700 Archivo, color #09101D, center
+    - Section Header Subtitle: 14px / 400 Archivo, color #747B84 (новый), max-width 343px
+    - Product Title: 15px / 600 Archivo
+    - Product Price: 13px / 600 Archivo
+    - Product Meta: 14px / 400 Archivo, color #414249 (новый)
+    - Action Label: 13px / 600 Archivo
+    - Stepper Number: 12px / 500 Archivo, color #2A2B2F (новый)
+  - **5 Modular Components**:
+    - **Section Header**: centered title + subtitle, padding 16px H × 10px V, spacing 5px
+    - **Icon Action Buttons**:
+      - Container: padding 32px H, 10px T, 20px B, distribution space-between
+      - Active state: 44px icon, padding 12px (icon 20×20), bg #4141E6
+      - Inactive state: 44px icon, padding 14px (icon 16×16 меньше!), bg #F4F6F9
+      - Label: 13px/600, spacing 5px from icon
+    - **Product List Item**:
+      - Image: 40px × 40px, borderRadius 15px, bg #F4F6F9
+      - Title: 15px/600, max-width 160px
+      - Price + Meta: "$0.75 ・ 280 g" (separator " ・ " middle dot)
+      - Layout: 16px spacer + image + 10px + info (flex) + 16px spacer + stepper + 16px
+    - **Quantity Stepper** (новый компонент):
+      - Container: padding 2px, borderRadius 20px, bg #F4F6F9, spacing 15px
+      - Buttons: 24px × 24px circles, padding 4px (icon 16×16), bg #4141E6
+      - Number: 12px/500, color #2A2B2F
+    - **List Dividers**: 1px height, color #EAEEEF2 (новый), padding 16px H × 10px V
+  - **Complete Layout: Order Confirmation Screen** с ASCII diagram и breakdown компонентов
+  - **Modular Components Matrix**: совместимость компонентов в различных экранах (Order Confirm, Shopping Cart, Order History)
+  - **Extensibility Guide** с 4 практическими примерами:
+    - Добавление 4-й action button (grid layout)
+    - Добавление Total Price Section для корзины
+    - Убрать Quantity Stepper для read-only Order History
+    - Динамическое добавление товаров из backend
+  - **Новые цвета в палитру**:
+    - #747B84 - subtitle gray (для subtitles и secondary text)
+    - #414249 - meta gray (для quantity/weight информации)
+    - #2A2B2F - stepper text (для чисел в stepper)
+    - #EAEEEF2 - divider line (для разделительных линий)
+  - **Complete CSS Implementation** (450+ lines):
+    - Shopping Screen Container
+    - Section Header
+    - Action Buttons Row (active/inactive states, hover)
+    - Product List Item (с spacers, image, info, quantity)
+    - Quantity Stepper (с hover/active states)
+    - List Divider
+    - Responsive Behaviors (4-button grid, scrollable lists)
+  - **3 Usage Examples**:
+    - Basic Order Confirmation Screen (полная разметка)
+    - Shopping Cart with Total (с Total Section и Checkout Button)
+    - Order History Read-only (без steppers, static quantity)
 
 #### v5.9.0 (2025-11-19)
 - **Добавлена новая секция "Mobile Screens & Layouts"** - система модульных экранов для onboarding и других flow:
