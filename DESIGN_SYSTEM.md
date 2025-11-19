@@ -38,26 +38,75 @@
 --color-black: #09101D;
 ```
 
+### Background Colors
+
+```css
+/* Фоновые цвета из Flutter кода */
+--color-bg-primary: #FFFFFF;
+--color-bg-secondary: #F4F6F9;       /* Светло-серый фон */
+--color-bg-tertiary: #D9DDE2;        /* Серый фон */
+--color-bg-overlay: #EFD1D5DB;       /* Overlay для клавиатуры */
+--color-bg-elevated: #FDFDFD;        /* Приподнятый белый фон */
+```
+
 ### Text Colors
 
 ```css
-/* Текст из Tailwind CSS */
---color-text-primary: #020617;     /* slate-950 */
---color-text-secondary: #27272A;   /* zinc-800 */
+/* Цвета текста из Flutter кода */
+--color-text-primary: #09101D;       /* Основной черный текст */
+--color-text-secondary: #23262B;     /* Вторичный темный текст */
+--color-text-tertiary: #2A2B2F;      /* Третичный темный текст */
+--color-text-muted: rgba(0, 0, 0, 0.55);  /* Приглушенный текст */
 ```
 
 ### Accent Colors
 
 ```css
-/* Акцентные цвета */
---color-accent-blue: #1D4ED8;      /* blue-700 */
+/* Акцентные цвета из Flutter кода */
+--color-primary: #4141E6;            /* Основной синий (кнопки) */
+--color-accent-blue: #4141E6;
+--color-accent-green: #11BB8D;       /* Зеленый акцент (border) */
+--color-accent-green-light: #0C11BB8D;  /* Зеленый с прозрачностью */
+--color-accent-pink: #FC466B;        /* Розовый градиент */
+```
+
+### Gradient Colors
+
+```css
+/* Цвета градиентов из Flutter кода */
+--gradient-purple: #833AB4;          /* Фиолетовый (Instagram gradient) */
+--gradient-red: #FD1D1D;             /* Красный (Instagram gradient) */
+--gradient-orange: #FCB045;          /* Оранжевый (Instagram gradient) */
+
+/* Instagram-style gradient */
+--gradient-instagram: linear-gradient(135deg, #833AB4 0%, #FD1D1D 50%, #FCB045 100%);
+```
+
+### Payment System Colors
+
+```css
+/* Цвета платежных систем */
+--mastercard-red: #DA1414;
+--mastercard-orange: #F79E1C;
+```
+
+### Border Colors
+
+```css
+/* Цвета границ */
+--color-border-primary: #D9DDE2;
+--color-border-focus: #4141E6;
+--color-border-success: #11BB8D;
+--color-border-pink: #FC466B;
 ```
 
 ### Shadow Colors
 
 ```css
-/* Тени */
---shadow-light: rgba(240, 241, 242, 1.00);  /* из кода: shadow-[0px_1px_1px_0px_rgba(240,241,242,1.00)] */
+/* Тени из Flutter кода */
+--shadow-keyboard-dark: #898A8D;
+--shadow-keyboard-light: rgba(4, 4, 15, 0.36);
+--shadow-button-dark: rgba(0, 0, 0, 0.35);
 ```
 
 ---
@@ -77,16 +126,18 @@
 ### Font Sizes
 
 ```css
---font-size-10: 0.625rem;     /* 10px */
+--font-size-10: 0.625rem;     /* 10px - из Flutter кода */
 --font-size-11: 0.6875rem;    /* 11px */
 --font-size-12: 0.75rem;      /* 12px */
---font-size-13: 0.8125rem;    /* 13px */
---font-size-14: 0.875rem;     /* 14px */
+--font-size-13: 0.8125rem;    /* 13px - из Flutter кода */
+--font-size-14: 0.875rem;     /* 14px - из Flutter кода */
 --font-size-15: 0.9375rem;    /* 15px */
---font-size-16: 1rem;         /* 16px */
---font-size-18: 1.125rem;     /* 18px */
+--font-size-16: 1rem;         /* 16px - из Flutter кода */
+--font-size-18: 1.125rem;     /* 18px - из Flutter кода */
+--font-size-23: 1.4375rem;    /* 23px - клавиатура iOS */
 --font-size-24: 1.5rem;       /* 24px */
 --font-size-26: 1.625rem;     /* 26px */
+--font-size-27: 1.6875rem;    /* 27px - иконки клавиатуры */
 --font-size-32: 2rem;         /* 32px */
 ```
 
@@ -111,6 +162,15 @@
 --line-height-36: 2.25rem;    /* 36px */
 --line-height-40: 2.5rem;     /* 40px */
 --line-height-50: 3.15rem;    /* 50.4px */
+--line-height-140: 1.40;      /* 140% - основной из Flutter кода */
+```
+
+### Letter Spacing
+
+```css
+/* Из Flutter кода клавиатуры */
+--letter-spacing-tight: -0.32px;   /* Для клавиатуры */
+--letter-spacing-normal: 0;        /* По умолчанию */
 ```
 
 ### Text Styles (iOS Mobile)
@@ -162,6 +222,40 @@
 #### Caption 3
 - **Semibold**: Font: 10px (0.625rem), Weight: 600, Line Height: 12px
 
+### Text Styles (Из Flutter кода)
+
+#### Card Title
+- **Bold**: Font: 18px (1.125rem), Weight: 700, Line Height: 140%, Color: #09101D
+- **Использование**: Заголовки карточек
+
+#### Card Description
+- **Regular**: Font: 14px (0.875rem), Weight: 400, Line Height: 140%, Color: #23262B
+- **Использование**: Описание в карточках
+
+#### Button Text
+- **Semibold**: Font: 14px (0.875rem), Weight: 600, Line Height: 140%, Color: #FFFFFF (на primary кнопках)
+- **Height**: 44px
+
+#### Link Text
+- **Regular**: Font: 14px (0.875rem), Weight: 400, Line Height: 140%, Color: #4141E6
+- **Использование**: Ссылки "More info"
+
+#### Small Text
+- **Regular**: Font: 13px (0.8125rem), Weight: 400, Line Height: 140%, Color: #23262B
+- **Использование**: Мелкий текст подсказок
+
+#### Keyboard Keys
+- **Regular**: Font: 23px (1.4375rem), Weight: 400, Color: #000000
+- **Использование**: Буквы на клавиатуре iOS
+
+#### Keyboard Actions
+- **Regular**: Font: 16px (1rem), Weight: 400, Letter Spacing: -0.32px, Color: #000000
+- **Использование**: Текст на функциональных кнопках клавиатуры
+
+#### Badge Text
+- **Semibold**: Font: 10px (0.625rem), Weight: 600, Line Height: 140%, Color: #FFFFFF
+- **Использование**: Текст в badge (например, "Live")
+
 ---
 
 ## Spacing & Layout
@@ -187,21 +281,29 @@
 ### Border Radius
 
 ```css
+/* Из Flutter кода */
 --radius-none: 0;
---radius-sm: 0.125rem;    /* 2px */
---radius-base: 0.25rem;   /* 4px */
---radius-md: 0.375rem;    /* 6px */
---radius-lg: 0.5rem;      /* 8px */
---radius-xl: 0.75rem;     /* 12px */
---radius-2xl: 1rem;       /* 16px */
---radius-full: 9999px;
+--radius-sm: 0.3125rem;   /* 5px - клавиатура */
+--radius-base: 0.75rem;   /* 12px - badge Live */
+--radius-md: 0.9375rem;   /* 15px - кнопки, inputs */
+--radius-lg: 1.25rem;     /* 20px - карточки */
+--radius-xl: 1.875rem;    /* 30px - аватары */
+--radius-2xl: 2rem;       /* 32px */
+--radius-3xl: 2.5rem;     /* 40px - контейнеры */
+--radius-full: 100px;     /* Полностью круглый - кнопки, иконки, аватары */
 ```
 
 ### Shadows
 
-#### Card Shadows
+#### Shadows из Flutter кода
 
 ```css
+/* Тени клавиатуры iOS */
+--shadow-keyboard-key: 0 1px 0 0 rgba(0, 0, 0, 0.35);
+--shadow-keyboard-dark: 0 1px 0 0 #898A8D;
+--shadow-keyboard-light: 0 1px 0 0 rgba(4, 4, 15, 0.36);
+
+/* Card Shadows */
 --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
 --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
 --shadow-base: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
@@ -231,10 +333,11 @@
 #### Border Width
 
 ```css
+/* Из Flutter кода */
 --border-width-0: 0;
---border-width-1: 1px;
---border-width-2: 2px;
---border-width-4: 4px;
+--border-width-1: 1px;    /* По умолчанию */
+--border-width-2: 2px;    /* Аватары, акценты, focus states */
+--border-width-4: 4px;    /* Группы аватаров */
 ```
 
 #### Border Offset
@@ -248,12 +351,15 @@
 ### Opacity Scale
 
 ```css
+/* Из Flutter кода */
 --opacity-0: 0;
 --opacity-10: 0.1;
 --opacity-20: 0.2;
+--opacity-25: 0.25;       /* Фоновый overlay - из кода */
 --opacity-30: 0.3;
 --opacity-40: 0.4;
 --opacity-50: 0.5;
+--opacity-55: 0.55;       /* Приглушенный текст - из кода */
 --opacity-60: 0.6;
 --opacity-70: 0.7;
 --opacity-80: 0.8;
@@ -267,79 +373,175 @@
 
 ### 1. Cards
 
-#### Basic Card
+#### Basic Card (из Flutter кода)
 
-- **Padding**: 24px (space-6)
-- **Border Radius**: 8px (radius-lg)
-- **Background**: color-bg-primary (#FFFFFF)
-- **Shadow**: shadow-base
-- **Border**: 1px solid color-border-primary
+- **Width**: 375px (max width для mobile), 327px (внутренний content)
+- **Padding**:
+  - Top: 8px
+  - Left/Right: 16px
+  - Bottom: 16px
+- **Border Radius**: 20px
+- **Background**: #FFFFFF
+- **Shadow**: None (clean design)
+- **Gap между секциями**: 20px
+
+**Content Structure:**
+- **Icon/Image Section**:
+  - Spacing: 8px между элементами
+  - Icon container: 60px × 60px, padding: 2px, border-radius: 100px
+- **Text Section**:
+  - Title: 18px, weight: 700, color: #09101D, line-height: 140%
+  - Description: 14px, weight: 400, color: #23262B, line-height: 140%
+  - Width: 327px, text-align: center
 
 **Варианты:**
-- **Elevated Card**: Shadow: shadow-md, No border
-- **Outlined Card**: Border: 1px solid color-border-primary, Shadow: none
-- **Interactive Card**: Hover: shadow-hover-md, Cursor: pointer, Transition: all 0.2s ease
+
+#### Card with Icon
+- **Icon Container**: 60px × 60px, circular (border-radius: 100px)
+- **Close Button**: 24px × 24px, top-right position, background: #F4F6F9, border-radius: 100px
+
+#### Card with Image
+- **Image Size**: 79.01px × 79.01px
+- **Border Radius**: 15px
+- **Background**: #F4F6F9 (fallback)
+
+#### Card with Avatar
+- **Avatar Container**: 56px × 56px (large), 48px × 48px (medium), 40px × 40px (small), 32px × 32px (extra small)
+- **Border**: 2px solid color (для акцентов, например #FC466B)
+- **Border Radius**: Circular (30px для 56px avatar)
+- **Live Badge**:
+  - Size: 28px × 14px
+  - Padding: 4px horizontal, 2px vertical
+  - Border: 1px solid white
+  - Gradient: linear-gradient(90deg, #833AB4, #FD1D1D, #FCB045)
+  - Border Radius: 12px
+  - Text: 10px, weight: 600, color: white
+
+#### Card with Payment Method
+- **Input Height**: 46px
+- **Padding**: 16px left, 20px right
+- **Border**: 2px solid #11BB8D
+- **Border Radius**: 15px
+- **Background**: rgba(17, 187, 141, 0.05)
+- **Mastercard Icon**: 20px × 20px
+  - Red circle: #DA1414
+  - Orange circle: #F79E1C
 
 #### Пример использования
 
 ```css
 .card {
-  padding: var(--space-6);
-  border-radius: var(--radius-lg);
-  background: var(--color-bg-primary);
-  box-shadow: var(--shadow-base);
-  border: var(--border-width-1) solid var(--color-border-primary);
-  transition: all 0.2s ease;
+  width: 100%;
+  max-width: 375px;
+  padding: 8px 16px 16px;
+  border-radius: 20px;
+  background: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
-.card--elevated {
-  box-shadow: var(--shadow-md);
-  border: none;
+.card__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
 }
 
-.card--interactive:hover {
-  box-shadow: var(--shadow-hover-md);
-  transform: translateY(-2px);
+.card__title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #09101D;
+  line-height: 1.4;
+  text-align: center;
+  max-width: 327px;
+}
+
+.card__description {
+  font-size: 14px;
+  font-weight: 400;
+  color: #23262B;
+  line-height: 1.4;
+  text-align: center;
+  max-width: 327px;
 }
 ```
 
 ---
 
-### 2. Buttons
+### 2. Buttons (из Flutter кода)
 
 #### Primary Button
 
 - **Size**:
-  - Small: Height: 32px, Padding: 8px 16px, Font: 14px
-  - Medium: Height: 40px, Padding: 10px 20px, Font: 16px
-  - Large: Height: 48px, Padding: 12px 24px, Font: 18px
-- **Radius**: radius-md (6px)
-- **States**:
-  - Default: Background: color-primary, Color: white, Shadow: shadow-button
-  - Hover: Background: color-primary-hover, Shadow: shadow-button-hover, Transform: translateY(-1px)
-  - Active: Background: color-primary-active, Shadow: shadow-button-active, Transform: translateY(0)
-  - Disabled: Background: color-gray-300, Color: color-text-disabled, Cursor: not-allowed, Opacity: 0.6
+  - Height: 44px (standard mobile)
+  - Padding: 16px horizontal, 10px vertical
+  - Width: 100% (full-width) или 327px
+  - Gap между элементами: 8px
+- **Border Radius**: 15px
+- **Typography**:
+  - Font Size: 14px
+  - Font Weight: 600 (semibold)
+  - Line Height: 140%
+- **Colors**:
+  - Background: #4141E6
+  - Text: #FFFFFF
+  - Shadow: None (flat design)
+- **Alignment**: Center (text и иконки)
 
-#### Secondary Button
+**States:**
+- **Default**: Background: #4141E6, Text: white
+- **Hover**: Легкое затемнение (opacity: 0.9)
+- **Active**: Затемнение (opacity: 0.8)
+- **Disabled**: Background: #D9DDE2, Text: rgba(0,0,0,0.4), Cursor: not-allowed
+
+#### Secondary Button / Text Button
 
 - **Size**: Same as Primary
-- **Radius**: radius-md (6px)
-- **States**:
-  - Default: Background: color-secondary, Color: white
-  - Hover: Background: color-secondary-hover
+- **Padding**: 16px horizontal, 5px vertical
+- **Border Radius**: 15px
+- **Colors**:
+  - Background: transparent
+  - Text: #09101D (default) или #4141E6 (link style)
+  - Shadow: None
+- **Typography**: 14px, weight: 400 или 600, line-height: 140%
 
-#### Outline Button
+**Варианты:**
 
-- **Border**: 1px solid color-primary
+#### Link Button
+- **Text Color**: #4141E6
 - **Background**: transparent
-- **States**:
-  - Hover: Background: color-primary-light, Border-color: color-primary-hover
+- **Font Weight**: 400
+- **Underline**: None (optional on hover)
+- **Использование**: "More info", "Dismiss"
 
-#### Ghost Button
+#### Two-Button Layout
+- **Container**: Row с gap: 10px
+- **Buttons**: Flex-grow: 1 (равная ширина)
+- **Left Button**: Text style (Dismiss)
+- **Right Button**: Primary style (Action - "Appk", etc.)
 
-- **Background**: transparent
-- **States**:
-  - Hover: Background: color-gray-100
+#### iOS Keyboard Button
+- **Key Size**: 31.5px × 42px
+- **Padding**: Centered text
+- **Border Radius**: 5px
+- **Background**: #FFFFFF
+- **Shadow**: 0 1px 0 0 rgba(0,0,0,0.35)
+- **Text**: 23px, weight: 400, color: #000000
+
+#### Functional Keys (Space, Return, etc.)
+- **Space Bar**: Width: 182.49px, Height: 42px
+- **Return Key**: Width: 87.73px, Height: 42px, Background: #ADB3BC
+- **123 Key**: Smaller width
+- **Border Radius**: 5px
+- **Shadow**: 0 1px 0 0 (varies by type)
+
+#### Close Button (в карточках)
+- **Size**: 24px × 24px
+- **Padding**: 6px (иконка 12px)
+- **Border Radius**: 100px (circular)
+- **Background**: #F4F6F9
+- **Position**: Absolute, top-right
 
 ---
 
@@ -483,23 +685,51 @@
 
 ---
 
-### 9. Avatars
+### 9. Avatars (из Flutter кода)
 
 #### Sizes
 
-- **XS**: 24px × 24px
-- **Small**: 32px × 32px
-- **Medium**: 40px × 40px
-- **Large**: 48px × 48px
-- **XL**: 64px × 64px
-- **2XL**: 96px × 96px
+- **Extra Small**: 32px × 32px (в группах)
+- **Small**: 40px × 40px (в группах)
+- **Medium**: 48px × 48px (в группах)
+- **Large**: 56px × 56px (основной)
+- **Extra Large**: 60px × 60px (иконки)
 
 #### Styles
 
-- **Border Radius**: radius-full (circle) или radius-md (rounded square)
-- **Border**: 2px solid white (для группировки)
-- **Placeholder**: Background: color-gray-300, Icon/Initials: color-gray-600
-- **Status Indicator**: Size: 25% of avatar, Border: 2px solid white, Position: bottom-right
+- **Border Radius**: Circular (40px для 48px avatar, 30px для 56px avatar, 100px для иконок)
+- **Border Width**:
+  - Solo avatar: 2px solid (accent color, например #FC466B)
+  - Group avatars: 4px solid white
+- **Placeholder**: Background: #D9DDE2
+- **Image Fit**: Cover
+
+#### Avatar с Live Badge (из Flutter кода)
+
+- **Avatar Size**: 56px × 56px
+- **Border**: 2px solid #FC466B (Instagram gradient border)
+- **Inner Avatar**: 48px × 48px (4px отступ от внешней границы)
+- **Live Badge**:
+  - Position: Bottom of avatar container
+  - Size: 28px × 14px
+  - Padding: 4px horizontal, 2px vertical
+  - Border: 1px solid white
+  - Border Radius: 12px
+  - Background: linear-gradient(90deg, #833AB4, #FD1D1D, #FCB045)
+  - Text: "Live", 10px, weight: 600, color: white
+
+#### Avatar Groups (из Flutter кода)
+
+- **Layout**: Horizontal row с gap: 10px
+- **Overlap**: None (используется gap вместо overlap)
+- **Individual Avatar**:
+  - Container: 40px × 40px
+  - Border: 4px solid white
+  - Border Radius: 30px (circular)
+  - Inner Image: 32px × 32px
+  - Background: #D9DDE2 (placeholder)
+- **Group Spacing**: 6px между border и следующим аватаром
+- **Max Visible**: Обычно 4-5 аватаров, затем "+N" badge
 
 ---
 
@@ -624,6 +854,114 @@
 --backdrop-blur-md: blur(12px);
 --backdrop-blur-lg: blur(16px);
 ```
+
+---
+
+### 17. iOS Keyboard (из Flutter кода)
+
+#### Keyboard Container
+- **Width**: 375px (full width)
+- **Height**: 290px (клавиатура + home indicator)
+- **Background**: rgba(209, 213, 219, 0.94) - #EFD1D5DB
+- **Clip**: antiAlias
+
+#### Keyboard Layout
+- **Keys Area**: 214px height
+- **Bottom Bar**: 76px height (включает home indicator)
+
+#### Key Specifications
+
+**Letter Keys:**
+- **Size**: 31.5px × 42px
+- **Border Radius**: 5px
+- **Background**: #FFFFFF
+- **Shadow**: 0 1px 0 0 rgba(0, 0, 0, 0.35)
+- **Font**: 23px, weight: 400, color: #000000
+- **Text Align**: Center
+
+**Space Bar:**
+- **Size**: 182.49px × 42px
+- **Border Radius**: 5px
+- **Background**: #FDFDFD
+- **Shadow**: 0 1px 0 0 rgba(4, 4, 15, 0.36)
+- **Text**: "space", 16px, weight: 400, letter-spacing: -0.32px
+
+**Return Key:**
+- **Size**: 87.73px × 42px
+- **Border Radius**: 5px
+- **Background**: #ADB3BC
+- **Shadow**: 0 1px 0 0 #898A8D
+- **Text**: "return", 16px, weight: 400, letter-spacing: -0.32px, color: #000000
+
+**123 Key:**
+- **Text**: "123", 16px, weight: 400, letter-spacing: -0.32px
+- **Background**: Same as Return key
+
+**Symbol Keys:**
+- **Font**: 27px (для символов типа 􀊱, 􀆪)
+- **Color**: rgba(0, 0, 0, 0.55)
+- **Usage**: Keyboard switchers, emoji button
+
+#### Keyboard Row Spacing
+- **Top Row** (QWERTYUIOP): 9px from top
+- **Middle Row** (ASDFGHJKL): 63px from top
+- **Bottom Row** (ZXCVBNM): 117px from top
+- **Function Row** (Space, Return, etc.): 165px from top
+
+---
+
+### 18. Home Indicator (из Flutter кода)
+
+#### Specifications
+- **Width**: 134px
+- **Height**: 5px
+- **Border Radius**: 100px (pill shape)
+- **Background**: #09101D (черный)
+- **Border**: 1px solid (может быть #FFFFFF или #09101D в зависимости от варианта)
+- **Position**: Bottom center, 21px from bottom
+- **Container Height**: 34px
+
+#### Alternative Variant
+- **Border Color**: Может быть white для контраста с темным фоном
+
+---
+
+### 19. Badges (из Flutter кода)
+
+#### Live Badge (Instagram-style)
+- **Size**: 28px × 14px
+- **Padding**: 4px horizontal, 2px vertical
+- **Border Radius**: 12px
+- **Border**: 1px solid white
+- **Background**: linear-gradient(90deg, #833AB4 0%, #FD1D1D 50%, #FCB045 100%)
+- **Typography**:
+  - Text: "Live"
+  - Font Size: 10px
+  - Font Weight: 600
+  - Color: white
+  - Line Height: 140%
+- **Position**: Usually bottom of avatar or top-right of content
+
+---
+
+### 20. Screen Container (из Flutter кода)
+
+#### Mobile Screen Container
+- **Width**: 375px (iPhone-like width)
+- **Height**: 812px (iPhone X-like height)
+- **Background**: rgba(217, 221, 226, 0.25) с opacity 0.25 - #D9DDE2
+- **Border Radius**: 40px (при клипе на экран)
+- **Clip Behavior**: antiAlias
+
+#### Status Bar Area
+- **Height**: 44px
+- **Position**: Top of screen
+- **Content**: Time, signal indicators (обычно оставляется пустым в дизайне)
+
+#### Safe Area
+- **Top**: 44px (status bar)
+- **Bottom**: 34px (home indicator area)
+- **Sides**: 8px padding (для карточек)
 
 ---
 
@@ -776,6 +1114,73 @@
 
 ---
 
+## Градиенты (из Flutter кода)
+
+### Instagram-style Gradient
+
+**Использование**: Live badge, accent borders, premium features
+
+```css
+background: linear-gradient(90deg, #833AB4 0%, #FD1D1D 50%, #FCB045 100%);
+```
+
+**Цвета:**
+- Start: #833AB4 (фиолетовый)
+- Middle: #FD1D1D (красный)
+- End: #FCB045 (оранжевый)
+
+**Применение:**
+- Live badge на аватарах
+- Premium borders
+- Accent highlights
+- Feature indicators
+
+### Gradient Direction
+
+**Horizontal (90deg):**
+- Begin: Alignment(0.00, 0.50)
+- End: Alignment(1.00, 0.50)
+- Используется для badge и горизонтальных элементов
+
+**Vertical (180deg):**
+- Не используется в текущем дизайне
+
+**Diagonal (135deg):**
+- Альтернативный вариант для больших площадей
+
+### Flutter Implementation
+
+```dart
+decoration: BoxDecoration(
+  gradient: LinearGradient(
+    begin: Alignment(0.00, 0.50),
+    end: Alignment(1.00, 0.50),
+    colors: [
+      Color(0xFF833AB4),
+      Color(0xFFFD1D1D),
+      Color(0xFFFCB045),
+    ],
+  ),
+  borderRadius: BorderRadius.circular(12),
+  border: Border.all(color: Colors.white, width: 1),
+),
+```
+
+### CSS Implementation
+
+```css
+.gradient-instagram {
+  background: linear-gradient(90deg, #833AB4 0%, #FD1D1D 50%, #FCB045 100%);
+}
+
+.gradient-border {
+  border: 2px solid;
+  border-image: linear-gradient(90deg, #833AB4, #FD1D1D, #FCB045) 1;
+}
+```
+
+---
+
 ## Как использовать эту дизайн-систему
 
 ### Для дизайнеров
@@ -803,9 +1208,36 @@
 
 ## Версионирование и обновления
 
-**Текущая версия**: v5.0.0
+**Текущая версия**: v5.1.0
 
 ### Changelog
+
+#### v5.1.0 (2025-11-19)
+- **Цветовая палитра**: Добавлены реальные цвета из Flutter кода
+  - Background colors: #F4F6F9, #D9DDE2, #EFD1D5DB, #FDFDFD
+  - Text colors: #09101D, #23262B, #2A2B2F
+  - Accent colors: #4141E6, #11BB8D, #FC466B
+  - Gradient colors: Instagram-style (#833AB4, #FD1D1D, #FCB045)
+  - Payment system colors: Mastercard (#DA1414, #F79E1C)
+- **Типографика**: Расширены размеры шрифтов
+  - Добавлены: 23px (клавиатура), 27px (иконки)
+  - Letter spacing: -0.32px для клавиатуры
+  - Новые text styles из Flutter кода
+- **Spacing & Layout**: Обновлены border radius и shadows
+  - Border radius: 5px, 12px, 15px, 20px, 30px, 40px, 100px
+  - iOS keyboard shadows
+  - Opacity: 0.25, 0.55
+- **Компоненты**: Полностью обновлены на основе Flutter кода
+  - Cards: Mobile-first (375px), padding 8/16px, border-radius 20px
+  - Buttons: Primary (#4141E6), height 44px, border-radius 15px
+  - Avatars: Sizes 32-60px, Instagram-style borders
+  - iOS Keyboard: Полная спецификация клавиатуры
+  - Home Indicator: 134×5px pill
+  - Live Badge: Instagram gradient badge
+  - Screen Container: 375×812px (iPhone X)
+- **Градиенты**: Instagram-style gradient с примерами кода
+  - Flutter и CSS implementations
+  - Horizontal gradient (90deg)
 
 #### v5.0.0 (2025-11-19)
 - Первая версия дизайн-системы
