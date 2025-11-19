@@ -56,6 +56,7 @@
 --color-text-primary: #09101D;       /* Основной черный текст */
 --color-text-secondary: #23262B;     /* Вторичный темный текст */
 --color-text-tertiary: #2A2B2F;      /* Третичный темный текст */
+--color-text-gray: #373940;          /* Серый текст (из Content Card) */
 --color-text-muted: rgba(0, 0, 0, 0.55);  /* Приглушенный текст */
 ```
 
@@ -91,6 +92,14 @@
 
 /* Instagram-style gradient */
 --gradient-instagram: linear-gradient(135deg, #833AB4 0%, #FD1D1D 50%, #FCB045 100%);
+
+/* Pricing/Subscription gradient (из Buttons Light) */
+--gradient-pricing-start: #FF512F;    /* Оранжево-красный (начало) */
+--gradient-pricing-end: #DD2476;      /* Розовый (конец) */
+--gradient-pricing: linear-gradient(90deg, #FF512F 0%, #DD2476 100%);
+
+/* Outline button colors (из Buttons Light) */
+--outline-border-orange: #FE5032;     /* Оранжевый для outline кнопок */
 ```
 
 ### Payment System Colors
@@ -606,6 +615,37 @@
 - **Text**: white, 15px, weight 600
 - **Icon**: 24px (left side), spacing 8px
 - **Usage**: "Sign in via mobile number"
+
+#### Gradient Button (Pricing/Premium)
+
+- **Size**: 44px height (standard)
+- **Padding**: 16px horizontal, 10px vertical
+- **Border Radius**: 30px (большой!)
+- **Background**: linear-gradient(90deg, #FF512F 0%, #DD2476 100%)
+- **Text**: 14px, weight 600, white
+- **Spacing**: 8px между текстом и badge
+- **Usage**: Pricing buttons, premium CTA, subscription actions
+
+**С Price Badge:**
+- Badge height: 20px
+- Badge padding: 10px horizontal, 5px vertical
+- Badge radius: 12px
+- Badge background: white
+- Badge text: 11px, weight 600, color #FF512F
+
+**Example:**
+- Primary: "\$ 86.99/Year" + "Save 23%" badge
+- Secondary: "\$ 9.49/Month" without badge
+
+#### Outline Button (Colored Border)
+
+- **Size**: 44px height (standard)
+- **Padding**: 16px horizontal, 10px vertical
+- **Border Radius**: 30px (большой!)
+- **Border**: 1px solid #FE5032
+- **Background**: white
+- **Text**: 14px, weight 600, color #E24949
+- **Usage**: Secondary pricing option, alternative CTA
 
 #### Secondary Button / Text Button
 
@@ -1657,6 +1697,107 @@ Step 1  Step 2  Step 3  Step 4
   - Line Height: 140%
 - **Position**: Usually bottom of avatar or top-right of content
 
+#### Level Badge (из Buttons Light)
+
+**Specifications:**
+- **Height**: 24px
+- **Padding**: left 5px, right 10px
+- **Border Radius**: 10px
+- **Background**: white
+- **Icon**: 24px × 24px (6px padding inside)
+- **Typography**:
+  - Text: "Beginner level", "Intermediate", "Advanced"
+  - Font Size: 11px
+  - Font Weight: 600
+  - Color: #23262B
+  - Line Height: 140%
+- **Spacing**: 8px между icon и text
+- **Position**: Bottom right на preview изображении
+
+**Usage:**
+- Content cards (courses, tutorials, articles)
+- Skill level indicators
+- Difficulty badges
+
+**CSS Example:**
+
+```css
+.level-badge {
+  height: 24px;
+  padding-left: 5px;
+  padding-right: 10px;
+  border-radius: 10px;
+  background: white;
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+}
+
+.level-badge__icon {
+  width: 24px;
+  height: 24px;
+  padding: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.level-badge__text {
+  font-size: 11px;
+  font-weight: 600;
+  color: #23262B;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+```
+
+#### Price Badge (из Buttons Light)
+
+**Specifications:**
+- **Height**: 20px
+- **Padding**: 10px horizontal, 5px vertical
+- **Border Radius**: 12px
+- **Background**: white
+- **Typography**:
+  - Text: "Save 23%", "50% OFF", "-20%"
+  - Font Size: 11px
+  - Font Weight: 600
+  - Color: #FF512F (gradient start color)
+  - Line Height: 140%
+- **Position**: Inside gradient button, right side
+
+**Usage:**
+- Pricing buttons
+- Discount indicators
+- Promotional badges
+
+**CSS Example:**
+
+```css
+.price-badge {
+  height: 20px;
+  padding: 5px 10px;
+  border-radius: 12px;
+  background: white;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.price-badge__text {
+  font-size: 11px;
+  font-weight: 600;
+  color: #FF512F;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+/* Inside gradient button */
+.gradient-button .price-badge {
+  margin-left: 8px;
+}
+```
+
 ---
 
 ### 21. Screen Container (из Flutter кода)
@@ -2128,6 +2269,280 @@ padding-top: 50px;
 
 ---
 
+### 25. Content Cards (из Buttons Light)
+
+#### Course/Content Card with Pricing
+
+**Card Container:**
+- **Width**: 375px (mobile full width)
+- **Height**: 430px (flexible, auto-adjust)
+- **Border Radius**: 30px
+- **Background**: white
+- **Clip**: antiAlias
+- **Shadow**: Optional (0 2px 8px rgba(0,0,0,0.08))
+
+**Layout Structure:**
+
+**1. Image Section**
+- **Container**: 375px × 231px (padding 16px top/left/right)
+- **Image**:
+  - Width: 343px
+  - Height: 211px
+  - Border Radius: 15px
+  - Background: #F4F6F9
+  - Fit: cover
+
+**Overlays на изображении:**
+
+**Level Badge (bottom-right):**
+- Position: Bottom-right с padding 10px
+- See Level Badge specs above
+
+**Favorite Button (top-right):**
+- Size: 30px × 30px
+- Padding: 8px (icon 14px)
+- Border Radius: 100px (circle)
+- Background: white
+- Position: Top-right с padding 10px
+
+**2. Content Section**
+- **Padding**: 10px vertical, 16px horizontal
+- **Spacing**: 5px между элементами
+
+**Title:**
+- Font Size: 16px
+- Font Weight: 700 (bold)
+- Line Height: 140%
+- Color: #09101D
+- Max Width: 343px
+
+**Subtitle/Location:**
+- Font Size: 15px
+- Font Weight: 400
+- Line Height: 140%
+- Color: #D9DDE2
+- Max Width: 343px
+
+**Author Section:**
+- **Avatar**: 32px × 32px (в контейнере 40px с offset 4px)
+- **Border Radius**: 10px
+- **Spacing**: 6px между avatar и text
+- **Name**:
+  - Font: 13px, weight 400
+  - Color: #4141E6 (link style)
+- **Role**:
+  - Font: 12px, weight 400
+  - Color: #373940
+
+**3. Gradient Overlay**
+- **Position**: Starts at 254px from top
+- **Padding Top**: 30px
+- **Gradient**: linear-gradient(180deg, rgba(255,255,255,0) 0%, #FFFFFF 100%)
+- **Purpose**: Smooth transition для pricing секции
+
+**4. Pricing/Actions Section**
+- **Padding**: 5px vertical per button container
+- **Container padding**: 16px horizontal
+- **Spacing**: 10px между кнопками
+
+**Primary Pricing (Gradient Button):**
+- See Gradient Button specs
+- Text: "\$ 86.99/Year" + "Save 23%" badge
+- Full width with horizontal padding
+
+**Secondary Pricing (Outline Button):**
+- See Outline Button specs
+- Text: "\$ 9.49/Month"
+- Full width with horizontal padding
+
+**5. Home Indicator**
+- Width: 134px
+- Height: 5px
+- Border Radius: 100px
+- Background: #09101D
+- Position: Bottom center, 21px from bottom
+
+#### Flexible Elements
+
+**Adaptations:**
+1. **Image**: Можно заменить на video preview или carousel
+2. **Badges**: Добавить/убрать level badge, favorite
+3. **Content**: Title и subtitle опциональны, можно варьировать длину
+4. **Author**: Опциональная секция, можно показать несколько авторов
+5. **Pricing**: 1-2 опции, можно добавить больше вариантов подписки
+6. **Actions**: Легко добавить дополнительные кнопки (Free trial, Learn more)
+
+#### CSS Example
+
+```css
+/* Content Card Container */
+.content-card {
+  width: 375px;
+  min-height: 430px;
+  border-radius: 30px;
+  background: white;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Image Section */
+.content-card__image-container {
+  width: 100%;
+  padding: 20px 16px 0;
+}
+
+.content-card__image {
+  width: 343px;
+  height: 211px;
+  border-radius: 15px;
+  background: #F4F6F9;
+  object-fit: cover;
+  position: relative;
+}
+
+/* Overlays */
+.content-card__favorite {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 30px;
+  height: 30px;
+  padding: 8px;
+  border-radius: 100px;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.content-card__level-badge {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
+
+/* Content */
+.content-card__content {
+  padding: 10px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.content-card__title {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.4;
+  color: #09101D;
+}
+
+.content-card__subtitle {
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: #D9DDE2;
+}
+
+/* Author */
+.content-card__author {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.content-card__avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.content-card__author-name {
+  font-size: 13px;
+  font-weight: 400;
+  color: #4141E6;
+}
+
+.content-card__author-role {
+  font-size: 12px;
+  font-weight: 400;
+  color: #373940;
+}
+
+/* Gradient Overlay */
+.content-card__overlay {
+  position: absolute;
+  left: 0;
+  top: 254px;
+  width: 100%;
+  padding-top: 30px;
+  background: linear-gradient(180deg, rgba(255,255,255,0) 0%, #FFFFFF 100%);
+}
+
+/* Pricing Actions */
+.content-card__actions {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0 16px;
+}
+
+/* Home Indicator */
+.content-card__home-indicator {
+  width: 134px;
+  height: 5px;
+  border-radius: 100px;
+  background: #09101D;
+  margin: 0 auto;
+  margin-top: 34px;
+  margin-bottom: 21px;
+}
+```
+
+#### Usage Examples
+
+**Course Card:**
+```html
+<div class="content-card">
+  <div class="content-card__image-container">
+    <img src="course.jpg" class="content-card__image" />
+    <button class="content-card__favorite">❤</button>
+    <div class="content-card__level-badge level-badge">
+      <span class="level-badge__text">Beginner level</span>
+    </div>
+  </div>
+
+  <div class="content-card__content">
+    <h3 class="content-card__title">Healthy food course & practice</h3>
+    <p class="content-card__subtitle">New York, 214 W 29th St</p>
+
+    <div class="content-card__author">
+      <img src="avatar.jpg" class="content-card__avatar" />
+      <div>
+        <div class="content-card__author-name">Nicole Dowson</div>
+        <div class="content-card__author-role">Kitchen Crew</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-card__overlay">
+    <div class="content-card__actions">
+      <button class="gradient-button">
+        $ 86.99/Year
+        <span class="price-badge">Save 23%</span>
+      </button>
+      <button class="outline-button">$ 9.49/Month</button>
+    </div>
+
+    <div class="content-card__home-indicator"></div>
+  </div>
+</div>
+```
+
+---
+
 ## Паттерны
 
 ### Dashboard Layouts
@@ -2371,9 +2786,49 @@ decoration: BoxDecoration(
 
 ## Версионирование и обновления
 
-**Текущая версия**: v5.7.0
+**Текущая версия**: v5.8.0
 
 ### Changelog
+
+#### v5.8.0 (2025-11-19)
+- **Content Cards**: Добавлена секция с карточками контента и pricing
+  - Course/Content Card: 375px × 430px, 30px border-radius
+  - Image section: 343px × 211px, level badge, favorite button overlays
+  - Content: Title (16px bold), Subtitle (15px), Author (avatar + name/role)
+  - Gradient overlay: Плавный переход от контента к pricing секции
+  - Pricing actions: Gradient и Outline кнопки
+  - Home indicator: 134px × 5px pill (bottom center)
+  - Flexible elements: Легко адаптировать image, badges, content, pricing
+- **Gradient Buttons**: Новый вариант кнопок для pricing/premium
+  - Height: 44px, Border-radius: 30px (большой!)
+  - Gradient: linear-gradient(90deg, #FF512F 0%, #DD2476 100%)
+  - Price Badge: 20px height, 12px radius, white background
+  - Text: 14px weight 600, с опциональным badge
+  - Usage: Subscription, premium CTA, pricing options
+- **Outline Buttons**: Цветной outline вариант
+  - Border: 1px solid #FE5032
+  - Border-radius: 30px
+  - Text: 14px weight 600, color #E24949
+  - Usage: Secondary pricing, alternative CTA
+- **Level Badge**: Новый компонент для difficulty/skill indicators
+  - Height: 24px, padding 5px/10px, radius 10px
+  - Icon: 24px с 6px padding
+  - Text: 11px weight 600, color #23262B
+  - Usage: Course cards, skill levels, difficulty badges
+- **Price Badge**: Компонент для discount индикаторов
+  - Height: 20px, padding 5px/10px, radius 12px
+  - Text: 11px weight 600, color #FF512F
+  - Position: Inside gradient buttons
+  - Usage: "Save 23%", "50% OFF", promotional badges
+- **Цвета**: Добавлены градиенты для pricing кнопок
+  - Gradient start: #FF512F (оранжево-красный)
+  - Gradient end: #DD2476 (розовый)
+  - Outline border: #FE5032 (оранжевый)
+  - Text gray: #373940 (для author role)
+- **Компоненты**: CSS примеры для всех новых элементов
+  - Content card layout с flexible sections
+  - Gradient и Outline кнопки
+  - Level и Price badges
 
 #### v5.7.0 (2025-11-19)
 - **Onboarding/Start Screens**: Добавлена секция с готовыми блоками
