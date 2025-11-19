@@ -84,6 +84,10 @@
 /* Цвета для графиков и charts */
 --color-chart-grid: #A4ABB3;       /* Color(0xFFA4ABB3) - светло-серый для grid lines */
 --color-chart-axis: #747B84;       /* Color(0xFF747B84) - темнее для осей */
+
+/* Цвета для pagination dots и индикаторов */
+--color-pagination-active: #181920;   /* Color(0xFF181920) - темный для активной точки */
+--color-pagination-inactive: #FAFAFB; /* Color(0xFFFAFAFB) - светлый для неактивных точек */
 ```
 
 ### Shadow Colors
@@ -1131,7 +1135,95 @@
 
 ---
 
-### 17. Card Patterns (Flutter)
+### 17. Hero Image Carousel (Flutter)
+
+Система каруселей для hero-изображений с различными форматами и аспект-рацио.
+
+#### Carousel Container (Mobile)
+
+Основной контейнер для карусели изображений.
+
+- **Width**: 375px (full mobile width)
+- **Padding**: symmetric(vertical: 10px)
+- **Border Radius**: 30px (для внутренних элементов)
+- **Image Background**: #F4F6F9 (color-background-light)
+- **Spacing**:
+  - Между изображениями: 10px horizontal
+  - Вертикальный padding: 10px
+- **Layout**: Horizontal scroll с Row, spacing: 10px
+- **Clip Behavior**: antiAlias
+
+#### Hero Image Formats
+
+Различные форматы изображений для разных типов контента.
+
+##### Portrait Format (3:4 Ratio)
+
+Вертикальный формат для портретных изображений.
+
+- **Image Size**: 327×450px
+- **Container**: 375px width, 470px height
+- **Aspect Ratio**: 0.727 (3:4 portrait)
+- **Использование**: Fashion lookbooks, портреты, вертикальный контент
+
+##### Square Format
+
+Квадратный формат для универсального контента.
+
+- **Варианты размеров**:
+  - **Standard**: 327×330px (с left padding)
+  - **Full Width**: 375×330px (на всю ширину)
+  - **With Padding**: 343×330px (с 16px horizontal padding)
+- **Container**: 375px width, 350px height
+- **Aspect Ratio**: ~1.0 (квадрат)
+- **Использование**: Продуктовые фото, посты в социальных сетях
+
+##### Landscape Format (16:9 Ratio)
+
+Горизонтальный формат для широких изображений.
+
+- **Варианты размеров**:
+  - **Standard**: 327×240px (с left padding)
+  - **Full Width**: 375×240px (на всю ширину)
+  - **With Padding**: 343×240px (с 16px horizontal padding)
+- **Container**: 375px width, 260px height
+- **Aspect Ratio**: ~1.56 (16:9 landscape)
+- **Использование**: Видео-превью, панорамы, широкоформатный контент
+
+#### Pagination Dots
+
+Индикаторы текущей позиции в карусели.
+
+- **Dot Size**: 8×8px (OvalBorder - круги)
+- **Spacing**: 16px между центрами точек (8px gap)
+- **Container**: 56px width, 8px height (для 4 точек)
+- **Colors**:
+  - **Active**: #181920 (темный)
+  - **Inactive**: #FAFAFB (светлый)
+- **Position**: Bottom center карусели
+- **Padding**:
+  - Top: 10px
+  - Horizontal: 16px
+  - Bottom: 20px (portrait), 15px (landscape)
+- **Layout**: Row с фиксированными позициями (left: 0, 16, 32, 48)
+
+#### Desktop Layout Container
+
+Контейнер для desktop версии с несколькими каруселями.
+
+- **Width**: 2315px
+- **Padding**: 50px
+- **Border**: 1px solid #7B61FF (accent-purple)
+- **Border Radius**: 15px
+- **Background**: White
+- **Spacing**: 100px между carousel секциями
+- **Layout**: Row с mainAxisAlignment: spaceBetween
+
+**Использование**: Hero секции на главной, image galleries, продуктовые слайдеры
+
+---
+
+### 18. Card Patterns (Flutter)
 
 Полноценные паттерны карточек для различных типов контента.
 
@@ -1242,7 +1334,7 @@
 
 ---
 
-### 18. Chart & Graph Components (Flutter)
+### 19. Chart & Graph Components (Flutter)
 
 Компоненты для построения графиков и визуализаций данных.
 
@@ -1319,7 +1411,7 @@
 
 ---
 
-### 19. Special Effects
+### 20. Special Effects
 
 #### Focus Ring
 
@@ -1514,9 +1606,38 @@
 
 ## Версионирование и обновления
 
-**Текущая версия**: v5.5.0
+**Текущая версия**: v5.6.0
 
 ### Changelog
+
+#### v5.6.0 (2025-11-19)
+- 🖼️ Добавлена **полная система Hero Image Carousel**
+- 🎨 Новые цвета для pagination индикаторов:
+  - Pagination Active (#181920) - темный для активной точки
+  - Pagination Inactive (#FAFAFB) - светлый для неактивных точек
+- 📐 Добавлена новая секция **Hero Image Carousel (Flutter)** с тремя форматами:
+  - **Portrait Format** (3:4 ratio) - 327×450px
+    - Container: 375px width, 470px height
+    - Использование: Fashion lookbooks, портреты
+  - **Square Format** (~1:1 ratio)
+    - Варианты: 327×330px, 375×330px (full width), 343×330px (with padding)
+    - Container: 375px width, 350px height
+    - Использование: Продуктовые фото, социальные посты
+  - **Landscape Format** (16:9 ratio)
+    - Варианты: 327×240px, 375×240px, 343×240px (with padding)
+    - Container: 375px width, 260px height
+    - Использование: Видео-превью, панорамы
+- 🎯 Добавлены **Pagination Dots спецификации**:
+  - Dot Size: 8×8px круги
+  - Spacing: 16px между центрами (8px gap)
+  - Container: 56px width для 4 точек
+  - Colors: #181920 (active), #FAFAFB (inactive)
+  - Position: Bottom center с padding 10/20px
+- 🖥️ Добавлен **Desktop Layout Container**:
+  - Width: 2315px, Padding: 50px
+  - Border: 1px solid #7B61FF
+  - Spacing: 100px между секциями
+- 📊 Все данные извлечены из реального Flutter кода hero image системы
 
 #### v5.5.0 (2025-11-19)
 - 🏷️ Добавлена **полная система Badge Components**
