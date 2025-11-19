@@ -80,6 +80,10 @@
 
 /* Overlay цвета для видео/медиа */
 --color-overlay-black-30: rgba(0, 0, 0, 0.30);  /* Черный с 30% прозрачностью */
+
+/* Цвета для графиков и charts */
+--color-chart-grid: #A4ABB3;       /* Color(0xFFA4ABB3) - светло-серый для grid lines */
+--color-chart-axis: #747B84;       /* Color(0xFF747B84) - темнее для осей */
 ```
 
 ### Shadow Colors
@@ -277,6 +281,23 @@
 - **Color**: #09101D (black)
 - **Line Height**: 1.40
 - **Использование**: Заголовки товарных карточек, крупные заголовки
+
+#### Chart Label (Small)
+- **Font**: 8px (0.5rem), Archivo
+- **Weight**: 700 (Bold)
+- **Color**: #09101D (black)
+- **Line Height**: 1.40
+- **Text Align**: Center
+- **Использование**: Метки на осях графиков, маленькие подписи
+
+#### Chart Label (Medium)
+- **Font**: 10px (0.625rem), Archivo
+- **Weight**: 600 (Semibold)
+- **Color**: #09101D (black)
+- **Line Height**: 1.40
+- **Text Align**: Center
+- **Padding**: horizontal 5px
+- **Использование**: Стандартные метки на графиках
 
 ---
 
@@ -1134,7 +1155,84 @@
 
 ---
 
-### 18. Special Effects
+### 18. Chart & Graph Components (Flutter)
+
+Компоненты для построения графиков и визуализаций данных.
+
+#### Grid Line (Vertical)
+
+Вертикальная линия сетки графика.
+
+- **Width**: 1px
+- **Color**: #A4ABB3 (chart-grid) - основная сетка
+- **Transform**: rotateZ(-1.57) - поворот на 90° для вертикальной ориентации
+- **Height**: 346px (или по высоте графика)
+- **Stroke Align**: Center
+- **Использование**: Вертикальные линии сетки на графиках
+
+#### Grid Line (Horizontal)
+
+Горизонтальная линия сетки графика.
+
+- **Width**: 1px
+- **Color**: #747B84 (chart-axis) - для основных делений
+- **Stroke Align**: Center
+- **Использование**: Горизонтальные линии сетки, основные деления
+
+#### Axis Line (Thin)
+
+Тонкая линия для вспомогательных делений.
+
+- **Width**: 0.5px
+- **Color**: #747B84 (chart-axis)
+- **Stroke Align**: Center
+- **Использование**: Вспомогательные деления, minor grid lines
+
+#### Chart Label
+
+Текстовая метка на графике.
+
+**Варианты размеров:**
+- **Small**: 8px Bold, padding horizontal 5px (optional)
+- **Medium**: 10px Semibold, padding horizontal 5px
+
+**Общие характеристики:**
+- **Border Radius**: 10px
+- **Text Align**: Center
+- **Color**: #09101D (black)
+- **Line Height**: 1.40
+- **Spacing**: 1px между строками (если многострочный)
+
+**Позиционирование:**
+- **Bottom**: Под осью X с spacing 5px
+- **Left**: Слева от оси Y
+- **Right**: Справа от оси Y
+- **Top**: Над графиком
+
+**Использование**: Метки значений на осях графиков, легенда
+
+#### Chart Container
+
+Контейнер для графика.
+
+- **Height**: 446px (стандартная высота)
+- **Padding**: 50px
+- **Border**: 1px solid #7B61FF (accent-purple) - для демо
+- **Border Radius**: 15px
+- **Spacing**:
+  - Между элементами: 50px, 20px, 10px
+  - Внутри labels: 5px
+
+**Варианты layout:**
+- **Horizontal Grid**: Row layout с вертикальными линиями
+- **Vertical Grid**: Column layout с горизонтальными линиями
+- **Combined**: Grid с обеими осями
+
+**Использование**: Контейнер для размещения графиков и chart elements
+
+---
+
+### 19. Special Effects
 
 #### Focus Ring
 
@@ -1329,9 +1427,28 @@
 
 ## Версионирование и обновления
 
-**Текущая версия**: v5.3.0
+**Текущая версия**: v5.4.0
 
 ### Changelog
+
+#### v5.4.0 (2025-11-19)
+- 📊 Добавлена **система для графиков и визуализаций данных**
+- 🎨 Новые цвета для графиков:
+  - Chart Grid (#A4ABB3) - светло-серый для grid lines
+  - Chart Axis (#747B84) - для осей и основных делений
+- 📝 Добавлены **текстовые стили для chart labels**:
+  - Chart Label Small (8px Bold) - маленькие метки
+  - Chart Label Medium (10px Semibold) - стандартные метки
+- 📐 Добавлены **спецификации линий**:
+  - Grid Line 1px (#A4ABB3) - основная сетка
+  - Axis Line 0.5px (#747B84) - вспомогательные деления
+- 📈 Новая секция **Chart & Graph Components**:
+  - **Grid Line (Vertical)** - 1px, transform rotateZ(-1.57)
+  - **Grid Line (Horizontal)** - 1px для основных делений
+  - **Axis Line (Thin)** - 0.5px для вспомогательных делений
+  - **Chart Label** - два размера (8px, 10px) с различным позиционированием
+  - **Chart Container** - 446px height, spacing 50/20/10px
+- 🎯 Все данные извлечены из реального Flutter кода элементов графиков
 
 #### v5.3.0 (2025-11-19)
 - 🎨 Добавлены **новые цвета** для карточек и контента:
