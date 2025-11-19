@@ -1095,6 +1095,128 @@
 - **Background**: Соответствующий bg цвет (success-bg, error-bg, etc.)
 - **Close Button**: Right: 12px, Top: 12px
 
+#### Snackbar (Flutter Mobile)
+
+**Container**:
+- Width: 375px (mobile screen width)
+- Padding: 16px all (outer container)
+- Clip Behavior: antiAlias
+
+**Snackbar Base**:
+- Background: #09101D (color-bg-card-dark)
+- Border Radius: 15px
+- Padding: 16px all
+- Clip Behavior: antiAlias (optional, based on variant)
+
+**Typography**:
+- **Message Text**:
+  - Font: Archivo 14px, weight 600
+  - Color: white (#FFFFFF)
+  - Line Height: 1.40
+  - Width: varies by variant (159px-311px)
+- **Action Button Text**:
+  - Font: Archivo 13px, weight 600
+  - Color: white (#FFFFFF)
+  - Line Height: 1.40
+
+**Elements**:
+
+1. **Avatar** (optional):
+   - Container: 56px × 56px
+   - Inner Avatar: 48px × 48px
+   - Position: left 4px, top 4px (within container)
+   - Border Radius: 40px
+   - Background: white (placeholder)
+   - Image: NetworkImage with BoxFit.cover
+   - Padding: 16px (around avatar container)
+
+2. **Icon** (optional):
+   - Size: 24px × 24px
+   - Padding: 16px (around icon)
+   - Clip Behavior: antiAlias
+
+3. **Close Button** (optional):
+   - Icon Size: 20px × 20px
+   - Container Height: 44px or 36px
+   - Padding: 16px horizontal, 10px vertical
+   - Border Radius: 15px
+   - Position: right side
+
+4. **Action Button** (optional):
+   - Height: 36px or 44px
+   - Padding: 16px horizontal, 10px vertical
+   - Border Radius: 15px
+   - Text: "Action" (customizable)
+   - Position: right side
+   - Spacing: 70px (internal row spacing)
+
+**Variants**:
+
+1. **Basic Snackbar** (Text Only):
+   - Padding: 16px all
+   - Message width: 311px
+   - No icons, no actions
+   - **Usage**: Simple notifications
+
+2. **Snackbar with Icon**:
+   - Icon: 24px (left side, padding 16px)
+   - Message width: 235px-271px
+   - Optional close button (20px icon)
+   - Row layout: Icon + Text + (optional Close)
+   - **Usage**: Info, success, warning, error notifications
+
+3. **Snackbar with Avatar**:
+   - Avatar: 56px container (left side, padding 16px)
+   - Message width: 203px-239px
+   - Optional close button or action button
+   - Row layout: Avatar + Text + (optional Action/Close)
+   - **Usage**: User-related notifications, social updates
+
+4. **Snackbar with Action**:
+   - No icon/avatar
+   - Message width: 223px-267px
+   - Action button: height 36px or 44px (right side)
+   - Row layout: Text + Action Button
+   - **Usage**: Notifications requiring user action
+
+5. **Snackbar with Icon and Action**:
+   - Icon: 24px (left side)
+   - Message width: varies
+   - Action button: height 44px (right side)
+   - Row layout: Icon + Text + Action Button
+   - **Usage**: Notifications with context icon and action
+
+6. **Snackbar with Avatar and Action**:
+   - Avatar: 56px container (left side)
+   - Message width: 159px-223px
+   - Action button: height 36px or 44px (right side)
+   - Row layout: Avatar + Text + Action Button
+   - **Usage**: Social notifications with user context and action
+
+**Layout Patterns**:
+- **Row Layout**: Main axis start, cross axis center
+- **Expanded Text**: Text container uses Expanded to fill available space
+- **Spacing**: 8px between major elements
+- **Padding**:
+  - Avatar/Icon section: padding 16px
+  - Text section: padding 16px vertical, 0-8px horizontal (right)
+  - Action/Close: padding 16px horizontal, 10px vertical
+
+**Height Variations**:
+- Text only: ~56px (with 2-line message)
+- With icon/avatar: ~88px (with 2-line message)
+- With action button: varies (36px-44px button height)
+
+**Usage Guidelines**:
+- Use basic snackbar for simple status messages
+- Add icon for semantic meaning (success, error, info, warning)
+- Add avatar for user-related notifications
+- Add action button when user response is needed
+- Add close button for persistent snackbars
+- Position at bottom of screen for mobile
+- Auto-dismiss after 3-5 seconds (optional)
+- Stack multiple snackbars vertically with 10px spacing
+
 ---
 
 ### 16. Panels & Cards
@@ -1822,6 +1944,21 @@ Icon Button (40px):
     9. Disabled: All colors #D9DDE2
   - Validation patterns: Success (green border + light green bg), Error (red border + light red bg + error message)
   - Helper and error messages: Archivo 14px weight 400, positioned below field
+- Snackbar Component (Flutter Mobile):
+  - Container: 375px width, padding 16px all
+  - Background: #09101D (color-bg-card-dark), border-radius 15px, padding 16px
+  - Typography: Message (Archivo 14px weight 600, white), Action (Archivo 13px weight 600, white)
+  - Elements: Avatar (56px container, 48px image), Icon (24px), Close button (20px icon), Action button (36px-44px height)
+  - 6 Variants documented:
+    1. Basic (text only): 311px message width
+    2. With Icon: 24px icon, 235-271px message width, optional close button
+    3. With Avatar: 56px avatar container, 203-239px message width
+    4. With Action: 223-267px message width, 36-44px action button
+    5. With Icon and Action: combines icon + text + action
+    6. With Avatar and Action: 159-223px message width, avatar + action
+  - Layout: Row layout with expanded text, 8px spacing between elements
+  - Height: ~56px (text only), ~88px (with icon/avatar)
+  - Usage guidelines: Bottom positioning, auto-dismiss 3-5s, stack vertically with 10px spacing
 - Layout patterns и Best practices
 
 ---
