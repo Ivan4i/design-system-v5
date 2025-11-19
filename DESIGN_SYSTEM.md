@@ -57,6 +57,7 @@
 --color-primary-border: #0B24FB;   /* Primary border variant из Flutter */
 --color-accent-blue: #1D4ED8;      /* blue-700 */
 --color-accent-purple: #7B61FF;    /* Фиолетовый из Flutter кода */
+--color-accent-yellow: #FFC043;    /* Желтый/золотой для charts из Flutter */
 --color-success: #11BB8D;          /* Зеленый для success badges из Flutter */
 ```
 
@@ -619,6 +620,40 @@
 - **Border Width**: 2px (white)
 - **Spacing**: 2px between segments
 - **Colors**: Use chart colors
+
+#### Spiral/Radial Timeline Chart (Flutter Mobile)
+
+**Размеры**:
+- Container: 375px × 170px или 375px × 240px
+- Chart Area: 186px × 186px (circular area)
+- Clip Behavior: antiAlias
+
+**Data Points**:
+- Size: 5px × 5px
+- Shape: OvalBorder (круг)
+- Colors:
+  - Primary: #4141E6 (color-primary)
+  - Secondary: #FFC043 (color-accent-yellow)
+- Border:
+  - Width: 1px
+  - Stroke Align: strokeAlignOutside
+  - Primary Border: rgba(11, 36, 251, 0.20) - #0B24FB с opacity 20%
+  - Secondary Border: rgba(255, 192, 67, 0.20) - #FFC043 с opacity 20%
+
+**Labels** (Year markers):
+- Font: Archivo 10px, weight 400
+- Color: #09101D (color-text-primary)
+- Line Height: 1.40
+- Text Align: center
+- Positioning: Absolute (Positioned по кругу)
+- Examples: "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021"
+
+**Layout**:
+- Points и labels распределены по окружности
+- Абсолютное позиционирование для всех элементов
+- Chart area центрируется в контейнере
+
+**Использование**: Timeline visualization, yearly data, spiral progress charts
 
 ---
 
@@ -1332,6 +1367,7 @@ Icon Button (40px):
 - Полная цветовая палитра с реальными значениями из Flutter кода:
   - Primary: #4141E6
   - Primary border: #0B24FB
+  - Accent yellow: #FFC043 (для charts)
   - Background light: #F4F6F9
   - Background dark: #18202F
   - Background overlay: rgba(0, 0, 0, 0.10)
@@ -1362,6 +1398,11 @@ Icon Button (40px):
   6. Story/Post Card (140×190px)
   7. Product Card (140×210px)
   8. Course Card (140×150px)
+- Chart Components:
+  - Spiral/Radial Timeline Chart (186×186px chart area)
+  - Data points: 5×5px with borders
+  - Colors: #4141E6 и #FFC043
+  - Labels: Archivo 10px, center aligned
 - Mobile Layout Patterns (375px width)
 - Spacing values: 5px, 10px, 15px, 20px, 70px
 - Border radius values: 10px, 11px, 12px, 15px, 16px
