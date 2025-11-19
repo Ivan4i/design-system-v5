@@ -45,6 +45,8 @@
 --color-text-primary: #020617;     /* slate-950 */
 --color-text-secondary: #27272A;   /* zinc-800 */
 --color-text-dark: #09101D;        /* Основной темный текст (Flutter) */
+--color-text-charcoal: #23262B;    /* Очень темный серый для основного текста */
+--color-text-meta: #303239;        /* Темно-серый для метаданных (даты, авторы) */
 --color-text-gray: #373940;        /* Серый текст для подписей (Flutter) */
 --color-text-subtitle: #414249;    /* Темно-серый для subtitle/вторичного текста в списках */
 --color-text-muted: #747B84;       /* Приглушенный серый для timestamps и метаданных */
@@ -55,9 +57,11 @@
 ```css
 /* Акцентные цвета */
 --color-accent-blue: #1D4ED8;      /* blue-700 */
+--color-accent-navy: #46467F;      /* Темно-синий для флагов и декоративных элементов */
 --color-accent-purple: #7B61FF;    /* Фиолетовый из Flutter кода */
 --color-link-blue: #4141E6;        /* Синий для ссылок и активных элементов */
 --color-success-green: #11BB8D;    /* Зеленый для активного toggle и success состояний */
+--color-error-red: #E24949;        /* Красный для ошибок и негативных значений */
 --color-accent-yellow: #FFC043;    /* Желтый для date dividers */
 --color-accent-dark-green: #05944F; /* Темно-зеленый для date dividers */
 --color-accent-orange: #FF6937;    /* Оранжевый для date dividers и new messages */
@@ -68,8 +72,10 @@
 ```css
 /* Фоны для компонентов */
 --color-bg-light: #F4F6F9;         /* Светлый фон */
+--color-bg-ultralight: #F8F8FA;    /* Очень светлый фон для иконок и плейсхолдеров */
 --color-bg-card-light: #D9DDE2;    /* Светлая карточка */
 --color-bg-card-dark: #23262B;     /* Темная карточка */
+--color-bg-teal: #B7D5D5;          /* Бирюзовый фон для декоративных элементов */
 ```
 
 ### Border & Control Colors
@@ -967,16 +973,36 @@ Container(
 
 ---
 
-#### Flutter Avatar (Recipe Author)
+#### Flutter Avatar Variants
 
-Avatar компонент из Flutter кода для карточек рецептов.
+Avatar компоненты из Flutter кода с двухслойной структурой (outer container + inner image).
 
+**Flutter Avatar Small (40×40):**
 - **Outer Container**: 40px × 40px
 - **Inner Image**: 32px × 32px
   - Position: Left 4px, Top 4px
-- **Border Radius**: 10px (rounded square)
+- **Border Radius**: 10px (rounded square) или 40px (circle)
 - **Placeholder Background**: #D9DDE2
 - **Image Fit**: BoxFit.cover
+- **Usage**: Карточки рецептов, компактные списки
+
+**Flutter Avatar Medium (48×48):**
+- **Outer Container**: 48px × 48px
+- **Inner Image**: 40px × 40px
+  - Position: Left 4px, Top 4px
+- **Border Radius**: 40px (circle)
+- **Placeholder Background**: #D9DDE2
+- **Image Fit**: BoxFit.cover
+- **Usage**: Списки криптовалют, активов, стандартные list items
+
+**Flutter Avatar Large (56×56):**
+- **Outer Container**: 56px × 56px
+- **Inner Image**: 48px × 48px
+  - Position: Left 4px, Top 4px
+- **Border Radius**: 40px (circle)
+- **Placeholder Background**: #D9DDE2
+- **Image Fit**: BoxFit.cover
+- **Usage**: Follow lists, социальные списки с действиями
 
 ```dart
 Container(
@@ -1236,6 +1262,494 @@ Container(
 ```
 
 **Usage:** Списки с настройками, переключателями, выбором опций в мобильном приложении.
+
+---
+
+#### Advanced List Item Variants
+
+Расширенные варианты list items из Flutter кода для различных сценариев использования.
+
+##### 1. Range Slider List Item
+
+List item с двойным ползунком для выбора диапазона значений.
+
+**Container:**
+- **Width**: 375px
+- **Padding**: Horizontal 16px, Vertical 20px
+- **Background**: White (#FFFFFF)
+
+**Header:**
+- **Title**: "Title", 16px, Archivo Bold (w700), color #09101D
+- **Value Display**: "\$0 - \$98", 16px, Archivo SemiBold (w600), color #09101D
+- **Subtitle**: "Subtitle", 14px, Archivo Regular (w400), color #414249
+- **Spacing**: 8px between title and value, 24px sections
+
+**Slider:**
+- **Track Height**: 4px
+- **Track Color**: #F4F6F9 (inactive)
+- **Active Track Color**: #4141E6
+- **Track Border Radius**: 40px
+- **Thumb Size**: 20px × 20px
+- **Thumb Color**: #4141E6
+- **Thumb Border**: 4px solid rgba(11, 36, 251, 0.25) - #0B24FB with 25% opacity
+- **Thumb Border Radius**: 40px
+- **Position**: Top 64.01px from container
+
+**Value Tooltip:**
+- **Padding**: Horizontal 16px, Vertical 12px
+- **Background**: #09101D (dark)
+- **Border Radius**: 5px
+- **Text**: White, 13px, Archivo Bold (w700)
+- **Line Height**: 1.40
+- **Examples**: "1\$", "50\$"
+
+**Usage:** Фильтры по цене, настройки диапазонов значений.
+
+---
+
+##### 2. Section Header List Item
+
+Простой заголовок секции с разделителем.
+
+**Container:**
+- **Width**: 375px (327px content)
+- **Padding**: Horizontal 16px, Vertical 20px
+- **Spacing**: 10px between content and divider, 5px around content
+
+**Content:**
+- **Title**: 16px, Archivo Bold (w700), color #09101D
+- **Subtitle**: 14px, Archivo Regular (w400), color #414249, width 327px
+- **Spacing**: 5px between title and subtitle
+
+**Divider:**
+- **Height**: 1px
+- **Color**: #EAEEF2
+- **Vertical Padding**: 5px
+
+**Usage:** Разделители секций в длинных списках.
+
+---
+
+##### 3. User Follow List Item
+
+List item с аватаром пользователя и кнопкой действия.
+
+**Container:**
+- **Width**: 375px
+- **Padding**: Horizontal 16px, Vertical 10px
+- **Spacing**: 10px between avatar and content
+
+**Avatar:**
+- **Outer**: 56px × 56px
+- **Inner**: 48px × 48px (left 4px, top 4px)
+- **Border Radius**: 40px (circle)
+- **Background**: #D9DDE2
+
+**Text Content:**
+- **Name (Bold Part)**: "Name Surname", 14px, Archivo SemiBold (w600), color #09101D
+- **Action Text (Regular)**: "started following you", 14px, Rubik Regular (w400), color #09101D
+- **Combined Width**: 195px
+- **Label**: "label", 12px, Archivo Regular (w400), color #747B84
+
+**Follow Button:**
+- **Height**: 36px
+- **Padding**: Horizontal 16px, Vertical 10px
+- **Background**: #4141E6
+- **Border Radius**: 15px
+- **Text**: "Follow", White, 13px, Archivo SemiBold (w600)
+
+**Divider:**
+- **Height**: 1px
+- **Color**: #EAEEF2
+- **Vertical Padding**: 5px
+
+```dart
+Container(
+  height: 36,
+  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+  decoration: ShapeDecoration(
+    color: const Color(0xFF4141E6),
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(15),
+    ),
+  ),
+  child: Text(
+    'Follow',
+    style: TextStyle(
+      color: Colors.white,
+      fontSize: 13,
+      fontFamily: 'Archivo',
+      fontWeight: FontWeight.w600,
+      height: 1.40,
+    ),
+  ),
+)
+```
+
+**Usage:** Социальные списки, уведомления о подписчиках.
+
+---
+
+##### 4. Crypto/Asset List Item
+
+List item для отображения криптовалют и активов с графиком.
+
+**Container:**
+- **Width**: 375px
+- **Padding**: Horizontal 16px, Vertical 10px
+- **Height**: 50px
+
+**Avatar:**
+- **Outer**: 48px × 48px
+- **Inner**: 40px × 40px (left 4px, top 4px)
+- **Border Radius**: 40px (circle)
+
+**Left Section:**
+- **Title**: "Bitcoin", 13px, Archivo Bold (w700), color #09101D
+- **Badge Container**: Padding 5px horizontal, 2px vertical, background #EAEEF2, border-radius 4px
+  - **Badge Text**: "1", 10px, Archivo SemiBold (w600), color #09101D
+- **Ticker**: "BTC", 11px, Archivo SemiBold (w600), color #747B84
+- **Percentage**: "3,24 %", 11px, Archivo SemiBold (w600), color #E24949 (negative)
+- **Spacing**: 5px between badge and ticker, 10px between ticker group
+
+**Chart Area:**
+- **Width**: 60px
+- **Height**: 40px
+- **Position**: Between left and right sections
+
+**Right Section:**
+- **Price**: "54 256.73 ", 13px, Archivo Bold (w700), color #09101D, right aligned
+- **Market Cap**: "MCAP 1.9 T", 11px, Archivo Regular (w400), color #303239, right aligned
+- **Spacing**: 5px between price and market cap
+
+**Spacing**: 20px between sections
+
+**Usage:** Списки криптовалют, акций, торговых активов.
+
+---
+
+##### 5. Simple Asset List Item
+
+Упрощенная версия для отображения активов с процентным изменением.
+
+**Container:**
+- **Width**: 375px
+- **Padding**: Horizontal 16px, Vertical 10px
+- **Height**: 50px
+
+**Avatar:**
+- **Outer**: 48px × 48px
+- **Inner**: 40px × 40px
+
+**Content:**
+- **Title**: "Bitcoin", 13px, Archivo Regular (w400), color #09101D
+- **Label**: "Label", 11px, Archivo Regular (w400), color #D9DDE2
+- **Spacing**: 5px vertical between title and label
+
+**Right Section:**
+- **Percentage**: "-1.13 %", 13px, Archivo Bold (w700), color #E24949, right aligned
+
+**Spacing**: 20px between avatar and content
+
+**Usage:** Компактные списки активов, портфолио.
+
+---
+
+##### 6. Expandable/Accordion List Item
+
+Раскрывающийся list item с иконкой действия.
+
+**Container:**
+- **Width**: 375px
+- **Padding**: Horizontal 16px, Vertical 20px
+- **Height**: 41px (collapsed)
+- **Spacing**: 20px between content sections
+
+**Content:**
+- **Subtitle**: "Subtitle", 14px, Archivo Regular (w400), color #414249
+- **Title**: "What exactly navigation is and how it works", 14px, Archivo SemiBold (w600), color #09101D, width 235px
+- **Spacing**: 20px between subtitle and title
+
+**Icon Button:**
+- **Container**: 40px width
+- **Icon**: 24px × 24px
+- **Padding**: 2px
+- **Border Radius**: 12px
+
+**Divider:**
+- **Height**: 1px
+- **Color**: #EAEEF2
+- **Vertical Padding**: 5px
+
+**Usage:** FAQ секции, раскрывающиеся списки, аккордеоны.
+
+---
+
+##### 7. File/Document List Item
+
+List item для файлов и материалов с метаданными.
+
+**Container:**
+- **Width**: 375px
+- **Padding**: Horizontal 16px, Vertical 20px
+
+**Icon Container:**
+- **Size**: 64px × 64px
+- **Background**: #F8F8FA
+- **Border Radius**: 16px
+- **Icon**: 28px × 24px with 4px horizontal padding
+
+**Content:**
+- **Title**: "Materials", 16px, Archivo SemiBold (w600), color #09101D
+- **Author**: "Allysa Goodman", 12px, Archivo SemiBold (w600), color #303239, line-height 1.67
+- **Separator**: "•", 12px, Archivo SemiBold (w600), color #414249
+- **Date**: "8 March 2021", 12px, Archivo SemiBold (w600), color #303239
+- **Spacing**: 2px between title and metadata, 4px between metadata items
+
+**Action Button:**
+- **Icon**: 24px × 24px
+- **Padding**: Horizontal 8px, Vertical 9px
+
+**Spacing**: 10px between icon and content
+
+**Usage:** Списки файлов, документов, материалов курсов.
+
+---
+
+##### 8. Photo Grid List Item
+
+List item с сеткой фотографий.
+
+**Container:**
+- **Width**: 375px
+- **Padding**: Horizontal 16px, Vertical 20px
+
+**Grid:**
+- **Layout**: 3 columns × 2 rows
+- **Photo Size**: 100px × 100px each
+- **Border Radius**: 16px
+- **Spacing**: 10px between photos (horizontal and vertical)
+- **Total Grid**: 6 positions
+
+**Photo:**
+- **Image Fit**: BoxFit.cover
+- **Border Radius**: 16px
+
+**Last Item (Add More):**
+- **Size**: 100px × 100px
+- **Background**: #F8F8FA
+- **Border Radius**: 16px
+- **Plus Icon**: 24px × 24px centered
+- **Icon Container**: 37.50px × 37.50px
+
+**Usage:** Галереи фотографий, альбомы, портфолио.
+
+---
+
+##### 9. Grid Icon List Item
+
+List item с мини-сеткой иконок.
+
+**Container:**
+- **Width**: 343px (375px - 32px padding)
+- **Padding**: Horizontal 16px, Vertical 10px
+- **Spacing**: 20px vertical
+
+**Icon Grid:**
+- **Layout**: 2 × 2 grid
+- **Icon Size**: 25px × 25px each
+- **Background**: #F8F8FA
+- **Border Radius**: 5px
+- **Spacing**: 5px between icons (horizontal and vertical)
+
+**Content:**
+- **Title**: "Title", 16px, Archivo Bold (w700), color #09101D, width 122px
+- **Label**: "Label", 14px, Archivo Regular (w400), color #D9DDE2, right aligned
+- **Icon Button**: 24px
+- **Subtitle**: "Subtitle", 14px, Archivo Regular (w400), color #414249, width 278px
+- **Spacing**: 5px between title/label and subtitle
+
+**Divider:**
+- **Height**: 1px
+- **Color**: #EAEEF2
+- **Vertical Padding**: 5px
+
+**Usage:** Списки с категориями, теги, группировки.
+
+---
+
+##### 10. Icon List Item
+
+Компактный list item с одной иконкой слева.
+
+**Container:**
+- **Width**: 375px (expanded)
+- **Padding**: Horizontal 16px, Vertical 10px
+
+**Icon Container:**
+- **Size**: 40px × 40px
+- **Background**: #F4F6F9
+- **Border Radius**: 15px
+- **Icon**: 20px × 20px (positioned at 9.75px, 9.85px)
+
+**Content:**
+- **Title**: "Title", 16px, Archivo Bold (w700), color #09101D, width 129.50px
+- **Label**: "Label", 14px, Archivo Regular (w400), color #D9DDE2, right aligned
+- **More Icon**: 24px
+- **Spacing**: 5px between elements
+
+**Usage:** Настройки, меню, навигация.
+
+---
+
+##### 11. Product/Album List Item
+
+List item с крупным изображением продукта или альбома.
+
+**Container:**
+- **Width**: 343px (375px - 32px padding)
+- **Padding**: Horizontal 16px, Vertical 10px
+- **Spacing**: 20px vertical
+
+**Image Container:**
+- **Size**: 90px × 90px
+- **Background**: #B7D5D5 (или другой декоративный цвет)
+- **Border Radius**: 10px
+- **Padding**: 10px
+- **Inner Image**: 60px × 60px, border-radius 10px, fit: cover
+
+**Content:**
+- **Subtitle**: "Subtitle", 14px, Archivo Regular (w400), color #414249, width 243px
+- **Title**: "Title", 16px, Archivo Bold (w700), color #09101D, width 243px
+- **Label**: "Label", 14px, Archivo Regular (w400), color #D9DDE2, right aligned, width 75.50px
+- **Spacing**: 5px between elements
+
+**Action Buttons:**
+- **Size**: 24px × 24px each
+- **Count**: 2 buttons
+- **Padding**: 2px
+- **Border Radius**: 100px (circle)
+- **Spacing**: 10px between label and buttons
+
+**Divider:**
+- **Height**: 1px
+- **Color**: #EAEEF2
+- **Vertical Padding**: 5px
+
+**Usage:** Списки альбомов, продуктов, медиа контента.
+
+---
+
+##### 12. Filter/Sort Header
+
+Header с кнопками фильтра и сортировки.
+
+**Container:**
+- **Width**: 375px
+- **Padding**: Horizontal 16px, Vertical 10px
+
+**Left Section (Filter):**
+- **Icon**: 24px, padding 2px, border-radius 12px
+- **Text**: "Filter", 14px, Archivo SemiBold (w600), color #09101D, width 143.50px
+- **Spacing**: 10px between icon and text
+
+**Right Section (Sort):**
+- **Text**: "Sort", 14px, Archivo SemiBold (w600), color #09101D, right aligned
+- **Icon**: 24px, padding 2px, border-radius 12px
+- **Spacing**: 10px between text and icon
+
+**Divider:**
+- **Height**: 1px
+- **Color**: #EAEEF2
+- **Vertical Padding**: 5px
+
+**Usage:** Headers для списков с фильтрацией и сортировкой.
+
+---
+
+##### 13. Avatar with Details List Item
+
+Стандартный list item с аватаром и подробностями.
+
+**Container:**
+- **Width**: 375px
+- **Padding**: Horizontal 16px, Vertical 10px
+
+**Avatar:**
+- **Outer**: 48px × 48px
+- **Inner**: 40px × 40px (left 4px, top 4px)
+- **Border Radius**: 40px (circle)
+
+**Content:**
+- **Title**: "Title", 16px, Archivo Bold (w700), color #09101D
+- **Subtitle**: "Subtitle", 14px, Archivo Regular (w400), color #414249
+
+**More Icon:**
+- **Size**: 24px × 24px
+- **Spacing**: 16px from avatar
+
+**Divider:**
+- **Height**: 1px
+- **Color**: #F4F6F9 (lighter variant!)
+- **Vertical Padding**: none (direct border)
+
+**Usage:** Контакты, пользователи, профили.
+
+---
+
+##### 14. Checkbox Agreement List Item
+
+List item с чекбоксом и текстом соглашения.
+
+**Container:**
+- **Width**: 375px (full)
+- **Padding**: Horizontal 16px, Vertical 10px
+
+**Checkbox:**
+- **Size**: 24px × 24px
+- **Border**: 2px solid #EAEEF2
+- **Border Radius**: 2px
+- **Stroke Align**: Center
+- **Position**: Left
+
+**Text:**
+- **Content**: "By registering, you agree our Terms of Use"
+- **Regular Text**: 13px, Archivo Regular (w400), color #23262B
+- **Link Text**: "Terms of Use", 13px, Archivo Regular (w400), color #4141E6
+- **Spacing**: 5px between checkbox and text
+
+**Usage:** Формы регистрации, соглашения, подтверждения.
+
+---
+
+##### 15. Language Selector List Item
+
+List item для выбора языка с флагом.
+
+**Container:**
+- **Width**: 375px
+- **Padding**: Horizontal 16px, Vertical 20px
+
+**Flag Icon:**
+- **Size**: 40px × 30px
+- **Border Radius**: 5px
+- **Clip**: antiAlias
+- **Example Color**: #46467F (for flag elements)
+
+**Language Text:**
+- **Text**: "English", 15px, Archivo SemiBold (w600), color #09101D
+- **Spacing**: 10px from flag
+
+**Checkbox (Right):**
+- **Size**: 24px × 24px
+- **Border**: 2px solid #EAEEF2
+- **Border Radius**: 2px
+- **Stroke Align**: Center
+- **Position**: Right aligned
+
+**Spacing**: 10px between elements
+
+**Usage:** Настройки языка, выбор локали.
 
 ---
 
@@ -1789,9 +2303,57 @@ Container(
 
 ## Версионирование и обновления
 
-**Текущая версия**: v5.4.0
+**Текущая версия**: v5.5.0
 
 ### Changelog
+
+#### v5.5.0 (2025-11-19)
+- **Добавлено 15 Advanced List Item Variants:**
+  1. Range Slider List Item - с двойным ползунком для диапазона значений
+  2. Section Header List Item - заголовки секций с разделителями
+  3. User Follow List Item - социальные списки с кнопкой Follow (height 36px)
+  4. Crypto/Asset List Item - списки криптовалют с графиками и процентами
+  5. Simple Asset List Item - упрощенные списки активов
+  6. Expandable/Accordion List Item - раскрывающиеся элементы
+  7. File/Document List Item - файлы с метаданными (автор, дата)
+  8. Photo Grid List Item - сетка фотографий 3×2 (100px each)
+  9. Grid Icon List Item - мини-сетка иконок 2×2 (25px each)
+  10. Icon List Item - компактные элементы с одной иконкой
+  11. Product/Album List Item - альбомы с крупным изображением (90×90px)
+  12. Filter/Sort Header - headers с кнопками фильтра и сортировки
+  13. Avatar with Details List Item - стандартные элементы с аватаром
+  14. Checkbox Agreement List Item - соглашения с чекбоксами
+  15. Language Selector List Item - выбор языка с флагами (40×30px)
+- **Новые цвета:**
+  - `#23262B` - Очень темный серый для основного текста
+  - `#303239` - Темно-серый для метаданных (даты, авторы)
+  - `#E24949` - Красный для ошибок и негативных значений
+  - `#F8F8FA` - Очень светлый серый для иконок и плейсхолдеров
+  - `#B7D5D5` - Бирюзовый для декоративных фонов
+  - `#46467F` - Темно-синий для флагов и декоративных элементов
+- **Обновлены Flutter Avatar Variants:**
+  - Flutter Avatar Small (40×40 outer, 32×32 inner) - для компактных списков
+  - Flutter Avatar Medium (48×48 outer, 40×40 inner) - для стандартных list items
+  - Flutter Avatar Large (56×56 outer, 48×48 inner) - NEW! для follow lists
+- **Range Slider Component:**
+  - Track: 4px height, colors #F4F6F9 (inactive) / #4141E6 (active)
+  - Thumb: 20×20px, border 4px rgba(11, 36, 251, 0.25)
+  - Value Tooltip: dark background #09101D, white text, padding 16×12px
+- **Button Specifications:**
+  - Follow Button: height 36px, padding 16×10px, background #4141E6, border-radius 15px
+- **Badge Specifications:**
+  - Crypto Badge: padding 5×2px, background #EAEEF2, border-radius 4px, text 10px
+- **Grid Specifications:**
+  - Photo Grid: 3×2 layout, 100px items, 10px spacing, border-radius 16px
+  - Icon Grid: 2×2 layout, 25px items, 5px spacing, border-radius 5px
+- **Text Specifications:**
+  - Metadata text: 12px, Archivo SemiBold (w600), color #303239, line-height 1.67
+  - Percentage negative: 11px/13px, Archivo Bold/SemiBold, color #E24949
+  - Agreement text: 13px, Archivo Regular, color #23262B, link #4141E6
+- **Spacing & Layout:**
+  - Filter/Sort header: 143.50px filter width, 10px spacing
+  - Crypto list: 60×40px chart area, 20px section spacing
+  - File list: 64×64px icon container, 2px title spacing, 4px metadata spacing
 
 #### v5.4.0 (2025-11-19)
 - **Добавлена секция Chat / Messaging (Flutter):**
