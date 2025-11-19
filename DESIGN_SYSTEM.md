@@ -46,6 +46,7 @@
 --color-bg-primary: #FFFFFF;
 --color-bg-secondary: #F4F6F9;     /* Светлый серо-голубой */
 --color-bg-tertiary: #D9DDE2;      /* Светло-серый (аватары, плейсхолдеры) */
+--color-bg-quaternary: #FAFAFB;    /* Очень светлый серый (контейнеры) */
 --color-bg-toggle: #EAEEF2;        /* Toggle switch background (inactive) */
 --color-bg-dark: #12202F;          /* Темный фон */
 ```
@@ -57,6 +58,7 @@
 --color-text-primary: #09101D;     /* Основной текст (заголовки) */
 --color-text-secondary: #414249;   /* Вторичный текст (подзаголовки) */
 --color-text-tertiary: #64748B;    /* Третичный текст */
+--color-text-placeholder: #747B84; /* Placeholder текст в inputs */
 ```
 
 ### Accent Colors
@@ -305,6 +307,22 @@
   font-weight: 400;
 }
 ```
+
+#### Input Placeholder Text
+- **Font Size**: 15px (0.9375rem)
+- **Font Weight**: 400 (Regular)
+- **Font Family**: 'Archivo'
+- **Line Height**: 1.40 (21px)
+- **Color**: #747B84 (--color-text-placeholder)
+- **Использование**: Placeholder текст в input полях ("Message", "Search", etc.)
+
+#### Input Filled Text
+- **Font Size**: 15px (0.9375rem)
+- **Font Weight**: 400 (Regular)
+- **Font Family**: 'Archivo'
+- **Line Height**: 1.40 (21px)
+- **Color**: #09101D (--color-text-primary)
+- **Использование**: Введенный пользователем текст в input полях ("Hello!", etc.)
 
 ---
 
@@ -867,34 +885,207 @@ Cursor: not-allowed
 
 ---
 
-### 4. Inputs
+### 4. Inputs (из реального Flutter кода)
 
-#### Text Input
+#### Text Input Field Specification
 
-- **Height**:
-  - Small: 32px
-  - Medium: 40px
-  - Large: 48px
-- **Padding**: 10px 12px (medium)
-- **Radius**: radius-md (6px)
-- **Border**: 1px solid color-border-primary
-- **States**:
-  - Focus: Border: 2px solid color-border-focus, Outline: none
-  - Error: Border: 1px solid color-error
-  - Disabled: Background: color-bg-tertiary, Cursor: not-allowed, Opacity: 0.6
+**Спецификация из кода (iOS style):**
+- **Container Size**: 375px × 44px (стандартный iOS input)
+- **Background**: #F4F6F9 (--color-bg-secondary) или white
+- **Border Radius**: 15px (--radius-badge)
+- **Inner Padding**: 8px (для текстового поля)
+- **Outer Padding**: 10px horizontal, 5px vertical
+- **Shadow**: rgba(0, 0, 0, 0.05) / box-shadow: 0 -1px 0 rgba(0,0,0,0.05)
+- **Row Spacing**: 5px (между элементами в input)
 
-#### Textarea
+**Typography (Placeholder):**
+- **Font Size**: 15px (0.9375rem)
+- **Font Weight**: 400 (Regular)
+- **Font Family**: 'Archivo'
+- **Line Height**: 1.40 (21px)
+- **Color**: #747B84 (--color-text-placeholder)
+- **Использование**: Placeholder текст "Message"
 
-- **Min Height**: 80px
-- **Padding**: 10px 12px
-- **Radius**: radius-md (6px)
-- **Resize**: vertical
+**Typography (Filled Text):**
+- **Font Size**: 15px (0.9375rem)
+- **Font Weight**: 400 (Regular)
+- **Font Family**: 'Archivo'
+- **Line Height**: 1.40 (21px)
+- **Color**: #09101D (--color-text-primary)
+- **Использование**: Введенный текст "Hello!"
 
-#### Select
+**Структура Input Field:**
 
-- **Height**: 40px (medium)
-- **Padding**: 10px 36px 10px 12px
-- **Icon**: Chevron down, Right: 12px, Size: 16px
+```
+Container: 375×44 (background: white or #F4F6F9)
+├─ Shadow: 0 -1px 0 rgba(0,0,0,0.05)
+└─ Row Container: padding 10px/5px
+   ├─ Spacing: 5px between elements
+   └─ Input Field Container: Expanded
+      ├─ Background: #F4F6F9 or white
+      ├─ Border Radius: 15px
+      ├─ Padding: 8px
+      └─ Text: 15px, weight 400
+```
+
+**Варианты Input Field:**
+
+**1. Basic Input (Default - Filled Background)**
+```
+Container background: white
+Input field:
+- Background: #F4F6F9 (--color-bg-secondary)
+- Border: none
+- Border Radius: 15px
+- Padding: 8px
+- Text color: #747B84 (placeholder) or #09101D (filled)
+```
+
+**2. Basic Input (Light Background)**
+```
+Container background: #F4F6F9
+Input field:
+- Background: white
+- Border: none
+- Border Radius: 15px
+- Padding: 8px
+```
+
+**3. Input with Outlined Border**
+```
+Input field:
+- Background: transparent
+- Border: 1px solid #D9DDE2 (strokeAlign: outside)
+- Border Radius: 15px
+- Padding: 8px
+```
+
+**4. Input with Action Buttons (Left/Right)**
+```
+Row layout:
+├─ Left icon button(s): 34×34 (optional)
+├─ Input field: Expanded, background #F4F6F9
+└─ Right icon button(s): 34×34 (1-3 buttons)
+
+Action Button specs:
+- Size: 34×34
+- Background: #F4F6F9 (--color-bg-secondary)
+- Border Radius: 15px
+- Icon Size: 23×23
+- Padding horizontal: 5px
+- Spacing between buttons: 5px
+```
+
+**5. Input with Multiple Action Buttons**
+```
+Left side:
+- Icon button 1: 34×34
+- Icon button 2: 34×34
+- Icon button 3: 34×34
+
+Center:
+- Input field: Expanded
+
+Right side:
+- Icon button: 34×34
+```
+
+**6. Input with Continuous Background**
+```
+Left icon button + Input field имеют одинаковый background:
+- Combined background: #F4F6F9
+- Border Radius: 15px
+- Icon button padding: 5px horizontal
+- Input padding: 8px left only
+- Creates seamless look
+```
+
+**Container Backgrounds (из кода):**
+- **White**: Для input полей с filled background (#F4F6F9)
+- **Light Gray (#F4F6F9)**: Для input полей с white background
+- **Transparent/None**: Для inputs с только border
+
+**Action Icon Button:**
+- **Size**: 34×34 (compact, smaller than standard 40×40)
+- **Background**: #F4F6F9 (default), transparent (variant)
+- **Border Radius**: 15px
+- **Icon Size**: 23×23
+- **Icon Placeholder**: 23×23 empty container (для SVG/icon)
+- **Padding**: 5px horizontal (для иконок)
+- **Spacing**: 5px (между кнопками)
+- **Alignment**: Center vertical
+
+**CSS пример:**
+
+```css
+.input-container {
+  width: 375px;
+  height: 44px;
+  background: white; /* или #F4F6F9 */
+  box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.05);
+  padding: 5px 10px;
+  display: flex;
+  align-items: flex-end;
+  gap: 5px;
+}
+
+.input-field {
+  flex: 1;
+  height: 100%;
+  padding: 8px;
+  background: var(--color-bg-secondary); /* #F4F6F9 */
+  border: none;
+  border-radius: var(--radius-badge); /* 15px */
+  font-family: 'Archivo';
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.40;
+  color: var(--color-text-primary);
+}
+
+.input-field::placeholder {
+  color: var(--color-text-placeholder); /* #747B84 */
+}
+
+.input-field--outlined {
+  background: transparent;
+  border: 1px solid var(--color-bg-tertiary); /* #D9DDE2 */
+}
+
+.input-field--white {
+  background: white;
+}
+
+.input-action-button {
+  width: 34px;
+  height: 34px;
+  background: var(--color-bg-secondary); /* #F4F6F9 */
+  border: none;
+  border-radius: var(--radius-badge); /* 15px */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 5px;
+  cursor: pointer;
+}
+
+.input-action-button--transparent {
+  background: transparent;
+}
+
+.input-action-button__icon {
+  width: 23px;
+  height: 23px;
+}
+```
+
+**Usage Guidelines:**
+- **Basic Input**: Simple text entry (messages, search)
+- **With Border**: Emphasized input, form fields
+- **With Action Buttons**: Quick actions (send, attach, emoji, voice)
+- **Icon Buttons**: 1-4 icons total, balanced left/right
+- **Background Variants**: Match with container background for visual hierarchy
+- **Accessibility**: Label, placeholder, focus states, keyboard support
 
 ---
 
