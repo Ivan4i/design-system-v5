@@ -61,6 +61,11 @@
 /* UI Element Colors */
 --color-avatar-placeholder: #D9DDE2; /* Color(0xFFD9DDE2) - gray avatar placeholder */
 --color-badge-dark: #23262B;        /* Color(0xFF23262B) - dark badge background */
+--color-pin-pressed: #EAEEF2;       /* Color(0xFFEAEEF2) - PIN slot pressed state background */
+
+/* Error/Negative State Colors */
+--color-error-border: #DA1414;      /* Color(0xFFDA1414) - negative/error border for PIN */
+--color-error-bg-light: #0CDA1414;  /* Color(0x0CDA1414) - error background with ~5% opacity (0x0C = 12) */
 
 /* Gradient Colors for UI */
 --color-gradient-red-start: #EB001B; /* Color(0xFFEB001B) - gradient start (red) */
@@ -72,16 +77,16 @@
 ```
 
 **Использование цветов в проекте:**
-- **Backgrounds**: #12202F (dark theme), #F4F6F9 (light containers), #FFFFFF (white cards), #09101D (dark cards), #D9DDE2 (avatar placeholders)
-- **Text**: #09101D (primary), #747B84 (secondary/placeholder), #FFFFFF (inverse), #FF6937 (orange accent)
-- **Borders**: #09101D (dark), #7B61FF (purple accent), #833AB4 (purple/instagram), #4141E6 (blue), #FE5032 (orange button border), 1-2px width
-- **Status Indicators**: #11BB8D (success), #0B24FB (info), #E24949 (error), #FF9500 (warning)
+- **Backgrounds**: #12202F (dark theme), #F4F6F9 (light containers), #FFFFFF (white cards), #09101D (dark cards), #D9DDE2 (avatar placeholders), #EAEEF2 (pressed state), #0C11BB8D (5% green tint), #0CDA1414 (5% red tint for errors)
+- **Text**: #09101D (primary), #747B84 (secondary/placeholder), #FFFFFF (inverse), #FF6937 (orange accent), #E24949 (error text), #D9DDE2 (disabled text)
+- **Borders**: #09101D (dark), #7B61FF (purple accent), #833AB4 (purple/instagram), #4141E6 (blue), #FE5032 (orange button border), #11BB8D (success/positive), #DA1414 (error/negative), 1-2px width
+- **Status Indicators**: #11BB8D (success), #0B24FB (info), #E24949 (error), #FF9500 (warning), #DA1414 (negative state)
 - **Badge dots**: 6×6px oval shapes with status colors
 - **Badge backgrounds**: #23262B (dark badge), #E24949 (notification badge)
 - **Overlays**: Linear gradients from transparent to semi-transparent black for image overlays
-- **Tinted backgrounds**: #0C11BB8D (5% green tint)
 - **Story borders**: #833AB4 (purple), #4141E6 (blue) - 2px borders for active stories
 - **Button gradients**: #EB001B to #DD2476 (red to pink gradient for CTA buttons)
+- **PIN input states**: #F4F6F9 (enabled), #EAEEF2 (pressed), #0C11BB8D + #11BB8D border (positive), #0CDA1414 + #DA1414 border (negative)
 
 ### Primary Colors
 
@@ -944,6 +949,112 @@
 - Time labels use 11px/600 font, positioned at slider edges
 - Spacing between slider and handle: 20px vertical
 - Inner container padding: 50px with 100px between variants
+
+#### SmallPin (PIN Code Input) - Complete Component Block
+
+**Container Layout:**
+- **Size**: 840px × 994px
+- **Border**: 1px solid #7B61FF
+- **Border Radius**: 15px (circular(15))
+- **Clip Behavior**: Clip.antiAlias
+- **Layout**: Stack with positioned elements (left: 20px/445px, various top positions)
+
+**Component Structure:**
+- **Container**: 375px width, padding: horizontal 16px, vertical 5px
+- **Layout**: Column, spacing: 8px
+- **Elements**: Label + PIN slots + Helper message
+
+**PIN Slot Specifications:**
+- **Size**: 36px × 36px
+- **Border Radius**: 12px (circular(12))
+- **Spacing**: 10px between slots
+- **Layout**: Row with 4 slots
+
+**State Variants:**
+
+1. **Enabled (Empty)**
+   - **Label**: "Enabled", 14px/600, #09101D
+   - **Slots**: Background #F4F6F9, no border
+   - **Content**: Bullet "•", 24px/400, #747B84
+   - **Helper**: "Helper message", 14px/400, #747B84
+
+2. **Focus - Slot 1/2/3/4**
+   - **Label**: "Focus - Slot X", 14px/600, #09101D
+   - **Focused Slot**: 2px solid border #09101D, background #F4F6F9
+   - **Content**: Number "1" (14px/400, #09101D) or empty
+   - **Other Slots**: Background #F4F6F9, no border
+   - **Helper**: "Helper message", 14px/400, #747B84
+
+3. **Complete (All Filled)**
+   - **Label**: "Complete", 14px/600, #09101D
+   - **All Slots**: Background #F4F6F9, no border
+   - **Content**: Number "1" in each slot, 14px/400, #09101D
+   - **Helper**: "Helper message", 14px/400, #747B84
+
+4. **Positive (Success)**
+   - **Label**: "Positive", 14px/600, #09101D
+   - **All Slots**:
+     - **Background**: #0C11BB8D (~5% green tint, 0x0C = 12)
+     - **Border**: 2px solid #11BB8D (success green)
+     - **Border Radius**: 12px
+   - **Content**: Number "1", 14px/400, #09101D
+   - **Helper**: "Helper message", 14px/400, #747B84
+
+5. **Pressed**
+   - **Label**: "Pressed", 14px/600, #09101D
+   - **All Slots**: Background #EAEEF2 (lighter pressed gray)
+   - **Content**: Bullet "•", 24px/400, #747B84
+   - **Helper**: "Helper message", 14px/400, #747B84
+
+6. **Active - Typing - Slot 1/2/3/4**
+   - **Label**: "Active - Typing - Slot X", 14px/600, #09101D
+   - **Active Slot**: 2px solid border #09101D
+   - **Filled Slots**: Number "1", 14px/400, #09101D
+   - **Empty Slots**: No content or border
+   - **Helper**: "Helper message", 14px/400, #747B84
+
+7. **Negative (Error)**
+   - **Label**: "Negative", 14px/600, #09101D
+   - **All Slots**:
+     - **Background**: #0CDA1414 (~5% red tint, 0x0C = 12)
+     - **Border**: 2px solid #DA1414 (error red)
+     - **Border Radius**: 12px
+   - **Content**: Bullet "•", 24px/400, #E24949 (error text)
+   - **Helper**: "Error message!", 14px/400, #E24949
+
+8. **Disabled**
+   - **Label**: "Disabled", 14px/600, #D9DDE2 (disabled gray)
+   - **All Slots**: Background #F4F6F9, no border
+   - **Content**: Bullet "•", 24px/400, #D9DDE2
+   - **Helper**: "Helper message", 14px/400, #D9DDE2
+
+**Color Specifications:**
+- **Enabled Background**: #F4F6F9 (light gray)
+- **Pressed Background**: #EAEEF2 (lighter gray)
+- **Positive Background**: #0C11BB8D (~5% opacity green)
+- **Positive Border**: #11BB8D (success green), 2px solid
+- **Negative Background**: #0CDA1414 (~5% opacity red)
+- **Negative Border**: #DA1414 (error red), 2px solid
+- **Focus Border**: #09101D (dark), 2px solid
+- **Disabled Color**: #D9DDE2 (all elements)
+- **Text Colors**: #09101D (primary), #747B84 (secondary), #E24949 (error)
+
+**Typography:**
+- **Label**: Font: 'Archivo', Size: 14px, Weight: 600, Line Height: 1.40
+- **PIN Number**: Font: 'Archivo', Size: 14px, Weight: 400, Line Height: 1.40
+- **Bullet Point**: Font: 'Archivo', Size: 24px, Weight: 400, Line Height: 1.40
+- **Helper Message**: Font: 'Archivo', Size: 14px, Weight: 400, Line Height: 1.40
+
+**Usage Notes:**
+- Container uses Stack with Positioned for layout flexibility (multiple states shown)
+- PIN slots always 36×36px with 12px border radius
+- Spacing between slots: 10px horizontal
+- Internal spacing: 8px between label, slots, and helper
+- Focus/Active state uses 2px border on specific slot
+- Positive/Negative states apply to all slots simultaneously
+- Helper message changes color to match state (normal/error/disabled)
+- Border uses standard 2px width for all interactive states
+- Background tints use ~5% opacity (0x0C = 12 in hex)
 
 ---
 
