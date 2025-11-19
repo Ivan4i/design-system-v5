@@ -58,6 +58,7 @@
 /* Цвета из Flutter кода */
 --color-primary-blue: #4141E6;     /* Color(0xFF4141E6) - основной синий */
 --color-accent-purple: #7B61FF;    /* Color(0xFF7B61FF) - фиолетовый акцент */
+--color-info-blue: #0B24FB;        /* Color(0xFF0B24FB) - синий для secondary info */
 ```
 
 ### UI Colors
@@ -1368,6 +1369,161 @@
 
 **Использование**: Password fields, authentication forms, registration, security settings
 
+#### Text Input Field
+
+Универсальный компонент text input с различными вариантами использования (email, username, search, amount).
+
+##### Base Specs
+
+**Dimensions:**
+- **Container Width**: 375px (full mobile width)
+- **Container Padding**: symmetric(horizontal: 16px, vertical: 10px)
+- **Input Height**: 44px (base) или 46px (с helper text)
+- **Border**: 2px solid #4141E6 (primary-blue) - focus state
+- **Border Radius**: 15px
+- **Internal Padding**: top 4px, left 20px, right 15px, bottom 4px
+
+**Typography:**
+- **Placeholder**: 12px Regular #747B84 (tertiary)
+- **Input Text**: 14px Semibold #09101D (black)
+- **Label**: 14px Semibold #09101D
+- **Helper Text**: 12px Regular
+  - Success: #11BB8D (green-badge)
+  - Error: #E24949 (red-accent)
+- **Secondary Info**: 10px Semibold
+  - Default: #09101D
+  - Accent: #0B24FB (info-blue)
+
+**Cursor:**
+- Character: "|" (pipe)
+- Color: #09101D (black)
+- Font: 12px Regular
+- Position: before placeholder или after text
+
+**Spacing:**
+- Between elements: 5px vertical
+- Label to input: 5px
+- Input to helper: 5px
+- Icon spacing: 8px, 10px between elements
+
+##### Field Variants
+
+**1. Basic Input with Cursor**
+- Border: 2px solid #4141E6
+- Placeholder: "|Your email" (cursor + placeholder)
+- Cursor visible before placeholder text
+- No icons, no helper
+
+**2. Input with Positive Validation**
+- Border: 2px solid #4141E6
+- Placeholder: "|First name"
+- Helper Bottom: "Name is correct 👌" (#11BB8D green)
+- Emoji: 👌 (14px, #11BB8D)
+- Helper padding: horizontal 10px
+
+**3. Input with Top Label & Balance Info**
+- Top Label Row:
+  - Left: "From" (14px Semibold #09101D), width 189px
+  - Right: "Balance: 1.01 ETH" (10px Semibold #09101D) + "~4.043$" (#0B24FB info-blue)
+  - Spacing: 10px между balance и price
+- Border: 2px solid #4141E6
+- Placeholder: "|Enter amount"
+- Top label padding: horizontal 10px
+
+**4. Input with Right Icon**
+- Border: 2px solid #4141E6
+- Placeholder: "|Location" (width 276px)
+- Right Icon: 24×24px (2px padding, 100px border-radius container)
+- Spacing: 8px text to icon
+
+**5. Input with Left Icon**
+- Left Icon: 24×24px (2px padding, 100px border-radius)
+- Placeholder: "|Search" (width 274px)
+- Icon-to-text spacing: 10px
+
+**6. Input with Avatar & Delete Button**
+- Left Avatar: 30×30px circle
+  - Background: #F4F6F9 за placeholder image
+  - Image: NetworkImage, OvalBorder
+  - Icon overlay: 16×16px centered
+- Text: "Helen Smith|" (#747B84 placeholder + cursor)
+- Width: 236px для текста
+- Right Delete Button:
+  - Container: 24×24px, #F4F6F9 background
+  - Border radius: 10px
+  - Icon: 24×24px (2px padding)
+- Spacing: 10px avatar to text, 8px текста к кнопке
+
+**7. Filled Input (Email)**
+- Border: 2px solid #4141E6
+- Text: "you@awesome.com" (14px Semibold #09101D)
+- Width: 308px для текста
+- No placeholder, no cursor (filled state)
+- Container height: 44px
+
+**8. Input with Negative Validation**
+- Border: 2px solid #4141E6
+- Text: "@johnsmith" (14px Semibold #09101D)
+- Helper Bottom: "Username already taken" (#E24949 red-accent)
+- Helper padding: horizontal 10px
+- Helper width: 323px
+- Container height: 46px (с helper)
+
+##### Icons & Avatars
+
+**Icons:**
+- **Size**: 24×24px standard
+- **Container**: 2px padding, border-radius 100px
+- **Position**: Left или right внутри input
+- **Spacing**: 8-10px от текста
+
+**Avatars:**
+- **Size**: 30×30px circle
+- **Shape**: OvalBorder
+- **Background**: #F4F6F9 (placeholder)
+- **Image**: NetworkImage, fit: cover
+- **Icon overlay**: 16×16px centered
+
+**Delete/Action Buttons:**
+- **Container**: 24×24px
+- **Background**: #F4F6F9
+- **Border radius**: 10px
+- **Icon**: 24×24px (2px padding)
+
+##### Helper Text Layout
+
+**Success Helper:**
+- Color: #11BB8D (green-badge)
+- Text: left-aligned, width 309px
+- Emoji: right-aligned, spacing 13px, optional 👌
+- Padding: horizontal 10px
+- Font: 12px Regular
+
+**Error Helper:**
+- Color: #E24949 (red-accent)
+- Text: left-aligned, full width (323px)
+- Padding: horizontal 10px
+- Font: 12px Regular
+
+##### Top Label with Info
+
+**Structure:**
+- Container padding: horizontal 10px
+- Row layout: spaceBetween
+- Alignment: end (bottom-aligned)
+
+**Left Section:**
+- Label: 14px Semibold #09101D
+- Width: 189px
+
+**Right Section:**
+- Primary info: 10px Semibold #09101D (e.g., "Balance: 1.01 ETH")
+- Secondary info: 10px Semibold #0B24FB (e.g., "~4.043$")
+- Spacing: 10px между элементами
+- Row layout: spacing 10px
+
+**Использование**: Email inputs, username fields, search bars, amount inputs, location pickers, contact selectors, authentication forms
+
 ---
 
 ### 17. Hero Image Carousel (Flutter)
@@ -1841,9 +1997,40 @@
 
 ## Версионирование и обновления
 
-**Текущая версия**: v5.8.0
+**Текущая версия**: v5.9.0
 
 ### Changelog
+
+#### v5.9.0 (2025-11-19)
+- 📝 Добавлен **Text Input Field** компонент с универсальными вариантами
+- 🎨 Новый цвет для secondary info:
+  - Info Blue (#0B24FB) - синий для дополнительной информации (цены, балансы)
+- 🔧 Добавлена полная спецификация **Text Input Field** с 8 вариантами:
+  1. **Basic Input with Cursor** - базовое поле с курсором
+  2. **Input with Positive Validation** - успешная валидация с emoji 👌
+  3. **Input with Top Label & Balance Info** - с label и balance/price info
+  4. **Input with Right Icon** - иконка справа (24px)
+  5. **Input with Left Icon** - иконка слева (24px)
+  6. **Input with Avatar & Delete Button** - аватар 30px + action button
+  7. **Filled Input** - заполненное поле (email)
+  8. **Input with Negative Validation** - ошибка валидации
+- 📐 **Base Specs**:
+  - Dimensions: 375px container, 44-46px height
+  - Border: 2px solid #4141E6 (primary-blue) focus state
+  - Border radius: 15px
+  - Internal padding: top 4px, left 20px, right 15px, bottom 4px
+- 📋 **Typography**:
+  - Placeholder: 12px Regular #747B84
+  - Input Text: 14px Semibold #09101D
+  - Helper: 12px Regular (#11BB8D success, #E24949 error)
+  - Label: 14px Semibold
+  - Secondary Info: 10px Semibold (#09101D, #0B24FB)
+- 🎯 **Icons & Avatars**:
+  - Icons: 24×24px, 2px padding, border-radius 100px
+  - Avatar: 30×30px circle, OvalBorder, #F4F6F9 background
+  - Delete Button: 24×24px, #F4F6F9 bg, 10px border-radius
+- 💬 **Cursor**: "|" pipe character, 12px Regular #09101D
+- 📊 Все данные извлечены из реального Flutter кода text input системы
 
 #### v5.8.0 (2025-11-19)
 - 🔐 Добавлен **Password Input Field** компонент с полной системой состояний
