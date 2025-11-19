@@ -144,6 +144,11 @@
 --color-gray-8: #EAEEF2;
 --color-gray-9: #F4F6F9;
 --color-gray-10: #FAFAFB;
+
+/* Background Colors */
+--color-bg-peach: #FFF0E1;
+--color-bg-pink-light: #FFE5E5;
+--color-bg-pink-light-25: rgba(255, 229, 229, 0.25);
 ```
 
 ### Chart Colors / Accent Colors
@@ -198,12 +203,15 @@
 ```css
 --font-size-2xs: 0.6875rem;   /* 11px */
 --font-size-xs: 0.75rem;      /* 12px */
+--font-size-xs-plus: 0.8125rem; /* 13px */
 --font-size-sm: 0.875rem;     /* 14px */
+--font-size-sm-plus: 0.9375rem; /* 15px */
 --font-size-base: 1rem;       /* 16px */
 --font-size-md: 1.125rem;     /* 18px */
 --font-size-lg: 1.25rem;      /* 20px */
 --font-size-xl: 1.5rem;       /* 24px */
 --font-size-2xl: 1.875rem;    /* 30px */
+--font-size-2xl-plus: 2rem;   /* 32px */
 --font-size-3xl: 2.25rem;     /* 36px */
 --font-size-4xl: 3rem;        /* 48px */
 --font-size-5xl: 3.75rem;     /* 60px */
@@ -259,6 +267,7 @@
 --letter-spacing-normal: 0;
 --letter-spacing-wide: 0.02em;
 --letter-spacing-wider: 0.05em;
+--letter-spacing-widest: 0.50em;
 ```
 
 ---
@@ -270,11 +279,15 @@
 ```css
 --space-0: 0;
 --space-1: 0.25rem;   /* 4px */
+--space-1-25: 0.3125rem; /* 5px */
+--space-1-5: 0.375rem; /* 6px */
 --space-2: 0.5rem;    /* 8px */
+--space-2-5: 0.625rem; /* 10px */
 --space-3: 0.75rem;   /* 12px */
 --space-4: 1rem;      /* 16px */
 --space-5: 1.25rem;   /* 20px */
 --space-6: 1.5rem;    /* 24px */
+--space-7-5: 1.875rem; /* 30px */
 --space-8: 2rem;      /* 32px */
 --space-10: 2.5rem;   /* 40px */
 --space-12: 3rem;     /* 48px */
@@ -293,7 +306,9 @@
 --radius-base: 0.25rem;   /* 4px */
 --radius-md: 0.375rem;    /* 6px */
 --radius-lg: 0.5rem;      /* 8px */
+--radius-lg-plus: 0.6875rem; /* 11px */
 --radius-xl: 0.75rem;     /* 12px */
+--radius-xl-plus: 0.9375rem; /* 15px */
 --radius-2xl: 1rem;       /* 16px */
 --radius-3xl: 1.875rem;   /* 30px */
 --radius-4xl: 6.25rem;    /* 100px */
