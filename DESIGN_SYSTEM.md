@@ -64,6 +64,8 @@ MaterialApp(
 --color-text-secondary: #D9DDE2;   /* Color(0xFFD9DDE2) - вторичный светлый текст */
 --color-text-tertiary: #747B84;    /* Color(0xFF747B84) - серый текст для описаний (из View2) */
 --color-text-dark: #2A2B2F;        /* Color(0xFF2A2B2F) - темный текст для активной цены (из View2) */
+--color-text-subtitle: #414249;    /* Color(0xFF414249) - subtitle text (из ImagePlaceholders) */
+--color-text-description: #23262B; /* Color(0xFF23262B) - description text (из ImagePlaceholders) */
 --color-text-white: #FFFFFF;       /* Colors.white - белый текст */
 --color-text-blue: #4141E6;        /* Color(0xFF4141E6) - синий текст для акцентов */
 ```
@@ -104,6 +106,24 @@ MaterialApp(
 --color-badge-blue: #4141E6;       /* Color(0xFF4141E6) - синий для рейтинга */
 ```
 
+### Gradient Colors (из ImagePlaceholders)
+
+```css
+/* Instagram Gradient для Gradient Button */
+--gradient-instagram-1: #833AB4;   /* Color(0xFF833AB4) - фиолетовый */
+--gradient-instagram-2: #FD1D1D;   /* Color(0xFFFD1D1D) - красный */
+--gradient-instagram-3: #FCB045;   /* Color(0xFFFCB045) - оранжевый */
+```
+
+**LinearGradient**:
+```dart
+LinearGradient(
+  begin: Alignment(0.00, -1.00),
+  end: Alignment(0, 1),
+  colors: [Color(0xFF833AB4), Color(0xFFFD1D1D), Color(0xFFFCB045)],
+)
+```
+
 ### Shadow Colors
 
 ```css
@@ -133,20 +153,21 @@ MaterialApp(
 ### Font Sizes
 
 ```css
-/* Font Sizes из Flutter кода (SmallButtonLarge + View2) */
+/* Font Sizes из Flutter кода (SmallButtonLarge + View2 + ImagePlaceholders) */
 --font-size-8: 0.5rem;        /* 8px - для badge text (emoji + text) */
 --font-size-10: 0.625rem;     /* 10px - для rating и мелкого текста */
 --font-size-11: 0.6875rem;    /* 11px - для discount/seasonal badges */
 --font-size-12: 0.75rem;      /* 12px - для цены и описаний */
 --font-size-13: 0.8125rem;    /* 13px - для кнопок и заголовков карточек */
 --font-size-14: 0.875rem;     /* 14px - для названий продуктов и цен */
---font-size-15: 0.9375rem;    /* 15px */
---font-size-16: 1rem;         /* 16px */
---font-size-18: 1.125rem;     /* 18px */
+--font-size-15: 0.9375rem;    /* 15px - для list item info */
+--font-size-16: 1rem;         /* 16px - для list item subtitle и modal description */
+--font-size-18: 1.125rem;     /* 18px - для list item title */
 --font-size-22: 1.375rem;     /* 22px - для номеров карт */
 --font-size-24: 1.5rem;       /* 24px */
 --font-size-26: 1.625rem;     /* 26px */
---font-size-32: 2rem;         /* 32px */
+--font-size-32: 2rem;         /* 32px - для profile header title */
+--font-size-72: 4.5rem;       /* 72px - для Images title (ImagePlaceholders) */
 ```
 
 ### Font Weights
@@ -260,21 +281,23 @@ MaterialApp(
 ### Spacing Scale (из Flutter кода)
 
 ```css
-/* Spacing из компонента SmallButtonLarge */
+/* Spacing из компонента SmallButtonLarge + ImagePlaceholders */
 --space-0: 0;
 --space-1: 0.25rem;   /* 4px */
---space-2: 0.5rem;    /* 8px - spacing между иконкой и текстом в кнопках */
+--space-2: 0.5rem;    /* 8px - spacing между иконкой и текстом в кнопках, между элементами в list items */
 --space-3: 0.75rem;   /* 12px */
 --space-4: 1rem;      /* 16px - horizontal padding кнопок */
---space-5: 1.25rem;   /* 20px */
+--space-5: 1.25rem;   /* 20px - spacing в modal, profile header */
 --space-6: 1.5rem;    /* 24px */
 --space-7: 1.75rem;   /* 28px */
 --space-8: 2rem;      /* 32px */
 --space-10: 2.5rem;   /* 40px - spacing: 10 в Flutter Column */
 --space-12: 3rem;     /* 48px */
+--space-13: 3.125rem; /* 50px - spacing между avatar showcase rows (ImagePlaceholders) */
 --space-16: 4rem;     /* 64px */
 --space-20: 5rem;     /* 80px */
 --space-24: 6rem;     /* 96px */
+--space-25: 6.25rem;  /* 100px - main container padding (ImagePlaceholders) */
 ```
 
 ### Button Padding (из Flutter кода)
@@ -311,19 +334,22 @@ MaterialApp(
 ### Border Radius (из Flutter кода)
 
 ```css
-/* Border Radius из компонента SmallButtonLarge, View2 и Master */
+/* Border Radius из компонента SmallButtonLarge, View2, Master и ImagePlaceholders */
 --radius-none: 0;
 --radius-xs: 0.3125rem;    /* 5px - для rating badge (View2) */
 --radius-sm: 0.25rem;      /* 4px */
 --radius-base: 0.5rem;     /* 8px */
+--radius-rounded-avatar: 0.625rem; /* 10px - для rounded avatars (ImagePlaceholders) */
 --radius-badge: 0.6875rem; /* 11px - для badges (View2) и Small Chip (Master) */
 --radius-md: 0.75rem;      /* 12px - для Ghost Button */
 --radius-chip-medium: 0.8125rem; /* 13px - для Medium Chip (Master) */
---radius-lg: 0.9375rem;    /* 15px - для кнопок, Large Chip (Master), showcase container, product cards */
+--radius-lg: 0.9375rem;    /* 15px - для кнопок, Large Chip (Master), showcase container, product cards, rounded avatars */
 --radius-xl: 1rem;         /* 16px - для image containers в карточках (View2) */
---radius-counter: 1.25rem; /* 20px - для price counter badge (View2) */
---radius-2xl: 1.25rem;     /* 20px */
+--radius-counter: 1.25rem; /* 20px - для price counter badge (View2) и modal (ImagePlaceholders) */
+--radius-2xl: 1.25rem;     /* 20px - modal border radius */
 --radius-3xl: 1.5rem;      /* 24px */
+--radius-avatar: 3.125rem; /* 50px - для circular avatars (OvalBorder, ImagePlaceholders) */
+--radius-container: 5rem;  /* 80px - для main container (ImagePlaceholders) */
 --radius-full: 9999px;     /* BorderRadius.circular(100) для круглых кнопок и иконок */
 ```
 
@@ -338,6 +364,22 @@ MaterialApp(
 --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
 --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
 --shadow-xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+```
+
+#### Modal Shadows (из ImagePlaceholders)
+
+```css
+/* BoxShadow из Modal/Card */
+--shadow-modal: 0 2px 10px 0 rgba(0, 0, 0, 0.10);  /* BoxShadow(color: Color(0x19000000), blurRadius: 10, offset: Offset(0, 2)) */
+```
+
+**Flutter BoxShadow**:
+```dart
+BoxShadow(
+  color: Color(0x19000000),  // rgba(0, 0, 0, 0.10)
+  blurRadius: 10,
+  offset: Offset(0, 2),
+)
 ```
 
 #### Button Shadows
@@ -639,6 +681,60 @@ MaterialApp(
 - **State**: Non-interactive
 - **Variants**: Same layout variations as Primary
 
+#### Gradient Button (из ImagePlaceholders)
+
+**Из ImagePlaceholders - Modal Gradient Button**
+
+- **Height**: 44px
+- **Padding**: horizontal: 16px, vertical: 10px
+- **Border Radius**: 15px
+- **Gradient**: LinearGradient (Instagram colors)
+  - Begin: Alignment(0.00, -1.00) - top
+  - End: Alignment(0, 1) - bottom
+  - Colors: [#833AB4, #FD1D1D, #FCB045]
+- **Text Color**: #FFFFFF (Colors.white)
+- **Font**: Archivo, 13px, weight: 600
+- **Icon Size**: 16x16px (padding: 2px)
+- **Spacing**: 8px между иконкой и текстом
+- **MainAxisAlignment**: center
+- **CrossAxisAlignment**: center
+
+**Flutter Code**:
+```dart
+Container(
+  height: 44,
+  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+  decoration: BoxDecoration(
+    gradient: LinearGradient(
+      begin: Alignment(0.00, -1.00),
+      end: Alignment(0, 1),
+      colors: [Color(0xFF833AB4), Color(0xFFFD1D1D), Color(0xFFFCB045)],
+    ),
+    borderRadius: BorderRadius.circular(15),
+  ),
+  child: Row(
+    mainAxisSize: MainAxisSize.min,
+    mainAxisAlignment: MainAxisAlignment.center,
+    crossAxisAlignment: CrossAxisAlignment.center,
+    children: [
+      Container(width: 16, height: 16, child: Icon),
+      const SizedBox(width: 8),
+      Text(
+        'Follow',
+        style: TextStyle(
+          color: Colors.white,
+          fontSize: 13,
+          fontFamily: 'Archivo',
+          fontWeight: FontWeight.w600,
+        ),
+      ),
+    ],
+  ),
+)
+```
+
+**Usage**: Gradient buttons используются для premium actions, подписок, CTAs, специальных предложений.
+
 #### Button Icon Layout Patterns
 
 1. **Text Only**: Просто текст по центру
@@ -877,7 +973,78 @@ Chips - компактные интерактивные элементы для 
 
 ---
 
-### 6. Forms
+### 6. Avatars (из ImagePlaceholders)
+
+Avatars - круглые или скругленные изображения для отображения профилей пользователей. Пять размеров: 30px, 40px, 60px, 79px, 98px. Два стиля: Circular (OvalBorder) и Rounded Square.
+
+#### Avatar Sizes
+
+**Из ImagePlaceholders - все аватары**
+
+**Circular Avatars (OvalBorder)**:
+- **30x30px**: Border radius: 50px (OvalBorder)
+- **40x40px**: Border radius: 50px (OvalBorder)
+- **60x60px**: Border radius: 50px (OvalBorder)
+- **79x79px**: Border radius: 50px (OvalBorder)
+- **98x98px**: Border radius: 50px (OvalBorder)
+
+**Rounded Square Avatars**:
+- **30x30px**: Border radius: 15px
+- **40x40px**: Border radius: 10px
+- **60x60px**: Border radius: 15px
+- **79x79px**: Border radius: 15px
+- **98x98px**: Border radius: 15px
+
+#### Avatar Container
+
+**Из ImagePlaceholders - Container для каждого аватара**
+
+```dart
+Container(
+  width: 30/40/60/79/98,
+  height: 30/40/60/79/98,
+  decoration: ShapeDecoration(
+    image: DecorationImage(
+      image: NetworkImage("https://via.placeholder.com/98x98"),
+      fit: BoxFit.fill,
+    ),
+    shape: OvalBorder(),  // для circular
+    // или
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(15/10),  // для rounded square
+    ),
+  ),
+)
+```
+
+#### Avatar Showcase Layout
+
+**Из ImagePlaceholders - структура showcase**
+
+- **Main Container**:
+  - Padding: 100px
+  - Border Radius: 80px
+  - Background: #FFFFFF
+- **Title**: "Images", 72px, weight: 800, color: #09101D
+- **Spacing**: 50px между строками аватаров
+- **Row Structure**: SizedBox width: 100 между аватарами (spacing)
+
+**Layout Structure**:
+```
+Column (spacing: 50):
+  - Row (spacing: 100): 30px Circular avatars (5 штук)
+  - Row (spacing: 100): 30px Rounded avatars (5 штук)
+  - Row (spacing: 100): 40px Circular avatars (5 штук)
+  - Row (spacing: 100): 40px Rounded avatars (5 штук)
+  - Row (spacing: 100): 60px Circular + Rounded avatars
+  - ... и т.д. для всех размеров
+```
+
+**Usage**: Avatars используются в профилях, списках пользователей, комментариях, чатах, карточках учителей.
+
+---
+
+### 7. Forms
 
 #### Form Layout
 
@@ -985,15 +1152,79 @@ Chips - компактные интерактивные элементы для 
 
 ### 10. List Items
 
-#### List Item
+#### List Item (из ImagePlaceholders)
 
-- **Height**: 48px (medium)
-- **Padding**: 12px 16px
-- **Border Bottom**: 1px solid color-border-primary
-- **States**:
-  - Hover: Background: color-bg-secondary
-  - Active: Background: color-primary-light
-  - Selected: Background: color-primary-light, Border-left: 3px solid color-primary
+Списочные элементы с аватарами, текстом и stepper controls.
+
+##### List Item with 40px Avatar
+
+**Из ImagePlaceholders - первый list item**
+
+- **Avatar**: 40x40px (Circular, border radius: 50px)
+- **Spacing**: 8px между аватаром и текстом
+- **Content Layout**:
+  - **Title**: Archivo, 18px, weight: 700, color: #09101D
+  - **Subtitle**: Archivo, 16px, weight: 700, color: #09101D
+  - **Info**: Archivo, 15px, weight: 600, color: #747B84
+- **Stepper Controls**:
+  - **Container**: 32x32px
+  - **Border**: 1px solid #747B84
+  - **Border Radius**: 8px
+  - **Icon**: 24x24px (padding: 4px), color: #09101D
+  - **Count Text**: Archivo, 16px, weight: 700, color: #09101D
+  - **Spacing**: 8px между элементами
+
+**Structure**:
+```
+Row (spacing: 8):
+  - Avatar (40x40)
+  - Column (flex: 5):
+    - Title (18px weight 700)
+    - Subtitle (16px weight 700)
+    - Info (15px weight 600)
+  - Row (spacing: 8):
+    - Stepper Button (-) [32x32, border, icon 24x24]
+    - Count Text (16px weight 700)
+    - Stepper Button (+) [32x32, border, icon 24x24]
+```
+
+##### List Item with 60px Avatar
+
+**Из ImagePlaceholders - второй list item**
+
+- **Avatar**: 60x60px (Circular, border radius: 50px)
+- **Spacing**: 8px между аватаром и текстом
+- **Content Layout**: Same as 40px variant
+- **Stepper Controls**: Same as 40px variant
+
+**Structure**: Same layout as 40px variant, только avatar 60x60px
+
+**Usage**: List items используются в корзине, списках товаров, заказах, меню с выбором количества.
+
+---
+
+### 11. Profile Header (из ImagePlaceholders)
+
+Компонент заголовка профиля с большим аватаром и текстовой информацией.
+
+**Из ImagePlaceholders - profile header section**
+
+- **Avatar**: 98x98px (Circular, border radius: 50px)
+- **Spacing**: 20px между аватаром и текстом
+- **Content Layout**:
+  - **Title**: Archivo, 32px, weight: 700, color: #09101D
+  - **Subtitle**: Archivo, 14px, weight: 400, color: #414249
+
+**Structure**:
+```
+Row (spacing: 20):
+  - Avatar (98x98, circular)
+  - Column:
+    - Title (32px weight 700, color: #09101D)
+    - Subtitle (14px weight 400, color: #414249)
+```
+
+**Usage**: Profile headers используются в профилях пользователей, настройках аккаунта, карточках контактов.
 
 ---
 
@@ -1030,14 +1261,73 @@ Chips - компактные интерактивные элементы для 
   - Padding Bottom: 16px
   - Border Bottom: 1px solid color-border-primary
 
-#### Modal
+#### Modal / Card (из ImagePlaceholders)
 
-- **Max Width**: 600px (small), 800px (medium), 1000px (large)
-- **Background**: color-bg-primary
-- **Border Radius**: radius-xl (12px)
-- **Shadow**: shadow-xl
-- **Overlay**: Background: color-bg-overlay, Backdrop-filter: blur(4px)
-- **Padding**: 24px
+Модальное окно с аватаром, текстом и gradient button.
+
+**Из ImagePlaceholders - modal component**
+
+- **Container**:
+  - Background: #FFFFFF
+  - Border Radius: 20px
+  - Padding: 20px
+  - Shadow: BoxShadow(color: 0x19000000, blurRadius: 10, offset: Offset(0, 2))
+  - Width: auto (fit content)
+
+- **Content Layout**:
+  - **Avatar Image**: 79x79px
+    - Border Radius: 15px
+    - Image Fit: cover
+    - NetworkImage placeholder
+  - **Title**: Archivo, 18px, weight: 700, color: #09101D
+  - **Description**: Archivo, 16px, weight: 700, color: #23262B
+  - **Spacing**: 20px между элементами (Column spacing)
+
+- **Gradient Button**:
+  - **Height**: 44px
+  - **Padding**: horizontal: 16px, vertical: 10px
+  - **Border Radius**: 15px
+  - **Gradient**: LinearGradient
+    - Begin: Alignment(0.00, -1.00)
+    - End: Alignment(0, 1)
+    - Colors: [#833AB4, #FD1D1D, #FCB045] (Instagram gradient)
+  - **Text**: "Follow", Archivo, 13px, weight: 600, color: #FFFFFF
+  - **Icon**: 16x16px (padding: 2px), color: white
+  - **Spacing**: 8px между иконкой и текстом
+  - **MainAxisAlignment**: center
+  - **CrossAxisAlignment**: center
+
+**Structure**:
+```
+Container (padding: 20, radius: 20, shadow):
+  - Column (spacing: 20):
+    - Avatar Image (79x79, radius: 15)
+    - Title (18px weight 700, #09101D)
+    - Description (16px weight 700, #23262B)
+    - Gradient Button:
+      - Container (height: 44, radius: 15, gradient):
+        - Row (center):
+          - Icon (16x16)
+          - spacing: 8
+          - Text "Follow" (13px weight 600, white)
+```
+
+**Flutter Gradient Code**:
+```dart
+Container(
+  decoration: BoxDecoration(
+    gradient: LinearGradient(
+      begin: Alignment(0.00, -1.00),
+      end: Alignment(0, 1),
+      colors: [Color(0xFF833AB4), Color(0xFFFD1D1D), Color(0xFFFCB045)],
+    ),
+    borderRadius: BorderRadius.circular(15),
+  ),
+  child: // Button content
+)
+```
+
+**Usage**: Modal используется для профилей, подписок, actions, промо-карточек с gradient buttons.
 
 ---
 
@@ -1237,8 +1527,9 @@ Chips - компактные интерактивные элементы для 
 ### Component Sizes (из Flutter кода)
 
 ```css
-/* Размеры из компонента SmallButtonLarge и View2 */
+/* Размеры из компонента SmallButtonLarge, View2 и ImagePlaceholders */
 --component-button-height: 36px;        /* Высота кнопки */
+--component-button-gradient-height: 44px; /* Высота gradient button */
 --component-button-icon: 16px;          /* Размер иконки в кнопке */
 --component-container-width: 375px;     /* Стандартная ширина mobile container */
 --component-showcase-width: 2145px;     /* Ширина showcase container */
@@ -1271,6 +1562,23 @@ Chips - компактные интерактивные элементы для 
 --chip-icon-size: 24px;                 /* Icon size в chips */
 --chip-showcase-width: 485px;           /* Master showcase container width */
 --chip-showcase-height: 1010px;         /* Master showcase container height */
+
+/* Avatar Sizes из ImagePlaceholders */
+--avatar-size-30: 30px;                 /* Avatar 30x30 */
+--avatar-size-40: 40px;                 /* Avatar 40x40 (list items) */
+--avatar-size-60: 60px;                 /* Avatar 60x60 (list items) */
+--avatar-size-79: 79px;                 /* Avatar 79x79 (modal) */
+--avatar-size-98: 98px;                 /* Avatar 98x98 (profile header) */
+
+/* List Item Sizes из ImagePlaceholders */
+--list-item-stepper-size: 32px;         /* Stepper button size */
+--list-item-stepper-icon: 24px;         /* Stepper icon size */
+
+/* Modal Sizes из ImagePlaceholders */
+--modal-avatar-size: 79px;              /* Avatar в modal */
+--modal-avatar-radius: 15px;            /* Border radius для modal avatar */
+--modal-padding: 20px;                  /* Modal padding */
+--modal-radius: 20px;                   /* Modal border radius */
 ```
 
 ### Flutter-Specific Properties (из кода)
@@ -1339,9 +1647,59 @@ Chips - компактные интерактивные элементы для 
 
 ## Версионирование и обновления
 
-**Текущая версия**: v5.0.0
+**Текущая версия**: v5.1.0
 
 ### Changelog
+
+#### v5.1.0 (2025-11-19)
+- Добавлены компоненты из ImagePlaceholders:
+  - **Avatars**: 5 размеров (30px, 40px, 60px, 79px, 98px)
+    - Circular avatars (OvalBorder, border radius: 50px)
+    - Rounded square avatars (border radius: 10px, 15px)
+    - Showcase layout с padding: 100px, border radius: 80px
+  - **List Items с аватарами**: 2 варианта (40px и 60px avatars)
+    - Title: 18px weight 700
+    - Subtitle: 16px weight 700
+    - Info: 15px weight 600
+    - Stepper controls: 32x32px с border, icons 24x24px
+    - Spacing: 8px между элементами
+  - **Profile Header**: 98px avatar + title (32px weight 700) + subtitle (14px weight 400)
+    - Spacing: 20px между аватаром и текстом
+  - **Modal/Card**: с shadow, avatar 79x79px, gradient button
+    - Border radius: 20px
+    - Padding: 20px
+    - Shadow: BoxShadow(color: 0x19000000, blurRadius: 10, offset: Offset(0, 2))
+  - **Gradient Button**: Instagram gradient (#833AB4, #FD1D1D, #FCB045)
+    - Height: 44px
+    - Border radius: 15px
+    - LinearGradient от top к bottom
+    - Usage: premium actions, подписки, CTAs
+- **Новые цвета**:
+  - Text: #414249 (subtitle), #23262B (description)
+  - Gradient: #833AB4, #FD1D1D, #FCB045 (Instagram gradient)
+- **Новая типографика**:
+  - Font size: 72px (Images title, weight: 800)
+  - Font size: 32px (profile header title)
+  - Font size: 18px (list item title)
+  - Font size: 16px (list item subtitle, modal description)
+  - Font size: 15px (list item info)
+- **Новые spacing значения**:
+  - 100px (main container padding)
+  - 50px (showcase row spacing)
+  - 20px (modal spacing, profile header spacing)
+- **Новые shadows**:
+  - Modal shadow: BoxShadow(color: 0x19000000, blurRadius: 10, offset: Offset(0, 2))
+- **Новые border radius**:
+  - 80px (main container)
+  - 50px (circular avatars - OvalBorder)
+  - 20px (modal)
+  - 10px (rounded avatars 40px)
+  - 15px (rounded avatars 30px, 60px, 79px, 98px)
+- **Новые component sizes**:
+  - Avatars: 30px, 40px, 60px, 79px, 98px
+  - Gradient button: 44px height
+  - List item stepper: 32x32px
+  - Modal avatar: 79x79px
 
 #### v5.0.0 (2025-11-19)
 - Первая версия дизайн-системы
