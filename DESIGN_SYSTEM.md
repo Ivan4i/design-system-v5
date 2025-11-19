@@ -69,6 +69,11 @@
 --color-info: #3B82F6;
 --color-info-bg: #DBEAFE;
 --color-info-border: #93C5FD;
+
+/* Accent - из TabBar кода */
+--color-accent: #4141E6;
+--color-accent-hover: #3131D6;
+--color-accent-active: #2121C6;
 ```
 
 ### Neutral Colors
@@ -76,7 +81,7 @@
 ```css
 /* Text - из Flutter кода */
 --color-text-primary: #09101D;
---color-text-secondary: #6B7280;
+--color-text-secondary: #747B84;  /* Обновлено из TabBar кода */
 --color-text-tertiary: #9CA3AF;
 --color-text-disabled: #D1D5DB;
 --color-text-inverse: #FFFFFF;
@@ -85,6 +90,7 @@
 --color-bg-primary: #FFFFFF;
 --color-bg-secondary: #EAEEF2;
 --color-bg-tertiary: #F3F4F6;
+--color-bg-quaternary: #F4F6F9;  /* Из TabBar кода */
 --color-bg-elevated: #FFFFFF;
 --color-bg-overlay: rgba(0, 0, 0, 0.5);
 --color-bg-dark: #12202F;
@@ -98,9 +104,12 @@
 /* Shades */
 --color-gray-50: #F9FAFB;
 --color-gray-100: #F3F4F6;
+--color-gray-150: #F4F6F9;  /* Из TabBar кода */
+--color-gray-175: #F0F1F2;  /* Из TabBar кода - для теней */
 --color-gray-200: #E5E7EB;
 --color-gray-300: #D1D5DB;
 --color-gray-400: #9CA3AF;
+--color-gray-450: #747B84;  /* Из TabBar кода - вторичный текст */
 --color-gray-500: #6B7280;
 --color-gray-600: #4B5563;
 --color-gray-700: #374151;
@@ -159,7 +168,9 @@
 ### Font Sizes
 
 ```css
+--font-size-2xs: 0.625rem;    /* 10px - из TabBar кода (badge text) */
 --font-size-xs: 0.75rem;      /* 12px */
+--font-size-xs-plus: 0.8125rem; /* 13px - из TabBar кода (action text) */
 --font-size-sm: 0.875rem;     /* 14px */
 --font-size-base: 1rem;       /* 16px - из Flutter кода */
 --font-size-md: 1.125rem;     /* 18px */
@@ -235,7 +246,10 @@
 ```css
 /* Из Flutter кода - базовые значения spacing */
 --space-0: 0;
+--space-0-25: 0.0625rem; /* 1px - из TabBar кода */
+--space-0-5: 0.125rem;  /* 2px - из TabBar кода */
 --space-1: 0.25rem;   /* 4px */
+--space-1-25: 0.3125rem; /* 5px - из TabBar кода */
 --space-1-5: 0.375rem;  /* 6px - из Flutter кода */
 --space-2: 0.5rem;    /* 8px - из Flutter кода */
 --space-2-5: 0.625rem;  /* 10px - из Flutter кода */
@@ -244,7 +258,8 @@
 --space-5: 1.25rem;   /* 20px - из Flutter кода */
 --space-6: 1.5rem;    /* 24px */
 --space-8: 2rem;      /* 32px */
---space-10: 2.5rem;   /* 40px */
+--space-8-5: 2.125rem;  /* 34px - из TabBar кода */
+--space-10: 2.5rem;   /* 40px - из TabBar кода */
 --space-12: 3rem;     /* 48px */
 --space-12-5: 3.125rem;  /* 50px - из Flutter кода */
 --space-16: 4rem;     /* 64px */
@@ -258,13 +273,15 @@
 ```css
 /* Из Flutter кода - border radius значения */
 --radius-none: 0;
+--radius-2xs: 0.0625rem;  /* 1px - из TabBar кода */
 --radius-sm: 0.125rem;    /* 2px */
 --radius-base: 0.25rem;   /* 4px */
 --radius-md: 0.375rem;    /* 6px */
 --radius-lg: 0.5rem;      /* 8px - из Flutter кода */
---radius-xl: 0.75rem;     /* 12px */
+--radius-xl: 0.75rem;     /* 12px - из TabBar кода */
 --radius-2xl: 1rem;       /* 16px */
 --radius-3xl: 0.9375rem;  /* 15px - из Flutter кода */
+--radius-badge: 1.25rem;  /* 20px - из TabBar кода (badge radius) */
 --radius-4xl: 5rem;       /* 80px - из Flutter кода */
 --radius-5xl: 6.25rem;    /* 100px - из Flutter кода */
 --radius-full: 9999px;
@@ -297,6 +314,13 @@
 --shadow-hover-sm: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
 --shadow-hover-md: 0 8px 16px 0 rgba(0, 0, 0, 0.12);
 --shadow-hover-lg: 0 12px 24px 0 rgba(0, 0, 0, 0.15);
+```
+
+#### TabBar Shadow
+
+```css
+/* Из TabBar кода - subtle top border shadow */
+--shadow-tabbar: 0 -1px 0 0 #F0F1F2;
 ```
 
 ### Borders
@@ -986,6 +1010,144 @@ theme: ThemeData.dark().copyWith(
 
 ---
 
+### 21. TabBar (Bottom Navigation)
+
+Компонент TabBar для нижней навигации, извлеченный из Flutter приложения.
+
+#### Характеристики контейнера:
+
+- **Container Width**: 375px (mobile), 950px (desktop showcase)
+- **Container Height**: 88px, 90px
+- **Background**: color-bg-primary (#FFFFFF)
+- **Shadow**: BoxShadow(color: #F0F1F2, offset: (0, -1)) - subtle top border
+
+#### Tab структура:
+
+**Tab Item:**
+- **Height**: 54px, 56px
+- **Padding**: Horizontal: 4px, Vertical: 2px (top: 4px, bottom: 2px)
+- **Border Radius**: 12px (radius-xl)
+- **Icon Container**: 40px × 40px, 50px × 50px
+- **Icon Size**: 20px, 24px
+- **Icon Padding**: 2px (radius-full container)
+
+**Label:**
+- **Text**: "Label"
+- **Font**: Archivo
+- **Font Size**: 12px (font-size-xs)
+- **Font Weight**: 400 (normal)
+- **Line Height**: 1.40 (line-height-comfortable)
+- **Color Active**: #09101D (color-text-primary)
+- **Color Inactive**: #747B84 (color-text-secondary)
+
+#### Badge компонент:
+
+**Text Badge (Notification Count):**
+- **Height**: 20px
+- **Padding**: Horizontal: 4px, Vertical: 2px
+- **Background**: #4141E6 (color-accent)
+- **Border Radius**: 20px (radius-badge)
+- **Position**: Top-right of icon
+- **Text**:
+  - Font: Archivo
+  - Size: 10px (font-size-2xs)
+  - Weight: 600 (semibold)
+  - Color: white (color-text-inverse)
+  - Line Height: 1.40
+
+**Dot Badge (Indicator):**
+- **Size**: 5px × 5px
+- **Background**: #4141E6 (color-accent)
+- **Border Radius**: 20px (radius-badge)
+- **Position**: Bottom-right or top-right of icon
+
+#### Indicator (Active Tab):
+
+- **Width**: 134px
+- **Height**: 5px
+- **Border Radius**: 100px (radius-full)
+- **Background**: #09101D (color-text-primary)
+- **Position**: Bottom, centered
+
+#### Варианты TabBar:
+
+**3 Tab Layout:**
+- Tab width: 125px (375px / 3)
+- Equal spacing
+
+**4 Tab Layout:**
+- Tab width: ~93px (375px / 4)
+- Equal spacing
+
+**5 Tab Layout:**
+- Tab width: 75px (375px / 5)
+- Equal spacing
+
+#### Состояния:
+
+- **Active**: Label color #09101D, indicator visible
+- **Inactive**: Label color #747B84, no indicator
+- **With Badge**: Badge positioned top-right (20px height with count) or bottom-right (5px dot)
+
+---
+
+### 22. Header / Section Title
+
+Компонент заголовков секций, извлеченный из TabBar кода.
+
+#### Характеристики:
+
+**Title Only:**
+- **Padding**: 10px (top), 16px (horizontal), 10px (vertical)
+- **Background**: color-bg-primary (#FFFFFF)
+- **Title**:
+  - Font: Archivo
+  - Size Large: 24px (font-size-xl)
+  - Size Small: 16px (font-size-base)
+  - Weight: 700 (bold)
+  - Color: #09101D (color-text-primary)
+  - Line Height: 1.40
+
+**Title with Underline:**
+- **Underline Bar**:
+  - Width: 40px
+  - Height: 2px
+  - Color: #4141E6 (color-accent)
+  - Border Radius: 1px (radius-2xs)
+  - Spacing from title: 5px
+
+**Title with Subtitle:**
+- **Subtitle**:
+  - Font: Archivo
+  - Size Large: 14px (font-size-sm)
+  - Size Small: 13px (font-size-xs-plus)
+  - Weight: 400 (normal)
+  - Color: #09101D (color-text-primary)
+  - Line Height: 1.40
+  - Spacing from title: 5px
+
+**Title with Action Link:**
+- **Action Text**:
+  - Font: Archivo
+  - Size Large: 14px (font-size-sm)
+  - Size Small: 13px (font-size-xs-plus)
+  - Weight: 600 (semibold)
+  - Color: #4141E6 (color-accent)
+  - Line Height: 1.40
+  - Alignment: Right
+  - Text: "Action"
+
+#### Варианты:
+
+1. **Simple Title**: Только заголовок
+2. **Title + Underline**: Заголовок с подчеркиванием
+3. **Title + Subtitle**: Заголовок с подзаголовком
+4. **Title + Action**: Заголовок с кнопкой действия справа
+5. **Title + Underline + Subtitle**: Полный вариант с подчеркиванием и подзаголовком
+6. **Title + Action + Subtitle**: Заголовок с действием и подзаголовком
+
+---
+
 ## Как использовать эту дизайн-систему
 
 ### Для дизайнеров
@@ -1013,9 +1175,23 @@ theme: ThemeData.dark().copyWith(
 
 ## Версионирование и обновления
 
-**Текущая версия**: v5.1.0
+**Текущая версия**: v5.2.0
 
 ### Changelog
+
+#### v5.2.0 (2025-11-19)
+- Добавлены данные из TabBar компонента Flutter
+- Обновлен вторичный цвет текста (#747B84)
+- Добавлен accent цвет (#4141E6) для badges и действий
+- Добавлен quaternary background (#F4F6F9)
+- Добавлены новые font sizes: 10px (badge text), 13px (action text)
+- Добавлены новые spacing: 1px, 2px, 5px, 34px, 40px
+- Добавлены новые border radius: 1px, 12px, 20px (badge)
+- Добавлена shadow для TabBar: 0 -1px 0 0 #F0F1F2
+- Добавлены новые gray shades: 150, 175, 450
+- Добавлен компонент TabBar (Bottom Navigation) с вариантами на 3-5 табов
+- Добавлен компонент Header/Section Title с 6 вариантами
+- Добавлена спецификация Badge компонента (text и dot варианты)
 
 #### v5.1.0 (2025-11-19)
 - Добавлены данные из реального Flutter приложения
