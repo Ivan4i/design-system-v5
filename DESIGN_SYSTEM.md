@@ -7288,6 +7288,1459 @@ Complete CSS для всех компонентов Cards & Listings:
 
 ---
 
+<!-- ============================================================================ -->
+<!-- SECTION: Messaging & Chat                                                  -->
+<!-- FILE REFERENCE: design-system.md#messaging--chat                           -->
+<!-- USAGE: Chat lists, messaging apps, conversation interfaces, social feeds   -->
+<!-- COMPONENTS: chat-list-item, avatar-ring, unread-badge, status-indicators   -->
+<!-- AI NAVIGATION: Search for "COMPONENT:" tags to find specific components    -->
+<!-- ============================================================================ -->
+
+## Messaging & Chat
+
+**Модульная система компонентов для chat-интерфейсов** — chat list items, avatars с notification badges, status rings, group chat indicators, message previews.
+
+### Принцип модульности
+
+Каждый chat list item состоит из **7 переиспользуемых блоков**, которые можно комбинировать для создания различных вариантов:
+
+1. **Avatar Container** — 56×56px контейнер с image offset для white border эффекта
+2. **Status Ring** — 2px border вокруг аватара (purple #833AB4 или blue #4141E6)
+3. **Notification Badge** — 20px badge справа сверху с unread count
+4. **Content Column** — text content (name, message preview, metadata)
+5. **Unread Badge** — inline badge рядом с именем
+6. **Special Indicators** — reply/media/transfer indicators с иконками
+7. **Photo Thumbnails** — preview изображений 30×30px
+
+**Все компоненты помечены AI-TAG markers** для быстрой навигации и поиска.
+
+---
+
+### Container Specifications
+
+<!-- ========================================== -->
+<!-- COMPONENT: Chat List Container            -->
+<!-- AI-TAG: chat-list-container                -->
+<!-- ========================================== -->
+
+**Screen & List Container:**
+- **Screen Width**: 375px (standard mobile)
+- **Border Radius**: 30px (опционально для preview)
+- **Vertical Padding**: 30px (top/bottom)
+
+**Chat List Item:**
+- **Container Width**: 375px
+- **Padding**: 16px horizontal × 10px vertical
+- **Layout**: Row (avatar + content column)
+- **Avatar-Content Spacing**: 10px gap
+- **Background**: transparent (hover: rgba(65, 65, 230, 0.05))
+
+---
+
+### Typography System
+
+<!-- ========================================== -->
+<!-- COMPONENT: Chat Text Styles                -->
+<!-- AI-TAG: chat-text-typography               -->
+<!-- ========================================== -->
+
+**8 text styles для chat list:**
+
+1. **Contact Name**: `16px / 600 'Archivo'`, color `#09101D` (Primary Text)
+2. **Message Preview**: `13px / 400 'Archivo'`, color `#747B84` (Tertiary Text)
+3. **Timestamp**: `13px / 400 'Archivo'`, color `#747B84`, right-aligned
+4. **Unread Badge Text**: `10px / 600 'Archivo'`, color `#FFFFFF` (white)
+5. **Special Indicator Label**: `13px / 400 'Archivo'`, color `#747B84` (для "Media", "Transfer")
+6. **Reply Indicator Name**: `13px / 400 'Archivo'`, color `#747B84` (для "Jay Watson")
+7. **Group Member Name**: `10px / 600 'Archivo'`, color `#09101D` (в превью)
+8. **Message Separator**: `13px / 400 'Archivo'`, character "・" (middle dot)
+
+**Line Height**: 1.40 для всех текстов
+
+---
+
+### Modular Components
+
+<!-- ========================================== -->
+<!-- COMPONENT: Avatar Container                -->
+<!-- AI-TAG: chat-avatar-container              -->
+<!-- ========================================== -->
+
+#### 1. Avatar Container (базовый)
+
+**Container (56×56px):**
+```
+Container: 56px × 56px
+Border Radius: 40px (highly rounded)
+Background: transparent
+
+Image Offset Technique:
+- Container: 56px × 56px
+- Image: 48px × 48px
+- Offset: 4px top, 4px left
+- Result: 4px white border effect
+```
+
+**CSS Variables:**
+```css
+--chat-avatar-size: 56px;
+--chat-avatar-image-size: 48px;
+--chat-avatar-offset: 4px;
+--chat-avatar-radius: 40px;
+```
+
+---
+
+<!-- ========================================== -->
+<!-- COMPONENT: Avatar Status Ring              -->
+<!-- AI-TAG: chat-avatar-status-ring            -->
+<!-- ========================================== -->
+
+#### 2. Avatar Status Ring (для активных чатов)
+
+**Ring Specifications:**
+```
+Border: 2px solid
+Colors:
+  - Purple Ring: #833AB4 (для special status, новых сообщений)
+  - Blue Ring: #4141E6 (для active status, онлайн)
+Border Radius: 40px (совпадает с container)
+
+Layout:
+Container (56×56px) {
+  border: 2px solid #833AB4 или #4141E6
+  padding: 2px implicit
+  → Image: 48px × 48px с offset 4px
+}
+```
+
+**CSS Variables:**
+```css
+--chat-avatar-ring-width: 2px;
+--chat-avatar-ring-purple: #833AB4;  /* NEW COLOR */
+--chat-avatar-ring-blue: #4141E6;
+```
+
+---
+
+<!-- ========================================== -->
+<!-- COMPONENT: Notification Badge              -->
+<!-- AI-TAG: chat-notification-badge            -->
+<!-- ========================================== -->
+
+#### 3. Notification Badge (unread count на аватаре)
+
+**Badge Specifications:**
+```
+Position: Top-Right corner of avatar
+Size: 20px height, auto width (min 20px для circle)
+Background: #4141E6 (Primary Blue)
+Border Radius: 20px (pill shape)
+Padding: 4px horizontal × 2px vertical
+
+Text:
+- Font: 10px / 600 'Archivo'
+- Color: #FFFFFF (white)
+- Content: "11", "3", "99+" (числовые значения)
+
+Offset from Avatar:
+- Right: -2px (slightly overlaps avatar)
+- Top: -2px (slightly above avatar top)
+```
+
+**CSS Variables:**
+```css
+--chat-notif-badge-height: 20px;
+--chat-notif-badge-padding: 4px 2px;
+--chat-notif-badge-bg: #4141E6;
+--chat-notif-badge-radius: 20px;
+--chat-notif-badge-font: 600 10px/1.40 'Archivo';
+--chat-notif-badge-color: #FFFFFF;
+```
+
+---
+
+<!-- ========================================== -->
+<!-- COMPONENT: Content Column                  -->
+<!-- AI-TAG: chat-content-column                -->
+<!-- ========================================== -->
+
+#### 4. Content Column (text content справа от аватара)
+
+**Layout Structure:**
+```
+Content Column (flex-grow: 1) {
+  Row 1: Name + Unread Badge (inline) │ Timestamp (right-aligned)
+  Row 2: Message Preview (с indicators) │ ---
+}
+
+Spacing:
+- Row gap: 2px (tight spacing для компактности)
+- Content max-width: calculated (375px - 16px*2 - 56px - 10px = 277px)
+```
+
+**Row 1 - Name Line:**
+```
+Layout: [Name + Badge] ←→ [Timestamp]
+
+Name: 16px/600 #09101D
+Badge: 20px height, inline (если есть unread)
+Timestamp: 13px/400 #747B84, margin-left: auto
+```
+
+**Row 2 - Message Preview:**
+```
+Message Preview: 13px/400 #747B84
+Max Width: 100% (wrap if needed)
+Truncate: text-overflow ellipsis (1-2 lines max)
+```
+
+---
+
+<!-- ========================================== -->
+<!-- COMPONENT: Unread Badge (Inline)           -->
+<!-- AI-TAG: chat-unread-badge-inline           -->
+<!-- ========================================== -->
+
+#### 5. Unread Badge (inline с именем)
+
+**Badge Specifications:**
+```
+Position: Inline рядом с именем (margin-left: 5px)
+Size: 20px height, auto width
+Background: #4141E6 (Primary Blue)
+Border Radius: 20px (pill shape)
+Padding: 4px horizontal × 2px vertical
+
+Text:
+- Font: 10px / 600 'Archivo'
+- Color: #FFFFFF (white)
+- Content: "3", "5", "12" (числовые значения)
+
+Use Case:
+- Используется когда badge НЕ на аватаре
+- Показывается inline рядом с именем контакта
+- Альтернатива notification badge на аватаре
+```
+
+**Difference from Avatar Badge:**
+- Avatar Badge: positioned absolute, top-right corner аватара
+- Inline Badge: positioned inline, рядом с текстом имени
+
+---
+
+<!-- ========================================== -->
+<!-- COMPONENT: Special Indicators              -->
+<!-- AI-TAG: chat-special-indicators            -->
+<!-- ========================================== -->
+
+#### 6. Special Indicators (reply, media, transfer)
+
+**Indicator Types:**
+
+**A) Reply Indicator:**
+```
+Layout: [Avatar 24×24px] + [Name "Jay Watson"]
+
+Avatar: 24px × 24px, borderRadius 40px
+Name: 13px/400 #747B84
+Spacing: 5px gap
+Prefix: "↩" icon или avatar того, кому reply
+
+Use Case: показать кому был ответ в последнем сообщении
+```
+
+**B) Media Indicator:**
+```
+Layout: [Icon 24×24px] + ["Media"]
+
+Icon: 24px × 24px image/photo icon
+Text: "Media", 13px/400 #747B84
+Spacing: 5px gap
+
+Use Case: показать что последнее сообщение — медиафайл
+```
+
+**C) Transfer Indicator:**
+```
+Layout: [Icon 24×24px] + ["Transfer"]
+
+Icon: 24px × 24px transfer/money icon
+Text: "Transfer", 13px/400 #747B84
+Spacing: 5px gap
+
+Use Case: показать что последнее сообщение — денежный перевод
+```
+
+**CSS Variables:**
+```css
+--chat-indicator-icon-size: 24px;
+--chat-indicator-font: 400 13px/1.40 'Archivo';
+--chat-indicator-color: #747B84;
+--chat-indicator-spacing: 5px;
+```
+
+---
+
+<!-- ========================================== -->
+<!-- COMPONENT: Photo Thumbnails                -->
+<!-- AI-TAG: chat-photo-thumbnails              -->
+<!-- ========================================== -->
+
+#### 7. Photo Thumbnails (preview изображений в сообщении)
+
+**Thumbnail Specifications:**
+```
+Size: 30px × 30px
+Border Radius: 10px (rounded square)
+Spacing: 5px gap (horizontal row)
+Count: обычно 1-3 thumbnails
+
+Layout: [Thumb 1] [Thumb 2] [Thumb 3]
+
+Use Case:
+- Показать preview изображений из последнего сообщения
+- Отображается в message preview строке
+- Может комбинироваться с текстом или быть отдельно
+```
+
+**CSS Variables:**
+```css
+--chat-thumb-size: 30px;
+--chat-thumb-radius: 10px;
+--chat-thumb-spacing: 5px;
+```
+
+---
+
+<!-- ========================================== -->
+<!-- COMPONENT: Group Chat Avatars              -->
+<!-- AI-TAG: chat-group-avatars                 -->
+<!-- ========================================== -->
+
+#### 8. Group Chat Avatars (stacked avatars для группового чата)
+
+**Stacked Avatar Specifications:**
+```
+Layout: Overlapping circles с white borders
+
+Avatar 1 (Left):
+  Size: 40px × 40px
+  Border: 4px solid #FFFFFF (white)
+  Border Radius: 50% (perfect circle)
+  Image: 32px × 32px (после учета border)
+  Z-Index: 1
+
+Avatar 2 (Right, slightly overlapping):
+  Size: 40px × 40px
+  Border: 4px solid #FFFFFF (white)
+  Border Radius: 50%
+  Image: 32px × 32px
+  Z-Index: 2
+  Offset: margin-left: -6px (overlap на 6px)
+
+Visual Effect:
+[●] overlaps [●] → creates depth
+
+White borders create separation визуально
+```
+
+**Small Avatars (для reply/mention indicators):**
+```
+Size: 32px × 32px
+Border: 3px solid #FFFFFF
+Image: 26px × 26px
+
+Size: 24px × 24px
+Border: 2px solid #FFFFFF
+Image: 20px × 20px
+```
+
+**CSS Variables:**
+```css
+--chat-group-avatar-size: 40px;
+--chat-group-avatar-border: 4px;
+--chat-group-avatar-overlap: -6px;
+
+--chat-small-avatar-32: 32px;
+--chat-small-avatar-24: 24px;
+```
+
+---
+
+### Complete Layout: Chat List Item
+
+<!-- ========================================== -->
+<!-- LAYOUT: Chat List Item Breakdown           -->
+<!-- AI-TAG: chat-list-item-layout              -->
+<!-- ========================================== -->
+
+**ASCII Diagram:**
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│  Container: 375px width, padding 16px H × 10px V                    │
+│                                                                      │
+│  ┌──────────┐   ┌─────────────────────────────────────────────┐   │
+│  │          │   │ Jenny Wilson            [3]          2 hrs  │   │
+│  │  Avatar  │   │ ↩ Jay Watson: Let me know if...              │   │
+│  │  56×56   │   └─────────────────────────────────────────────┘   │
+│  │  Ring    │       ↑                ↑            ↑                 │
+│  │  Badge   │   Name 16px/600   Unread Badge  Timestamp 13px/400   │
+│  └──────────┘   Message Preview 13px/400 + Reply Indicator          │
+│      ↑                                                               │
+│  Avatar + Ring + Notification Badge                                 │
+└─────────────────────────────────────────────────────────────────────┘
+
+Components Breakdown:
+1. Avatar Container: 56×56px с ring #833AB4
+2. Notification Badge: "11" white on blue, top-right
+3. Name: "Jenny Wilson" 16px/600
+4. Unread Badge: "3" inline badge (опционально)
+5. Timestamp: "2 hrs" right-aligned
+6. Message Preview: "↩ Jay Watson: Let me know if..." с reply indicator
+7. Spacing: 10px между avatar и content
+```
+
+**Layout Variants:**
+
+**Variant 1: With Avatar Notification Badge (Jenny Wilson)**
+```
+Avatar: 56×56px, ring #833AB4 purple
+Badge: "11" на аватаре top-right
+Name: "Jenny Wilson" + inline badge "3"
+Message: Reply indicator + "Jay Watson: Let me know if..."
+```
+
+**Variant 2: With Status Ring (Kristin Watson, Jacob Jones)**
+```
+Avatar: 56×56px, ring #4141E6 blue
+No notification badge на аватаре
+Name: без inline badge
+Message: Photo thumbnails (3×30px images) OR text preview
+```
+
+**Variant 3: No Ring (Darrell Steward, Guy Hawkins, Alex, Foodlovers)**
+```
+Avatar: 56×56px, БЕЗ ring
+Message: Media indicator OR Transfer indicator OR simple text
+Special: Group chat (Foodlovers) — stacked avatars 40×40px
+```
+
+---
+
+### Modular Components Matrix
+
+<!-- ========================================== -->
+<!-- MATRIX: Chat Components Compatibility      -->
+<!-- AI-TAG: chat-components-matrix             -->
+<!-- ========================================== -->
+
+**Таблица совместимости компонентов для различных chat list вариантов:**
+
+| Component               | Direct Message | Group Chat | Media Preview | Transfer | Reply | Unread |
+|-------------------------|----------------|------------|---------------|----------|-------|--------|
+| Avatar Container        | ✅ Single       | ✅ Stacked  | ✅ Single      | ✅ Single | ✅ Single | ✅ Single |
+| Status Ring (Purple)    | ✅              | ❌          | ❌             | ❌       | ✅     | ✅      |
+| Status Ring (Blue)      | ✅              | ❌          | ✅             | ✅       | ❌     | ❌      |
+| Notification Badge      | ✅              | ✅          | ❌             | ❌       | ✅     | ✅      |
+| Inline Unread Badge     | ✅              | ✅          | ❌             | ❌       | ✅     | ✅      |
+| Name + Timestamp        | ✅              | ✅          | ✅             | ✅       | ✅     | ✅      |
+| Message Preview (Text)  | ✅              | ✅          | ❌             | ❌       | ✅     | ✅      |
+| Reply Indicator         | ❌              | ❌          | ❌             | ❌       | ✅     | ❌      |
+| Media Indicator         | ❌              | ❌          | ✅             | ❌       | ❌     | ❌      |
+| Transfer Indicator      | ❌              | ❌          | ❌             | ✅       | ❌     | ❌      |
+| Photo Thumbnails        | ❌              | ❌          | ✅             | ❌       | ❌     | ❌      |
+
+**Пояснения:**
+- ✅ = Компонент используется
+- ❌ = Компонент не используется
+- **Direct Message**: обычный 1-to-1 чат с текстовыми сообщениями
+- **Group Chat**: групповой чат с несколькими участниками (stacked avatars)
+- **Media Preview**: чат с превью изображений в последнем сообщении
+- **Transfer**: чат с денежным переводом в последнем сообщении
+- **Reply**: чат с ответом на другое сообщение
+- **Unread**: чат с непрочитанными сообщениями (notification badge или inline badge)
+
+---
+
+### Extensibility Guide
+
+<!-- ========================================== -->
+<!-- GUIDE: Extending Chat Components          -->
+<!-- AI-TAG: chat-extensibility-guide           -->
+<!-- ========================================== -->
+
+**4 практических примера как расширить и адаптировать chat компоненты:**
+
+#### Example 1: Добавить Typing Indicator вместо Message Preview
+
+**Проблема**: По дизайну есть message preview, но нужно показать что собеседник печатает.
+
+**Решение**: Заменить message preview на typing indicator:
+
+```html
+<!-- Вместо: -->
+<div class="message-preview">Hey, how are you?</div>
+
+<!-- Используйте: -->
+<div class="message-preview message-preview--typing">
+  <span class="typing-indicator">
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+  </span>
+  <span class="typing-text">typing...</span>
+</div>
+```
+
+**CSS:**
+```css
+.typing-indicator {
+  display: inline-flex;
+  gap: 3px;
+}
+
+.typing-indicator .dot {
+  width: 4px;
+  height: 4px;
+  background: #747B84;
+  border-radius: 50%;
+  animation: typing 1.4s infinite;
+}
+
+.typing-text {
+  margin-left: 5px;
+  color: #747B84;
+  font-style: italic;
+}
+```
+
+---
+
+#### Example 2: Добавить Online Status Dot к аватару
+
+**Проблема**: По дизайну есть status ring, но нужно добавить green dot для online status.
+
+**Решение**: Добавить online dot поверх аватара:
+
+```html
+<div class="avatar-container">
+  <img src="avatar.jpg" alt="User" class="avatar-image">
+  <span class="online-dot"></span>
+</div>
+```
+
+**CSS:**
+```css
+.avatar-container {
+  position: relative;
+}
+
+.online-dot {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  width: 12px;
+  height: 12px;
+  background: #11BB8D;  /* Success green */
+  border: 2px solid #FFFFFF;
+  border-radius: 50%;
+  z-index: 10;
+}
+```
+
+**Комбинируется с:** Status ring, notification badge
+
+---
+
+#### Example 3: Создать Pinned Chat Variant (закрепленный чат)
+
+**Проблема**: По дизайну нет pinned чатов, но нужно визуально выделить закрепленные.
+
+**Решение**: Добавить pin icon и subtle background:
+
+```html
+<div class="chat-item chat-item--pinned">
+  <div class="avatar-container">
+    <!-- Avatar -->
+  </div>
+  <div class="content-column">
+    <div class="name-row">
+      <span class="contact-name">Alex</span>
+      <svg class="pin-icon"><!-- Pin icon --></svg>
+      <span class="timestamp">Yesterday</span>
+    </div>
+    <!-- Message preview -->
+  </div>
+</div>
+```
+
+**CSS:**
+```css
+.chat-item--pinned {
+  background: rgba(65, 65, 230, 0.03);  /* Subtle blue tint */
+  border-left: 3px solid #4141E6;
+}
+
+.pin-icon {
+  width: 16px;
+  height: 16px;
+  color: #4141E6;
+  margin-left: auto;
+  margin-right: 5px;
+}
+```
+
+---
+
+#### Example 4: Добавить Multi-Line Message Preview с Emoji
+
+**Проблема**: По дизайну message preview одна строка, но нужно показать 2 строки с emoji.
+
+**Решение**: Расширить message preview и добавить emoji support:
+
+```html
+<div class="message-preview message-preview--multi-line">
+  <span class="emoji">😂</span>
+  <span class="text">That's hilarious! I can't believe you actually...</span>
+</div>
+```
+
+**CSS:**
+```css
+.message-preview--multi-line {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;  /* Limit to 2 lines */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-height: 1.40;
+  max-height: calc(13px * 1.40 * 2);  /* 2 lines max */
+}
+
+.message-preview .emoji {
+  font-size: 14px;
+  margin-right: 3px;
+}
+```
+
+**Используйте когда:** нужно показать больше контекста сообщения, для Desktop версии с большим пространством
+
+---
+
+### Complete CSS Implementation
+
+<!-- ========================================== -->
+<!-- CSS: Full Chat Components Implementation   -->
+<!-- AI-TAG: chat-css-full-implementation       -->
+<!-- ========================================== -->
+
+```css
+/* ============================================================================ */
+/* CHAT & MESSAGING COMPONENTS                                                 */
+/* AI-TAG: chat-messaging-system                                               */
+/* FILE: styles/chat-components.css                                            */
+/* ============================================================================ */
+
+/* ========================================== */
+/* CSS Variables                              */
+/* AI-TAG: chat-css-variables                 */
+/* ========================================== */
+
+:root {
+  /* Chat Container */
+  --chat-screen-width: 375px;
+  --chat-screen-radius: 30px;
+  --chat-screen-padding: 30px;
+
+  /* Chat List Item */
+  --chat-item-padding-h: 16px;
+  --chat-item-padding-v: 10px;
+  --chat-item-gap: 10px;  /* Avatar to content spacing */
+  --chat-item-hover-bg: rgba(65, 65, 230, 0.05);
+
+  /* Avatar */
+  --chat-avatar-size: 56px;
+  --chat-avatar-image-size: 48px;
+  --chat-avatar-offset: 4px;
+  --chat-avatar-radius: 40px;
+
+  /* Avatar Status Ring */
+  --chat-avatar-ring-width: 2px;
+  --chat-avatar-ring-purple: #833AB4;  /* NEW COLOR */
+  --chat-avatar-ring-blue: #4141E6;
+
+  /* Notification Badge (on avatar) */
+  --chat-notif-badge-height: 20px;
+  --chat-notif-badge-padding: 4px 2px;
+  --chat-notif-badge-bg: #4141E6;
+  --chat-notif-badge-radius: 20px;
+  --chat-notif-badge-font: 600 10px/1.40 'Archivo';
+  --chat-notif-badge-color: #FFFFFF;
+  --chat-notif-badge-offset: -2px;
+
+  /* Unread Badge (inline) */
+  --chat-unread-badge-height: 20px;
+  --chat-unread-badge-padding: 4px 2px;
+  --chat-unread-badge-bg: #4141E6;
+  --chat-unread-badge-radius: 20px;
+  --chat-unread-badge-font: 600 10px/1.40 'Archivo';
+  --chat-unread-badge-color: #FFFFFF;
+  --chat-unread-badge-margin: 5px;
+
+  /* Typography */
+  --chat-name-font: 600 16px/1.40 'Archivo';
+  --chat-name-color: #09101D;
+
+  --chat-message-font: 400 13px/1.40 'Archivo';
+  --chat-message-color: #747B84;
+
+  --chat-timestamp-font: 400 13px/1.40 'Archivo';
+  --chat-timestamp-color: #747B84;
+
+  /* Special Indicators */
+  --chat-indicator-icon-size: 24px;
+  --chat-indicator-font: 400 13px/1.40 'Archivo';
+  --chat-indicator-color: #747B84;
+  --chat-indicator-spacing: 5px;
+
+  /* Photo Thumbnails */
+  --chat-thumb-size: 30px;
+  --chat-thumb-radius: 10px;
+  --chat-thumb-spacing: 5px;
+
+  /* Group Chat Avatars */
+  --chat-group-avatar-size: 40px;
+  --chat-group-avatar-border: 4px;
+  --chat-group-avatar-overlap: -6px;
+  --chat-small-avatar-32: 32px;
+  --chat-small-avatar-24: 24px;
+
+  /* Content Layout */
+  --chat-content-row-gap: 2px;
+}
+
+/* ========================================== */
+/* COMPONENT: Chat Screen Container           */
+/* AI-TAG: chat-screen-container              */
+/* ========================================== */
+
+.chat-screen {
+  width: var(--chat-screen-width);
+  border-radius: var(--chat-screen-radius);
+  padding: var(--chat-screen-padding) 0;
+  background: #FFFFFF;
+  overflow: hidden;
+}
+
+/* ========================================== */
+/* COMPONENT: Chat List Container             */
+/* AI-TAG: chat-list-container                */
+/* ========================================== */
+
+.chat-list {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ========================================== */
+/* COMPONENT: Chat List Item                  */
+/* AI-TAG: chat-list-item                     */
+/* ========================================== */
+
+.chat-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--chat-item-gap);
+  padding: var(--chat-item-padding-v) var(--chat-item-padding-h);
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.chat-item:hover {
+  background: var(--chat-item-hover-bg);
+}
+
+.chat-item:active {
+  background: rgba(65, 65, 230, 0.08);
+}
+
+/* ========================================== */
+/* COMPONENT: Avatar Container                */
+/* AI-TAG: chat-avatar-container              */
+/* ========================================== */
+
+.avatar-container {
+  position: relative;
+  width: var(--chat-avatar-size);
+  height: var(--chat-avatar-size);
+  flex-shrink: 0;
+}
+
+.avatar-image {
+  width: var(--chat-avatar-image-size);
+  height: var(--chat-avatar-image-size);
+  border-radius: var(--chat-avatar-radius);
+  object-fit: cover;
+  position: absolute;
+  top: var(--chat-avatar-offset);
+  left: var(--chat-avatar-offset);
+}
+
+/* ========================================== */
+/* COMPONENT: Avatar Status Ring              */
+/* AI-TAG: chat-avatar-status-ring            */
+/* ========================================== */
+
+.avatar-container--ring-purple {
+  border: var(--chat-avatar-ring-width) solid var(--chat-avatar-ring-purple);
+  border-radius: var(--chat-avatar-radius);
+}
+
+.avatar-container--ring-blue {
+  border: var(--chat-avatar-ring-width) solid var(--chat-avatar-ring-blue);
+  border-radius: var(--chat-avatar-radius);
+}
+
+/* ========================================== */
+/* COMPONENT: Notification Badge (on avatar)  */
+/* AI-TAG: chat-notification-badge            */
+/* ========================================== */
+
+.notification-badge {
+  position: absolute;
+  top: var(--chat-notif-badge-offset);
+  right: var(--chat-notif-badge-offset);
+  min-height: var(--chat-notif-badge-height);
+  min-width: var(--chat-notif-badge-height);  /* Circle when single digit */
+  padding: var(--chat-notif-badge-padding);
+  background: var(--chat-notif-badge-bg);
+  border-radius: var(--chat-notif-badge-radius);
+
+  font: var(--chat-notif-badge-font);
+  color: var(--chat-notif-badge-color);
+  text-align: center;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+/* ========================================== */
+/* COMPONENT: Content Column                  */
+/* AI-TAG: chat-content-column                */
+/* ========================================== */
+
+.content-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--chat-content-row-gap);
+  min-width: 0;  /* Allow text truncation */
+}
+
+/* ========================================== */
+/* COMPONENT: Name Row                        */
+/* AI-TAG: chat-name-row                      */
+/* ========================================== */
+
+.name-row {
+  display: flex;
+  align-items: center;
+  gap: var(--chat-unread-badge-margin);
+}
+
+.contact-name {
+  font: var(--chat-name-font);
+  color: var(--chat-name-color);
+}
+
+.timestamp {
+  font: var(--chat-timestamp-font);
+  color: var(--chat-timestamp-color);
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+/* ========================================== */
+/* COMPONENT: Unread Badge (Inline)           */
+/* AI-TAG: chat-unread-badge-inline           -->
+/* ========================================== */
+
+.unread-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--chat-unread-badge-height);
+  min-width: var(--chat-unread-badge-height);
+  padding: var(--chat-unread-badge-padding);
+  background: var(--chat-unread-badge-bg);
+  border-radius: var(--chat-unread-badge-radius);
+
+  font: var(--chat-unread-badge-font);
+  color: var(--chat-unread-badge-color);
+}
+
+/* ========================================== */
+/* COMPONENT: Message Preview                 */
+/* AI-TAG: chat-message-preview               */
+/* ========================================== */
+
+.message-preview {
+  font: var(--chat-message-font);
+  color: var(--chat-message-color);
+
+  /* Truncate to 1 line */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.message-preview--multi-line {
+  /* Allow 2 lines */
+  white-space: normal;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+/* ========================================== */
+/* COMPONENT: Special Indicators              */
+/* AI-TAG: chat-special-indicators            */
+/* ========================================== */
+
+.indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--chat-indicator-spacing);
+}
+
+.indicator-icon {
+  width: var(--chat-indicator-icon-size);
+  height: var(--chat-indicator-icon-size);
+  flex-shrink: 0;
+}
+
+.indicator-text {
+  font: var(--chat-indicator-font);
+  color: var(--chat-indicator-color);
+}
+
+/* Reply Indicator */
+.indicator--reply .indicator-icon {
+  border-radius: 40px;  /* Avatar style */
+}
+
+/* Media Indicator */
+.indicator--media .indicator-icon {
+  /* Icon styles */
+}
+
+/* Transfer Indicator */
+.indicator--transfer .indicator-icon {
+  /* Icon styles */
+}
+
+/* ========================================== */
+/* COMPONENT: Photo Thumbnails                */
+/* AI-TAG: chat-photo-thumbnails              */
+/* ========================================== */
+
+.photo-thumbnails {
+  display: flex;
+  gap: var(--chat-thumb-spacing);
+}
+
+.photo-thumb {
+  width: var(--chat-thumb-size);
+  height: var(--chat-thumb-size);
+  border-radius: var(--chat-thumb-radius);
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+/* ========================================== */
+/* COMPONENT: Group Chat Avatars              */
+/* AI-TAG: chat-group-avatars                 */
+/* ========================================== */
+
+.avatar-group {
+  display: flex;
+  position: relative;
+  width: calc(var(--chat-avatar-size) + 6px);  /* Account for overlap */
+  height: var(--chat-avatar-size);
+}
+
+.group-avatar {
+  width: var(--chat-group-avatar-size);
+  height: var(--chat-group-avatar-size);
+  border: var(--chat-group-avatar-border) solid #FFFFFF;
+  border-radius: 50%;
+  object-fit: cover;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.group-avatar:nth-child(1) {
+  left: 0;
+  z-index: 1;
+}
+
+.group-avatar:nth-child(2) {
+  left: calc(var(--chat-group-avatar-size) + var(--chat-group-avatar-overlap));
+  z-index: 2;
+}
+
+.group-avatar:nth-child(3) {
+  left: calc((var(--chat-group-avatar-size) + var(--chat-group-avatar-overlap)) * 2);
+  z-index: 3;
+}
+
+/* Small Avatar Variants */
+.group-avatar--32 {
+  width: var(--chat-small-avatar-32);
+  height: var(--chat-small-avatar-32);
+  border-width: 3px;
+}
+
+.group-avatar--24 {
+  width: var(--chat-small-avatar-24);
+  height: var(--chat-small-avatar-24);
+  border-width: 2px;
+}
+
+/* ========================================== */
+/* Utility Classes                            */
+/* AI-TAG: chat-utility-classes               */
+/* ========================================== */
+
+.chat-item--pinned {
+  background: rgba(65, 65, 230, 0.03);
+  border-left: 3px solid #4141E6;
+}
+
+.chat-item--muted {
+  opacity: 0.5;
+}
+
+.chat-item--archived {
+  opacity: 0.4;
+}
+
+/* Online Status Dot */
+.online-dot {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  width: 12px;
+  height: 12px;
+  background: #11BB8D;  /* Success green */
+  border: 2px solid #FFFFFF;
+  border-radius: 50%;
+  z-index: 10;
+}
+
+/* Typing Indicator */
+.typing-indicator {
+  display: inline-flex;
+  gap: 3px;
+  align-items: center;
+}
+
+.typing-indicator .dot {
+  width: 4px;
+  height: 4px;
+  background: #747B84;
+  border-radius: 50%;
+  animation: typing 1.4s infinite;
+}
+
+.typing-indicator .dot:nth-child(1) { animation-delay: 0s; }
+.typing-indicator .dot:nth-child(2) { animation-delay: 0.2s; }
+.typing-indicator .dot:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes typing {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+  30% { transform: translateY(-4px); opacity: 1; }
+}
+
+.typing-text {
+  margin-left: 5px;
+  color: #747B84;
+  font-style: italic;
+  font-size: 13px;
+}
+
+/* ========================================== */
+/* Responsive Adjustments                     */
+/* AI-TAG: chat-responsive                    */
+/* ========================================== */
+
+@media (min-width: 768px) {
+  .chat-screen {
+    width: 100%;
+    max-width: 600px;
+  }
+
+  .chat-item {
+    padding: 12px 20px;
+  }
+
+  .message-preview {
+    /* Allow 2 lines on larger screens */
+    white-space: normal;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+}
+
+/* ========================================== */
+/* Accessibility                              */
+/* AI-TAG: chat-accessibility                 */
+/* ========================================== */
+
+.chat-item:focus {
+  outline: 2px solid #4141E6;
+  outline-offset: -2px;
+}
+
+.chat-item[aria-selected="true"] {
+  background: rgba(65, 65, 230, 0.1);
+}
+
+/* Screen reader only */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+```
+
+---
+
+### Usage Examples
+
+<!-- ============================================================================ -->
+<!-- USAGE EXAMPLES                                                              -->
+<!-- AI-TAG: chat-usage-examples                                                 -->
+<!-- ============================================================================ -->
+
+<!-- ========================================== -->
+<!-- USAGE EXAMPLE: Basic Chat Item             -->
+<!-- AI-TAG: example-chat-item-basic            -->
+<!-- ========================================== -->
+
+#### Example 1: Basic Chat Item (с notification badge на аватаре)
+
+```html
+<div class="chat-list">
+  <!-- Chat Item: Jenny Wilson -->
+  <div class="chat-item" role="button" tabindex="0" aria-label="Chat with Jenny Wilson, 11 unread messages">
+    <!-- Avatar with ring and notification badge -->
+    <div class="avatar-container avatar-container--ring-purple">
+      <img src="jenny.jpg" alt="Jenny Wilson" class="avatar-image">
+      <span class="notification-badge">11</span>
+    </div>
+
+    <!-- Content Column -->
+    <div class="content-column">
+      <!-- Name Row -->
+      <div class="name-row">
+        <span class="contact-name">Jenny Wilson</span>
+        <span class="unread-badge">3</span>
+        <span class="timestamp">2 hrs</span>
+      </div>
+
+      <!-- Message Preview with Reply Indicator -->
+      <div class="message-preview">
+        <span class="indicator indicator--reply">
+          <img src="jay.jpg" alt="Jay Watson" class="indicator-icon">
+          <span class="indicator-text">Jay Watson: Let me know if...</span>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+<!-- ========================================== -->
+<!-- USAGE EXAMPLE: Chat with Media Preview     -->
+<!-- AI-TAG: example-chat-item-media            -->
+<!-- ========================================== -->
+
+#### Example 2: Chat with Media Preview (photo thumbnails)
+
+```html
+<div class="chat-item" role="button" tabindex="0" aria-label="Chat with Jacob Jones">
+  <!-- Avatar with blue status ring -->
+  <div class="avatar-container avatar-container--ring-blue">
+    <img src="jacob.jpg" alt="Jacob Jones" class="avatar-image">
+  </div>
+
+  <!-- Content Column -->
+  <div class="content-column">
+    <!-- Name Row -->
+    <div class="name-row">
+      <span class="contact-name">Jacob Jones</span>
+      <span class="timestamp">Yesterday</span>
+    </div>
+
+    <!-- Message Preview with Photo Thumbnails -->
+    <div class="message-preview">
+      <div class="photo-thumbnails">
+        <img src="photo1.jpg" alt="Photo 1" class="photo-thumb">
+        <img src="photo2.jpg" alt="Photo 2" class="photo-thumb">
+        <img src="photo3.jpg" alt="Photo 3" class="photo-thumb">
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+<!-- ========================================== -->
+<!-- USAGE EXAMPLE: Group Chat                  -->
+<!-- AI-TAG: example-chat-item-group            -->
+<!-- ========================================== -->
+
+#### Example 3: Group Chat (stacked avatars)
+
+```html
+<div class="chat-item" role="button" tabindex="0" aria-label="Group chat: Foodlovers">
+  <!-- Group Avatars (stacked) -->
+  <div class="avatar-group">
+    <img src="member1.jpg" alt="Member 1" class="group-avatar">
+    <img src="member2.jpg" alt="Member 2" class="group-avatar">
+  </div>
+
+  <!-- Content Column -->
+  <div class="content-column">
+    <!-- Name Row -->
+    <div class="name-row">
+      <span class="contact-name">Foodlovers</span>
+      <span class="timestamp">Mar 24</span>
+    </div>
+
+    <!-- Message Preview -->
+    <div class="message-preview">
+      <span class="indicator-text">Sarah: That looks delicious! Where did...</span>
+    </div>
+  </div>
+</div>
+```
+
+<!-- ========================================== -->
+<!-- USAGE EXAMPLE: Transfer Indicator          -->
+<!-- AI-TAG: example-chat-item-transfer         -->
+<!-- ========================================== -->
+
+#### Example 4: Chat with Transfer Indicator
+
+```html
+<div class="chat-item" role="button" tabindex="0" aria-label="Chat with Guy Hawkins">
+  <!-- Avatar (no ring) -->
+  <div class="avatar-container">
+    <img src="guy.jpg" alt="Guy Hawkins" class="avatar-image">
+    <span class="online-dot"></span>  <!-- Online status -->
+  </div>
+
+  <!-- Content Column -->
+  <div class="content-column">
+    <!-- Name Row -->
+    <div class="name-row">
+      <span class="contact-name">Guy Hawkins</span>
+      <span class="timestamp">11:30 AM</span>
+    </div>
+
+    <!-- Message Preview with Transfer Indicator -->
+    <div class="message-preview">
+      <span class="indicator indicator--transfer">
+        <svg class="indicator-icon"><!-- Transfer icon --></svg>
+        <span class="indicator-text">Transfer</span>
+      </span>
+    </div>
+  </div>
+</div>
+```
+
+<!-- ========================================== -->
+<!-- USAGE EXAMPLE: Complete Chat List          -->
+<!-- AI-TAG: example-chat-list-complete         -->
+<!-- ========================================== -->
+
+#### Example 5: Complete Chat List (полный экран)
+
+```html
+<div class="chat-screen">
+  <div class="chat-list" role="list">
+    <!-- Chat 1: Unread with reply -->
+    <div class="chat-item" role="listitem">
+      <div class="avatar-container avatar-container--ring-purple">
+        <img src="jenny.jpg" alt="" class="avatar-image">
+        <span class="notification-badge" aria-label="11 unread">11</span>
+      </div>
+      <div class="content-column">
+        <div class="name-row">
+          <span class="contact-name">Jenny Wilson</span>
+          <span class="unread-badge" aria-label="3 unread">3</span>
+          <span class="timestamp">2 hrs</span>
+        </div>
+        <div class="message-preview">
+          <span class="sr-only">Reply from Jay Watson:</span>
+          Let me know if...
+        </div>
+      </div>
+    </div>
+
+    <!-- Chat 2: Pinned chat -->
+    <div class="chat-item chat-item--pinned" role="listitem">
+      <div class="avatar-container avatar-container--ring-blue">
+        <img src="kristin.jpg" alt="" class="avatar-image">
+        <span class="online-dot" aria-label="Online"></span>
+      </div>
+      <div class="content-column">
+        <div class="name-row">
+          <span class="contact-name">Kristin Watson</span>
+          <svg class="pin-icon" aria-label="Pinned"><!-- Pin --></svg>
+          <span class="timestamp">10:45 AM</span>
+        </div>
+        <div class="message-preview message-preview--typing">
+          <span class="typing-indicator">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+          </span>
+          <span class="typing-text">typing...</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Chat 3: Group chat -->
+    <div class="chat-item" role="listitem">
+      <div class="avatar-group">
+        <img src="member1.jpg" alt="" class="group-avatar">
+        <img src="member2.jpg" alt="" class="group-avatar">
+      </div>
+      <div class="content-column">
+        <div class="name-row">
+          <span class="contact-name">Foodlovers</span>
+          <span class="timestamp">Yesterday</span>
+        </div>
+        <div class="message-preview">
+          Sarah: That looks delicious!
+        </div>
+      </div>
+    </div>
+
+    <!-- Chat 4: Media preview -->
+    <div class="chat-item" role="listitem">
+      <div class="avatar-container avatar-container--ring-blue">
+        <img src="jacob.jpg" alt="" class="avatar-image">
+      </div>
+      <div class="content-column">
+        <div class="name-row">
+          <span class="contact-name">Jacob Jones</span>
+          <span class="timestamp">Mar 24</span>
+        </div>
+        <div class="message-preview">
+          <div class="photo-thumbnails">
+            <img src="p1.jpg" alt="Photo" class="photo-thumb">
+            <img src="p2.jpg" alt="Photo" class="photo-thumb">
+            <img src="p3.jpg" alt="Photo" class="photo-thumb">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+---
+
+### Accessibility Guidelines
+
+**ARIA Roles & Attributes:**
+```html
+<!-- Chat List -->
+<div class="chat-list" role="list">
+
+  <!-- Chat Item -->
+  <div class="chat-item"
+       role="listitem"
+       tabindex="0"
+       aria-label="Chat with Jenny Wilson, 11 unread messages, last message 2 hours ago">
+
+    <!-- Notification Badge -->
+    <span class="notification-badge" aria-label="11 unread messages">11</span>
+
+    <!-- Online Status -->
+    <span class="online-dot" aria-label="Online"></span>
+
+    <!-- Typing Indicator -->
+    <span class="typing-indicator" aria-live="polite" aria-label="Typing">
+      <!-- Dots -->
+    </span>
+  </div>
+</div>
+```
+
+**Keyboard Navigation:**
+- `Tab` / `Shift+Tab`: Navigate between chat items
+- `Enter` / `Space`: Open selected chat
+- `Arrow Up` / `Arrow Down`: Navigate chat list
+- `Delete`: Archive/delete chat (with confirmation)
+
+**Screen Reader Support:**
+- All interactive elements have `aria-label`
+- Unread counts announced with badge
+- Typing indicators with `aria-live="polite"`
+- Online status announced
+- Group chat member count announced
+
+---
+
+### Best Practices
+
+**1. Performance:**
+- Virtualize long chat lists (render only visible items)
+- Lazy load avatars as user scrolls
+- Debounce typing indicators
+- Cache avatar images
+
+**2. Real-time Updates:**
+- Use WebSocket для live message updates
+- Animate new messages appearing
+- Update unread counts instantly
+- Show typing indicators in real-time
+
+**3. Content Guidelines:**
+- Truncate long message previews с ellipsis
+- Show emoji в preview если есть
+- Display media indicators для images/videos/files
+- Format timestamps относительно (2 hrs ago, Yesterday, Mar 24)
+
+**4. Visual Hierarchy:**
+- Unread chats: bold name + badge
+- Pinned chats: subtle background + pin icon
+- Muted chats: opacity 0.5
+- Archived chats: opacity 0.4 или скрыты
+
+**5. Status Indicators Priority:**
+- Notification Badge (highest) — непрочитанные сообщения
+- Online Dot — активность пользователя
+- Status Ring — special status (new chat, важный контакт)
+- Typing Indicator — real-time активность
+
+---
+
 ## Как использовать эту дизайн-систему
 
 ### Для дизайнеров
@@ -7315,9 +8768,65 @@ Complete CSS для всех компонентов Cards & Listings:
 
 ## Версионирование и обновления
 
-**Текущая версия**: v5.11.0
+**Текущая версия**: v5.12.0
 
 ### Changelog
+
+#### v5.12.0 (2025-11-19)
+- **Добавлена новая секция "Messaging & Chat"** - модульная система компонентов для chat-интерфейсов с IDE AI navigation markers:
+  - **Принцип модульности**: каждый chat list item состоит из 7 переиспользуемых блоков
+  - **IDE AI Navigation Markers**: все компоненты помечены <!-- AI-TAG: --> для быстрой навигации
+  - **Container Specifications**:
+    - Screen: 375px width, borderRadius 30px, padding 30px V
+    - Chat List Item: padding 16px H × 10px V, 10px gap между avatar и content
+    - Background: transparent (hover: rgba(65,65,230,0.05))
+  - **Typography System** (8 text styles):
+    - Contact Name: 16px / 600 Archivo, color #09101D
+    - Message Preview: 13px / 400 Archivo, color #747B84
+    - Timestamp: 13px / 400 right-aligned
+    - Unread Badge: 10px / 600 white
+    - Special Indicators: 13px / 400 #747B84
+    - Group Member: 10px / 600 #09101D
+    - Separator: "・" character
+  - **8 Modular Components** (каждый с AI-TAG):
+    - **Avatar Container** (AI-TAG: chat-avatar-container): 56×56px с image offset 4px для white border эффекта
+    - **Avatar Status Ring** (AI-TAG: chat-avatar-status-ring): 2px border, purple #833AB4 (новый!) или blue #4141E6
+    - **Notification Badge** (AI-TAG: chat-notification-badge): 20px badge на аватаре top-right, bg #4141E6, text 10px/600 white
+    - **Content Column** (AI-TAG: chat-content-column): flex layout, 2px row gap, calculated max-width 277px
+    - **Unread Badge Inline** (AI-TAG: chat-unread-badge-inline): 20px inline badge рядом с именем
+    - **Special Indicators** (AI-TAG: chat-special-indicators): Reply (24×24px avatar), Media, Transfer indicators
+    - **Photo Thumbnails** (AI-TAG: chat-photo-thumbnails): 30×30px, borderRadius 10px, 5px spacing
+    - **Group Chat Avatars** (AI-TAG: chat-group-avatars): stacked 40×40px с 4px white borders, -6px overlap
+  - **Complete Layout: Chat List Item** с ASCII diagram и breakdown всех 8 компонентов
+  - **Modular Components Matrix**: таблица совместимости для 6 типов чатов (Direct Message, Group Chat, Media Preview, Transfer, Reply, Unread)
+  - **Extensibility Guide** с 4 практическими примерами:
+    - Добавление Typing Indicator (animated dots)
+    - Добавление Online Status Dot (12px green dot)
+    - Создание Pinned Chat Variant (pin icon + subtle background)
+    - Multi-Line Message Preview с Emoji (2 lines max)
+  - **Новый цвет в палитру**:
+    - #833AB4 - avatar status ring purple (для special status, новых сообщений)
+  - **Complete CSS Implementation** (500+ lines) с IDE AI-TAG markers:
+    - AI-TAG: chat-screen-container, chat-list-container, chat-list-item
+    - AI-TAG: chat-avatar-container, chat-avatar-status-ring, chat-notification-badge
+    - AI-TAG: chat-content-column, chat-name-row, chat-unread-badge-inline
+    - AI-TAG: chat-message-preview, chat-special-indicators, chat-photo-thumbnails
+    - AI-TAG: chat-group-avatars, chat-utility-classes, chat-responsive
+    - AI-TAG: chat-accessibility
+  - **5 Usage Examples** с AI-TAG markers:
+    - AI-TAG: example-chat-item-basic (с notification badge)
+    - AI-TAG: example-chat-item-media (с photo thumbnails)
+    - AI-TAG: example-chat-item-group (stacked avatars)
+    - AI-TAG: example-chat-item-transfer (с transfer indicator)
+    - AI-TAG: example-chat-list-complete (полный экран со всеми вариантами)
+  - **Section Navigation Markers**:
+    - <!-- SECTION: Messaging & Chat -->
+    - <!-- FILE REFERENCE: design-system.md#messaging--chat -->
+    - <!-- USAGE: Chat lists, messaging apps, conversation interfaces, social feeds -->
+    - <!-- COMPONENTS: chat-list-item, avatar-ring, unread-badge, status-indicators -->
+    - <!-- AI NAVIGATION: Search for "COMPONENT:" tags to find specific components -->
+  - **Accessibility Guidelines**: ARIA roles, keyboard navigation, screen reader support
+  - **Best Practices**: Performance, Real-time Updates, Content Guidelines, Visual Hierarchy, Status Indicators Priority
 
 #### v5.11.0 (2025-11-19)
 - **Добавлена новая секция "Cards & Listings"** - модульная система карточек для hotels, restaurants, properties, products с IDE AI navigation markers:
