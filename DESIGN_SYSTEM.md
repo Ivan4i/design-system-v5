@@ -46,6 +46,7 @@
 --color-bg-primary: #FFFFFF;
 --color-bg-secondary: #F4F6F9;     /* Светлый серо-голубой */
 --color-bg-tertiary: #D9DDE2;      /* Светло-серый (аватары, плейсхолдеры) */
+--color-bg-toggle: #EAEEF2;        /* Toggle switch background (inactive) */
 --color-bg-dark: #12202F;          /* Темный фон */
 ```
 
@@ -149,6 +150,7 @@
 --font-size-24: 1.5rem;       /* 24px */
 --font-size-26: 1.625rem;     /* 26px */
 --font-size-32: 2rem;         /* 32px */
+--font-size-72: 4.5rem;       /* 72px */
 ```
 
 ### Font Weights
@@ -172,6 +174,7 @@
 --line-height-36: 2.25rem;    /* 36px */
 --line-height-40: 2.5rem;     /* 40px */
 --line-height-50: 3.15rem;    /* 50.4px */
+--line-height-tight: 0.70;    /* 70% (relative) - для больших заголовков */
 ```
 
 ### Text Styles (iOS Mobile)
@@ -266,6 +269,42 @@
 - **Line Height**: 1.40 (14px)
 - **Color**: #FFFFFF (white)
 - **Использование**: "Live" badge, статусные метки
+
+#### Display Heading (Extra Large)
+- **Font Size**: 72px (4.5rem)
+- **Font Weight**: 800 (Extrabold)
+- **Font Family**: 'Archivo'
+- **Line Height**: 0.70 (50.4px)
+- **Color**: #09101D (--color-text-primary)
+- **Использование**: Большие заголовки секций, главные экраны
+- **Пример**: Заголовок "Badges" на главном экране
+
+#### Mixed Text Style (Bold + Regular)
+- **Font Size**: 12px (0.75rem)
+- **Font Family**: 'Archivo'
+- **Line Height**: 1.40 (16.8px)
+- **Color**: #09101D (--color-text-primary) или #414249 (--color-text-secondary)
+- **Использование**: Комбинированный текст с выделением (например, "98+ **Playlists** on Napster")
+- **Структура**:
+  - Часть 1: Font Weight 700 (Bold)
+  - Часть 2: Font Weight 400 (Regular)
+- **Пример CSS**:
+```css
+.mixed-text {
+  font-size: 12px;
+  font-family: 'Archivo';
+  line-height: 1.40;
+  color: var(--color-text-primary);
+}
+
+.mixed-text__bold {
+  font-weight: 700;
+}
+
+.mixed-text__regular {
+  font-weight: 400;
+}
+```
 
 ---
 
@@ -715,7 +754,120 @@ Border: none
 
 ---
 
-### 3. Inputs
+### 3. Toggle Switch (из реального Flutter кода)
+
+#### Toggle Switch Specification
+
+**Спецификация из кода:**
+- **Size**: 52px × 31px
+- **Border Radius**: 40px (--radius-avatar)
+- **Background (inactive)**: #EAEEF2 (--color-bg-toggle)
+- **Background (active)**: #4141E6 (--color-accent-blue)
+- **Transition**: 200ms ease
+
+**Toggle Circle:**
+- **Size**: 31px × 31px
+- **Background**: #FFFFFF (white)
+- **Border**: 2px solid #EAEEF2 (inactive) or #4141E6 (active)
+- **Border Radius**: 40px
+- **Position (inactive)**: left: 0
+- **Position (active)**: left: 21px (52px - 31px)
+- **Transition**: left 200ms ease
+
+**Структура Toggle Switch:**
+
+```
+Container: 52×31 (border-radius: 40px)
+├─ Background (inactive): #EAEEF2
+├─ Background (active): #4141E6
+└─ Toggle Circle: 31×31 (position: left 0 or 21px)
+   ├─ Background: white
+   ├─ Border: 2px solid (matches container bg)
+   └─ Border Radius: 40px
+```
+
+**States:**
+
+**1. Inactive (Off)**
+```
+Container Background: #EAEEF2 (--color-bg-toggle)
+Circle Position: left 0
+Circle Border: 2px solid #EAEEF2
+```
+
+**2. Active (On)**
+```
+Container Background: #4141E6 (--color-accent-blue)
+Circle Position: left 21px
+Circle Border: 2px solid #4141E6
+```
+
+**3. Disabled (Off)**
+```
+Container Background: #EAEEF2
+Circle Border: 2px solid #EAEEF2
+Opacity: 0.5
+Cursor: not-allowed
+```
+
+**4. Disabled (On)**
+```
+Container Background: #4141E6
+Circle Border: 2px solid #4141E6
+Opacity: 0.5
+Cursor: not-allowed
+```
+
+**CSS пример:**
+
+```css
+.toggle-switch {
+  width: 52px;
+  height: 31px;
+  border-radius: var(--radius-avatar); /* 40px */
+  background: var(--color-bg-toggle); /* #EAEEF2 */
+  position: relative;
+  cursor: pointer;
+  transition: background-color 200ms ease;
+}
+
+.toggle-switch--active {
+  background: var(--color-accent-blue); /* #4141E6 */
+}
+
+.toggle-switch__circle {
+  width: 31px;
+  height: 31px;
+  background: white;
+  border: var(--border-width-2) solid var(--color-bg-toggle);
+  border-radius: var(--radius-avatar); /* 40px */
+  position: absolute;
+  left: 0;
+  top: 0;
+  transition: left 200ms ease, border-color 200ms ease;
+}
+
+.toggle-switch--active .toggle-switch__circle {
+  left: 21px;
+  border-color: var(--color-accent-blue);
+}
+
+.toggle-switch:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+```
+
+**Usage Guidelines:**
+- **Label Position**: Left or right of toggle (8-12px spacing)
+- **Accessibility**: Include ARIA attributes (role="switch", aria-checked)
+- **Keyboard**: Support Space/Enter for toggling
+- **Использование**: Settings toggles, feature on/off, binary choices
+
+---
+
+### 4. Inputs
 
 #### Text Input
 
