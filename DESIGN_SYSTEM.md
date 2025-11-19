@@ -936,6 +936,280 @@
 
 ---
 
+### 17. Photo Grids
+
+Photo Grid components для отображения коллекций изображений в различных компоновках.
+
+#### Container Properties
+
+- **Container**:
+  - Width: 375px (стандартная ширина для мобильных экранов)
+  - Padding: 16px (horizontal), 5px (vertical)
+  - Background: color-bg-primary (#FFFFFF)
+  - Border Radius: 15px (для внешнего контейнера с рамкой)
+  - Border: 1px solid #7B61FF (secondary) или #4141E6 (primary)
+
+#### Photo Item Properties
+
+- **Background**: #F4F6F9 (color-bg-secondary)
+- **Border Radius**:
+  - Large photos: 20px (radius-20)
+  - Thumbnails: 15px (radius-15)
+- **Clip Behavior**: antiAlias
+- **Image Fit**: cover
+- **Placeholder**: NetworkImage с placehold.co URLs
+- **Icon Container**: 24px × 24px (для действий: favorite, share, etc.)
+
+#### Layout Variants
+
+##### Variant 1: 2×2 Grid (Equal Items)
+Сетка из 4 равных фотографий в 2 ряда по 2 колонки.
+
+- **Container Height**: 280px
+- **Grid**:
+  - Rows: 2
+  - Columns: 2
+  - Row Spacing: 10px (space-2-5)
+  - Column Spacing: 10px (space-2-5)
+- **Individual Photo**:
+  - Size: 166.50px × 130px (expandable)
+  - Border Radius: 20px (radius-20)
+  - Background: #F4F6F9
+- **Use Case**: Фотогалереи, предпросмотр альбомов, равномерная сетка
+
+##### Variant 2: Horizontal Scroll (4 Small Thumbnails - Expandable)
+Горизонтальный скролл из 4 миниатюр с равным распределением пространства.
+
+- **Container Height**: 90px
+- **Spacing**: 5px (space-1-25) between items
+- **Individual Photo**:
+  - Size: 82px × 80px (expandable with flex)
+  - Border Radius: 15px (radius-15)
+  - Background: #F4F6F9
+- **Use Case**: Компактные превью, горизонтальная галерея
+
+##### Variant 3: Horizontal Scroll (4 Fixed Width)
+Горизонтальный скролл с фиксированной шириной элементов.
+
+- **Container Height**: 90px
+- **Spacing**: 10px (space-2-5) between items
+- **Individual Photo**:
+  - Size: 90px × 80px (fixed width)
+  - Border Radius: 15px (radius-15)
+  - Background: #F4F6F9
+- **Use Case**: Список категорий, миниатюры продуктов
+
+##### Variant 4: Horizontal Scroll (3 Items Only)
+Горизонтальный скролл из 3 элементов для компактного отображения.
+
+- **Container Height**: 90px
+- **Spacing**: 5px (space-1-25) between items
+- **Individual Photo**:
+  - Size: 111px × 80px (expandable, 3 items total)
+  - Border Radius: 15px (radius-15)
+  - Background: #F4F6F9
+- **Use Case**: Короткие списки, рекомендации
+
+##### Variant 5: 3 Small + 1 Large (Top Heavy)
+Композиция: 3 маленькие фотографии сверху, 1 большая снизу.
+
+- **Container Height**: 280px
+- **Top Row**:
+  - Items: 3
+  - Item Size: 107.67px × 100px (expandable)
+  - Spacing: 10px (space-2-5) between items
+  - Border Radius: 20px (radius-20)
+- **Bottom Row**:
+  - Items: 1 (full width)
+  - Item Size: 343px × 160px (expandable)
+  - Border Radius: 20px (radius-20)
+- **Row Spacing**: 10px (space-2-5) или 5px (space-1-25)
+- **Use Case**: Фото коллекции с акцентом на основное изображение
+
+##### Variant 6: 1 Large + 3 Small (Bottom Heavy)
+Композиция: 1 большая фотография сверху, 3 маленькие снизу (зеркальная к Variant 5).
+
+- **Container Height**: 280px
+- **Top Row**:
+  - Items: 1 (full width)
+  - Item Size: 343px × 160px (expandable)
+  - Border Radius: 20px (radius-20)
+- **Bottom Row**:
+  - Items: 3
+  - Item Size: 107.67px × 100px (expandable)
+  - Spacing: 10px (space-2-5) between items
+  - Border Radius: 20px (radius-20)
+- **Row Spacing**: 10px (space-2-5) или 5px (space-1-25)
+- **Use Case**: Фото с акцентом сверху и дополнительными изображениями
+
+##### Variant 7: Asymmetric Left (Large + 2 Small)
+Асимметричная компоновка: 1 большая слева, 2 маленькие справа.
+
+- **Container Height**: 280px (или 290px)
+- **Left Side**:
+  - Items: 1 (large vertical)
+  - Item Size: 233px × 270px (или 166.50px × 280px)
+  - Border Radius: 20px (radius-20)
+- **Right Side**:
+  - Items: 2 (stacked vertically)
+  - Item Size: 100px × 83.33px (или 166.50px × 135px)
+  - Spacing: 10px (space-2-5) between items
+  - Border Radius: 20px (radius-20)
+- **Column Spacing**: 10px (space-2-5) или 5px (space-1-25)
+- **Use Case**: Портретные фото с деталями, Instagram-like layouts
+
+##### Variant 8: Asymmetric Right (2 Small + Large)
+Асимметричная компоновка: 2 маленькие слева, 1 большая справа (зеркальная к Variant 7).
+
+- **Container Height**: 280px (или 290px)
+- **Left Side**:
+  - Items: 2 (stacked vertically)
+  - Item Size: 100px × 83.33px (или 166.50px × 135px)
+  - Spacing: 10px (space-2-5) between items
+  - Border Radius: 20px (radius-20)
+- **Right Side**:
+  - Items: 1 (large vertical)
+  - Item Size: 233px × 270px (или 166.50px × 280px)
+  - Border Radius: 20px (radius-20)
+- **Column Spacing**: 10px (space-2-5) или 5px (space-1-25)
+- **Use Case**: Альтернативная компоновка для портретных фото
+
+##### Variant 9: Full Width + 2 Items (Top-Bottom)
+Компоновка: 1 полноширинная сверху, 2 равные снизу.
+
+- **Container Height**: 280px
+- **Top Row**:
+  - Items: 1 (full width)
+  - Item Size: 343px × 130px (expandable)
+  - Border Radius: 20px (radius-20)
+- **Bottom Row**:
+  - Items: 2
+  - Item Size: 166.50px × 130px (expandable)
+  - Spacing: 10px (space-2-5) between items
+  - Border Radius: 20px (radius-20)
+- **Row Spacing**: 10px (space-2-5)
+- **Use Case**: Главное фото с дополнительными вариантами
+
+##### Variant 10: 2 Items + Full Width (Top-Bottom)
+Компоновка: 2 равные сверху, 1 полноширинная снизу (зеркальная к Variant 9).
+
+- **Container Height**: 280px
+- **Top Row**:
+  - Items: 2
+  - Item Size: 166.50px × 130px (expandable)
+  - Spacing: 10px (space-2-5) between items
+  - Border Radius: 20px (radius-20)
+- **Bottom Row**:
+  - Items: 1 (full width)
+  - Item Size: 343px × 130px (expandable)
+  - Border Radius: 20px (radius-20)
+- **Row Spacing**: 5px (space-1-25) или 10px (space-2-5)
+- **Use Case**: Альтернативная компоновка с акцентом снизу
+
+#### Interactive Elements
+
+- **Icon Overlay**:
+  - Size: 24px × 24px
+  - Position: Centered или positioned (varies by variant)
+  - Background: Semi-transparent overlay (опционально)
+  - Color: white (обычно)
+  - Actions: Favorite, Share, Download, etc.
+
+#### Responsive Behavior
+
+- **Mobile** (< 768px):
+  - Container width: 100% (max 375px)
+  - Maintain aspect ratios
+  - Horizontal scroll для overflow
+
+- **Tablet** (768px - 1024px):
+  - Scale proportionally
+  - Может использовать 2 колонки
+
+- **Desktop** (> 1024px):
+  - Fixed width или max-width
+  - Может отображать несколько grid систем рядом
+
+#### Code Example
+
+```css
+/* Photo Grid Container */
+.photo-grid {
+  width: 375px;
+  padding: 5px 16px;
+}
+
+/* Photo Item */
+.photo-item {
+  background: var(--color-bg-secondary); /* #F4F6F9 */
+  border-radius: var(--radius-20); /* 20px для больших, 15px для thumbnails */
+  overflow: hidden;
+  position: relative;
+}
+
+/* Thumbnail Variant */
+.photo-item--thumbnail {
+  border-radius: var(--radius-15); /* 15px */
+}
+
+/* 2x2 Grid Layout */
+.photo-grid--2x2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 130px);
+  gap: var(--space-2-5); /* 10px */
+}
+
+/* Horizontal Scroll Layout */
+.photo-grid--horizontal {
+  display: flex;
+  gap: var(--space-1-25); /* 5px */
+  overflow-x: auto;
+}
+
+.photo-grid--horizontal .photo-item {
+  flex: 1;
+  min-width: 82px;
+  height: 80px;
+}
+
+/* Asymmetric Layout (Large + 2 Small) */
+.photo-grid--asymmetric {
+  display: flex;
+  gap: var(--space-2-5); /* 10px */
+  height: 270px;
+}
+
+.photo-grid--asymmetric .photo-large {
+  flex: 233px 0 0;
+}
+
+.photo-grid--asymmetric .photo-small-column {
+  flex: 100px 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2-5); /* 10px */
+}
+
+/* Icon Overlay */
+.photo-item__icon {
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  /* Position varies by design */
+}
+```
+
+#### Flutter Implementation Notes
+
+- Используется `Stack` с `Positioned` для размещения элементов
+- `Expanded` виджеты для responsive sizing
+- `clipBehavior: Clip.antiAlias` для скругленных углов
+- `NetworkImage` с `fit: BoxFit.cover` для заполнения контейнеров
+- `spacing` параметр в `Row` и `Column` для отступов между элементами
+
+---
+
 ## Паттерны
 
 ### Dashboard Layouts
