@@ -56,6 +56,7 @@
 ```css
 /* Цвета текста из Flutter кода */
 --color-text-primary: #09101D;         /* Основной текст */
+--color-text-primary-alt: #23262B;     /* Альтернативный основной (чуть светлее) */
 --color-text-secondary: #414249;       /* Вторичный текст */
 --color-text-tertiary: #747B84;        /* Третичный текст (подписи) */
 ```
@@ -2876,6 +2877,492 @@ End date in range:
 }
 ```
 
+### Advanced Input Field Variants
+
+Расширенные варианты полей ввода с borders, разными размерами, состояниями и сложными layout-ами.
+
+#### Container Padding Variation
+
+```css
+--input-container-padding-v-alt: 10px;  /* Alternative vertical padding (10px instead of 5px) */
+```
+
+#### Field Heights
+
+```css
+--input-field-height-small: 44px;   /* Compact height */
+--input-field-height-medium: 46px;  /* Standard height */
+```
+
+**Два варианта высоты**:
+- **Small (44px)**: для компактных UI, минимальный padding
+- **Medium (46px)**: стандартная высота, комфортный touch target
+
+#### Visible Borders
+
+```css
+/* Border Configuration */
+--input-field-border-width: 2px;
+--input-field-border-color: #F4F6F9;  /* Same as background, creates subtle depth */
+```
+
+**Применение**:
+- Border width: 2px
+- Border color: #F4F6F9 (совпадает с фоном для subtle эффекта)
+- Creates depth without visual contrast
+
+#### Field Padding Variation
+
+```css
+/* Asymmetric Padding */
+--input-field-padding-top: 4px;
+--input-field-padding-left: 20px;
+--input-field-padding-right: 15px;
+--input-field-padding-bottom: 4px;
+```
+
+**Характеристики**:
+- Asymmetric: 20px left, 15px right
+- Vertical: минимальный 4px top/bottom
+- Оптимизировано для text alignment
+
+#### Typography Variations
+
+##### Small Text (Compact Fields)
+
+```css
+--input-text-small-size: 12px;
+--input-text-small-weight: 400;
+--input-text-small-color: #747B84;      /* For placeholder */
+--input-text-small-filled-color: #09101D; /* For filled text */
+```
+
+**Использование**: компактные поля, secondary information
+
+##### Medium Text (Standard Fields)
+
+```css
+--input-text-medium-size: 14px;
+--input-text-medium-weight: 600;
+--input-text-medium-color: #09101D;
+```
+
+**Использование**: основные поля ввода
+
+##### Special Text Color
+
+```css
+--input-text-special-color: #23262B;  /* Slightly lighter than primary black */
+```
+
+**Использование**: альтернативный цвет для filled text в специальных случаях
+
+#### Element Spacing
+
+```css
+--input-element-spacing-tight: 5px;  /* Tight spacing between title/field/helper */
+```
+
+**Применение**: альтернатива стандартным 8px для более компактных layouts
+
+### Field State Variations
+
+#### Success State
+
+Положительная валидация с визуальной обратной связью.
+
+```css
+--input-success-color: #11BB8D;
+--input-success-message-size: 12px;
+--input-success-message-weight: 400;
+--input-success-emoji-size: 14px;
+```
+
+**Характеристики**:
+- Helper message: 12px / 400 Archivo
+- Color: #11BB8D (Success Green)
+- Optional emoji: 14px font size
+- Padding: 10px horizontal
+
+**Example**:
+```html
+<div class="input-container" style="padding: 10px 16px;">
+  <div class="input-field" style="height: 46px;">
+    <input value="First name" />
+  </div>
+  <div class="input-helper-success" style="padding: 0 10px; color: #11BB8D;">
+    <span>Name is correct</span>
+    <span style="font-size: 14px;">👌</span>
+  </div>
+</div>
+```
+
+#### Error State
+
+Негативная валидация с error message.
+
+```css
+--input-error-color: #E24949;
+--input-error-message-size: 12px;
+--input-error-message-weight: 400;
+```
+
+**Характеристики**:
+- Helper message: 12px / 400 Archivo
+- Color: #E24949 (Error Red)
+- Padding: 10px left (asymmetric)
+
+**Example**:
+```html
+<div class="input-container">
+  <div class="input-field" style="height: 46px;">
+    <input value="@johnsmith" style="font-size: 14px; font-weight: 600;" />
+  </div>
+  <div class="input-helper-error" style="padding-left: 10px; color: #E24949;">
+    Username already taken
+  </div>
+</div>
+```
+
+#### Two-Line Field (Label + Value)
+
+Поле с label над значением внутри одного input контейнера.
+
+```css
+/* Two-Line Field */
+--input-two-line-label-size: 12px;
+--input-two-line-label-weight: 400;
+--input-two-line-label-color: #747B84;
+--input-two-line-value-size: 14px;
+--input-two-line-value-weight: 600;
+--input-two-line-value-color: #09101D;
+```
+
+**Layout**:
+- Top line (label): 12px / 400, color #747B84
+- Bottom line (value): 14px / 600, color #09101D
+- Vertical stack с минимальным spacing
+
+**Use Cases**:
+- Email display: "Your email" → "you@awesome.com"
+- Name display: "Your name" → "John"
+- Currency display: "~38058.93$" → "38069.01"
+
+### Complex Field Types
+
+#### Field with Top Label and Balance Info
+
+Поле с заголовком, balance информацией и USD конвертацией.
+
+```css
+/* Top Label with Balance */
+--input-label-font-size: 14px;
+--input-label-font-weight: 600;
+--input-label-color: #09101D;
+--input-balance-font-size: 10px;
+--input-balance-font-weight: 600;
+--input-balance-color: #09101D;
+--input-usd-font-size: 10px;
+--input-usd-font-weight: 600;
+--input-usd-color-blue: #0B24FB;
+--input-usd-color-purple: #4141E6;
+```
+
+**Structure**:
+```html
+<div style="padding: 0 10px; display: flex; justify-content: space-between; align-items: flex-end;">
+  <span style="font: 600 14px/1.4 Archivo; color: #09101D;">From</span>
+  <div style="display: flex; gap: 10px;">
+    <span style="font: 600 10px/1.4 Archivo; color: #09101D;">Balance: 1.01 ETH</span>
+    <span style="font: 600 10px/1.4 Archivo; color: #0B24FB;">~4.043$</span>
+  </div>
+</div>
+<div class="input-field" style="height: 46px;">
+  <input placeholder="Enter amount" />
+</div>
+```
+
+**Характеристики**:
+- Label: 14px/600 на baseline alignment с balance info
+- Balance: 10px/600, черный текст
+- USD price: 10px/600, синий (#0B24FB) или фиолетовый (#4141E6)
+- Spacing: 10px gap между balance элементами
+
+#### Field with Avatar
+
+Поле с аватаром слева от текста.
+
+```css
+/* Avatar Specifications */
+--input-avatar-size: 30px;
+--input-avatar-border-radius-circle: 50px;  /* Circular avatar */
+--input-avatar-border-radius-rounded: 10px; /* Rounded square avatar */
+--input-avatar-spacing: 10px;               /* Space to text */
+```
+
+**Avatar Variants**:
+1. **Circular (OvalBorder)**: borderRadius 50px
+2. **Rounded Square**: borderRadius 10px
+
+**Layout**:
+```html
+<div class="input-field" style="height: 46px; display: flex; gap: 10px; align-items: center;">
+  <img src="avatar.jpg" style="width: 30px; height: 30px; border-radius: 50px;" />
+  <span style="font: 400 12px/1.4 Archivo; color: #747B84;">Helen Smith</span>
+  <img src="icon.svg" style="width: 24px; height: 24px; margin-left: auto;" />
+</div>
+```
+
+**Use Cases**:
+- User selection fields
+- Contact picker
+- Account switcher
+- Service/app selection (e.g., "Netflix", "Dropbox")
+
+#### Field with Multiple Icons
+
+Поле с несколькими иконками справа.
+
+```css
+/* Icon Sizes */
+--input-icon-24: 24px;
+--input-icon-padding-2: 2px;
+--input-icon-padding-4: 4px;
+--input-icon-padding-6: 6px;
+--input-icon-inner-14: 14.40px;  /* 24px container with 6px padding */
+--input-icon-inner-19: 19.20px;  /* 24px container with 4px padding */
+```
+
+**Icon Spacing**: 5px gap между иконками справа
+
+**Example Layout**:
+```html
+<!-- Currency Field with Avatar, Label and Dropdown -->
+<div class="input-field" style="height: 46px; display: flex; align-items: center; gap: 5px;">
+  <span style="flex: 1; font: 600 14px/1.4 Archivo;">0.109367206519394123</span>
+  <img src="btc-avatar.png" style="width: 30px; height: 30px; border-radius: 50px;" />
+  <span style="font: 600 13px/1.4 Archivo; color: #09101D;">BTC</span>
+  <div style="width: 24px; height: 24px; padding: 4px;">
+    <img src="dropdown-icon.svg" style="width: 19.2px; height: 19.2px;" />
+  </div>
+</div>
+```
+
+#### Field with Left and Right Content
+
+Сложное поле с контентом с обеих сторон.
+
+```css
+/* Typography for Currency/Balance Display */
+--input-currency-label-size: 13px;
+--input-currency-label-weight: 600;
+--input-currency-label-color: #09101D;
+```
+
+**Example: Search Icon Left + Clear Icon Right**:
+- Left icon: 24px × 24px, 10px gap to text
+- Placeholder: 12px/400
+- Right icon: 24px × 24px
+
+**Example: Avatar Left + Value Right**:
+- Left: 30px avatar + two-line text
+- Right: numeric value + subtitle
+- Gap: 10px between sections
+
+#### Field with Right-Aligned Text Column
+
+```html
+<div class="input-field" style="height: 46px; display: flex; justify-content: space-between;">
+  <div style="display: flex; gap: 10px; align-items: center;">
+    <img src="avatar.png" style="width: 30px; height: 30px; border-radius: 50px;" />
+    <img src="icon.svg" style="width: 24px; height: 24px;" />
+  </div>
+  <div style="text-align: right;">
+    <div style="font: 600 14px/1.4 Archivo; color: #09101D;">63498.45</div>
+    <div style="font: 400 12px/1.4 Archivo; color: #747B84;">United States Dollar</div>
+  </div>
+</div>
+```
+
+### Advanced CSS Implementation
+
+```css
+/* Extended Variables */
+:root {
+  /* Alternative Heights */
+  --input-field-height-small: 44px;
+  --input-field-height-medium: 46px;
+
+  /* Visible Border */
+  --input-field-border-width: 2px;
+  --input-field-border-color: #F4F6F9;
+
+  /* Asymmetric Padding */
+  --input-field-padding: 4px 15px 4px 20px;
+
+  /* Small Text Variant */
+  --input-text-small: 400 12px/1.4 'Archivo';
+  --input-text-small-color: #747B84;
+  --input-text-small-filled: #09101D;
+
+  /* Special Color */
+  --input-text-special: #23262B;
+
+  /* Tight Spacing */
+  --input-spacing-tight: 5px;
+
+  /* State Colors */
+  --input-success: #11BB8D;
+  --input-error: #E24949;
+
+  /* Label with Balance */
+  --input-label-text: 600 14px/1.4 'Archivo';
+  --input-balance-text: 600 10px/1.4 'Archivo';
+  --input-usd-blue: #0B24FB;
+  --input-usd-purple: #4141E6;
+
+  /* Avatar */
+  --input-avatar-size: 30px;
+  --input-avatar-radius-circle: 50px;
+  --input-avatar-radius-rounded: 10px;
+
+  /* Currency Label */
+  --input-currency-label: 600 13px/1.4 'Archivo';
+
+  /* Icon Sizes */
+  --input-icon-24: 24px;
+  --input-icon-14: 14.40px;
+  --input-icon-19: 19.20px;
+}
+
+/* Field with Visible Border */
+.input-field--bordered {
+  height: var(--input-field-height-medium);
+  padding: var(--input-field-padding);
+  background: var(--input-field-bg);
+  border: var(--input-field-border-width) solid var(--input-field-border-color);
+  border-radius: var(--input-field-border-radius);
+}
+
+/* Small Text Variant */
+.input-field--small-text {
+  font: var(--input-text-small);
+  color: var(--input-text-small-color);
+}
+
+.input-field--small-text:not(:placeholder-shown) {
+  color: var(--input-text-small-filled);
+}
+
+/* Two-Line Field */
+.input-field--two-line {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.input-field__label {
+  font: 400 12px/1.4 'Archivo';
+  color: var(--input-text-tertiary);
+}
+
+.input-field__value {
+  font: 600 14px/1.4 'Archivo';
+  color: var(--input-text-primary);
+}
+
+/* Success State */
+.input-helper--success {
+  font: 400 12px/1.4 'Archivo';
+  color: var(--input-success);
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+
+.input-helper--success .emoji {
+  font-size: 14px;
+}
+
+/* Error State */
+.input-helper--error {
+  font: 400 12px/1.4 'Archivo';
+  color: var(--input-error);
+  padding-left: 10px;
+}
+
+/* Field with Avatar */
+.input-field--with-avatar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.input-field__avatar {
+  width: var(--input-avatar-size);
+  height: var(--input-avatar-size);
+  flex-shrink: 0;
+}
+
+.input-field__avatar--circle {
+  border-radius: var(--input-avatar-radius-circle);
+}
+
+.input-field__avatar--rounded {
+  border-radius: var(--input-avatar-radius-rounded);
+}
+
+/* Label with Balance */
+.input-label-row {
+  padding: 0 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 5px;
+}
+
+.input-label-row__title {
+  font: var(--input-label-text);
+  color: var(--input-label-color);
+}
+
+.input-label-row__balance {
+  display: flex;
+  gap: 10px;
+  align-items: flex-end;
+}
+
+.input-label-row__balance-amount {
+  font: var(--input-balance-text);
+  color: var(--input-balance-color);
+}
+
+.input-label-row__usd {
+  font: var(--input-balance-text);
+}
+
+.input-label-row__usd--blue {
+  color: var(--input-usd-blue);
+}
+
+.input-label-row__usd--purple {
+  color: var(--input-usd-purple);
+}
+
+/* Currency Field */
+.input-field--currency {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.input-field__currency-label {
+  font: var(--input-currency-label);
+  color: var(--input-currency-label-color);
+}
+```
+
 ### Usage Examples
 
 ```html
@@ -2942,9 +3429,57 @@ End date in range:
 
 ## Версионирование и обновления
 
-**Текущая версия**: v5.6.0
+**Текущая версия**: v5.7.0
 
 ### Changelog
+
+#### v5.7.0 (2025-11-19)
+- **Расширена секция "Input Fields"** с Advanced Variants, State Variations и Complex Field Types:
+  - **Advanced Input Field Variants**:
+    - Container Padding Variation: 10px vertical (альтернатива 5px)
+    - Field Heights: 44px (small/compact) и 46px (medium/standard)
+    - Visible Borders: 2px width, color #F4F6F9 (subtle depth)
+    - Field Padding: асимметричный 4px/20px/15px/4px (top/left/right/bottom)
+    - Typography Variations:
+      - Small Text: 12px/400 для compact fields и secondary info
+      - Medium Text: 14px/600 для standard fields
+      - Special Text Color: #23262B (альтернатива primary black)
+    - Element Spacing Tight: 5px между элементами (альтернатива 8px)
+  - **Field State Variations**:
+    - Success State: helper 12px/400 #11BB8D, emoji 14px, padding 10px horizontal
+    - Error State: helper 12px/400 #E24949, asymmetric padding 10px left
+    - Two-Line Field: label 12px/400 #747B84 + value 14px/600 #09101D
+  - **Complex Field Types**:
+    - Field with Top Label and Balance Info:
+      - Label: 14px/600, Balance: 10px/600, USD price: 10px/600
+      - USD colors: #0B24FB (blue) или #4141E6 (purple)
+      - Spacing: 10px gap между balance элементами
+    - Field with Avatar:
+      - Avatar size: 30px × 30px
+      - Variants: circular (borderRadius 50px) и rounded square (borderRadius 10px)
+      - Spacing: 10px gap to text
+      - Use cases: user selection, contact picker, account switcher, service selection
+    - Field with Multiple Icons:
+      - Icon sizes: 24px container с padding 2px/4px/6px
+      - Inner icon sizes: 14.40px и 19.20px
+      - Icon spacing: 5px gap между иконками справа
+    - Field with Left and Right Content:
+      - Currency label: 13px/600 #09101D
+      - Complex layouts: search icon + text + clear icon
+      - Avatar + two-line text + numeric value
+    - Field with Right-Aligned Text Column:
+      - Top text: 14px/600 #09101D
+      - Bottom text: 12px/400 #747B84
+      - Text alignment: right
+  - **Advanced CSS Implementation**:
+    - Extended CSS variables для всех новых вариантов
+    - Utility classes для bordered, small-text, two-line variants
+    - Success/Error state styles с emoji support
+    - Avatar variants (circle/rounded)
+    - Label with Balance row components
+    - Currency field layouts
+- **Расширена цветовая палитра**:
+  - `--color-text-primary-alt: #23262B` - альтернативный основной цвет текста (чуть светлее #09101D)
 
 #### v5.6.0 (2025-11-19)
 - **Добавлена новая секция "Input Fields"** - система полей ввода для мобильного приложения:
