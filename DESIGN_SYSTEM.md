@@ -54,8 +54,17 @@
 
 /* Accent Colors */
 --color-accent-orange: #FF6937;     /* Color(0xFFFF6937) - orange accent for labels */
+--color-accent-orange-border: #FE5032; /* Color(0xFFFE5032) - orange border for buttons */
 --color-accent-purple: #833AB4;     /* Color(0xFF833AB4) - purple/instagram gradient color */
 --color-accent-blue: #4141E6;       /* Color(0xFF4141E6) - blue accent */
+
+/* UI Element Colors */
+--color-avatar-placeholder: #D9DDE2; /* Color(0xFFD9DDE2) - gray avatar placeholder */
+--color-badge-dark: #23262B;        /* Color(0xFF23262B) - dark badge background */
+
+/* Gradient Colors for UI */
+--color-gradient-red-start: #EB001B; /* Color(0xFFEB001B) - gradient start (red) */
+--color-gradient-pink-end: #DD2476;  /* Color(0xFFDD2476) - gradient end (pink) */
 
 /* Overlay/Gradient Colors */
 --color-overlay-start: #00080808;   /* Color(0x00080808) - transparent black (gradient start) */
@@ -63,14 +72,16 @@
 ```
 
 **Использование цветов в проекте:**
-- **Backgrounds**: #12202F (dark theme), #F4F6F9 (light containers), #FFFFFF (white cards), #09101D (dark cards)
+- **Backgrounds**: #12202F (dark theme), #F4F6F9 (light containers), #FFFFFF (white cards), #09101D (dark cards), #D9DDE2 (avatar placeholders)
 - **Text**: #09101D (primary), #747B84 (secondary/placeholder), #FFFFFF (inverse), #FF6937 (orange accent)
-- **Borders**: #09101D (dark), #7B61FF (purple accent), #833AB4 (purple/instagram), #4141E6 (blue), 1-2px width
+- **Borders**: #09101D (dark), #7B61FF (purple accent), #833AB4 (purple/instagram), #4141E6 (blue), #FE5032 (orange button border), 1-2px width
 - **Status Indicators**: #11BB8D (success), #0B24FB (info), #E24949 (error), #FF9500 (warning)
 - **Badge dots**: 6×6px oval shapes with status colors
+- **Badge backgrounds**: #23262B (dark badge), #E24949 (notification badge)
 - **Overlays**: Linear gradients from transparent to semi-transparent black for image overlays
 - **Tinted backgrounds**: #0C11BB8D (5% green tint)
 - **Story borders**: #833AB4 (purple), #4141E6 (blue) - 2px borders for active stories
+- **Button gradients**: #EB001B to #DD2476 (red to pink gradient for CTA buttons)
 
 ### Primary Colors
 
@@ -175,6 +186,11 @@
 /* begin: Alignment(0.50, -0.00), end: Alignment(0.50, 1.00)
    colors: [Color(0x00080808), Color(0x7F080808)]
    Vertical gradient from transparent to 50% black */
+
+--gradient-button-cta: linear-gradient(90deg, #EB001B 0%, #DD2476 100%);
+/* begin: Alignment(-1.00, 0.00), end: Alignment(1.00, 0.00)
+   colors: [Color(0xFFEB001B), Color(0xFFDD2476)]
+   Horizontal gradient from red to pink for CTA/pricing buttons */
 ```
 
 ### Brand Icon Colors
@@ -203,9 +219,11 @@
 --font-size-h2: 1.625rem;           /* 26px - fontSize: 26 - Medium card titles */
 --font-size-h3: 1.5rem;             /* 24px - fontSize: 24 - Card headers, section titles */
 --font-size-base: 1rem;             /* 16px - fontSize: 16 - Body text, buttons */
+--font-size-sm: 0.875rem;           /* 14px - fontSize: 14 - Button text, navigation */
 --font-size-small-plus: 0.8125rem;  /* 13px - fontSize: 13 - Small buttons, secondary text */
 --font-size-small: 0.75rem;         /* 12px - fontSize: 12 - Status bar, small text */
 --font-size-xs: 0.6875rem;          /* 11px - fontSize: 11 - Captions, fine print */
+--font-size-xxs: 0.625rem;          /* 10px - fontSize: 10 - Badge counter, tiny text */
 --font-weight-ultra: 800;           /* fontWeight: FontWeight.w800 */
 --font-weight-bold: 700;            /* fontWeight: FontWeight.w700 */
 --font-weight-semibold: 600;        /* fontWeight: FontWeight.w600 */
@@ -223,10 +241,13 @@
 - **Card Headers**: Size: 24px, Weight: 700, Line Height: 1.40, Color: white / #09101D
 - **Body Text**: Size: 16px, Weight: 400, Line Height: 1.40, Color: white / #747B84
 - **Card Labels**: Size: 16px, Weight: 700, Line Height: 1.40, Color: #FF6937 (orange accent)
+- **Button Text**: Size: 14px, Weight: 600, Line Height: 1.40, Color: #09101D / white
 - **Small Buttons**: Size: 13px, Weight: 600, Line Height: 1.40, Color: #09101D / white
 - **Status Bar Time**: Size: 12px, Weight: 600, Line Height: 1.33, Color: #09101D / white
 - **Status Bar Text**: Size: 12px, Weight: 400, Line Height: 1.33, Letter Spacing: -0.05
 - **Captions**: Size: 11px, Weight: 400, Line Height: 1.40, Color: white
+- **Avatar Labels**: Size: 11px, Weight: 600, Line Height: 1.40, Color: #09101D
+- **Badge Counter**: Size: 10px, Weight: 600, Line Height: 1.40, Color: white
 
 ### Font Family
 
@@ -312,12 +333,14 @@
 /* Реальные отступы из проекта */
 --space-project-0-75: 0.1875rem; /* 3px - Column spacing (stories label) */
 --space-project-1: 0.25rem;     /* 4px - Row spacing, vertical padding, Column spacing */
---space-project-1-25: 0.3125rem; /* 5px - left padding, Column spacing */
+--space-project-1-25: 0.3125rem; /* 5px - left padding, Column spacing, badge padding */
 --space-project-1-75: 0.4375rem; /* 7px - vertical padding */
 --space-project-2: 0.5rem;      /* 8px - padding, Row/Column spacing */
 --space-project-xs: 0.625rem;   /* 10px - spacing: 10, EdgeInsets.all(10), Row/Column spacing, padding, stories */
+--space-project-2-5: 0.75rem;   /* 12px - badge border radius, small element radius */
 --space-project-sm: 1rem;       /* 16px - horizontal padding, positioning, icon padding */
 --space-project-md: 1.25rem;    /* 20px - padding: 20, all sides */
+--space-project-button: 1.875rem; /* 30px - button border radius */
 --space-project-lg: 2rem;       /* 32px - padding: 32, all sides */
 --space-project-xl: 3.125rem;   /* 50px - container padding, Row/Column gap */
 --space-project-2xl: 4.375rem;  /* 70px - Row spacing */
@@ -327,9 +350,9 @@
 ```
 
 **Использование в проекте:**
-- **Micro**: 3px (stories label spacing), 4px (Row/Column spacing), 5px (padding), 8px (spacing, padding)
-- **Small**: 10px (gap, EdgeInsets, Row/Column spacing, stories)
-- **Medium**: 16px (horizontal padding, icon padding), 20px (padding all sides, card padding)
+- **Micro**: 3px (stories label spacing), 4px (Row/Column spacing), 5px (padding, badge vertical padding), 8px (spacing, padding)
+- **Small**: 10px (gap, EdgeInsets, Row/Column spacing, stories), 12px (badge border radius, small elements)
+- **Medium**: 16px (horizontal padding, icon padding), 20px (padding all sides, card padding), 30px (button border radius)
 - **Large**: 32px (padding all sides), 50px (container padding)
 - **XLarge**: 70px (Row spacing between elements), 100px (padding all, Row/Column gap, positioning)
 - **XXLarge**: 200px (top positioning), 236px (Column spacing for large gaps)
@@ -362,9 +385,11 @@
 ```css
 /* Реальные border radius из проекта */
 --radius-project-xs: 0.625rem;        /* 10px - BorderRadius.circular(10) - story images */
+--radius-project-xxs: 0.75rem;        /* 12px - BorderRadius.circular(12) - small badges, notification badges */
 --radius-project-sm: 0.8125rem;       /* 13px - BorderRadius.circular(13) - story containers with border */
 --radius-project-base: 0.9375rem;     /* 15px - BorderRadius.circular(15) - containers, search bars, buttons */
 --radius-project-md: 1.25rem;         /* 20px - BorderRadius.circular(20) - cards, images */
+--radius-project-button: 1.875rem;    /* 30px - BorderRadius.circular(30) - CTA buttons, pricing buttons */
 --radius-project-lg: 2rem;            /* 32px - BorderRadius.circular(32) - badges, pills */
 --radius-project-xl: 2.5rem;          /* 40px - BorderRadius.circular(40) - phone container */
 --radius-project-2xl: 6.25rem;        /* 100px - BorderRadius.circular(100) - main container, icons */
@@ -372,9 +397,11 @@
 
 **Использование в проекте:**
 - **Story Images**: BorderRadius.circular(10) = 10px radius
+- **Small Badges**: BorderRadius.circular(12) = 12px radius (notification badges)
 - **Story Containers with Border**: BorderRadius.circular(13) = 13px radius
 - **Buttons/Search**: BorderRadius.circular(15) = 15px radius
 - **Cards/Images**: BorderRadius.circular(20) = 20px radius (most common for content cards)
+- **CTA Buttons**: BorderRadius.circular(30) = 30px radius (pricing buttons, gradient buttons)
 - **Badges/Pills**: BorderRadius.circular(32) = 32px radius
 - **Phone Container**: BorderRadius.circular(40) = 40px radius
 - **Main Container/Icons**: BorderRadius.circular(100) = 100px radius (fully rounded)
@@ -692,6 +719,94 @@
 - Spacing between stories in row: 100px
 - Label text always 13px/700 with 10px left padding
 - Internal spacing in label column: 3px
+
+#### Navigation Bars - Complete Component Block
+
+**Container Layout:**
+- **Padding**: 50px (all sides)
+- **Border**: 1px solid #7B61FF
+- **Border Radius**: 15px (circular(15))
+- **Clip Behavior**: Clip.antiAlias
+- **Layout**: Column with spacing: 50px
+
+**Component Variants:**
+
+1. **Navigation Header (with Notification Badge)**
+   - **Container**: 375px width, height: 44px
+   - **Background**: white (#FFFFFF)
+   - **Layout**: Row with mainAxisAlignment: spaceBetween, crossAxisAlignment: center
+   - **Title Section**:
+     - **Container**: height: 44px, padding: horizontal 16px, vertical 10px
+     - **Text**: "Following", Font: 'Archivo', Size: 24px, Weight: 700, Color: #09101D, Line Height: 1.40
+   - **Notification Badge**:
+     - **Container**: 12px × 12px (positioned right: 16px, top: 16px)
+     - **Background**: #E24949 (error red)
+     - **Border**: 2px solid white
+     - **Border Radius**: 12px (circular(12))
+     - **Clip Behavior**: Clip.antiAlias
+
+2. **Avatar with Badge Counter**
+   - **Container**: Column, spacing: 10px
+   - **Avatar Container**: 56px × 56px
+     - **Inner Circle**: 48px × 48px, Border Radius: 40px/50px
+     - **Background**: #D9DDE2 (gray placeholder)
+     - **Image**: 48px × 48px, BoxFit.cover
+     - **Clip Behavior**: Clip.antiAlias
+   - **Badge Counter**:
+     - **Container**: 20px × 20px (positioned top-right of avatar)
+     - **Background**: #23262B (dark badge)
+     - **Border**: 2px solid white
+     - **Border Radius**: 12px (circular(12))
+     - **Text**: "2", Font: 'Archivo', Size: 10px, Weight: 600, Color: white, Align: center
+   - **Label Section**: Column, spacing: 5px
+     - **Container**: padding-left: 10px
+     - **Text**: "User name", Font: 'Archivo', Size: 11px, Weight: 600, Color: #09101D, Line Height: 1.40
+
+3. **Gradient Pricing Button (with Save Badge)**
+   - **Container**: height: 44px, Border Radius: 30px (circular(30))
+   - **Background**: linear-gradient(90deg, #EB001B 0%, #DD2476 100%)
+   - **Padding**: horizontal: 16px, vertical: 10px
+   - **Layout**: Row with mainAxisAlignment: center, spacing: 8px
+   - **Clip Behavior**: Clip.antiAlias
+   - **Price Text**:
+     - **Text**: "$86.99/Year", Font: 'Archivo', Size: 14px, Weight: 600, Color: white, Line Height: 1.40
+   - **Save Badge**:
+     - **Container**: height: 20px, Border Radius: 12px (circular(12))
+     - **Background**: white (#FFFFFF)
+     - **Padding**: horizontal: 8px, vertical: 5px
+     - **Text**: "Save 23%", Font: 'Archivo', Size: 11px, Weight: 600, Color: #09101D, Line Height: 1.40
+
+4. **Outlined Pricing Button**
+   - **Container**: height: 44px, Border Radius: 30px (circular(30))
+   - **Background**: white (#FFFFFF)
+   - **Border**: 1px solid #FE5032 (orange border)
+   - **Padding**: horizontal: 16px, vertical: 10px
+   - **Clip Behavior**: Clip.antiAlias
+   - **Text**: "$9.49/Month", Font: 'Archivo', Size: 14px, Weight: 600, Color: #09101D, Line Height: 1.40, Align: center
+
+5. **Home Indicator**
+   - **Container**: 134px × 5px
+   - **Background**: #09101D (dark)
+   - **Border Radius**: 100px (circular(100))
+   - **Position**: center horizontal, bottom (typically with bottom spacing)
+
+**Color Usage:**
+- **Navigation Background**: #FFFFFF (white)
+- **Avatar Placeholder**: #D9DDE2 (gray)
+- **Badge Background**: #23262B (dark), #E24949 (notification red)
+- **Gradient**: #EB001B to #DD2476 (red to pink)
+- **Border**: #FE5032 (orange accent), white (badge borders)
+- **Text**: #09101D (primary), white (on gradient/badges)
+
+**Usage Notes:**
+- Navigation header height: 44px standard
+- Avatar size: 56×56px container with 48×48px image
+- Badge counter size: 20×20px with 2px white border
+- Button height: 44px with 30px border radius
+- Save badge uses white background with dark text for contrast
+- Home indicator: 134×5px with full rounding (100px radius)
+- Spacing between navigation elements: 50px
+- Internal badge padding: horizontal 8px, vertical 5px
 
 ---
 
