@@ -55,10 +55,18 @@
 --color-success-bg: #D1FAE5;
 --color-success-border: #6EE7B7;
 
+/* Success (Form Validation) - из SmallLeadingSelector кода */
+--color-success-positive: #11BB8D;
+--color-success-positive-bg: rgba(17, 187, 141, 0.05);
+
 /* Error / Trend Down */
 --color-error: #EF4444;
 --color-error-bg: #FEE2E2;
 --color-error-border: #FCA5A5;
+
+/* Error (Form Validation) - из SmallLeadingSelector кода */
+--color-error-negative: #DA1414;
+--color-error-negative-bg: rgba(218, 20, 20, 0.05);
 
 /* Warning / Hot */
 --color-warning: #F59E0B;
@@ -105,6 +113,7 @@
 --color-bg-tertiary: #F3F4F6;
 --color-bg-quaternary: #F4F6F9;  /* Из TabBar кода */
 --color-bg-light: #FAFAFB;  /* Из Message кода - showcase background */
+--color-bg-pressed: #EAEFF2;  /* Из SmallLeadingSelector кода - pressed state */
 --color-bg-elevated: #FFFFFF;
 --color-bg-overlay: rgba(0, 0, 0, 0.5);
 --color-bg-dark: #12202F;
@@ -1908,6 +1917,260 @@ Width: 260px, Background: #303239, Aligned right
 
 ---
 
+### 27. Form Input with Small Leading Selector
+
+Компонент Form Input с ведущим селектором (dropdown), извлеченный из Flutter приложения SmallLeadingSelector.
+
+#### Характеристики Showcase Container:
+
+- **Width**: 840px
+- **Height**: 710px
+- **Padding**: 50px (all sides)
+- **Border**: 1px solid #7B61FF (color-primary)
+- **Border Radius**: 15px (radius-3xl)
+- **Clip Behavior**: antiAlias
+- **Layout**: Two column grid (2 columns of states)
+- **Column Spacing**: Horizontal gap between columns
+
+#### Form Group Container:
+
+- **Width**: 375px
+- **Padding**: Horizontal: 16px, Vertical: 5px
+- **Spacing**: 8px between form elements
+- **Clip Behavior**: antiAlias
+
+#### Label:
+
+- **Text**: "Label"
+- **Font**: Archivo
+- **Font Size**: 14px (font-size-sm)
+- **Font Weight**: 600 (semibold)
+- **Color**: #09101D (color-text-primary)
+- **Line Height**: 1.40
+- **Margin Bottom**: 8px
+
+#### Input Container:
+
+**Base Container:**
+- **Height**: 36px
+- **Border Radius**: 15px (radius-3xl)
+- **Layout**: Horizontal row (leading selector + text input)
+- **Spacing**: 0 (no gap between selector and input)
+
+**Leading Selector (Dropdown):**
+- **Width**: Auto (fits content)
+- **Padding**: Left: 16px, Right: 10px
+- **Vertical Padding**: Centered
+- **Text**: "Ms."
+- **Font**: Archivo
+- **Font Size**: 14px (font-size-sm)
+- **Font Weight**: 600 (semibold)
+- **Color**: #09101D (color-text-primary)
+- **Line Height**: 1.40
+- **Dropdown Icon**: 20px × 20px chevron down
+- **Icon Spacing**: 2px from text
+
+**Text Input Field:**
+- **Flex**: Expands to fill remaining space
+- **Height**: 36px
+- **Padding**: Left: 16px, Right: 20px
+- **Font**: Archivo
+- **Font Size**: 14px (font-size-sm)
+- **Font Weight**: 400 (normal)
+- **Color**: #09101D (color-text-primary)
+- **Line Height**: 1.40
+- **Placeholder Color**: #747B84 (color-text-secondary)
+
+**Action Icons:**
+- **Clear Icon**: 20px × 20px
+- **Position**: Right edge, 10px from right
+- **Padding**: 2px (for touch target)
+- **Icon Color**: #747B84 (color-text-secondary)
+
+**Cursor:**
+- **Width**: 2px
+- **Height**: 16px
+- **Color**: #09101D (color-text-primary)
+- **Animation**: Blinking
+
+#### Helper Text:
+
+- **Text**: "Helper text"
+- **Font**: Archivo
+- **Font Size**: 14px (font-size-sm)
+- **Font Weight**: 400 (normal)
+- **Color**: #747B84 (color-text-secondary)
+- **Line Height**: 1.40
+- **Margin Top**: 8px
+
+#### State Variants:
+
+**1. Enabled (Default State):**
+- **Background**: #F4F6F9 (color-bg-quaternary)
+- **Border**: None
+- **Text**: Placeholder "Enter text"
+- **Selector**: Active, "Ms." visible
+- **Helper Text**: Displayed below
+
+**2. Focus:**
+- **Background**: White (color-bg-primary)
+- **Border**: 2px solid #09101D (color-text-primary)
+- **Cursor**: Visible, blinking at text position
+- **Text**: Placeholder visible
+- **Selector**: Active, "Ms." visible
+- **Helper Text**: Displayed below
+- **Transition**: Border appears smoothly
+
+**3. Complete (Filled):**
+- **Background**: #F4F6F9 (color-bg-quaternary)
+- **Border**: None
+- **Text**: "Emily" (actual value, 14px Archivo normal)
+- **Selector**: Active, "Ms." visible
+- **Clear Icon**: 20×20px visible on right
+- **Helper Text**: Displayed below
+
+**4. Positive (Success Validation):**
+- **Background**: rgba(17, 187, 141, 0.05) (color-success-positive-bg)
+- **Border**: 2px solid #11BB8D (color-success-positive)
+- **Text**: Placeholder visible
+- **Selector**: Active, "Ms." visible
+- **Helper Text**: Success message below
+- **Helper Text Color**: #11BB8D
+
+**5. Pressed (Active Click):**
+- **Background**: #EAEFF2 (color-bg-pressed)
+- **Border**: None
+- **Text**: Placeholder visible
+- **Selector**: Active, "Ms." visible
+- **State**: Button press state before focus
+
+**6. Active - Typing:**
+- **Background**: White (color-bg-primary)
+- **Border**: 2px solid #09101D (color-text-primary)
+- **Text**: "Em" (partial input)
+- **Cursor**: Visible after "Em"
+- **Selector**: Active, "Ms." visible
+- **Helper Text**: Displayed below
+
+**7. Incomplete:**
+- **Background**: #F4F6F9 (color-bg-quaternary)
+- **Border**: None
+- **Text**: Empty (no value)
+- **Selector**: Active, "Ms." visible
+- **Clear Icon**: 20×20px visible (even though empty)
+- **Helper Text**: Displayed below
+
+**8. Negative (Error Validation):**
+- **Background**: rgba(218, 20, 20, 0.05) (color-error-negative-bg)
+- **Border**: 2px solid #DA1414 (color-error-negative)
+- **Text**: Placeholder visible
+- **Selector**: Active, "Ms." visible
+- **Helper Text**: Error message below
+- **Helper Text Color**: #DA1414
+
+**9. Disabled:**
+- **Background**: #F4F6F9 (color-bg-quaternary)
+- **Border**: None
+- **Text Color**: #747B84 (color-text-secondary)
+- **Selector**: Disabled, text color #747B84
+- **Dropdown Icon**: Disabled color #747B84
+- **Helper Text**: Disabled color #747B84
+- **Cursor**: not-allowed
+- **Opacity**: 0.6
+
+#### Layout Structure:
+
+```
+┌─────────────────────────────────────────┐
+│ Label (14px semibold)                   │
+│ ┌───────────────────────────────────┐   │
+│ │ Ms. ▾ │ Enter text          [×] │   │
+│ └───────────────────────────────────┘   │
+│ Helper text (14px normal, secondary)    │
+└─────────────────────────────────────────┘
+
+Selector: 16px L padding, 10px R padding
+Input: 16px L padding, 20px R padding
+Height: 36px, Radius: 15px
+```
+
+**Two Column Showcase Layout:**
+```
+┌───────────────────┬───────────────────┐
+│ 1. Enabled        │ 6. Active-Typing  │
+│ 2. Focus          │ 7. Incomplete     │
+│ 3. Complete       │ 8. Negative       │
+│ 4. Positive       │ 9. Disabled       │
+│ 5. Pressed        │                   │
+└───────────────────┴───────────────────┘
+```
+
+#### Spacing:
+
+- **Label to Input**: 8px
+- **Input to Helper Text**: 8px
+- **Between Form Groups**: 5px vertical padding
+- **Selector Text to Icon**: 2px
+- **Icon Padding**: 2px for touch target
+
+#### Border Specifications:
+
+- **Default State**: No border
+- **Focus/Typing**: 2px solid #09101D
+- **Positive**: 2px solid #11BB8D
+- **Negative**: 2px solid #DA1414
+- **Border Radius**: 15px (all states)
+
+#### Typography:
+
+**Label:**
+- Archivo 14px semibold, #09101D
+
+**Selector:**
+- Archivo 14px semibold, #09101D (enabled)
+- Archivo 14px semibold, #747B84 (disabled)
+
+**Input Text:**
+- Archivo 14px normal, #09101D (value)
+- Archivo 14px normal, #747B84 (placeholder)
+
+**Helper Text:**
+- Archivo 14px normal, #747B84 (default)
+- Archivo 14px normal, #11BB8D (success)
+- Archivo 14px normal, #DA1414 (error)
+
+#### Use Cases:
+
+1. **User Registration Forms**: Name input with title/prefix selector
+2. **Contact Forms**: Phone number with country code selector
+3. **E-commerce**: Product quantity with unit selector
+4. **Multi-step Forms**: Validation states guide user input
+5. **Settings Pages**: Configuration inputs with category selectors
+6. **Profile Editing**: Personal info with prefix/suffix options
+
+#### Best Practices:
+
+- Use 36px height for optimal touch targets on mobile
+- Maintain 15px border radius for visual consistency
+- 2px border width for focus and validation states for clear visual feedback
+- Success validation (#11BB8D) for correct input
+- Error validation (#DA1414) for invalid input with helpful error message
+- Pressed state (#EAEFF2) provides tactile feedback before focus
+- Disabled state uses 0.6 opacity with secondary text color
+- Clear icon (20×20px) only appears when input has value (except Incomplete state)
+- Cursor (2px width) indicates typing position
+- Helper text provides context, instructions, or validation feedback
+- Selector stays visible and active in all non-disabled states
+- Use semibold (600) for selector text to distinguish from input value
+- Placeholder uses secondary color (#747B84) for reduced prominence
+- Leading selector (dropdown) for related categorization of input
+- Keep selector options concise (2-4 characters ideal: "Ms.", "Mr.", "+1")
+- Validation backgrounds use subtle 5% opacity for non-intrusive feedback
+- Focus state removes default background for cleaner appearance
+- Border transitions should be smooth (150-200ms ease)
+
+---
+
 ## Как использовать эту дизайн-систему
 
 ### Для дизайнеров
@@ -1935,9 +2198,40 @@ Width: 260px, Background: #303239, Aligned right
 
 ## Версионирование и обновления
 
-**Текущая версия**: v5.6.0
+**Текущая версия**: v5.7.0
 
 ### Changelog
+
+#### v5.7.0 (2025-11-19)
+- Добавлены данные из SmallLeadingSelector компонента Flutter (Form Input with Leading Selector)
+- Добавлены новые design tokens для валидации форм:
+  - Success Positive: #11BB8D (color-success-positive) для успешной валидации
+  - Success Positive Background: rgba(17, 187, 141, 0.05) (color-success-positive-bg)
+  - Error Negative: #DA1414 (color-error-negative) для ошибок валидации
+  - Error Negative Background: rgba(218, 20, 20, 0.05) (color-error-negative-bg)
+  - Pressed Background: #EAEFF2 (color-bg-pressed) для состояния нажатия
+- Добавлен компонент Form Input with Small Leading Selector с 9 состояниями:
+  - Enabled (Default): #F4F6F9 background, no border
+  - Focus: White background, 2px solid #09101D border, cursor visible
+  - Complete (Filled): #F4F6F9 background, value "Emily", clear icon visible
+  - Positive (Success): rgba(17, 187, 141, 0.05) background, 2px solid #11BB8D border
+  - Pressed: #EAEFF2 background (active click state)
+  - Active - Typing: White background, 2px border, cursor after partial text "Em"
+  - Incomplete: #F4F6F9 background, empty value with clear icon
+  - Negative (Error): rgba(218, 20, 20, 0.05) background, 2px solid #DA1414 border
+  - Disabled: #F4F6F9 background, 0.6 opacity, secondary text color
+- Input спецификации:
+  - Height: 36px, Border radius: 15px
+  - Leading Selector: "Ms." text, 14px semibold, 16px L / 10px R padding
+  - Text Input: 14px normal, 16px L / 20px R padding, expandable
+  - Label: 14px semibold, 8px margin bottom
+  - Helper Text: 14px normal, secondary/success/error color, 8px margin top
+  - Clear Icon: 20×20px, positioned right
+  - Cursor: 2px width, 16px height, blinking
+- Showcase container: 840×710px, two column layout для демонстрации всех состояний
+- Border specifications: 2px для focus/validation states, 0 для default states
+- Validation backgrounds: 5% opacity для subtle visual feedback
+- Документированы use cases и best practices для Form Input компонентов
 
 #### v5.6.0 (2025-11-19)
 - Добавлены данные из Message компонента Flutter (Chat Messages)
