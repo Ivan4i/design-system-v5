@@ -77,16 +77,28 @@
 --color-status-warning: #F59E0B;
 ```
 
+### Overlay Colors
+
+```css
+/* Overlay цвета */
+--color-overlay-dark: rgba(29, 29, 29, 0.5);      /* Темный overlay (50% opacity) */
+--color-overlay-gradient-start: rgba(196, 196, 196, 0);  /* Прозрачный старт */
+--color-overlay-gradient-end: rgba(29, 29, 29, 0.5);     /* Темный конец */
+```
+
 ### Gradient Colors
 
 ```css
 /* Градиенты */
---gradient-live-start: #833AB4;    /* Фиолетовый (Live badge) */
+--gradient-live-start: #833AB4;    /* Фиолетовый (Live badge, category borders) */
 --gradient-live-middle: #FD1D1D;   /* Красный (Live badge) */
 --gradient-live-end: #FCB045;      /* Оранжевый (Live badge) */
 
 /* Применение Live gradient */
 --gradient-live: linear-gradient(90deg, #833AB4 0%, #FD1D1D 50%, #FCB045 100%);
+
+/* Image overlay gradient (для карточек) */
+--gradient-overlay: linear-gradient(180deg, rgba(196, 196, 196, 0) 0%, rgba(29, 29, 29, 0.5) 100%);
 ```
 
 ### Border Colors
@@ -95,8 +107,10 @@
 /* Цвета границ */
 --color-border-primary: #E5E7EB;
 --color-border-secondary: #D1D5DB;
---color-border-stories-blue: #4141E6;   /* Border для непросмотренных stories */
---color-border-stories-pink: #FC466B;   /* Border для highlighted stories */
+--color-border-stories-blue: #4141E6;     /* Border для непросмотренных stories */
+--color-border-stories-pink: #FC466B;     /* Border для highlighted stories */
+--color-border-category-blue: #4141E6;    /* Border для активных категорий (синий) */
+--color-border-category-purple: #833AB4;  /* Border для категорий (фиолетовый) */
 ```
 
 ### Shadow Colors
@@ -283,21 +297,27 @@
 --radius-base: 0.25rem;   /* 4px */
 --radius-md: 0.375rem;    /* 6px */
 --radius-lg: 0.5rem;      /* 8px */
---radius-icon: 0.625rem;  /* 10px - Icon containers */
---radius-xl: 0.75rem;     /* 12px - Live badge */
---radius-badge: 0.9375rem; /* 15px - Badge containers */
---radius-2xl: 1rem;       /* 16px */
---radius-notification: 1.25rem;  /* 20px - Notification badge */
---radius-stories: 1.875rem;      /* 30px - Stories border */
---radius-avatar: 2.5rem;         /* 40px - Avatar */
---radius-full: 9999px;           /* Полностью круглый */
+--radius-category-inner: 0.625rem;   /* 10px - Category card inner */
+--radius-icon: 0.625rem;             /* 10px - Icon containers */
+--radius-category: 0.75rem;          /* 12px - Category card outer */
+--radius-xl: 0.75rem;                /* 12px - Live badge */
+--radius-category-border: 0.875rem;  /* 14px - Category card with border */
+--radius-badge: 0.9375rem;           /* 15px - Badge containers, Buttons */
+--radius-2xl: 1rem;                  /* 16px */
+--radius-notification: 1.25rem;      /* 20px - Notification badge */
+--radius-stories: 1.875rem;          /* 30px - Stories border */
+--radius-avatar: 2.5rem;             /* 40px - Avatar */
+--radius-full: 9999px;               /* Полностью круглый */
 ```
 
 **Применение из Flutter кода:**
+- `radius-category (12px)`: Category card outer border radius
+- `radius-category-border (14px)`: Category card с border (2px border)
+- `radius-category-inner (10px)`: Category card inner image
 - `radius-avatar (40px)`: Основной border radius для аватаров
 - `radius-stories (30px)`: Border radius для stories border вокруг аватара
 - `radius-notification (20px)`: Notification badge
-- `radius-badge (15px)`: Стандартные badge контейнеры
+- `radius-badge (15px)`: Стандартные badge контейнеры, Buttons
 - `radius-xl (12px)`: Live badge
 - `radius-icon (10px)`: Icon containers
 - `radius-full`: Online indicator, круглые элементы
@@ -409,6 +429,141 @@
 .card--interactive:hover {
   box-shadow: var(--shadow-hover-md);
   transform: translateY(-2px);
+}
+```
+
+#### Category Card (из реального Flutter кода)
+
+**Спецификация из кода:**
+- **Size**: 100px × 120px
+- **Border Radius**: 12px (outer container)
+- **Image fit**: cover
+- **Использование**: Карточки категорий/сервисов с изображением и текстом
+
+**Структура Category Card:**
+
+```
+Container: 100×120 (border-radius: 12px)
+├─ Outer Border Container: 100×120 (optional)
+│  ├─ Border: 2px solid
+│  ├─ Border Radius: 14px
+│  └─ Border Colors: #4141E6 (blue), #833AB4 (purple)
+│
+├─ Inner Image Container: 92×112 (position: 4px, 4px)
+│  ├─ Border Radius: 10px
+│  ├─ Image: fit cover
+│  └─ Background: white
+│
+├─ Gradient Overlay: 92×112 (или 100×120 без border)
+│  ├─ Height: 64.84px (или 70px)
+│  ├─ Position: top 50px (или 51.16px)
+│  ├─ Gradient: linear-gradient(180deg, transparent 0%, rgba(29,29,29,0.5) 100%)
+│  └─ Border Radius: bottom corners 10px
+│
+└─ Text Container: (position: 83.08px from top)
+   ├─ Padding: 10px left, 10px bottom (optional 10px right)
+   ├─ Width: 80px (text) или 90px
+   └─ Text:
+      ├─ Font: 10px, weight 600
+      ├─ Color: white
+      ├─ Line Height: 1.40 (14px)
+      ├─ Font Family: 'Archivo'
+      └─ Multi-line support
+```
+
+**Варианты Category Card:**
+
+**1. Default (без border)**
+```
+Size: 100×120
+Border Radius: 12px
+Image: cover, 100×120
+Overlay: gradient from top 50px
+Text: bottom, white
+```
+
+**2. With Blue Border (активная категория)**
+```
+Outer Container: 100×120, border-radius 14px
+Border: 2px solid #4141E6
+Inner Image: 92×112, position 4×4, border-radius 10px
+Overlay: gradient from top 51.16px, height 64.84px
+Text: bottom, white, padding 10px
+```
+
+**3. With Purple Border**
+```
+Border: 2px solid #833AB4
+Other specs: same as blue border variant
+```
+
+**Spacing & Layout (из кода):**
+- **Card spacing**: 10px (horizontal gap между карточками)
+- **Container padding**: 10px top/bottom, 16px left
+- **Text padding**: 10px left, 10px bottom, 10px right (optional)
+- **Text width**: 80px
+
+**Typography:**
+- **Font Size**: 10px (0.625rem)
+- **Font Weight**: 600 (Semibold)
+- **Font Family**: 'Archivo'
+- **Line Height**: 1.40 (14px)
+- **Color**: #FFFFFF (white)
+- **Multi-line**: Поддержка 2+ строк
+
+**CSS пример:**
+
+```css
+.category-card {
+  width: 100px;
+  height: 120px;
+  border-radius: var(--radius-category); /* 12px */
+  overflow: hidden;
+  position: relative;
+}
+
+.category-card--bordered {
+  border: var(--border-width-2) solid var(--color-border-category-blue);
+  border-radius: var(--radius-category-border); /* 14px */
+}
+
+.category-card--bordered.purple {
+  border-color: var(--color-border-category-purple);
+}
+
+.category-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--radius-category-inner); /* 10px */
+}
+
+.category-card--bordered .category-card__image {
+  width: 92px;
+  height: 112px;
+  position: absolute;
+  left: 4px;
+  top: 4px;
+}
+
+.category-card__overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 70px;
+  background: var(--gradient-overlay);
+}
+
+.category-card__text {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  width: 80px;
+  color: white;
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1.40;
 }
 ```
 
