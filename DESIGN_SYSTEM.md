@@ -54,6 +54,8 @@
 
 /* Accent Colors */
 --color-accent-orange: #FF6937;     /* Color(0xFFFF6937) - orange accent for labels */
+--color-accent-purple: #833AB4;     /* Color(0xFF833AB4) - purple/instagram gradient color */
+--color-accent-blue: #4141E6;       /* Color(0xFF4141E6) - blue accent */
 
 /* Overlay/Gradient Colors */
 --color-overlay-start: #00080808;   /* Color(0x00080808) - transparent black (gradient start) */
@@ -63,11 +65,12 @@
 **Использование цветов в проекте:**
 - **Backgrounds**: #12202F (dark theme), #F4F6F9 (light containers), #FFFFFF (white cards), #09101D (dark cards)
 - **Text**: #09101D (primary), #747B84 (secondary/placeholder), #FFFFFF (inverse), #FF6937 (orange accent)
-- **Borders**: #09101D (dark), #7B61FF (purple accent), 1px width
+- **Borders**: #09101D (dark), #7B61FF (purple accent), #833AB4 (purple/instagram), #4141E6 (blue), 1-2px width
 - **Status Indicators**: #11BB8D (success), #0B24FB (info), #E24949 (error), #FF9500 (warning)
 - **Badge dots**: 6×6px oval shapes with status colors
 - **Overlays**: Linear gradients from transparent to semi-transparent black for image overlays
 - **Tinted backgrounds**: #0C11BB8D (5% green tint)
+- **Story borders**: #833AB4 (purple), #4141E6 (blue) - 2px borders for active stories
 
 ### Primary Colors
 
@@ -307,11 +310,12 @@
 
 ```css
 /* Реальные отступы из проекта */
+--space-project-0-75: 0.1875rem; /* 3px - Column spacing (stories label) */
 --space-project-1: 0.25rem;     /* 4px - Row spacing, vertical padding, Column spacing */
 --space-project-1-25: 0.3125rem; /* 5px - left padding, Column spacing */
 --space-project-1-75: 0.4375rem; /* 7px - vertical padding */
 --space-project-2: 0.5rem;      /* 8px - padding, Row/Column spacing */
---space-project-xs: 0.625rem;   /* 10px - spacing: 10, EdgeInsets.all(10), Row/Column spacing, padding */
+--space-project-xs: 0.625rem;   /* 10px - spacing: 10, EdgeInsets.all(10), Row/Column spacing, padding, stories */
 --space-project-sm: 1rem;       /* 16px - horizontal padding, positioning, icon padding */
 --space-project-md: 1.25rem;    /* 20px - padding: 20, all sides */
 --space-project-lg: 2rem;       /* 32px - padding: 32, all sides */
@@ -323,8 +327,8 @@
 ```
 
 **Использование в проекте:**
-- **Micro**: 4px (Row/Column spacing), 5px (padding), 8px (spacing, padding)
-- **Small**: 10px (gap, EdgeInsets, Row/Column spacing)
+- **Micro**: 3px (stories label spacing), 4px (Row/Column spacing), 5px (padding), 8px (spacing, padding)
+- **Small**: 10px (gap, EdgeInsets, Row/Column spacing, stories)
 - **Medium**: 16px (horizontal padding, icon padding), 20px (padding all sides, card padding)
 - **Large**: 32px (padding all sides), 50px (container padding)
 - **XLarge**: 70px (Row spacing between elements), 100px (padding all, Row/Column gap, positioning)
@@ -357,14 +361,18 @@
 
 ```css
 /* Реальные border radius из проекта */
---radius-project-sm: 0.9375rem;       /* 15px - BorderRadius.circular(15) - containers, search bars, buttons */
---radius-project-base: 1.25rem;       /* 20px - BorderRadius.circular(20) - cards, images */
---radius-project-md: 2rem;            /* 32px - BorderRadius.circular(32) - badges, pills */
---radius-project-lg: 2.5rem;          /* 40px - BorderRadius.circular(40) - phone container */
---radius-project-xl: 6.25rem;         /* 100px - BorderRadius.circular(100) - main container, icons */
+--radius-project-xs: 0.625rem;        /* 10px - BorderRadius.circular(10) - story images */
+--radius-project-sm: 0.8125rem;       /* 13px - BorderRadius.circular(13) - story containers with border */
+--radius-project-base: 0.9375rem;     /* 15px - BorderRadius.circular(15) - containers, search bars, buttons */
+--radius-project-md: 1.25rem;         /* 20px - BorderRadius.circular(20) - cards, images */
+--radius-project-lg: 2rem;            /* 32px - BorderRadius.circular(32) - badges, pills */
+--radius-project-xl: 2.5rem;          /* 40px - BorderRadius.circular(40) - phone container */
+--radius-project-2xl: 6.25rem;        /* 100px - BorderRadius.circular(100) - main container, icons */
 ```
 
 **Использование в проекте:**
+- **Story Images**: BorderRadius.circular(10) = 10px radius
+- **Story Containers with Border**: BorderRadius.circular(13) = 13px radius
 - **Buttons/Search**: BorderRadius.circular(15) = 15px radius
 - **Cards/Images**: BorderRadius.circular(20) = 20px radius (most common for content cards)
 - **Badges/Pills**: BorderRadius.circular(32) = 32px radius
@@ -423,10 +431,12 @@
 
 ```css
 /* Реальные border width из проекта */
---border-width-project: 15px;  /* width: 15 - phone container border */
+--border-width-story: 2px;     /* width: 2 - story container border */
+--border-width-phone: 15px;    /* width: 15 - phone container border */
 ```
 
 **Использование в проекте:**
+- **Story Border**: width: 2px, strokeAlign: BorderSide.strokeAlignCenter, colors: #833AB4 / #4141E6
 - **Phone Container Border**: width: 15px, strokeAlign: BorderSide.strokeAlignOutside, color: #09101D
 
 ##### Standard Border Width
@@ -434,10 +444,10 @@
 ```css
 --border-width-0: 0;
 --border-width-1: 1px;
---border-width-2: 2px;
+--border-width-2: 2px;  /* Project-specific - stories */
 --border-width-4: 4px;
 --border-width-8: 8px;
---border-width-15: 15px;  /* Project-specific */
+--border-width-15: 15px;  /* Project-specific - phone */
 ```
 
 #### Border Offset
@@ -622,6 +632,66 @@
 - **Text Button**: Height: 44px, Background: #747B84, Border Radius: 15px, Padding: 16×10, Font: 16px/700
 - **Small Button**: Height: 36px, Background: white/#F4F6F9, Border Radius: 15px, Padding: 16×10, Font: 13px/600
 - **Button with Icon**: Icon: 16×16px (padding: 2px, rounded: 100px), spacing: 8px
+
+#### Master Stories (Text Outside) - Complete Component Block
+
+**Container Layout:**
+- **Padding**: 50px (all sides)
+- **Border**: 1px solid #7B61FF
+- **Border Radius**: 15px (circular(15))
+- **Clip Behavior**: Clip.antiAlias
+- **Layout**: Row with spacing: 100px
+
+**Story Card Variants:**
+
+1. **Vertical Portrait Story (Standard)**
+   - **Container**: Column, spacing: 10px
+   - **Image**: 100px × 120px, Border Radius: 10px (circular(10)), BoxFit.cover
+   - **Label Section**: Column, spacing: 3px
+     - **Container**: width: 100px, padding-left: 10px
+     - **Text**: "Category or service", Font: 'Archivo', Size: 13px, Weight: 700, Color: #09101D, Line Height: 1.40, Width: 90px
+
+2. **Vertical Portrait Story (With Purple Border - Active)**
+   - **Container**: Column, spacing: 10px
+   - **Border Container**: 100px × 120px, Background: white, Border: 2px solid #833AB4, Border Radius: 13px (circular(13)), strokeAlign: center
+   - **Image**: 94px × 114px (positioned inside), Border Radius: 10px, BoxFit.cover
+   - **Label**: Same as standard
+
+3. **Vertical Portrait Story (With Blue Border - Active)**
+   - **Container**: Column, spacing: 10px
+   - **Border Container**: 100px × 120px, Background: white, Border: 2px solid #4141E6, Border Radius: 13px, strokeAlign: center
+   - **Image**: 94px × 114px, Border Radius: 10px, BoxFit.cover
+   - **Label**: Same as standard
+
+4. **Horizontal Landscape Story (Standard)**
+   - **Container**: Column, spacing: 10px
+   - **Image**: 130px × 80px, Border Radius: 10px, BoxFit.cover
+   - **Label Section**: Column, spacing: 3px
+     - **Container**: padding-left: 10px
+     - **Text**: "Category or service", Font: 'Archivo', Size: 13px, Weight: 700, Color: #09101D, Width: 110px
+
+5. **Horizontal Landscape Story (With Purple Border - Active)**
+   - **Container**: Column, spacing: 10px
+   - **Border Container**: 130px × 80px, Background: white, Border: 2px solid #833AB4, Border Radius: 13px, strokeAlign: center
+   - **Image**: 124px × 74px, Border Radius: 10px, BoxFit.cover
+   - **Label**: Same as standard
+
+6. **Horizontal Landscape Story (With Blue Border - Active)**
+   - **Container**: Column, spacing: 10px
+   - **Border Container**: 130px × 80px, Background: white, Border: 2px solid #4141E6, Border Radius: 13px, strokeAlign: center
+   - **Image**: 124px × 74px, Border Radius: 10px, BoxFit.cover
+   - **Label**: Same as standard
+
+**Story Border Colors:**
+- **Purple**: #833AB4 - Instagram gradient style (for active/viewed stories)
+- **Blue**: #4141E6 - Alternative active state
+
+**Usage Notes:**
+- Border reduces image size by 6px on each side (100→94, 120→114, 130→124, 80→74)
+- Border uses strokeAlign: center positioning
+- Spacing between stories in row: 100px
+- Label text always 13px/700 with 10px left padding
+- Internal spacing in label column: 3px
 
 ---
 
