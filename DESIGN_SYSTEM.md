@@ -1210,6 +1210,461 @@ Photo Grid components для отображения коллекций изоб�
 
 ---
 
+### 18. Price & Amount Components
+
+Компоненты для отображения цен, сумм и связанных элементов с различными вариантами оформления.
+
+#### Price Badge/Pill
+
+Компактные контейнеры для отображения цен с опциональными иконками и скидками.
+
+##### Container Properties
+
+- **Background**: #F4F6F9 (color-bg-secondary)
+- **Border Radius**: 20px (radius-20)
+- **Clip Behavior**: antiAlias
+- **Padding Variants**:
+  - Compact: 2px all sides
+  - Standard: 5px (horizontal), 2px (vertical)
+  - With text: 10px (horizontal), 2px (vertical)
+  - Text-only: 10px (horizontal), 7px (vertical)
+
+##### Price Text
+
+- **Font**: Archivo, 12px (font-size-xs), weight 400 (normal)
+- **Line Height**: 1.40
+- **Colors**:
+  - Regular price: #2A2B2F (dark text)
+  - Strikethrough/Old price: #747B84 (color-text-secondary) with text-decoration: lineThrough
+- **Spacing**: 2px between price elements
+
+##### Icon Container
+
+- **Size**: 24px × 24px
+- **Padding**: 4px
+- **Border Radius**: 100px (radius-full)
+- **Background**:
+  - Default: transparent
+  - Active/Selected: #4141E6 (color-primary)
+- **Icon Size**: 19.20px (centered within container)
+- **Position**: Left/Right of price text
+
+##### Layout Variants
+
+###### Variant 1: Icon + Strikethrough + Price + Icon
+Полный вариант с иконками слева и справа, старой ценой (зачеркнутой) и новой ценой.
+
+- **Elements**: Icon (24px) + Strikethrough Price + Regular Price + Icon (24px)
+- **Spacing**: 2px between text elements
+- **Use Case**: Скидки, распродажи, сравнение цен
+
+###### Variant 2: Icon + Price + Icon
+Стандартный вариант с иконками по бокам.
+
+- **Elements**: Icon (24px) + Price + Icon (24px)
+- **Spacing**: 2px
+- **Use Case**: Стандартное отображение цены с действиями
+
+###### Variant 3: Strikethrough + Price + Icon
+Вариант со скидкой без левой иконки.
+
+- **Elements**: Strikethrough Price + Regular Price + Icon (24px)
+- **Spacing**: 2px between prices
+- **Use Case**: Компактное отображение скидки
+
+###### Variant 4: Icon Only
+Минималистичный вариант с одной иконкой.
+
+- **Elements**: Icon (24px)
+- **Padding**: 2px all sides
+- **Use Case**: Действия, индикаторы, минималистичный дизайн
+
+###### Variant 5: Price + Icon
+Вариант с ценой и иконкой справа.
+
+- **Elements**: Price + Icon (24px)
+- **Padding**: 10px (left), 5px (right), 2px (vertical)
+- **Use Case**: Цена с действием или индикатором
+
+###### Variant 6: Price Only
+Чистый вариант только с ценой.
+
+- **Elements**: Price text
+- **Padding**: 10px (horizontal), 7px (vertical)
+- **Use Case**: Простое отображение цены без дополнительных элементов
+
+###### Variant 7: Quantity Counter
+Специальный вариант с кнопками + и - для управления количеством.
+
+- **Elements**: Icon Minus (24px, background #4141E6) + Number + Icon Plus (24px, background #4141E6)
+- **Spacing**: 15px between icon and number, 15px between number and icon
+- **Padding**: 2px all sides
+- **Icon Background**: #4141E6 (color-primary)
+- **Icon Border Radius**: 20px (radius-20)
+- **Use Case**: Корзина покупок, выбор количества
+
+##### Container Arrangement
+
+- **Row Container**:
+  - Padding: 20px all sides
+  - Spacing between badges: 20px
+  - Background: white or #F4F6F9
+  - Border: 1px solid #7B61FF (secondary) или #4141E6 (primary)
+  - Border Radius: 15px (radius-15)
+  - Height: 83px
+
+#### Typography Elements
+
+Различные комбинации текстовых элементов для отображения информации.
+
+##### Title Variants
+
+###### Large Title (32px)
+- **Font Size**: 32px (font-size-2xl)
+- **Font Weight**: 700 (bold)
+- **Color**: #09101D (color-text-primary)
+- **Line Height**: 1.40
+- **Width**: 160px (fixed container)
+- **Use Case**: Главные заголовки, основные цены
+
+###### Medium Title (24px)
+- **Font Size**: 24px (font-size-xl)
+- **Font Weight**: 700 (bold)
+- **Color**: #09101D (color-text-primary)
+- **Line Height**: 1.40
+- **Width**: 160px
+- **Use Case**: Подзаголовки, вторичные цены
+
+###### Small Title (16px)
+- **Font Size**: 16px (font-size-base)
+- **Font Weight**: 700 (bold)
+- **Color**: #09101D (color-text-primary)
+- **Line Height**: 1.40
+- **Width**: 160px
+- **Use Case**: Маленькие заголовки, названия секций
+
+##### Title + Subtitle Combinations
+
+###### Large Title + Subtitle
+- **Title**: 32px, weight 700, color #09101D
+- **Subtitle**: 14px, weight 400, color #414249
+- **Spacing**: Вертикальный stack без gap (естественный line-height)
+- **Container Width**: 160px
+- **Use Case**: Цена с описанием, заголовок с подзаголовком
+
+###### Medium Title + Subtitle
+- **Title**: 24px, weight 700, color #09101D
+- **Subtitle**: 14px, weight 400, color #414249
+- **Container Width**: 160px
+- **Use Case**: Средние заголовки с описанием
+
+###### Small Title + Subtitle
+- **Title**: 16px, weight 700, color #09101D
+- **Subtitle**: 14px, weight 400, color #414249
+- **Container Width**: 160px
+- **Use Case**: Компактные элементы с описанием
+
+##### Label + Title Combinations
+
+###### Label + Large Title
+- **Label**: 14px, weight 400, color #414249 (сверху)
+- **Title**: 32px, weight 700, color #09101D (снизу)
+- **Container Width**: 160px
+- **Use Case**: Категория/метка над основным заголовком
+
+###### Label + Medium Title
+- **Label**: 14px, weight 400, color #414249
+- **Title**: 24px, weight 700, color #09101D
+- **Container Width**: 160px
+- **Use Case**: Средние элементы с метками
+
+###### Label + Small Title
+- **Label**: 14px, weight 400, color #414249
+- **Title**: 16px, weight 700, color #09101D
+- **Container Width**: 160px
+- **Use Case**: Компактные элементы с метками
+
+##### Complex Text Blocks
+
+###### Title + Subtitle + Caption
+- **Title**: 16px, weight 700, color #09101D
+- **Subtitle**: 14px, weight 400, color #414249
+- **Caption**: 14px, weight 400, color #414249
+- **Spacing**:
+  - 2px между Title и Subtitle
+  - 4px между Subtitle и Caption
+- **Container Width**: 160px
+- **Use Case**: Детальное описание, карточки товаров
+
+###### Label + Title + Subtitle
+- **Label**: 14px, weight 400, color #414249 (сверху)
+- **Title**: 16px, weight 700, color #09101D
+- **Subtitle**: 14px, weight 400, color #414249
+- **Spacing**:
+  - 6px между Label и Title
+  - 2px между Title и Subtitle
+- **Container Width**: 160px
+- **Use Case**: Категоризированная информация
+
+##### Typography Container
+
+- **Container Height**: 110px
+- **Padding**: 20px all sides
+- **Layout**: Horizontal row with expandable columns
+- **Background**: white
+- **Border**: 1px solid #4141E6 (primary)
+- **Border Radius**: 15px (radius-15)
+- **Column Width**: 160px each (flexible/expandable)
+
+#### Detail & Info Components
+
+Компоненты для отображения детальной информации с иконками.
+
+##### Detail + Info (with Icon)
+
+- **Detail Text**:
+  - Font: 15px (font-size-15)
+  - Weight: 600 (semibold)
+  - Color: #09101D (color-text-primary)
+  - Align: right
+- **Info Text**:
+  - Font: 14px (font-size-sm)
+  - Weight: 400 (normal)
+  - Color: #414249 (color-text-secondary)
+  - Align: right
+- **Icon**: 24px × 24px (positioned right)
+- **Spacing**:
+  - 2px between Detail and Info (vertical)
+  - 4px between text and icon (horizontal)
+- **Use Case**: Дополнительная информация, статистика
+
+##### Detail Only (with Icon)
+
+- **Detail Text**: 15px, weight 600, color #09101D, align right or center
+- **Icon**: 24px × 24px (optional, positioned right)
+- **Spacing**: 4px between text and icon
+- **Use Case**: Одиночное значение с действием
+
+##### Detail Only (no Icon)
+
+- **Detail Text**: 15px, weight 600, color #09101D, align right or center
+- **Use Case**: Простое отображение значения
+
+##### Info Only (with Icon)
+
+- **Info Text**: 14px, weight 400, color #414249, align right
+- **Icon**: 24px × 24px (positioned right)
+- **Spacing**: 4px between text and icon
+- **Use Case**: Вторичная информация с действием
+
+##### Icon Only
+
+- **Icon**: 24px × 24px
+- **Container**: Minimal padding
+- **Use Case**: Действия, индикаторы
+
+##### Container Layout
+
+- **Container Height**: 83px
+- **Padding**: 20px all sides
+- **Row Spacing**: 20px between elements
+- **Background**: white
+- **Border**: 1px solid #4141E6 (primary)
+- **Border Radius**: 15px (radius-15)
+
+#### Dot Indicators
+
+Индикаторы размеров или состояний в виде точек.
+
+##### Sizes
+
+- **Small**: 16px × 16px
+- **Medium**: 20px × 20px
+- **Large**: 24px × 24px
+
+##### Properties
+
+- **Background**: transparent (placeholders) или цветная заливка
+- **Border Radius**: 50% (круглые)
+- **Spacing**: 18px between dots
+
+##### Container
+
+- **Container Height**: 83px
+- **Padding**: 20px all sides
+- **Background**: #F4F6F9 (color-bg-secondary)
+- **Border**: 1px solid #7B61FF (secondary)
+- **Border Radius**: 15px (radius-15)
+- **Layout**: Horizontal centered row
+
+##### Use Cases
+
+- Индикаторы размеров товаров
+- Пагинация
+- Состояния процессов
+- Выбор цвета/варианта
+
+#### Code Example
+
+```css
+/* Price Badge */
+.price-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 2px 5px;
+  background: var(--color-bg-secondary); /* #F4F6F9 */
+  border-radius: var(--radius-20); /* 20px */
+}
+
+.price-badge__icon {
+  width: 24px;
+  height: 24px;
+  padding: 4px;
+  border-radius: var(--radius-full); /* 100px */
+}
+
+.price-badge__icon--active {
+  background: var(--color-primary); /* #4141E6 */
+}
+
+.price-badge__price {
+  font-family: var(--font-primary);
+  font-size: var(--font-size-xs); /* 12px */
+  font-weight: var(--font-weight-normal); /* 400 */
+  color: var(--color-text-primary);
+  line-height: 1.40;
+}
+
+.price-badge__price--strikethrough {
+  color: var(--color-text-secondary); /* #747B84 */
+  text-decoration: line-through;
+}
+
+/* Quantity Counter */
+.price-badge--counter {
+  padding: 2px;
+  gap: 15px;
+}
+
+.price-badge--counter .price-badge__icon {
+  background: var(--color-primary); /* #4141E6 */
+  border-radius: var(--radius-20); /* 20px */
+}
+
+/* Typography Blocks */
+.text-block {
+  width: 160px;
+}
+
+.text-block__title--large {
+  font-size: var(--font-size-2xl); /* 32px */
+  font-weight: var(--font-weight-bold); /* 700 */
+  color: var(--color-text-primary); /* #09101D */
+  line-height: 1.40;
+}
+
+.text-block__title--medium {
+  font-size: var(--font-size-xl); /* 24px */
+  font-weight: var(--font-weight-bold); /* 700 */
+  color: var(--color-text-primary);
+  line-height: 1.40;
+}
+
+.text-block__title--small {
+  font-size: var(--font-size-base); /* 16px */
+  font-weight: var(--font-weight-bold); /* 700 */
+  color: var(--color-text-primary);
+  line-height: 1.40;
+}
+
+.text-block__subtitle,
+.text-block__label,
+.text-block__caption {
+  font-size: var(--font-size-sm); /* 14px */
+  font-weight: var(--font-weight-normal); /* 400 */
+  color: #414249; /* Secondary text */
+  line-height: 1.40;
+}
+
+/* Detail Component */
+.detail-info {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.detail-info__text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  text-align: right;
+}
+
+.detail-info__detail {
+  font-size: var(--font-size-15); /* 15px */
+  font-weight: var(--font-weight-semibold); /* 600 */
+  color: var(--color-text-primary); /* #09101D */
+  line-height: 1.40;
+}
+
+.detail-info__info {
+  font-size: var(--font-size-sm); /* 14px */
+  font-weight: var(--font-weight-normal); /* 400 */
+  color: #414249;
+  line-height: 1.40;
+}
+
+.detail-info__icon {
+  width: 24px;
+  height: 24px;
+}
+
+/* Dot Indicators */
+.dot-indicator {
+  border-radius: 50%;
+  background: transparent; /* or colored */
+}
+
+.dot-indicator--small {
+  width: 16px;
+  height: 16px;
+}
+
+.dot-indicator--medium {
+  width: 20px;
+  height: 20px;
+}
+
+.dot-indicator--large {
+  width: 24px;
+  height: 24px;
+}
+
+.dot-container {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: var(--color-bg-secondary); /* #F4F6F9 */
+  border: 1px solid var(--color-secondary); /* #7B61FF */
+  border-radius: var(--radius-15); /* 15px */
+  height: 83px;
+}
+```
+
+#### Flutter Implementation Notes
+
+- Используется `Row` с `spacing` для горизонтальных композиций
+- `Column` с `spacing` для вертикальных текстовых блоков
+- `Text` виджет с `TextStyle` для типографики
+- `textDecoration: TextDecoration.lineThrough` для зачеркнутых цен
+- `Container` с `clipBehavior: Clip.antiAlias` для скругленных углов
+- `Expanded` для гибких колонок в grid layouts
+
+---
+
 ## Паттерны
 
 ### Dashboard Layouts
