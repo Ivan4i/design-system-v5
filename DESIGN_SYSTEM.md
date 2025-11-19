@@ -30,6 +30,16 @@
 
 ## Цветовая палитра
 
+### Real Project Colors (Extracted from Flutter Code)
+
+```css
+/* Реальные цвета из проекта */
+--color-bg-dark: #12202F;           /* Color.fromARGB(255, 18, 32, 47) - scaffold background */
+--color-text-dark: #09101D;         /* Color(0xFF09101D) - text and border color */
+--color-white: #FFFFFF;             /* Colors.white */
+--color-border-dark: #09101D;       /* Border color */
+```
+
 ### Primary Colors
 
 ```css
@@ -145,12 +155,26 @@
 
 ## Типографика
 
+### Real Project Typography (Extracted from Flutter Code)
+
+```css
+/* Реальная типографика из проекта */
+--font-project: 'Archivo';          /* fontFamily: 'Archivo' */
+--font-size-display: 4.5rem;        /* 72px - fontSize: 72 */
+--font-weight-ultra: 800;           /* fontWeight: FontWeight.w800 */
+--line-height-tight: 0.70;          /* height: 0.70 */
+```
+
+**Использование в проекте:**
+- **Grid Title**: Font: 'Archivo', Size: 72px (4.5rem), Weight: 800 (extrabold), Line Height: 0.70, Color: #09101D
+
 ### Font Family
 
 ```css
 --font-primary: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
 --font-secondary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 --font-mono: 'JetBrains Mono', 'Fira Code', 'Monaco', 'Consolas', 'Courier New', monospace;
+--font-archivo: 'Archivo', sans-serif;  /* Project-specific font */
 ```
 
 ### Font Sizes
@@ -222,12 +246,29 @@
 
 ## Spacing & Layout
 
+### Real Project Spacing (Extracted from Flutter Code)
+
+```css
+/* Реальные отступы из проекта */
+--space-project-xs: 0.625rem;   /* 10px - spacing: 10, EdgeInsets.all(10) */
+--space-project-sm: 1rem;       /* 16px - left: 16 */
+--space-project-lg: 6.25rem;    /* 100px - left: 100, top: 100 */
+--space-project-xl: 12.5rem;    /* 200px - top: 200 */
+```
+
+**Использование в проекте:**
+- **Column spacing**: 10px (gap между элементами)
+- **Container padding**: 10px (EdgeInsets.all)
+- **Grid positioning**: left: 100px, top: 100px, 200px
+- **Content positioning**: left: 16px
+
 ### Spacing Scale
 
 ```css
 --space-0: 0;
 --space-1: 0.25rem;   /* 4px */
 --space-2: 0.5rem;    /* 8px */
+--space-2-5: 0.625rem;  /* 10px - Project-specific */
 --space-3: 0.75rem;   /* 12px */
 --space-4: 1rem;      /* 16px */
 --space-5: 1.25rem;   /* 20px */
@@ -238,9 +279,25 @@
 --space-16: 4rem;     /* 64px */
 --space-20: 5rem;     /* 80px */
 --space-24: 6rem;     /* 96px */
+--space-25: 6.25rem;  /* 100px - Project-specific */
+--space-50: 12.5rem;  /* 200px - Project-specific */
 ```
 
 ### Border Radius
+
+#### Real Project Border Radius (Extracted from Flutter Code)
+
+```css
+/* Реальные border radius из проекта */
+--radius-project-container: 6.25rem;  /* 100px - BorderRadius.circular(100) - main container */
+--radius-project-phone: 2.5rem;       /* 40px - BorderRadius.circular(40) - phone container */
+```
+
+**Использование в проекте:**
+- **Main Container**: BorderRadius.circular(100) = 100px radius
+- **Phone Container**: BorderRadius.circular(40) = 40px radius
+
+#### Standard Border Radius
 
 ```css
 --radius-none: 0;
@@ -250,6 +307,8 @@
 --radius-lg: 0.5rem;      /* 8px */
 --radius-xl: 0.75rem;     /* 12px */
 --radius-2xl: 1rem;       /* 16px */
+--radius-3xl: 2.5rem;     /* 40px - Project-specific */
+--radius-4xl: 6.25rem;    /* 100px - Project-specific */
 --radius-full: 9999px;
 ```
 
@@ -286,11 +345,25 @@
 
 #### Border Width
 
+##### Real Project Border Width (Extracted from Flutter Code)
+
+```css
+/* Реальные border width из проекта */
+--border-width-project: 15px;  /* width: 15 - phone container border */
+```
+
+**Использование в проекте:**
+- **Phone Container Border**: width: 15px, strokeAlign: BorderSide.strokeAlignOutside, color: #09101D
+
+##### Standard Border Width
+
 ```css
 --border-width-0: 0;
 --border-width-1: 1px;
 --border-width-2: 2px;
 --border-width-4: 4px;
+--border-width-8: 8px;
+--border-width-15: 15px;  /* Project-specific */
 ```
 
 #### Border Offset
@@ -320,6 +393,44 @@
 ---
 
 ## Компоненты
+
+### Real Project Components (Extracted from Flutter Code)
+
+#### Grid Container
+- **Size**: 575px × 1112px
+- **Background**: white (#FFFFFF)
+- **Border Radius**: 100px (circular(100))
+- **Clip Behavior**: Clip.antiAlias
+- **Description**: Основной контейнер для grid layout
+
+#### Phone/Device Container
+- **Size**: 375px × 812px (стандартный размер iPhone)
+- **Background**: white (#FFFFFF)
+- **Border**: 15px solid #09101D (strokeAlignOutside)
+- **Border Radius**: 40px (circular(40))
+- **Clip Behavior**: Clip.antiAlias
+- **Position**: left: 100px, top: 200px
+- **Description**: Контейнер с border для имитации устройства
+
+#### Content Container
+- **Size**: 343px × 812px
+- **Padding**: 10px (EdgeInsets.all)
+- **Clip Behavior**: Clip.antiAlias
+- **Position**: left: 16px, top: 0
+- **Description**: Внутренний контейнер для контента
+
+#### Grid Title
+- **Text**: "Grid"
+- **Font**: 'Archivo'
+- **Size**: 72px
+- **Weight**: 800 (extrabold)
+- **Line Height**: 0.70
+- **Color**: #09101D
+- **Position**: left: 100px, top: 100px
+- **Alignment**: crossAxisAlignment: start
+- **Spacing**: 10px (gap между элементами колонки)
+
+---
 
 ### 1. Cards
 
