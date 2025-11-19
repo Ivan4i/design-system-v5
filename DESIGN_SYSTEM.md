@@ -59,6 +59,7 @@
 --color-primary-blue: #4141E6;     /* Color(0xFF4141E6) - основной синий */
 --color-accent-purple: #7B61FF;    /* Color(0xFF7B61FF) - фиолетовый акцент */
 --color-info-blue: #0B24FB;        /* Color(0xFF0B24FB) - синий для secondary info */
+--color-link-blue: #2E5AAC;        /* Color(0xFF2E5AAC) - синий для ссылок и подчеркиваний */
 ```
 
 ### UI Colors
@@ -68,6 +69,7 @@
 --color-gray-light: #D9DDE2;       /* Color(0xFFD9DDE2) - светло-серый для разделителей */
 --color-gray-lighter: #EAEEF2;     /* Color(0xFFEAEEF2) - очень светло-серый для inactive steps */
 --color-background-light: #F4F6F9; /* Color(0xFFF4F6F9) - светлый фон для inactive кнопок */
+--color-input-background: #FAFAFB; /* Color(0xFFFAFAFB) - очень светлый фон для input полей */
 
 /* Цвета для карточек и контента */
 --color-yellow-accent: #FFC043;    /* Color(0xFFFFC043) - желтый для скидок, CTA кнопок */
@@ -1524,6 +1526,51 @@
 
 **Использование**: Email inputs, username fields, search bars, amount inputs, location pickers, contact selectors, authentication forms
 
+#### Toggle Switch
+
+Переключатель вкл/выкл для настроек и preferences.
+
+**Dimensions:**
+- **Container Width**: 51px
+- **Container Height**: 31px
+- **Border Radius**: 40px (pill shape)
+
+**Toggle Circle:**
+- **Size**: 31×31px
+- **Border**: 2px solid (matches background color)
+- **Border Radius**: 40px (полный круг)
+- **Background**: White
+
+**States:**
+
+**Active (On):**
+- Background: #11BB8D (green-badge)
+- Circle position: Right-aligned
+- Circle border: 2px solid #11BB8D
+
+**Inactive (Off):**
+- Background: #D9DDE2 (gray-light) или #EAEEF2 (gray-lighter)
+- Circle position: Left-aligned
+- Circle border: 2px solid background color
+
+**Usage with Label:**
+- Layout: Row with spaceBetween
+- Label: 12px Medium #09101D
+- Spacing: Auto (spaceBetween pushes switch to right)
+- Container padding: horizontal 16px, vertical 10px
+
+**Animation:**
+- Transition: Circle slides from left to right (или наоборот)
+- Duration: ~200-300ms
+- Easing: ease-in-out
+
+**Accessibility:**
+- Tap target: Full 51×31px area
+- Visual feedback: Circle moves immediately
+- Color contrast: Meets WCAG AA standards
+
+**Использование**: Settings toggles, feature flags, remember me checkboxes, preferences, notifications on/off
+
 ---
 
 ### 17. Hero Image Carousel (Flutter)
@@ -1970,6 +2017,232 @@
 
 ---
 
+## UI Blocks & Screen Patterns (Flutter)
+
+Готовые UI блоки для мобильных экранов - комплексные паттерны, которые можно гибко адаптировать под конкретные нужды проекта.
+
+> **Гибкость блоков**: Все блоки можно расширять/модифицировать. Например, если в блоке 2 input поля, но по backend требуется 3 - просто добавьте еще одно поле с теми же стилями.
+
+### Start Screen Blocks
+
+Блоки для onboarding, регистрации и welcome screens.
+
+#### Start Screen - Onboarding
+
+Стартовый экран с hero-текстом и призывом к действию.
+
+**Dimensions:**
+- Screen: 375×412px
+- Border Radius: 30px (screen corners)
+- Background: White
+
+**Structure (top to bottom):**
+
+1. **Gradient Overlay Section**
+   - Gradient: `LinearGradient(begin: (0.50, 0.00), end: (0.50, 1.00))`
+   - Colors: `[Colors.white.withValues(alpha: 0), Colors.white, Colors.white]`
+   - Fade effect from transparent to solid white
+
+2. **Logo/Image Section** (top padding: 60px, bottom: 10px)
+   - Height: 80px
+   - Border radius: 15px
+   - Shadow: `BoxShadow(color: rgba(0, 0, 0, 0.1), blurRadius: 10, offset: (0, 2))`
+   - Image: NetworkImage, fit: cover
+   - Spacing below: 4px
+
+3. **Hero Text Section** (padding: top 10px, horizontal 16px, bottom 20px)
+   - Width: 343px
+   - Text: Mixed style TextSpan
+     - Regular part: 32px Bold #09101D "Get a rental car in "
+     - Accent part: 32px Bold #7CC5D6 "15 minutes"
+   - Text Align: Center
+   - Line Height: 1.40
+   - Spacing below: 20px
+
+4. **CTA Buttons Section** (top: 10px spacing)
+
+   **Primary Button:**
+   - Width: 343px (full width minus padding)
+   - Height: 44px
+   - Background: #7CC5D6 (cyan-light)
+   - Border Radius: 15px
+   - Padding: horizontal 16px, vertical 10px
+   - Text: "Sign up" (16px Semibold White)
+   - Spacing below: 10px
+
+   **Secondary Button:**
+   - Width: 343px
+   - Height: 44px
+   - Background: Transparent
+   - Border Radius: 15px
+   - Padding: horizontal 16px, vertical 10px
+   - Text: "Log in" (14px Semibold #09101D)
+
+5. **iOS Home Indicator**
+   - Width: 134px
+   - Height: 5px
+   - Background: #09101D (black)
+   - Border Radius: 100px (pill shape)
+   - Position: Center bottom (34px container height, positioned at top: 21px)
+
+**Flexible elements:**
+- Можно добавить больше кнопок (social login, etc.)
+- Изменить hero text на любой другой
+- Добавить subtitle под hero text
+- Заменить logo section на другой content
+
+**Usage:** Onboarding, welcome screens, app intro, marketing landing
+
+---
+
+#### Start Screen - Sign Up Form
+
+Экран регистрации с формой ввода и toggle switch.
+
+**Dimensions:**
+- Screen: 375×496px
+- Border Radius: 30px
+- Background: White
+
+**Structure (top to bottom):**
+
+1. **Top Status Bar** (0-44px)
+   - Height: 44px
+   - Close button right-aligned:
+     - Icon: 24×24px
+     - Padding: horizontal 16px, vertical 10px
+
+2. **Close Button Row** (44-88px)
+   - Height: 44px
+   - Right-aligned icon: 24×24px (2px padding, border-radius 100px)
+
+3. **Page Title Section** (88-172px, padding: top 40px, horizontal 16px)
+   - Title: "Create account"
+     - Font: 32px Bold #09101D
+     - Width: 343px
+     - Line Height: 1.40
+
+4. **Subtitle with Link** (172-218px, padding: top 5px, horizontal 16px, vertical 10px)
+   - Text: Mixed style TextSpan
+     - Regular: "Have an account? " (15px Regular #09101D)
+     - Link: "Sign in" (15px Regular #2E5AAC, underlined)
+   - Width: 343px
+
+5. **Email Input Field** (218-320px, padding: top 20px)
+   - Label: "Your email" (13px Semibold #09101D)
+   - Input Container:
+     - Width: 343px
+     - Height: 46px
+     - Background: #FAFAFB (input-background)
+     - Border Radius: 15px
+     - Padding: left 16px, right 20px
+   - Placeholder: "|you@awesome.com" (16px Regular rgba(9, 16, 29, 0.2))
+   - Cursor: 2×16px
+   - Spacing: 8px (label to input)
+
+6. **Toggle Switch Row** (320-372px, padding: top 5px, bottom 10px)
+   - Container: horizontal 16px padding
+   - Layout: Row with spaceBetween
+
+   **Label (left):**
+   - Text: "Remember sign in details"
+   - Font: 12px Medium #09101D
+   - Width: 292px
+
+   **Toggle Switch (right):**
+   - Container Width: 51px
+   - Container Height: 31px
+   - Background: #11BB8D (green, active state)
+   - Border Radius: 40px (pill)
+   - Toggle Circle:
+     - Size: 31×31px
+     - Background: White
+     - Border: 2px solid #11BB8D
+     - Border Radius: 40px
+     - Position: Right-aligned (active)
+
+7. **Primary Button** (372-436px, padding: vertical 10px, horizontal 16px)
+   - Width: 343px
+   - Height: 44px
+   - Background: #09101D (black)
+   - Border Radius: 15px
+   - Padding: horizontal 16px, vertical 10px
+   - Text: "Confirm & Continue" (14px Semibold White)
+   - Inner padding: horizontal 10px
+
+8. **Legal Footer Text** (436-496px, padding: top 10px, horizontal 16px, bottom 20px)
+   - Width: 343px
+   - Text: Mixed style TextSpan (11px Regular)
+     - Regular: "By continuing, you agree to Appka's " (#747B84)
+     - Link: "Privacy Policy" (11px Semibold #2E5AAC)
+     - Regular: " and " (#747B84)
+     - Link: "Terms of Service" (11px Semibold #2E5AAC)
+   - Line Height: 1.40
+
+**Flexible elements:**
+- Добавить больше input полей (password, name, phone)
+- Добавить social login buttons
+- Изменить toggle на checkbox
+- Добавить validation errors под inputs
+- Добавить "Forgot password?" link
+
+**Usage:** Sign up, registration, account creation, user onboarding
+
+---
+
+#### Start Screen - Gallery Preview
+
+Экран с каруселью изображений (preview mode).
+
+**Dimensions:**
+- Screen: 375×488px
+- Border Radius: 30px
+- Background: White
+
+**Structure:**
+
+1. **Top Spacer** (0-44px)
+   - Empty space for status bar
+
+2. **Image Carousel** (44-424px, padding: vertical 20px)
+   - Layout: Horizontal Row, spacing: 15px
+   - Alignment: Center
+
+   **Side Image (Left):**
+   - Size: 143×310px
+   - Border Radius: 15px
+   - Image: NetworkImage, fit: cover
+   - Clip: antiAlias
+
+   **Center Image (Featured):**
+   - Size: 166.5×360px
+   - Border Radius: 15px
+   - Image: NetworkImage, fit: contain (важно!)
+   - Clip: antiAlias
+   - Emphasis: Larger size для focus
+
+   **Side Image (Right):**
+   - Size: 143×310px
+   - Border Radius: 15px
+   - Image: NetworkImage, fit: cover
+   - Clip: antiAlias
+
+**Spacing:**
+- Between images: 15px
+- Vertical padding: 20px
+- Side images aligned to center vertically
+
+**Flexible elements:**
+- Изменить количество images (2, 4, 5)
+- Добавить pagination dots внизу
+- Добавить swipe gesture indicators
+- Изменить размеры под разные aspect ratios
+- Добавить captions под images
+
+**Usage:** Onboarding gallery, feature showcase, portfolio preview, image selection
+
+---
+
 ## Как использовать эту дизайн-систему
 
 ### Для дизайнеров
@@ -1997,9 +2270,44 @@
 
 ## Версионирование и обновления
 
-**Текущая версия**: v5.9.0
+**Текущая версия**: v5.10.0
 
 ### Changelog
+
+#### v5.10.0 (2025-11-19)
+- 🎨 Добавлена новая секция **UI Blocks & Screen Patterns** - готовые комплексные блоки UI
+- 📱 Добавлены **3 Start Screen блока** с гибкой структурой:
+  1. **Start Screen - Onboarding** (375×412px)
+     - Gradient overlay (white fade effect)
+     - Logo section (80px, shadow)
+     - Hero text: Mixed style (32px Bold, акцент #7CC5D6)
+     - Primary button: #7CC5D6 background, "Sign up"
+     - Secondary button: Transparent, "Log in"
+     - iOS Home Indicator
+  2. **Start Screen - Sign Up Form** (375×496px)
+     - Close button (top-right)
+     - Page title "Create account" (32px Bold)
+     - Subtitle с link "Have an account? Sign in"
+     - Email input field (#FAFAFB background)
+     - Toggle switch "Remember sign in details"
+     - Primary button "Confirm & Continue" (черный)
+     - Legal footer text (Privacy Policy, Terms of Service)
+  3. **Start Screen - Gallery Preview** (375×488px)
+     - 3-image carousel (center focus)
+     - Side images: 143×310px
+     - Center image: 166.5×360px (larger, fit: contain)
+     - Spacing: 15px между images
+- 🔘 Добавлен **Toggle Switch** компонент:
+  - Dimensions: 51×31px
+  - Active: #11BB8D green background
+  - Inactive: #D9DDE2/#EAEEF2 gray
+  - Circle: 31×31px white, 2px border
+  - Animation: ~200-300ms slide
+- 🎨 Новые цвета:
+  - Link Blue (#2E5AAC) - для ссылок и underline
+  - Input Background (#FAFAFB) - очень светлый для input полей
+- ✨ **Гибкость блоков**: Все UI блоки можно расширять/модифицировать (добавлять input поля, кнопки, менять контент)
+- 📊 Все данные извлечены из реального Flutter кода start screen блоков
 
 #### v5.9.0 (2025-11-19)
 - 📝 Добавлен **Text Input Field** компонент с универсальными вариантами
