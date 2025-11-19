@@ -74,6 +74,16 @@
 --color-accent: #4141E6;
 --color-accent-hover: #3131D6;
 --color-accent-active: #2121C6;
+
+/* Sale/Discount - из InformationCardSlider кода */
+--color-sale: #F7B68A;
+--color-sale-hover: #F6A678;
+--color-sale-active: #F59668;
+
+/* Danger/Alert - из InformationCardSlider кода */
+--color-danger: #E24949;
+--color-danger-hover: #D93939;
+--color-danger-active: #C92929;
 ```
 
 ### Neutral Colors
@@ -82,8 +92,11 @@
 /* Text - из Flutter кода */
 --color-text-primary: #09101D;
 --color-text-secondary: #747B84;  /* Обновлено из TabBar кода */
+--color-text-dark: #23262B;  /* Из InformationCardSlider - для badge */
+--color-text-muted: #414249;  /* Из InformationCardSlider - для secondary info */
+--color-text-subtitle: #373940;  /* Из InformationCardSlider - для subtitle */
 --color-text-tertiary: #9CA3AF;
---color-text-disabled: #D1D5DB;
+--color-text-disabled: #D9DDE2;  /* Обновлено из InformationCardSlider */
 --color-text-inverse: #FFFFFF;
 
 /* Backgrounds - из Flutter кода */
@@ -107,11 +120,15 @@
 --color-gray-150: #F4F6F9;  /* Из TabBar кода */
 --color-gray-175: #F0F1F2;  /* Из TabBar кода - для теней */
 --color-gray-200: #E5E7EB;
+--color-gray-250: #D9DDE2;  /* Из InformationCardSlider - disabled/placeholder */
 --color-gray-300: #D1D5DB;
 --color-gray-400: #9CA3AF;
 --color-gray-450: #747B84;  /* Из TabBar кода - вторичный текст */
 --color-gray-500: #6B7280;
+--color-gray-550: #414249;  /* Из InformationCardSlider - muted text */
+--color-gray-575: #373940;  /* Из InformationCardSlider - subtitle */
 --color-gray-600: #4B5563;
+--color-gray-650: #23262B;  /* Из InformationCardSlider - dark text */
 --color-gray-700: #374151;
 --color-gray-800: #1F2937;
 --color-gray-900: #111827;
@@ -169,9 +186,11 @@
 
 ```css
 --font-size-2xs: 0.625rem;    /* 10px - из TabBar кода (badge text) */
+--font-size-2xs-plus: 0.6875rem; /* 11px - из InformationCardSlider кода */
 --font-size-xs: 0.75rem;      /* 12px */
 --font-size-xs-plus: 0.8125rem; /* 13px - из TabBar кода (action text) */
 --font-size-sm: 0.875rem;     /* 14px */
+--font-size-sm-plus: 0.9375rem; /* 15px - из InformationCardSlider кода */
 --font-size-base: 1rem;       /* 16px - из Flutter кода */
 --font-size-md: 1.125rem;     /* 18px */
 --font-size-lg: 1.25rem;      /* 20px */
@@ -276,12 +295,15 @@
 --radius-2xs: 0.0625rem;  /* 1px - из TabBar кода */
 --radius-sm: 0.125rem;    /* 2px */
 --radius-base: 0.25rem;   /* 4px */
+--radius-base-plus: 0.3125rem; /* 5px - из InformationCardSlider кода */
 --radius-md: 0.375rem;    /* 6px */
 --radius-lg: 0.5rem;      /* 8px - из Flutter кода */
+--radius-lg-plus: 0.625rem; /* 10px - из InformationCardSlider кода */
 --radius-xl: 0.75rem;     /* 12px - из TabBar кода */
 --radius-2xl: 1rem;       /* 16px */
 --radius-3xl: 0.9375rem;  /* 15px - из Flutter кода */
 --radius-badge: 1.25rem;  /* 20px - из TabBar кода (badge radius) */
+--radius-avatar: 2.5rem;  /* 40px - из InformationCardSlider кода (avatar) */
 --radius-4xl: 5rem;       /* 80px - из Flutter кода */
 --radius-5xl: 6.25rem;    /* 100px - из Flutter кода */
 --radius-full: 9999px;
@@ -1148,6 +1170,149 @@ theme: ThemeData.dark().copyWith(
 
 ---
 
+### 23. Information Cards (Slider Component)
+
+Компонент слайдера информационных карточек, извлеченный из Flutter приложения InformationCardSlider.
+
+#### Характеристики Image Slider:
+
+- **Image Size**: Width: 327px, Height: 200px
+- **Border Radius**: 20px (radius-badge)
+- **Scroll Direction**: Horizontal
+- **Spacing**: Between cards in carousel
+
+#### Badge Component:
+
+**Badge Container:**
+- **Padding**: Horizontal: 6px, Vertical: 3px
+- **Border Radius**: 5px (radius-base-plus)
+- **Font**: Archivo
+- **Font Size**: 11px (font-size-2xs-plus)
+- **Font Weight**: 600 (semibold)
+- **Line Height**: 1.40
+
+**Badge Variants:**
+
+1. **Covid-free Badge**:
+   - Background: white (color-bg-primary)
+   - Text Color: #23262B (color-text-dark)
+   - Text: "Covid-free"
+
+2. **New Place Badge**:
+   - Background: white (color-bg-primary)
+   - Text Color: #23262B (color-text-dark)
+   - Text: "New place"
+
+3. **Beginner Level Badge**:
+   - Background: white (color-bg-primary)
+   - Text Color: #23262B (color-text-dark)
+   - Text: "Beginner level"
+
+4. **Sale Badge**:
+   - Background: #F7B68A (color-sale)
+   - Text Color: white (color-text-inverse)
+   - Text: "25%"
+
+5. **Category Badge**:
+   - Background: white (color-bg-primary)
+   - Text Color: #23262B (color-text-dark)
+   - Examples: "Hotels", "Restaurants", "Entertainment"
+
+#### Avatar Component:
+
+**Avatar Container:**
+- **Size**: 40px × 40px
+- **Border Radius**: 10px (radius-lg-plus)
+- **Padding**: 4px (creates inner spacing)
+
+**Avatar Image:**
+- **Size**: 32px × 32px (внутри 40px контейнера)
+- **Border Radius**: Inherited from container
+
+#### Card Variants:
+
+**1. Hotel Card:**
+- **Image**: 327px × 200px with 20px border radius
+- **Badge**: "Covid-free" (white bg)
+- **Title**:
+  - Font: Archivo
+  - Size: 15px (font-size-sm-plus)
+  - Weight: 600 (semibold)
+  - Color: #09101D (color-text-primary)
+  - Line Height: 1.40
+- **Subtitle**:
+  - Font: Archivo
+  - Size: 13px (font-size-xs-plus)
+  - Weight: 400 (normal)
+  - Color: #373940 (color-text-subtitle)
+  - Line Height: 1.40
+- **Rating**: Stars + count text
+- **Price**: Primary color emphasis
+
+**2. Experience Card:**
+- **Image**: 327px × 200px with 20px border radius
+- **Badge**: "New place" (white bg)
+- **Title**: Same as Hotel Card
+- **Subtitle**: Same as Hotel Card
+- **Category Badge**: "Entertainment"
+- **Additional Info**: Duration, level, etc.
+
+**3. Restaurant Card:**
+- **Image**: 327px × 200px with 20px border radius
+- **Badge**: Category badge (white bg)
+- **Title**: Same as Hotel Card
+- **Subtitle**: Same as Hotel Card
+- **Secondary Info**:
+  - Font: Archivo
+  - Size: 11px (font-size-2xs-plus)
+  - Weight: 400 (normal)
+  - Color: #414249 (color-text-muted)
+  - Line Height: 1.40
+
+**4. Video Card:**
+- **Image**: 327px × 200px with 20px border radius
+- **Badge**: "25%" sale badge (#F7B68A bg)
+- **Title**: Same as Hotel Card
+- **Avatar**: 40px container with 32px image (10px radius)
+- **Video Duration**: Overlay on image
+- **Like/Save Icons**: Top-right corner
+
+#### Card Layout Structure:
+
+```
+┌─────────────────────────────────┐
+│                                 │
+│   Image (327×200, radius 20)    │
+│   ┌──────────┐                  │
+│   │ Badge    │                  │
+│   └──────────┘                  │
+│                                 │
+├─────────────────────────────────┤
+│ Title (15px, semibold)          │
+│ Subtitle (13px, normal)         │
+│ Secondary Info (11px, muted)    │
+│                                 │
+│ [Avatar] Additional Details     │
+└─────────────────────────────────┘
+```
+
+#### Spacing:
+
+- **Card Padding**: 10px, 12px, 16px (внутренние отступы)
+- **Badge to Image**: 10px from edges
+- **Title to Subtitle**: 4px
+- **Subtitle to Additional Info**: 6px (space-1-5)
+- **Between Cards**: Horizontal scroll spacing
+
+#### States:
+
+- **Default**: Standard appearance
+- **Hover**: Subtle scale or shadow effect (interactive)
+- **Active**: Pressed state for card selection
+- **Disabled**: Reduced opacity (#D9DDE2 for disabled text)
+
+---
+
 ## Как использовать эту дизайн-систему
 
 ### Для дизайнеров
@@ -1175,9 +1340,34 @@ theme: ThemeData.dark().copyWith(
 
 ## Версионирование и обновления
 
-**Текущая версия**: v5.2.0
+**Текущая версия**: v5.3.0
 
 ### Changelog
+
+#### v5.3.0 (2025-11-19)
+- Добавлены данные из InformationCardSlider компонента Flutter
+- Добавлены новые цвета:
+  - Sale/Discount цвет (#F7B68A) для скидок и промо
+  - Danger/Alert цвет (#E24949) для критических уведомлений
+- Обновлены цвета текста:
+  - text-dark (#23262B) для темного текста на светлом фоне
+  - text-muted (#414249) для второстепенной информации
+  - text-subtitle (#373940) для подзаголовков
+  - text-disabled обновлен до #D9DDE2
+- Добавлены новые gray shades: 250, 550, 575, 650
+- Добавлены новые font sizes:
+  - 11px (font-size-2xs-plus) для мелкого текста
+  - 15px (font-size-sm-plus) для заголовков карточек
+- Добавлены новые border radius:
+  - 5px (radius-base-plus) для badge компонентов
+  - 10px (radius-lg-plus) для avatar компонентов
+  - 40px (radius-avatar) для больших аватаров
+- Добавлен компонент Information Cards (Slider Component):
+  - 4 варианта карточек: Hotel, Experience, Restaurant, Video
+  - Image Slider спецификации (327px × 200px, 20px radius)
+  - Badge компонент с 5 вариантами (covid-free, new-place, beginner-level, sale, category)
+  - Avatar компонент (40px контейнер, 32px изображение, 10px radius)
+  - Детальные спецификации typography для карточек (15px title, 13px subtitle, 11px secondary info)
 
 #### v5.2.0 (2025-11-19)
 - Добавлены данные из TabBar компонента Flutter
