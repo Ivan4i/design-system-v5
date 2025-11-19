@@ -33,31 +33,51 @@
 ### Base Colors
 
 ```css
-/* Основные цвета */
+/* Основные цвета из Flutter кода */
 --color-white: #FFFFFF;
 --color-black: #09101D;
+```
+
+### Background Colors
+
+```css
+/* Фоновые цвета */
+--color-bg-primary: #FFFFFF;           /* Основной фон */
+--color-bg-secondary: #D9DDE2;         /* Вторичный фон с opacity 0.25 */
+--color-bg-overlay: rgba(217, 221, 226, 0.25);  /* Overlay фон */
 ```
 
 ### Text Colors
 
 ```css
-/* Текст из Tailwind CSS */
---color-text-primary: #020617;     /* slate-950 */
---color-text-secondary: #27272A;   /* zinc-800 */
+/* Цвета текста из Flutter кода */
+--color-text-primary: #09101D;         /* Основной текст */
+--color-text-secondary: #414249;       /* Вторичный текст */
+--color-text-tertiary: #747B84;        /* Третичный текст (подписи) */
 ```
 
 ### Accent Colors
 
 ```css
 /* Акцентные цвета */
---color-accent-blue: #1D4ED8;      /* blue-700 */
+--color-primary: #4141E6;              /* Primary синий/фиолетовый */
+--color-primary-light: rgba(11, 36, 251, 0.10);  /* #0B24FB с 10% opacity */
+--color-success: #11BB8D;              /* Зеленый для успеха/рейтингов */
+```
+
+### Border Colors
+
+```css
+/* Цвета границ */
+--color-border-primary: #EAEEF2;       /* Основной цвет разделителей */
+--color-border-secondary: #D9DDE2;     /* Вторичный цвет границ */
 ```
 
 ### Shadow Colors
 
 ```css
-/* Тени */
---shadow-light: rgba(240, 241, 242, 1.00);  /* из кода: shadow-[0px_1px_1px_0px_rgba(240,241,242,1.00)] */
+/* Тени из Flutter кода */
+--shadow-primary: rgba(101, 99, 255, 0.40);  /* #6563FF с 40% opacity для теней кнопок */
 ```
 
 ---
@@ -103,6 +123,10 @@
 ### Line Heights
 
 ```css
+/* Из Flutter кода используется единый line height */
+--line-height-base: 1.40;     /* Универсальное значение для всех текстов */
+
+/* Дополнительные значения */
 --line-height-12: 0.75rem;    /* 12px */
 --line-height-16: 1rem;       /* 16px */
 --line-height-20: 1.25rem;    /* 20px */
@@ -110,120 +134,99 @@
 --line-height-32: 2rem;       /* 32px */
 --line-height-36: 2.25rem;    /* 36px */
 --line-height-40: 2.5rem;     /* 40px */
---line-height-50: 3.15rem;    /* 50.4px */
 ```
 
-### Text Styles (iOS Mobile)
+### Text Styles (из Flutter приложения)
 
-#### Large Title
-- **Bold**: Font: 32px (2rem), Weight: 700, Line Height: 40px
-- **Regular**: Font: 32px (2rem), Weight: 400, Line Height: 40px
+#### Heading 1 (Accounts, Title)
+- **Bold**: Font: 24px (1.5rem), Weight: 700, Line Height: 1.40, Family: Archivo
+- Используется для основных заголовков страниц и секций
 
-#### Title 1
-- **Bold**: Font: 26px (1.625rem), Weight: 700, Line Height: 36px
-- **Regular**: Font: 26px (1.625rem), Weight: 400, Line Height: 36px
+#### Heading 2 (Dialog Titles)
+- **Bold**: Font: 24px (1.5rem), Weight: 700, Line Height: 1.40, Family: Archivo
+- Используется для заголовков модальных окон
 
-#### Title 2
-- **Bold**: Font: 24px (1.5rem), Weight: 700, Line Height: 32px
-- **Regular**: Font: 24px (1.5rem), Weight: 400, Line Height: 32px
+#### Body Large (Menu Items, Settings)
+- **Semibold**: Font: 16px (1rem), Weight: 600, Line Height: 1.40, Family: Archivo
+- **Regular**: Font: 16px (1rem), Weight: 400, Line Height: 1.40, Family: Archivo
+- Используется для пунктов меню, настроек
 
-#### Title 3
-- **Medium**: Font: 18px (1.125rem), Weight: 500, Line Height: 24px
-- **Regular**: Font: 18px (1.125rem), Weight: 400, Line Height: 24px
+#### Body Medium (Ratings, Buttons)
+- **Semibold**: Font: 16px (1rem), Weight: 600, Line Height: 1.40, Family: Archivo
+- **Bold**: Font: 16px (1rem), Weight: 700, Line Height: 1.40, Family: Archivo
+- Используется для рейтингов, значений, кнопок
 
-#### Headline
-- **Bold**: Font: 16px (1rem), Weight: 700, Line Height: 24px
-- **Semibold Italic**: Font: 16px (1rem), Weight: 600, Style: Italic, Line Height: 24px
+#### Callout (Primary Buttons)
+- **Semibold**: Font: 15px (0.9375rem), Weight: 600, Line Height: 1.40, Family: Archivo
+- Используется для текста на основных кнопках
 
-#### Body
-- **Semibold**: Font: 16px (1rem), Weight: 600, Line Height: 24px
-- **Regular**: Font: 16px (1rem), Weight: 400, Line Height: 24px
+#### Body Small (List Items, Labels)
+- **Semibold**: Font: 14px (0.875rem), Weight: 600, Line Height: 1.40, Family: Archivo
+- **Regular**: Font: 14px (0.875rem), Weight: 400, Line Height: 1.40, Family: Archivo
+- Используется для элементов списков, меток, описаний
 
-#### Callout
-- **Semibold**: Font: 15px (0.9375rem), Weight: 600, Line Height: 20px
-- **Regular**: Font: 15px (0.9375rem), Weight: 400, Line Height: 20px
-
-#### Subheadline
-- **Semibold**: Font: 14px (0.875rem), Weight: 600, Line Height: 20px
-- **Regular**: Font: 14px (0.875rem), Weight: 400, Line Height: 20px
-
-#### Footnote
-- **Medium**: Font: 13px (0.8125rem), Weight: 500, Line Height: 20px
-- **Regular**: Font: 13px (0.8125rem), Weight: 400, Line Height: 20px
-
-#### Caption 1
-- **Medium**: Font: 12px (0.75rem), Weight: 500, Line Height: 16px
-- **Regular**: Font: 12px (0.75rem), Weight: 400, Line Height: 16px
-
-#### Caption 2
-- **Semibold**: Font: 11px (0.6875rem), Weight: 600, Line Height: 16px
-- **Regular**: Font: 11px (0.6875rem), Weight: 400, Line Height: 16px
-
-#### Caption 3
-- **Semibold**: Font: 10px (0.625rem), Weight: 600, Line Height: 12px
+#### Caption Large (Tags, Badges)
+- **Semibold**: Font: 13px (0.8125rem), Weight: 600, Line Height: 1.40, Family: Archivo
+- **Regular**: Font: 13px (0.8125rem), Weight: 400, Line Height: 1.40, Family: Archivo
+- Используется для небольших меток, тегов, подписей
 
 ---
 
 ## Spacing & Layout
 
-### Spacing Scale
+### Spacing Scale (из Flutter кода)
 
 ```css
+/* Основные значения из реального приложения */
 --space-0: 0;
---space-1: 0.25rem;   /* 4px */
+--space-1: 0.125rem;  /* 2px */
 --space-2: 0.5rem;    /* 8px */
+--space-2-5: 0.625rem;/* 10px */
 --space-3: 0.75rem;   /* 12px */
 --space-4: 1rem;      /* 16px */
 --space-5: 1.25rem;   /* 20px */
 --space-6: 1.5rem;    /* 24px */
+--space-7-5: 1.875rem;/* 30px */
 --space-8: 2rem;      /* 32px */
 --space-10: 2.5rem;   /* 40px */
---space-12: 3rem;     /* 48px */
---space-16: 4rem;     /* 64px */
---space-20: 5rem;     /* 80px */
---space-24: 6rem;     /* 96px */
+
+/* Специфичные значения для мобильного интерфейса */
+--space-handle: 0.3125rem;   /* 5px - для handle индикатора */
+--space-badge: 0.8125rem;    /* 13px - для padding в badge */
 ```
 
-### Border Radius
+### Border Radius (из Flutter кода)
 
 ```css
+/* Значения из реального приложения */
 --radius-none: 0;
---radius-sm: 0.125rem;    /* 2px */
---radius-base: 0.25rem;   /* 4px */
---radius-md: 0.375rem;    /* 6px */
---radius-lg: 0.5rem;      /* 8px */
---radius-xl: 0.75rem;     /* 12px */
---radius-2xl: 1rem;       /* 16px */
---radius-full: 9999px;
+--radius-xs: 0.0625rem;   /* 1px - для тонких разделителей */
+--radius-base: 0.9375rem; /* 15px - для кнопок и карточек */
+--radius-lg: 1.25rem;     /* 20px - для bottom sheets */
+--radius-xl: 1.875rem;    /* 30px - для верхних углов модальных окон */
+--radius-2xl: 2.5rem;     /* 40px - для больших закруглений */
+--radius-full: 6.25rem;   /* 100px - для кругов */
 ```
 
-### Shadows
+### Shadows (из Flutter кода)
 
-#### Card Shadows
+#### Button Shadows
 
 ```css
+/* Тень для primary кнопки */
+--shadow-button-primary: 0 0 20px 0 rgba(101, 99, 255, 0.40);
+```
+
+#### Additional Shadows
+
+```css
+/* Стандартные тени для элементов */
 --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
 --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
 --shadow-base: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
 --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
 --shadow-xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-```
-
-#### Button Shadows
-
-```css
---shadow-button: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
---shadow-button-hover: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
---shadow-button-active: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-```
-
-#### Hover Shadows
-
-```css
---shadow-hover-sm: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
---shadow-hover-md: 0 8px 16px 0 rgba(0, 0, 0, 0.12);
---shadow-hover-lg: 0 12px 24px 0 rgba(0, 0, 0, 0.15);
 ```
 
 ### Borders
@@ -248,11 +251,11 @@
 ### Opacity Scale
 
 ```css
+/* Значения opacity из Flutter приложения */
 --opacity-0: 0;
---opacity-10: 0.1;
---opacity-20: 0.2;
---opacity-30: 0.3;
---opacity-40: 0.4;
+--opacity-10: 0.1;     /* Используется для light backgrounds (#0B24FB с 10% opacity) */
+--opacity-25: 0.25;    /* Используется для overlay backgrounds (#D9DDE2 с 25% opacity) */
+--opacity-40: 0.40;    /* Используется для теней кнопок */
 --opacity-50: 0.5;
 --opacity-60: 0.6;
 --opacity-70: 0.7;
@@ -776,6 +779,213 @@
 
 ---
 
+## Мобильные компоненты (из Flutter приложения)
+
+### 1. Bottom Sheet
+
+Bottom sheet - модальное окно, которое выдвигается снизу экрана.
+
+**Структура:**
+- **Width**: 375px (полная ширина экрана)
+- **Background**: #FFFFFF
+- **Border Radius**: 20px (только верхние углы - topLeft, topRight: 30px)
+- **Border**: 1px solid #FFFFFF
+
+**Handle (Индикатор сверху):**
+- **Size**: 40px × 3px
+- **Color**: #D9DDE2
+- **Border Radius**: 100px (полное закругление)
+- **Position**: По центру, padding: 8px по вертикали, 167px по горизонтали
+
+**Padding внутри:**
+- Horizontal: 16px
+- Vertical: 10px
+
+#### Варианты использования
+1. **Accounts Sheet** - список аккаунтов
+2. **Trust Dialog** - диалог подтверждения
+3. **Expiration Period Selector** - выбор периода
+4. **Settings Menu** - меню настроек
+5. **Rating Sheet** - форма рейтинга
+
+---
+
+### 2. List Items
+
+Элементы списка для различных целей (аккаунты, настройки, меню).
+
+**Стандартный List Item:**
+- **Height**: auto (min 48px с padding 12px vertical)
+- **Padding**: 12px vertical, 16px horizontal
+- **Background**: #FFFFFF
+- **Border**: 1px solid #FFFFFF
+
+**С иконкой:**
+- **Icon Size**: 40px × 40px
+- **Icon Background**: rgba(11, 36, 251, 0.10) - светло-синий
+- **Icon Border Radius**: 100px (круг)
+- **Icon Padding**: 13px внутри
+- **Gap между иконкой и текстом**: 12px
+
+**Текст:**
+- **Title**: 14px, Weight: 600, Color: #09101D
+- **Subtitle**: 14px, Weight: 400, Color: #414249 (если есть)
+- **Value справа**: 14px, Weight: 600, Color: #09101D
+
+**Trailing элементы:**
+- **Chevron**: 24px × 24px
+
+---
+
+### 3. Buttons
+
+#### Primary Button
+- **Height**: 44px
+- **Padding**: 10px horizontal, 16px vertical
+- **Background**: #4141E6 (синий/фиолетовый)
+- **Color**: #FFFFFF (белый текст)
+- **Border Radius**: 15px
+- **Font**: 15px, Weight: 600, Family: Archivo
+- **Shadow**: 0 0 20px 0 rgba(101, 99, 255, 0.40)
+
+**Пример**: "No, Go back", "Vote"
+
+#### Secondary Button
+- **Height**: 44px
+- **Padding**: 10px horizontal, 16px vertical
+- **Background**: transparent или #09101D (dark)
+- **Color**: #09101D или #FFFFFF
+- **Border Radius**: 15px
+- **Font**: 14px или 16px, Weight: 600-700, Family: Archivo
+
+**Пример**: "Appk" (темная версия)
+
+---
+
+### 4. Badges & Tags
+
+#### Badge "New"
+- **Height**: 36px
+- **Padding**: 10px vertical, 16px horizontal
+- **Background**: rgba(11, 36, 251, 0.10) - светло-синий с 10% opacity
+- **Border Radius**: 15px
+- **Font**: 13px, Weight: 600, Color: #4141E6
+- **Icon + Text**: Gap 8px между иконкой (16px) и текстом
+
+---
+
+### 5. Radio Buttons / Selection
+
+Используются для выбора опций (например, периода истечения).
+
+**Selected State:**
+- **Outer Circle**: 12px × 12px
+- **Border**: 3px solid #4141E6
+- **Inner Dot**: 6px × 6px, Background: #4141E6
+- **Position**: Centered
+
+**Unselected State:**
+- **Outer Circle**: 12px × 12px
+- **Border**: 3px solid #EAEEF2
+- **Background**: rgba(11, 36, 251, 0.10)
+
+**Padding**: 10px vertical, 2px внутри
+
+---
+
+### 6. Dividers
+
+Горизонтальные разделители между элементами.
+
+**Standard Divider:**
+- **Height**: 1px
+- **Color**: #EAEEF2
+- **Padding**: 5px vertical (в контейнере с 10px vertical)
+- **Width**: 100% (full width)
+
+**Accent Divider (для активных элементов):**
+- **Height**: 2px
+- **Width**: 40px
+- **Color**: #4141E6
+- **Border Radius**: 1px
+
+---
+
+### 7. Headers & Titles
+
+#### Section Header (внутри Bottom Sheet)
+- **Font**: 24px, Weight: 700, Color: #09101D, Family: Archivo
+- **Line Height**: 1.40
+- **Padding**: 12px vertical
+
+**С кнопкой справа:**
+- **Title**: слева
+- **Action Button/Badge**: справа (например, "New" badge)
+
+#### Dialog Title
+- **Font**: 24px, Weight: 700, Color: #09101D
+- **Description**: 14px, Weight: 400, Color: #414249
+- **Icon**: 40px × 40px (опционально слева)
+- **Gap**: 12px между иконкой и текстом
+
+---
+
+### 8. Rating Component
+
+Компонент для отображения рейтинга.
+
+**Rating Circle:**
+- **Size**: 56px × 56px (outer), 48px × 48px (inner)
+- **Background**: #11BB8D (зеленый)
+- **Border Radius**: 40px (круг)
+- **Text**: 16px, Weight: 600, Color: #FFFFFF
+- **Value**: "4.6" (пример)
+
+**Rating Layout:**
+- **Icon/Circle**: 56px слева
+- **Content**: справа
+  - Title: 24px, Weight: 700, "Rating 👌🏻"
+  - Subtitle: 14px, Weight: 400, "You are in a good hands"
+- **Gap**: 12px между кругом и контентом
+
+**Stars/Icons:**
+- **Size**: 44px × 44px each
+- **Layout**: Horizontal row, centered
+- **Padding**: 10px top, 30px bottom
+
+---
+
+### 9. Screen Dimensions
+
+**Стандартный размер экрана (iPhone):**
+- **Width**: 375px
+- **Height**: 812px
+
+**Status Bar:**
+- **Height**: 44px
+- **Elements inside**: Time, battery, signal indicators
+
+**Home Indicator (Bottom):**
+- **Width**: 134px
+- **Height**: 5px
+- **Position**: Bottom center (21px from bottom)
+- **Color**: #09101D
+- **Border Radius**: 100px
+
+---
+
+### 10. Icon Sizes
+
+**Из реального приложения:**
+- **XS**: 14.40px (positioned icons)
+- **SM**: 16px (badges, small UI elements)
+- **Base**: 16.80px (standard icons)
+- **MD**: 24px (trailing icons, chevrons)
+- **LG**: 40px (list item icons)
+- **XL**: 44px (rating stars, action buttons)
+
+---
+
 ## Как использовать эту дизайн-систему
 
 ### Для дизайнеров
@@ -803,9 +1013,27 @@
 
 ## Версионирование и обновления
 
-**Текущая версия**: v5.0.0
+**Текущая версия**: v5.1.0
 
 ### Changelog
+
+#### v5.1.0 (2025-11-19)
+- **Обновлена цветовая палитра** с реальными данными из Flutter приложения
+- **Дополнена типографика** с фактическими размерами и весами шрифтов
+- **Обновлены spacing и border radius** с точными значениями из кода
+- **Добавлены мобильные компоненты**:
+  - Bottom Sheet с handle индикатором
+  - List Items с иконками
+  - Primary и Secondary кнопки
+  - Badges & Tags
+  - Radio Buttons / Selection
+  - Dividers (стандартные и акцентные)
+  - Headers & Titles
+  - Rating Component
+  - Screen Dimensions
+  - Icon Sizes
+- **Обновлены shadows** с реальными значениями из приложения
+- **Добавлены opacity значения** (10%, 25%, 40%)
 
 #### v5.0.0 (2025-11-19)
 - Первая версия дизайн-системы
