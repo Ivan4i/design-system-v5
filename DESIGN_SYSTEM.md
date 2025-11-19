@@ -1056,6 +1056,155 @@
 - Border uses standard 2px width for all interactive states
 - Background tints use ~5% opacity (0x0C = 12 in hex)
 
+#### SocialLight (Social Booking Sheet) - Complete Flexible UI Block
+
+**Block Purpose:**
+Ready-made booking/scheduling interface with social elements (avatar selection + time slot selection). Designed to be flexible and extensible during development.
+
+**Container Layout:**
+- **Size**: 375px width × variable height
+- **Background**: white (#FFFFFF)
+- **Border Radius**: 30px (circular(30)) - top corners only
+- **Clip Behavior**: Clip.antiAlias
+- **Layout**: Column with full-height stack
+
+**Component Structure:**
+
+1. **Status Bar (Dark Mode)**
+   - **Size**: 375px × 44px
+   - **Background**: #09101D (dark)
+   - **Purpose**: System status bar for bottom sheet header
+   - **Extensibility**: Can be omitted or replaced with light variant
+
+2. **Screen Indicator / Notch**
+   - **Size**: 343px × 10px
+   - **Background**: #D9DDE2 (gray)
+   - **Border Radius**: 10px (circular(10)) - top corners only
+   - **Position**: Top of sheet, horizontally centered (16px padding)
+   - **Purpose**: Visual indicator of screen/device edge
+
+3. **Pull Handle**
+   - **Size**: 40px × 3px
+   - **Background**: #D9DDE2 (gray)
+   - **Border Radius**: 100px (circular(100))
+   - **Position**: Centered horizontally, below notch
+   - **Purpose**: Drag handle for dismissing sheet
+
+4. **Header Section**
+   - **Container**: 375px × 44px
+   - **Background**: white (#FFFFFF)
+   - **Layout**: Row with spaceBetween alignment
+   - **Left Element**: Back button
+     - **Icon**: 24px × 24px (chevron left or back arrow)
+     - **Padding**: 16px horizontal
+     - **Color**: #09101D
+   - **Center Element**: Title
+     - **Text**: "Select free slot" (or customizable)
+     - **Font**: 'Archivo', Size: 16px, Weight: 600, Color: #09101D, Line Height: 1.40
+     - **Align**: center
+   - **Right Element**: Optional action button/icon (if needed)
+   - **Extensibility**: Title can be customized for different booking contexts
+
+5. **Search Bar**
+   - **Container**: 375px width, padding: horizontal 16px
+   - **Input Field**:
+     - **Height**: 44px
+     - **Background**: #F4F6F9 (light gray)
+     - **Border Radius**: 15px (circular(15))
+     - **Padding**: horizontal 16px, vertical 12px
+   - **Icon**: 20px × 20px search icon (left side, 16px padding)
+   - **Placeholder**: "Search", Font: 'Archivo', Size: 16px, Weight: 400, Color: #747B84
+   - **Extensibility**: Can filter avatars, time slots, or both; can be hidden if not needed
+
+6. **Avatar Selection Row (Horizontal Scroll)**
+   - **Container**: 375px width, horizontal scroll enabled
+   - **Layout**: Row with 10px spacing between avatars
+   - **Padding**: horizontal 16px, vertical 20px
+   - **Avatar Card**:
+     - **Container**: 56px × 56px
+     - **Image Container**: 48px × 48px
+     - **Border Radius**: 40px (circular(40))
+     - **Background**: #D9DDE2 (gray placeholder)
+     - **Image Fit**: BoxFit.cover
+     - **Clip Behavior**: Clip.antiAlias
+   - **Selected Avatar State**:
+     - **Border**: 2px solid #4141E6 (blue accent)
+     - **Border Radius**: 30px (circular(30)) on container
+     - **Container**: 56px × 56px with 2px border
+   - **Avatar Label**:
+     - **Container**: width 50px max, centered under avatar
+     - **Text**: User name, Font: 'Archivo', Size: 11px, Weight: 600, Color: #09101D
+     - **Overflow**: ellipsis
+   - **Count**: 7 avatars shown (example), can extend infinitely with horizontal scroll
+   - **Extensibility**:
+     - **Scalable list**: Can accommodate 1 to unlimited users
+     - **Custom states**: Can add badges, online status, availability indicators
+     - **Multi-select**: Can be modified to allow multiple avatar selection
+
+7. **Section Header**
+   - **Text**: "Available slots" (or customizable)
+   - **Font**: 'Archivo', Size: 16px, Weight: 700, Color: #09101D, Line Height: 1.40
+   - **Padding**: horizontal 16px, vertical 10px
+   - **Extensibility**: Can be dynamic based on search/filter state
+
+8. **Time Slot Grid**
+   - **Container**: 375px width, padding: horizontal 16px
+   - **Grid Layout**:
+     - **Columns**: 5 columns
+     - **Rows**: 5 rows (example, can extend)
+     - **Spacing**: 10px horizontal and vertical
+   - **Time Slot Cell**:
+     - **Padding**: 10px (all sides)
+     - **Border Radius**: 15px (circular(15))
+     - **Text**: Time (e.g., "9:00", "10:00"), Font: 'Archivo', Size: 12px, Weight: 400, Line Height: 1.40
+     - **Align**: center
+   - **Slot States**:
+     - **Available**:
+       - **Background**: #F4F6F9 (light gray)
+       - **Text Color**: #09101D (dark)
+     - **Selected**:
+       - **Background**: #09101D (dark)
+       - **Text Color**: white (#FFFFFF)
+     - **Disabled**:
+       - **Background**: transparent
+       - **Text Color**: #D9DDE2 (gray)
+       - **Text Decoration**: strikethrough (line-through)
+   - **Extensibility**:
+     - **Grid dimensions**: Can add more rows for extended time ranges
+     - **Column count**: Can adjust for different slot durations (e.g., 4 columns for 30-min slots, 6 for 15-min)
+     - **Custom states**: Can add "almost full", "premium", "discounted" states with different colors
+     - **Time format**: Can switch between 12h/24h format
+     - **Date selection**: Can add date picker to show slots for different days
+     - **Slot details**: Can add tooltips or expand cells to show additional info (duration, price, participants)
+
+**Color Palette:**
+- **Background**: #FFFFFF (white sheet), #09101D (dark header/selected)
+- **UI Elements**: #D9DDE2 (gray handles/placeholders), #F4F6F9 (available slots/search)
+- **Accents**: #4141E6 (blue selected avatar)
+- **Text**: #09101D (primary), #747B84 (secondary/placeholder), white (inverse)
+
+**Spacing:**
+- **Section padding**: 16px horizontal (consistent)
+- **Avatar spacing**: 20px vertical padding, 10px between items
+- **Grid spacing**: 10px between slots
+- **Header height**: 44px standard
+
+**Flexibility & Extensibility Notes:**
+- **Avatar list**: Horizontally scrollable, supports any number of users (1 to 100+)
+- **Time slots**: Grid can be extended vertically for more time slots, or modified to show different views (list, calendar)
+- **Search**: Can filter avatars by name, slots by time, or both simultaneously
+- **Multi-step flow**: Can be extended to multi-step booking (select person → select time → confirm details)
+- **Additional fields**: Can add fields like "Duration", "Service type", "Location" above or below time grid
+- **Responsive**: Can adapt to different screen widths by adjusting column count
+- **Customizable states**: Easy to add new slot states (pending, confirmed, blocked, etc.)
+- **Integration ready**: Designed to connect with backend for real-time availability updates
+
+**Usage Examples:**
+- Social scheduling (select friend + time for meeting)
+- Appointment booking (select service provider + available time)
+- Class/event registration (select instructor + class time)
+- Resource booking (select room/equipment + time slot)
+
 ---
 
 ### 1. Cards
