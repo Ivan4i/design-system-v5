@@ -63,6 +63,10 @@
 --color-badge-dark: #23262B;        /* Color(0xFF23262B) - dark badge background */
 --color-pin-pressed: #EAEEF2;       /* Color(0xFFEAEEF2) - PIN slot pressed state background */
 
+/* Product Variant Colors */
+--color-swatch-brown: #905846;      /* Color(0xFF905846) - brown product color variant */
+--color-swatch-teal: #4E9381;       /* Color(0xFF4E9381) - teal/green product color variant */
+
 /* Error/Negative State Colors */
 --color-error-border: #DA1414;      /* Color(0xFFDA1414) - negative/error border for PIN */
 --color-error-bg-light: #0CDA1414;  /* Color(0x0CDA1414) - error background with ~5% opacity (0x0C = 12) */
@@ -87,6 +91,7 @@
 - **Story borders**: #833AB4 (purple), #4141E6 (blue) - 2px borders for active stories
 - **Button gradients**: #EB001B to #DD2476 (red to pink gradient for CTA buttons)
 - **PIN input states**: #F4F6F9 (enabled), #EAEEF2 (pressed), #0C11BB8D + #11BB8D border (positive), #0CDA1414 + #DA1414 border (negative)
+- **Product swatches**: #905846 (brown), #09101D (black), #4E9381 (teal) - color variant indicators for products
 
 ### Primary Colors
 
@@ -1204,6 +1209,145 @@ Ready-made booking/scheduling interface with social elements (avatar selection +
 - Appointment booking (select service provider + available time)
 - Class/event registration (select instructor + class time)
 - Resource booking (select room/equipment + time slot)
+
+#### CardsLight (Product Card) - Complete Flexible UI Block
+
+**Block Purpose:**
+Ready-made e-commerce product card with image, color variants, action button, and product information. Designed to be flexible and extensible for various product catalog contexts.
+
+**Container Layout:**
+- **Size**: 375px width × variable height
+- **Padding**: vertical 30px
+- **Background**: white (#FFFFFF)
+- **Border Radius**: 30px (circular(30))
+- **Clip Behavior**: Clip.antiAlias
+- **Layout**: Column containing multiple product cards
+
+**Single Product Card Structure:**
+- **Container**: 375px width × 531px height
+- **Padding**: horizontal 16px, vertical 10px
+- **Border Radius**: 15px (circular(15))
+- **Clip Behavior**: Clip.antiAlias
+- **Layout**: Column with Expanded image + info section
+
+**Component Structure:**
+
+1. **Product Image**
+   - **Container**: Expanded (flexible height, typically ~400px)
+   - **Width**: 343px (full card width minus padding)
+   - **Border Radius**: 15px (circular(15))
+   - **Image Fit**: BoxFit.cover
+   - **Purpose**: Main product visual
+   - **Extensibility**: Can support multiple images with swipe/carousel, video, 360° view
+
+2. **Information Section**
+   - **Padding**: vertical 10px
+   - **Border Radius**: 15px (circular(15)) - bottom corners only
+   - **Layout**: Column with 5px vertical spacing
+   - **Clip Behavior**: Clip.antiAlias
+
+3. **Color Swatches & Action Row**
+   - **Layout**: Row with spaceBetween alignment
+   - **Height**: 24px
+   - **Left Side - Color Variants**:
+     - **Layout**: Row with color circles
+     - **Color Circle Container**: 24×24px
+     - **Padding**: 6px (creates visual space)
+     - **Inner Circle**:
+       - **Size**: 14.40×14.40px
+       - **Border**: 2px solid white (#FFFFFF)
+       - **Border Radius**: 20px (circular(20))
+       - **Position**: left: -1.20px, top: -1.20px (alignment adjustment)
+       - **Colors**:
+         - Brown: #905846
+         - Black: #09101D
+         - Teal: #4E9381
+     - **Purpose**: Show available product color variants
+     - **Extensibility**:
+       - Can display 1 to unlimited color options
+       - Can be replaced with size indicators (S, M, L, XL)
+       - Can show material variants (cotton, leather, etc.)
+       - Can indicate selected variant with larger border or checkmark
+   - **Right Side - Action Icon**:
+     - **Container**: 24×24px
+     - **Padding**: 5px
+     - **Inner Icon**: 16.80×16.80px
+     - **Purpose**: Wishlist/favorite toggle or quick add to cart
+     - **Extensibility**: Can be share button, compare, quick view
+
+4. **Product Information**
+   - **Layout**: Column with 5px vertical spacing
+   - **Width**: 343px (full card width)
+   - **Components**:
+
+   **Product Title:**
+   - **Text**: "RUBBERISED SOFT BACKPACK" (example)
+   - **Font**: 'Archivo', Size: 14px, Weight: 600, Color: #09101D, Line Height: 1.40
+   - **Width**: 343px
+   - **Overflow**: Can be ellipsis or multi-line
+   - **Extensibility**: Can be truncated or expanded on hover
+
+   **Price & Brand Section:**
+   - **Layout**: Column with 2px vertical spacing
+   - **Price**:
+     - **Text**: "65.99 USD" (example)
+     - **Font**: 'Archivo', Size: 14px, Weight: 600, Color: #09101D, Line Height: 1.40
+     - **Extensibility**:
+       - Can show original price with strikethrough + sale price
+       - Can display price range for variants
+       - Can show "from $X" for configurable products
+       - Can include currency conversion
+   - **Brand**:
+     - **Text**: "ZARA" (example)
+     - **Font**: 'Archivo', Size: 14px, Weight: 600, Color: #09101D, Line Height: 1.40
+     - **Extensibility**:
+       - Can be replaced with category, seller, or rating
+       - Can include brand logo instead of text
+
+**Typography:**
+- **Product Title**: Font: 'Archivo', Size: 14px, Weight: 600, Line Height: 1.40
+- **Price**: Font: 'Archivo', Size: 14px, Weight: 600, Line Height: 1.40
+- **Brand**: Font: 'Archivo', Size: 14px, Weight: 600, Line Height: 1.40
+
+**Color Palette:**
+- **Background**: #FFFFFF (white card)
+- **Text**: #09101D (primary text for title, price, brand)
+- **Swatches**: #905846 (brown), #09101D (black), #4E9381 (teal)
+- **Swatch Border**: white 2px (separates overlapping circles)
+
+**Spacing:**
+- **Card padding**: horizontal 16px, vertical 10px
+- **Section spacing**: 5px between color row and product info
+- **Price/Brand spacing**: 2px vertical
+- **Container padding**: vertical 30px (around all cards)
+
+**Dimensions:**
+- **Card**: 375px × 531px (with padding)
+- **Image**: 343px × ~400px (flexible)
+- **Info section**: 343px × ~100px (flexible based on content)
+- **Color swatches**: 24×24px container, 14.40×14.40px circle
+- **Action icon**: 24×24px container, 16.80×16.80px icon
+
+**Flexibility & Extensibility Notes:**
+- **Color swatches**: Horizontally expandable, supports 1 to unlimited variants
+- **Product info**: Can add rating stars, review count, availability status
+- **Action icons**: Can be multiple actions (wishlist, share, compare, quick view)
+- **Image section**: Can be replaced with image carousel, video, 3D view, AR preview
+- **Price section**: Can show discounts, payment options (e.g., "or 4x $16.50"), loyalty points
+- **Additional fields**: Can add tags/badges ("NEW", "SALE", "LIMITED"), stock indicator
+- **Responsive**: Can adapt to grid layouts (2, 3, or 4 columns)
+- **Interactive states**: Can add hover effects, quick view modal, add-to-cart button
+- **Customizable layout**: Info section can be overlaid on image for compact view
+- **Multi-variant support**: Can expand to show size/color matrix on interaction
+
+**Usage Examples:**
+- E-commerce product catalogs (fashion, electronics, home goods)
+- Marketplace listings (multi-vendor platforms)
+- Wishlist/favorites collections
+- Product comparison grids
+- Search results pages
+- Category browsing pages
+- Related products recommendations
 
 ---
 
