@@ -94,6 +94,8 @@ MaterialApp(
 --color-bg-light: #F4F6F9;         /* Светлый фон кнопок и карточек */
 --color-bg-primary: #4141E6;       /* Фон primary кнопок и rating badge */
 --color-bg-disabled: #D9DDE2;      /* Фон disabled состояний */
+--color-bg-step-inactive: #EAEEF2; /* Фон неактивной соединительной линии steps (из StepsGroups) */
+--color-bg-badge-semi: #330B24FB;  /* Color(0x330B24FB) - полупрозрачный фон badge rgba(11, 36, 251, 0.20) */
 ```
 
 ### Badge Colors (из View2)
@@ -1228,7 +1230,158 @@ Row (spacing: 20):
 
 ---
 
-### 11. Messages / Notifications
+### 12. Vertical Steps / Stepper (из StepsGroups)
+
+Вертикальный компонент отображения этапов процесса (multi-step form, onboarding, checkout). Три варианта индикаторов: Icon, Numbered Badge, Avatar Image.
+
+**Из StepsGroups - showcase container**
+
+- **Showcase Container**:
+  - Width: 1565px
+  - Padding: 50px
+  - Border: 1px solid #7B61FF
+  - Border Radius: 15px
+  - Clip: antiAlias
+  - Row spacing: 200px между колонками
+  - 3 columns по 375px каждый
+
+#### Vertical Steps with Icon Indicators
+
+**Из StepsGroups - первая колонка**
+
+- **Column Width**: 375px
+- **Step Container**:
+  - Width: full
+  - Background: #FFFFFF
+  - Clip: antiAlias
+- **Layout**: 64px левая колонка (connector + indicator) + expanded текст
+
+**Vertical Connector Line**:
+- **Width**: 1px (expanded)
+- **Color (active)**: #4141E6
+- **Color (inactive)**: transparent
+- **Position**: Vertical center через весь step
+- **Top padding**: 0 (expanded from previous step)
+- **Bottom padding**: 8px перед indicator
+
+**Icon Indicator**:
+- **Outer container**: 18x18px
+- **Inner container**: 16x16px, padding: 2px, border-radius: 100px
+- **Icon size**: 14.40x14.40px (positioned -1.20, -1.20)
+- **State**: Active or inactive (визуальное различие через цвет)
+
+**Content Area**:
+- **Width**: 295px (expanded)
+- **Padding**: vertical: 15px, right: 16px
+- **Title**: Archivo, 16px, weight: 700, color: #09101D, line-height: 1.40
+- **Subtitle** (optional): Archivo, 14px, weight: 400, color: #414249, line-height: 1.40
+- **Description** (optional): Archivo, 14px, weight: 400, color: #414249, line-height: 1.40, multiline
+
+**Navigation Buttons** (на активном шаге):
+- **Container padding bottom**: 20px
+- **Buttons spacing**: 10px
+- **Previous button**:
+  - Height: 36px
+  - Padding: horizontal: 16px, vertical: 10px
+  - Background: #F4F6F9
+  - Text: "Previous", Archivo, 13px, weight: 600, color: #09101D
+  - Border radius: 15px
+- **Next button**:
+  - Height: 36px
+  - Padding: horizontal: 16px, vertical: 10px
+  - Background: #4141E6
+  - Text: "Next", Archivo, 13px, weight: 600, color: white
+  - Icon: 16x16px, spacing: 8px
+  - Border radius: 15px
+
+**States**:
+- **Active**: Connector #4141E6, icon показан, текст #09101D
+- **Completed**: Connector #4141E6 (through), icon с галочкой
+- **Inactive/Future**: Connector transparent, текст #D9DDE2
+
+**Example Steps**:
+1. Create account + Enter your phone number
+2. Add payment method
+3. Schedule appointment + description + Previous/Next buttons
+4. Select master (inactive)
+
+#### Vertical Steps with Numbered Badges
+
+**Из StepsGroups - вторая колонка**
+
+Все параметры как у Icon variant, но вместо иконок используются numbered badges.
+
+**Numbered Badge**:
+- **Outer container**: padding: 1px
+- **Container**: 24x24px, padding: 2px, border-radius: 100px
+- **Inner badge**: 24x24px (positioned -2, -2)
+  - Padding: horizontal: 4px, vertical: 2px
+  - Border radius: 20px
+  - **Background colors**:
+    - Current step: #4141E6 (solid)
+    - Previous step (semi-active): rgba(11, 36, 251, 0.20) = #330B24FB
+    - Future step: #D9DDE2
+- **Number text**:
+  - Font: Archivo, 10px, weight: 600
+  - Color: white
+  - Align: center
+  - Values: "1", "2", "3", "4"
+
+**Connector**: Same as Icon variant
+
+**Content**: Same as Icon variant
+
+**Navigation**: Same as Icon variant
+
+#### Vertical Steps with Avatar Images
+
+**Из StepsGroups - третья колонка**
+
+Все параметры как у Icon variant, но вместо иконок используются avatar images 30x30.
+
+**Avatar Image**:
+- **Outer container**: padding: 1px
+- **Row container**: spacing: 10px
+- **Avatar container**: 30x30px
+  - Background: #F4F6F9
+  - Border radius: 10px
+  - Icon placeholder: 16x16px (positioned 7, 6.85)
+- **Image overlay**:
+  - NetworkImage: "https://placehold.co/30x30"
+  - Fit: cover
+  - Border radius: 10px
+  - ShapeDecoration with RoundedRectangleBorder
+
+**Connector**:
+- **Color (active)**: #4141E6
+- **Color (inactive)**: #EAEEF2
+
+**Content**: Same as Icon variant
+
+**Navigation Buttons** (вариант с иконками слева):
+- **Previous button**: Icon 16x16 слева + spacing 8px + text
+- **Next button**: Text + spacing 8px + Icon 16x16 справа
+
+**Structure** (все три варианта):
+```
+Showcase Container (1565x?, padding: 50, border: 1px #7B61FF, radius: 15):
+  - Row (spacing: 200):
+    - Column 1 (375px): Icon Indicators
+    - Column 2 (375px): Numbered Badges
+    - Column 3 (375px): Avatar Images
+
+    Each Column:
+      - Step 1 (active)
+      - Step 2 (active)
+      - Step 3 (current with buttons)
+      - Step 4 (inactive)
+```
+
+**Usage**: Vertical steps используются в multi-step forms, onboarding flows, checkout processes, registration wizards, appointment booking.
+
+---
+
+### 13. Messages / Notifications
 
 #### Toast Notification
 
@@ -1579,6 +1732,19 @@ Container(
 --modal-avatar-radius: 15px;            /* Border radius для modal avatar */
 --modal-padding: 20px;                  /* Modal padding */
 --modal-radius: 20px;                   /* Modal border radius */
+
+/* Vertical Steps Sizes из StepsGroups */
+--step-showcase-width: 1565px;          /* Steps showcase container width */
+--step-column-width: 375px;             /* Step column width */
+--step-column-spacing: 200px;           /* Spacing между step columns */
+--step-connector-width: 64px;           /* Left column width (connector + indicator) */
+--step-content-width: 295px;            /* Content area width */
+--step-icon-indicator-outer: 18px;      /* Icon indicator outer size */
+--step-icon-indicator-inner: 16px;      /* Icon indicator inner size */
+--step-icon-size: 14.40px;              /* Icon actual size */
+--step-numbered-badge: 24px;            /* Numbered badge size */
+--step-avatar-size: 30px;               /* Avatar image size */
+--step-connector-line: 1px;             /* Connector line width */
 ```
 
 ### Flutter-Specific Properties (из кода)
@@ -1647,9 +1813,42 @@ Container(
 
 ## Версионирование и обновления
 
-**Текущая версия**: v5.1.0
+**Текущая версия**: v5.2.0
 
 ### Changelog
+
+#### v5.2.0 (2025-11-19)
+- Добавлен компонент Vertical Steps / Stepper из StepsGroups:
+  - **3 варианта индикаторов**:
+    - Icon Indicators: 18x18 outer, 16x16 inner, 14.40x14.40 icon
+    - Numbered Badges: 24x24, numbers 1-4, three states (active #4141E6, semi-active #330B24FB, inactive #D9DDE2)
+    - Avatar Images: 30x30, border radius 10px, NetworkImage placeholder
+  - **Vertical Connector Line**: 1px width, #4141E6 (active) / transparent или #EAEEF2 (inactive)
+  - **Content Area**: 295px width
+    - Title: 16px weight 700, #09101D
+    - Subtitle: 14px weight 400, #414249
+    - Description: 14px weight 400, multiline
+  - **Navigation Buttons**: Previous (secondary) + Next (primary)
+    - Height: 36px, padding: 16/10
+    - Previous: #F4F6F9 background, #09101D text
+    - Next: #4141E6 background, white text, with icon
+    - Spacing: 10px between buttons
+  - **States**: Active, Completed, Inactive/Future
+  - **Layout**: 64px connector column + expanded content
+  - **Showcase**: 1565px width, 50px padding, 200px column spacing
+- **Новые цвета**:
+  - Background: #EAEEF2 (inactive connector)
+  - Badge semi-active: rgba(11, 36, 251, 0.20) = #330B24FB
+- **Новые component sizes**:
+  - Step showcase: 1565px width
+  - Step column: 375px width
+  - Step column spacing: 200px
+  - Connector width: 64px
+  - Content width: 295px
+  - Icon indicator: 18px/16px/14.40px
+  - Numbered badge: 24px
+  - Step avatar: 30px
+  - Connector line: 1px
 
 #### v5.1.0 (2025-11-19)
 - Добавлены компоненты из ImagePlaceholders:
