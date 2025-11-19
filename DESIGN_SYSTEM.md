@@ -201,6 +201,7 @@
 ### Font Sizes
 
 ```css
+--font-size-3xs: 0.5625rem;   /* 9px */
 --font-size-2xs: 0.6875rem;   /* 11px */
 --font-size-xs: 0.75rem;      /* 12px */
 --font-size-xs-plus: 0.8125rem; /* 13px */
@@ -304,6 +305,7 @@
 --radius-none: 0;
 --radius-sm: 0.125rem;    /* 2px */
 --radius-base: 0.25rem;   /* 4px */
+--radius-base-plus: 0.3125rem; /* 5px */
 --radius-md: 0.375rem;    /* 6px */
 --radius-lg: 0.5rem;      /* 8px */
 --radius-lg-plus: 0.6875rem; /* 11px */
@@ -326,6 +328,7 @@
 --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
 --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
 --shadow-xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+--shadow-card-tiny: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
 ```
 
 #### Button Shadows
