@@ -299,6 +299,13 @@
 - **Padding**: horizontal 5px
 - **Использование**: Стандартные метки на графиках
 
+#### Page Title (Hero)
+- **Font**: 72px (4.5rem), Archivo
+- **Weight**: 800 (Extrabold)
+- **Color**: #09101D (black)
+- **Line Height**: 0.70
+- **Использование**: Главные заголовки страниц, hero titles
+
 ---
 
 ## Spacing & Layout
@@ -938,19 +945,99 @@
   - 21px from top of container (13px from bottom)
 - **Использование**: Навигационный индикатор на iPhone без физической кнопки Home
 
-#### Badge (Status/Label)
+#### Badge System (Complete)
 
-Маленький бейдж для статусов и меток.
+Полная система бейджей с различными вариантами.
 
-- **Padding**: symmetric(horizontal: 5px, vertical: 3px)
-- **Border Radius**: 5px (radius-mobile-xs)
-- **Font**: 9px Archivo Semibold
-- **Line Height**: 1.40
-- **Варианты**:
-  - **New Badge**: Background: #09101D, Text: White, может содержать emoji "🔥 New"
-  - **Join Life Badge**: Background: #11BB8D (green), Text: White
-  - **Strikethrough**: Используется для перечеркнутой старой цены
-- **Использование**: Статусы товаров, специальные метки
+##### Text Badge
+
+Бейдж с текстовой меткой.
+
+- **Height**: 16px
+- **Padding**: symmetric(horizontal: 4px, vertical: 2px)
+- **Background**: #4141E6 (primary-blue)
+- **Border Radius**: 12px
+- **Text Style**:
+  - Font: 10px Archivo
+  - Weight: 600 (Semibold)
+  - Color: White
+  - Line Height: 1.40
+- **Использование**: Текстовые метки, категории, статусы
+
+##### Time Badge
+
+Бейдж с отображением времени.
+
+- **Height**: 16px
+- **Padding**: symmetric(horizontal: 4px, vertical: 2px)
+- **Background**: #4141E6 (primary-blue)
+- **Border Radius**: 12px
+- **Text**: "35:12" формат (10px Semibold White)
+- **Использование**: Продолжительность, таймеры
+
+##### Counter Badge
+
+Бейдж со счетчиком.
+
+- **Height**: 20px
+- **Padding**: symmetric(horizontal: 4px, vertical: 2px)
+- **Background**: #4141E6 (primary-blue)
+- **Border Radius**: 20px (pill shape)
+- **Text**:
+  - Font: 10px Semibold White
+  - Text Align: Center
+  - Line Height: 1.40
+- **Использование**: Уведомления, количество элементов ("11", "99+")
+
+##### Notification Dot with Icon
+
+Бейдж-точка с иконкой внутри.
+
+- **Size**: 14×14px
+- **Background**: #4141E6 (primary-blue)
+- **Border**: 1px solid White
+- **Border Radius**: 20px (круг)
+- **Inner Icon**: 12×12px (padding: 2px)
+- **Использование**: Индикаторы с иконкой, статус с действием
+
+##### Status Dot (Primary)
+
+Маленькая цветная точка-индикатор.
+
+- **Size**: 12×12px
+- **Padding**: symmetric(horizontal: 4px, vertical: 2px)
+- **Background**: #4141E6 (primary-blue)
+- **Border**: 2px solid White
+- **Border Radius**: 20px (круг)
+- **Использование**: Статус онлайн, активность
+
+##### Status Dot (Success)
+
+Зеленая точка успеха.
+
+- **Size**: 12×12px
+- **Padding**: symmetric(horizontal: 4px, vertical: 2px)
+- **Background**: #11BB8D (green-badge)
+- **Border**: 2px solid White
+- **Border Radius**: 20px (круг)
+- **Использование**: Успешный статус, доступность
+
+##### Status Dot (Error)
+
+Красная точка ошибки.
+
+- **Size**: 12×12px
+- **Padding**: symmetric(horizontal: 4px, vertical: 2px)
+- **Background**: #E24949 (red-accent)
+- **Border**: 2px solid White
+- **Border Radius**: 20px (круг)
+- **Использование**: Ошибка, недоступность, критичный статус
+
+##### Legacy Badges (from previous versions)
+
+- **New Badge**: 9px Semibold, #09101D background, может содержать emoji "🔥 New", 5px border-radius
+- **Join Life Badge**: 9px Semibold, #11BB8D background, "Join Life" text, 5px border-radius
+- **Strikethrough Price**: 14px Regular, #D9DDE2 color, текст с перечеркиванием
 
 #### Discount Badge
 
@@ -1427,9 +1514,47 @@
 
 ## Версионирование и обновления
 
-**Текущая версия**: v5.4.0
+**Текущая версия**: v5.5.0
 
 ### Changelog
+
+#### v5.5.0 (2025-11-19)
+- 🏷️ Добавлена **полная система Badge Components**
+- 📝 Добавлен новый текстовый стиль **Page Title (Hero)**:
+  - Font Size: 72px
+  - Font Weight: Extrabold (800)
+  - Line Height: 0.70
+  - Цвет: #09101D (черный)
+- 🎨 Новая секция **Badge System (Complete)** с 7 вариантами бейджей:
+  - **Text Badge** (16px height, 12px border-radius)
+    - Padding: 4px horizontal, 2px vertical
+    - Background: Primary Blue (#4141E6)
+    - Text: 10px Semibold White
+  - **Time Badge** (16px height, 4px border-radius)
+    - Формат времени: "35:12"
+    - Background: Overlay Black 30%
+    - Text: 10px Semibold White
+  - **Counter Badge** (20px height, pill shape)
+    - Padding: 4px horizontal, 2px vertical
+    - Border Radius: 20px
+    - Background: Red Accent (#E24949)
+    - Text: 12px Semibold White ("11" формат)
+  - **Notification Dot with Icon** (14×14px)
+    - Background: Primary Blue (#4141E6)
+    - Иконка: белая, размер 10px
+  - **Status Dot - Primary** (12×12px)
+    - Background: Primary Blue (#4141E6)
+    - Border: 2px solid White
+    - Используется для индикации статуса "активно"
+  - **Status Dot - Success** (12×12px)
+    - Background: Green Badge (#11BB8D)
+    - Border: 2px solid White
+    - Используется для положительного статуса
+  - **Status Dot - Error** (12×12px)
+    - Background: Red Accent (#E24949)
+    - Border: 2px solid White
+    - Используется для ошибок и предупреждений
+- 📊 Все данные извлечены из реального Flutter кода badge системы
 
 #### v5.4.0 (2025-11-19)
 - 📊 Добавлена **система для графиков и визуализаций данных**
