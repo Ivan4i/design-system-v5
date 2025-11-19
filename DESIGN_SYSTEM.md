@@ -55,6 +55,7 @@
 /* Акцентные цвета */
 --color-primary: #4141E6;          /* Основной primary цвет из Flutter */
 --color-primary-border: #0B24FB;   /* Primary border variant из Flutter */
+--color-primary-action: #2E5AAC;   /* Primary action цвет для onboarding/auth screens (buttons, progress, focus) */
 --color-accent-blue: #1D4ED8;      /* blue-700 */
 --color-accent-purple: #7B61FF;    /* Фиолетовый из Flutter кода */
 --color-accent-yellow: #FFC043;    /* Желтый/золотой для charts из Flutter */
@@ -68,6 +69,7 @@
 ```css
 /* Фоны для компонентов */
 --color-bg-light: #F4F6F9;         /* Светлый фон из Flutter (основной для cards) */
+--color-bg-light-input: #FAFAFB;   /* Очень светлый фон для input полей (onboarding/auth screens) */
 --color-bg-light-pressed: #EAEEF2; /* Pressed state для светлых компонентов (textarea, inputs) */
 --color-bg-dark: #18202F;          /* Темный scaffold background из Flutter */
 --color-bg-dark-secondary: #23262B; /* Темный вторичный фон (для picker items, secondary dark elements) */
@@ -1634,6 +1636,237 @@
 
 ---
 
+## Onboarding & Authentication Screens (Flutter Mobile)
+
+### Common Elements
+
+#### Status Bar
+- **Height**: 44px
+- **Background**: #09101D (color-bg-card-dark)
+- **Content**: System time, signal indicators (21px × 54px container)
+- **Usage**: Fixed at top of screen
+
+#### Pull Indicator
+- **Size**: 40px × 3px
+- **Background**: #D9DDE2 (color-bg-card-light)
+- **Border Radius**: 100px (fully rounded)
+- **Position**: Centered horizontally, 8px from top edge
+- **Usage**: Bottom sheet pull handle
+
+#### Progress Indicator (Step Bar)
+- **Container**: 375px width, padding 10px vertical
+- **Segment Height**: 3px
+- **Number of Segments**: 5 (customizable)
+- **Spacing**: 0 (segments touch)
+- **Active Segment**: #2E5AAC (color-primary-action)
+- **Inactive Segment**: rgba(9, 16, 29, 0.10) (10% opacity black)
+- **Border Radius**:
+  - First segment: left corners 10px
+  - Last segment: right corners 10px
+  - Middle segments: 3px (rectangular)
+- **Usage**: Multi-step form progress tracking
+
+#### Back Button
+- **Container**: 44px height, padding 16px horizontal, 10px vertical
+- **Icon**: 24px × 24px (2px padding inner)
+- **Border Radius**: 12px
+- **Position**: Top left of screen
+- **Usage**: Navigate to previous screen/step
+
+### Screen 1: Phone Number Input
+
+**Layout**:
+- **Container**: 375px × 499px
+- **Background**: white
+- **Border Radius**: 30px (top corners)
+- **Status Bar**: 44px black bar at top
+- **Pull Indicator**: 40px × 3px, centered
+
+**Progress**: 1 of 5 segments active
+
+**Header**:
+- **Padding**: 16px horizontal, 10px vertical
+- **Spacing**: 5px between title and subtitle
+- **Title**: "Add your mobile number"
+  - Font: Archivo 26px, weight 700
+  - Color: #09101D (color-text-primary)
+  - Line Height: 1.40
+- **Subtitle**: "We'll need to confirm it by sending a text"
+  - Font: Archivo 18px, weight 400
+  - Color: #414249 (color-text-tertiary)
+  - Line Height: 1.40
+  - Width: 343px
+
+**Phone Input Section** (padding: 16px horizontal, 5px vertical, top 20px):
+- **Label**: "Mobile number"
+  - Font: Archivo 14px, weight 600
+  - Color: #09101D
+  - Line Height: 1.40
+- **Input Row** (spacing: 8px):
+  - **Country Selector**:
+    - Height: 46px
+    - Padding: left 16px, right 10px
+    - Background: #FAFAFB (color-bg-light-input)
+    - Border Radius: 15px
+    - Flag: 22px × 16px, border-radius 2px
+    - Dropdown icon: 20px × 20px
+    - Spacing: 20px between flag and icon
+  - **Phone Input**:
+    - Height: 46px
+    - Padding: left 16px, right 20px
+    - Border: 2px solid #2E5AAC (color-primary-action) when focused
+    - Border Radius: 15px
+    - Text: "+1 628 123 4567"
+      - Font: Archivo 14px, weight 600
+      - Color: #09101D
+      - Line Height: 1.40
+    - Cursor: 2px × 16px
+
+**Disclaimer Text** (padding: 16px horizontal, 10px vertical):
+- **Font**: Archivo 12px, weight 400
+- **Color**: #747B84 (color-text-secondary)
+- **Line Height**: 1.40
+- **Width**: 343px
+- **Content**: "By continuing, you confirm that you're the owner..."
+
+**Next Button** (padding: 16px horizontal, 10px vertical):
+- **Height**: 44px
+- **Padding**: 16px horizontal, 10px vertical
+- **Background**: #2E5AAC (color-primary-action)
+- **Border Radius**: 15px
+- **Text**: "Next"
+  - Font: Archivo 14px, weight 600
+  - Color: white
+  - Line Height: 1.40
+- **Layout**: Row with spaceBetween, spacing 70px
+
+### Screen 2: Registration Form
+
+**Layout**:
+- **Container**: 375px × 515px
+- **Background**: white
+- **Border Radius**: 30px (top corners)
+- **Status Bar**: 44px at top (no background color)
+
+**Header**:
+- **Padding**: left 16px, right 16px, bottom 10px
+- **Title**: "Get started"
+  - Font: Archivo 32px, weight 700
+  - Color: #09101D (color-text-primary)
+  - Line Height: 1.40
+  - Width: 343px
+  - Height: 44px
+
+**Form Inputs** (4 fields, 16px horizontal padding, 5px vertical):
+1. **Full Name**:
+   - Height: 46px
+   - Padding: left 16px, right 20px
+   - Border: 1px solid #D9DDE2 (color-text-disabled)
+   - Border Radius: 15px
+   - Placeholder: "Full Name"
+     - Font: Archivo 15px, weight 400
+     - Color: rgba(9, 16, 29, 0.40) (40% opacity)
+     - Line Height: 1.40
+
+2. **Email Address**:
+   - Same specs as Full Name
+   - Placeholder: "Email Address"
+
+3. **Confirm Email**:
+   - Same specs as Full Name
+   - Placeholder: "Confirm Email"
+
+4. **Password**:
+   - Same specs as Full Name
+   - Placeholder: "Password"
+
+**Password Strength Indicator** (padding: 16px horizontal, 10px vertical):
+- **Container**: 3 segments
+- **Segment Height**: 3px
+- **Spacing**: 10px between segments
+- **Border Radius**: 3px
+- **Colors**:
+  - Weak (1 segment): #D9DDE2
+  - Medium (2 segments): #D9DDE2
+  - Strong (3 segments): #D9DDE2
+- **Layout**: Row with expanded segments
+
+**Terms Text** (padding: 16px horizontal, 10px vertical):
+- **Font**: Archivo 15px, weight 400/600
+- **Color**: #747B84 (regular), #11BB8D (links - color-success)
+- **Line Height**: 1.40
+- **Width**: 343px
+- **Content**: "By signing up for Appka, you agree to the Appka's **Term of Service** and **Privacy Policy**"
+
+**Create Account Button** (padding: 16px horizontal, 10px vertical):
+- **Height**: 44px
+- **Padding**: 16px horizontal, 10px vertical (inner: 10px horizontal for text)
+- **Background**: #11BB8D (color-success)
+- **Border Radius**: 15px
+- **Text**: "Create account"
+  - Font: Archivo 14px, weight 600
+  - Color: white
+  - Line Height: 1.40
+- **Layout**: Row with spaceBetween, spacing 70px
+
+### Screen 3: Phone Verification (OTP)
+
+**Layout**:
+- **Container**: 375px × 444px
+- **Background**: white
+- **Border Radius**: 30px (top corners)
+- **Status Bar**: 44px black bar at top
+- **Pull Indicator**: 40px × 3px, centered
+
+**Progress**: 4 of 5 segments active (#2E5AAC)
+
+**Header**:
+- **Padding**: 16px horizontal, 10px vertical
+- **Spacing**: 5px between title and subtitle
+- **Title**: "Check your phone"
+  - Font: Archivo 26px, weight 700
+  - Color: #09101D (color-text-primary)
+  - Line Height: 1.40
+- **Subtitle**: "To confirm your account, enter the 4-digit code sent to **+1 628 123 4567**"
+  - Font: Archivo 18px, weight 400/700 (number in bold)
+  - Color: #414249 (color-text-tertiary)
+  - Line Height: 1.40
+  - Width: 343px
+
+**Code Input Section** (padding: 16px horizontal, 5px vertical, top 20px, bottom 10px):
+- **Label**: "Code"
+  - Font: Archivo 14px, weight 600
+  - Color: #09101D
+  - Line Height: 1.40
+- **Code Fields** (4 fields, spacing: 20px):
+  - **Width**: Expanded (equal width)
+  - **Height**: 46px
+  - **Background**: #FAFAFB (color-bg-light-input)
+  - **Border Radius**: 12px
+  - **States**:
+    - Empty: background #FAFAFB
+    - Filled: text "4", font Archivo 14px weight 400, color #09101D, centered
+    - Active/Focus: border 2px solid #2E5AAC (color-primary-action)
+  - **Clip Behavior**: antiAlias
+
+**Helper Text** (padding: 16px horizontal, 20px vertical):
+- **Font**: Archivo 14px, weight 400/600
+- **Color**: #23262B (regular), #2E5AAC (link - color-primary-action)
+- **Line Height**: 1.40
+- **Width**: 343px
+- **Content**: "Didn't get the code? **See other options**"
+
+**Usage Notes**:
+- All screens use 375px width (standard mobile)
+- Padding typically 16px horizontal for content
+- Border radius: 15px for buttons/inputs, 12px for small fields
+- Spacing between elements: 5px-20px depending on hierarchy
+- Forms can be extended with additional fields as needed
+- Progress indicator segments adjustable (3-7 steps typical)
+- Input states: default, focus (2px border), filled, disabled (not shown)
+
+---
+
 ## Паттерны
 
 ### Mobile Layout Patterns (Flutter)
@@ -1959,6 +2192,32 @@ Icon Button (40px):
   - Layout: Row layout with expanded text, 8px spacing between elements
   - Height: ~56px (text only), ~88px (with icon/avatar)
   - Usage guidelines: Bottom positioning, auto-dismiss 3-5s, stack vertically with 10px spacing
+- Onboarding & Authentication Screens (Flutter Mobile):
+  - New colors: #2E5AAC (primary-action), #FAFAFB (bg-light-input)
+  - Common Elements:
+    - Status Bar: 44px height, #09101D background
+    - Pull Indicator: 40px × 3px, #D9DDE2, border-radius 100px
+    - Progress Indicator: 5 segments, 3px height, #2E5AAC active, rgba(9,16,29,0.10) inactive
+    - Back Button: 44px height, 24px icon, 12px border-radius
+  - Screen 1 - Phone Number Input (375×499px):
+    - Header: Title (Archivo 26px weight 700), Subtitle (18px weight 400 #414249)
+    - Country Selector: 46px height, #FAFAFB background, 22×16px flag, 20px dropdown icon
+    - Phone Input: 46px height, border 2px #2E5AAC (focus), Archivo 14px weight 600
+    - Disclaimer: Archivo 12px weight 400, color #747B84
+    - Next Button: 44px height, #2E5AAC background, Archivo 14px weight 600 white
+  - Screen 2 - Registration Form (375×515px):
+    - Header: "Get started" - Archivo 32px weight 700
+    - Form Inputs: 4 fields (Full Name, Email, Confirm Email, Password)
+    - Input specs: 46px height, border 1px #D9DDE2, placeholder Archivo 15px rgba(9,16,29,0.40)
+    - Password Strength: 3 segments, 3px height, 10px spacing
+    - Terms: Archivo 15px, #747B84 text, #11BB8D links
+    - Create Button: 44px height, #11BB8D background
+  - Screen 3 - Phone Verification OTP (375×444px):
+    - Progress: 4 of 5 segments active
+    - Header: Title (Archivo 26px weight 700), Subtitle with bold phone number
+    - Code Fields: 4 fields, 46px height, #FAFAFB background, border 2px #2E5AAC (focus)
+    - Helper text: "Didn't get the code?" with link #2E5AAC
+  - Usage Notes: Flexible forms (add/remove fields), adjustable progress (3-7 steps), 375px width standard
 - Layout patterns и Best practices
 
 ---
