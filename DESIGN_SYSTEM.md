@@ -74,7 +74,7 @@
 
 ```css
 /* Text */
---color-text-primary: #111827;
+--color-text-primary: #09101D;
 --color-text-secondary: #6B7280;
 --color-text-tertiary: #9CA3AF;
 --color-text-disabled: #D1D5DB;
@@ -82,7 +82,7 @@
 
 /* Backgrounds */
 --color-bg-primary: #FFFFFF;
---color-bg-secondary: #F9FAFB;
+--color-bg-secondary: #F4F6F9;
 --color-bg-tertiary: #F3F4F6;
 --color-bg-elevated: #FFFFFF;
 --color-bg-overlay: rgba(0, 0, 0, 0.5);
@@ -95,15 +95,15 @@
 
 /* Shades */
 --color-gray-50: #F9FAFB;
---color-gray-100: #F3F4F6;
+--color-gray-100: #F4F6F9;
 --color-gray-200: #E5E7EB;
---color-gray-300: #D1D5DB;
+--color-gray-300: #D9DDE2;
 --color-gray-400: #9CA3AF;
 --color-gray-500: #6B7280;
 --color-gray-600: #4B5563;
---color-gray-700: #374151;
---color-gray-800: #1F2937;
---color-gray-900: #111827;
+--color-gray-700: #414249;
+--color-gray-800: #23262B;
+--color-gray-900: #09101D;
 ```
 
 ### Chart Colors
@@ -148,9 +148,10 @@
 ### Font Family
 
 ```css
---font-primary: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+--font-primary: 'Archivo', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
 --font-secondary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 --font-mono: 'JetBrains Mono', 'Fira Code', 'Monaco', 'Consolas', 'Courier New', monospace;
+--font-display: 'Archivo', sans-serif;  /* Для заголовков и акцентов */
 ```
 
 ### Font Sizes
@@ -166,6 +167,7 @@
 --font-size-3xl: 2.25rem;     /* 36px */
 --font-size-4xl: 3rem;        /* 48px */
 --font-size-5xl: 3.75rem;     /* 60px */
+--font-size-6xl: 4.5rem;      /* 72px - Display/Elevations заголовки */
 ```
 
 ### Font Weights
@@ -250,20 +252,48 @@
 --radius-lg: 0.5rem;      /* 8px */
 --radius-xl: 0.75rem;     /* 12px */
 --radius-2xl: 1rem;       /* 16px */
+--radius-3xl: 1.875rem;   /* 30px - для карточек с elevations */
+--radius-4xl: 6.25rem;    /* 100px - для контейнеров */
 --radius-full: 9999px;
 ```
 
 ### Shadows
 
-#### Card Shadows
+#### Elevations (7 уровней)
 
 ```css
---shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
---shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
---shadow-base: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
---shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
---shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
---shadow-xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+/* Elevation Level 1 */
+--shadow-elevation-1: 0 1px 1px 0 rgba(0, 0, 0, 0.4);
+
+/* Elevation Level 2 */
+--shadow-elevation-2: 0 2px 10px 0 rgba(0, 0, 0, 0.1);
+
+/* Elevation Level 3 */
+--shadow-elevation-3: 0 10px 30px 0 rgba(0, 0, 0, 0.05);
+
+/* Elevation Level 4 */
+--shadow-elevation-4: 0 10px 20px 0 rgba(0, 0, 0, 0.2);
+
+/* Elevation Level 5 */
+--shadow-elevation-5: 0 15px 60px 0 rgba(0, 0, 0, 0.2);
+
+/* Elevation Level 6 */
+--shadow-elevation-6: 0 17.5px 70px 0 rgba(0, 0, 0, 0.25);
+
+/* Elevation Level 7 */
+--shadow-elevation-7: 0 35px 90px 0 rgba(0, 0, 0, 0.25);
+```
+
+#### Алиасы для удобства
+
+```css
+--shadow-xs: var(--shadow-elevation-1);
+--shadow-sm: var(--shadow-elevation-2);
+--shadow-base: var(--shadow-elevation-3);
+--shadow-md: var(--shadow-elevation-4);
+--shadow-lg: var(--shadow-elevation-5);
+--shadow-xl: var(--shadow-elevation-6);
+--shadow-2xl: var(--shadow-elevation-7);
 ```
 
 #### Button Shadows
@@ -336,6 +366,14 @@
 - **Outlined Card**: Border: 1px solid color-border-primary, Shadow: none
 - **Interactive Card**: Hover: shadow-hover-md, Cursor: pointer, Transition: all 0.2s ease
 
+#### Elevation Card (с тенями)
+
+- **Size**: 160px × 160px (квадратная карточка)
+- **Border Radius**: 30px (radius-3xl)
+- **Background**: Поддерживает различные фоны (white, gray-100, gray-300, gray-700, gray-800)
+- **Shadows**: 7 уровней elevation (от shadow-elevation-1 до shadow-elevation-7)
+- **Использование**: Для демонстрации глубины и иерархии в интерфейсе
+
 #### Пример использования
 
 ```css
@@ -357,6 +395,22 @@
   box-shadow: var(--shadow-hover-md);
   transform: translateY(-2px);
 }
+
+/* Elevation Card - для демонстрации глубины */
+.card--elevation {
+  width: 160px;
+  height: 160px;
+  border-radius: var(--radius-3xl); /* 30px */
+  background: var(--color-bg-primary);
+}
+
+.card--elevation-1 { box-shadow: var(--shadow-elevation-1); }
+.card--elevation-2 { box-shadow: var(--shadow-elevation-2); }
+.card--elevation-3 { box-shadow: var(--shadow-elevation-3); }
+.card--elevation-4 { box-shadow: var(--shadow-elevation-4); }
+.card--elevation-5 { box-shadow: var(--shadow-elevation-5); }
+.card--elevation-6 { box-shadow: var(--shadow-elevation-6); }
+.card--elevation-7 { box-shadow: var(--shadow-elevation-7); }
 ```
 
 ---
