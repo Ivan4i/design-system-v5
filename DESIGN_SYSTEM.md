@@ -36,28 +36,74 @@
 /* Основные цвета */
 --color-white: #FFFFFF;
 --color-black: #09101D;
+--color-scaffold-bg: #12202F;      /* Темный фон приложения */
+```
+
+### Background Colors
+
+```css
+/* Фоновые цвета */
+--color-bg-primary: #FFFFFF;
+--color-bg-secondary: #F4F6F9;     /* Светлый серо-голубой */
+--color-bg-tertiary: #D9DDE2;      /* Светло-серый (аватары, плейсхолдеры) */
+--color-bg-dark: #12202F;          /* Темный фон */
 ```
 
 ### Text Colors
 
 ```css
-/* Текст из Tailwind CSS */
---color-text-primary: #020617;     /* slate-950 */
---color-text-secondary: #27272A;   /* zinc-800 */
+/* Текстовые цвета */
+--color-text-primary: #09101D;     /* Основной текст (заголовки) */
+--color-text-secondary: #414249;   /* Вторичный текст (подзаголовки) */
+--color-text-tertiary: #64748B;    /* Третичный текст */
 ```
 
 ### Accent Colors
 
 ```css
 /* Акцентные цвета */
---color-accent-blue: #1D4ED8;      /* blue-700 */
+--color-accent-blue: #4141E6;      /* Синий (stories, primary actions) */
+--color-accent-pink: #FC466B;      /* Розовый (stories, highlights) */
+```
+
+### Status Colors
+
+```css
+/* Статусные цвета */
+--color-status-online: #11BB8D;    /* Зеленый (online indicator) */
+--color-status-success: #10B981;
+--color-status-error: #EF4444;
+--color-status-warning: #F59E0B;
+```
+
+### Gradient Colors
+
+```css
+/* Градиенты */
+--gradient-live-start: #833AB4;    /* Фиолетовый (Live badge) */
+--gradient-live-middle: #FD1D1D;   /* Красный (Live badge) */
+--gradient-live-end: #FCB045;      /* Оранжевый (Live badge) */
+
+/* Применение Live gradient */
+--gradient-live: linear-gradient(90deg, #833AB4 0%, #FD1D1D 50%, #FCB045 100%);
+```
+
+### Border Colors
+
+```css
+/* Цвета границ */
+--color-border-primary: #E5E7EB;
+--color-border-secondary: #D1D5DB;
+--color-border-stories-blue: #4141E6;   /* Border для непросмотренных stories */
+--color-border-stories-pink: #FC466B;   /* Border для highlighted stories */
 ```
 
 ### Shadow Colors
 
 ```css
 /* Тени */
---shadow-light: rgba(240, 241, 242, 1.00);  /* из кода: shadow-[0px_1px_1px_0px_rgba(240,241,242,1.00)] */
+--shadow-light: rgba(240, 241, 242, 1.00);
+--shadow-dark: rgba(0, 0, 0, 0.1);
 ```
 
 ---
@@ -162,6 +208,50 @@
 #### Caption 3
 - **Semibold**: Font: 10px (0.625rem), Weight: 600, Line Height: 12px
 
+### Text Styles (Flutter Components - из реального кода)
+
+#### User List Item Title
+- **Font Size**: 16px (1rem)
+- **Font Weight**: 700 (Bold)
+- **Font Family**: 'Archivo'
+- **Line Height**: 1.40 (22.4px)
+- **Color**: #09101D (--color-text-primary)
+- **Использование**: Заголовки в списках пользователей, основной текст в карточках
+
+#### User List Item Subtitle
+- **Font Size**: 14px (0.875rem)
+- **Font Weight**: 400 (Regular)
+- **Font Family**: 'Archivo'
+- **Line Height**: 1.40 (19.6px)
+- **Color**: #414249 (--color-text-secondary)
+- **Использование**: Подзаголовки, дополнительная информация
+
+#### Avatar Initials
+- **Font Size**: 16px (1rem)
+- **Font Weight**: 600 (Semibold)
+- **Font Family**: 'Archivo'
+- **Line Height**: 1.40 (22.4px)
+- **Color**: #FFFFFF (white)
+- **Text Align**: Center
+- **Использование**: Инициалы в аватарах без фото
+
+#### Notification Badge
+- **Font Size**: 10px (0.625rem)
+- **Font Weight**: 600 (Semibold)
+- **Font Family**: 'Archivo'
+- **Line Height**: 1.40 (14px)
+- **Color**: #FFFFFF (white)
+- **Text Align**: Center
+- **Использование**: Цифры уведомлений, счетчики
+
+#### Live Badge
+- **Font Size**: 10px (0.625rem)
+- **Font Weight**: 600 (Semibold)
+- **Font Family**: 'Archivo'
+- **Line Height**: 1.40 (14px)
+- **Color**: #FFFFFF (white)
+- **Использование**: "Live" badge, статусные метки
+
 ---
 
 ## Spacing & Layout
@@ -192,10 +282,24 @@
 --radius-base: 0.25rem;   /* 4px */
 --radius-md: 0.375rem;    /* 6px */
 --radius-lg: 0.5rem;      /* 8px */
---radius-xl: 0.75rem;     /* 12px */
+--radius-icon: 0.625rem;  /* 10px - Icon containers */
+--radius-xl: 0.75rem;     /* 12px - Live badge */
+--radius-badge: 0.9375rem; /* 15px - Badge containers */
 --radius-2xl: 1rem;       /* 16px */
---radius-full: 9999px;
+--radius-notification: 1.25rem;  /* 20px - Notification badge */
+--radius-stories: 1.875rem;      /* 30px - Stories border */
+--radius-avatar: 2.5rem;         /* 40px - Avatar */
+--radius-full: 9999px;           /* Полностью круглый */
 ```
+
+**Применение из Flutter кода:**
+- `radius-avatar (40px)`: Основной border radius для аватаров
+- `radius-stories (30px)`: Border radius для stories border вокруг аватара
+- `radius-notification (20px)`: Notification badge
+- `radius-badge (15px)`: Стандартные badge контейнеры
+- `radius-xl (12px)`: Live badge
+- `radius-icon (10px)`: Icon containers
+- `radius-full`: Online indicator, круглые элементы
 
 ### Shadows
 
@@ -232,10 +336,14 @@
 
 ```css
 --border-width-0: 0;
---border-width-1: 1px;
---border-width-2: 2px;
+--border-width-1: 1px;    /* Online indicator, Live badge border */
+--border-width-2: 2px;    /* Stories border */
 --border-width-4: 4px;
 ```
+
+**Применение из Flutter кода:**
+- `border-width-2 (2px)`: Stories border вокруг аватара
+- `border-width-1 (1px)`: Online indicator border (white), Live badge border (white)
 
 #### Border Offset
 
@@ -374,9 +482,70 @@
 
 ---
 
-### 4. Badges & Tags
+### 4. Badges & Tags (из реального Flutter кода)
 
-#### Badge
+#### Notification Badge (Counter)
+
+**Спецификация из кода:**
+- **Size**: 20px × 20px
+- **Background**: #4141E6 (--color-accent-blue)
+- **Border Radius**: 20px (--radius-notification)
+- **Padding**: 4px horizontal, 2px vertical
+- **Position**: Top-right corner of avatar (left: 36px, top: 0)
+- **Typography**:
+  - Font: 10px (0.625rem)
+  - Weight: 600 (Semibold)
+  - Color: white
+  - Text Align: center
+- **Использование**: Счетчики уведомлений на аватарах
+- **Пример контента**: "11", "99+", "3"
+
+#### Online Status Indicator
+
+**Спецификация из кода:**
+- **Size**: 14px × 14px
+- **Background**: #11BB8D (--color-status-online)
+- **Border**: 1px solid white (--border-width-1)
+- **Border Radius**: circle (--radius-full)
+- **Position**: Bottom-right corner of avatar (left: 0, top: 36px)
+- **Использование**: Индикатор онлайн-статуса пользователя
+- **Варианты**:
+  - Online: Background #11BB8D (зеленый)
+  - Offline: Background #9CA3AF (серый)
+  - Away: Background #F59E0B (оранжевый)
+  - DND: Background #EF4444 (красный)
+
+#### Live Badge
+
+**Спецификация из кода:**
+- **Size**: 28px × 14px
+- **Background**: Linear gradient
+  - Start: #833AB4 (фиолетовый)
+  - Middle: #FD1D1D (красный)
+  - End: #FCB045 (оранжевый)
+  - Direction: 90deg (horizontal)
+- **Border**: 1px solid white (--border-width-1)
+- **Border Radius**: 12px (--radius-xl)
+- **Padding**: 4px horizontal, 2px vertical
+- **Position**: Bottom-center of avatar (left: 0, top: 36px)
+- **Typography**:
+  - Font: 10px (0.625rem)
+  - Weight: 600 (Semibold)
+  - Color: white
+  - Text Width: 20px
+  - Content: "Live"
+- **Использование**: Индикатор live-трансляций
+
+```css
+/* Live Badge Gradient */
+background: linear-gradient(90deg,
+  var(--gradient-live-start) 0%,
+  var(--gradient-live-middle) 50%,
+  var(--gradient-live-end) 100%
+);
+```
+
+#### General Badge Variants
 
 - **Padding**: 4px 8px
 - **Radius**: radius-full (9999px)
@@ -387,6 +556,7 @@
   - Warning: Background: color-warning-bg, Color: color-warning, Border: 1px solid color-warning-border
   - Info: Background: color-info-bg, Color: color-info, Border: 1px solid color-info-border
   - Neutral: Background: color-gray-100, Color: color-gray-700, Border: 1px solid color-gray-300
+  - Primary: Background: #4141E6, Color: white (из кода)
 
 #### Tag
 
@@ -483,23 +653,180 @@
 
 ---
 
-### 9. Avatars
+### 9. Avatars (из реального Flutter кода)
 
 #### Sizes
 
 - **XS**: 24px × 24px
 - **Small**: 32px × 32px
 - **Medium**: 40px × 40px
-- **Large**: 48px × 48px
+- **Large**: 48px × 48px (основной размер из кода)
 - **XL**: 64px × 64px
 - **2XL**: 96px × 96px
 
-#### Styles
+#### Avatar Container Structure (из кода)
 
-- **Border Radius**: radius-full (circle) или radius-md (rounded square)
-- **Border**: 2px solid white (для группировки)
-- **Placeholder**: Background: color-gray-300, Icon/Initials: color-gray-600
-- **Status Indicator**: Size: 25% of avatar, Border: 2px solid white, Position: bottom-right
+**Базовый аватар:**
+- **Outer Container**: 56px × 56px
+- **Avatar Image**: 48px × 48px
+- **Position**: left: 4px, top: 4px (отступ от контейнера)
+- **Background (placeholder)**: #D9DDE2 (--color-bg-tertiary)
+- **Border Radius**: 40px (--radius-avatar)
+- **Image fit**: cover
+
+#### Варианты аватаров
+
+**1. Simple Avatar (без border)**
+```
+Container: 56×56
+└─ Avatar: 48×48 (position: 4px, 4px)
+   ├─ Background: #D9DDE2
+   ├─ Border Radius: 40px
+   └─ Image: NetworkImage (плейсхолдер)
+```
+
+**2. Avatar with Stories Border (Blue - непросмотренные)**
+```
+Container: 56×56
+├─ Stories Border: 56×56 (position: 0, 0)
+│  ├─ Border: 2px solid #4141E6
+│  └─ Border Radius: 30px
+└─ Avatar: 48×48 (position: 4px, 4px)
+   ├─ Background: #D9DDE2
+   └─ Border Radius: 40px
+```
+
+**3. Avatar with Stories Border (Pink - highlighted)**
+```
+Container: 56×56
+├─ Stories Border: 56×56 (position: 0, 0)
+│  ├─ Border: 2px solid #FC466B
+│  └─ Border Radius: 30px
+└─ Avatar: 48×48 (position: 4px, 4px)
+```
+
+**4. Avatar with Icon**
+```
+Row (spacing: 8px)
+├─ Avatar: 48×48
+└─ Icon Container: 24×24
+   ├─ Background: #F4F6F9
+   └─ Border Radius: 10px
+```
+
+**5. Avatar with Text (User List Item)**
+```
+Row (spacing: 8px)
+├─ Avatar: 48×48
+└─ Column
+   ├─ Title: "Title"
+   │  ├─ Font: 16px, weight: 700
+   │  └─ Color: #09101D
+   └─ Subtitle: "Subtitle"
+      ├─ Font: 14px, weight: 400
+      └─ Color: #414249
+```
+
+**6. Avatar with Top Badge (Notification Counter)**
+```
+Container: 56×56
+├─ Avatar: 48×48 (position: 4px, 4px)
+└─ Notification Badge: 20×20 (position: 36px, 0)
+   ├─ Background: #4141E6
+   ├─ Border Radius: 20px
+   ├─ Padding: 4px horizontal, 2px vertical
+   └─ Text: "11"
+      ├─ Font: 10px, weight: 600
+      ├─ Color: white
+      └─ Align: center
+```
+
+**7. Avatar with Bottom Badge (Online Indicator)**
+```
+Container: 56×56
+├─ Avatar: 48×48 (position: 4px, 4px)
+└─ Online Indicator: 14×14 (position: 0, 36px - bottom-right)
+   ├─ Background: #11BB8D
+   ├─ Border: 1px solid white
+   ├─ Border Radius: 20px (circle)
+   └─ Size: 14×14
+```
+
+**8. Avatar with Live Badge**
+```
+Container: 56×56
+├─ Avatar: 48×48 (position: 4px, 4px)
+└─ Live Badge: 28×14 (position: 0, 36px - bottom)
+   ├─ Gradient: #833AB4 → #FD1D1D → #FCB045
+   ├─ Border: 1px solid white
+   ├─ Border Radius: 12px
+   ├─ Padding: 4px horizontal, 2px vertical
+   └─ Text: "Live"
+      ├─ Font: 10px, weight: 600
+      ├─ Color: white
+      └─ Width: 20px
+```
+
+**9. Avatar with Initials (без фото)**
+```
+Container: 56×56
+└─ Avatar: 48×48 (position: 4px, 4px)
+   ├─ Background: #D9DDE2
+   ├─ Border Radius: 40px
+   └─ Text: "AH" (position: 4px, 17px)
+      ├─ Font: 16px, weight: 600
+      ├─ Color: white
+      ├─ Align: center
+      └─ Width: 48px
+```
+
+**10. Avatar with Icon Placeholder**
+```
+Container: 56×56
+└─ Avatar: 48×48 (position: 4px, 4px)
+   ├─ Background: #D9DDE2
+   ├─ Border Radius: 40px
+   └─ Icon: 24×24 (centered, padding: 12px horizontal)
+```
+
+#### Spacing & Layout (из кода)
+
+- **Row spacing between elements**: 8px
+- **Row internal spacing**: 10px
+- **Avatar position offset**: 4px (left, top)
+- **Badge position (top-right)**: left: 36px, top: 0
+- **Badge position (bottom)**: left: 0, top: 36px
+
+#### Stories Border Specification
+
+- **Border Width**: 2px
+- **Border Radius**: 30px
+- **Blue Border Color**: #4141E6 (--color-border-stories-blue) - для непросмотренных stories
+- **Pink Border Color**: #FC466B (--color-border-stories-pink) - для highlighted stories
+- **Container Size**: 56×56 (на 8px больше чем аватар для вмещения border)
+
+#### Badges on Avatars
+
+**Notification Badge (Top-Right):**
+- Size: 20×20
+- Background: #4141E6 (--color-accent-blue)
+- Border Radius: 20px
+- Position: top: 0, right: 0 (relative to 56×56 container)
+- Text: Font 10px, weight 600, color white
+
+**Online Indicator (Bottom-Right):**
+- Size: 14×14
+- Background: #11BB8D (--color-status-online)
+- Border: 1px solid white
+- Border Radius: circle
+- Position: bottom: 0, right: 0
+
+**Live Badge (Bottom-Center):**
+- Size: 28×14
+- Gradient: linear-gradient(90deg, #833AB4, #FD1D1D, #FCB045)
+- Border: 1px solid white
+- Border Radius: 12px
+- Text: "Live", Font 10px, weight 600, color white
 
 ---
 
