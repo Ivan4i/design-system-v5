@@ -11,6 +11,7 @@
 7. [Состояния](#состояния)
 8. [Иконки](#иконки)
 9. [Charts & Graphs](#charts--graphs)
+10. [Date & Time Pickers](#date--time-pickers)
 
 ---
 
@@ -64,6 +65,7 @@
 --color-primary: #4141E6;              /* Primary синий/фиолетовый */
 --color-primary-light: rgba(11, 36, 251, 0.10);  /* #0B24FB с 10% opacity */
 --color-success: #11BB8D;              /* Зеленый для успеха/рейтингов */
+--color-error: #E24949;                /* Красный для выходных/ошибок */
 ```
 
 ### Border Colors
@@ -1461,6 +1463,512 @@ Bottom sheet - модальное окно, которое выдвигаетс�
 
 ---
 
+## Date & Time Pickers
+
+Система компонентов для выбора даты и времени в мобильном приложении.
+
+### Time Slots Grid (Сетка выбора времени)
+
+Компонент для выбора временных слотов с интервалом 30 минут.
+
+#### Container
+
+**Размеры:**
+- **Width**: 375px (полная ширина мобильного экрана)
+- **Padding**: 16px horizontal, 10px vertical
+
+**Layout:**
+- **Spacing между рядами**: 5px (между rows), 10px (внутри Column)
+- **Grid**: 5 columns per row
+- **Gap между слотами**: 10px
+
+#### Time Slot Button
+
+**Размеры:**
+- **Height**: 40px
+- **Padding**: 10px (all sides)
+- **Border Radius**: 15px
+- **Width**: Expanded (равномерное распределение)
+
+**Typography:**
+- **Font**: 12px, Weight: 400, Family: Archivo, Line height: 1.40
+- **Text Format**: "HH:MM" (например, "10:00", "10:30")
+
+**States:**
+
+1. **Selected (выбранное время):**
+   - Background: #09101D (темный)
+   - Text Color: #FFFFFF (белый)
+   - Пример: "10:00"
+
+2. **Available (доступное время):**
+   - Background: #F4F6F9 (светло-серый)
+   - Text Color: #09101D (темный)
+   - Пример: "10:30", "11:00", "11:30" и т.д.
+
+3. **Disabled (недоступное время):**
+   - Background: transparent
+   - Text Color: #D9DDE2 (серый)
+   - Text Decoration: line-through (зачеркнутый)
+   - Пример: "20:30", "21:00", "21:30", "22:00"
+
+**Time Range:**
+- От 10:00 до 22:00
+- Интервал: 30 минут
+- Всего слотов: 25 (5 рядов × 5 колонок)
+
+**CSS Variables:**
+
+```css
+/* Time Slot Dimensions */
+--time-slot-height: 40px;
+--time-slot-padding: 10px;
+--time-slot-radius: 15px;
+--time-slot-gap: 10px;
+
+/* Time Slot Colors */
+--time-slot-bg-selected: #09101D;
+--time-slot-text-selected: #FFFFFF;
+--time-slot-bg-available: #F4F6F9;
+--time-slot-text-available: #09101D;
+--time-slot-text-disabled: #D9DDE2;
+```
+
+---
+
+### Horizontal Date Picker (Горизонтальный выбор дат)
+
+Компонент для прокрутки и выбора даты в горизонтальной полосе.
+
+#### Container
+
+**Размеры:**
+- **Width**: 375px (полная ширина экрана)
+- **Padding**: bottom 10px
+- **Layout**: Horizontal Row
+- **Spacing**: 2px между карточками
+
+#### Date Card
+
+**Размеры:**
+- **Width**: 50px (фиксированная)
+- **Height**: auto
+- **Padding**: 14px horizontal, 8px vertical
+- **Border Radius**: 15px
+
+**Структура:**
+- **Day Label** (верхняя строка): SAT, SUN, MON, TUE, WEN, THU, FRI
+- **Date Number** (нижняя строка): 12, 13, 14, 15, 16, 17, 18, 19
+
+**Typography:**
+
+1. **Day Label:**
+   - Font: 10px, Weight: 600, Family: Archivo, Line height: 1.40
+   - Text Align: Center
+   - Text Transform: Uppercase
+
+2. **Date Number:**
+   - Font: 14px, Weight: 600, Family: Archivo, Line height: 1.40
+   - Text Align: Center
+
+**Internal Spacing:**
+- **Gap между Day и Date**: 2px
+
+**States:**
+
+1. **Selected (выбранная дата):**
+   - Background: #09101D (темный)
+   - Day Label Color: #FFFFFF (белый)
+   - Date Number Color: #FFFFFF (белый)
+   - Пример: "TUE 15"
+
+2. **Available Weekday (доступный будний день):**
+   - Background: #FFFFFF (белый)
+   - Day Label Color: #09101D (темный)
+   - Date Number Color: #09101D (темный)
+   - Пример: "MON 14", "WEN 16"
+
+3. **Available Weekend (доступные выходные):**
+   - Background: #FFFFFF (белый)
+   - Day Label Color: #E24949 (красный)
+   - Date Number Color: #09101D (темный)
+   - Пример: "SAT 12", "SUN 13", "SAT 19"
+
+4. **Disabled (недоступная дата):**
+   - Background: #FFFFFF (белый)
+   - Day Label Color: #D9DDE2 (серый)
+   - Date Number Color: #D9DDE2 (серый)
+   - Пример: "THU 17", "FRI 18"
+
+**CSS Variables:**
+
+```css
+/* Date Card Dimensions */
+--date-card-width: 50px;
+--date-card-padding-horizontal: 14px;
+--date-card-padding-vertical: 8px;
+--date-card-radius: 15px;
+--date-card-gap: 2px;
+
+/* Date Card Colors */
+--date-card-bg-selected: #09101D;
+--date-card-text-selected: #FFFFFF;
+--date-card-bg-available: #FFFFFF;
+--date-card-text-weekday: #09101D;
+--date-card-text-weekend: #E24949;
+--date-card-text-disabled: #D9DDE2;
+```
+
+---
+
+### Monthly Calendar (Месячный календарь)
+
+Полноценный месячный календарь с выбором дат, диапазонов и отображением событий.
+
+#### Container
+
+**Размеры:**
+- **Width**: 375px (полная ширина экрана)
+- **Padding**: 16px horizontal, 10px vertical
+- **Spacing**: 30px (между header и calendar grid)
+
+#### Month/Year Header
+
+**Layout:**
+- **Container Padding**: 14px horizontal
+- **Height**: 40px (для navigation)
+- **Structure**: Left Arrow | Month Year | Right Arrow
+
+**Elements:**
+
+1. **Navigation Arrows:**
+   - Size: 24px × 24px
+   - Position: Left and Right edges
+
+2. **Month Text:**
+   - Font: 14px, Weight: 700, Family: Archivo, Line height: 1.40
+   - Color: #09101D
+   - Padding: top 5px, right 5px, bottom 5px
+   - Пример: "February"
+
+3. **Year Text:**
+   - Font: 14px, Weight: 700, Family: Archivo, Line height: 1.40
+   - Color: #09101D
+   - Width: 40px
+   - Padding: top 5px, right 5px, bottom 5px
+   - Пример: "2022"
+
+#### Day Names Row
+
+**Размеры:**
+- **Height**: 40px
+- **Padding**: 5px per cell
+- **Layout**: 7 equal columns (Mon-Sun)
+
+**Typography:**
+- **Font**: 12px, Weight: 400, Family: Archivo, Line height: 1.40
+- **Color**: #09101D
+- **Text Align**: Center
+- **Days**: Mon, Tue, Wen, Thu, Fri, Sat, Sun
+
+#### Calendar Grid
+
+**Layout:**
+- **Structure**: 7 columns (дни недели) × 5-6 rows (недели)
+- **Row Padding**: 4px vertical
+- **Cell**: Expanded width × 40px height
+
+#### Calendar Cell (Date)
+
+**Размеры:**
+- **Size**: auto width (Expanded) × 40px height
+- **Padding**: 5px (standard) или 10px (selected/range)
+- **Border Radius**: 15px (для selected и range)
+
+**Typography:**
+- **Date Number**: 12px, Weight: 400, Family: Archivo, Line height: 1.40
+- **Event Value**: 7px, Weight: 600, Family: Archivo, Line height: 1.40
+
+**States:**
+
+1. **Current/Selected Date (текущая выбранная дата):**
+   - Background: #09101D (темный)
+   - Text Color: #FFFFFF (белый)
+   - Border Radius: 15px
+   - Padding: 10px
+   - Пример: "11", "14", "15", "16", "26"
+
+2. **Date Range (диапазон дат):**
+   - Background: #F4F6F9 (светло-серый)
+   - Text Color: #09101D (темный)
+   - Border Radius: Conditional
+     - **Start of range**: borderRadius только слева (topLeft: 15px, bottomLeft: 15px)
+     - **Middle of range**: без borderRadius
+     - **End of range**: borderRadius только справа (topRight: 15px, bottomRight: 15px)
+   - Пример: "14-16" (3 дня), "26-28" + next month "1-2" (5 дней)
+
+3. **Date with Event/Value (дата с событием):**
+   - Date number: 12px, Weight: 400, Color: #09101D
+   - Event value below (в отдельном контейнере):
+     - Font: 7px, Weight: 600
+     - Color: #11BB8D (зеленый для активных событий)
+     - Color: #747B84 (серый для прошедших)
+     - Height: 12px, Padding top: 2px
+   - Примеры значений: "1 141", "1 610"
+   - Пример: дата "1" с событием "1 141"
+
+4. **Date with Dot Indicator (дата с точкой-индикатором):**
+   - Date number: standard (12px, Weight: 400)
+   - Dot below:
+     - Character: "•"
+     - Font: 13px, Weight: 600
+     - Color: #09101D
+     - Container: 12px height
+   - Пример: дата "6" с точкой
+
+5. **Other Month Dates (даты другого месяца):**
+   - Text Color: #D9DDE2 (серый)
+   - Padding: 5px
+   - Пример: "27", "28", "29", "30", "31" (предыдущий месяц)
+
+6. **Disabled Date (недоступная дата):**
+   - Text Color: #D9DDE2 (серый)
+   - Padding: 5px
+   - Пример: "5", "7", "13"
+
+7. **Available Date (обычная доступная дата):**
+   - Background: transparent
+   - Text Color: #09101D (темный)
+   - Padding: 5px
+   - Пример: "17", "18", "19", "20", "21", "22", "23", "24", "25"
+
+**Complex Cell Structures:**
+
+**Date Cell with Event (40px height):**
+```
+┌─────────────┐
+│     Date    │ ← 28px (date number container)
+│   "1 141"   │ ← 12px (event value container, padding top 2px)
+└─────────────┘
+```
+
+**Date Cell in Range (40px height):**
+```
+Selected date inside range:
+┌─────────────┐
+│     14      │ ← Dark background (#09101D), white text
+└─────────────┘
+
+Middle date in range:
+┌─────────────┐
+│     15      │ ← Light gray background (#F4F6F9), no radius
+└─────────────┘
+
+End date in range:
+┌─────────────┐
+│     16      │ ← Light gray background, radius only right side
+└─────────────┘
+```
+
+**CSS Variables:**
+
+```css
+/* Calendar Dimensions */
+--calendar-width: 375px;
+--calendar-padding-horizontal: 16px;
+--calendar-padding-vertical: 10px;
+--calendar-cell-height: 40px;
+--calendar-cell-padding: 5px;
+--calendar-cell-padding-selected: 10px;
+
+/* Calendar Header */
+--calendar-header-height: 40px;
+--calendar-header-spacing: 30px;
+--calendar-nav-icon-size: 24px;
+
+/* Calendar Colors */
+--calendar-bg-selected: #09101D;
+--calendar-text-selected: #FFFFFF;
+--calendar-bg-range: #F4F6F9;
+--calendar-text-range: #09101D;
+--calendar-text-other-month: #D9DDE2;
+--calendar-text-disabled: #D9DDE2;
+--calendar-event-color-active: #11BB8D;
+--calendar-event-color-past: #747B84;
+
+/* Calendar Cell Radius */
+--calendar-cell-radius: 15px;
+```
+
+---
+
+### Использование Date & Time Pickers
+
+#### Time Slots Grid
+
+**Когда использовать:**
+- Бронирование встреч/услуг
+- Выбор времени доставки
+- Планирование событий
+- Выбор из предопределенных временных слотов
+
+**Best Practices:**
+- Показывать доступные слоты для выбранной даты
+- Четко обозначать недоступные времена (зачеркивание)
+- Использовать темный фон для выбранного слота
+- Ограничить количество слотов на экране (5×5 оптимально)
+
+#### Horizontal Date Picker
+
+**Когда использовать:**
+- Быстрый выбор ближайших дат
+- Просмотр доступности на несколько дней вперед
+- Booking интерфейсы
+- Компактное отображение календаря
+
+**Best Practices:**
+- Выделять выходные красным цветом
+- Показывать 7-8 дат одновременно
+- Поддерживать горизонтальную прокрутку
+- Четко выделять выбранную дату
+
+#### Monthly Calendar
+
+**Когда использовать:**
+- Выбор дат далеко в будущем/прошлом
+- Просмотр событий/занятости на месяц
+- Выбор диапазона дат
+- Планирование с визуализацией
+
+**Best Practices:**
+- Показывать события под датами (value или dot)
+- Поддерживать выбор диапазона дат
+- Выделять текущую дату
+- Серым цветом обозначать даты другого месяца
+- Использовать цветовую кодировку для событий
+
+#### Accessibility
+
+**Для всех компонентов:**
+- **ARIA Labels**: `aria-label="Select date"`, `aria-label="Select time slot"`
+- **Role**: `role="button"` для каждого slot/date
+- **Selected State**: `aria-selected="true"` для выбранных элементов
+- **Disabled State**: `aria-disabled="true"` для недоступных
+- **Keyboard Navigation**:
+  - Arrow keys для перемещения между датами/слотами
+  - Enter/Space для выбора
+  - Tab для навигации между секциями
+- **Screen Reader**: Объявлять выбранную дату/время полностью
+
+#### Примеры кода
+
+**Time Slot (Available):**
+```css
+.time-slot {
+  height: var(--time-slot-height);
+  padding: var(--time-slot-padding);
+  background: var(--time-slot-bg-available);
+  color: var(--time-slot-text-available);
+  border-radius: var(--time-slot-radius);
+  font: 400 12px/1.4 'Archivo', sans-serif;
+  text-align: center;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.time-slot--selected {
+  background: var(--time-slot-bg-selected);
+  color: var(--time-slot-text-selected);
+}
+
+.time-slot--disabled {
+  background: transparent;
+  color: var(--time-slot-text-disabled);
+  text-decoration: line-through;
+  cursor: not-allowed;
+}
+```
+
+**Date Card (Horizontal):**
+```css
+.date-card {
+  width: var(--date-card-width);
+  padding: var(--date-card-padding-vertical) var(--date-card-padding-horizontal);
+  background: var(--date-card-bg-available);
+  border-radius: var(--date-card-radius);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--date-card-gap);
+}
+
+.date-card__day {
+  font: 600 10px/1.4 'Archivo', sans-serif;
+  color: var(--date-card-text-weekday);
+  text-transform: uppercase;
+}
+
+.date-card__day--weekend {
+  color: var(--date-card-text-weekend);
+}
+
+.date-card__number {
+  font: 600 14px/1.4 'Archivo', sans-serif;
+  color: var(--date-card-text-weekday);
+}
+
+.date-card--selected {
+  background: var(--date-card-bg-selected);
+}
+
+.date-card--selected .date-card__day,
+.date-card--selected .date-card__number {
+  color: var(--date-card-text-selected);
+}
+```
+
+**Calendar Cell:**
+```css
+.calendar-cell {
+  height: var(--calendar-cell-height);
+  padding: var(--calendar-cell-padding);
+  font: 400 12px/1.4 'Archivo', sans-serif;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.calendar-cell--selected {
+  background: var(--calendar-bg-selected);
+  color: var(--calendar-text-selected);
+  border-radius: var(--calendar-cell-radius);
+  padding: var(--calendar-cell-padding-selected);
+}
+
+.calendar-cell--range {
+  background: var(--calendar-bg-range);
+  color: var(--calendar-text-range);
+}
+
+.calendar-cell--range-start {
+  border-radius: var(--calendar-cell-radius) 0 0 var(--calendar-cell-radius);
+}
+
+.calendar-cell--range-end {
+  border-radius: 0 var(--calendar-cell-radius) var(--calendar-cell-radius) 0;
+}
+
+.calendar-cell__event {
+  font: 600 7px/1.4 'Archivo', sans-serif;
+  color: var(--calendar-event-color-active);
+  margin-top: 2px;
+}
+```
+
+---
+
 ## Как использовать эту дизайн-систему
 
 ### Для дизайнеров
@@ -1488,9 +1996,39 @@ Bottom sheet - модальное окно, которое выдвигаетс�
 
 ## Версионирование и обновления
 
-**Текущая версия**: v5.3.0
+**Текущая версия**: v5.4.0
 
 ### Changelog
+
+#### v5.4.0 (2025-11-19)
+- **Добавлена новая секция "Date & Time Pickers"** - система компонентов для выбора даты и времени:
+  - **Time Slots Grid** - сетка выбора времени с интервалом 30 минут:
+    - Container: 375px × auto, padding 16px/10px
+    - Slot Button: 40px height, borderRadius 15px, padding 10px
+    - 3 состояния: Selected (#09101D bg), Available (#F4F6F9 bg), Disabled (transparent, strikethrough)
+    - Layout: 5 columns × 5 rows = 25 временных слотов
+    - Диапазон: 10:00 - 22:00
+  - **Horizontal Date Picker** - горизонтальный выбор дат:
+    - Date Card: 50px width, padding 14px/8px, borderRadius 15px
+    - День недели: 10px/600, Дата: 14px/600
+    - Gap между элементами: 2px
+    - 4 состояния: Selected, Available Weekday, Available Weekend (#E24949 красный), Disabled
+  - **Monthly Calendar** - полноценный месячный календарь:
+    - Container: 375px × auto, padding 16px/10px
+    - Month/Year Header: 40px height, navigation arrows 24px
+    - Day Names Row: 40px height, 7 columns
+    - Calendar Grid: 7 columns × 5-6 rows
+    - Cell: 40px height, padding 5px or 10px
+    - 7 состояний ячеек: Selected, Range, With Event, With Dot, Other Month, Disabled, Available
+    - Date Range с conditional borderRadius (start/middle/end)
+    - Event indicators: 7px font, colors #11BB8D (active) / #747B84 (past)
+    - Dot indicator: "•" character, 13px font
+  - **CSS переменные** для всех компонентов
+  - **Accessibility** рекомендации: ARIA labels, keyboard navigation, screen readers
+  - **Best Practices** для каждого компонента
+  - **Примеры CSS кода** для всех состояний
+- **Расширена цветовая палитра**:
+  - `--color-error: #E24949` - красный для выходных дней и ошибок
 
 #### v5.3.0 (2025-11-19)
 - **Добавлена новая секция "Charts & Graphs"** - система визуализации данных для мобильных экранов:
