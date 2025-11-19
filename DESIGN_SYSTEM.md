@@ -58,6 +58,7 @@
 --color-text-primary: #09101D;     /* Основной текст (заголовки) */
 --color-text-secondary: #414249;   /* Вторичный текст (подзаголовки) */
 --color-text-tertiary: #64748B;    /* Третичный текст */
+--color-text-dark: #23262B;        /* Темный текст (emphasis) */
 --color-text-placeholder: #747B84; /* Placeholder текст в inputs */
 ```
 
@@ -355,6 +356,28 @@
 - **Line Height**: 1.40 (19.6px)
 - **Color**: #09101D (--color-text-primary)
 - **Использование**: Введенный текст в search полях ("Request", "Text", поисковые запросы)
+
+#### Form Top Helper Text
+- **Font Size**: 10px (0.625rem)
+- **Font Weight**: 600 (Semibold)
+- **Font Family**: 'Archivo'
+- **Line Height**: 1.40 (14px)
+- **Color**: #09101D (--color-text-primary) основной, #4141E6 (--color-accent-blue) для secondary info
+- **Использование**: Балансы, дополнительная информация над input ("Balance: 0.10025 BTC", "~6.984$")
+
+#### Form Field Two-Line (Label + Value)
+- **Label (Top Line)**: 12px, weight 400, color #747B84, line-height 1.40
+- **Value (Bottom Line)**: 14px, weight 600, color #09101D или #23262B, line-height 1.40
+- **Использование**: Двухстрочный контент в input ("Your email" / "you@awesome.com")
+
+#### Form Bottom Helper Success
+- **Font Size**: 14px (0.875rem)
+- **Font Weight**: 400 (Regular)
+- **Font Family**: 'Archivo'
+- **Line Height**: 1.40 (19.6px)
+- **Color**: #11BB8D (--color-status-online) для success state
+- **Emoji Support**: Да (например: "👍🏻")
+- **Использование**: Успешная валидация, позитивный feedback ("Good name 👍🏻")
 
 ---
 
@@ -1401,6 +1424,122 @@ Cursor: not-allowed
 - **Icon Size**: 20×20 for compact design
 - **Height**: 36px (более компактный чем стандартный 44px)
 - **Accessibility**: Label, aria-label, keyboard support (Enter to search, Esc to clear)
+
+#### Advanced Input Field Specification (Form Fields)
+
+**Спецификация из кода:**
+- **Field Size**: 375px × 46px (больше чем standard 44px и search 36px)
+- **Container Padding**: 16px horizontal, 10px vertical
+- **Field Padding**: 4px top, 20px left, 15px right, 4px bottom
+- **Border**: 2px solid #4141E6 (--color-accent-blue) focused/active
+- **Border Radius**: 15px (--radius-badge)
+- **Spacing**: 5px (между элементами column)
+
+**Typography (Top Helper):**
+- **Font Size**: 10px (0.625rem)
+- **Font Weight**: 600 (Semibold)
+- **Line Height**: 1.40
+- **Color**: #09101D (normal) или #4141E6 (blue accent для secondary info)
+- **Использование**: "Balance: 0.10025 BTC", "~6.984$"
+
+**Typography (Field Label/Value Two-Line):**
+- **Top Line (Label)**: 12px, weight 400, color #747B84
+- **Bottom Line (Value)**: 14px, weight 600, color #09101D или #23262B (--color-text-dark)
+- **Использование**: "Your email" / "you@awesome.com", "Company" / "Dropbox"
+
+**Typography (Bottom Helper - Success):**
+- **Font Size**: 14px (0.875rem)
+- **Font Weight**: 400 (Regular)
+- **Color**: #11BB8D (--color-status-online) для success state
+- **Emoji**: Поддержка emoji ("👍🏻")
+- **Использование**: "Good name 👍🏻"
+
+**Icon Specifications:**
+- **Large Icon**: 30×30
+  - Square: border-radius 10px
+  - Circle: border-radius 50px
+  - Background: #F4F6F9 (placeholder)
+- **Medium Icon**: 24×24 (actions, indicators)
+- **Small Icon**: ~12×12 (в 24px контейнере с padding 6px)
+
+**Структура Advanced Input:**
+
+```
+Container: 375px, padding 16px/10px
+├─ Spacing: 5px vertical
+│
+├─ Top Helper (optional): 10px, weight 600
+│  ├─ Main text: color #09101D
+│  └─ Secondary text: color #4141E6 (blue accent)
+│
+├─ Field: 375×46
+│  ├─ Border: 2px solid #4141E6
+│  ├─ Border Radius: 15px
+│  ├─ Padding: 4px/20px/4px/15px
+│  │
+│  └─ Row Layout:
+│     ├─ Left Icon (optional): 30×30 (square/circle)
+│     ├─ Content: Expanded
+│     │  ├─ Single Line: 14px, weight 600
+│     │  └─ Two Lines:
+│     │     ├─ Top: 12px, weight 400, #747B84
+│     │     └─ Bottom: 14px, weight 600, #09101D
+│     └─ Right Icons (optional): 24×24 or 30×30
+│
+└─ Bottom Helper (optional): 14px, weight 400
+   └─ Success: color #11BB8D (green) + emoji support
+```
+
+**Variants:**
+
+**1. With Top Helper (Balance Info)**
+```
+Top Helper: "Balance: 0.10025 BTC" + "~6.984$" (blue)
+Field: "Enter amount" (14px/600)
+```
+
+**2. Single Line with Icon**
+```
+Left Icon: 30×30 (square/circle)
+Text: "Netflix" or "you@awesome.com" (14px/600)
+Right Icon: 24×24 (optional)
+```
+
+**3. Two-Line Content**
+```
+Top: "Company" or "Your email" (12px/400, #747B84)
+Bottom: "Dropbox" or "you@awesome.com" (14px/600, #09101D)
+Icons: 30×30 left, 24×24 right (optional)
+```
+
+**4. With Bottom Helper Success**
+```
+Field: "John" (14px/600)
+Bottom Helper: "Good name 👍🏻" (14px/400, #11BB8D green)
+```
+
+**5. Multiple Icons**
+```
+Left: Icon 24×24 + Icon 30×30
+Center: Text
+Right: Multiple icons or dropdown indicator
+```
+
+**6. Currency/Crypto Display**
+```
+Left Icon: 30×30 (coin/currency logo)
+Center: Value + Currency amount
+Right: Icon 30×30 + Text label "BTC" + Icon 24×24
+```
+
+**Usage Guidelines:**
+- **Field Height**: 46px для форм с иконками и двумя строками
+- **Top Helper**: Балансы, дополнительная информация, constraints
+- **Bottom Helper**: Validation (error/success), hints, character count
+- **Two-Line**: Label вверху, value внизу для filled states
+- **Icons**: 30×30 для coin/logo/avatar, 24×24 для actions
+- **Success State**: Зеленый helper text #11BB8D + emoji для позитивного feedback
+- **Emoji Support**: Можно использовать emoji в helper text
 
 ---
 
