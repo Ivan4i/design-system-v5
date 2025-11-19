@@ -13,6 +13,7 @@
 9. [Charts & Graphs](#charts--graphs)
 10. [Date & Time Pickers](#date--time-pickers)
 11. [Progress Indicators & Steppers](#progress-indicators--steppers)
+12. [Input Fields](#input-fields)
 
 ---
 
@@ -2471,6 +2472,449 @@ End date in range:
 
 ---
 
+## Input Fields
+
+Система полей ввода для мобильного приложения с поддержкой различных конфигураций, иконок и вспомогательных элементов.
+
+### Container Specifications
+
+```css
+--input-container-width: 375px;
+--input-container-padding-h: 16px;
+--input-container-padding-v: 5px;
+--input-element-spacing: 8px;
+```
+
+**Структура**:
+- **Container**: 375px width, padding 16px horizontal / 5px vertical
+- **Spacing**: 8px между элементами (title, field, helper message)
+- **Layout**: Vertical Column с consistent gap
+
+### Input Field Components
+
+#### 1. Input Title (Заголовок поля)
+
+Текстовый label над полем ввода.
+
+```css
+/* Typography */
+--input-title-font-size: 14px;
+--input-title-font-weight: 600;
+--input-title-font-family: 'Archivo';
+--input-title-line-height: 1.40;
+--input-title-color: #09101D;
+```
+
+**Характеристики**:
+- **Font**: 14px / 600 Archivo
+- **Color**: #09101D (Primary Text)
+- **Line Height**: 1.40 (19.6px)
+- **Spacing**: 8px margin-bottom
+
+#### 2. Input Field (Поле ввода)
+
+Основное поле для ввода текста с опциональными иконками.
+
+```css
+/* Field Container */
+--input-field-height: 36px;
+--input-field-border-radius: 15px;
+--input-field-bg: #F4F6F9;
+
+/* Padding Variations */
+--input-field-padding-left: 16px;
+--input-field-padding-right-default: 20px;
+--input-field-padding-right-with-icon: 10px;
+
+/* Typography */
+--input-text-font-size: 14px;
+--input-text-font-family: 'Archivo';
+--input-text-line-height: 1.40;
+
+/* Text Colors */
+--input-placeholder-color: #747B84;     /* Placeholder state */
+--input-placeholder-weight: 400;
+--input-text-color: #09101D;            /* Filled state */
+--input-text-weight: 600;               /* Filled text is bold */
+```
+
+**Характеристики**:
+- **Container**: 36px height, borderRadius 15px
+- **Background**: #F4F6F9 (Secondary Background)
+- **Padding**:
+  - Base: 16px left, 20px right
+  - With right icon: 16px left, 10px right
+- **Placeholder Text**: 14px / 400 Archivo, color #747B84
+- **Entered Text**: 14px / 600 Archivo, color #09101D (bold when filled!)
+
+#### 3. Icons in Input Fields
+
+##### Left Icon (Префиксная иконка)
+
+Иконка слева внутри поля ввода.
+
+```css
+--input-icon-size: 20px;
+--input-icon-padding: 2px;
+--input-icon-border-radius: 100px;
+--input-icon-spacing: 10px;  /* Space between icon and text */
+```
+
+**Характеристики**:
+- **Size**: 20px × 20px
+- **Padding**: 2px (internal)
+- **Border Radius**: 100px (круглая)
+- **Position**: Left side, 16px from container edge
+- **Spacing**: 10px gap to text
+
+##### Right Trailing Icon(s) (Суффиксная иконка)
+
+Одна или несколько иконок справа от текста.
+
+```css
+--input-trailing-icon-size: 20px;
+--input-trailing-icon-border-radius: 100px;
+--input-trailing-icon-spacing: 10px;  /* Between multiple icons */
+```
+
+**Характеристики**:
+- **Size**: 20px × 20px
+- **Border Radius**: 100px (круглая)
+- **Position**: Right side, 10px from container edge
+- **Multiple Icons**: 10px spacing between them
+- **Use Cases**: Clear button, visibility toggle, search icon
+
+##### Flag Icon (Иконка флага страны)
+
+Специальная иконка для выбора страны (обычно для телефонных номеров).
+
+```css
+--input-flag-width: 22px;
+--input-flag-height: 16px;
+--input-flag-border-radius: 2px;
+```
+
+**Характеристики**:
+- **Size**: 22px × 16px (прямоугольная)
+- **Border Radius**: 2px (скругленные углы)
+- **Content**: Country flag image
+- **Usage**: Country/phone number selector
+
+#### 4. Helper Message (Вспомогательное сообщение)
+
+Текст под полем ввода для подсказок или ошибок.
+
+```css
+--input-helper-font-size: 14px;
+--input-helper-font-weight: 400;
+--input-helper-font-family: 'Archivo';
+--input-helper-line-height: 1.40;
+--input-helper-color: #747B84;
+```
+
+**Характеристики**:
+- **Font**: 14px / 400 Archivo
+- **Color**: #747B84 (Tertiary Text)
+- **Line Height**: 1.40 (19.6px)
+- **Spacing**: 8px margin-top
+- **Use Cases**: Hints, validation errors, character count
+
+### Layout Variations
+
+#### Single Full-Width Input
+
+Стандартное одиночное поле ввода на всю ширину.
+
+```css
+/* Single Input Layout */
+.input-wrapper {
+  width: 375px;
+  padding: 5px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.input-field {
+  width: 100%;
+  height: 36px;
+  padding: 0 20px 0 16px;
+  background: #F4F6F9;
+  border-radius: 15px;
+  border: none;
+}
+```
+
+#### Dual Input Layout (Two Side-by-Side)
+
+Два поля рядом (например, флаг + номер телефона).
+
+```css
+/* Dual Input Layout */
+.input-row {
+  display: flex;
+  gap: 10px;  /* Может быть 10px, 15px, или 20px */
+}
+
+/* Example: Flag + Phone Number */
+.input-field--flag {
+  width: auto;  /* Compact size for flag selector */
+  padding: 0 10px 0 16px;
+}
+
+.input-field--phone {
+  flex: 1;  /* Takes remaining space */
+  padding: 0 20px 0 16px;
+}
+```
+
+**Spacing Variations**:
+- **Tight**: 10px gap between fields
+- **Medium**: 15px gap between fields
+- **Comfortable**: 20px gap between fields
+
+### Input States
+
+#### Empty State (Placeholder)
+
+```css
+.input-field::placeholder {
+  color: var(--input-placeholder-color);
+  font-weight: var(--input-placeholder-weight);
+  font-size: 14px;
+  line-height: 1.40;
+}
+```
+
+**Визуальные характеристики**:
+- Placeholder text: #747B84
+- Font weight: 400
+- Background: #F4F6F9
+
+#### Filled State
+
+```css
+.input-field:not(:placeholder-shown) {
+  color: var(--input-text-color);
+  font-weight: var(--input-text-weight);
+}
+```
+
+**Визуальные характеристики**:
+- Text color: #09101D
+- Font weight: 600 (bold!)
+- Background: #F4F6F9
+
+### Accessibility
+
+```html
+<!-- Input Field with Label -->
+<div class="input-wrapper">
+  <label for="input-id" class="input-title">
+    Input title
+  </label>
+  <input
+    id="input-id"
+    type="text"
+    class="input-field"
+    placeholder="Text"
+    aria-describedby="helper-id"
+  />
+  <span id="helper-id" class="input-helper">
+    Helper message
+  </span>
+</div>
+```
+
+**ARIA Guidelines**:
+- Используйте `<label>` с `for` атрибутом
+- Связывайте helper text через `aria-describedby`
+- Добавляйте `aria-invalid="true"` для состояния ошибки
+- Используйте правильные `type` атрибуты (text, email, tel, etc.)
+
+### Best Practices
+
+1. **Typography Consistency**:
+   - Title и Helper используют одинаковый размер (14px), но разный weight
+   - Placeholder: 400 weight (light)
+   - Filled text: 600 weight (semibold) — важно!
+
+2. **Spacing**:
+   - Всегда 8px между title, field, и helper
+   - Consistent padding внутри полей
+   - Gap между иконками: 10px
+
+3. **Icon Usage**:
+   - Левая иконка: для визуальной категоризации (search, email, etc.)
+   - Правая иконка: для actions (clear, visibility, submit)
+   - Flag иконка: только для country/region selection
+
+4. **Color Semantics**:
+   - #747B84 (Tertiary) — для placeholder и helper текста
+   - #09101D (Primary) — для заполненного текста и labels
+   - #F4F6F9 — стандартный фон поля
+
+5. **Responsive Behavior**:
+   - Container width фиксирован на 375px (iPhone)
+   - Dual layouts используют flex для адаптивности
+   - Icon sizes остаются фиксированными
+
+### Example CSS Implementation
+
+```css
+/* CSS Variables */
+:root {
+  --input-container-width: 375px;
+  --input-container-padding-h: 16px;
+  --input-container-padding-v: 5px;
+  --input-element-spacing: 8px;
+
+  --input-field-height: 36px;
+  --input-field-border-radius: 15px;
+  --input-field-bg: #F4F6F9;
+
+  --input-title-font-size: 14px;
+  --input-title-font-weight: 600;
+  --input-title-color: #09101D;
+
+  --input-placeholder-color: #747B84;
+  --input-placeholder-weight: 400;
+  --input-text-color: #09101D;
+  --input-text-weight: 600;
+
+  --input-helper-color: #747B84;
+
+  --input-icon-size: 20px;
+  --input-flag-width: 22px;
+  --input-flag-height: 16px;
+}
+
+/* Input Container */
+.input-container {
+  width: var(--input-container-width);
+  padding: var(--input-container-padding-v) var(--input-container-padding-h);
+  display: flex;
+  flex-direction: column;
+  gap: var(--input-element-spacing);
+}
+
+/* Input Title */
+.input-title {
+  font-family: 'Archivo', sans-serif;
+  font-size: var(--input-title-font-size);
+  font-weight: var(--input-title-font-weight);
+  color: var(--input-title-color);
+  line-height: 1.40;
+}
+
+/* Input Field */
+.input-field {
+  height: var(--input-field-height);
+  padding: 0 20px 0 16px;
+  background: var(--input-field-bg);
+  border-radius: var(--input-field-border-radius);
+  border: none;
+
+  font-family: 'Archivo', sans-serif;
+  font-size: 14px;
+  line-height: 1.40;
+  color: var(--input-text-color);
+  font-weight: var(--input-text-weight);
+}
+
+.input-field::placeholder {
+  color: var(--input-placeholder-color);
+  font-weight: var(--input-placeholder-weight);
+}
+
+.input-field:focus {
+  outline: none;
+  /* Add focus style if needed */
+}
+
+/* Input with Left Icon */
+.input-field--with-left-icon {
+  padding-left: calc(16px + var(--input-icon-size) + 10px);
+}
+
+/* Input with Right Icon */
+.input-field--with-right-icon {
+  padding-right: calc(10px + var(--input-icon-size) + 10px);
+}
+
+/* Helper Message */
+.input-helper {
+  font-family: 'Archivo', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--input-helper-color);
+  line-height: 1.40;
+}
+
+/* Icon Styles */
+.input-icon {
+  width: var(--input-icon-size);
+  height: var(--input-icon-size);
+  border-radius: 100px;
+  padding: 2px;
+}
+
+.input-flag {
+  width: var(--input-flag-width);
+  height: var(--input-flag-height);
+  border-radius: 2px;
+}
+
+/* Dual Input Layout */
+.input-row {
+  display: flex;
+  gap: 10px;
+}
+
+.input-row .input-field {
+  flex: 1;
+}
+```
+
+### Usage Examples
+
+```html
+<!-- Basic Single Input -->
+<div class="input-container">
+  <label class="input-title">Email Address</label>
+  <input type="email" class="input-field" placeholder="Enter your email" />
+  <span class="input-helper">We'll never share your email</span>
+</div>
+
+<!-- Input with Flag and Phone Number -->
+<div class="input-container">
+  <label class="input-title">Phone Number</label>
+  <div class="input-row">
+    <div class="input-field" style="width: auto; padding: 0 10px 0 16px;">
+      <img src="flag-ru.png" class="input-flag" alt="Russia" />
+    </div>
+    <input type="tel" class="input-field" placeholder="+7 (900) 123-45-67" />
+  </div>
+  <span class="input-helper">For verification purposes</span>
+</div>
+
+<!-- Input with Icons -->
+<div class="input-container">
+  <label class="input-title">Search</label>
+  <div style="position: relative;">
+    <img src="search-icon.svg" class="input-icon"
+         style="position: absolute; left: 16px; top: 8px;" />
+    <input type="text" class="input-field input-field--with-left-icon"
+           placeholder="Search..." />
+    <img src="clear-icon.svg" class="input-icon"
+         style="position: absolute; right: 10px; top: 8px; cursor: pointer;" />
+  </div>
+  <span class="input-helper">Type to search</span>
+</div>
+```
+
+---
+
 ## Как использовать эту дизайн-систему
 
 ### Для дизайнеров
@@ -2498,9 +2942,43 @@ End date in range:
 
 ## Версионирование и обновления
 
-**Текущая версия**: v5.5.0
+**Текущая версия**: v5.6.0
 
 ### Changelog
+
+#### v5.6.0 (2025-11-19)
+- **Добавлена новая секция "Input Fields"** - система полей ввода для мобильного приложения:
+  - **Container Specifications**:
+    - Container: 375px width, padding 16px horizontal / 5px vertical
+    - Spacing: 8px между элементами (title, field, helper message)
+    - Layout: Vertical Column с consistent gap
+  - **Input Title** - заголовок поля:
+    - Font: 14px / 600 Archivo
+    - Color: #09101D (Primary Text)
+    - Line Height: 1.40
+  - **Input Field** - основное поле ввода:
+    - Container: 36px height, borderRadius 15px, background #F4F6F9
+    - Padding: 16px left, 20px right (10px right при наличии иконки)
+    - Placeholder Text: 14px / 400 Archivo, color #747B84
+    - Entered Text: 14px / 600 Archivo, color #09101D (bold when filled!)
+  - **Icons in Input Fields**:
+    - Left Icon: 20px × 20px, borderRadius 100px, padding 2px, spacing 10px to text
+    - Right Trailing Icon(s): 20px × 20px, borderRadius 100px, 10px spacing between multiple icons
+    - Flag Icon: 22px × 16px, borderRadius 2px (для country/phone selection)
+  - **Helper Message** - вспомогательное сообщение:
+    - Font: 14px / 400 Archivo
+    - Color: #747B84 (Tertiary Text)
+  - **Layout Variations**:
+    - Single Full-Width Input - стандартное одиночное поле
+    - Dual Input Layout - два поля рядом (например, флаг + телефон)
+    - Spacing variations: 10px, 15px, 20px gap
+  - **Input States**:
+    - Empty State: placeholder #747B84, weight 400
+    - Filled State: text #09101D, weight 600 (bold!)
+  - **CSS переменные** для всех компонентов input fields
+  - **Accessibility** рекомендации: `<label>` с `for`, `aria-describedby` для helper text, `aria-invalid` для ошибок
+  - **Best Practices**: Typography Consistency, Spacing, Icon Usage, Color Semantics, Responsive Behavior
+  - **Примеры CSS кода** и HTML разметки для всех вариантов
 
 #### v5.5.0 (2025-11-19)
 - **Добавлена новая секция "Progress Indicators & Steppers"** - система индикаторов прогресса:
