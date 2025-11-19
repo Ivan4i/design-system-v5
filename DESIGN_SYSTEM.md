@@ -55,6 +55,7 @@
 /* Акцентные цвета */
 --color-primary: #4141E6;          /* Основной primary цвет из Flutter */
 --color-primary-border: #0B24FB;   /* Primary border variant из Flutter */
+--color-primary-progress: rgba(11, 36, 251, 0.30); /* In-progress segment для progress bar (30% opacity от primary-border) */
 --color-primary-action: #2E5AAC;   /* Primary action цвет для onboarding/auth screens (buttons, progress, focus) */
 --color-accent-blue: #1D4ED8;      /* blue-700 */
 --color-accent-purple: #7B61FF;    /* Фиолетовый из Flutter кода */
@@ -2363,6 +2364,337 @@ All colors used are from existing design system palette:
 
 ---
 
+<!-- AI-FRIENDLY: Education & Learning Components Section -->
+<!-- KEYWORDS: education, learning, course, lesson, podcast, audio player, video player, e-learning, media player, progress tracker -->
+<!-- COMPONENT_TYPE: Learning Cards, Media Players, Course Cards, Lesson Players -->
+<!-- USE_CASES: Online courses, podcasts, audio lessons, video tutorials, e-learning platforms, educational apps, audiobooks -->
+
+## Education & Learning Components (Flutter Mobile)
+
+**Component Type**: Course/Lesson Card with Media Player
+**Use Cases**: Online Learning, Podcasts, Audio Courses, Video Tutorials, E-learning Platforms
+**Related Components**: [Progress Indicators](#onboarding--authentication-screens-flutter-mobile), [Buttons](#buttons-flutter-mobile)
+**Platform**: Flutter Mobile (375px width standard)
+
+---
+
+### Course Card with Media Player
+
+<!-- AI-FRIENDLY: Course/Lesson Card Component -->
+**Description**: Interactive learning card with course/lesson thumbnail, description, progress tracking, and integrated media player controls for audio/video content.
+
+**Layout**: Stack-based layout with multiple cards (vertical scroll)
+
+#### Container (Main Wrapper)
+
+**Outer Container**:
+- **Width**: 375px (mobile screen width)
+- **Height**: 502px (full card height with 2 items)
+- **Background**: #FFFFFF (white)
+- **Border Radius**: 30px
+- **Clip Behavior**: antiAlias
+- **Layout**: Stack (позволяет позиционирование карточек)
+
+**Card Positioning**:
+- Card 1: `top: 0` (first lesson)
+- Card 2: `top: 260` (second lesson, позиция calculated)
+- Pattern: Можно добавлять больше карточек с increment 260px
+
+---
+
+#### Individual Course Card Structure
+
+**Card Layout**: Column with 4 sections
+```
+Course Card
+├─ Header Section (top-rounded 10px)
+│  ├─ Thumbnail (60×60px)
+│  └─ Title + Subtitle
+├─ Description Section (no border-radius)
+│  └─ Long text description
+├─ Progress Bar Section
+│  └─ 6-segment progress indicator (3px height)
+└─ Player Controls Section (bottom-rounded 10px)
+   ├─ Play/Pause Button (36×36px)
+   ├─ Time Remaining ("1 min left")
+   ├─ Skip Backward Button (24×24px)
+   └─ Skip Forward Button (24×24px)
+```
+
+**Card Padding**: 16px horizontal, 10px vertical (consistent across sections)
+**Section Spacing**: 10px between major sections
+
+---
+
+#### Section 1: Header Section (Top-Rounded)
+
+**Container**:
+- **Width**: Full width (343px content area)
+- **Background**: #FAFAFB (color-bg-light-input)
+- **Border Radius**: Top-left 10px, Top-right 10px (только верхние углы)
+- **Clip Behavior**: antiAlias
+
+**Layout**: Row with horizontal elements
+
+**Elements** (Left to Right):
+1. **Spacer**: 16px width (left margin)
+2. **Thumbnail Container**:
+   - **Size**: 60px × 60px
+   - **Background**: #FAFAFB (placeholder)
+   - **Border Radius**: 15px
+   - **Image**: NetworkImage, fit: cover
+   - **Padding**: 10px right (spacing to text)
+   - **Icon Overlay** (optional): 24×24px centered icon for play/document
+
+3. **Content Column** (Expanded):
+   - **Padding**: 12px vertical
+   - **Spacing**: Tight (minimal between title and subtitle)
+
+   **Title**:
+   - **Text**: "Mindfulness & Happiness"
+   - **Font**: Archivo 15px, weight 600
+   - **Color**: #09101D (color-text-primary)
+   - **Line Height**: 1.40
+   - **Width**: Full available (auto-wrap)
+
+   **Subtitle**:
+   - **Text**: "Hit" (категория, автор, или другой метаданные)
+   - **Font**: Archivo 14px, weight 400
+   - **Color**: #414249 (color-text-tertiary)
+   - **Line Height**: 1.40
+   - **Width**: 257px max
+
+---
+
+#### Section 2: Description Section (Middle)
+
+**Container**:
+- **Width**: Full width
+- **Background**: #FAFAFB (color-bg-light-input)
+- **Border Radius**: none (middle section)
+- **Clip Behavior**: antiAlias
+
+**Layout**: Row with spacers (16px left, 16px right margins)
+
+**Description Text**:
+- **Content**: "Starting out as a public radio program all the way back in 1997, The Splendid Table is the OG of food podcasts..." (длинное описание)
+- **Font**: Archivo 13px, weight 400
+- **Color**: #414249 (color-text-tertiary)
+- **Line Height**: 1.40
+- **Width**: 311px (343px - 32px horizontal margins)
+- **Max Lines**: Flexible (can be clamped to 3-4 lines with ellipsis)
+
+**Usage**:
+- Show full description for expanded state
+- Truncate with "..." for collapsed state
+- Can include "Read more" link if needed
+
+---
+
+#### Section 3: Progress Bar Section
+
+**Container**:
+- **Width**: Full width
+- **Background**: #FAFAFB (color-bg-light-input)
+- **Padding**: 20px top, 16px horizontal, 10px bottom
+- **Border Radius**: none (middle section)
+
+**Progress Bar**:
+- **Height**: 3px
+- **Width**: Full available (Expanded within row)
+- **Layout**: Row with 6 Expanded segments
+- **Spacing**: 0 (segments touch each other)
+
+**Segment States**:
+
+1. **Completed Segments** (Segment 1-2):
+   - **Color**: #4141E6 (color-primary)
+   - **State**: Fully listened/watched
+   - **First Segment**: Border-radius left 10px (top-left + bottom-left)
+   - **Middle Segments**: No border-radius
+
+2. **In-Progress Segment** (Segment 3):
+   - **Color**: rgba(11, 36, 251, 0.30) (color-primary-progress) - NEW COLOR!
+   - **Opacity**: 30% of primary-border
+   - **State**: Currently playing/partially completed
+   - **Border Radius**: 3px (rectangular, slight rounding)
+
+3. **Remaining Segments** (Segment 4-5-6):
+   - **Color**: rgba(9, 16, 29, 0.10) (10% opacity black)
+   - **State**: Not yet played/watched
+   - **Last Segment**: Border-radius right 10px (top-right + bottom-right)
+   - **Middle Segments**: Border-radius 3px
+
+**Progress Calculation**:
+- 6 segments = 100% / 6 ≈ 16.67% per segment
+- Completed: 2 segments = 33.33%
+- In-progress: 1 segment (partially filled)
+- Remaining: 3 segments = 50%
+- Current position: ~35-40%
+
+**Flexible Segments**:
+- Can be 4-10 segments depending on content length
+- Typical: 6 segments for short lessons (5-10 min)
+- More segments for longer content (30+ min)
+
+---
+
+#### Section 4: Player Controls Section (Bottom-Rounded)
+
+**Container**:
+- **Width**: Full width
+- **Background**: #FAFAFB (color-bg-light-input)
+- **Border Radius**: Bottom-left 10px, Bottom-right 10px (только нижние углы)
+- **Padding**: 0px top, 10px bottom
+- **Clip Behavior**: antiAlias
+
+**Layout**: Row with controls
+
+**Elements** (Left to Right):
+
+1. **Spacer**: 16px width (left margin)
+
+2. **Play/Pause Button**:
+   - **Container Size**: 36px × 36px (includes 10px padding)
+   - **Button Size**: 36px × 36px
+   - **Background**: #09101D (color-bg-card-dark)
+   - **Border Radius**: 30px (circular)
+   - **Padding**: 10px all (outer container padding)
+   - **Icon**: 16px × 16px (centered)
+     - Play icon: ▶️ or custom play icon
+     - Pause icon: ⏸️ or custom pause icon
+   - **States**:
+     - Default: Play icon visible
+     - Playing: Pause icon visible
+     - Loading: Spinner animation
+
+3. **Time Remaining** (Expanded):
+   - **Text**: "1 min left" / "5 min left" / "Completed"
+   - **Font**: Archivo 15px, weight 600
+   - **Color**: #09101D (color-text-primary)
+   - **Line Height**: 1.40
+   - **Padding**: 12px vertical
+   - **Alignment**: Left (start of expanded area)
+   - **Format Variants**:
+     - "X min left" - Time remaining
+     - "X:XX / Y:YY" - Current time / Total time
+     - "Completed" - Lesson finished
+
+4. **Skip Backward Button** (15 seconds):
+   - **Container**: 24px × 24px (with 10px padding container)
+   - **Icon**: 20px × 20px (with -2px offset for positioning)
+   - **Padding Left**: 16px (spacing from time text)
+   - **Padding**: 10px all (container padding)
+   - **Border**: 2px circular padding decoration
+   - **Icon**: ⏮️ or custom skip-back icon (-15s)
+
+5. **Skip Forward Button** (15 seconds):
+   - **Container**: 24px × 24px (with 10px padding container)
+   - **Icon**: 20px × 20px (with -2px offset for positioning)
+   - **Padding Right**: 16px (spacing from edge)
+   - **Padding**: 10px all (container padding)
+   - **Border**: 2px circular padding decoration
+   - **Icon**: ⏭️ or custom skip-forward icon (+15s)
+
+---
+
+### Usage Guidelines
+
+**When to Use**:
+- Online learning platforms (Coursera, Udemy-style apps)
+- Podcast players and audio content apps
+- Video tutorial apps
+- Language learning apps
+- Audiobook players
+- Meditation and mindfulness apps
+
+**Flexible Elements**:
+- **Thumbnail**: Can show course logo, instructor photo, or content preview
+- **Title**: Course name, lesson name, podcast episode title
+- **Subtitle**: Category, instructor name, episode number, duration
+- **Description**: Full episode description, lesson objectives, or show notes
+- **Progress Bar**: Adjustable segment count (4-10 segments typical)
+- **Time Display**: Can show elapsed time, remaining time, or both
+- **Skip Controls**: Can be configured for 5s, 10s, 15s, or 30s intervals
+
+**States**:
+1. **Not Started**: Progress bar empty (all segments grey)
+2. **In Progress**: Mixed completed/in-progress/remaining segments
+3. **Completed**: All segments filled with primary color
+4. **Paused**: Play button visible, progress retained
+5. **Playing**: Pause button visible, progress animating
+
+**Interaction Patterns**:
+- **Tap Thumbnail**: Expand/collapse description or navigate to detail page
+- **Tap Play/Pause**: Toggle playback
+- **Tap Progress Bar**: Seek to segment (optional)
+- **Tap Skip Buttons**: Jump backward/forward 15 seconds
+- **Swipe Card**: Dismiss or navigate to next lesson
+
+**Accessibility**:
+- Play/Pause button minimum 44×44px touch target (36px + 8px padding)
+- Screen reader: "Lesson title, X minutes remaining, Play button, Skip controls"
+- Progress bar should announce percentage completed
+- Skip buttons should announce time skip amount
+
+**Performance**:
+- Load thumbnail images asynchronously with placeholder
+- Cache progress state locally
+- Update progress bar smoothly during playback
+- Optimize for battery during audio-only playback
+
+---
+
+### Color Reference
+
+All colors used are from existing design system palette:
+
+```css
+/* Primary Colors */
+--color-primary: #4141E6;          /* Completed progress segments */
+--color-primary-progress: rgba(11, 36, 251, 0.30); /* In-progress segment (NEW!) */
+
+/* Text */
+--color-text-primary: #09101D;     /* Title, time text */
+--color-text-tertiary: #414249;    /* Subtitle, description */
+
+/* Backgrounds */
+--color-bg-light-input: #FAFAFB;   /* Card section backgrounds */
+--color-bg-card-dark: #09101D;     /* Play/pause button */
+
+/* Overlays */
+--color-overlay: rgba(9, 16, 29, 0.10); /* Remaining progress segments */
+```
+
+---
+
+### Component Variations
+
+**Compact Course Card** (Without Description):
+- Height: ~180px (remove description section)
+- Use case: Course list, lesson grid
+
+**Expanded Course Card** (With Playlist):
+- Height: Variable (add lessons list below)
+- Show multiple lessons with individual progress bars
+- Use case: Course detail page, playlist view
+
+**Video Player Card** (With Video Preview):
+- Thumbnail: 343×193px (16:9 aspect ratio)
+- Add fullscreen button
+- Use case: Video tutorials, recorded lectures
+
+**Live Session Card** (Real-time):
+- Replace progress bar with "LIVE" badge
+- Show participant count
+- Use case: Live webinars, virtual classrooms
+
+---
+
+<!-- END AI-FRIENDLY: Education & Learning Components -->
+
+---
+
 ## Паттерны
 
 ### Mobile Layout Patterns (Flutter)
@@ -2777,6 +3109,49 @@ Icon Button (40px):
     - Performance: Image placeholders, lazy loading, caching, optimization (WebP/AVIF)
   - Cross-references: Links to [Mobile Card Components], [Badges], [Buttons]
   - AI-friendly markers: Keywords (product card, shopping, marketplace, e-commerce, retail, catalog), Component Type (Product Listings, Shopping Cards), Use Cases
+- Education & Learning Components (Course Card with Media Player - Flutter Mobile):
+  - NEW SECTION with AI-friendly markers for IDE navigation
+  - New color: rgba(11, 36, 251, 0.30) (color-primary-progress) - In-progress segment для progress bar (30% opacity от primary-border)
+  - Course Card with Media Player (375×502px container, Stack layout):
+    - Card positioning: Card 1 at top:0, Card 2 at top:260, pattern increment 260px
+    - Individual card: 343px content width, 16px horizontal padding, 10px vertical
+  - Section 1 - Header (top-rounded 10px):
+    - Background: #FAFAFB
+    - Thumbnail: 60×60px, border-radius 15px, NetworkImage fit cover
+    - Title: "Mindfulness & Happiness" - Archivo 15px weight 600 #09101D
+    - Subtitle: "Hit" - Archivo 14px weight 400 #414249
+  - Section 2 - Description (middle, no border-radius):
+    - Background: #FAFAFB
+    - Text: Archivo 13px weight 400 #414249, width 311px
+    - Can be clamped to 3-4 lines with ellipsis or expanded
+  - Section 3 - Progress Bar:
+    - Background: #FAFAFB, padding 20px top/16px horizontal/10px bottom
+    - Height: 3px, 6 Expanded segments (adjustable 4-10 segments)
+    - Segment colors:
+      - Completed (1-2): #4141E6 (color-primary), first has border-radius left 10px
+      - In-progress (3): rgba(11,36,251,0.30) (NEW color-primary-progress), border-radius 3px
+      - Remaining (4-6): rgba(9,16,29,0.10), last has border-radius right 10px
+    - Progress calculation: 6 segments = 16.67% each, example shows 33% completed + in-progress
+  - Section 4 - Player Controls (bottom-rounded 10px):
+    - Background: #FAFAFB, padding 10px bottom
+    - Play/Pause Button: 36×36px, #09101D background, border-radius 30px, 16×16px icon
+    - Time Remaining: "1 min left" - Archivo 15px weight 600 #09101D (Expanded)
+    - Skip Backward: 24×24px container, 20×20px icon, padding left 16px
+    - Skip Forward: 24×24px container, 20×20px icon, padding right 16px
+  - Component Variations:
+    - Compact Card: ~180px height (without description)
+    - Expanded Card: Variable height (with playlist)
+    - Video Player Card: 343×193px thumbnail (16:9), fullscreen button
+    - Live Session Card: "LIVE" badge instead of progress, participant count
+  - Usage Guidelines:
+    - Use Cases: Online learning platforms, podcasts, video tutorials, language learning, audiobooks, meditation apps
+    - Flexible Elements: Thumbnail (logo/photo/preview), Title (course/lesson/episode), Subtitle (category/instructor/duration), Description (full/truncated), Progress bar (4-10 segments), Time display (elapsed/remaining/both), Skip intervals (5s/10s/15s/30s)
+    - States: Not Started (all grey), In Progress (mixed segments), Completed (all primary), Paused (play button), Playing (pause button)
+    - Interaction: Tap thumbnail (expand/detail), tap play/pause (toggle), tap progress (seek), tap skip (jump), swipe card (dismiss/next)
+    - Accessibility: 44×44px touch targets, screen reader announcements, progress percentage
+    - Performance: Async image loading, local progress cache, smooth updates, battery optimization
+  - Cross-references: Links to [Progress Indicators], [Buttons]
+  - AI-friendly markers: Keywords (education, learning, course, lesson, podcast, audio player, video player, e-learning, media player, progress tracker), Component Type (Learning Cards, Media Players), Use Cases
 - Layout patterns и Best practices
 
 ---
