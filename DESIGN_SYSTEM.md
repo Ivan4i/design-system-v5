@@ -67,6 +67,7 @@
 /* Фоны для компонентов */
 --color-bg-light: #F4F6F9;         /* Светлый фон из Flutter (основной для cards) */
 --color-bg-dark: #18202F;          /* Темный scaffold background из Flutter */
+--color-bg-dark-secondary: #23262B; /* Темный вторичный фон (для picker items, secondary dark elements) */
 --color-bg-overlay: rgba(0, 0, 0, 0.10);  /* Overlay для изображений */
 --color-bg-card-light: #D9DDE2;    /* Светлая карточка (avatar placeholder) */
 --color-bg-card-dark: #09101D;     /* Темная карточка (dark buttons, dark elements) */
@@ -233,6 +234,7 @@
 --space-16: 4rem;     /* 64px */
 --space-20: 5rem;     /* 80px - из Flutter spacing: 20 */
 --space-24: 6rem;     /* 96px */
+--space-50: 3.125rem; /* 50px - из Flutter spacing: 50 (для Picker spacing) */
 --space-70: 4.375rem; /* 70px - из Flutter spacing: 70 (для Row spacing) */
 ```
 
@@ -496,7 +498,85 @@
 
 ---
 
-### 4. Badges & Tags (Flutter Mobile)
+### 4. Pickers (Flutter Mobile)
+
+#### Day Picker
+
+**Container**:
+- Padding: 50px all
+- Border: 1px solid #7B61FF (color-accent-purple)
+- Border Radius: 15px
+- Clip Behavior: antiAlias
+
+**Row Layout**:
+- Spacing: 50px (space-50)
+
+**Day Item**:
+- Width: 50px
+- Padding: 14px horizontal, 8px vertical
+- Border Radius: 15px
+- Column spacing: 2px
+
+**States**:
+- **Dark Selected**:
+  - Background: #23262B (color-bg-dark-secondary)
+  - Text: white
+- **Light**:
+  - Background: #F4F6F9 (color-bg-light)
+  - Text: #09101D (color-text-primary)
+- **Disabled**:
+  - Background: #F4F6F9 (color-bg-light)
+  - Text: #D9DDE2 (color-text-disabled)
+
+**Typography**:
+- Label ("Day"):
+  - Font: Archivo 12px, weight 400
+  - Line Height: 1.40
+  - Text Align: center
+- Number ("00"):
+  - Font: Archivo 14px, weight 600
+  - Line Height: 1.40
+  - Text Align: center
+
+#### Time Picker
+
+**Container**:
+- Padding: 50px all
+- Border: 1px solid #7B61FF (color-accent-purple)
+- Border Radius: 15px
+- Clip Behavior: antiAlias
+
+**Row Layout**:
+- Spacing: 50px (space-50)
+
+**Time Slot**:
+- Height: 40px (для selected/active)
+- Padding: 10px all
+- Border Radius: 15px
+
+**States**:
+- **Primary Selected**:
+  - Background: #09101D (color-bg-card-dark)
+  - Text: white
+- **Dark**:
+  - Background: #23262B (color-bg-dark-secondary)
+  - Text: white
+- **Disabled/Crossed**:
+  - Background: transparent
+  - Text: #D9DDE2 (color-text-disabled)
+  - Text Decoration: line-through
+- **Light**:
+  - Background: #F4F6F9 (color-bg-light)
+  - Text: #09101D (color-text-primary)
+
+**Typography**:
+- Time Text ("10:00"):
+  - Font: Archivo 12px, weight 400
+  - Line Height: 1.40
+
+---
+
+### 5. Badges & Tags (Flutter Mobile)
 
 #### Live Badge (Instagram-style)
 
