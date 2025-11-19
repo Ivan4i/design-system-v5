@@ -83,6 +83,10 @@
 --color-accent-hover: #3131D6;
 --color-accent-active: #2121C6;
 
+/* Price/Value Display - из ContentTextTopHelperNoBottomHelperNoStateDisabled кода */
+--color-price-primary: #0B24FB;
+--color-price-secondary: #4141E6;
+
 /* Sale/Discount - из InformationCardSlider кода */
 --color-sale: #F7B68A;
 --color-sale-hover: #F6A678;
@@ -2171,6 +2175,353 @@ Height: 36px, Radius: 15px
 
 ---
 
+### 28. Text Input Fields (Disabled States with Variants)
+
+Компонент Text Input Fields с различными вариантами отображения disabled состояния, helper text, labels и иконками, извлеченный из Flutter приложения ContentTextTopHelperNoBottomHelperNoStateDisabled.
+
+#### Общие характеристики:
+
+**Container:**
+- **Width**: 375px
+- **Padding**: Horizontal: 16px, Vertical: 10px
+- **Clip Behavior**: antiAlias
+
+**Input Field:**
+- **Height**: 44px, 46px (varies by variant)
+- **Padding**: Top: 4px, Left: 20px, Right: 15px, Bottom: 4px
+- **Background**: #F4F6F9 (color-bg-quaternary)
+- **Border**: 2px solid #F4F6F9 (invisible border, same as background)
+- **Border Radius**: 15px (radius-3xl)
+- **Text Color (Disabled)**: #D9DDE2 (color-text-disabled)
+
+#### Variant 1: Simple Placeholder (Email)
+
+**Input:**
+- **Height**: 44px
+- **Text**: "Your email"
+- **Font**: Archivo
+- **Font Size**: 12px (font-size-xs)
+- **Font Weight**: 400 (normal)
+- **Color**: #D9DDE2 (color-text-disabled)
+- **Line Height**: 1.40
+- **Text Width**: 308px
+
+#### Variant 2: Input with Success Helper Text
+
+**Input:**
+- **Height**: 46px
+- **Text**: "First name"
+- **Font**: Archivo 12px normal
+- **Color**: #D9DDE2 (color-text-disabled)
+
+**Helper Text:**
+- **Text**: "Name is correct 👌"
+- **Font**: Archivo
+- **Font Size**: 12px (text), 14px (emoji)
+- **Font Weight**: 400 (normal)
+- **Color**: #11BB8D (color-success-positive)
+- **Line Height**: 1.40
+- **Padding**: Horizontal: 10px
+- **Spacing**: 13px gap
+- **Width**: 309px (text), 5px spacing before emoji
+
+#### Variant 3: Input with Top Label and Balance Info
+
+**Top Label Row:**
+- **Padding**: Horizontal: 10px
+- **Spacing**: 13px gap
+- **Alignment**: Space between
+
+**Label:**
+- **Text**: "From"
+- **Font**: Archivo
+- **Font Size**: 14px (font-size-sm)
+- **Font Weight**: 600 (semibold)
+- **Color**: #09101D (color-text-primary)
+- **Line Height**: 1.40
+- **Width**: 189px
+
+**Balance Info:**
+- **Balance**: "Balance: 1.01 ETH"
+  - Font: Archivo 10px (font-size-2xs) semibold
+  - Color: #09101D (color-text-primary)
+  - Line Height: 1.40
+- **Price**: "~4.043$"
+  - Font: Archivo 10px (font-size-2xs) semibold
+  - Color: #0B24FB (color-price-primary)
+  - Line Height: 1.40
+  - Spacing: 10px from balance
+
+**Input:**
+- **Height**: 46px
+- **Text**: "Enter amount "
+- **Font**: Archivo 12px normal
+- **Color**: #D9DDE2 (color-text-disabled)
+
+#### Variant 4: Input with Trailing Icon (Location)
+
+**Input:**
+- **Height**: 46px
+- **Text**: "Location"
+- **Font**: Archivo 12px normal
+- **Color**: #D9DDE2 (color-text-disabled)
+- **Text Width**: 276px
+
+**Trailing Icon:**
+- **Size**: 24px × 24px
+- **Padding**: 2px (container padding)
+- **Border Radius**: 100px (circular)
+- **Spacing**: 5px gap from text
+- **Position**: Right edge
+
+#### Variant 5: Input with Leading Icon (Search)
+
+**Input:**
+- **Height**: 46px
+- **Spacing**: 10px between icon and text
+
+**Leading Icon:**
+- **Size**: 24px × 24px
+- **Padding**: 2px (container padding)
+- **Border Radius**: 100px (circular)
+- **Position**: Left side before text
+
+**Text:**
+- **Text**: "Search"
+- **Font**: Archivo 12px normal
+- **Color**: #D9DDE2 (color-text-disabled)
+- **Width**: 274px
+
+#### Variant 6: Input with Leading Avatar and Trailing Icon
+
+**Input:**
+- **Height**: 46px
+- **Spacing**: 10px between avatar and text
+
+**Leading Avatar:**
+- **Size**: 30px × 30px
+- **Border Radius**: 50px (circular)
+- **Background**: #F4F6F9 (color-bg-quaternary)
+- **Image**: 30×30px network image
+- **Shape**: Oval border
+- **Position**: Left side
+
+**Text:**
+- **Text**: "Helen Smith"
+- **Font**: Archivo 12px normal
+- **Color**: #D9DDE2 (color-text-disabled)
+- **Width**: 236px
+
+**Trailing Icon:**
+- **Size**: 24px × 24px
+- **Padding**: 2px
+- **Border Radius**: 100px (circular)
+- **Spacing**: 5px gap
+- **Position**: Right edge
+
+#### Variant 7: Input with Bold Value (Email)
+
+**Input:**
+- **Height**: 44px
+- **Text**: "you@awesome.com"
+- **Font**: Archivo
+- **Font Size**: 14px (font-size-sm)
+- **Font Weight**: 600 (semibold)
+- **Color**: #D9DDE2 (color-text-disabled)
+- **Line Height**: 1.40
+- **Text Width**: 308px
+
+#### Variant 8: Input with Bottom Helper Text (Username)
+
+**Input:**
+- **Height**: 46px
+- **Text**: "@johnsmith"
+- **Font**: Archivo 14px semibold
+- **Color**: #D9DDE2 (color-text-disabled)
+- **Text Width**: 308px
+
+**Helper Text:**
+- **Text**: "Helper message"
+- **Font**: Archivo
+- **Font Size**: 14px (font-size-sm)
+- **Font Weight**: 400 (normal)
+- **Color**: #D9DDE2 (color-text-disabled)
+- **Line Height**: 1.40
+- **Padding**: Horizontal: 10px
+- **Width**: 323px
+
+#### Variant 9: Input with Top Label (To/Estimated)
+
+**Top Label Row:**
+- **Padding**: Horizontal: 10px
+- **Alignment**: Space between
+
+**Label:**
+- **Text**: "To (Estimated)"
+- **Font**: Archivo 14px semibold
+- **Color**: #09101D (color-text-primary)
+- **Width**: 172px
+
+**Balance Info:**
+- **Balance**: "Balance: 0.10025 BTC"
+  - Font: Archivo 10px semibold
+  - Color: #09101D (color-text-primary)
+- **Price**: "~6.984$"
+  - Font: Archivo 10px semibold
+  - Color: #4141E6 (color-accent)
+  - Spacing: 10px from balance
+
+**Input:**
+- **Height**: 46px
+- **Text**: "Enter amount"
+- **Font**: Archivo 14px semibold
+- **Color**: #D9DDE2 (color-text-disabled)
+
+#### Variant 10: Input with Value and Trailing Clear Icon
+
+**Input:**
+- **Height**: 46px
+- **Text**: "you@awesome.com"
+- **Font**: Archivo 14px semibold
+- **Color**: #D9DDE2 (color-text-disabled)
+- **Text Width**: 276px
+
+**Trailing Clear Icon:**
+- **Size**: 24px × 24px
+- **Padding**: 2px
+- **Border Radius**: 100px (circular)
+- **Spacing**: 5px gap
+- **Position**: Right edge
+
+#### Layout Structure:
+
+**Basic Input:**
+```
+┌─────────────────────────────────────┐
+│ [Padding 20px L, 15px R]            │
+│  Your email                         │
+│                                     │
+└─────────────────────────────────────┘
+Height: 44px or 46px, Radius: 15px
+```
+
+**With Top Label & Balance:**
+```
+┌─────────────────────────────────────┐
+│ From      Balance: 1.01 ETH ~4.043$ │
+│ ┌─────────────────────────────────┐ │
+│ │ Enter amount                    │ │
+│ └─────────────────────────────────┘ │
+└─────────────────────────────────────┘
+Label: 14px semibold, Balance: 10px semibold
+```
+
+**With Helper Text:**
+```
+┌─────────────────────────────────────┐
+│ ┌─────────────────────────────────┐ │
+│ │ First name                      │ │
+│ └─────────────────────────────────┘ │
+│ Name is correct 👌                  │
+└─────────────────────────────────────┘
+Helper: 12px Archivo, success green
+```
+
+**With Icons:**
+```
+┌─────────────────────────────────────┐
+│ ┌─────────────────────────────────┐ │
+│ │ [icon] Search              [×]  │ │
+│ └─────────────────────────────────┘ │
+└─────────────────────────────────────┘
+Icons: 24×24px, 2px padding, circular
+```
+
+**With Avatar:**
+```
+┌─────────────────────────────────────┐
+│ ┌─────────────────────────────────┐ │
+│ │ [@] Helen Smith            [×]  │ │
+│ └─────────────────────────────────┘ │
+└─────────────────────────────────────┘
+Avatar: 30×30px circular
+```
+
+#### Typography Summary:
+
+**Placeholder/Value Text:**
+- **12px normal**: Basic placeholders (#D9DDE2)
+- **14px semibold**: Bold values, usernames (#D9DDE2)
+
+**Labels:**
+- **14px semibold**: Field labels (#09101D)
+
+**Helper Text:**
+- **12px normal**: Success messages (#11BB8D)
+- **14px normal**: Helper messages (#D9DDE2)
+
+**Balance/Price Info:**
+- **10px semibold**: Balance amounts (#09101D)
+- **10px semibold**: Price values (#0B24FB, #4141E6)
+
+#### Icon Sizes:
+
+- **24×24px**: Action icons (search, clear, location)
+- **30×30px**: User avatars
+- **16×16px**: Embedded icons (within larger containers)
+
+#### Spacing:
+
+- **Container Padding**: 16px horizontal, 10px vertical
+- **Input Padding**: 20px left, 15px right, 4px top/bottom
+- **Helper Text Padding**: 10px horizontal
+- **Icon Spacing**: 5px gap, 10px for avatar
+- **Balance Info Spacing**: 10px between balance and price
+- **Helper Text Spacing**: 13px gap from input
+
+#### Color Palette:
+
+**Text:**
+- Disabled: #D9DDE2 (all disabled input text)
+- Primary: #09101D (labels, balance info)
+- Success: #11BB8D (success helper text)
+- Price Primary: #0B24FB (price display)
+- Price Secondary: #4141E6 (price display alternative)
+
+**Background:**
+- Input: #F4F6F9 (disabled state background)
+- Avatar Placeholder: #F4F6F9
+
+#### Use Cases:
+
+1. **Email Inputs**: Simple placeholder or filled value with semibold text
+2. **Username Fields**: With @ prefix and helper text
+3. **Search Fields**: Leading icon for visual indication
+4. **Location Fields**: Trailing icon for additional actions
+5. **Amount/Currency Fields**: Top labels with balance and price info
+6. **User Selection**: Avatar display with name
+7. **Form Validation**: Success helper text with emoji feedback
+8. **Multi-info Inputs**: Labels, balance, price, and helper text combinations
+
+#### Best Practices:
+
+- Use 12px for placeholders in compact fields
+- Use 14px semibold for actual values to distinguish from placeholders
+- Top labels (14px semibold) provide context for complex inputs
+- Balance info (10px semibold) displays related data without cluttering
+- Price display uses distinct colors (#0B24FB or #4141E6) for visibility
+- Helper text provides validation feedback or additional instructions
+- Success messages (#11BB8D) with emoji add friendly confirmation
+- Icons (24×24px) provide visual affordances for actions
+- Avatars (30×30px) help identify users in selection fields
+- Disabled state (#D9DDE2) maintains readability while indicating non-interactivity
+- Input heights: 44px for simple fields, 46px for fields with icons/avatars
+- Border radius: 15px maintains visual consistency
+- Padding: 20px left, 15px right ensures comfortable reading
+- All disabled inputs use same background (#F4F6F9) for consistency
+
+---
+
 ## Как использовать эту дизайн-систему
 
 ### Для дизайнеров
@@ -2198,9 +2549,48 @@ Height: 36px, Radius: 15px
 
 ## Версионирование и обновления
 
-**Текущая версия**: v5.7.0
+**Текущая версия**: v5.8.0
 
 ### Changelog
+
+#### v5.8.0 (2025-11-19)
+- Добавлены данные из ContentTextTopHelperNoBottomHelperNoStateDisabled компонента Flutter (Text Input Fields - Disabled States)
+- Добавлены новые design tokens для отображения цен:
+  - Price Primary: #0B24FB (color-price-primary) для основного отображения цен
+  - Price Secondary: #4141E6 (color-price-secondary) для альтернативного отображения
+- Добавлен компонент Text Input Fields (Disabled States with Variants) с 10 вариантами:
+  - Variant 1: Simple Placeholder (Email) - "Your email", 12px, 44px height
+  - Variant 2: Input with Success Helper Text - "First name" + success message (#11BB8D) с emoji
+  - Variant 3: Input with Top Label and Balance Info - "From" label + balance + price (#0B24FB)
+  - Variant 4: Input with Trailing Icon (Location) - 24×24px trailing icon
+  - Variant 5: Input with Leading Icon (Search) - 24×24px leading icon
+  - Variant 6: Input with Leading Avatar and Trailing Icon - 30×30px avatar + name + icon
+  - Variant 7: Input with Bold Value (Email) - "you@awesome.com", 14px semibold
+  - Variant 8: Input with Bottom Helper Text (Username) - "@johnsmith" + helper message
+  - Variant 9: Input with Top Label (To/Estimated) - label + balance + price (#4141E6)
+  - Variant 10: Input with Value and Trailing Clear Icon - value + 24×24px clear icon
+- Input спецификации:
+  - Heights: 44px (simple), 46px (with icons/avatars)
+  - Padding: 20px left, 15px right, 4px top/bottom
+  - Border radius: 15px
+  - Background: #F4F6F9 (disabled state)
+  - Border: 2px solid #F4F6F9 (invisible border)
+- Typography:
+  - Placeholders: 12px normal (#D9DDE2)
+  - Values: 14px semibold (#D9DDE2)
+  - Labels: 14px semibold (#09101D)
+  - Helper text: 12px/14px normal (#11BB8D success, #D9DDE2 default)
+  - Balance/Price: 10px semibold (#09101D balance, #0B24FB/#4141E6 price)
+- Icon & Avatar sizes:
+  - Action icons: 24×24px
+  - User avatars: 30×30px circular
+  - Embedded icons: 16×16px
+- Spacing:
+  - Container: 16px horizontal, 10px vertical
+  - Helper text: 10px horizontal padding, 13px gap from input
+  - Icon spacing: 5px gap, 10px for avatar
+  - Balance info: 10px between balance and price
+- Документированы 8 use cases и comprehensive best practices для различных типов полей
 
 #### v5.7.0 (2025-11-19)
 - Добавлены данные из SmallLeadingSelector компонента Flutter (Form Input with Leading Selector)
