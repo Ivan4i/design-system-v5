@@ -100,6 +100,15 @@
 --color-border-pink: #FC466B;
 ```
 
+### Chart Colors
+
+```css
+/* Цвета для графиков из Flutter кода */
+--chart-grid-light: #A4ABB3;         /* Светло-серый для линий сетки */
+--chart-grid-dark: #747B84;          /* Темно-серый для осей */
+--chart-label-text: #09101D;         /* Черный для подписей */
+```
+
 ### Shadow Colors
 
 ```css
@@ -126,7 +135,8 @@
 ### Font Sizes
 
 ```css
---font-size-10: 0.625rem;     /* 10px - из Flutter кода */
+--font-size-8: 0.5rem;        /* 8px - лейблы графиков */
+--font-size-10: 0.625rem;     /* 10px - метки графиков (Q1, Q2...) */
 --font-size-11: 0.6875rem;    /* 11px */
 --font-size-12: 0.75rem;      /* 12px */
 --font-size-13: 0.8125rem;    /* 13px - из Flutter кода */
@@ -255,6 +265,14 @@
 #### Badge Text
 - **Semibold**: Font: 10px (0.625rem), Weight: 600, Line Height: 140%, Color: #FFFFFF
 - **Использование**: Текст в badge (например, "Live")
+
+#### Chart Labels
+- **Quarter Labels (Q1-Q4)**: Font: 10px (0.625rem), Weight: 600, Color: #09101D, Line Height: 140%
+- **Использование**: Метки кварталов на графиках
+
+#### Chart Legend Labels
+- **Bold**: Font: 8px (0.5rem), Weight: 700, Color: #09101D, Line Height: 140%
+- **Использование**: Подписи в легенде графика
 
 ---
 
@@ -662,26 +680,102 @@
 
 ---
 
-### 8. Charts
+### 8. Charts (из Flutter кода)
 
-#### Line Chart
+#### Quarterly Bar Chart (4 Quarters)
 
-- **Line Width**: 2px
-- **Point Radius**: 4px
-- **Grid Lines**: Color: color-gray-200, Width: 1px
-- **Colors**: Use chart colors (--color-chart-1 to --color-chart-8)
+**Container:**
+- **Width**: 375px (mobile full width)
+- **Height**: 185px (chart area)
+- **Padding**: 16px horizontal, 10px vertical
+- **Background**: Transparent
 
-#### Bar Chart
+**Bar Specifications:**
+- **Width**: Равномерно распределенные (Expanded widgets)
+- **Height**: 166px (когда повернут вертикально)
+- **Transform**: Повернут на -90° (rotateZ(-1.57))
+- **Border**: 1px solid #A4ABB3
+- **Border Alignment**: strokeAlignCenter
+- **Background**: Transparent (только border)
+- **Spacing между барами**: 10px
 
-- **Bar Spacing**: 8px
-- **Border Radius**: radius-sm (2px) на верхних углах
-- **Colors**: Use chart colors
+**Quarter Labels (Q1, Q2, Q3, Q4):**
+- **Font Size**: 10px
+- **Font Weight**: 600 (semibold)
+- **Color**: #09101D
+- **Text Align**: Center
+- **Line Height**: 140%
+- **Padding**: 5px horizontal
+- **Border Radius**: 10px
+- **Spacing от бара**: 5px
 
-#### Pie/Donut Chart
+**Chart Layout:**
+- **Row Layout**: 4 равномерных колонки
+- **Column per Quarter**:
+  - Bar (166px height, rotated)
+  - Spacing (5px)
+  - Label (Q1-Q4)
 
-- **Border Width**: 2px (white)
-- **Spacing**: 2px between segments
-- **Colors**: Use chart colors
+#### Chart Legend
+
+**Container:**
+- **Width**: 504.38px (или расчетная для mobile)
+- **Height**: 160px (auto по контенту)
+- **Padding**: 10px top, 16px right, 10px bottom
+- **Spacing между строками**: 15px
+
+**Legend Items:**
+- **Label Font Size**: 8px
+- **Label Font Weight**: 700 (bold)
+- **Label Color**: #09101D
+- **Label Padding**: Wrapped in container с border-radius 10px
+- **Label Spacing**: 1px internal
+
+**Legend Lines:**
+- **Border**: 1px solid #747B84
+- **Alignment**: strokeAlignCenter
+- **Width**: Expanded (растягивается)
+- **Spacing от label**: 10px
+
+**Legend Row Structure:**
+```
+[Label] ─────────────────────
+```
+
+#### Grid Lines (Horizontal)
+
+- **Border Width**: 1px
+- **Color**: #747B84 (темно-серый)
+- **Style**: Solid
+- **Stroke Align**: Center
+- **Spacing**: 15px между линиями
+
+#### Vertical Grid Lines
+
+- **Border Width**: 1px
+- **Color**: #A4ABB3 (светло-серый)
+- **Style**: Solid
+- **Использование**: Для баров и вертикальных разделителей
+
+#### Chart Typography
+
+**Labels (Quarters):**
+- Font: 10px, Weight: 600, Color: #09101D
+
+**Legend Labels:**
+- Font: 8px, Weight: 700, Color: #09101D
+
+**Axis Labels:**
+- Font: 8px, Weight: 700, Color: #09101D
+
+#### Chart Colors Palette
+
+```css
+/* Основные цвета графиков */
+--chart-grid-light: #A4ABB3;    /* Вертикальные линии, бары */
+--chart-grid-dark: #747B84;     /* Горизонтальные линии, оси */
+--chart-text: #09101D;          /* Все подписи */
+```
 
 ---
 
@@ -1208,9 +1302,25 @@ decoration: BoxDecoration(
 
 ## Версионирование и обновления
 
-**Текущая версия**: v5.1.0
+**Текущая версия**: v5.2.0
 
 ### Changelog
+
+#### v5.2.0 (2025-11-19)
+- **Charts (Графики)**: Добавлена полная спецификация графиков
+  - Quarterly Bar Chart: 375px width, 185px height, вертикальные бары
+  - Chart Legend: 8px labels (bold), горизонтальные линии
+  - Grid Lines: #A4ABB3 (light), #747B84 (dark)
+  - Chart Typography: 8px (legends), 10px (quarters)
+  - Chart Colors: #A4ABB3, #747B84, #09101D
+- **Цвета**: Добавлены цвета для графиков
+  - Chart grid light: #A4ABB3
+  - Chart grid dark: #747B84
+  - Chart text: #09101D
+- **Типографика**: Добавлен размер 8px для лейблов графиков
+  - Font size 8px для легенды
+  - Font size 10px для меток кварталов
+  - Text styles для графиков
 
 #### v5.1.0 (2025-11-19)
 - **Цветовая палитра**: Добавлены реальные цвета из Flutter кода
