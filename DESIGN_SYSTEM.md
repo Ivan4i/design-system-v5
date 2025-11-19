@@ -62,8 +62,9 @@
 
 ```css
 /* Акцентные цвета */
---color-accent-blue: #4141E6;      /* Синий (stories, primary actions) */
+--color-accent-blue: #4141E6;      /* Синий (stories, primary actions, buttons) */
 --color-accent-pink: #FC466B;      /* Розовый (stories, highlights) */
+--color-accent-purple: #7B61FF;    /* Фиолетовый (borders, decorative) */
 ```
 
 ### Status Colors
@@ -413,41 +414,149 @@
 
 ---
 
-### 2. Buttons
+### 2. Buttons (из реального Flutter кода)
 
-#### Primary Button
+#### Pill Button (Small Button)
 
-- **Size**:
-  - Small: Height: 32px, Padding: 8px 16px, Font: 14px
-  - Medium: Height: 40px, Padding: 10px 20px, Font: 16px
-  - Large: Height: 48px, Padding: 12px 24px, Font: 18px
-- **Radius**: radius-md (6px)
-- **States**:
-  - Default: Background: color-primary, Color: white, Shadow: shadow-button
-  - Hover: Background: color-primary-hover, Shadow: shadow-button-hover, Transform: translateY(-1px)
-  - Active: Background: color-primary-active, Shadow: shadow-button-active, Transform: translateY(0)
-  - Disabled: Background: color-gray-300, Color: color-text-disabled, Cursor: not-allowed, Opacity: 0.6
+**Спецификация из кода:**
+- **Height**: 36px
+- **Padding**: 16px horizontal, 10px vertical
+- **Border Radius**: 15px (--radius-badge)
+- **Typography**:
+  - Font: 13px (0.8125rem)
+  - Weight: 600 (Semibold)
+  - Font Family: 'Archivo'
+  - Line Height: 1.40 (18.2px)
+- **Icon Spacing**: 8px (между иконкой и текстом)
+- **Icon Size**: 16×16 (padding: 2px, border-radius: 100px)
+- **Варианты позиций иконки**:
+  - Left: Icon → Text
+  - Right: Text → Icon
+  - Both: Icon → Text → Icon
+  - Icon Only: Только icon в кнопке
 
-#### Secondary Button
+**Варианты Pill Button:**
 
-- **Size**: Same as Primary
-- **Radius**: radius-md (6px)
-- **States**:
-  - Default: Background: color-secondary, Color: white
-  - Hover: Background: color-secondary-hover
+**1. Primary (Blue Filled)**
+```
+Background: #4141E6 (--color-accent-blue)
+Text Color: #FFFFFF (white)
+Border: none
+```
 
-#### Outline Button
+**2. Secondary (Light Gray Filled)**
+```
+Background: #F4F6F9 (--color-bg-secondary)
+Text Color: #09101D (--color-text-primary)
+Border: none
+```
 
-- **Border**: 1px solid color-primary
-- **Background**: transparent
-- **States**:
-  - Hover: Background: color-primary-light, Border-color: color-primary-hover
+**3. Outlined (Blue Border)**
+```
+Background: transparent
+Text Color: #4141E6 (--color-accent-blue)
+Border: 1px solid #4141E6
+Border Radius: 15px
+```
 
-#### Ghost Button
+**4. Disabled**
+```
+Background: #F4F6F9 (--color-bg-secondary)
+Text Color: #D9DDE2 (--color-bg-tertiary) - low contrast
+Border: none
+Cursor: not-allowed
+```
 
-- **Background**: transparent
-- **States**:
-  - Hover: Background: color-gray-100
+**5. Ghost (Transparent)**
+```
+Background: transparent
+Text Color: #09101D (--color-text-primary)
+Border: none
+```
+
+#### Icon Button (Square)
+
+**Спецификация из кода:**
+- **Size**: 40×40
+- **Padding**: 12px (icon становится 16×16)
+- **Border Radius**: 15px (--radius-badge)
+- **Icon Size**: 16×16 (centered)
+
+**Варианты Icon Button:**
+
+**1. Primary (Blue Filled)**
+```
+Background: #4141E6 (--color-accent-blue)
+Icon Color: white
+Border: none
+```
+
+**2. Secondary (Light Gray Filled)**
+```
+Background: #F4F6F9 (--color-bg-secondary)
+Icon Color: #09101D (--color-text-primary)
+Border: none
+```
+
+**3. Outlined (Blue Border)**
+```
+Background: transparent
+Icon Color: #4141E6 (--color-accent-blue)
+Border: 1px solid #4141E6
+Border Radius: 15px
+```
+
+**4. Disabled**
+```
+Background: #F4F6F9 (--color-bg-secondary)
+Icon Color: #D9DDE2 (--color-bg-tertiary)
+Border: none
+Cursor: not-allowed
+```
+
+**5. Ghost (Transparent)**
+```
+Background: transparent
+Icon Color: #09101D (--color-text-primary)
+Border: none
+```
+
+#### Button Spacing (из кода)
+
+- **Horizontal spacing** (между кнопками): ~162px
+- **Vertical spacing** (между кнопками): ~90px
+- **Icon button spacing**: 34px (в вертикальном списке)
+
+#### Button States
+
+**Interactive States для всех кнопок:**
+
+- **Default**: Базовое состояние
+- **Hover**:
+  - Primary: Lighter shade of blue (#5858E9)
+  - Secondary: Darker gray (#E8EAED)
+  - Outlined: Light blue background (#F0F2FF)
+  - Ghost: Light gray background (#F4F6F9)
+  - Transition: 150ms ease
+- **Active/Pressed**:
+  - Transform: scale(0.98)
+  - Opacity: 0.9
+  - Transition: 100ms ease
+- **Focus**:
+  - Outline: 2px solid #4141E6
+  - Outline offset: 2px
+- **Disabled**:
+  - Cursor: not-allowed
+  - Pointer events: none
+  - Opacity: 0.6 (для всех элементов)
+
+#### Usage Guidelines
+
+- **Primary**: Main actions, CTAs (Confirm, Submit, Save)
+- **Secondary**: Less prominent actions (Cancel, Back)
+- **Outlined**: Alternative actions, filters, selections
+- **Ghost**: Tertiary actions, minimal visual weight
+- **Icon Button**: Compact actions, toolbars, navigation
 
 ---
 
