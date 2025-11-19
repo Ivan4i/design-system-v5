@@ -286,6 +286,7 @@
 --space-2: 0.5rem;    /* 8px */
 --space-2-5: 0.625rem; /* 10px */
 --space-3: 0.75rem;   /* 12px */
+--space-3-75: 0.9375rem; /* 15px */
 --space-4: 1rem;      /* 16px */
 --space-5: 1.25rem;   /* 20px */
 --space-6: 1.5rem;    /* 24px */
@@ -298,6 +299,7 @@
 --space-20: 5rem;     /* 80px */
 --space-24: 6rem;     /* 96px */
 --space-25: 6.25rem;  /* 100px */
+--space-50: 12.5rem;  /* 200px */
 ```
 
 ### Border Radius
@@ -313,7 +315,9 @@
 --radius-xl: 0.75rem;     /* 12px */
 --radius-xl-plus: 0.9375rem; /* 15px */
 --radius-2xl: 1rem;       /* 16px */
+--radius-2xl-plus: 1.25rem; /* 20px */
 --radius-3xl: 1.875rem;   /* 30px */
+--radius-3xl-plus: 2.5rem; /* 40px */
 --radius-4xl: 6.25rem;    /* 100px */
 --radius-full: 9999px;
 ```
