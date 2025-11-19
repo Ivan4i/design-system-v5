@@ -1318,6 +1318,9 @@
 
 ## Mobile Card Components (Flutter)
 
+<!-- AI-FRIENDLY: Mobile Card Components -->
+**See Also**: [E-commerce Product Cards](#e-commerce-components-flutter-mobile) for shopping/marketplace card components
+
 ### 1. User Card with Live Badge
 
 **Размер**: 140px × 68px
@@ -2039,6 +2042,327 @@
 
 ---
 
+<!-- AI-FRIENDLY: E-commerce Components Section -->
+<!-- KEYWORDS: product card, shopping, marketplace, e-commerce, retail, catalog -->
+<!-- COMPONENT_TYPE: Product Listings, Shopping Cards -->
+<!-- USE_CASES: Product catalogs, marketplace listings, shopping grids, retail apps -->
+
+## E-commerce Components (Flutter Mobile)
+
+**Component Type**: Product Card (Vertical Layout)
+**Use Cases**: Shopping, Marketplace, Product Listings, Retail Catalogs
+**Related Components**: [Image Cards](#mobile-card-components-flutter), [Badges](#badges-flutter-mobile), [Buttons](#buttons-flutter-mobile)
+**Platform**: Flutter Mobile (375px width standard)
+
+---
+
+### Product Card - Vertical Layout
+
+<!-- AI-FRIENDLY: Product Card Component -->
+**Description**: Vertical product card for e-commerce applications with image, badge, favorite button, rating, price, brand, and size information.
+
+#### Container (Product List Wrapper)
+
+**Outer Container**:
+- **Width**: 375px (mobile screen width)
+- **Padding**: 30px vertical
+- **Background**: #FFFFFF (white)
+- **Border Radius**: 30px
+- **Clip Behavior**: antiAlias
+
+**Cards Row** (Horizontal Scrollable):
+- **Padding**: 16px horizontal, 10px vertical
+- **Spacing**: 5px between cards
+- **Layout**: Row with horizontal scroll
+- **Clip Behavior**: antiAlias
+
+#### Individual Product Card
+
+**Card Container**:
+- **Width**: 170px
+- **Height**: 360px
+- **Border Radius**: 15px
+- **Layout**: Column (Image + Content)
+
+**Card Structure**:
+```
+Product Card (170×360px)
+├─ Image Section (~253px height, Expanded)
+│  ├─ Product Image (170×253px, fit: cover, border-radius: 5px)
+│  ├─ Favorite Button (top-left overlay, 30×30px)
+│  └─ Status Badge (bottom-left overlay, "🔥 New")
+└─ Content Section (~107px height)
+   ├─ Rating (👌 4.8 (130))
+   ├─ Price & Brand ($96.50, Nike 👟)
+   └─ Sizes (36 ・ 37・ 38・ 39)
+```
+
+---
+
+#### Image Section
+
+**Image Container** (Expanded):
+- **Width**: 170px (full card width)
+- **Height**: ~253px (flexible, uses Expanded)
+- **Border Radius**: 5px
+- **Image Fit**: BoxFit.cover
+- **Clip Behavior**: antiAlias
+- **Image Source**: NetworkImage (placeholder or product image URL)
+
+**Overlay Layout**:
+- **Arrangement**: Column with `spaceBetween`
+- **Elements**: Favorite Button (top) + Status Badge (bottom)
+
+---
+
+#### Favorite Button (Top-Left Overlay)
+
+**Position**: Top-left corner of image
+- **Padding from edges**: 10px all
+
+**Button Container**:
+- **Size**: 30px × 30px
+- **Background**: #FFFFFF (white)
+- **Border Radius**: 100px (circle)
+- **Padding**: 8px (inner padding)
+
+**Icon**:
+- **Size**: ~16.8px × 16.8px (14px with 1.4px positioning offset)
+- **Icon Type**: Heart (favorite/wishlist icon)
+- **Color**: Not specified (typically #09101D or #DA1414 for filled)
+
+**Interaction**:
+- **States**: Default (outline heart), Active (filled heart)
+- **Action**: Toggle favorite/wishlist
+
+---
+
+#### Status Badge (Bottom-Left Overlay)
+
+**Position**: Bottom-left corner of image
+- **Padding from edges**: 5px all
+
+**Badge Container**:
+- **Height**: auto (content-based)
+- **Padding**: 5px horizontal, 3px vertical
+- **Background**: #09101D (color-bg-card-dark)
+- **Border Radius**: 5px
+
+**Badge Content**: "🔥 New"
+- **Emoji**: "🔥"
+  - Font: Archivo 9px, weight 400
+  - Color: #FFFFFF (white)
+  - Line Height: 1.40
+- **Text**: "New"
+  - Font: Archivo 9px, weight 600
+  - Color: #FFFFFF (white)
+  - Line Height: 1.40
+
+**Badge Variants** (Customizable):
+- "🔥 New" - New arrivals
+- "🏷️ Sale" - Sale items
+- "⭐ Trending" - Trending products
+- "🎯 Limited" - Limited edition
+- Custom text + emoji combinations
+
+---
+
+#### Content Section (Card Bottom)
+
+**Container**:
+- **Padding**: top 10px, left 5px, right 10px, bottom 10px
+- **Clip Behavior**: antiAlias
+- **Spacing**: 5px between elements (column spacing)
+
+**Elements** (Top to Bottom):
+1. Rating Row
+2. Product Info (Price + Brand)
+3. Sizes
+
+---
+
+##### 1. Rating Row
+
+**Layout**: Row with minimal spacing
+
+**Rating Content**: "👌 4.8 (130)"
+
+- **Emoji**: "👌"
+  - Font Size: 13px
+  - Color: #E24949 (color-notification) - used for visual accent
+
+- **Rating Number**: "4.8"
+  - Font: Archivo 13px, weight 600
+  - Color: #09101D (color-text-primary)
+  - Line Height: 1.40
+
+- **Space**: " " (single space)
+  - Font: Archivo 13px, weight 400
+  - Color: #747B84 (color-text-secondary)
+
+- **Review Count**: "(130)"
+  - Font: Archivo 13px, weight 400
+  - Color: #747B84 (color-text-secondary)
+  - Line Height: 1.40
+
+**Format**: `[emoji] [rating] ([count])`
+**Examples**:
+- "👌 4.8 (130)"
+- "👌 4.5 (89)"
+- "👌 5.0 (12)"
+
+---
+
+##### 2. Product Info (Price + Brand)
+
+**Container**:
+- **Width**: 155px max (full available width with padding)
+- **Spacing**: 4px between price/brand and sizes
+
+**Inner Spacing**: 2px between price and brand
+
+**Price**:
+- **Text**: "$96.50" / "$159.20" / "$350"
+- **Font**: Archivo 14px, weight 600
+- **Color**: #09101D (color-text-primary)
+- **Line Height**: 1.40
+- **Width**: 155px max
+
+**Brand with Emoji**:
+- **Brand Name**: "Nike"
+  - Font: Archivo 14px, weight 600
+  - Color: #09101D (color-text-primary)
+  - Line Height: 1.40
+
+- **Emoji**: "👟" (category emoji)
+  - Font: Archivo 14px, weight 400
+  - Color: #414249 (color-text-tertiary)
+  - Line Height: 1.40
+
+**Format**: `[brand_name] [emoji]`
+**Examples**:
+- "Nike 👟" - Footwear
+- "Apple 📱" - Electronics
+- "Adidas 👕" - Apparel
+- "Samsung 💻" - Tech
+
+---
+
+##### 3. Sizes (Available Variants)
+
+**Text**: "36 ・ 37・ 38・ 39"
+- **Font**: Archivo 13px, weight 400
+- **Color**: #747B84 (color-text-secondary)
+- **Line Height**: 1.40
+- **Width**: 155px max
+- **Separator**: " ・ " (bullet separator)
+
+**Format**: `[size1] ・ [size2]・ [size3]・ [size4]`
+
+**Examples**:
+- Footwear: "36 ・ 37・ 38・ 39"
+- Apparel: "S ・ M・ L・ XL"
+- Single size: "One Size"
+- Out of stock: "Sold Out" (можно использовать цвет #DA1414)
+
+---
+
+### Layout Specifications
+
+**Product Grid**:
+- **Columns**: 2 cards per row (visible area)
+- **Card Width**: 170px
+- **Spacing**: 5px between cards
+- **Scroll**: Horizontal scroll for additional cards
+- **Padding**: 16px horizontal from screen edges
+
+**Responsive Calculations**:
+```
+Screen Width: 375px
+Container Padding: 16px × 2 = 32px
+Available Width: 375px - 32px = 343px
+Card Width: 170px
+Spacing: 5px
+Cards Visible: 2 cards (170px + 5px + 170px = 345px ≈ 343px with scroll)
+```
+
+---
+
+### Usage Guidelines
+
+**When to Use**:
+- Product catalog screens
+- Marketplace listings
+- Search results
+- Category browsing
+- Recommended products sections
+
+**Flexible Elements**:
+- **Badge**: Can be customized with different text/emoji or hidden
+- **Favorite Button**: Can be removed for non-authenticated users
+- **Sizes**: Can be replaced with color swatches, variants, or other metadata
+- **Rating**: Can be hidden if product is new (no reviews yet)
+- **Price**: Can show original + discounted price for sales
+
+**Accessibility**:
+- Favorite button should have minimum touch target 44×44px (padding around 30px circle)
+- Rating should include screen reader text: "Rated 4.8 out of 5 stars, 130 reviews"
+- Product images should have alt text describing the product
+
+**Performance**:
+- Use image loading placeholders (skeleton or blur hash)
+- Lazy load images for off-screen cards
+- Cache images for better scroll performance
+- Consider image optimization (WebP, AVIF)
+
+---
+
+### Color Reference
+
+All colors used are from existing design system palette:
+
+```css
+/* Text */
+--color-text-primary: #09101D;     /* Price, brand, rating */
+--color-text-secondary: #747B84;   /* Sizes, review count */
+--color-text-tertiary: #414249;    /* Emoji accents */
+
+/* Backgrounds */
+--color-bg-card-dark: #09101D;     /* Badge background */
+
+/* Accents */
+--color-notification: #E24949;     /* Rating emoji accent */
+
+/* Structural */
+--color-white: #FFFFFF;            /* Container, favorite button */
+```
+
+---
+
+### Component Variations
+
+**Horizontal Product Card** (Alternative Layout):
+- Width: 343px (full content width)
+- Height: 120px
+- Layout: Row (Image left 120×120px + Content right)
+- Use case: List view, cart items
+
+**Product Card with Action Button** (Enhanced):
+- Add "Add to Cart" button at bottom (44px height)
+- Total height: 404px (360px + 44px)
+- Button: #11BB8D background, Archivo 14px weight 600
+
+**Compact Product Card** (Smaller):
+- Width: 140px (from existing Mobile Cards)
+- Height: 210px (from existing Mobile Cards)
+- Use case: Compact grids, related products
+
+---
+
+<!-- END AI-FRIENDLY: E-commerce Components -->
+
+---
+
 ## Паттерны
 
 ### Mobile Layout Patterns (Flutter)
@@ -2413,6 +2737,46 @@ Icon Button (40px):
     - Percentage: Archivo 13px weight 600, centered
     - Empty Slot: 44×44px with 1px border #09101D, plus icon centered
   - Usage: Flexible cashback slots (add/remove), customizable card gradients, OCR-A font for authenticity
+- E-commerce Components (Product Cards - Flutter Mobile):
+  - NEW SECTION with AI-friendly markers for IDE navigation
+  - Product Card - Vertical Layout (170×360px):
+    - Container: 375px width, 30px vertical padding, white background, 30px border-radius
+    - Cards Row: Horizontal scroll, 5px spacing, 16px horizontal padding
+    - Card Structure: Image Section (~253px) + Content Section (~107px)
+  - Image Section:
+    - Image: 170×253px, fit cover, border-radius 5px
+    - Favorite Button: 30×30px circle, white background, top-left overlay (10px padding)
+    - Icon: ~16.8px heart icon
+    - Status Badge: Bottom-left overlay (5px padding), "🔥 New"
+      - Background: #09101D, border-radius 5px, padding 5px/3px
+      - Typography: Archivo 9px (emoji weight 400, text weight 600), white color
+    - Badge Variants: New, Sale, Trending, Limited (customizable)
+  - Content Section (padding 10px/5px/10px/10px, spacing 5px):
+    - Rating: "👌 4.8 (130)"
+      - Emoji: 13px #E24949 (notification color)
+      - Rating: Archivo 13px weight 600 #09101D
+      - Count: Archivo 13px weight 400 #747B84
+    - Price & Brand (spacing 2px):
+      - Price: Archivo 14px weight 600 #09101D ("$96.50", "$159.20", "$350")
+      - Brand: Archivo 14px weight 600 #09101D + emoji 14px weight 400 #414249 ("Nike 👟")
+    - Sizes: "36 ・ 37・ 38・ 39"
+      - Font: Archivo 13px weight 400 #747B84
+      - Separator: " ・ " (bullet)
+  - Layout Specifications:
+    - Grid: 2 cards per row visible (170px + 5px + 170px ≈ 343px)
+    - Scroll: Horizontal scroll for additional cards
+    - Responsive: 375px width standard, 16px horizontal padding
+  - Component Variations:
+    - Horizontal Card: 343px×120px (list view)
+    - With Action Button: 404px height (add "Add to Cart")
+    - Compact Card: 140×210px (from existing Mobile Cards)
+  - Usage Guidelines:
+    - Use Cases: Product catalogs, marketplace listings, search results, category browsing
+    - Flexible Elements: Badge (customizable/removable), Favorite button (auth-dependent), Sizes (replaceable with variants), Rating (hideable for new products), Price (supports discounts)
+    - Accessibility: 44×44px touch targets, screen reader support, alt text for images
+    - Performance: Image placeholders, lazy loading, caching, optimization (WebP/AVIF)
+  - Cross-references: Links to [Mobile Card Components], [Badges], [Buttons]
+  - AI-friendly markers: Keywords (product card, shopping, marketplace, e-commerce, retail, catalog), Component Type (Product Listings, Shopping Cards), Use Cases
 - Layout patterns и Best practices
 
 ---
