@@ -126,6 +126,17 @@ LinearGradient(
 )
 ```
 
+### Semantic Colors (из SmallMobilePhone)
+
+```css
+/* Semantic colors для states */
+--color-success: #11BB8D;          /* Color(0xFF11BB8D) - success/positive border */
+--color-success-bg: #0C11BB8D;     /* rgba(17, 187, 141, 0.05) - success background */
+--color-error: #DA1414;            /* Color(0xFFDA1414) - error/negative border */
+--color-error-bg: #0CDA1414;       /* rgba(218, 20, 20, 0.05) - error background */
+--color-error-text: #E24949;       /* Color(0xFFE24949) - error message text */
+```
+
 ### Shadow Colors
 
 ```css
@@ -757,6 +768,149 @@ Container(
 ---
 
 ### 3. Inputs
+
+#### Phone Input (из SmallMobilePhone)
+
+Мобильный телефонный инпут с выбором страны и 9 состояниями.
+
+**Из SmallMobilePhone - showcase container**
+
+- **Showcase Container**:
+  - Size: 840x710px
+  - Border: 1px solid #7B61FF
+  - Border Radius: 15px
+  - Clip: antiAlias
+  - 8 states в 2 колонках
+
+**Container Structure**:
+- **Width**: 375px (mobile standard)
+- **Padding**: horizontal: 16px, vertical: 5px
+- **Spacing**: 8px между label, input, helper
+
+**Label**:
+- **Font**: Archivo, 14px, weight: 600
+- **Color**: #09101D (default), #747B84 (disabled)
+- **Margin bottom**: 8px
+
+**Input Row**:
+- **Spacing**: 8px между country selector и phone field
+- **Alignment**: horizontal
+
+**Country Selector** (левая часть):
+- **Height**: 36px
+- **Padding**: left: 16px, right: 10px
+- **Background**: #F4F6F9
+- **Border Radius**: 15px
+- **Spacing**: 10px между элементами, 20px между flag и chevron
+- **Flag Container**:
+  - Padding: horizontal: 1px, vertical: 4px
+  - Clip: antiAlias
+- **Flag**:
+  - Size: 22x16px
+  - Border radius: 2px
+  - Background: white
+  - Flag graphic: 9.43x7.47px, color: #46467F
+- **Chevron Icon**: 20x20px
+
+**Phone Input Field** (правая часть, expanded):
+- **Height**: 36px
+- **Padding**: left: 16px, right: 20px
+- **Border Radius**: 15px
+- **Spacing**: 15px между text и icon
+- **Text**:
+  - Font: Archivo, 14px, weight: 400
+  - Placeholder: "+1  (000) 000-0000"
+  - Filled: "+1  (415) 123-4567"
+- **Cursor** (typing state):
+  - Width: 2px, height: 16px
+- **Icon** (right side):
+  - Size: 20x20px
+  - Checkmark (complete) или Clear (incomplete)
+
+**Helper Text**:
+- **Font**: Archivo, 14px, weight: 400
+- **Color**: #747B84 (default), #E24949 (error)
+- **Margin top**: 8px
+
+**States** (9 вариантов):
+
+1. **Enabled** (default):
+   - Background: #F4F6F9
+   - Border: none
+   - Text: #747B84 (placeholder)
+   - Label: #09101D
+
+2. **Focus**:
+   - Background: #F4F6F9
+   - Border: 2px solid #09101D
+   - Text: #747B84 (placeholder)
+   - Cursor: visible
+
+3. **Complete** (filled with checkmark):
+   - Background: #F4F6F9
+   - Border: none
+   - Text: #09101D (filled value)
+   - Icon: Checkmark 20x20
+
+4. **Positive** (success validation):
+   - Background: rgba(17, 187, 141, 0.05) = #0C11BB8D
+   - Border: 2px solid #11BB8D
+   - Text: #09101D (filled)
+   - Cursor: visible
+
+5. **Pressed** (active press):
+   - Background: #EAEEF2 (pressed state)
+   - Border: none
+   - Text: #747B84 (placeholder)
+
+6. **Active - Typing** (currently typing):
+   - Background: #F4F6F9
+   - Border: 2px solid #09101D
+   - Text: #09101D (filled)
+   - Cursor: visible
+   - Icon: Checkmark (if valid)
+
+7. **Incomplete** (invalid/incomplete):
+   - Background: #F4F6F9
+   - Border: none
+   - Text: #747B84 (placeholder)
+   - Icon: Clear 20x20
+
+8. **Negative** (error validation):
+   - Background: rgba(218, 20, 20, 0.05) = #0CDA1414
+   - Border: 2px solid #DA1414
+   - Text: #09101D (filled value)
+   - Cursor: visible
+   - Helper: "Error message!" - color #E24949
+
+9. **Disabled**:
+   - Background: #F4F6F9
+   - Border: none
+   - Text: #D9DDE2 (disabled)
+   - Label: #747B84
+   - Cursor: not-allowed
+
+**Structure**:
+```
+Container (padding: 16/5):
+  - Column (spacing: 8):
+    - Label (14px weight 600)
+    - Row (spacing: 8):
+      - Country Selector (height: 36):
+        - Row (spacing: 10):
+          - Flag Container (22x16, radius: 2)
+          - Chevron Icon (20x20)
+      - Phone Field (expanded, height: 36):
+        - Row (spacing: 15):
+          - Text (14px weight 400)
+          - Cursor (2x16, if typing)
+          - Icon (20x20, if needed)
+    - Helper Text (14px weight 400)
+```
+
+**Usage**: Phone inputs используются в формах регистрации, профилях, checkout, верификации номера телефона.
+
+---
 
 #### Text Input
 
@@ -1745,6 +1899,17 @@ Container(
 --step-numbered-badge: 24px;            /* Numbered badge size */
 --step-avatar-size: 30px;               /* Avatar image size */
 --step-connector-line: 1px;             /* Connector line width */
+
+/* Phone Input Sizes из SmallMobilePhone */
+--phone-input-showcase-width: 840px;    /* Phone input showcase container width */
+--phone-input-showcase-height: 710px;   /* Phone input showcase container height */
+--phone-input-container-width: 375px;   /* Mobile container width */
+--phone-input-height: 36px;             /* Input field height */
+--phone-input-flag-width: 22px;         /* Flag width */
+--phone-input-flag-height: 16px;        /* Flag height */
+--phone-input-icon-size: 20px;          /* Icon size (checkmark/clear/chevron) */
+--phone-input-cursor-width: 2px;        /* Cursor width */
+--phone-input-cursor-height: 16px;      /* Cursor height */
 ```
 
 ### Flutter-Specific Properties (из кода)
@@ -1813,9 +1978,49 @@ Container(
 
 ## Версионирование и обновления
 
-**Текущая версия**: v5.2.0
+**Текущая версия**: v5.3.0
 
 ### Changelog
+
+#### v5.3.0 (2025-11-19)
+- Добавлен компонент Phone Input из SmallMobilePhone:
+  - **Мобильный телефонный инпут** с выбором страны и полем для номера
+  - **9 состояний**:
+    - Enabled (default): Background #F4F6F9, placeholder text
+    - Focus: 2px solid #09101D border, cursor visible
+    - Complete: Filled value with checkmark icon
+    - Positive (success): Background rgba(17, 187, 141, 0.05), border 2px #11BB8D
+    - Pressed: Background #EAEEF2 (active press state)
+    - Active-Typing: 2px border, cursor visible, filled value
+    - Incomplete: With clear icon
+    - Negative (error): Background rgba(218, 20, 20, 0.05), border 2px #DA1414, error text #E24949
+    - Disabled: #D9DDE2 text, #747B84 label, not-allowed cursor
+  - **Country Selector**:
+    - Height: 36px
+    - Padding: left 16px, right 10px
+    - Background: #F4F6F9
+    - Border radius: 15px
+    - Flag: 22x16px with 2px border radius
+    - Chevron icon: 20x20px
+  - **Phone Field**:
+    - Height: 36px
+    - Border radius: 15px
+    - Font: Archivo 14px weight 400
+    - Placeholder: "+1  (000) 000-0000"
+    - Cursor: 2x16px (typing state)
+    - Icons: 20x20px (checkmark/clear)
+  - **Layout**: 375px mobile width, 8px spacing между элементами
+  - **Usage**: Регистрация, профили, checkout, верификация номера телефона
+- **Новые семантические цвета**:
+  - Success: #11BB8D (border), rgba(17, 187, 141, 0.05) (background)
+  - Error: #DA1414 (border), rgba(218, 20, 20, 0.05) (background)
+  - Error text: #E24949
+- **Новые component sizes**:
+  - Phone input showcase: 840x710px
+  - Phone input height: 36px
+  - Flag: 22x16px
+  - Icons: 20x20px (checkmark/clear/chevron)
+  - Cursor: 2x16px
 
 #### v5.2.0 (2025-11-19)
 - Добавлен компонент Vertical Steps / Stepper из StepsGroups:
