@@ -105,6 +105,7 @@
 --color-text-primary: #09101D;
 --color-text-secondary: #747B84;  /* Обновлено из TabBar кода */
 --color-text-dark: #23262B;  /* Из InformationCardSlider - для badge */
+--color-text-dark-2: #2A2B2F;  /* Из CardsLight - для time slot buttons */
 --color-text-muted: #414249;  /* Из InformationCardSlider - для secondary info */
 --color-text-subtitle: #373940;  /* Из InformationCardSlider - для subtitle */
 --color-text-tertiary: #9CA3AF;
@@ -2847,6 +2848,311 @@ Background: White
 
 ---
 
+### 30. Movie/Event Card (Complete Block)
+
+Готовый блок карточки фильма/события с постером, информацией о сеансах и бронированием, извлеченный из Flutter приложения CardsLight. Это целостный UI-блок с изображением, метаданными, рейтингом и временными слотами.
+
+**🔧 Гибкость блока**: Количество элементов (временные слоты, жанровые badges, карточки) может быть изменено в зависимости от требований бэкенда. Например, временные слоты могут быть от 2 до 10+ с горизонтальным скроллом; жанровые badges от 1 до 5+; можно добавить информацию о цене, директоре, актерах.
+
+#### Общая структура блока:
+
+**Main Container:**
+- **Width**: 375px (mobile)
+- **Padding**: Vertical 30px
+- **Background**: White (#FFFFFF, color-bg-primary)
+- **Border Radius**: 30px (radius-card-large)
+- **Layout**: Vertical column with 2 identical card structures (можно 1+)
+
+**🔧 Гибкость**: Контейнер может содержать от 1 до неограниченного количества карточек с vertical scroll
+
+#### 1. Movie/Event Card (Single Card)
+
+**Card Container:**
+- **Width**: 343px (full width minus padding 16px each side)
+- **Height**: 400px
+- **Layout**: Stack (image + overlay content)
+- **Spacing**: 20px gap between cards
+
+#### 2. Poster Section (Background Image with Overlay)
+
+**Poster Image:**
+- **Size**: 343×290px
+- **Border Radius**: 15px (radius-3xl)
+- **Background**: Image with gradient overlay
+- **Position**: Top of card
+- **Clip**: antiAlias
+
+**Gradient Overlay:**
+- **Type**: Linear gradient vertical
+- **Colors**:
+  - Top: Colors.black.withValues(alpha: 0) - transparent
+  - Bottom: Colors.black - solid black
+- **Purpose**: Обеспечивает читаемость текста поверх изображения
+
+**Action Icon (Top-Right):**
+- **Size**: 28×28px container
+- **Icon**: 16×16px (bookmark/favorite)
+- **Background**: Semi-transparent or solid
+- **Position**: Top-right corner (padding 12px from edges)
+- **Border Radius**: 100px (circular)
+- **Purpose**: Bookmark, favorite, or share action
+
+**🔧 Гибкость**:
+- Icon может быть bookmark (незаполненный/заполненный), heart, share
+- Можно добавить дополнительные иконки (play button для трейлера)
+- Gradient может быть отключен для light posters
+
+#### 3. Content Overlay Section (On Poster)
+
+**Title:**
+- **Text**: "The Dark Knight" (example)
+- **Font**: Archivo
+- **Font Size**: 16px (font-size-base)
+- **Font Weight**: 700 (bold)
+- **Color**: White (#FFFFFF)
+- **Position**: Bottom-left on poster (padding 16px left, 10px from badges)
+- **Max Lines**: 1 with ellipsis
+
+**Description:**
+- **Text**: Movie/event description (example: "Готэм-Сити находится на грани...")
+- **Font**: Archivo
+- **Font Size**: 14px (font-size-sm)
+- **Font Weight**: 400 (normal)
+- **Color**: White (#FFFFFF)
+- **Position**: Below title (5px gap)
+- **Max Lines**: 2 with ellipsis
+- **Padding**: Left 16px, Right 16px
+
+**🔧 Гибкость**: Description может быть скрыт или расширен до 3-4 строк
+
+#### 4. Badges Row (Rating & Genre Tags)
+
+**Badges Container:**
+- **Layout**: Horizontal row
+- **Padding**: Left 16px, Bottom 16px from poster bottom
+- **Spacing**: 10px gap between badges
+- **Position**: Bottom-left corner of poster
+
+**Rating Badge:**
+- **Text**: "8.9" (example)
+- **Height**: 24px
+- **Padding**: Horizontal 8px, Vertical 5px
+- **Background**: #11BB8D (color-success-positive) - зеленый для положительной оценки
+- **Border Radius**: 10px (radius-lg-plus)
+- **Font**: Archivo 11px (font-size-2xs-plus) semibold
+- **Color**: White (#FFFFFF)
+- **Purpose**: IMDb/Kinopoisk rating
+
+**Genre Badges (×2 or more):**
+- **Text**: "Comics", "Science Fiction" (examples)
+- **Height**: 24px
+- **Padding**: Horizontal 8px, Vertical 5px
+- **Background**: #23262B (color-text-dark) - темный
+- **Border Radius**: 10px (radius-lg-plus)
+- **Font**: Archivo 11px (font-size-2xs-plus) semibold
+- **Color**: White (#FFFFFF)
+- **Layout**: Wrap if more than 3 badges
+
+**🔧 Гибкость**:
+- Badges количество от 1 до 5+ с возможностью wrap
+- Можно добавить badge для возрастного рейтинга (16+, 18+)
+- Rating badge может менять цвет в зависимости от оценки:
+  - 8.0+: #11BB8D (зеленый)
+  - 6.0-7.9: #F59E0B (оранжевый)
+  - <6.0: #E24949 (красный)
+
+#### 5. Info Row (Location, Distance, Date)
+
+**Info Container:**
+- **Layout**: Horizontal row
+- **Padding**: Top 10px from poster bottom
+- **Spacing**: 10px gap between elements
+- **Alignment**: Center vertically
+
+**Distance Info:**
+- **Text**: "~500m" (example)
+- **Font**: Archivo
+- **Font Size**: 15px (font-size-sm-plus)
+- **Font Weight**: 600 (semibold)
+- **Color**: #747B84 (color-text-secondary)
+- **Purpose**: Distance to cinema/venue
+
+**Location Name:**
+- **Text**: "Cinema Plaza" (example)
+- **Font**: Archivo
+- **Font Size**: 16px (font-size-base)
+- **Font Weight**: 700 (bold)
+- **Color**: #09101D (color-text-primary)
+- **Flex**: Expanded (takes available space)
+
+**Date Info:**
+- **Text**: "Today" (example)
+- **Font**: Archivo
+- **Font Size**: 16px (font-size-base)
+- **Font Weight**: 700 (bold)
+- **Color**: #09101D (color-text-primary)
+
+**🔧 Гибкость**:
+- Distance может быть скрыт или показывать транспортное время
+- Date может быть "Today", "Tomorrow", конкретная дата "15 Nov"
+- Можно добавить иконки (location pin, calendar)
+
+#### 6. Time Slots Row (Booking Times)
+
+**Time Slots Container:**
+- **Layout**: Horizontal row with wrap
+- **Padding**: Top 10px from info row
+- **Spacing**: 10px gap between buttons
+- **Alignment**: Start (left-aligned)
+
+**Time Slot Button (×4 default):**
+- **Text**: "23:00", "00:15", "01:30", "3:00" (examples)
+- **Height**: 36px
+- **Padding**: Horizontal 16px, Vertical 10px
+- **Background**: #F4F6F9 (color-bg-quaternary) - светло-серый
+- **Border Radius**: 15px (radius-3xl)
+- **Font**: Archivo 11px (font-size-2xs-plus) semibold
+- **Color**: #2A2B2F (color-text-dark-2) - темный текст на светлом фоне
+- **Border**: None (default)
+- **Interactive States**:
+  - Default: #F4F6F9 background, #2A2B2F text
+  - Hover: Slightly darker background
+  - Selected: #09101D background, white text
+  - Disabled/Sold Out: #D9DDE2 background, #747B84 text
+
+**🔧 Гибкость**:
+- Количество time slots от 2 до 10+ с horizontal scroll
+- Можно добавить индикатор доступности мест ("23:00 • 5 left")
+- Selected state для выбранного времени
+- Disabled state для проданных сеансов
+- Можно группировать по дням для multi-day events
+
+#### Complete Block Layout:
+
+```
+┌─────────────────────────────────────────┐
+│  ╔══════════════════════════════════╗   │
+│  ║                            [♡]   ║   │
+│  ║                                  ║   │
+│  ║         POSTER IMAGE             ║   │ 290px
+│  ║       (343 × 290px)              ║   │
+│  ║                                  ║   │
+│  ║  ▓▓▓▓ Gradient Overlay ▓▓▓▓▓▓▓  ║   │
+│  ║  The Dark Knight                 ║   │
+│  ║  Готэм-Сити находится на грани.. ║   │
+│  ║  [8.9] [Comics] [Sci-Fi]         ║   │
+│  ╚══════════════════════════════════╝   │
+│                                          │
+│  ~500m    Cinema Plaza         Today    │ Info Row
+│                                          │
+│  [23:00] [00:15] [01:30] [3:00]         │ Time Slots
+├──────────────────────────────────────────┤ 20px gap
+│  ╔══════════════════════════════════╗   │
+│  ║                            [♡]   ║   │
+│  ║         POSTER IMAGE #2          ║   │ Second Card
+│  ║       (Same structure)           ║   │ (Optional)
+│  ║                                  ║   │
+│  ║  [8.5] [Drama] [Action]          ║   │
+│  ╚══════════════════════════════════╝   │
+│  ~1.2km   Cinema Star          Today    │
+│  [18:30] [20:45] [22:00]                │
+└──────────────────────────────────────────┘
+
+Container Width: 375px
+Card Width: 343px
+Poster Height: 290px
+Card Total Height: ~400px
+Padding: 16px horizontal, 30px vertical
+Background: White, Border Radius: 30px
+```
+
+#### Spacing Summary:
+
+- **Container Padding**: Horizontal 16px (each side), Vertical 30px (top/bottom)
+- **Poster Size**: 343×290px
+- **Poster Border Radius**: 15px
+- **Action Icon**: 28×28px, top-right 12px offset
+- **Title Padding**: Left 16px, bottom 10px from badges row
+- **Description Padding**: Left 16px, Right 16px, 5px gap from title
+- **Badges Row**: Left 16px, Bottom 16px from poster bottom, 10px gap between badges
+- **Badges Height**: 24px, padding 8px horizontal, 5px vertical
+- **Info Row**: Top 10px from poster, 10px gap between elements
+- **Time Slots Row**: Top 10px from info row, 10px gap between buttons
+- **Time Slot Button**: 36px height, 16px horizontal padding, 10px vertical padding
+- **Cards Gap**: 20px between multiple cards
+
+#### Typography Summary:
+
+- **Title**: 16px bold white (Archivo)
+- **Description**: 14px normal white (Archivo)
+- **Rating Badge**: 11px semibold white (Archivo)
+- **Genre Badges**: 11px semibold white (Archivo)
+- **Distance**: 15px semibold #747B84 (Archivo)
+- **Location**: 16px bold #09101D (Archivo)
+- **Date**: 16px bold #09101D (Archivo)
+- **Time Slots**: 11px semibold #2A2B2F (Archivo)
+
+#### Use Cases:
+
+1. **Cinema Showtimes**: Movie listings with session times and booking
+2. **Theater Events**: Theater performances, concerts, shows
+3. **Sports Events**: Match schedules, ticket availability
+4. **Conferences**: Event sessions, workshop schedules
+5. **Exhibitions**: Museum exhibitions, art gallery events
+6. **Online Events**: Webinars, virtual events with time zones
+
+#### Best Practices:
+
+**Flexibility & Extensibility:**
+- Time slots can range from 2 to 10+ with horizontal scroll for overflow
+- Genre badges can be 1-5+ with wrapping to second line
+- Multiple cards can be displayed in vertical scroll container
+- Rating badge color can change based on score threshold
+- Additional metadata can be added (director, cast, duration, price)
+
+**Responsive Behavior:**
+- Fixed 343px card width for mobile 375px container
+- Time slots wrap to multiple rows if many sessions
+- Poster maintains 343:290 aspect ratio when scaled
+- Cards stack vertically with consistent 20px spacing
+- Horizontal scroll for time slots on overflow
+
+**Interactive States:**
+- Time slot buttons show hover, selected, disabled states
+- Action icon (bookmark) toggles between saved/unsaved
+- Poster can be tapped for full details or trailer
+- Badges can be filtered by tapping (show only this genre)
+- Smooth transitions between states (200ms ease-in-out)
+
+**Accessibility:**
+- Action icon has minimum 44×44px touch target (with padding)
+- Time slot buttons have clear contrast (#2A2B2F on #F4F6F9)
+- Gradient overlay ensures text readability on all poster backgrounds
+- Rating and genre information is semantically labeled
+- Alt text for poster images describes movie/event
+
+**Design Tokens Used:**
+- Colors: #FFFFFF, #000000, #09101D, #23262B, #2A2B2F, #747B84, #11BB8D, #F4F6F9, #D9DDE2
+- Border Radius: 10px, 15px, 30px, 100px
+- Font Sizes: 11px, 14px, 15px, 16px
+- Font Weights: 400 (normal), 600 (semibold), 700 (bold)
+- Spacing: 5px, 10px, 12px, 16px, 20px, 30px
+- Shadows: Optional card shadow for elevation
+
+**Common Modifications:**
+- **Add Price**: Insert ticket price badge in badges row or below time slots
+- **Add Duration**: Show movie duration "2h 15m" in info row
+- **Add Age Rating**: Show "16+", "18+" badge with rating
+- **Add Seat Availability**: Show "23/150 seats" below time slots
+- **Add Director/Cast**: Show key cast members with small avatars
+- **Add 3D/IMAX Badges**: Technology badges alongside genre
+- **Add Booking Status**: Show "Booked", "In Cart" state for selected time
+- **Add Multi-Day Schedule**: Group time slots by dates with date headers
+- **Add Trailer Preview**: Auto-play video preview on card hover
+- **Add User Rating**: Allow users to submit their own rating
+
+---
+
 ## Как использовать эту дизайн-систему
 
 ### Для дизайнеров
@@ -2874,9 +3180,51 @@ Background: White
 
 ## Версионирование и обновления
 
-**Текущая версия**: v5.9.0
+**Текущая версия**: v5.10.0
 
 ### Changelog
+
+#### v5.10.0 (2025-11-19)
+- Добавлен готовый **UI-блок** из Flutter приложения CardsLight (Movie/Event Card)
+- Block #30: Movie/Event Card (Complete Block):
+  - Карточка фильма/события с постером, информацией о сеансах и бронированием
+  - Включает 6 секций: Container, Poster (343×290px), Content Overlay, Badges Row, Info Row, Time Slots
+  - **🔧 Гибкость блока**: Количество элементов настраивается (2-10+ time slots, 1-5+ genre badges, 1+ cards)
+- Добавлен новый design token:
+  - Text Dark 2: #2A2B2F (color-text-dark-2) для темного текста на светлых кнопках (time slot buttons)
+- Структура блока:
+  - Main Container: 375px width, 30px vertical padding, white background, 30px radius
+  - Poster Section: 343×290px с gradient overlay (transparent → black), action icon 28×28px
+  - Content Overlay: Title (16px bold white), Description (14px normal white, 2 lines max)
+  - Badges Row: Rating badge (#11BB8D, 24px height), Genre badges (#23262B, 24px height)
+  - Info Row: Distance (15px semibold #747B84), Location (16px bold #09101D), Date (16px bold #09101D)
+  - Time Slots: 4 buttons default (36px height, #F4F6F9 background, #2A2B2F text, 15px radius)
+- Interactive states для time slots:
+  - Default: #F4F6F9 background, #2A2B2F text
+  - Selected: #09101D background, white text
+  - Disabled/Sold Out: #D9DDE2 background, #747B84 text
+- Spacing:
+  - Container padding: 16px horizontal, 30px vertical
+  - Poster: 15px border radius
+  - Cards gap: 20px between multiple cards
+  - Info/Slots rows: 10px top padding, 10px gaps
+- Typography:
+  - Title: 16px bold white, Description: 14px normal white
+  - Badges: 11px semibold white
+  - Info: 15-16px semibold/bold #09101D/#747B84
+  - Time slots: 11px semibold #2A2B2F
+- Common Modifications:
+  - Add price, duration, age rating, seat availability
+  - Add director/cast, 3D/IMAX badges, booking status
+  - Add multi-day schedule, trailer preview, user rating
+- Документированы 6 use cases (Cinema, Theater, Sports, Conferences, Exhibitions, Online Events)
+- Best Practices для блоков:
+  - Flexible time slots (2-10+) с horizontal scroll
+  - Rating badge color changes based on score (8.0+: green, 6.0-7.9: orange, <6.0: red)
+  - Responsive behavior (343px mobile → scalable for tablet)
+  - Interactive states (hover, selected, disabled) с 200ms transitions
+  - Accessibility (44px touch targets, clear contrast, gradient readability)
+- ASCII-диаграмма полной структуры блока с двумя карточками
 
 #### v5.9.0 (2025-11-19)
 - Добавлен первый готовый **UI-блок** из Flutter приложения SocialLight (Social Program Card)
