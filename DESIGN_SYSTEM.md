@@ -68,11 +68,14 @@
 ```css
 /* Фоны для компонентов */
 --color-bg-light: #F4F6F9;         /* Светлый фон из Flutter (основной для cards) */
+--color-bg-light-pressed: #EAEEF2; /* Pressed state для светлых компонентов (textarea, inputs) */
 --color-bg-dark: #18202F;          /* Темный scaffold background из Flutter */
 --color-bg-dark-secondary: #23262B; /* Темный вторичный фон (для picker items, secondary dark elements) */
 --color-bg-overlay: rgba(0, 0, 0, 0.10);  /* Overlay для изображений */
 --color-bg-card-light: #D9DDE2;    /* Светлая карточка (avatar placeholder) */
 --color-bg-card-dark: #09101D;     /* Темная карточка (dark buttons, dark elements) */
+--color-bg-success-light: rgba(17, 187, 141, 0.05); /* Success state background (5% opacity) */
+--color-bg-error-light: rgba(218, 20, 20, 0.05);   /* Error state background (5% opacity) */
 ```
 
 ### Shadow Colors
@@ -485,12 +488,127 @@
   - Error: Border: 1px solid color-error
   - Disabled: Background: color-bg-tertiary, Cursor: not-allowed, Opacity: 0.6
 
-#### Textarea
+#### Textarea (Multi-line Input - Flutter Mobile)
 
-- **Min Height**: 80px
-- **Padding**: 10px 12px
-- **Radius**: radius-md (6px)
-- **Resize**: vertical
+**Container**:
+- Width: 375px (mobile screen width)
+- Padding: 16px horizontal
+- Column spacing: 10px (между label и field)
+
+**Field**:
+- Height: 135px
+- Padding: 20px horizontal, 15px vertical
+- Border Radius: 15px
+- Background: #F4F6F9 (color-bg-light)
+- Border: none (default), 2px solid (focus/active/positive/negative states)
+
+**Typography**:
+- **Label**:
+  - Font: Archivo 14px, weight 600
+  - Color: #09101D (color-text-primary)
+  - Line Height: 1.40
+- **Placeholder**:
+  - Font: Archivo 14px, weight 400
+  - Color: #747B84 (color-text-secondary)
+  - Line Height: 1.40
+- **Content Text**:
+  - Font: Archivo 14-15px, weight 400
+  - Color: #09101D (color-text-primary)
+  - Line Height: 1.40
+- **Character Counter**:
+  - Font: Archivo 10px, weight 600
+  - Position: Right (bottom-right corner)
+  - Format: "current/max" (e.g., "256/1200")
+  - Color: normal (#747B84), error (#E24949 when over limit)
+- **Helper Message**:
+  - Font: Archivo 14px, weight 400
+  - Color: #747B84 (color-text-secondary)
+  - Margin Top: 5px
+- **Error Message**:
+  - Font: Archivo 14px, weight 400
+  - Color: #E24949 (color-notification)
+  - Margin Top: 5px
+
+**Icons**:
+- Close Icon: 24px × 24px (positioned top-right inside field)
+- Check Icon: 24px × 24px (for positive/success state)
+- Size: 24px container, internal icon sizing varies
+
+**States**:
+
+1. **Enabled** (Default):
+   - Background: #F4F6F9 (color-bg-light)
+   - Border: none
+   - Placeholder: #747B84
+   - Counter: "0/1200" (#747B84)
+
+2. **Focus**:
+   - Background: #F4F6F9 (color-bg-light)
+   - Border: 2px solid #09101D (color-text-primary)
+   - Placeholder: visible or hidden (when typing)
+
+3. **Pressed** (Tap/Click):
+   - Background: #EAEEF2 (color-bg-light-pressed)
+   - Border: none
+   - Temporary state during press
+
+4. **Complete** (With Content):
+   - Background: #F4F6F9 (color-bg-light)
+   - Border: none
+   - Content text: visible
+   - Counter: "256/1200" (#747B84)
+   - Close icon: visible (24px, top-right)
+
+5. **Active-Typing** (Actively Typing):
+   - Background: #F4F6F9 (color-bg-light)
+   - Border: 2px solid #09101D (color-text-primary)
+   - Content text: visible
+   - Counter: "256/1200" (#747B84)
+   - Close icon: visible (24px, top-right)
+
+6. **Incomplete** (Required but Empty):
+   - Background: #F4F6F9 (color-bg-light)
+   - Border: none
+   - Placeholder: visible
+   - Counter: "0/1200" (#747B84)
+   - Close icon: visible (24px, top-right)
+
+7. **Positive** (Success/Valid):
+   - Background: rgba(17, 187, 141, 0.05) (color-bg-success-light)
+   - Border: 2px solid #11BB8D (color-success)
+   - Content text: visible
+   - Check icon: visible (24px, positioned appropriately)
+   - Helper message: optional success message
+
+8. **Negative** (Error/Invalid):
+   - Background: rgba(218, 20, 20, 0.05) (color-bg-error-light)
+   - Border: 2px solid #DA1414 (color-error)
+   - Content text: visible
+   - Counter: "1322/1200" in #E24949 (shows over-limit)
+   - Error message: visible below field
+   - Helper text: replaced by error message
+
+9. **Disabled**:
+   - Background: #F4F6F9 (color-bg-light)
+   - All text colors: #D9DDE2 (color-text-disabled)
+   - Counter: #D9DDE2
+   - Helper: #D9DDE2
+   - Cursor: not-allowed
+   - Opacity: reduced
+
+**Character Counter Functionality**:
+- Always visible in bottom-right corner
+- Updates in real-time as user types
+- Shows "current/max" format
+- Color changes to #E24949 when limit exceeded
+- Example: "0/1200", "256/1200", "1322/1200"
+
+**Validation Patterns**:
+- **Success**: Green border (#11BB8D) + light green background
+- **Error**: Red border (#DA1414) + light red background + error message
+- **Over Limit**: Counter turns red (#E24949)
+
+**Usage**: Multi-line text input for comments, descriptions, messages, notes, etc.
 
 #### Select
 
@@ -1683,6 +1801,27 @@ Icon Button (40px):
   - Added #23262B (bg-dark-secondary) для picker items
   - Added #DA1414 (error) для destructive actions
   - Added #E24949 (notification) для активных уведомлений и badges
+  - Added #EAEEF2 (bg-light-pressed) для pressed state светлых компонентов
+  - Added rgba(17, 187, 141, 0.05) (bg-success-light) для success state background
+  - Added rgba(218, 20, 20, 0.05) (bg-error-light) для error state background
+- Textarea Component (Multi-line Input - Flutter Mobile):
+  - Container: 375px width, padding 16px horizontal
+  - Field: 135px height, padding 20px/15px, border-radius 15px
+  - Typography: Label (Archivo 14px weight 600), Placeholder (14px weight 400 #747B84), Content (14-15px weight 400), Counter (10px weight 600)
+  - Character counter: bottom-right position, "current/max" format (e.g., "256/1200"), changes to #E24949 when over limit
+  - Icons: Close icon (24px), Check icon (24px for success state)
+  - 9 States documented:
+    1. Enabled: Background #F4F6F9, placeholder, counter "0/1200"
+    2. Focus: Border 2px #09101D
+    3. Pressed: Background #EAEEF2 (temporary state)
+    4. Complete: With content, counter "256/1200", close icon
+    5. Active-Typing: Border 2px #09101D, content, counter, close icon
+    6. Incomplete: Placeholder, counter "0/1200", close icon
+    7. Positive: Border 2px #11BB8D, background rgba(17,187,141,0.05), check icon
+    8. Negative: Border 2px #DA1414, background rgba(218,20,20,0.05), counter "1322/1200" in error color, error message
+    9. Disabled: All colors #D9DDE2
+  - Validation patterns: Success (green border + light green bg), Error (red border + light red bg + error message)
+  - Helper and error messages: Archivo 14px weight 400, positioned below field
 - Layout patterns и Best practices
 
 ---
