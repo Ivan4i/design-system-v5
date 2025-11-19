@@ -533,6 +533,327 @@ Container(
   - Padding: 20px
 - **Usage**: Промо карточки с текстом поверх изображения
 
+<!-- COMPONENT: Flutter Video/Content Card | CATEGORY: Cards, Media, Social | TAGS: video, content, social-proof, avatars, badges, author | RELATED: Flutter Overlay Badges, Flutter Avatar Groups, Flutter Author Info -->
+##### Video/Content Card with Social Proof
+
+Карточка видео/контента с социальными элементами: бейджи метрик, группа аватаров, информация об авторе.
+
+**Card Container:**
+- **Size**: 230px × 400px
+- **Border Radius**: 16px
+- **Content Padding**: 5px
+
+**Image Section:**
+- **Size**: 230px × 230px (full width)
+- **Border Radius**: 15px
+- **Overlay Badges**: Positioned at top with 10px padding
+
+**Overlay Badges (Duration & Views):**
+- **Height**: 24px
+- **Padding**: Left 5px, Right 10px
+- **Background**: rgba(0, 0, 0, 0.30) - black 30% opacity
+- **Border Radius**: 10px
+- **Icon Container**: 24×24px, padding 8px, border-radius 100px
+- **Icon Size**: ~10px (positioned with -0.80 offset)
+- **Typography**: 11px Archivo SemiBold (w600) white, line-height 1.40
+- **Content**: "2:12" (duration left), "1.342" (views right)
+- **Layout**: Space-between with 90px spacing
+- **Usage**: Показывает длительность контента и количество просмотров
+
+**Avatar Group (Overlapping with Border):**
+- **Container Spacing**: 10px between avatars in Row
+- **Each Avatar**:
+  - Outer: 32×32px
+  - Border: 4px solid white, border-radius 30px
+  - Inner Background: #D9DDE2, 24×24px (positioned at 4px offset)
+  - Image: 24×24px, border-radius 40px
+- **Counter Avatar** (last item showing "1k"):
+  - Same structure but with text instead of image
+  - Text: "1k", 10px Archivo SemiBold (w600) white
+  - Text positioned at top 7px (centered)
+  - Container: 24×24px, height 18px for text
+- **Total Display**: 5 avatars (4 images + 1 counter)
+- **Usage**: Социальный proof - показывает участников/подписчиков
+
+**Title:**
+- **Width**: 220px (constrained)
+- **Text**: "Home fitness program, 2 minutes per day"
+- **Typography**: 16px Archivo Bold (w700) #09101D, line-height 1.40
+- **Usage**: Заголовок контента
+
+**Author Info:**
+- **Avatar Outer**: 40×40px
+- **Avatar Inner**: 32×32px (positioned at 4px offset), #D9DDE2 background
+- **Avatar Image**: 32×32px, border-radius 40px
+- **Name**: "Nicole Dowson", 13px Archivo SemiBold (w600) #09101D, line-height 1.40
+- **Team/Role**: "Fitness App Team", 12px Archivo Regular (w400) #373940, line-height 1.40
+- **Spacing**: 6px between avatar and text column
+
+**Content Spacing:**
+- Between avatar group and title: 10px
+- Between sections within content: 5px
+- Between title and author: 5px
+
+```dart
+// Video/Content Card - Full Structure
+Container(
+  width: 230,
+  height: 400,
+  clipBehavior: Clip.antiAlias,
+  decoration: ShapeDecoration(
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(16),
+    ),
+  ),
+  child: Column(
+    children: [
+      // Image with overlay badges
+      Container(
+        width: double.infinity,
+        height: 230,
+        decoration: ShapeDecoration(
+          image: DecorationImage(
+            image: NetworkImage("https://placehold.co/230x230"),
+            fit: BoxFit.cover,
+          ),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15),
+          ),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Duration badge
+            Container(
+              padding: const EdgeInsets.all(10),
+              child: Container(
+                height: 24,
+                padding: const EdgeInsets.only(left: 5, right: 10),
+                decoration: ShapeDecoration(
+                  color: Colors.black.withValues(alpha: 0.30),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+                child: Row(
+                  children: [
+                    Container(width: 24, height: 24, padding: const EdgeInsets.all(8)),
+                    Text(
+                      '2:12',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 11,
+                        fontFamily: 'Archivo',
+                        fontWeight: FontWeight.w600,
+                        height: 1.40,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            // Views badge
+            Container(
+              padding: const EdgeInsets.all(10),
+              child: Container(
+                height: 24,
+                padding: const EdgeInsets.only(left: 5, right: 10),
+                decoration: ShapeDecoration(
+                  color: Colors.black.withValues(alpha: 0.30),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+                child: Row(
+                  children: [
+                    Container(width: 24, height: 24, padding: const EdgeInsets.all(8)),
+                    Text(
+                      '1.342',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 11,
+                        fontFamily: 'Archivo',
+                        fontWeight: FontWeight.w600,
+                        height: 1.40,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+      // Content section
+      Container(
+        width: double.infinity,
+        padding: const EdgeInsets.all(5),
+        child: Column(
+          spacing: 5,
+          children: [
+            // Avatar group
+            Row(
+              spacing: 10,
+              children: [
+                // Avatar with white border (repeated 4 times)
+                Container(
+                  width: 32,
+                  height: 32,
+                  child: Stack(
+                    children: [
+                      Container(
+                        width: 32,
+                        height: 32,
+                        decoration: ShapeDecoration(
+                          shape: RoundedRectangleBorder(
+                            side: BorderSide(width: 4, color: Colors.white),
+                            borderRadius: BorderRadius.circular(30),
+                          ),
+                        ),
+                      ),
+                      Positioned(
+                        left: 4,
+                        top: 4,
+                        child: Container(
+                          width: 24,
+                          height: 24,
+                          decoration: ShapeDecoration(
+                            image: DecorationImage(
+                              image: NetworkImage("https://placehold.co/24x24"),
+                              fit: BoxFit.cover,
+                            ),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(40),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                // Counter avatar
+                Container(
+                  width: 32,
+                  height: 32,
+                  child: Stack(
+                    children: [
+                      Container(
+                        decoration: ShapeDecoration(
+                          shape: RoundedRectangleBorder(
+                            side: BorderSide(width: 4, color: Colors.white),
+                            borderRadius: BorderRadius.circular(30),
+                          ),
+                        ),
+                      ),
+                      Positioned(
+                        left: 4,
+                        top: 7,
+                        child: Text(
+                          '1k',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 10,
+                            fontFamily: 'Archivo',
+                            fontWeight: FontWeight.w600,
+                            height: 1.40,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            // Title
+            SizedBox(
+              width: 220,
+              child: Text(
+                'Home fitness program, 2 minutes per day',
+                style: TextStyle(
+                  color: const Color(0xFF09101D),
+                  fontSize: 16,
+                  fontFamily: 'Archivo',
+                  fontWeight: FontWeight.w700,
+                  height: 1.40,
+                ),
+              ),
+            ),
+            // Author info
+            Row(
+              spacing: 6,
+              children: [
+                Container(
+                  width: 40,
+                  height: 40,
+                  child: Stack(
+                    children: [
+                      Positioned(
+                        left: 4,
+                        top: 4,
+                        child: Container(
+                          width: 32,
+                          height: 32,
+                          decoration: ShapeDecoration(
+                            image: DecorationImage(
+                              image: NetworkImage("https://placehold.co/32x32"),
+                              fit: BoxFit.cover,
+                            ),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(40),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Nicole Dowson',
+                      style: TextStyle(
+                        color: const Color(0xFF09101D),
+                        fontSize: 13,
+                        fontFamily: 'Archivo',
+                        fontWeight: FontWeight.w600,
+                        height: 1.40,
+                      ),
+                    ),
+                    Text(
+                      'Fitness App Team',
+                      style: TextStyle(
+                        color: const Color(0xFF373940),
+                        fontSize: 12,
+                        fontFamily: 'Archivo',
+                        fontWeight: FontWeight.w400,
+                        height: 1.40,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    ],
+  ),
+)
+```
+
+**Usage Notes:**
+- Карточка объединяет несколько паттернов: медиа контент + социальные элементы + авторство
+- Avatar group с белой обводкой создает визуальный "стек" участников
+- Counter avatar показывает общее количество когда слишком много для отображения
+- Overlay badges используют одинаковую структуру для consistency
+- Author info внизу добавляет credibility контенту
+- Ideal для: видео уроков, фитнес программ, курсов, туториалов
+
+<!-- CROSS-REFERENCE: See also "Flutter Overlay Badges" for badge variations, "Flutter Avatar Groups" for avatar patterns, "Flutter Author Info" for creator details -->
+
 ---
 
 ### 2. Buttons
@@ -1668,6 +1989,306 @@ Container(
   ),
 )
 ```
+
+---
+
+<!-- COMPONENT: Flutter Avatar Groups | CATEGORY: Avatar, Social, User Interface | TAGS: avatar, group, stack, counter, social-proof, participants | RELATED: Flutter Video/Content Card, Flutter Author Info, Avatar -->
+#### Flutter Avatar Groups
+
+Группы аватаров с белой обводкой для отображения участников/подписчиков с визуальным стеком.
+
+**Avatar with White Border:**
+- **Outer Size**: 32×32px
+- **Border**: 4px solid white (#FFFFFF)
+- **Border Radius**: 30px (circular)
+- **Inner Background**: #D9DDE2 (24×24px positioned at 4px offset)
+- **Image**: 24×24px, border-radius 40px
+- **Image Position**: Left 4px, Top 4px
+
+**Counter Avatar (Overflow Indicator):**
+- **Same Structure**: 32×32px outer with 4px white border
+- **Content**: Text instead of image
+- **Text**: "1k" (or any count format)
+- **Typography**: 10px Archivo SemiBold (w600) white, line-height 1.40
+- **Text Position**: Left 4px, Top 7px (slightly lower than image for centering)
+- **Text Container**: 24×24px width, 18px height
+- **Usage**: Показывает общее количество когда слишком много участников для отображения
+
+**Group Layout:**
+- **Spacing**: 10px between avatars
+- **Direction**: Horizontal Row
+- **Typical Count**: 4-5 avatars (4 images + 1 counter)
+- **Alignment**: Center
+
+**Color Specifications:**
+- Border: #FFFFFF (white) - creates visual separation on any background
+- Placeholder: #D9DDE2 (light gray)
+- Text: #FFFFFF (white) for counter
+
+```dart
+// Avatar with white border
+Container(
+  width: 32,
+  height: 32,
+  child: Stack(
+    children: [
+      // White border container
+      Container(
+        width: 32,
+        height: 32,
+        decoration: ShapeDecoration(
+          shape: RoundedRectangleBorder(
+            side: BorderSide(width: 4, color: Colors.white),
+            borderRadius: BorderRadius.circular(30),
+          ),
+        ),
+      ),
+      // Background
+      Positioned(
+        left: 4,
+        top: 4,
+        child: Container(
+          width: 24,
+          height: 24,
+          decoration: ShapeDecoration(
+            color: const Color(0xFFD9DDE2),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(40),
+            ),
+          ),
+        ),
+      ),
+      // Image
+      Positioned(
+        left: 4,
+        top: 4,
+        child: Container(
+          width: 24,
+          height: 24,
+          decoration: ShapeDecoration(
+            image: DecorationImage(
+              image: NetworkImage("https://placehold.co/24x24"),
+              fit: BoxFit.cover,
+            ),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(40),
+            ),
+          ),
+        ),
+      ),
+    ],
+  ),
+)
+
+// Counter avatar (showing "1k")
+Container(
+  width: 32,
+  height: 32,
+  child: Stack(
+    children: [
+      Container(
+        width: 32,
+        height: 32,
+        decoration: ShapeDecoration(
+          shape: RoundedRectangleBorder(
+            side: BorderSide(width: 4, color: Colors.white),
+            borderRadius: BorderRadius.circular(30),
+          ),
+        ),
+      ),
+      Positioned(
+        left: 4,
+        top: 4,
+        child: Container(
+          width: 24,
+          height: 24,
+          decoration: ShapeDecoration(
+            color: const Color(0xFFD9DDE2),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(40),
+            ),
+          ),
+        ),
+      ),
+      Positioned(
+        left: 4,
+        top: 7,
+        child: Container(
+          width: 24,
+          height: 18,
+          child: Text(
+            '1k',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 10,
+              fontFamily: 'Archivo',
+              fontWeight: FontWeight.w600,
+              height: 1.40,
+            ),
+          ),
+        ),
+      ),
+    ],
+  ),
+)
+
+// Full group
+Row(
+  spacing: 10,
+  children: [
+    // Avatar 1
+    // Avatar 2
+    // Avatar 3
+    // Avatar 4
+    // Counter avatar
+  ],
+)
+```
+
+**Usage Notes:**
+- Белая обводка 4px создает визуальное разделение на любом фоне
+- Counter avatar позволяет показать больше участников без перегрузки UI
+- Spacing 10px обеспечивает читаемость без overlapping
+- Используется для социального proof на карточках контента
+- Ideal для: участники курса, подписчики, команда проекта, реакции пользователей
+
+**Variants:**
+- **4 avatars + counter**: Стандартная группа для social proof
+- **Only avatars**: Без counter если количество участников небольшое
+- **Different sizes**: Можно масштабировать пропорционально (сохраняя border 4px)
+
+<!-- CROSS-REFERENCE: Used in "Flutter Video/Content Card", see also "Flutter Author Info" for single author display -->
+
+---
+
+<!-- COMPONENT: Flutter Author Info | CATEGORY: User Interface, Content, Author | TAGS: author, creator, user-info, avatar, credentials | RELATED: Flutter Video/Content Card, Flutter Avatar Groups -->
+#### Flutter Author Info
+
+Компонент информации об авторе/создателе контента с аватаром и описанием.
+
+**Avatar Section:**
+- **Outer Container**: 40×40px
+- **Inner Avatar**: 32×32px (positioned at 4px offset)
+- **Background**: #D9DDE2 (placeholder)
+- **Image**: 32×32px, border-radius 40px (circle)
+- **Position**: Left 4px, Top 4px
+
+**Text Section:**
+- **Layout**: Vertical Column, cross-axis start (left-aligned)
+- **Spacing**: 6px between avatar and text
+
+**Name (Primary):**
+- **Text**: "Nicole Dowson"
+- **Typography**: 13px Archivo SemiBold (w600) #09101D, line-height 1.40
+- **Color**: #09101D (dark black)
+- **Usage**: Имя автора/создателя
+
+**Team/Role (Secondary):**
+- **Text**: "Fitness App Team"
+- **Typography**: 12px Archivo Regular (w400) #373940, line-height 1.40
+- **Color**: #373940 (gray)
+- **Usage**: Команда, роль, компания, или дополнительная информация
+
+**Layout:**
+- **Direction**: Horizontal Row with avatar + text column
+- **Alignment**: Center (vertical alignment)
+- **Spacing**: 6px gap between avatar and text
+
+```dart
+// Flutter Author Info Component
+Row(
+  spacing: 6,
+  children: [
+    // Avatar
+    Container(
+      width: 40,
+      height: 40,
+      child: Stack(
+        children: [
+          Positioned(
+            left: 4,
+            top: 4,
+            child: Container(
+              width: 32,
+              height: 32,
+              decoration: ShapeDecoration(
+                color: const Color(0xFFD9DDE2),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(40),
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            left: 4,
+            top: 4,
+            child: Container(
+              width: 32,
+              height: 32,
+              decoration: ShapeDecoration(
+                image: DecorationImage(
+                  image: NetworkImage("https://placehold.co/32x32"),
+                  fit: BoxFit.cover,
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(40),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    ),
+    // Text info
+    Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Nicole Dowson',
+          style: TextStyle(
+            color: const Color(0xFF09101D),
+            fontSize: 13,
+            fontFamily: 'Archivo',
+            fontWeight: FontWeight.w600,
+            height: 1.40,
+          ),
+        ),
+        Text(
+          'Fitness App Team',
+          style: TextStyle(
+            color: const Color(0xFF373940),
+            fontSize: 12,
+            fontFamily: 'Archivo',
+            fontWeight: FontWeight.w400,
+            height: 1.40,
+          ),
+        ),
+      ],
+    ),
+  ],
+)
+```
+
+**Usage Notes:**
+- Avatar 40×40px outer (32×32px inner) больше чем в avatar group для акцента на авторе
+- Двухстрочная структура текста обеспечивает полную информацию в компактном формате
+- Name в SemiBold (w600) для выделения, Team/Role в Regular (w400) для иерархии
+- Spacing 6px оптимален для визуальной связи между avatar и текстом
+- Используется на карточках контента для credibility и атрибуции
+
+**Variants:**
+- **With verification badge**: Можно добавить иконку верификации после имени
+- **Single line**: Только имя без team/role для минимализма
+- **Interactive**: Может быть кликабельным для перехода на профиль автора
+- **With stats**: Можно добавить количество подписчиков или постов
+
+**Color Specifications:**
+- Primary text (Name): #09101D - dark black for prominence
+- Secondary text (Team): #373940 - gray for hierarchy
+- Avatar placeholder: #D9DDE2 - light gray
+
+<!-- CROSS-REFERENCE: Used in "Flutter Video/Content Card", companion to "Flutter Avatar Groups" for social elements -->
 
 ---
 
@@ -3107,9 +3728,65 @@ Container(
 
 ## Версионирование и обновления
 
-**Текущая версия**: v5.8.0
+**Текущая версия**: v5.9.0
 
 ### Changelog
+
+#### v5.9.0 (2025-11-19)
+- **Добавлена секция Flutter Video/Content Card with Social Proof:**
+  - Комплексная карточка 230×400px с медиа контентом и социальными элементами
+  - Image section: 230×230px с overlay badges
+  - Overlay badges для duration ("2:12") и views ("1.342")
+  - Avatar group с белой обводкой (4 avatars + counter "1k")
+  - Title section: 220px width, 16px Bold #09101D
+  - Author info section с avatar 40×40px и текстовой информацией
+  - Content spacing: 5px between sections, 6px avatar-to-text, 10px avatar group-to-title
+  - Полный Flutter код с комментариями для всех секций
+  - IDE AI Navigation markers для быстрого поиска
+  - Cross-references к связанным компонентам
+- **Добавлена секция Flutter Avatar Groups:**
+  - Группы аватаров с белой обводкой для social proof
+  - Avatar outer: 32×32px, border 4px white, border-radius 30px
+  - Avatar inner: 24×24px image positioned at 4px offset
+  - Counter avatar: текст "1k" вместо изображения (10px w600 white)
+  - Text position: top 7px (для центрирования)
+  - Group spacing: 10px between avatars
+  - Typical count: 4-5 avatars (4 images + 1 counter)
+  - Usage notes для социального proof: участники, подписчики, команда
+  - Variants: с counter/без counter, разные размеры
+  - Complete Flutter код для avatar with border и counter avatar
+  - IDE AI Navigation markers: CATEGORY: Avatar, Social, User Interface
+- **Добавлена секция Flutter Author Info:**
+  - Компонент информации об авторе контента
+  - Avatar: 40×40px outer, 32×32px inner (positioned at 4px offset)
+  - Name: "Nicole Dowson", 13px Archivo SemiBold (w600) #09101D
+  - Team/Role: "Fitness App Team", 12px Archivo Regular (w400) #373940
+  - Layout: Horizontal row, spacing 6px between avatar and text
+  - Text column: cross-axis start (left-aligned)
+  - Usage: Для credibility и атрибуции на карточках контента
+  - Variants: с verification badge, single line, interactive, with stats
+  - Complete Flutter код для avatar + text column
+  - IDE AI Navigation markers: CATEGORY: User Interface, Content, Author
+- **IDE AI Navigation System:**
+  - Добавлены HTML комментарии с метаданными для всех новых компонентов
+  - Format: `<!-- COMPONENT: Name | CATEGORY: Categories | TAGS: tags | RELATED: Components -->`
+  - Cross-references между связанными компонентами
+  - Улучшенная навигация для IDE AI ассистентов
+- **Typography спецификации:**
+  - Title card: 16px Archivo Bold (w700) #09101D
+  - Author name: 13px Archivo SemiBold (w600) #09101D
+  - Author team: 12px Archivo Regular (w400) #373940
+  - Counter text: 10px Archivo SemiBold (w600) white
+- **Color спецификации:**
+  - Avatar placeholder: #D9DDE2
+  - Primary text: #09101D (dark black)
+  - Secondary text: #373940 (gray)
+  - Border white: #FFFFFF (4px for avatar groups)
+- **Spacing system:**
+  - Avatar group: 10px between items
+  - Author info: 6px avatar-to-text
+  - Card sections: 5px internal spacing
+  - Avatar group to title: 10px
 
 #### v5.8.0 (2025-11-19)
 - **Добавлена секция Flutter Navigation Header:**
