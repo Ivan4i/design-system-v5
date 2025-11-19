@@ -1571,6 +1571,54 @@
 
 **Использование**: Settings toggles, feature flags, remember me checkboxes, preferences, notifications on/off
 
+#### Floating Action Button
+
+Круглая плавающая кнопка для быстрых действий (share, favorite, download, etc).
+
+**Dimensions:**
+- **Container Size**: 44×44px
+- **Border Radius**: 30px (circular)
+- **Padding**: 14px (all sides)
+- **Icon Size**: 16×16px (44px - 14px×2)
+
+**Visual Style:**
+- **Background**: #FFFFFF (white)
+- **Shadow**: BoxShadow
+  - Color: rgba(0, 0, 0, 0.3)
+  - Blur Radius: 10px
+  - Offset: (0, 2)
+
+**Icon:**
+- Size: 16×16px (centered)
+- Color: Usually #09101D (text-primary) or themed color
+- Padding: 14px around icon создает touch target 44×44px
+
+**Usage:**
+- Action buttons в gallery blocks (share, favorite, download, info)
+- Floating quick actions над контентом
+- Row/Grid arrangements: spacing 10-16px between buttons
+- Usually appears in groups of 2-6 buttons
+
+**Typical Actions:**
+- Share (share icon)
+- Favorite/Like (heart icon)
+- Download (download icon)
+- Info (info icon)
+- Edit (edit/pencil icon)
+- Delete (trash icon)
+
+**Interaction:**
+- Tap target: Full 44×44px
+- Hover state: Может добавляться тень побольше
+- Active state: Scale down slightly (0.95)
+
+**Accessibility:**
+- Minimum touch target: 44×44px ✓
+- High contrast: White button с тенью хорошо видна на любом фоне
+- Icon должна быть понятной (standard iconography)
+
+**Использование**: Gallery actions, quick share buttons, floating toolbars, card actions, media controls
+
 ---
 
 ### 17. Hero Image Carousel (Flutter)
@@ -2243,6 +2291,94 @@
 
 ---
 
+#### Gallery Block with Action Buttons
+
+Блок с сеткой изображений и плавающими action кнопками (share, like, save, etc).
+
+**Dimensions:**
+- Screen: 375×290px
+- Border Radius: 30px
+- Background: White
+
+**Structure:**
+
+1. **Gallery Grid** (padding: horizontal 16px, vertical 20px)
+
+   **Layout:** 2 columns, spacing: 10px
+
+   **Left Column:**
+   - Image: 166.5×250px (full height)
+   - Background: #F4F6F9 (placeholder)
+   - Border Radius: 20px
+   - Image fit: cover
+   - Clip: antiAlias
+
+   **Right Column:**
+   - Layout: 2 images stacked, spacing: 10px
+   - Each Image: 166.5×120px
+   - Background: #F4F6F9 (placeholder)
+   - Border Radius: 20px
+   - Image fit: cover
+   - Clip: antiAlias
+
+2. **Floating Action Buttons Row** (positioned at top: 194px from container top)
+   - Container Padding: top 10px, horizontal 32px, bottom 20px
+   - Layout: Row (4 buttons)
+   - Alignment: Center
+
+   **Each Button:**
+   - Outer Container Padding: 10px
+   - Button Size: 44×44px
+   - Background: White
+   - Border Radius: 30px (круг)
+   - Shadow: `BoxShadow(color: rgba(0, 0, 0, 0.3), blurRadius: 10, offset: (0, 2))`
+   - Icon Padding: 14px (icon area 16×16px)
+   - Icon Size: ~19px
+
+   **Buttons можно использовать для:**
+   - Share (поделиться)
+   - Like/Favorite (избранное)
+   - Save/Bookmark (сохранить)
+   - Download (скачать)
+   - Edit (редактировать)
+   - More actions (меню)
+
+**Shadow Specification:**
+```dart
+BoxShadow(
+  color: Color(0x4C000000),  // rgba(0, 0, 0, 0.3)
+  blurRadius: 10,
+  offset: Offset(0, 2),
+  spreadRadius: 0,
+)
+```
+
+**Grid Variants:**
+- **1+2 Layout**: 1 большое слева + 2 маленьких справа (текущий)
+- **2+1 Layout**: 2 маленьких слева + 1 большое справа
+- **2+2 Layout**: 4 равных изображения (2×2 grid)
+- **3 Column**: 3 вертикальных изображения
+- **Masonry**: Разные высоты в колонках
+
+**Button Count Variants:**
+- **2 buttons**: Primary actions (like, share)
+- **3 buttons**: Add download
+- **4 buttons**: Full action set (текущий)
+- **5+ buttons**: Scrollable row
+
+**Flexible elements:**
+- Изменить количество изображений (2, 4, 6, 8)
+- Изменить grid layout (1+2, 2+2, 3 columns, masonry)
+- Изменить количество action buttons (2-6+)
+- Добавить image captions/labels
+- Добавить selection checkboxes
+- Добавить pagination dots
+- Изменить button style (filled, outlined, text)
+
+**Usage:** Photo gallery, product images, portfolio grid, media selection, image viewer, social post layout
+
+---
+
 ## Как использовать эту дизайн-систему
 
 ### Для дизайнеров
@@ -2270,9 +2406,36 @@
 
 ## Версионирование и обновления
 
-**Текущая версия**: v5.10.0
+**Текущая версия**: v5.11.0
 
 ### Changelog
+
+#### v5.11.0 (2025-11-19)
+- 🖼️ Добавлен **Gallery Block with Action Buttons** в UI Blocks секцию
+- 📸 **Gallery Block структура**:
+  - Grid layout: 2 columns, spacing 10px
+  - Left: 166.5×250px image
+  - Right: 2× 166.5×120px images stacked
+  - Total: 343×250px gallery area
+  - Border radius: 10px на всех изображениях
+- 🎯 **Floating Action Buttons Row**:
+  - 4 buttons: Share, Favorite, Download, Info
+  - Size: 44×44px circular buttons
+  - White background (#FFFFFF)
+  - Shadow: rgba(0,0,0,0.3), blur 10px, offset (0,2)
+  - Spacing: 10-16px между кнопками
+- 🔘 Добавлен **Floating Action Button** компонент:
+  - Dimensions: 44×44px, border-radius 30px (circular)
+  - Padding: 14px (icon size 16×16px)
+  - Background: White с BoxShadow
+  - Shadow specs: rgba(0,0,0,0.3), blur 10px, offset (0,2)
+  - Typical actions: Share, Favorite, Download, Info, Edit, Delete
+  - Touch target: 44×44px ✓ accessibility
+- 🎨 **Gallery варианты**:
+  - Layout options: 1+2, 2+1, 2+2, 3-column, masonry
+  - Button count: 2-6+ buttons depending on actions
+  - Flexible: можно менять layout, количество images, добавлять captions
+- 📊 Все данные извлечены из реального Flutter кода gallery блока с ButtonsLight
 
 #### v5.10.0 (2025-11-19)
 - 🎨 Добавлена новая секция **UI Blocks & Screen Patterns** - готовые комплексные блоки UI
