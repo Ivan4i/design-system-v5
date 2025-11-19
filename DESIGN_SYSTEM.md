@@ -15,6 +15,7 @@
 11. [Progress Indicators & Steppers](#progress-indicators--steppers)
 12. [Input Fields](#input-fields)
 13. [Snackbars & Toasts](#snackbars--toasts)
+14. [Mobile Screens & Layouts](#mobile-screens--layouts)
 
 ---
 
@@ -3989,6 +3990,762 @@ Avatar + сообщение + action button.
 
 ---
 
+## Mobile Screens & Layouts
+
+Готовые макеты экранов для мобильного приложения с модульными компонентами, которые можно гибко комбинировать и расширять.
+
+> **Принцип модульности**: Каждый экран состоит из переиспользуемых блоков. Вы можете добавлять, удалять или дублировать блоки в зависимости от требований backend или бизнес-логики.
+
+### Screen Container Specifications
+
+```css
+/* Mobile Screen Container */
+--screen-width: 375px;
+--screen-border-radius: 30px;         /* Large radius for whole screen */
+--screen-bg-white: #FFFFFF;
+--screen-bg-light: #FAFAFB;           /* Light gray background */
+```
+
+**Характеристики**:
+- **Width**: 375px (iPhone standard)
+- **Border Radius**: 30px (большое скругление для всего экрана)
+- **Backgrounds**: White (#FFFFFF) или Light Gray (#FAFAFB)
+- **Heights**: Variable (368px, 363px, 286px и т.д.)
+
+### Screen Typography
+
+#### Large Titles (Welcome Screens)
+
+```css
+/* Large Screen Titles */
+--screen-title-large-size: 32px;
+--screen-title-large-weight: 700;
+--screen-title-large-line-height: 1.40;
+--screen-title-large-color: #09101D;
+--screen-title-large-spacing: 10px;   /* Space to subtitle */
+
+/* Medium Screen Titles */
+--screen-title-medium-size: 24px;
+--screen-title-medium-weight: 700;
+--screen-title-medium-line-height: 1.40;
+```
+
+**Использование**:
+- **32px/700**: Главные welcome/onboarding заголовки
+- **24px/700**: Вторичные заголовки на onboarding screens
+
+#### Subtitles with Letter Spacing
+
+```css
+/* Screen Subtitles */
+--screen-subtitle-size: 16px;
+--screen-subtitle-weight: 400;
+--screen-subtitle-line-height: 1.40;
+--screen-subtitle-letter-spacing: 1px;    /* Important! */
+--screen-subtitle-color: #09101D;
+--screen-subtitle-color-dimmed: rgba(9, 16, 29, 0.40);  /* 40% opacity */
+```
+
+**Характеристики**:
+- Font: 16px / 400 Archivo
+- Letter spacing: 1px (для читаемости)
+- Colors: обычный #09101D или dimmed с opacity 0.40
+
+#### Colored Accent Text
+
+Выделение ключевых слов цветом внутри заголовков и подзаголовков.
+
+```css
+--screen-accent-color: #4141E6;       /* Primary purple for accents */
+```
+
+**Использование**:
+- Выделение ключевых слов в заголовках
+- Выделение brand terms в описаниях
+- Создание visual hierarchy
+
+**Example**:
+```html
+<h1 style="font: 700 32px/1.4 Archivo; text-align: center;">
+  One app for<br/>
+  <span style="color: #4141E6;">any currencies</span>
+</h1>
+```
+
+### Screen Elements
+
+#### 1. Home Indicator (iPhone-style)
+
+Индикатор нижней части экрана (как на iPhone).
+
+```css
+/* Home Indicator */
+--home-indicator-width: 134px;
+--home-indicator-height: 5px;
+--home-indicator-border-radius: 100px;
+--home-indicator-color: #09101D;
+--home-indicator-margin-top: 21px;
+```
+
+**Характеристики**:
+- **Size**: 134px × 5px
+- **Border Radius**: 100px (pill shape)
+- **Color**: #09101D (black)
+- **Position**: Bottom center, 21px от верхнего края контейнера
+- **Container Height**: 34px total
+
+**CSS**:
+```css
+.home-indicator {
+  width: var(--home-indicator-width);
+  height: var(--home-indicator-height);
+  background: var(--home-indicator-color);
+  border-radius: var(--home-indicator-border-radius);
+  margin: 21px auto 0;
+}
+```
+
+#### 2. Progress Bar (Multi-segment)
+
+Прогресс-бар из нескольких сегментов для onboarding/stepper screens.
+
+```css
+/* Progress Bar */
+--progress-bar-height: 3px;
+--progress-bar-segment-spacing: 10px;
+--progress-bar-active-color: #4141E6;
+--progress-bar-inactive-color: rgba(11, 36, 251, 0.20);
+--progress-bar-border-radius: 10px;
+```
+
+**Структура**:
+- **Container**: padding 16px horizontal, 10px vertical
+- **Height**: 3px
+- **Segments**: 5 сегментов (или любое количество)
+- **Spacing**: 10px между сегментами
+- **Colors**:
+  - Active: #4141E6 (primary purple)
+  - Inactive: rgba(11, 36, 251, 0.20) - 20% opacity
+- **Border Radius**:
+  - First segment: topLeft/bottomLeft 10px
+  - Last segment: topRight/bottomRight 10px
+  - Middle segments: no radius
+
+**Модульность**: Количество сегментов можно менять (3, 4, 5, 6 и т.д.)
+
+**CSS**:
+```css
+.progress-bar {
+  display: flex;
+  gap: var(--progress-bar-segment-spacing);
+  height: var(--progress-bar-height);
+  padding: 10px 16px;
+}
+
+.progress-bar__segment {
+  flex: 1;
+  height: 100%;
+  background: var(--progress-bar-inactive-color);
+}
+
+.progress-bar__segment--active {
+  background: var(--progress-bar-active-color);
+}
+
+.progress-bar__segment:first-child {
+  border-radius: var(--progress-bar-border-radius) 0 0 var(--progress-bar-border-radius);
+}
+
+.progress-bar__segment:last-child {
+  border-radius: 0 var(--progress-bar-border-radius) var(--progress-bar-border-radius) 0;
+}
+```
+
+#### 3. Back Button
+
+Кнопка назад для navigation.
+
+```css
+/* Back Button */
+--back-button-height: 44px;
+--back-button-icon-size: 24px;
+--back-button-icon-bg: rgba(9, 16, 29, 0.20);  /* 20% opacity */
+--back-button-icon-padding: 6px;
+--back-button-icon-radius: 100px;
+--back-button-container-padding: 16px 10px;
+```
+
+**Структура**:
+- **Container**: height 44px, padding 16px/10px
+- **Icon Container**: 24px × 24px, borderRadius 100px
+- **Icon Background**: rgba(9, 16, 29, 0.20) - 20% opacity black
+- **Icon**: 14.40px × 14.40px (с padding 6px = 24px total)
+
+**CSS**:
+```css
+.back-button {
+  height: var(--back-button-height);
+  padding: var(--back-button-container-padding);
+  background: transparent;
+  border: none;
+}
+
+.back-button__icon-wrapper {
+  width: var(--back-button-icon-size);
+  height: var(--back-button-icon-size);
+  background: var(--back-button-icon-bg);
+  border-radius: var(--back-button-icon-radius);
+  padding: var(--back-button-icon-padding);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.back-button__icon {
+  width: 14.40px;
+  height: 14.40px;
+}
+```
+
+#### 4. Button Groups
+
+Группы кнопок (рядом или вертикально) для actions на экранах.
+
+##### Dual Buttons (Side by Side)
+
+Две кнопки рядом друг с другом.
+
+```css
+/* Dual Button Row */
+--button-row-spacing: 10px;
+--button-height-large: 52px;
+--button-padding: 16px 10px;
+--button-border-radius: 15px;
+--button-font: 600 16px/1.4 'Archivo';
+```
+
+**Структура**:
+- **Container**: padding 16px horizontal
+- **Row**: две кнопки с spacing 10px
+- **Button Height**: 52px
+- **Button Padding**: 16px horizontal, 10px vertical
+- **Border Radius**: 15px
+- **Text**: 16px / 600 Archivo
+
+**Variants**:
+1. **Outline + Filled**:
+   - Left: border 1px #09101D, text #09101D
+   - Right: background #09101D, text white
+
+2. **Custom Colors**:
+   - Left: border 1px #4141E6, text #4141E6
+   - Right: background #4141E6, text white
+
+**Модульность**: Можно делать 1, 2 или 3 кнопки в ряд с adjustable widths
+
+##### Stacked Buttons (Vertical)
+
+Две или более кнопок вертикально.
+
+```css
+/* Stacked Button Column */
+--button-stack-spacing: 10px;
+--button-height-medium: 44px;
+```
+
+**Структура**:
+- **Container**: padding 16px horizontal, 10px vertical
+- **Column**: spacing 10px между кнопками
+- **Button Height**: 44px (немного меньше чем dual row)
+- **Full Width**: каждая кнопка на всю ширину
+
+**Variants**:
+1. **Filled + Outline**:
+   - Top: background #4141E6, text white
+   - Bottom: border 1px #4141E6, text #4141E6
+
+2. **All Outlined**
+3. **All Filled**
+
+**Модульность**: Можно добавлять 3, 4, 5+ кнопок вертикально
+
+### Screen Layouts
+
+#### Layout 1: Welcome Screen (White Background)
+
+Простой welcome screen с заголовком, подзаголовком и двумя кнопками.
+
+```css
+/* Welcome Screen */
+--welcome-padding-v: 50px;
+--welcome-padding-h: 16px;
+--welcome-content-width: 343px;      /* Max width for text */
+--welcome-text-spacing: 10px;
+```
+
+**Структура**:
+```
+┌─────────────────────────────────────┐
+│                                     │ 50px padding top
+│     "Welcome to Appka Studio"       │ 32px/700 title
+│                                     │ 10px spacing
+│   "Design made simple for your...   │ 16px/400 subtitle (dimmed)
+│                                     │
+│   [Sign in]    [Register]           │ Dual buttons (52px)
+│                                     │
+│         ────────                    │ Home indicator
+└─────────────────────────────────────┘
+```
+
+**Характеристики**:
+- Background: white
+- Padding: 50px vertical, 16px horizontal (для текста)
+- Title: 32px/700, center, color #09101D
+- Subtitle: 16px/400, center, color rgba(9,16,29,0.40), letter-spacing 1
+- Buttons: dual row, 52px height
+  - "Sign in": outline (border #09101D)
+  - "Register": filled (bg #09101D)
+- Home indicator: внизу
+
+**Модульность**:
+- ✅ Можно изменить текст заголовка/подзаголовка
+- ✅ Можно заменить dual buttons на single button или stacked
+- ✅ Можно убрать home indicator
+
+#### Layout 2: Onboarding with Accent (Light Background)
+
+Onboarding screen с цветными акцентами в тексте.
+
+```css
+/* Onboarding Accent Screen */
+--onboarding-padding-top: 10px;
+--onboarding-padding-bottom: 20px;
+--onboarding-bg: #FAFAFB;
+```
+
+**Структура**:
+```
+┌─────────────────────────────────────┐
+│                                     │ 10px padding top
+│       "One app for                  │ 32px/700 title
+│      any currencies"                │ (purple accent)
+│                                     │ 10px spacing
+│   "Own your limits with custom...   │ 16px/400 subtitle
+│   ...spending smarter"              │ (with purple accents)
+│                                     │
+│                                     │ 20px spacing
+│          [Sign in]                  │ Filled button (44px)
+│     [Create an account]             │ Outline button (44px)
+│                                     │
+│         ────────                    │ Home indicator
+└─────────────────────────────────────┘
+```
+
+**Характеристики**:
+- Background: #FAFAFB (light gray)
+- Padding: 10px vertical, 16px horizontal
+- Title: 32px/700, center
+  - Mixed colors: #09101D + #4141E6 accents
+- Subtitle: 16px/400, center, letter-spacing 1
+  - Mixed colors: #09101D + #4141E6 accents
+- Buttons: stacked vertical, 44px height, spacing 10px
+  - "Sign in": filled (bg #4141E6, text white)
+  - "Create an account": outline (border #4141E6, text #4141E6)
+- Home indicator: внизу
+
+**Модульность**:
+- ✅ Можно добавить/убрать цветные акценты
+- ✅ Можно заменить на dual buttons вместо stacked
+- ✅ Можно добавить 3-ю кнопку вертикально
+
+#### Layout 3: Progress Screen with Content
+
+Screen с progress bar, back button и контентом.
+
+```css
+/* Progress Screen */
+--progress-screen-content-padding-top: 30px;
+--progress-screen-height: 286px;     /* Компактный вариант */
+```
+
+**Структура**:
+```
+┌─────────────────────────────────────┐
+│ ← Back                              │ 44px back button
+│                                     │
+│ ▮▮▮▮▯                               │ Progress bar (3px)
+│                                     │
+│                                     │ 30px padding
+│   "Blockchains like Ethereum...     │ 24px/700 title
+│   ...can have difficulty scaling."  │ (with purple accent)
+│                                     │
+└─────────────────────────────────────┘
+```
+
+**Характеристики**:
+- Background: white
+- Back button: top left, 44px height, icon 24px
+- Progress bar: 3px height, 5 segments (4 active, 1 inactive)
+- Content padding: 30px top, 16px horizontal, 10px bottom
+- Title: 24px/700, center
+  - Mixed colors: #09101D + #4141E6 accent
+
+**Модульность**:
+- ✅ Можно изменить количество сегментов progress bar (3, 4, 5, 6...)
+- ✅ Можно добавить subtitle под title
+- ✅ Можно добавить buttons внизу (1, 2 или stacked)
+- ✅ Можно убрать back button
+
+### Modular Components Matrix
+
+Таблица совместимости компонентов для быстрого проектирования:
+
+| Component          | Welcome Screen | Onboarding Screen | Progress Screen | Can Add More? |
+|--------------------|----------------|-------------------|-----------------|---------------|
+| Large Title (32px) | ✅             | ✅                | ❌              | ✅            |
+| Medium Title (24px)| ❌             | ❌                | ✅              | ✅            |
+| Subtitle (16px)    | ✅             | ✅                | ❌              | ✅            |
+| Colored Accents    | ❌             | ✅                | ✅              | ✅            |
+| Dual Buttons (52px)| ✅             | ❌                | ❌              | ✅            |
+| Stacked Buttons (44px)| ❌          | ✅                | ❌              | ✅            |
+| Home Indicator     | ✅             | ✅                | ❌              | ✅            |
+| Progress Bar       | ❌             | ❌                | ✅              | ✅            |
+| Back Button        | ❌             | ❌                | ✅              | ✅            |
+
+### Extensibility Guide
+
+Как расширять готовые блоки под требования backend:
+
+#### Пример 1: Добавить 3-ю кнопку
+
+**Исходный макет**: 2 кнопки вертикально
+
+**Требование backend**: Нужна 3-я кнопка "Skip"
+
+**Решение**:
+```html
+<!-- Original -->
+<div class="button-stack">
+  <button class="button button--filled">Sign in</button>
+  <button class="button button--outline">Create an account</button>
+</div>
+
+<!-- Extended -->
+<div class="button-stack">
+  <button class="button button--filled">Sign in</button>
+  <button class="button button--outline">Create an account</button>
+  <button class="button button--text">Skip</button>  <!-- Added -->
+</div>
+```
+
+#### Пример 2: Увеличить progress segments
+
+**Исходный макет**: 5 сегментов progress bar
+
+**Требование backend**: Нужно 7 шагов onboarding
+
+**Решение**:
+```html
+<!-- Original (5 segments) -->
+<div class="progress-bar">
+  <div class="progress-bar__segment progress-bar__segment--active"></div>
+  <div class="progress-bar__segment progress-bar__segment--active"></div>
+  <div class="progress-bar__segment progress-bar__segment--active"></div>
+  <div class="progress-bar__segment progress-bar__segment--active"></div>
+  <div class="progress-bar__segment"></div>
+</div>
+
+<!-- Extended (7 segments) -->
+<div class="progress-bar">
+  <div class="progress-bar__segment progress-bar__segment--active"></div>
+  <div class="progress-bar__segment progress-bar__segment--active"></div>
+  <div class="progress-bar__segment progress-bar__segment--active"></div>
+  <div class="progress-bar__segment progress-bar__segment--active"></div>
+  <div class="progress-bar__segment"></div>
+  <div class="progress-bar__segment"></div>  <!-- Added -->
+  <div class="progress-bar__segment"></div>  <!-- Added -->
+</div>
+```
+
+Segments автоматически распределяются равномерно через `flex: 1`.
+
+#### Пример 3: Добавить дополнительные элементы
+
+**Исходный макет**: Title + Subtitle + Buttons
+
+**Требование**: Добавить image/illustration между title и subtitle
+
+**Решение**:
+```html
+<div class="screen-content">
+  <h1 class="screen-title-large">Welcome to Appka Studio</h1>
+
+  <!-- Added illustration -->
+  <img src="welcome-illustration.svg" class="screen-illustration"
+       style="width: 200px; margin: 20px auto;" />
+
+  <p class="screen-subtitle">Design made simple...</p>
+  <div class="button-row">...</div>
+</div>
+```
+
+### Complete CSS Implementation
+
+```css
+/* Screen Container Variables */
+:root {
+  /* Container */
+  --screen-width: 375px;
+  --screen-border-radius: 30px;
+  --screen-bg-white: #FFFFFF;
+  --screen-bg-light: #FAFAFB;
+
+  /* Typography */
+  --screen-title-large: 700 32px/1.4 'Archivo';
+  --screen-title-medium: 700 24px/1.4 'Archivo';
+  --screen-subtitle: 400 16px/1.4 'Archivo';
+  --screen-subtitle-letter-spacing: 1px;
+
+  /* Colors */
+  --screen-text-primary: #09101D;
+  --screen-text-dimmed: rgba(9, 16, 29, 0.40);
+  --screen-accent: #4141E6;
+
+  /* Elements */
+  --home-indicator-width: 134px;
+  --home-indicator-height: 5px;
+  --progress-bar-height: 3px;
+  --back-button-height: 44px;
+  --button-height-large: 52px;
+  --button-height-medium: 44px;
+}
+
+/* Screen Container */
+.screen {
+  width: var(--screen-width);
+  border-radius: var(--screen-border-radius);
+  background: var(--screen-bg-white);
+  overflow: hidden;
+}
+
+.screen--light {
+  background: var(--screen-bg-light);
+}
+
+/* Screen Typography */
+.screen-title-large {
+  font: var(--screen-title-large);
+  color: var(--screen-text-primary);
+  text-align: center;
+}
+
+.screen-title-medium {
+  font: var(--screen-title-medium);
+  color: var(--screen-text-primary);
+  text-align: center;
+}
+
+.screen-subtitle {
+  font: var(--screen-subtitle);
+  color: var(--screen-text-primary);
+  letter-spacing: var(--screen-subtitle-letter-spacing);
+  text-align: center;
+}
+
+.screen-subtitle--dimmed {
+  color: var(--screen-text-dimmed);
+}
+
+.text-accent {
+  color: var(--screen-accent);
+}
+
+/* Home Indicator */
+.home-indicator {
+  width: var(--home-indicator-width);
+  height: var(--home-indicator-height);
+  background: var(--screen-text-primary);
+  border-radius: 100px;
+  margin: 21px auto 0;
+}
+
+/* Progress Bar */
+.progress-bar {
+  display: flex;
+  gap: 10px;
+  height: var(--progress-bar-height);
+  padding: 10px 16px;
+}
+
+.progress-bar__segment {
+  flex: 1;
+  height: 100%;
+  background: rgba(11, 36, 251, 0.20);
+}
+
+.progress-bar__segment--active {
+  background: var(--screen-accent);
+}
+
+.progress-bar__segment:first-child,
+.progress-bar__segment:first-child.progress-bar__segment--active {
+  border-radius: 10px 0 0 10px;
+}
+
+.progress-bar__segment:last-child,
+.progress-bar__segment:last-child.progress-bar__segment--active {
+  border-radius: 0 10px 10px 0;
+}
+
+/* Back Button */
+.back-button {
+  height: var(--back-button-height);
+  padding: 10px 16px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.back-button__icon-wrapper {
+  width: 24px;
+  height: 24px;
+  background: rgba(9, 16, 29, 0.20);
+  border-radius: 100px;
+  padding: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Button Groups */
+.button-row {
+  display: flex;
+  gap: 10px;
+  padding: 0 16px;
+}
+
+.button-row .button {
+  flex: 1;
+}
+
+.button-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px 16px;
+}
+
+.button {
+  height: var(--button-height-medium);
+  padding: 10px 16px;
+  border-radius: 15px;
+  font: 600 16px/1.4 'Archivo';
+  cursor: pointer;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button--large {
+  height: var(--button-height-large);
+}
+
+.button--filled {
+  background: var(--screen-text-primary);
+  color: white;
+}
+
+.button--filled-accent {
+  background: var(--screen-accent);
+  color: white;
+}
+
+.button--outline {
+  background: transparent;
+  border: 1px solid var(--screen-text-primary);
+  color: var(--screen-text-primary);
+}
+
+.button--outline-accent {
+  background: transparent;
+  border: 1px solid var(--screen-accent);
+  color: var(--screen-accent);
+}
+```
+
+### Usage Examples
+
+```html
+<!-- Welcome Screen -->
+<div class="screen">
+  <div style="padding: 50px 16px;">
+    <h1 class="screen-title-large">Welcome to Appka Studio</h1>
+    <p class="screen-subtitle screen-subtitle--dimmed">
+      Design made simple for your business, idea, app and more
+    </p>
+  </div>
+
+  <div class="button-row">
+    <button class="button button--large button--outline">Sign in</button>
+    <button class="button button--large button--filled">Register</button>
+  </div>
+
+  <div style="height: 34px;">
+    <div class="home-indicator"></div>
+  </div>
+</div>
+
+<!-- Onboarding with Accent -->
+<div class="screen screen--light">
+  <div style="padding: 10px 16px;">
+    <h1 class="screen-title-large">
+      One app for<br/>
+      <span class="text-accent">any currencies</span>
+    </h1>
+    <p class="screen-subtitle">
+      Own your limits with <span class="text-accent">custom budgets</span>
+      and save more by <span class="text-accent">spending smarter</span>
+    </p>
+  </div>
+
+  <div class="button-stack">
+    <button class="button button--filled-accent">Sign in</button>
+    <button class="button button--outline-accent">Create an account</button>
+  </div>
+
+  <div style="height: 34px;">
+    <div class="home-indicator"></div>
+  </div>
+</div>
+
+<!-- Progress Screen -->
+<div class="screen">
+  <button class="back-button">
+    <div class="back-button__icon-wrapper">
+      <img src="back-icon.svg" alt="Back" />
+    </div>
+  </button>
+
+  <div class="progress-bar">
+    <div class="progress-bar__segment progress-bar__segment--active"></div>
+    <div class="progress-bar__segment progress-bar__segment--active"></div>
+    <div class="progress-bar__segment progress-bar__segment--active"></div>
+    <div class="progress-bar__segment progress-bar__segment--active"></div>
+    <div class="progress-bar__segment"></div>
+  </div>
+
+  <div style="padding: 30px 16px 10px;">
+    <h2 class="screen-title-medium">
+      Blockchains like Ethereum & Bitcoin offer security and decentralization,
+      but <span class="text-accent">can have difficulty scaling</span>.
+    </h2>
+  </div>
+</div>
+```
+
+---
+
 ## Как использовать эту дизайн-систему
 
 ### Для дизайнеров
@@ -4016,9 +4773,41 @@ Avatar + сообщение + action button.
 
 ## Версионирование и обновления
 
-**Текущая версия**: v5.8.0
+**Текущая версия**: v5.9.0
 
 ### Changelog
+
+#### v5.9.0 (2025-11-19)
+- **Добавлена новая секция "Mobile Screens & Layouts"** - система модульных экранов для onboarding и других flow:
+  - **Принцип модульности**: каждый экран состоит из переиспользуемых блоков, которые можно комбинировать и расширять
+  - **Screen Container Specifications**:
+    - Container: 375px width (standard mobile), border-radius 30px
+    - Backgrounds: white (#FFFFFF) для welcome screens, light gray (#FAFAFB) для onboarding
+    - Padding: 50px для welcome, 35px/30px для onboarding с navigation
+  - **Typography System**:
+    - Large Title: 32px / 700 Archivo для hero screens
+    - Medium Title: 24px / 700 Archivo для content screens
+    - Subtitle: 16px / 400 Archivo с letter-spacing 1px
+    - Subtitle Dimmed: rgba(9,16,29,0.40) для secondary text
+    - Colored Accent Text: #4141E6 для выделения ключевых слов
+  - **Modular Screen Elements** (4 переиспользуемых компонента):
+    - **Home Indicator**: 134px × 5px, pill shape, black color (iPhone-style)
+    - **Progress Bar**: 5 segments, 3px height, 10px spacing, active #4141E6, inactive rgba(11,36,251,0.20)
+    - **Back Button**: 44px height, 24px icon, rgba(9,16,29,0.20) background
+    - **Button Groups**:
+      - Dual Buttons (row): 52px height, 10px spacing, side-by-side layout
+      - Stacked Buttons: 44px height, 10px spacing, vertical layout
+  - **3 Complete Screen Layouts** с ASCII diagrams:
+    - Welcome Screen (white bg, large title 32px, dual buttons 52px)
+    - Onboarding with Accent (light gray bg, colored text accents, stacked buttons 44px)
+    - Progress Screen (back button, 5-segment progress bar, medium title 24px)
+  - **Modular Components Matrix**: таблица совместимости компонентов (Large Title, Dual Buttons, Progress Bar и т.д.)
+  - **Extensibility Guide** с 3 практическими примерами:
+    - Добавление 3-й кнопки в стек (когда по дизайну 2, но нужно 3)
+    - Расширение progress bar с 5 до 7 сегментов
+    - Добавление иллюстрации между элементами
+  - **Complete CSS Implementation** с variables, 3 screen layouts, button variants
+  - **Usage Examples** для всех 3 screen layouts с модификациями
 
 #### v5.8.0 (2025-11-19)
 - **Добавлена новая секция "Snackbars & Toasts"** - система уведомлений для мобильного приложения:
