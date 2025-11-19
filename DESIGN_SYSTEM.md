@@ -1916,6 +1916,88 @@
 
 ---
 
+<!-- AI_COMPONENT: RatingComponents -->
+### 21. Rating Components {#rating-components}
+
+**[Component Category: Rating & Reviews]**
+
+Компоненты для отображения рейтингов, отзывов и оценок качества.
+
+#### Rating Progress Bar
+
+**[Component: RatingProgressBar]** - Segmented horizontal progress bar для детального отображения рейтинга (используется в reviews, ratings breakdown).
+
+**Dimensions:**
+- **Height**: 3px
+- **Total Width**: ~234px (адаптивная, 6 segments по 39.08px)
+- **Segments**: 6 (для 5-star rating из расчета 5 filled + 1 unfilled max)
+- **Segment Width**: 39.08px each
+- **Border Radius**: 10px (на концах - topLeft/bottomLeft для первого, topRight/bottomRight для последнего)
+
+**Visual Style:**
+- **Filled Segments**: #09101D (color-text-primary)
+- **Unfilled Segments**: rgba(9, 16, 29, 0.1) или #1909101D (~10% opacity)
+- **No Spacing**: Сегменты идут вплотную друг к другу
+
+**Structure:**
+```dart
+Row(
+  children: [
+    // Filled segments (left-aligned)
+    Container(width: 39.08, height: 3,
+      decoration: ShapeDecoration(
+        color: Color(0xFF09101D),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(10),
+            bottomLeft: Radius.circular(10),
+          ),
+        ),
+      ),
+    ),
+    // ... more filled segments (no border-radius)
+    // Unfilled segment (right-aligned)
+    Container(width: 39.08, height: 3,
+      decoration: ShapeDecoration(
+        color: Color(0x1909101D), // rgba(9,16,29,0.1)
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            topRight: Radius.circular(10),
+            bottomRight: Radius.circular(10),
+          ),
+        ),
+      ),
+    ),
+  ]
+)
+```
+
+**Calculation:**
+- 5.0 rating = 6 filled segments (100%)
+- 4.7 rating = 5 filled + partial (~83%)
+- 4.5 rating = 5 filled + partial (~75%)
+- Формула: `(rating / 5.0) * totalSegments`
+
+**Layout with Label & Score:**
+```
+[Label]           [■■■■■■░] [Score]
+Location          ▰▰▰▰▰▱    4.7
+  (11px Regular)  (3px bar) (10px Semibold)
+```
+
+**Spacing:**
+- Container padding: top 5.5px, left 5.5px, bottom 5.5px
+- Right spacing: 5px между bar и score
+- Row spacing: 15px между rating rows
+
+**Typography (сопутствующая):**
+- **Category Label** (left): 11px Regular #09101D
+- **Score Value** (right): 10px Semibold #09101D
+
+**Использование**: Rating breakdowns, category scores, review summaries, detailed ratings, quality metrics
+
+---
+
 ## Паттерны
 
 ### Dashboard Layouts
@@ -2379,6 +2461,137 @@ BoxShadow(
 
 ---
 
+<!-- AI_UI_BLOCK: RatingSummaryCard -->
+#### Rating Summary Card {#rating-summary-card}
+
+**[UI Block: Rating Summary Card]** - Карточка с общим рейтингом и детальным breakdown по категориям.
+
+**Dimensions:**
+- Screen: 375×317px
+- Background: #FAFAFB (color-input-background)
+- Border Radius: 30px
+- Clip: antiAlias
+
+**Structure:**
+
+1. **Header Section** (0-44px)
+   - Height: 44px
+   - Navigation icons (optional): 24×24px icons
+   - Left padding: 21px, Top padding: 12px
+   - Icon border-radius: 32px
+
+2. **Action Buttons Row** (44-88px)
+   - Height: 44px
+   - Layout: Row, spaceBetween
+   - Spacing: 8px between buttons
+   - Padding: horizontal 16px, vertical 10px
+
+   **Each Button:**
+   - Icon: 24×24px, padding 2px
+   - Border-radius: 100px (circular)
+   - Container padding: horizontal 16px, vertical 10px
+   - Border-radius: 12px
+
+3. **Overall Rating Display** (88-152px)
+   - Padding: top 10px, horizontal 16px, bottom 20px
+   - Layout: Row, spacing 10px
+
+   **Star Icon:**
+   - Size: 24×24px
+   - Color: Typically gold/yellow для filled star
+
+   **Rating Text:**
+   - Font: 24px Bold (Archivo)
+   - Color: #09101D (text-primary)
+   - Format: "4.59 (32 reviews)"
+   - Line height: 1.40
+
+4. **Rating Breakdown** (152-317px)
+   - Padding: top 10px, horizontal 16px, bottom 30px
+   - Layout: 3 columns (Label | Progress Bar | Score)
+   - Spacing: 5px between columns
+   - Row spacing: 15px между category rows
+
+   **Categories (5 rows):**
+   - Location: 4.7
+   - Check-in: 4.6
+   - Cleanliness: 4.5
+   - Accuracy: 4.8
+   - Communication: 4.9
+
+   **Per Row:**
+   - **Left Column** (Category Label):
+     - Font: 11px Regular (Archivo)
+     - Color: #09101D
+     - Align: left
+
+   - **Middle Column** (Progress Bar):
+     - Component: Rating Progress Bar (see ### 21. Rating Components)
+     - Height: 3px
+     - Width: ~234px (6 segments × 39.08px)
+     - Filled: #09101D
+     - Unfilled: rgba(9, 16, 29, 0.1)
+     - Border-radius: 10px (ends)
+     - Padding: top 5.5px, left 5.5px, bottom 5.5px
+
+   - **Right Column** (Score Value):
+     - Font: 10px Semibold (Archivo)
+     - Color: #09101D
+     - Align: right
+     - Format: "4.7" (one decimal)
+
+**Visual Example:**
+```
+┌─────────────────────────────────────┐
+│  [Header Area - 44px]               │  Navigation/Close
+├─────────────────────────────────────┤
+│  [○]                         [○]    │  Action Buttons
+├─────────────────────────────────────┤
+│  ★ 4.59 (32 reviews)                │  Overall Rating
+├─────────────────────────────────────┤
+│  Location      ▰▰▰▰▰▱   4.7         │
+│  Check-in      ▰▰▰▰▰▱   4.6         │  Rating Breakdown
+│  Cleanliness   ▰▰▰▰▰▱   4.5         │
+│  Accuracy      ▰▰▰▰▰▱   4.8         │
+│  Communication ▰▰▰▰▰▰   4.9         │
+└─────────────────────────────────────┘
+```
+
+**Color Palette Used:**
+- Background: #FAFAFB (color-input-background) - очень светлый серый
+- Text: #09101D (color-text-primary) - темный текст
+- Progress Filled: #09101D - темный
+- Progress Unfilled: rgba(9, 16, 29, 0.1) - прозрачный светлый
+
+**Typography:**
+- Overall Rating: 24px Bold #09101D, line-height 1.40
+- Category Labels: 11px Regular #09101D, line-height 1.40
+- Score Values: 10px Semibold #09101D, line-height 1.40
+
+**Spacing:**
+- Section padding: 16px horizontal (consistent)
+- Top/bottom padding varies by section (10-30px)
+- Row spacing: 15px между rating categories
+- Column spacing: 5px между элементами row
+
+**Related Components:**
+- **Rating Progress Bar** (см. ### 21. Rating Components)
+- **Star Icon** (24×24px) - можно добавить filled/outlined states
+- **Action Buttons** (см. Buttons section)
+
+**Flexible elements:**
+- Изменить количество категорий (3-10+ categories)
+- Добавить фильтры по rating (5 stars, 4 stars, etc)
+- Добавить "See all reviews" кнопку
+- Изменить overall rating display (star icons, numeric only)
+- Добавить time period filter (Last month, Last year)
+- Добавить reviewer count breakdown
+- Изменить progress bar style (gradient, colored segments)
+
+**Usage:** Product reviews, service ratings, property ratings (Airbnb-style), app store ratings, course ratings, restaurant reviews, hotel ratings
+
+---
+
 ## Как использовать эту дизайн-систему
 
 ### Для дизайнеров
@@ -2406,9 +2619,35 @@ BoxShadow(
 
 ## Версионирование и обновления
 
-**Текущая версия**: v5.11.0
+**Текущая версия**: v5.12.0
 
 ### Changelog
+
+#### v5.12.0 (2025-11-19)
+- ⭐ Добавлена новая секция **### 21. Rating Components** с AI навигацией
+- 📊 Добавлен **Rating Progress Bar** компонент:
+  - Height: 3px, segmented progress bar
+  - Width: ~234px (6 segments × 39.08px)
+  - Filled color: #09101D (text-primary)
+  - Unfilled color: rgba(9, 16, 29, 0.1) - прозрачный светлый
+  - Border-radius: 10px на концах (topLeft/bottomLeft, topRight/bottomRight)
+  - Используется для rating breakdown по категориям
+- 📱 Добавлен **Rating Summary Card** UI Block:
+  - Dimensions: 375×317px
+  - Background: #FAFAFB (input-background)
+  - Border-radius: 30px
+  - 4 секции: Header (44px), Action Buttons (44px), Overall Rating (64px), Breakdown (165px)
+  - Overall Rating: 24px Bold "4.59 (32 reviews)" с star icon 24×24px
+  - 5 rating categories: Location, Check-in, Cleanliness, Accuracy, Communication
+  - Typography: 11px Regular labels, 10px Semibold scores
+  - Layout: 3 columns (Label | Progress Bar | Score), spacing 5px
+- 🤖 **AI Navigation Markers** добавлены для IDE AI:
+  - HTML комментарии: `<!-- AI_COMPONENT: RatingComponents -->`, `<!-- AI_UI_BLOCK: RatingSummaryCard -->`
+  - Якоря для навигации: `{#rating-components}`, `{#rating-summary-card}`
+  - Категория теги: `**[Component Category: Rating & Reviews]**`
+  - Компонент теги: `**[Component: RatingProgressBar]**`, `**[UI Block: Rating Summary Card]**`
+- 🔗 **Related Components** ссылки между компонентами для легкой навигации
+- 📊 Все данные извлечены из реального Flutter кода RatingLight компонента
 
 #### v5.11.0 (2025-11-19)
 - 🖼️ Добавлен **Gallery Block with Action Buttons** в UI Blocks секцию
