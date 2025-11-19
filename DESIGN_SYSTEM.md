@@ -280,17 +280,30 @@ MaterialApp(
 ### Button Padding (из Flutter кода)
 
 ```css
-/* Padding из EdgeInsets.symmetric в кнопках */
---button-padding-horizontal: 16px;  /* horizontal padding */
---button-padding-vertical: 10px;    /* vertical padding */
+/* Padding из EdgeInsets.symmetric в кнопках и chips */
+--button-padding-horizontal: 16px;  /* horizontal padding для buttons */
+--button-padding-vertical: 10px;    /* vertical padding для buttons */
 --container-padding: 16px;          /* padding для containers */
+
+/* Chip Padding из Master */
+--chip-large-padding-h: 10px;       /* Large chip horizontal padding */
+--chip-large-padding-v: 5px;        /* Large chip vertical padding */
+--chip-medium-padding-h: 8px;       /* Medium chip horizontal padding */
+--chip-medium-padding-v: 2px;       /* Medium chip vertical padding */
+--chip-small-padding-h: 6px;        /* Small chip horizontal padding */
+--chip-icon-padding: 2px;           /* Icon padding в chips */
+--chip-icon-only-padding-large: 5px; /* Icon-only large chip padding */
+--chip-icon-only-padding-small: 2px; /* Icon-only medium/small chip padding */
+--showcase-padding: 50px;           /* Master showcase container padding */
 ```
 
 ### Layout Spacing (из Flutter кода)
 
 ```css
 /* Spacing значения из Flutter Column/Row */
---spacing-between-icon-text: 8px;   /* spacing между иконкой и текстом */
+--spacing-between-icon-text: 8px;   /* spacing между иконкой и текстом в buttons */
+--spacing-chip-elements: 6px;       /* spacing между элементами в chips (Master) */
+--spacing-chip-row: 30px;           /* spacing между chips в Row (Master) */
 --spacing-column: 10px;             /* spacing в Column */
 --spacing-row: 70px;                /* spacing в Row для разделения элементов */
 ```
@@ -298,19 +311,20 @@ MaterialApp(
 ### Border Radius (из Flutter кода)
 
 ```css
-/* Border Radius из компонента SmallButtonLarge и View2 */
+/* Border Radius из компонента SmallButtonLarge, View2 и Master */
 --radius-none: 0;
---radius-xs: 0.3125rem;   /* 5px - для rating badge (View2) */
---radius-sm: 0.25rem;     /* 4px */
---radius-base: 0.5rem;    /* 8px */
---radius-badge: 0.6875rem; /* 11px - для большинства badges (View2) */
---radius-md: 0.75rem;     /* 12px - для Ghost Button */
---radius-lg: 0.9375rem;   /* 15px - для кнопок, showcase container, product cards (View2) */
---radius-xl: 1rem;        /* 16px - для image containers в карточках (View2) */
+--radius-xs: 0.3125rem;    /* 5px - для rating badge (View2) */
+--radius-sm: 0.25rem;      /* 4px */
+--radius-base: 0.5rem;     /* 8px */
+--radius-badge: 0.6875rem; /* 11px - для badges (View2) и Small Chip (Master) */
+--radius-md: 0.75rem;      /* 12px - для Ghost Button */
+--radius-chip-medium: 0.8125rem; /* 13px - для Medium Chip (Master) */
+--radius-lg: 0.9375rem;    /* 15px - для кнопок, Large Chip (Master), showcase container, product cards */
+--radius-xl: 1rem;         /* 16px - для image containers в карточках (View2) */
 --radius-counter: 1.25rem; /* 20px - для price counter badge (View2) */
---radius-2xl: 1.25rem;    /* 20px */
---radius-3xl: 1.5rem;     /* 24px */
---radius-full: 9999px;    /* BorderRadius.circular(100) для круглых кнопок и иконок */
+--radius-2xl: 1.25rem;     /* 20px */
+--radius-3xl: 1.5rem;      /* 24px */
+--radius-full: 9999px;     /* BorderRadius.circular(100) для круглых кнопок и иконок */
 ```
 
 ### Shadows
@@ -765,7 +779,105 @@ MaterialApp(
 
 ---
 
-### 5. Forms
+### 5. Chips (из Master)
+
+Chips - компактные интерактивные элементы для выбора, фильтрации или действий. Три размера: Large (36px), Medium (30px), Small (24px).
+
+#### Large Chip (Height: 36px)
+
+**Из Master - первая кнопка в Row**
+
+- **Height**: 36px (fixed)
+- **Padding**: horizontal: 10px, vertical: 5px
+- **Border Radius**: 15px
+- **Font**: Archivo, 14px, weight: 600
+- **Line Height**: 1.40
+- **Icon Size**: 24x24px (padding: 2px)
+- **Spacing**: 6px между элементами
+
+**States:**
+- **Primary**: Background: #4141E6, Text: white
+- **Secondary**: Background: #F4F6F9, Text: #09101D
+- **Disabled**: Background: #F4F6F9, Text: #747B84
+
+**Layout Variants:**
+- Label only
+- Icon + Label
+- Label + Icon
+- Icon + Label + Icon
+- Icon only
+
+#### Medium Chip (Height: 30px)
+
+**Из Master - вторая кнопка в Row**
+
+- **Height**: 30px (fixed)
+- **Padding**: horizontal: 8px, vertical: 2px
+- **Border Radius**: 13px
+- **Font**: Archivo, 13px, weight: 600
+- **Line Height**: 1.40
+- **Icon Size**: 24x24px (padding: 2px)
+- **Spacing**: 6px между элементами
+
+**States:**
+- **Primary**: Background: #4141E6, Text: white
+- **Secondary**: Background: #F4F6F9, Text: #09101D
+- **Disabled**: Background: #F4F6F9, Text: #747B84
+
+**Layout Variants:** Same as Large Chip
+
+#### Small Chip (Height: 24px)
+
+**Из Master - третья кнопка в Row**
+
+- **Height**: 24px (fixed)
+- **Padding**: horizontal: 6px (no vertical padding for height constraint)
+- **Border Radius**: 11px
+- **Font**: Archivo, 11px, weight: 600
+- **Line Height**: 1.40
+- **Icon Size**: 24x24px (padding: 2px)
+- **Spacing**: 6px между элементами
+
+**States:**
+- **Primary**: Background: #4141E6, Text: white
+- **Secondary**: Background: #F4F6F9, Text: #09101D
+- **Disabled**: Background: #F4F6F9, Text: #747B84
+
+**Layout Variants:** Same as Large Chip
+
+#### Icon-Only Chips
+
+**Из Master - rows в Stack**
+
+- **Size**: Matches chip height (36px, 30px, 24px)
+- **Padding**: 5px (large), 2px (medium/small)
+- **Border Radius**: Matches chip radius (15px, 13px, 11px)
+- **Icon Size**: 24x24px (padding: 2px)
+- **States**: Same backgrounds as regular chips
+
+#### Showcase Container (Master)
+
+**Из Master - внешний container**
+
+- **First Container (Row)**:
+  - Padding: 50px
+  - Border: 1px solid #7B61FF
+  - Border Radius: 15px
+  - Spacing: 30px между chips
+  - Clip: antiAlias
+
+- **Second Container (Stack)**:
+  - Size: 485x1010px
+  - Border: 1px solid #7B61FF
+  - Border Radius: 15px
+  - Clip: antiAlias
+  - Contains: All chip variants positioned in grid
+
+**Usage**: Chips используются для фильтров, тегов, выбора опций, compact actions.
+
+---
+
+### 6. Forms
 
 #### Form Layout
 
@@ -1151,6 +1263,14 @@ MaterialApp(
 /* Badge Heights из View2 */
 --badge-height-24: 24px;                /* Высота discount/seasonal badge */
 --badge-height-auto: auto;              /* Special offer/native badge (padding: 5px) */
+
+/* Chip Sizes из Master */
+--chip-large-height: 36px;              /* Large chip height */
+--chip-medium-height: 30px;             /* Medium chip height */
+--chip-small-height: 24px;              /* Small chip height */
+--chip-icon-size: 24px;                 /* Icon size в chips */
+--chip-showcase-width: 485px;           /* Master showcase container width */
+--chip-showcase-height: 1010px;         /* Master showcase container height */
 ```
 
 ### Flutter-Specific Properties (из кода)
@@ -1225,8 +1345,15 @@ MaterialApp(
 
 #### v5.0.0 (2025-11-19)
 - Первая версия дизайн-системы
-- Полная цветовая палитра из реального Flutter кода (SmallButtonLarge + View2)
+- Полная цветовая палитра из реального Flutter кода (SmallButtonLarge + View2 + Master)
 - **Кнопки**: 5 вариантов (Primary, Secondary, Outlined, Ghost, Disabled) с 6 layout паттернами
+- **Chips** (из Master): 3 размера компактных интерактивных элементов:
+  - Large Chip (36px) - padding: 10/5px, font: 14px, radius: 15px
+  - Medium Chip (30px) - padding: 8/2px, font: 13px, radius: 13px
+  - Small Chip (24px) - padding: 6px, font: 11px, radius: 11px
+  - States: Primary, Secondary, Disabled
+  - Layout: Label only, Icon+Label, Label+Icon, Icon+Label+Icon, Icon only
+  - Showcase container: 485x1010px, padding: 50px
 - **Product Cards**: 4 типа карточек из View2:
   - Small Product Card (166.50x166.50) - квадратная с price counter
   - Vertical Restaurant Card (140x240) - с special offer badge и rating stars
@@ -1236,18 +1363,21 @@ MaterialApp(
 - **Typography**:
   - Font sizes: 8px, 10px, 11px, 12px, 13px, 14px
   - Font weights: 400, 500, 600, 700, 800, 900
-  - Usage: кнопки, карточки, badges, цены
+  - Usage: кнопки, chips, карточки, badges, цены
 - **Colors**:
   - Text: #09101D, #D9DDE2, #747B84, #2A2B2F
   - Badges: #F7B68A (orange), #E24949 (red), #7CC5D6 (cyan), #4141E6 (blue)
   - Background: #F4F6F9, #4141E6, #12202F
-- **Border Radius**: 5px, 11px, 12px, 15px, 16px, 20px, 100px (circular)
-- **Spacing**: 2px, 3px, 4px, 5px, 6px, 8px, 10px
+  - Border: #7B61FF (showcase)
+- **Border Radius**: 5px, 11px, 12px, 13px, 15px, 16px, 20px, 100px (circular)
+- **Spacing**: 2px, 3px, 4px, 5px, 6px, 8px, 10px, 30px, 50px
 - **Component Sizes**:
   - Cards: 166.50x166.50, 140x240, 140x230
+  - Chips: 36px, 30px, 24px (height)
   - Icons: 12px, 16px, 24px
   - Buttons: 32px, 36px
   - Badges: 24px height
+  - Showcase: 485x1010px (Master)
 - Theme configuration (ThemeData.dark с scaffold background #12202F)
 - Flutter-specific properties: Clip.antiAlias, MainAxisAlignment, CrossAxisAlignment, ShapeDecoration
 
