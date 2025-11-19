@@ -1,0 +1,30 @@
+{
+  "name": "design-system-v5",
+  "version": "5.0.0",
+  "description": "Comprehensive design system with components, colors, typography, and patterns",
+  "main": "styles/variables.css",
+  "scripts": {
+    "dev": "python -m http.server 8000",
+    "demo": "open examples/demo.html"
+  },
+  "keywords": [
+    "design-system",
+    "css",
+    "components",
+    "ui",
+    "design-tokens",
+    "css-variables"
+  ],
+  "author": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Ivan4i/design-system-v5.git"
+  },
+  "files": [
+    "styles/",
+    "components/",
+    "DESIGN_SYSTEM.md",
+    "README.md"
+  ]
+}

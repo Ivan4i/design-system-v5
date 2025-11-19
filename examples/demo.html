@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Design System v5 - Demo</title>
+  <link rel="stylesheet" href="../styles/variables.css">
+  <link rel="stylesheet" href="../styles/components.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-primary);
+      background: var(--color-bg-secondary);
+      color: var(--color-text-primary);
+      padding: var(--space-8);
+    }
+
+    .demo-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .demo-section {
+      background: var(--color-bg-primary);
+      border-radius: var(--radius-lg);
+      padding: var(--space-8);
+      margin-bottom: var(--space-6);
+      box-shadow: var(--shadow-base);
+    }
+
+    .demo-section h2 {
+      font-size: var(--font-size-2xl);
+      font-weight: var(--font-weight-bold);
+      margin-bottom: var(--space-6);
+      color: var(--color-text-primary);
+      border-bottom: 2px solid var(--color-border-primary);
+      padding-bottom: var(--space-4);
+    }
+
+    .demo-section h3 {
+      font-size: var(--font-size-lg);
+      font-weight: var(--font-weight-semibold);
+      margin-top: var(--space-6);
+      margin-bottom: var(--space-4);
+      color: var(--color-text-primary);
+    }
+
+    .demo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: var(--space-4);
+      margin-bottom: var(--space-6);
+    }
+
+    .demo-flex {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-4);
+      margin-bottom: var(--space-6);
+    }
+
+    .color-swatch {
+      padding: var(--space-6);
+      border-radius: var(--radius-md);
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-medium);
+      text-align: center;
+      border: 1px solid var(--color-border-primary);
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: var(--space-12);
+    }
+
+    .header h1 {
+      font-size: var(--font-size-5xl);
+      font-weight: var(--font-weight-bold);
+      margin-bottom: var(--space-4);
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .header p {
+      font-size: var(--font-size-lg);
+      color: var(--color-text-secondary);
+    }
+
+    code {
+      background: var(--color-bg-tertiary);
+      padding: 2px 6px;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-mono);
+      font-size: 0.9em;
+      color: var(--color-primary);
+    }
+  </style>
+</head>
+<body>
+  <div class="demo-container">
+    <div class="header">
+      <h1>Design System v5</h1>
+      <p>Полная библиотека компонентов и стилей</p>
+    </div>
+
+    <!-- Цвета -->
+    <div class="demo-section">
+      <h2>Цветовая палитра</h2>
+
+      <h3>Primary & Secondary</h3>
+      <div class="demo-grid">
+        <div class="color-swatch" style="background: var(--color-primary); color: white;">
+          Primary<br>#3B82F6
+        </div>
+        <div class="color-swatch" style="background: var(--color-primary-hover); color: white;">
+          Primary Hover<br>#2563EB
+        </div>
+        <div class="color-swatch" style="background: var(--color-secondary); color: white;">
+          Secondary<br>#8B5CF6
+        </div>
+      </div>
+
+      <h3>Semantic Colors</h3>
+      <div class="demo-grid">
+        <div class="color-swatch" style="background: var(--color-success); color: white;">
+          Success<br>#10B981
+        </div>
+        <div class="color-swatch" style="background: var(--color-error); color: white;">
+          Error<br>#EF4444
+        </div>
+        <div class="color-swatch" style="background: var(--color-warning); color: white;">
+          Warning<br>#F59E0B
+        </div>
+        <div class="color-swatch" style="background: var(--color-info); color: white;">
+          Info<br>#3B82F6
+        </div>
+      </div>
+
+      <h3>Gray Scale</h3>
+      <div class="demo-grid">
+        <div class="color-swatch" style="background: var(--color-gray-100);">Gray 100</div>
+        <div class="color-swatch" style="background: var(--color-gray-300);">Gray 300</div>
+        <div class="color-swatch" style="background: var(--color-gray-500); color: white;">Gray 500</div>
+        <div class="color-swatch" style="background: var(--color-gray-700); color: white;">Gray 700</div>
+        <div class="color-swatch" style="background: var(--color-gray-900); color: white;">Gray 900</div>
+      </div>
+    </div>
+
+    <!-- Кнопки -->
+    <div class="demo-section">
+      <h2>Кнопки</h2>
+
+      <h3>Variants</h3>
+      <div class="demo-flex">
+        <button class="btn btn--md btn--primary">Primary Button</button>
+        <button class="btn btn--md btn--secondary">Secondary Button</button>
+        <button class="btn btn--md btn--outline">Outline Button</button>
+        <button class="btn btn--md btn--ghost">Ghost Button</button>
+        <button class="btn btn--md btn--primary" disabled>Disabled</button>
+      </div>
+
+      <h3>Sizes</h3>
+      <div class="demo-flex items-center">
+        <button class="btn btn--sm btn--primary">Small</button>
+        <button class="btn btn--md btn--primary">Medium</button>
+        <button class="btn btn--lg btn--primary">Large</button>
+      </div>
+    </div>
+
+    <!-- Inputs -->
+    <div class="demo-section">
+      <h2>Inputs & Forms</h2>
+
+      <h3>Text Inputs</h3>
+      <div class="demo-grid">
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input type="email" class="input input--md" placeholder="example@email.com">
+          <div class="form-helper">Введите ваш email адрес</div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <input type="password" class="input input--md input--error" placeholder="••••••••">
+          <div class="form-error">Пароль слишком короткий</div>
+        </div>
+      </div>
+
+      <h3>Input Sizes</h3>
+      <div style="max-width: 400px;">
+        <input type="text" class="input input--sm mb-4" placeholder="Small input">
+        <input type="text" class="input input--md mb-4" placeholder="Medium input">
+        <input type="text" class="input input--lg" placeholder="Large input">
+      </div>
+
+      <h3>Textarea</h3>
+      <div style="max-width: 600px;">
+        <textarea class="input textarea" placeholder="Введите ваше сообщение..."></textarea>
+      </div>
+    </div>
+
+    <!-- Cards -->
+    <div class="demo-section">
+      <h2>Cards</h2>
+
+      <div class="demo-grid">
+        <div class="card">
+          <h3 style="margin-bottom: var(--space-2);">Basic Card</h3>
+          <p class="text-secondary">Базовая карточка с тенью и границей</p>
+        </div>
+
+        <div class="card card--elevated">
+          <h3 style="margin-bottom: var(--space-2);">Elevated Card</h3>
+          <p class="text-secondary">Карточка с увеличенной тенью</p>
+        </div>
+
+        <div class="card card--outlined">
+          <h3 style="margin-bottom: var(--space-2);">Outlined Card</h3>
+          <p class="text-secondary">Карточка только с границей</p>
+        </div>
+
+        <div class="card card--interactive">
+          <h3 style="margin-bottom: var(--space-2);">Interactive Card</h3>
+          <p class="text-secondary">Наведите для эффекта</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Badges & Tags -->
+    <div class="demo-section">
+      <h2>Badges & Tags</h2>
+
+      <h3>Badges</h3>
+      <div class="demo-flex items-center">
+        <span class="badge badge--success">Success</span>
+        <span class="badge badge--error">Error</span>
+        <span class="badge badge--warning">Warning</span>
+        <span class="badge badge--info">Info</span>
+        <span class="badge badge--neutral">Neutral</span>
+      </div>
+
+      <h3>Tags</h3>
+      <div class="demo-flex items-center">
+        <span class="tag">
+          React
+          <span class="tag__close">×</span>
+        </span>
+        <span class="tag">
+          TypeScript
+          <span class="tag__close">×</span>
+        </span>
+        <span class="tag">
+          CSS
+          <span class="tag__close">×</span>
+        </span>
+      </div>
+    </div>
+
+    <!-- Alerts -->
+    <div class="demo-section">
+      <h2>Alerts</h2>
+
+      <div class="alert alert--success mb-4">
+        <svg width="20" height="20" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+        </svg>
+        <div>
+          <strong>Успешно!</strong> Ваши изменения были сохранены.
+        </div>
+      </div>
+
+      <div class="alert alert--error mb-4">
+        <svg width="20" height="20" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
+        </svg>
+        <div>
+          <strong>Ошибка!</strong> Что-то пошло не так.
+        </div>
+      </div>
+
+      <div class="alert alert--warning mb-4">
+        <svg width="20" height="20" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+        </svg>
+        <div>
+          <strong>Внимание!</strong> Это действие необратимо.
+        </div>
+      </div>
+
+      <div class="alert alert--info">
+        <svg width="20" height="20" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+        </svg>
+        <div>
+          <strong>Информация.</strong> Новая версия доступна для скачивания.
+        </div>
+      </div>
+    </div>
+
+    <!-- Avatars -->
+    <div class="demo-section">
+      <h2>Avatars</h2>
+
+      <div class="demo-flex items-center">
+        <div class="avatar avatar--xs">
+          <img src="https://i.pravatar.cc/150?img=1" alt="Avatar">
+        </div>
+        <div class="avatar avatar--sm">
+          <img src="https://i.pravatar.cc/150?img=2" alt="Avatar">
+        </div>
+        <div class="avatar avatar--md">
+          <img src="https://i.pravatar.cc/150?img=3" alt="Avatar">
+        </div>
+        <div class="avatar avatar--lg">
+          <img src="https://i.pravatar.cc/150?img=4" alt="Avatar">
+        </div>
+        <div class="avatar avatar--xl">
+          <img src="https://i.pravatar.cc/150?img=5" alt="Avatar">
+        </div>
+        <div class="avatar avatar--2xl">
+          <img src="https://i.pravatar.cc/150?img=6" alt="Avatar">
+        </div>
+      </div>
+    </div>
+
+    <!-- Loaders -->
+    <div class="demo-section">
+      <h2>Loading States</h2>
+
+      <h3>Spinners</h3>
+      <div class="demo-flex items-center">
+        <div class="spinner spinner--sm"></div>
+        <div class="spinner spinner--md"></div>
+        <div class="spinner spinner--lg"></div>
+      </div>
+    </div>
+
+    <!-- Typography -->
+    <div class="demo-section">
+      <h2>Типографика</h2>
+
+      <h1 style="font-size: var(--font-size-4xl); font-weight: var(--font-weight-bold); margin-bottom: var(--space-4);">
+        Heading 1 - 48px Bold
+      </h1>
+      <h2 style="font-size: var(--font-size-3xl); font-weight: var(--font-weight-bold); margin-bottom: var(--space-4);">
+        Heading 2 - 36px Bold
+      </h2>
+      <h3 style="font-size: var(--font-size-2xl); font-weight: var(--font-weight-semibold); margin-bottom: var(--space-4);">
+        Heading 3 - 30px Semibold
+      </h3>
+      <h4 style="font-size: var(--font-size-xl); font-weight: var(--font-weight-semibold); margin-bottom: var(--space-4);">
+        Heading 4 - 24px Semibold
+      </h4>
+
+      <p style="font-size: var(--font-size-md); margin-bottom: var(--space-4);">
+        <strong>Body Large</strong> - 18px Regular. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+      </p>
+
+      <p style="font-size: var(--font-size-base); margin-bottom: var(--space-4);">
+        <strong>Body</strong> - 16px Regular. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+      </p>
+
+      <p style="font-size: var(--font-size-sm); margin-bottom: var(--space-4);">
+        <strong>Body Small</strong> - 14px Regular. Ut enim ad minim veniam, quis nostrud exercitation.
+      </p>
+
+      <p style="font-size: var(--font-size-xs); color: var(--color-text-secondary);">
+        <strong>Caption</strong> - 12px Regular. Duis aute irure dolor in reprehenderit.
+      </p>
+    </div>
+
+    <!-- Spacing -->
+    <div class="demo-section">
+      <h2>Spacing Scale</h2>
+
+      <div style="display: flex; flex-direction: column; gap: var(--space-2);">
+        <div style="display: flex; align-items: center; gap: var(--space-4);">
+          <code style="min-width: 100px;">--space-1</code>
+          <div style="width: var(--space-1); height: 20px; background: var(--color-primary);"></div>
+          <span class="text-secondary">4px</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: var(--space-4);">
+          <code style="min-width: 100px;">--space-2</code>
+          <div style="width: var(--space-2); height: 20px; background: var(--color-primary);"></div>
+          <span class="text-secondary">8px</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: var(--space-4);">
+          <code style="min-width: 100px;">--space-4</code>
+          <div style="width: var(--space-4); height: 20px; background: var(--color-primary);"></div>
+          <span class="text-secondary">16px</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: var(--space-4);">
+          <code style="min-width: 100px;">--space-6</code>
+          <div style="width: var(--space-6); height: 20px; background: var(--color-primary);"></div>
+          <span class="text-secondary">24px</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: var(--space-4);">
+          <code style="min-width: 100px;">--space-8</code>
+          <div style="width: var(--space-8); height: 20px; background: var(--color-primary);"></div>
+          <span class="text-secondary">32px</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
