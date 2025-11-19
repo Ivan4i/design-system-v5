@@ -17,6 +17,7 @@
 13. [Snackbars & Toasts](#snackbars--toasts)
 14. [Mobile Screens & Layouts](#mobile-screens--layouts)
 15. [Shopping & Orders](#shopping--orders)
+16. [Cards & Listings](#cards--listings)
 
 ---
 
@@ -5799,6 +5800,1494 @@ Complete CSS для всех компонентов Shopping & Orders:
 
 ---
 
+<!-- ============================================================================ -->
+<!-- SECTION: Cards & Listings                                                   -->
+<!-- FILE REFERENCE: design-system.md#cards--listings                            -->
+<!-- USAGE: Hotel cards, property listings, travel bookings, featured content    -->
+<!-- COMPONENTS: hotel-card, rating-badge, amenity-list, price-button            -->
+<!-- AI NAVIGATION: Search for "COMPONENT:" tags to find specific components     -->
+<!-- ============================================================================ -->
+
+## Cards & Listings
+
+Модульная система карточек для отображения контента: отели, рестораны, недвижимость, товары. Все компоненты можно комбинировать и расширять для различных типов listings.
+
+### Принцип модульности
+
+**Каждая карточка состоит из переиспользуемых блоков:**
+- Card Image (изображение с overlay badges)
+- Card Content Container (контейнер с информацией)
+- Rating Display (рейтинг в виде звезд и числа)
+- Rating Badge (цветной badge с оценкой)
+- Tags Row (теги типа "Discount", "Secret Deal")
+- Amenities List (удобства с иконками)
+- Price Button (кнопка с ценой)
+
+Эти блоки можно свободно комбинировать для создания различных типов карточек: hotel cards, restaurant cards, property cards, product cards и т.д.
+
+### Container Specifications
+
+```css
+/* ========================================== */
+/* COMPONENT: Card Container                  */
+/* CATEGORY: Layout                           */
+/* ========================================== */
+
+/* Screen Container */
+--card-screen-width: 375px;
+--card-screen-padding-v: 30px;
+--card-screen-border-radius: 30px;
+--card-screen-bg: #FFFFFF;
+
+/* Card Layout */
+--card-container-padding-h: 16px;
+--card-container-padding-v: 5px;
+--card-spacing: 5px;                     /* Spacing between image and content */
+
+/* Card Orientation */
+--card-layout: horizontal;               /* Image + Content side by side */
+```
+
+### Typography System
+
+```css
+/* ========================================== */
+/* COMPONENT: Card Typography                 */
+/* CATEGORY: Text Styles                      */
+/* ========================================== */
+
+/* Card Title */
+--card-title-font: 600 11px/1.40 'Archivo';
+--card-title-color: #09101D;
+--card-title-max-width: 128px;
+
+/* Card Location */
+--card-location-font: 400 10px/1.40 'Archivo';
+--card-location-color: #09101D;
+--card-location-max-width: 198px;
+
+/* Rating Text */
+--card-rating-number-font: 600 10px/1.40 'Archivo';
+--card-rating-number-color: #FFFFFF;
+
+--card-rating-label-font: 600 10px/1.40 'Archivo';
+--card-rating-label-color: #09101D;
+
+--card-rating-count-font: 400 10px/1.40 'Archivo';
+--card-rating-count-color: #747B84;
+
+/* Tag Text */
+--card-tag-font: 600 8px/1.40 'Archivo';
+--card-tag-color: #FFFFFF;
+
+/* Amenity Text */
+--card-amenity-font: 400 10px/1.40 'Archivo';
+--card-amenity-color: #747B84;
+
+/* Price Text */
+--card-price-number-font: 600 11px/1.40 'Archivo';
+--card-price-number-color: #09101D;
+
+--card-price-currency-font: 400 11px/1.40 'Archivo';
+--card-price-currency-color: #09101D;
+```
+
+**Новые цвета для палитры:**
+```css
+/* ========================================== */
+/* COLORS: Cards & Listings Palette           */
+/* ========================================== */
+
+--color-rating-badge: #221874;          /* Dark purple для rating badge */
+--color-price-button: #FFC043;          /* Yellow/gold для price button */
+--color-badge-overlay: rgba(17, 187, 141, 0.05);  /* Очень светлый green для image overlay badge */
+```
+
+<!-- ============================================================================ -->
+<!-- COMPONENT: Card Image Section                                               -->
+<!-- USAGE: Left side of horizontal card with image and overlay badge            -->
+<!-- VARIANTS: with-badge, no-badge, multiple-images                             -->
+<!-- ============================================================================ -->
+
+### 1. Card Image Component
+
+Левая часть карточки - изображение с опциональным badge overlay в верхнем левом углу.
+
+**Specifications:**
+```css
+/* ========================================== */
+/* COMPONENT: Card Image                      */
+/* FILE: cards-image.css                      */
+/* ========================================== */
+
+/* Image Container */
+--card-image-width: 120px;
+--card-image-height: 202px;              /* Aspect ratio ~1:1.68 (vertical) */
+--card-image-border-radius: 15px;
+--card-image-fit: cover;
+
+/* Overlay Badge (top-left corner) */
+--card-badge-overlay-size: 30px;
+--card-badge-overlay-padding: 8px;       /* Icon 14×14px */
+--card-badge-overlay-bg: rgba(17, 187, 141, 0.05);  /* 5% opacity green */
+--card-badge-overlay-border: 0.10px solid #FFFFFF;
+--card-badge-overlay-border-radius: 100px;  /* Circle */
+--card-badge-overlay-position-top: 10px;
+--card-badge-overlay-position-left: 10px;
+```
+
+**Visual Structure:**
+```
+┌────────────────────────┐
+│  ┌──┐  Image           │ ← Badge overlay (30×30px)
+│  │✓ │  120px × 202px   │   Top-left: 10px × 10px
+│  └──┘                  │   Background: rgba(17,187,141,0.05)
+│                        │   Border: 0.10px white
+│                        │   BorderRadius: 100px (circle)
+│      Hotel/Resort      │
+│         Image          │
+│                        │
+│                        │
+│                        │
+│                        │
+└────────────────────────┘
+   BorderRadius: 15px
+```
+
+**Badge types:**
+- **Favorite/Saved**: heart icon, indicates user saved this item
+- **Verified**: checkmark icon, indicates verified listing
+- **Featured**: star icon, indicates premium/featured content
+- **New**: badge for new listings
+
+<!-- ============================================================================ -->
+<!-- COMPONENT: Card Content Container                                           -->
+<!-- USAGE: Right side of horizontal card with all text info                     -->
+<!-- VARIANTS: compact, detailed, with-amenities, without-amenities              -->
+<!-- ============================================================================ -->
+
+### 2. Card Content Container
+
+Правая часть карточки - контейнер с padding, background и всей информацией о listing.
+
+**Specifications:**
+```css
+/* ========================================== */
+/* COMPONENT: Card Content Container          */
+/* FILE: cards-content.css                    */
+/* ========================================== */
+
+/* Content Container */
+--card-content-padding: 10px;
+--card-content-bg: #F4F6F9;              /* Light gray background */
+--card-content-border-radius: 15px;
+--card-content-spacing: 5px;             /* Spacing between child elements */
+
+/* Content Layout */
+--card-content-flex: 1;                  /* Takes remaining width */
+--card-content-flex-direction: column;
+--card-content-align-items: flex-start;
+```
+
+**Visual Structure:**
+```
+┌──────────────────────────────┐
+│  Content Container           │
+│  Padding: 10px               │
+│  Background: #F4F6F9          │
+│  BorderRadius: 15px          │
+│  ┌────────────────────────┐  │
+│  │ Title + Stars          │  │ ← Spacing 5px
+│  ├────────────────────────┤  │
+│  │ Location               │  │ ← Spacing 5px
+│  ├────────────────────────┤  │
+│  │ Rating Badge + Text    │  │ ← Spacing 5px
+│  ├────────────────────────┤  │
+│  │ Tags (Discount, etc.)  │  │ ← Spacing 5px
+│  ├────────────────────────┤  │
+│  │ Amenities List         │  │ ← Spacing 5px
+│  ├────────────────────────┤  │
+│  │ Price Button           │  │
+│  └────────────────────────┘  │
+└──────────────────────────────┘
+```
+
+<!-- ============================================================================ -->
+<!-- COMPONENT: Title & Star Rating Row                                          -->
+<!-- USAGE: First row in card content - title and star rating                    -->
+<!-- VARIANTS: 1-5 stars, with-title-only, compact                               -->
+<!-- ============================================================================ -->
+
+### 3. Title & Star Rating Component
+
+Первая строка в content - название (left) и звезды (right).
+
+**Specifications:**
+```css
+/* ========================================== */
+/* COMPONENT: Title & Star Rating Row         */
+/* FILE: cards-title-rating.css               -->
+/* ========================================== */
+
+/* Title */
+--card-title-font: 600 11px/1.40 'Archivo';
+--card-title-color: #09101D;
+--card-title-max-width: 128px;
+--card-title-overflow: hidden;
+--card-title-text-overflow: ellipsis;
+
+/* Star Rating */
+--card-star-size: 15px;
+--card-star-padding: 2px;
+--card-star-border-radius: 100px;
+--card-star-color: #FFC043;              /* Gold color for filled stars */
+--card-star-spacing: 0px;                /* No spacing between stars */
+
+/* Row Layout */
+--title-rating-display: flex;
+--title-rating-justify: space-between;
+--title-rating-align: flex-start;
+--title-rating-spacing: 10px;
+```
+
+**Visual Structure:**
+```
+┌────────────────────────────────────────────────┐
+│  Planta Luxury...  [★][★][★][★][☆]           │
+│  (128px max)       15px × 4 = 60px             │
+│  11px/600          Gold #FFC043                │
+└────────────────────────────────────────────────┘
+   ← spacing 10px →
+```
+
+**Star states:**
+- **Filled**: gold color (#FFC043), indicates active star
+- **Empty**: gray color (#E0E0E0), indicates inactive star
+- **Half**: can use icon or gradient for half-stars
+
+<!-- ============================================================================ -->
+<!-- COMPONENT: Location Text                                                    -->
+<!-- USAGE: Shows location/address below title                                   -->
+<!-- VARIANTS: with-icon, text-only, truncated                                   -->
+<!-- ============================================================================ -->
+
+### 4. Location Component
+
+Второй элемент - местоположение (город, страна).
+
+**Specifications:**
+```css
+/* ========================================== */
+/* COMPONENT: Location Text                   -->
+/* FILE: cards-location.css                   */
+/* ========================================== */
+
+/* Location Text */
+--card-location-font: 400 10px/1.40 'Archivo';
+--card-location-color: #09101D;
+--card-location-max-width: 198px;
+
+/* Optional: Location with Icon */
+--location-icon-size: 12px;
+--location-icon-color: #747B84;
+--location-icon-spacing: 4px;
+```
+
+**Visual Structure:**
+```
+┌──────────────────────┐
+│  Bali, Indonesia     │
+│  10px/400            │
+│  #09101D             │
+│  Max width: 198px    │
+└──────────────────────┘
+
+OR with icon:
+┌──────────────────────┐
+│  📍 Bali, Indonesia  │
+│  12px  10px/400      │
+└──────────────────────┘
+```
+
+<!-- ============================================================================ -->
+<!-- COMPONENT: Rating Badge & Text                                              -->
+<!-- USAGE: Shows numerical rating with badge and review text                    -->
+<!-- VARIANTS: badge-only, with-reviews, excellent/good/average                  -->
+<!-- ============================================================================ -->
+
+### 5. Rating Badge & Text Component
+
+Рейтинг с цветным badge, label и количеством отзывов.
+
+**Specifications:**
+```css
+/* ========================================== */
+/* COMPONENT: Rating Badge & Text             */
+/* FILE: cards-rating.css                     */
+/* ========================================== */
+
+/* Rating Badge */
+--rating-badge-padding: 3px;
+--rating-badge-bg: #221874;              /* Dark purple (NEW COLOR!) */
+--rating-badge-border-radius: 5px;
+--rating-badge-font: 600 10px/1.40 'Archivo';
+--rating-badge-color: #FFFFFF;
+
+/* Rating Label */
+--rating-label-font: 600 10px/1.40 'Archivo';
+--rating-label-color: #09101D;
+
+/* Review Count */
+--rating-count-font: 400 10px/1.40 'Archivo';
+--rating-count-color: #747B84;
+--rating-count-separator: ' | ';         /* Separator between label and count */
+
+/* Row Layout */
+--rating-row-spacing: 5px;               /* Between badge and text */
+--rating-row-align: center;
+```
+
+**Visual Structure:**
+```
+┌──────────────────────────────────────────┐
+│  [4.9]  Excellent | 41 reviews          │
+│   ^^^   ^^^^^^^^^ ^^^^^^^^^^            │
+│  Badge   Label     Count                │
+│  3px     10/600    10/400               │
+│  #221874 #09101D   #747B84              │
+└──────────────────────────────────────────┘
+   Spacing: 5px between elements
+```
+
+**Badge color variations (for future):**
+- **Excellent (9.0-10.0)**: #221874 (dark purple)
+- **Very Good (8.0-8.9)**: #4141E6 (primary blue)
+- **Good (7.0-7.9)**: #11BB8D (success green)
+- **Average (6.0-6.9)**: #FFC043 (yellow)
+- **Below Average (<6.0)**: #E24949 (error red)
+
+<!-- ============================================================================ -->
+<!-- COMPONENT: Tags Row                                                         -->
+<!-- USAGE: Shows promotional tags like "Discount", "Secret Deal"                -->
+<!-- VARIANTS: 1-tag, 2-tags, 3+tags, different-colors                           -->
+<!-- ============================================================================ -->
+
+### 6. Tags Component
+
+Цветные теги для промо-информации (Discount, Secret Deal, New, и т.д.).
+
+**Specifications:**
+```css
+/* ========================================== */
+/* COMPONENT: Tags Row                        */
+/* FILE: cards-tags.css                       */
+/* ========================================== */
+
+/* Tag Container */
+--card-tag-padding-h: 5px;
+--card-tag-padding-v: 3px;
+--card-tag-border-radius: 5px;
+--card-tag-font: 600 8px/1.40 'Archivo';
+--card-tag-color: #FFFFFF;
+
+/* Tag Colors (by type) */
+--tag-discount-bg: #11BB8D;              /* Success green */
+--tag-secret-deal-bg: #11BB8D;           /* Success green */
+--tag-new-bg: #4141E6;                   /* Primary blue */
+--tag-featured-bg: #FFC043;              /* Gold yellow */
+--tag-limited-bg: #E24949;               /* Error red */
+
+/* Tags Row Layout */
+--tags-row-spacing: 5px;                 /* Between tags */
+--tags-row-display: flex;
+--tags-row-wrap: wrap;
+```
+
+**Visual Structure:**
+```
+┌─────────────────────────────────┐
+│  [Discount] [Secret Deal]       │
+│   8px/600    8px/600            │
+│   #11BB8D    #11BB8D            │
+│   Padding: 5px H × 3px V        │
+│   BorderRadius: 5px             │
+└─────────────────────────────────┘
+   Spacing: 5px between tags
+```
+
+**Tag types:**
+1. **Discount** - green (#11BB8D), shows price discount available
+2. **Secret Deal** - green (#11BB8D), special members-only offer
+3. **New** - blue (#4141E6), new listing (< 30 days)
+4. **Featured** - yellow (#FFC043), premium placement
+5. **Limited** - red (#E24949), limited availability
+
+<!-- ============================================================================ -->
+<!-- COMPONENT: Amenities List                                                   -->
+<!-- USAGE: Shows facilities/features with icons (WiFi, Pool, etc.)              -->
+<!-- VARIANTS: 1-column, 2-columns, icon-only, with-text                         -->
+<!-- ============================================================================ -->
+
+### 7. Amenities List Component
+
+Список удобств с иконками (WiFi, Pool, Sea food, и т.д.).
+
+**Specifications:**
+```css
+/* ========================================== */
+/* COMPONENT: Amenities List                  */
+/* FILE: cards-amenities.css                  */
+/* ========================================== */
+
+/* Amenity Item */
+--amenity-item-spacing: 5px;             /* Between icon and text */
+--amenity-row-spacing: 0px;              /* Between rows (can add for vertical spacing) */
+
+/* Amenity Icon */
+--amenity-icon-size: 21px;               /* Container size */
+--amenity-icon-padding: 5px;             /* Icon actual size ~11×10px */
+--amenity-icon-border-radius: 100px;
+--amenity-icon-color: #747B84;
+
+/* Amenity Text */
+--amenity-text-font: 400 10px/1.40 'Archivo';
+--amenity-text-color: #747B84;
+
+/* List Layout */
+--amenities-list-display: flex;
+--amenities-list-direction: column;
+--amenities-list-gap: 0px;               /* Compact layout */
+```
+
+**Visual Structure:**
+```
+┌─────────────────────────┐
+│  [🍤]  Sea food         │ ← Icon 21×21px, text 10px/400
+│  [📶]  Free Wi-Fi       │   Spacing: 5px between icon and text
+│  [🏊]  Pool             │   Color: #747B84 for both
+│  [🍴]  Restaurant       │
+└─────────────────────────┘
+   Vertical spacing: 0px (compact)
+```
+
+**Common amenity icons:**
+- **WiFi**: 📶 signal icon
+- **Pool**: 🏊 swimming icon
+- **Restaurant**: 🍴 utensils icon
+- **Parking**: 🅿️ parking icon
+- **Sea food**: 🍤 seafood icon
+- **Beach**: 🏖️ beach icon
+- **Gym**: 💪 dumbbell icon
+- **Spa**: 🧖 spa icon
+
+<!-- ============================================================================ -->
+<!-- COMPONENT: Price Button                                                     -->
+<!-- USAGE: Prominent button showing price at bottom of card                     -->
+<!-- VARIANTS: with-currency, price-only, from-price, per-night                  -->
+<!-- ============================================================================ -->
+
+### 8. Price Button Component
+
+Кнопка с ценой в нижней части карточки. Яркий акцент золотого/желтого цвета.
+
+**Specifications:**
+```css
+/* ========================================== */
+/* COMPONENT: Price Button                    */
+/* FILE: cards-price-button.css               */
+/* ========================================== */
+
+/* Button Container */
+--price-button-height: 36px;
+--price-button-padding-h: 16px;
+--price-button-padding-v: 10px;
+--price-button-bg: #FFC043;              /* Yellow/gold (NEW COLOR!) */
+--price-button-border-radius: 15px;
+--price-button-border: none;
+
+/* Price Text */
+--price-number-font: 600 11px/1.40 'Archivo';
+--price-number-color: #09101D;
+
+--price-currency-font: 400 11px/1.40 'Archivo';
+--price-currency-color: #09101D;
+
+/* Price Layout */
+--price-text-spacing: 8px;               /* Between number and currency */
+--price-text-align: center;
+
+/* Button States */
+--price-button-hover-bg: #F5B639;        /* Slightly darker gold */
+--price-button-active-bg: #EBAA2F;       /* Even darker gold */
+```
+
+**Visual Structure:**
+```
+┌──────────────────────┐
+│   235   USD          │ ← Height: 36px
+│  11/600  11/400      │   Padding: 16px H × 10px V
+│  #09101D #09101D     │   Background: #FFC043
+│                      │   BorderRadius: 15px
+└──────────────────────┘
+   Spacing: 8px between price and currency
+```
+
+**Price format variations:**
+1. **Simple**: "235 USD"
+2. **From price**: "From 199 USD"
+3. **Per night**: "235 USD / night"
+4. **Discounted**: ~~"300"~~ "235 USD"
+5. **Range**: "235 - 450 USD"
+
+### Complete Layout: Hotel Card
+
+**Полная структура hotel card:**
+
+```
+┌───────────────────────────────────────────────────────────────┐
+│  Container (375px, padding 16px H × 5px V)                    │
+│  ┌──────────┬──────────────────────────────────────────────┐  │
+│  │  Image   │  Content Container (#F4F6F9, padding 10px)  │  │
+│  │  120×202 │  ┌────────────────────────────────────────┐  │  │
+│  │  ┌──┐    │  │ Planta Luxury... [★][★][★][★][☆]    │  │  │ ← Title + Stars
+│  │  │✓ │    │  ├────────────────────────────────────────┤  │  │
+│  │  └──┘    │  │ Bali, Indonesia                        │  │  │ ← Location
+│  │          │  ├────────────────────────────────────────┤  │  │
+│  │  Hotel   │  │ [4.9] Excellent | 41 reviews           │  │  │ ← Rating
+│  │  Image   │  ├────────────────────────────────────────┤  │  │
+│  │          │  │ [Discount] [Secret Deal]               │  │  │ ← Tags
+│  │          │  ├────────────────────────────────────────┤  │  │
+│  │          │  │ 🍤 Sea food                            │  │  │
+│  │          │  │ 📶 Free Wi-Fi                          │  │  │ ← Amenities
+│  │          │  ├────────────────────────────────────────┤  │  │
+│  │          │  │      [235 USD]                         │  │  │ ← Price Button
+│  │          │  └────────────────────────────────────────┘  │  │
+│  └──────────┴──────────────────────────────────────────────┘  │
+└───────────────────────────────────────────────────────────────┘
+     Spacing: 5px between image and content
+```
+
+**Компоненты в этом layout:**
+1. Card Image (120×202px) with overlay badge
+2. Card Content Container (#F4F6F9 background)
+3. Title & Star Rating Row (11px title + 15px stars)
+4. Location Text (10px)
+5. Rating Badge & Text (badge + "Excellent | 41 reviews")
+6. Tags Row (Discount, Secret Deal)
+7. Amenities List (2 items with icons)
+8. Price Button (36px height, #FFC043 background)
+
+### Modular Components Matrix
+
+Таблица показывает, какие компоненты используются в разных типах карточек:
+
+| Component              | Hotel Card | Restaurant | Property | Product | Can Add More? |
+|------------------------|------------|------------|----------|---------|---------------|
+| Card Image             | ✅ (120px) | ✅ (120px) | ✅ (120px) | ✅ (80px) | ✅ Flexible |
+| Overlay Badge          | ✅         | ✅         | ❌       | ❌      | ✅ Optional   |
+| Title & Star Rating    | ✅         | ✅         | ✅       | ❌      | ✅ Contextual |
+| Location               | ✅         | ✅         | ✅       | ❌      | ✅ Optional   |
+| Rating Badge & Text    | ✅         | ✅         | ❌       | ⚠️ Review | ✅ Conditional|
+| Tags Row               | ✅         | ✅         | ✅       | ✅      | ✅ Dynamic    |
+| Amenities List         | ✅         | ✅         | ✅       | ❌      | ✅ Conditional|
+| Price Button           | ✅         | ⚠️ Order  | ✅       | ✅      | ✅ Always     |
+
+**Гибкость:**
+- **Card Image**: можно менять размер (80px для product, 120px для hotel, 150px для property)
+- **Overlay Badge**: опциональный, можно добавить/убрать
+- **Tags Row**: количество динамическое (от 0 до бесконечности)
+- **Amenities List**: показывать только для hotel/restaurant/property
+- **Price Button**: всегда внизу, но текст может меняться ("Order", "Book", "Buy")
+
+### Extensibility Guide
+
+Практические примеры расширения компонентов для различных сценариев:
+
+#### Example 1: Добавление больше amenities
+
+Если у отеля больше удобств (например, 5 вместо 2), просто добавьте строки:
+
+```html
+<!-- ========================================== -->
+<!-- USAGE EXAMPLE: Extended Amenities List     -->
+<!-- ========================================== -->
+
+<div class="amenities-list">
+  <div class="amenity-item">
+    <div class="amenity-icon">🍤</div>
+    <span class="amenity-text">Sea food</span>
+  </div>
+  <div class="amenity-item">
+    <div class="amenity-icon">📶</div>
+    <span class="amenity-text">Free Wi-Fi</span>
+  </div>
+  <!-- NEW: Additional amenities -->
+  <div class="amenity-item">
+    <div class="amenity-icon">🏊</div>
+    <span class="amenity-text">Pool</span>
+  </div>
+  <div class="amenity-item">
+    <div class="amenity-icon">🏖️</div>
+    <span class="amenity-text">Beach access</span>
+  </div>
+  <div class="amenity-item">
+    <div class="amenity-icon">🧖</div>
+    <span class="amenity-text">Spa</span>
+  </div>
+</div>
+```
+
+**Note:** Для длинных списков можно использовать двухколоночный layout:
+```css
+.amenities-list--two-columns {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 5px;
+}
+```
+
+#### Example 2: Product Card (без amenities)
+
+Если создаете product card, уберите amenities и измените размер изображения:
+
+```html
+<!-- ========================================== -->
+<!-- USAGE EXAMPLE: Product Card Variant        -->
+<!-- ========================================== -->
+
+<div class="card-container">
+  <!-- Smaller image for products -->
+  <div class="card-image" style="width: 80px; height: 120px;">
+    <img src="product.jpg" alt="Product">
+    <!-- No overlay badge for products -->
+  </div>
+
+  <div class="card-content">
+    <!-- Title only (no stars for products) -->
+    <div class="card-title">Product Name</div>
+
+    <!-- No location for products -->
+
+    <!-- Optional: Review badge -->
+    <div class="rating-row">
+      <div class="rating-badge">4.5</div>
+      <span class="rating-label">Very Good</span>
+      <span class="rating-count">| 128 reviews</span>
+    </div>
+
+    <!-- Tags still work -->
+    <div class="tags-row">
+      <div class="tag tag--discount">Sale</div>
+      <div class="tag tag--limited">Limited</div>
+    </div>
+
+    <!-- NO amenities for products -->
+
+    <!-- Price button with different text -->
+    <div class="price-button">
+      <span class="price-number">49</span>
+      <span class="price-currency">USD</span>
+    </div>
+  </div>
+</div>
+```
+
+#### Example 3: Restaurant Card (с "Order" button)
+
+Для ресторанов измените price button на "Order" или "Reserve":
+
+```html
+<!-- ========================================== -->
+<!-- USAGE EXAMPLE: Restaurant Card Variant     -->
+<!-- ========================================== -->
+
+<div class="card-container">
+  <div class="card-image">
+    <img src="restaurant.jpg" alt="Restaurant">
+    <div class="card-badge-overlay">
+      <svg class="icon-verified"><!-- Verified icon --></svg>
+    </div>
+  </div>
+
+  <div class="card-content">
+    <!-- Title + Stars -->
+    <div class="title-rating-row">
+      <h3 class="card-title">Fine Dining Restaurant</h3>
+      <div class="star-rating">★★★★★</div>
+    </div>
+
+    <!-- Location -->
+    <div class="card-location">Downtown, New York</div>
+
+    <!-- Rating -->
+    <div class="rating-row">
+      <div class="rating-badge">4.8</div>
+      <span class="rating-label">Excellent</span>
+      <span class="rating-count">| 234 reviews</span>
+    </div>
+
+    <!-- Tags -->
+    <div class="tags-row">
+      <div class="tag tag--featured">Featured</div>
+      <div class="tag tag--new">New</div>
+    </div>
+
+    <!-- Amenities (cuisine types) -->
+    <div class="amenities-list">
+      <div class="amenity-item">
+        <div class="amenity-icon">🍝</div>
+        <span class="amenity-text">Italian</span>
+      </div>
+      <div class="amenity-item">
+        <div class="amenity-icon">🍷</div>
+        <span class="amenity-text">Wine bar</span>
+      </div>
+    </div>
+
+    <!-- Action Button (not price) -->
+    <button class="action-button action-button--order">
+      <span class="action-text">Reserve table</span>
+    </button>
+  </div>
+</div>
+```
+
+**CSS для action button:**
+```css
+/* ========================================== */
+/* VARIANT: Action Button (non-price)         */
+/* ========================================== */
+
+.action-button--order {
+  height: 36px;
+  padding: 10px 16px;
+  background: #4141E6;               /* Primary blue instead of gold */
+  border-radius: 15px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.action-button--order:hover {
+  background: #3333D1;
+}
+
+.action-text {
+  font: 600 11px/1.40 'Archivo';
+  color: #FFFFFF;
+}
+```
+
+#### Example 4: Vertical Card Layout
+
+Если нужен вертикальный layout (изображение сверху, контент снизу):
+
+```html
+<!-- ========================================== -->
+<!-- USAGE EXAMPLE: Vertical Card Layout        -->
+<!-- ========================================== -->
+
+<div class="card-container card-container--vertical">
+  <!-- Image on top (full width) -->
+  <div class="card-image card-image--vertical">
+    <img src="hotel.jpg" alt="Hotel">
+    <div class="card-badge-overlay">
+      <svg class="icon-heart"><!-- Heart icon --></svg>
+    </div>
+  </div>
+
+  <!-- Content below -->
+  <div class="card-content card-content--vertical">
+    <!-- Same content as horizontal -->
+    <div class="title-rating-row">...</div>
+    <div class="card-location">...</div>
+    <!-- etc. -->
+  </div>
+</div>
+```
+
+**CSS для vertical layout:**
+```css
+/* ========================================== */
+/* VARIANT: Vertical Card Layout              */
+/* ========================================== */
+
+.card-container--vertical {
+  flex-direction: column;            /* Stack vertically instead of horizontal */
+  padding: 0;                        /* Remove horizontal padding */
+}
+
+.card-image--vertical {
+  width: 100%;                       /* Full width */
+  height: 200px;                     /* Fixed height */
+  border-radius: 15px 15px 0 0;      /* Round only top corners */
+}
+
+.card-content--vertical {
+  border-radius: 0 0 15px 15px;      /* Round only bottom corners */
+}
+```
+
+### CSS Implementation
+
+Complete CSS для всех компонентов Cards & Listings:
+
+```css
+/* ============================================================================ */
+/* FILE: cards-listings.css                                                     */
+/* SECTION: Cards & Listings - Complete Stylesheet                             */
+/* COMPONENTS: All card components with IDE AI navigation markers              */
+/* ============================================================================ */
+
+/* ========================================== */
+/* COMPONENT: Screen Container                */
+/* AI-TAG: card-screen-container              */
+/* ========================================== */
+
+.card-screen {
+  width: 375px;
+  padding: 30px 0;
+  background: #FFFFFF;
+  border-radius: 30px;
+  overflow: hidden;
+}
+
+/* ========================================== */
+/* COMPONENT: Card Container                  */
+/* AI-TAG: card-container-horizontal          */
+/* ========================================== */
+
+.card-container {
+  padding: 5px 16px;
+  display: flex;
+  gap: 5px;                          /* Spacing between image and content */
+}
+
+/* ========================================== */
+/* COMPONENT: Card Image                      */
+/* AI-TAG: card-image-with-overlay            */
+/* ========================================== */
+
+.card-image {
+  position: relative;
+  width: 120px;
+  height: 202px;
+  border-radius: 15px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Overlay Badge (top-left corner) */
+.card-badge-overlay {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 30px;
+  height: 30px;
+  padding: 8px;                      /* Icon 14×14px */
+  background: rgba(17, 187, 141, 0.05);  /* 5% opacity green */
+  border: 0.10px solid #FFFFFF;
+  border-radius: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-badge-overlay svg {
+  width: 14px;
+  height: 14px;
+  color: #11BB8D;
+}
+
+/* ========================================== */
+/* COMPONENT: Card Content Container          */
+/* AI-TAG: card-content-container             */
+/* ========================================== */
+
+.card-content {
+  flex: 1;
+  padding: 10px;
+  background: #F4F6F9;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+/* ========================================== */
+/* COMPONENT: Title & Star Rating Row         */
+/* AI-TAG: card-title-rating-row              */
+/* ========================================== */
+
+.title-rating-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.card-title {
+  max-width: 128px;
+  font: 600 11px/1.40 'Archivo';
+  color: #09101D;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.star-rating {
+  display: flex;
+  gap: 0px;
+  flex-shrink: 0;
+}
+
+.star-rating__star {
+  width: 15px;
+  height: 15px;
+  padding: 2px;
+  border-radius: 100px;
+}
+
+.star-rating__star svg {
+  width: 11px;
+  height: 11px;
+  color: #FFC043;                    /* Gold for filled stars */
+}
+
+.star-rating__star--empty svg {
+  color: #E0E0E0;                    /* Gray for empty stars */
+}
+
+/* ========================================== */
+/* COMPONENT: Location Text                   */
+/* AI-TAG: card-location-text                 */
+/* ========================================== */
+
+.card-location {
+  max-width: 198px;
+  font: 400 10px/1.40 'Archivo';
+  color: #09101D;
+}
+
+/* Optional: Location with icon */
+.card-location--with-icon {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.location-icon {
+  width: 12px;
+  height: 12px;
+  color: #747B84;
+}
+
+/* ========================================== */
+/* COMPONENT: Rating Badge & Text             */
+/* AI-TAG: card-rating-badge-text             */
+/* ========================================== */
+
+.rating-row {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.rating-badge {
+  padding: 3px;
+  background: #221874;               /* Dark purple (NEW COLOR) */
+  border-radius: 5px;
+  font: 600 10px/1.40 'Archivo';
+  color: #FFFFFF;
+  flex-shrink: 0;
+}
+
+.rating-label {
+  font: 600 10px/1.40 'Archivo';
+  color: #09101D;
+}
+
+.rating-count {
+  font: 400 10px/1.40 'Archivo';
+  color: #747B84;
+}
+
+/* Rating badge color variations */
+.rating-badge--excellent {
+  background: #221874;               /* Dark purple (9.0-10.0) */
+}
+
+.rating-badge--very-good {
+  background: #4141E6;               /* Primary blue (8.0-8.9) */
+}
+
+.rating-badge--good {
+  background: #11BB8D;               /* Success green (7.0-7.9) */
+}
+
+.rating-badge--average {
+  background: #FFC043;               /* Yellow (6.0-6.9) */
+}
+
+.rating-badge--below-average {
+  background: #E24949;               /* Error red (<6.0) */
+}
+
+/* ========================================== */
+/* COMPONENT: Tags Row                        */
+/* AI-TAG: card-tags-row                      */
+/* ========================================== */
+
+.tags-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.tag {
+  padding: 3px 5px;
+  border-radius: 5px;
+  font: 600 8px/1.40 'Archivo';
+  color: #FFFFFF;
+}
+
+/* Tag type variations */
+.tag--discount,
+.tag--secret-deal {
+  background: #11BB8D;               /* Success green */
+}
+
+.tag--new {
+  background: #4141E6;               /* Primary blue */
+}
+
+.tag--featured {
+  background: #FFC043;               /* Gold yellow */
+}
+
+.tag--limited {
+  background: #E24949;               /* Error red */
+}
+
+/* ========================================== */
+/* COMPONENT: Amenities List                  */
+/* AI-TAG: card-amenities-list                */
+/* ========================================== */
+
+.amenities-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0px;                          /* Compact layout */
+}
+
+.amenity-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.amenity-icon {
+  width: 21px;
+  height: 20px;
+  padding: 5px;
+  border-radius: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.amenity-icon svg {
+  width: 11px;
+  height: 10px;
+  color: #747B84;
+}
+
+.amenity-text {
+  font: 400 10px/1.40 'Archivo';
+  color: #747B84;
+}
+
+/* Two-column layout for long lists */
+.amenities-list--two-columns {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 5px;
+}
+
+/* ========================================== */
+/* COMPONENT: Price Button                    */
+/* AI-TAG: card-price-button                  */
+/* ========================================== */
+
+.price-button {
+  height: 36px;
+  padding: 10px 16px;
+  background: #FFC043;               /* Yellow/gold (NEW COLOR) */
+  border-radius: 15px;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  align-self: flex-start;
+}
+
+.price-button:hover {
+  background: #F5B639;               /* Slightly darker gold */
+}
+
+.price-button:active {
+  background: #EBAA2F;               /* Even darker gold */
+}
+
+.price-number {
+  font: 600 11px/1.40 'Archivo';
+  color: #09101D;
+}
+
+.price-currency {
+  font: 400 11px/1.40 'Archivo';
+  color: #09101D;
+}
+
+/* ========================================== */
+/* VARIANT: Action Button (non-price)         */
+/* AI-TAG: card-action-button                 */
+/* ========================================== */
+
+.action-button {
+  height: 36px;
+  padding: 10px 16px;
+  border-radius: 15px;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.action-button--order {
+  background: #4141E6;               /* Primary blue */
+}
+
+.action-button--order:hover {
+  background: #3333D1;
+}
+
+.action-button--reserve {
+  background: #11BB8D;               /* Success green */
+}
+
+.action-button--reserve:hover {
+  background: #0FA87D;
+}
+
+.action-text {
+  font: 600 11px/1.40 'Archivo';
+  color: #FFFFFF;
+}
+
+/* ========================================== */
+/* VARIANT: Vertical Card Layout              */
+/* AI-TAG: card-container-vertical            */
+/* ========================================== */
+
+.card-container--vertical {
+  flex-direction: column;
+  padding: 0;
+  gap: 0;
+}
+
+.card-image--vertical {
+  width: 100%;
+  height: 200px;
+  border-radius: 15px 15px 0 0;      /* Round only top corners */
+}
+
+.card-content--vertical {
+  border-radius: 0 0 15px 15px;      /* Round only bottom corners */
+}
+
+/* ========================================== */
+/* VARIANT: Product Card (smaller image)      */
+/* AI-TAG: card-product-variant               */
+/* ========================================== */
+
+.card-image--product {
+  width: 80px;
+  height: 120px;
+}
+
+.card-content--product .card-title {
+  max-width: 100%;                   /* Full width for product titles */
+}
+
+/* ========================================== */
+/* Responsive & State Behaviors               */
+/* ========================================== */
+
+.card-container:hover .card-content {
+  background: #E8ECF1;               /* Slightly darker gray on hover */
+}
+
+/* For grid layouts (multiple cards) */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(343px, 1fr));
+  gap: 16px;
+  padding: 16px;
+}
+
+/* For list layouts (stacked cards) */
+.cards-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+```
+
+### Usage Examples
+
+<!-- ============================================================================ -->
+<!-- USAGE EXAMPLE: Basic Hotel Card                                            -->
+<!-- AI-TAG: example-hotel-card-basic                                            -->
+<!-- ============================================================================ -->
+
+#### Example 1: Basic Hotel Card
+
+```html
+<div class="card-screen">
+  <div class="card-container">
+    <!-- Card Image -->
+    <div class="card-image">
+      <img src="hotel-planta.jpg" alt="Planta Luxury Boutique Resort">
+      <div class="card-badge-overlay">
+        <svg class="icon-checkmark"><!-- Verified checkmark --></svg>
+      </div>
+    </div>
+
+    <!-- Card Content -->
+    <div class="card-content">
+      <!-- Title + Star Rating -->
+      <div class="title-rating-row">
+        <h3 class="card-title">Planta Luxury Boutique Resort</h3>
+        <div class="star-rating">
+          <div class="star-rating__star">
+            <svg><!-- Star filled --></svg>
+          </div>
+          <div class="star-rating__star">
+            <svg><!-- Star filled --></svg>
+          </div>
+          <div class="star-rating__star">
+            <svg><!-- Star filled --></svg>
+          </div>
+          <div class="star-rating__star">
+            <svg><!-- Star filled --></svg>
+          </div>
+          <div class="star-rating__star star-rating__star--empty">
+            <svg><!-- Star empty --></svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Location -->
+      <div class="card-location">Bali, Indonesia</div>
+
+      <!-- Rating Badge & Text -->
+      <div class="rating-row">
+        <div class="rating-badge rating-badge--excellent">4.9</div>
+        <span class="rating-label">Excellent</span>
+        <span class="rating-count">| 41 reviews</span>
+      </div>
+
+      <!-- Tags -->
+      <div class="tags-row">
+        <div class="tag tag--discount">Discount</div>
+        <div class="tag tag--secret-deal">Secret Deal</div>
+      </div>
+
+      <!-- Amenities -->
+      <div class="amenities-list">
+        <div class="amenity-item">
+          <div class="amenity-icon">
+            <svg><!-- Seafood icon --></svg>
+          </div>
+          <span class="amenity-text">Sea food</span>
+        </div>
+        <div class="amenity-item">
+          <div class="amenity-icon">
+            <svg><!-- WiFi icon --></svg>
+          </div>
+          <span class="amenity-text">Free Wi-Fi</span>
+        </div>
+      </div>
+
+      <!-- Price Button -->
+      <div class="price-button">
+        <span class="price-number">235</span>
+        <span class="price-currency">USD</span>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+<!-- ============================================================================ -->
+<!-- USAGE EXAMPLE: Restaurant Card with Reserve Button                         -->
+<!-- AI-TAG: example-restaurant-card                                             -->
+<!-- ============================================================================ -->
+
+#### Example 2: Restaurant Card
+
+```html
+<div class="card-container">
+  <div class="card-image">
+    <img src="restaurant.jpg" alt="Fine Dining Restaurant">
+    <div class="card-badge-overlay">
+      <svg class="icon-star"><!-- Featured star --></svg>
+    </div>
+  </div>
+
+  <div class="card-content">
+    <div class="title-rating-row">
+      <h3 class="card-title">Fine Dining Restaurant</h3>
+      <div class="star-rating">
+        <!-- 5 filled stars -->
+      </div>
+    </div>
+
+    <div class="card-location--with-icon">
+      <svg class="location-icon"><!-- Pin icon --></svg>
+      <span>Downtown, New York</span>
+    </div>
+
+    <div class="rating-row">
+      <div class="rating-badge rating-badge--excellent">4.8</div>
+      <span class="rating-label">Excellent</span>
+      <span class="rating-count">| 234 reviews</span>
+    </div>
+
+    <div class="tags-row">
+      <div class="tag tag--featured">Featured</div>
+      <div class="tag tag--new">New</div>
+    </div>
+
+    <div class="amenities-list">
+      <div class="amenity-item">
+        <div class="amenity-icon">
+          <svg><!-- Italian food icon --></svg>
+        </div>
+        <span class="amenity-text">Italian</span>
+      </div>
+      <div class="amenity-item">
+        <div class="amenity-icon">
+          <svg><!-- Wine icon --></svg>
+        </div>
+        <span class="amenity-text">Wine bar</span>
+      </div>
+    </div>
+
+    <!-- Action Button instead of Price -->
+    <button class="action-button action-button--reserve">
+      <span class="action-text">Reserve table</span>
+    </button>
+  </div>
+</div>
+```
+
+<!-- ============================================================================ -->
+<!-- USAGE EXAMPLE: Product Card (compact variant)                              -->
+<!-- AI-TAG: example-product-card                                                -->
+<!-- ============================================================================ -->
+
+#### Example 3: Product Card (Compact)
+
+```html
+<div class="card-container">
+  <div class="card-image card-image--product">
+    <img src="product.jpg" alt="Product Name">
+    <!-- No overlay badge for products -->
+  </div>
+
+  <div class="card-content card-content--product">
+    <!-- Title only (no stars) -->
+    <h3 class="card-title">Wireless Headphones</h3>
+
+    <!-- Optional review badge -->
+    <div class="rating-row">
+      <div class="rating-badge rating-badge--very-good">4.5</div>
+      <span class="rating-label">Very Good</span>
+      <span class="rating-count">| 128 reviews</span>
+    </div>
+
+    <!-- Tags -->
+    <div class="tags-row">
+      <div class="tag tag--discount">Sale</div>
+      <div class="tag tag--limited">Limited</div>
+    </div>
+
+    <!-- No amenities for products -->
+
+    <!-- Price -->
+    <div class="price-button">
+      <span class="price-number">49</span>
+      <span class="price-currency">USD</span>
+    </div>
+  </div>
+</div>
+```
+
+<!-- ============================================================================ -->
+<!-- USAGE EXAMPLE: Vertical Card Layout for Grid                               -->
+<!-- AI-TAG: example-vertical-card-grid                                          -->
+<!-- ============================================================================ -->
+
+#### Example 4: Vertical Cards in Grid
+
+```html
+<div class="cards-grid">
+  <!-- Card 1 -->
+  <div class="card-container card-container--vertical">
+    <div class="card-image card-image--vertical">
+      <img src="hotel1.jpg" alt="Hotel 1">
+      <div class="card-badge-overlay">
+        <svg class="icon-heart"><!-- Saved --></svg>
+      </div>
+    </div>
+    <div class="card-content card-content--vertical">
+      <!-- Same content structure as horizontal -->
+    </div>
+  </div>
+
+  <!-- Card 2 -->
+  <div class="card-container card-container--vertical">
+    <div class="card-image card-image--vertical">
+      <img src="hotel2.jpg" alt="Hotel 2">
+    </div>
+    <div class="card-content card-content--vertical">
+      <!-- ... -->
+    </div>
+  </div>
+
+  <!-- Card 3 -->
+  <div class="card-container card-container--vertical">
+    <!-- ... -->
+  </div>
+</div>
+```
+
+---
+
 ## Как использовать эту дизайн-систему
 
 ### Для дизайнеров
@@ -5826,9 +7315,70 @@ Complete CSS для всех компонентов Shopping & Orders:
 
 ## Версионирование и обновления
 
-**Текущая версия**: v5.10.0
+**Текущая версия**: v5.11.0
 
 ### Changelog
+
+#### v5.11.0 (2025-11-19)
+- **Добавлена новая секция "Cards & Listings"** - модульная система карточек для hotels, restaurants, properties, products с IDE AI navigation markers:
+  - **Принцип модульности**: каждая карточка состоит из 8 переиспользуемых блоков
+  - **IDE AI Navigation Markers**: добавлены комментарии <!-- AI-TAG: --> для быстрой навигации
+  - **Container Specifications**:
+    - Screen: 375px width, borderRadius 30px, padding 30px V
+    - Card layout: horizontal (image 120×202px + content), spacing 5px
+  - **Typography System** (8 text styles):
+    - Card Title: 11px / 600 Archivo, max-width 128px
+    - Location: 10px / 400 Archivo, max-width 198px
+    - Rating Number: 10px / 600 white на badge
+    - Rating Label: 10px / 600 #09101D
+    - Rating Count: 10px / 400 #747B84
+    - Tag: 8px / 600 white
+    - Amenity: 10px / 400 #747B84
+    - Price: 11px / 600 для number, 11px / 400 для currency
+  - **8 Modular Components** (каждый с AI-TAG):
+    - **Card Image** (AI-TAG: card-image-with-overlay): 120×202px, borderRadius 15px, aspect ratio 1:1.68
+    - **Overlay Badge** (AI-TAG: card-badge-overlay): 30×30px circle, top-left 10×10px, rgba(17,187,141,0.05) bg, 0.10px white border
+    - **Content Container** (AI-TAG: card-content-container): padding 10px, bg #F4F6F9, borderRadius 15px, spacing 5px
+    - **Title & Star Rating Row** (AI-TAG: card-title-rating-row): 11px title + 15px stars (gold #FFC043), spacing 10px
+    - **Location** (AI-TAG: card-location-text): 10px/400, optional with 12px icon
+    - **Rating Badge & Text** (AI-TAG: card-rating-badge-text): badge #221874 (новый!), "Excellent | 41 reviews"
+    - **Tags Row** (AI-TAG: card-tags-row): 8px/600, 5 типов (Discount, Secret Deal, New, Featured, Limited)
+    - **Amenities List** (AI-TAG: card-amenities-list): 21×20px icons, 10px/400 text, compact layout (gap 0px)
+    - **Price Button** (AI-TAG: card-price-button): 36px height, bg #FFC043 (новый!), hover/active states
+  - **Complete Layout: Hotel Card** с ASCII diagram и breakdown всех 8 компонентов
+  - **Modular Components Matrix**: таблица совместимости для 4 типов cards (Hotel, Restaurant, Property, Product)
+  - **Extensibility Guide** с 4 практическими примерами:
+    - Добавление больше amenities (2-column grid layout)
+    - Product Card variant (80×120px image, без amenities)
+    - Restaurant Card (action button "Reserve" вместо price)
+    - Vertical Card Layout (image сверху, content снизу)
+  - **Новые цвета в палитру**:
+    - #221874 - rating badge (dark purple для excellent ratings)
+    - #FFC043 - price button (yellow/gold, уже был в использовании)
+    - rgba(17,187,141,0.05) - badge overlay (5% opacity green)
+  - **Badge Color Variations** (для будущего):
+    - Excellent (9.0-10.0): #221874 dark purple
+    - Very Good (8.0-8.9): #4141E6 primary blue
+    - Good (7.0-7.9): #11BB8D success green
+    - Average (6.0-6.9): #FFC043 yellow
+    - Below Average (<6.0): #E24949 error red
+  - **Complete CSS Implementation** (400+ lines) с IDE AI-TAG markers:
+    - AI-TAG: card-screen-container, card-container-horizontal, card-image-with-overlay
+    - AI-TAG: card-content-container, card-title-rating-row, card-location-text
+    - AI-TAG: card-rating-badge-text, card-tags-row, card-amenities-list
+    - AI-TAG: card-price-button, card-action-button, card-container-vertical
+    - AI-TAG: card-product-variant
+  - **4 Usage Examples** с AI-TAG markers:
+    - AI-TAG: example-hotel-card-basic (полная разметка)
+    - AI-TAG: example-restaurant-card (с Reserve button)
+    - AI-TAG: example-product-card (compact variant)
+    - AI-TAG: example-vertical-card-grid (grid layout)
+  - **Section Navigation Markers**:
+    - <!-- SECTION: Cards & Listings -->
+    - <!-- FILE REFERENCE: design-system.md#cards--listings -->
+    - <!-- USAGE: Hotel cards, property listings, travel bookings, featured content -->
+    - <!-- COMPONENTS: hotel-card, rating-badge, amenity-list, price-button -->
+    - <!-- AI NAVIGATION: Search for "COMPONENT:" tags to find specific components -->
 
 #### v5.10.0 (2025-11-19)
 - **Добавлена новая секция "Shopping & Orders"** - модульная система компонентов для e-commerce приложений:
