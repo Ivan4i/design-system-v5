@@ -384,6 +384,7 @@
 
 ```css
 /* Реальные border radius из проекта */
+--radius-project-tooltip: 0.3125rem;  /* 5px - BorderRadius.circular(5) - slider tooltips */
 --radius-project-xs: 0.625rem;        /* 10px - BorderRadius.circular(10) - story images */
 --radius-project-xxs: 0.75rem;        /* 12px - BorderRadius.circular(12) - small badges, notification badges */
 --radius-project-sm: 0.8125rem;       /* 13px - BorderRadius.circular(13) - story containers with border */
@@ -391,11 +392,13 @@
 --radius-project-md: 1.25rem;         /* 20px - BorderRadius.circular(20) - cards, images */
 --radius-project-button: 1.875rem;    /* 30px - BorderRadius.circular(30) - CTA buttons, pricing buttons */
 --radius-project-lg: 2rem;            /* 32px - BorderRadius.circular(32) - badges, pills */
---radius-project-xl: 2.5rem;          /* 40px - BorderRadius.circular(40) - phone container */
+--radius-project-xl: 2.5rem;          /* 40px - BorderRadius.circular(40) - phone container, slider track/handle */
+--radius-project-slider: 5rem;        /* 80px - BorderRadius.circular(80) - slider container */
 --radius-project-2xl: 6.25rem;        /* 100px - BorderRadius.circular(100) - main container, icons */
 ```
 
 **Использование в проекте:**
+- **Slider Tooltips**: BorderRadius.circular(5) = 5px radius (price/percentage tooltips)
 - **Story Images**: BorderRadius.circular(10) = 10px radius
 - **Small Badges**: BorderRadius.circular(12) = 12px radius (notification badges)
 - **Story Containers with Border**: BorderRadius.circular(13) = 13px radius
@@ -403,7 +406,8 @@
 - **Cards/Images**: BorderRadius.circular(20) = 20px radius (most common for content cards)
 - **CTA Buttons**: BorderRadius.circular(30) = 30px radius (pricing buttons, gradient buttons)
 - **Badges/Pills**: BorderRadius.circular(32) = 32px radius
-- **Phone Container**: BorderRadius.circular(40) = 40px radius
+- **Phone Container/Slider Elements**: BorderRadius.circular(40) = 40px radius (slider track, handle)
+- **Slider Container**: BorderRadius.circular(80) = 80px radius (main slider demo container)
 - **Main Container/Icons**: BorderRadius.circular(100) = 100px radius (fully rounded)
 
 #### Standard Border Radius
@@ -807,6 +811,139 @@
 - Home indicator: 134×5px with full rounding (100px radius)
 - Spacing between navigation elements: 50px
 - Internal badge padding: horizontal 8px, vertical 5px
+
+#### Slider - Complete Component Block
+
+**Container Layout:**
+- **Padding**: 100px (all sides)
+- **Background**: white (#FFFFFF)
+- **Border Radius**: 80px (circular(80))
+- **Clip Behavior**: Clip.antiAlias
+- **Inner Container**: Padding: 50px, Border: 1px solid #7B61FF, Border Radius: 15px
+- **Layout**: Column with spacing: 100px
+
+**Component Variants:**
+
+1. **Basic Slider (Single Handle)**
+   - **Container**: 375px width, padding: horizontal 16px
+   - **Layout**: Column, spacing: 20px
+   - **Track**:
+     - **Size**: 343px × 4px
+     - **Background**: #F4F6F9 (light gray)
+     - **Border Radius**: 40px (circular(40))
+   - **Progress Fill**:
+     - **Width**: variable (e.g., 83px for 24% progress)
+     - **Height**: 4px
+     - **Background**: #4141E6 (blue)
+     - **Border Radius**: 40px
+   - **Handle**:
+     - **Size**: 20px × 20px
+     - **Background**: #4141E6
+     - **Border**: 4px solid #190B24FB (~10% opacity blue)
+     - **Border Radius**: 40px (circular(40))
+     - **Stroke Align**: strokeAlignOutside
+
+2. **Basic Slider (Reversed Layout)**
+   - Same as variant 1, but with different internal layout structure
+   - Progress fills from left with right padding to control length
+
+3. **Range Slider (Two Handles)**
+   - **Container**: 375px width, padding: horizontal 16px
+   - **Layout**: Column, spacing: 20px
+   - **Track**: 343px × 4px, #F4F6F9 background
+   - **Left Handle**:
+     - **Size**: 20px × 20px
+     - **Background**: #4141E6
+     - **Border**: 1px solid #4141E6 (outline style)
+     - **Outer Border**: 5px solid #190B24FB (~10% opacity)
+     - **Stroke Align**: strokeAlignOutside
+   - **Progress Fill** (between handles):
+     - **Height**: 4px
+     - **Background**: #4141E6
+   - **Right Handle**: Same as left handle
+
+4. **Slider with Volume Icons**
+   - **Container**: 375px width, padding: horizontal 16px
+   - **Layout**: Row with volume icons on both sides
+   - **Left Icon**: 24px × 24px (volume down/minus)
+   - **Slider Track**: 275px × 4.8px (slightly taller)
+     - **Background**: #D9DDE2 (gray)
+     - **Progress**: #4141E6
+   - **Handle**: 15px × 15px
+     - **Background**: #4141E6
+     - **Border**: 2px solid #4141E6
+     - **Stroke Align**: strokeAlignOutside
+   - **Right Icon**: 16.03px × 24px, then 24px × 24px (volume up/plus)
+
+5. **Slider with Volume Icons and Time**
+   - Same as variant 4
+   - **Time Label**:
+     - **Text**: "12:35"
+     - **Font**: 'Archivo', Size: 11px, Weight: 600, Color: #09101D
+     - **Position**: Right side of slider
+
+6. **Slider with Time Labels (Both Sides)**
+   - **Left Time**: "12:35" (start time)
+   - **Slider**: 263px × 3px (thinner track)
+   - **Right Time**: "12:35" (end time)
+   - **Handle**: 15px × 15px with 2px border
+
+7. **Slider with Percentage Tooltip**
+   - **Container**: Column, spacing: 10px
+   - **Tooltip**:
+     - **Text**: "50%"
+     - **Font**: 'Archivo', Size: 13px, Weight: 700, Color: white
+     - **Background**: #09101D (dark)
+     - **Padding**: horizontal 16px, vertical 12px
+     - **Border Radius**: 8px (circular(8))
+     - **Position**: Above handle, centered
+   - **Track**: 343px × 4px
+   - **Handle**: 20px × 20px with 4px outline
+
+8. **Range Slider with Price Tooltips**
+   - **Container**: 375px × 76px, padding: horizontal 16px
+   - **Left Tooltip**:
+     - **Text**: "1$"
+     - **Background**: #09101D
+     - **Padding**: horizontal 16px, vertical 12px
+     - **Border Radius**: 5px (circular(5))
+     - **Font**: 'Archivo', Size: 13px, Weight: 700, Color: white
+   - **Right Tooltip**:
+     - **Text**: "50$"
+     - **Same styling as left tooltip**
+   - **Track**: 323px × 4px
+   - **Progress**: From left handle to right handle
+   - **Handles**: 20px × 20px, positioned under each tooltip
+
+**Track & Handle Specifications:**
+- **Track Heights**: 3px (thin), 4px (standard), 4.8px (with icons)
+- **Track Background**: #F4F6F9 (light) or #D9DDE2 (gray)
+- **Progress Color**: #4141E6 (blue)
+- **Handle Sizes**: 15px, 20px diameter
+- **Handle Border**: 2px, 4px, or 5px with various opacity
+- **Outline Color**: #190B24FB (~10% opacity blue, 0x19 = 25)
+
+**Tooltip Specifications:**
+- **Background**: #09101D (dark)
+- **Text Color**: white
+- **Font**: 'Archivo', Size: 13px, Weight: 700
+- **Padding**: horizontal 16px, vertical 12px
+- **Border Radius**: 5px or 8px
+
+**Icon Specifications:**
+- **Size**: 24px × 24px (standard volume icons)
+- **Spacing**: 10px between icon and slider
+
+**Usage Notes:**
+- Container uses 80px border radius (circular(80)) for rounded container effect
+- Track always uses 40px border radius for fully rounded ends
+- Handle uses strokeAlignOutside for borders to maintain size
+- Tooltip positioned above handle with centered alignment
+- Progress fill always matches handle position
+- Range slider allows two independent handles with progress between them
+- Time labels use 11px/600 font, positioned at slider edges
+- Spacing between slider and handle: 20px vertical
+- Inner container padding: 50px with 100px between variants
 
 ---
 
