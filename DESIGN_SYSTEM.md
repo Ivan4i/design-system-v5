@@ -36,6 +36,9 @@
 /* Основные цвета */
 --color-white: #FFFFFF;
 --color-black: #09101D;
+
+/* Фоновые цвета из Flutter кода */
+--color-scaffold-dark: #12202F;      /* Color.fromARGB(255, 18, 32, 47) */
 ```
 
 ### Text Colors
@@ -51,6 +54,17 @@
 ```css
 /* Акцентные цвета */
 --color-accent-blue: #1D4ED8;      /* blue-700 */
+
+/* Цвета из Flutter кода */
+--color-primary-blue: #4141E6;     /* Color(0xFF4141E6) - основной синий */
+--color-accent-purple: #7B61FF;    /* Color(0xFF7B61FF) - фиолетовый акцент */
+```
+
+### UI Colors
+
+```css
+/* UI элементы из Flutter кода */
+--color-gray-light: #D9DDE2;       /* Color(0xFFD9DDE2) - светло-серый для разделителей */
 ```
 
 ### Shadow Colors
@@ -58,6 +72,10 @@
 ```css
 /* Тени */
 --shadow-light: rgba(240, 241, 242, 1.00);  /* из кода: shadow-[0px_1px_1px_0px_rgba(240,241,242,1.00)] */
+
+/* Полупрозрачные цвета из Flutter кода */
+--color-overlay-dark: rgba(9, 16, 29, 0.2);    /* Color(0x3309101D) */
+--color-overlay-black: rgba(0, 0, 0, 0.25);    /* Colors.black.withValues(alpha: 0.25) */
 ```
 
 ---
@@ -111,6 +129,9 @@
 --line-height-36: 2.25rem;    /* 36px */
 --line-height-40: 2.5rem;     /* 40px */
 --line-height-50: 3.15rem;    /* 50.4px */
+
+/* Множители line-height из Flutter кода */
+--line-height-multiplier: 1.40;  /* height: 1.40 - используется в TextStyle */
 ```
 
 ### Text Styles (iOS Mobile)
@@ -162,6 +183,36 @@
 #### Caption 3
 - **Semibold**: Font: 10px (0.625rem), Weight: 600, Line Height: 12px
 
+### Flutter Mobile Text Styles (из реального кода)
+
+#### Info Bar Text
+- **Font**: 11px (0.6875rem), Archivo
+- **Weight**: 400
+- **Color**: White (#FFFFFF)
+- **Line Height**: 1.40
+- **Использование**: Market info bar, статусные сообщения
+
+#### Info Text Medium
+- **Font**: 12px (0.75rem), Archivo
+- **Weight**: 400
+- **Color**: White (#FFFFFF)
+- **Line Height**: 1.40
+- **Использование**: Информационные панели, вторичный текст
+
+#### Body Text
+- **Font**: 14px (0.875rem), Archivo
+- **Weight**: 400
+- **Color**: White (#FFFFFF)
+- **Line Height**: 1.40
+- **Использование**: Основной текст уведомлений
+
+#### Heading Text
+- **Font**: 16px (1rem), Archivo
+- **Weight**: 700 (Bold)
+- **Color**: White (#FFFFFF)
+- **Line Height**: 1.40
+- **Использование**: Заголовки уведомлений, важные сообщения (например, "Price is up!")
+
 ---
 
 ## Spacing & Layout
@@ -184,6 +235,29 @@
 --space-24: 6rem;     /* 96px */
 ```
 
+### Flutter Mobile Spacing (из реального кода)
+
+```css
+/* Padding values используемые в Flutter приложении */
+--padding-xs: 0.375rem;     /* 6px */
+--padding-sm: 0.5rem;       /* 8px */
+--padding-md: 0.625rem;     /* 10px */
+--padding-lg: 0.75rem;      /* 12px */
+--padding-xl: 1rem;         /* 16px */
+--padding-2xl: 1.25rem;     /* 20px */
+--padding-3xl: 3.125rem;    /* 50px - outer container padding */
+
+/* Spacing между элементами (gap/spacing в Column/Row) */
+--gap-sm: 0.625rem;         /* 10px */
+--gap-md: 1rem;             /* 16px */
+--gap-lg: 1.25rem;          /* 20px */
+
+/* Специфичные размеры для mobile layout */
+--mobile-width: 375px;      /* Стандартная ширина мобильного экрана */
+--mobile-height: 812px;     /* Стандартная высота мобильного экрана (iPhone) */
+--status-bar-height: 44px;  /* Высота статус бара iOS */
+```
+
 ### Border Radius
 
 ```css
@@ -195,6 +269,16 @@
 --radius-xl: 0.75rem;     /* 12px */
 --radius-2xl: 1rem;       /* 16px */
 --radius-full: 9999px;
+```
+
+### Flutter Mobile Border Radius (из реального кода)
+
+```css
+/* Border radius используемые в мобильном приложении */
+--radius-mobile-sm: 0.625rem;     /* 10px - маленькие элементы */
+--radius-mobile-md: 0.9375rem;    /* 15px - карточки, контейнеры, иконки */
+--radius-mobile-lg: 1.875rem;     /* 30px - bottom sheets, модальные окна */
+--radius-mobile-pill: 6.25rem;    /* 100px - полностью скругленные элементы (pill) */
 ```
 
 ### Shadows
@@ -608,7 +692,110 @@
 
 ---
 
-### 16. Special Effects
+### 16. Mobile Components (Flutter)
+
+#### Info Bar
+
+Горизонтальная информационная панель для отображения маркет данных.
+
+- **Width**: 375px (full mobile width)
+- **Background**: #4141E6 (color-primary-blue)
+- **Padding**: symmetric(vertical: 10px)
+- **Text Style**:
+  - Font: 11px Archivo
+  - Weight: 400
+  - Color: White
+  - Line Height: 1.40
+- **Layout**: Row с spacing: 20px между элементами
+- **Separator**: '・' (средняя точка)
+- **Использование**: Market Pairs, ETH Gas, Market Cap, 24h Volume
+
+#### Bottom Sheet
+
+Модальное окно снизу экрана с закругленными верхними углами.
+
+- **Width**: 375px (full mobile width)
+- **Background**: #4141E6 (color-primary-blue) или White
+- **Border Radius**:
+  - topLeft: 30px (radius-mobile-lg)
+  - topRight: 30px (radius-mobile-lg)
+- **Content Padding**: symmetric(vertical: 20px)
+- **Handle Area**:
+  - Padding: symmetric(horizontal: 167px, vertical: 8px)
+  - Background: White
+
+#### Bottom Sheet Handle
+
+Индикатор для drag-to-dismiss жеста.
+
+- **Width**: 40px
+- **Height**: 3px
+- **Background**: #D9DDE2 (color-gray-light)
+- **Border Radius**: 100px (полностью скругленный)
+- **Position**: Centered horizontally в handle area
+
+#### Notification Card
+
+Карточка уведомления с иконкой и текстом.
+
+- **Width**: 375px (full mobile width)
+- **Background**: #4141E6 (color-primary-blue)
+- **Border Radius**:
+  - topLeft: 30px (radius-mobile-lg)
+  - topRight: 30px (radius-mobile-lg)
+- **Layout**:
+  - Icon area padding-right: 10px
+  - Content padding: symmetric(vertical: 12px)
+  - Action button padding: symmetric(horizontal: 16px)
+- **Icon**:
+  - Size: 40px × 40px
+  - Border Radius: 15px (radius-mobile-md)
+  - Placeholder: NetworkImage или local asset
+- **Text**:
+  - Title: 16px Bold, White, Line Height: 1.40
+  - Subtitle: 14px Regular, White, Line Height: 1.40
+- **Action Button**:
+  - Size: 44px × 44px (touch target)
+  - Icon size: 24px
+  - Background: rgba(9, 16, 29, 0.2) с border-radius: 100px
+
+#### Container with Border
+
+Контейнер с цветной рамкой для демонстрации компонентов.
+
+- **Border**: 1px solid #7B61FF (color-accent-purple)
+- **Border Radius**: 15px (radius-mobile-md)
+- **Padding**: 50px (padding-3xl)
+- **Clip**: antiAlias
+- **Spacing**: 20px между дочерними элементами (Column spacing)
+
+#### Divider / Separator Bar
+
+Горизонтальный разделитель с закругленными верхними углами.
+
+- **Width**: 343px (mobile-width - 32px horizontal padding)
+- **Height**: 10px
+- **Background**: #D9DDE2 (color-gray-light)
+- **Border Radius**:
+  - topLeft: 10px (radius-mobile-sm)
+  - topRight: 10px (radius-mobile-sm)
+- **Margin**: 16px horizontal (from screen edges)
+
+#### Mobile Screen Container
+
+Контейнер имитирующий мобильный экран.
+
+- **Width**: 375px (mobile-width)
+- **Height**: 812px (mobile-height) - iPhone dimensions
+- **Background**:
+  - Variant 1: rgba(0, 0, 0, 0.25) - темный с прозрачностью
+  - Variant 2: rgba(217, 221, 226, 0.25) - светлый с прозрачностью
+- **Border Radius**: 30px (для preview) или 40px
+- **Status Bar**: Height: 44px на верху экрана
+
+---
+
+### 17. Special Effects
 
 #### Focus Ring
 
@@ -803,9 +990,29 @@
 
 ## Версионирование и обновления
 
-**Текущая версия**: v5.0.0
+**Текущая версия**: v5.1.0
 
 ### Changelog
+
+#### v5.1.0 (2025-11-19)
+- ✨ Добавлены **реальные данные из Flutter мобильного приложения**
+- 🎨 Дополнена цветовая палитра:
+  - Primary Blue (#4141E6)
+  - Accent Purple (#7B61FF)
+  - Scaffold Dark (#12202F)
+  - UI Gray Light (#D9DDE2)
+  - Overlay colors с alpha-каналами
+- 📝 Добавлены **Flutter Mobile Text Styles** с реальными размерами (11px, 12px, 14px, 16px)
+- 📐 Добавлены **Flutter Mobile Spacing** values (padding, gap, mobile dimensions)
+- 🔄 Добавлены **Flutter Mobile Border Radius** (10px, 15px, 30px, 100px)
+- 📱 Добавлена новая секция **Mobile Components (Flutter)**:
+  - Info Bar
+  - Bottom Sheet с Handle индикатором
+  - Notification Card
+  - Container with Border
+  - Divider / Separator Bar
+  - Mobile Screen Container (375×812px)
+- 📊 Все данные извлечены из реального Flutter кода приложения
 
 #### v5.0.0 (2025-11-19)
 - Первая версия дизайн-системы
