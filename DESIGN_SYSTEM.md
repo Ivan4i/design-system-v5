@@ -118,6 +118,11 @@
 /* Badge backgrounds */
 --color-badge-light: #EAEEF2;
 --color-badge-dark: #2A2B2F;
+
+/* Stories colors */
+--color-stories-ring-purple: #833AB4;  /* Для непрочитанных stories (Instagram-like) */
+--color-stories-ring-primary: #4141E6; /* Для активных/просмотренных stories */
+--color-live-red: #FD1D1D;             /* Для Live индикатора */
 ```
 
 ### Chart Colors
@@ -144,6 +149,9 @@
 
 /* Градиент для оверлея изображений (View4) */
 --gradient-image-overlay: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 100%);
+
+/* Градиент для Stories Live badge (Instagram-like) */
+--gradient-stories-live: linear-gradient(90deg, #833AB4 0%, #FD1D1D 50%, #FCB045 100%);
 ```
 
 ### Brand Icon Colors
@@ -174,6 +182,7 @@
 ### Font Sizes
 
 ```css
+--font-size-10: 0.625rem;      /* 10px - для Live badge */
 --font-size-11: 0.6875rem;     /* 11px - для badge текста */
 --font-size-xs: 0.75rem;       /* 12px */
 --font-size-13: 0.8125rem;     /* 13px - для мелких subtitle */
@@ -263,6 +272,7 @@
 --space-12-5: 3.125rem; /* 50px - NavBar spacing */
 --space-16: 4rem;      /* 64px */
 --space-20: 5rem;      /* 80px */
+--space-22-5: 5.625rem; /* 90px - Stories avatars spacing */
 --space-24: 6rem;      /* 96px */
 --space-25: 6.25rem;   /* 100px - основной padding */
 ```
@@ -744,6 +754,61 @@
   - Border Radius: 20px (radius-20)
   - Position: встроен в контейнер аватара
   - Color: #11BB8D (success green)
+
+#### Stories Avatars (Instagram-like)
+
+Компонент для отображения Stories с аватарами пользователей в стиле Instagram.
+
+- **Container**:
+  - Width: 500px
+  - Height: 266px
+  - Padding: 50px (space-12-5)
+  - Border: 1px solid #4141E6 (primary) или #7B61FF (secondary)
+  - Border Radius: 15px (radius-15)
+  - Spacing between avatars: 90px (horizontal, first variant) или 20px (space-5, grid variant)
+
+- **Story Avatar**:
+  - Container Size: 56px × 56px
+  - Image Size: 48px × 48px (с offset 4px от краев контейнера)
+  - Border Radius: 40px (radius-40) для аватара
+  - Placeholder: #D9DDE2 (color-gray-300)
+
+- **Story Ring (непрочитанная история)**:
+  - Border: 2px solid #833AB4 (stories-ring-purple) - Instagram-like gradient ring
+  - Border Radius: 30px
+  - Position: вокруг контейнера 56px × 56px
+
+- **Story Ring (активная/просмотренная история)**:
+  - Border: 2px solid #4141E6 (stories-ring-primary)
+  - Border Radius: 30px
+
+- **Label**:
+  - Width: 50px
+  - Font: Archivo, 11px (font-size-11), weight 600
+  - Color: #09101D (text-primary)
+  - Line Height: 1.40
+  - Text Align: center
+  - Spacing от аватара: 5px (space-1-25)
+
+- **Live Badge** (для живых трансляций):
+  - Size: 28px × 14px
+  - Padding: 4px (horizontal), 2px (vertical)
+  - Border Radius: 12px
+  - Border: 1px solid white
+  - Background: Linear gradient (#833AB4 → #FD1D1D → #FCB045) - gradient-stories-live
+  - Text: "Live", 10px, weight 600, white color
+  - Position: внизу аватара (left 0, top 36)
+
+- **List Container**:
+  - Width: 375px
+  - Padding: 16px (horizontal)
+  - Padding: 10px (vertical)
+  - Horizontal scroll: enabled
+  - Spacing between items: 20px (space-5) или 90px (space-22-5)
+
+**Варианты отображения:**
+1. **Centered Row** (3 аватара): spacing 90px
+2. **Scrollable Grid** (7+ аватаров): spacing 20px, horizontal padding 16px
 
 ---
 
