@@ -66,6 +66,14 @@
 --color-bg-card-dark: #23262B;     /* Темная карточка */
 ```
 
+### Border & Control Colors
+
+```css
+/* Цвета для границ и контролов */
+--color-border-light: #EAEEF2;     /* Светлая граница для неактивных элементов (Radio, Toggle, Checkbox) */
+--color-control-inactive: #EAEEF2; /* Неактивные form controls */
+```
+
 ### Overlay & Shadow Colors
 
 ```css
@@ -577,6 +585,190 @@ Container(
 - **Height**: 40px (medium)
 - **Padding**: 10px 36px 10px 12px
 - **Icon**: Chevron down, Right: 12px, Size: 16px
+
+---
+
+#### Flutter Form Controls
+
+Компоненты форм из Flutter кода для мобильного приложения.
+
+##### Radio Button
+
+- **Size**: 24px × 24px (outer container)
+- **Padding**: 2px
+- **Radio Circle**: 20px × 20px
+- **Border Width**: 3px
+
+**States:**
+- **Unchecked**:
+  - Border Color: #EAEEF2
+  - Background: transparent
+
+- **Checked**:
+  - Border Color: #4141E6
+  - Inner Circle: 10px × 10px, Color: #4141E6
+
+- **Disabled**:
+  - Border Color: #0B24FB with 33% opacity (rgba(11, 36, 251, 0.33))
+  - Inner Circle: 10px × 10px, Color: #0B24FB with 33% opacity
+
+```dart
+// Checked Radio Button
+Container(
+  width: 24,
+  height: 24,
+  padding: const EdgeInsets.all(2),
+  child: Row(
+    mainAxisSize: MainAxisSize.min,
+    children: [
+      Container(
+        width: 20,
+        height: 20,
+        decoration: ShapeDecoration(
+          shape: OvalBorder(
+            side: BorderSide(width: 3, color: const Color(0xFF4141E6)),
+          ),
+        ),
+      ),
+      Container(
+        width: 10,
+        height: 10,
+        decoration: ShapeDecoration(
+          color: const Color(0xFF4141E6),
+          shape: OvalBorder(),
+        ),
+      ),
+    ],
+  ),
+)
+```
+
+##### Toggle Switch
+
+Два размера переключателей из Flutter кода.
+
+**Large Toggle (52px × 31px):**
+- **Track Width**: 52px
+- **Track Height**: 31px
+- **Track Border Radius**: 40px (fully rounded)
+- **Thumb Size**: 31px × 31px
+- **Thumb Border**: 2px solid (matches track color)
+- **Thumb Border Radius**: 40px
+
+**Small Toggle (32px × 20px):**
+- **Track Width**: 32px
+- **Track Height**: 20px
+- **Track Border Radius**: 40px (fully rounded)
+- **Thumb Size**: 20px × 20px
+- **Thumb Border**: 2px solid (matches track color)
+- **Thumb Border Radius**: 40px
+
+**States (для обоих размеров):**
+- **Off State**:
+  - Track Color: #EAEEF2
+  - Thumb Color: White (#FFFFFF)
+  - Thumb Border: #EAEEF2
+  - Alignment: Left (mainAxisAlignment: start)
+
+- **On State**:
+  - Track Color: #4141E6
+  - Thumb Color: White (#FFFFFF)
+  - Thumb Border: #4141E6
+  - Alignment: Right (mainAxisAlignment: end)
+
+- **Disabled State**:
+  - Opacity: 0.30
+  - Track Color: #4141E6
+  - Thumb Color: #F4F6F9
+  - Thumb Border: #4141E6
+
+```dart
+// Large Toggle - On State
+Container(
+  width: 52,
+  height: 31,
+  decoration: ShapeDecoration(
+    color: const Color(0xFF4141E6),
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
+  ),
+  child: Row(
+    mainAxisSize: MainAxisSize.min,
+    mainAxisAlignment: MainAxisAlignment.end,
+    children: [
+      Container(
+        width: 31,
+        height: 31,
+        decoration: ShapeDecoration(
+          color: Colors.white,
+          shape: RoundedRectangleBorder(
+            side: BorderSide(width: 2, color: const Color(0xFF4141E6)),
+            borderRadius: BorderRadius.circular(40),
+          ),
+        ),
+      ),
+    ],
+  ),
+)
+```
+
+##### Checkbox
+
+- **Outer Container**: 24px × 24px
+- **Checkbox Box**: 18px × 18px
+- **Position**: Left 3.21px, Top 3px (centered)
+- **Border Width**: 2px (strokeAlign: center)
+- **Border Radius**: 2px
+
+**States:**
+- **Unchecked**:
+  - Border Color: #EAEEF2
+  - Background: transparent
+
+- **Checked**:
+  - Background Color: #4141E6 (предположительно)
+  - Border Color: #4141E6
+  - Checkmark Icon: White
+
+- **Disabled**:
+  - Opacity: 0.30 (предположительно)
+
+```dart
+// Unchecked Checkbox
+Container(
+  width: 24,
+  height: 24,
+  child: Stack(
+    children: [
+      Positioned(
+        left: 3.21,
+        top: 3,
+        child: Container(
+          width: 18,
+          height: 18,
+          decoration: ShapeDecoration(
+            shape: RoundedRectangleBorder(
+              side: BorderSide(
+                width: 2,
+                strokeAlign: BorderSide.strokeAlignCenter,
+                color: const Color(0xFFEAEEF2),
+              ),
+              borderRadius: BorderRadius.circular(2),
+            ),
+          ),
+        ),
+      ),
+    ],
+  ),
+)
+```
+
+**Radio Button Group Container:**
+- **Width**: 371.50px
+- **Height**: 140px
+- **Padding**: 50px
+- **Border**: 1px solid #4141E6
+- **Border Radius**: 15px
+- **Spacing**: 50px between radio buttons
 
 ---
 
@@ -1168,9 +1360,23 @@ Container(
 
 ## Версионирование и обновления
 
-**Текущая версия**: v5.1.0
+**Текущая версия**: v5.2.0
 
 ### Changelog
+
+#### v5.2.0 (2025-11-19)
+- **Добавлены Flutter Form Controls:**
+  - Radio Button (24×24px, 3 состояния: unchecked, checked, disabled)
+  - Toggle Switch - Large (52×31px, 3 состояния)
+  - Toggle Switch - Small (32×20px, 3 состояния)
+  - Checkbox (24×24px, 18×18px внутренний box)
+- **Новые цвета:**
+  - `#EAEEF2` - Светлая граница для неактивных form controls
+  - `rgba(11, 36, 251, 0.33)` - Синий с opacity для disabled состояний
+- **Спецификации:**
+  - Radio Button Group Container (371.50×140px)
+  - Детальные размеры и spacing для всех состояний
+  - Flutter код примеры для каждого компонента
 
 #### v5.1.0 (2025-11-19)
 - **Добавлены Flutter Mobile компоненты:**
