@@ -12,6 +12,7 @@
 8. [Иконки](#иконки)
 9. [Charts & Graphs](#charts--graphs)
 10. [Date & Time Pickers](#date--time-pickers)
+11. [Progress Indicators & Steppers](#progress-indicators--steppers)
 
 ---
 
@@ -63,6 +64,7 @@
 ```css
 /* Акцентные цвета */
 --color-primary: #4141E6;              /* Primary синий/фиолетовый */
+--color-primary-alt: #0B24FB;          /* Альтернативный синий для прогресса */
 --color-primary-light: rgba(11, 36, 251, 0.10);  /* #0B24FB с 10% opacity */
 --color-success: #11BB8D;              /* Зеленый для успеха/рейтингов */
 --color-error: #E24949;                /* Красный для выходных/ошибок */
@@ -1969,6 +1971,506 @@ End date in range:
 
 ---
 
+## Progress Indicators & Steppers
+
+Система компонентов для отображения прогресса выполнения задач и многошаговых процессов.
+
+### Step Indicators (Индикаторы шагов)
+
+Точечные индикаторы для отображения прогресса в многошаговых процессах.
+
+#### Container
+
+**Размеры:**
+- **Общий контейнер**: 18px × 18px
+- **Внутренний круг**: 14px × 14px
+- **Padding**: 2px top (для некоторых вариантов)
+- **Border Radius**: 3px или 6px (для контейнера)
+
+#### Step Dot
+
+**Typography (Label):**
+- **Font**: 10px, Weight: 600, Family: Archivo, Line height: 1.40
+- **Color**: #09101D (темный)
+- **Text Align**: Center
+- **Content**: "Step name"
+- **Position**: Below the dot (spacing 5px или 3px)
+
+**States:**
+
+1. **Active (текущий шаг):**
+   - Dot: 14px × 14px, Background: #4141E6 (синий круг)
+   - Container: 18px × 18px, padding top 2px
+   - Label: visible below
+
+2. **Completed (завершенный шаг):**
+   - Outer circle: 18px × 18px, Background: #4141E6
+   - Inner circle: 14px × 14px, Background: #4141E6
+   - Border: 1px solid #FFFFFF (белая обводка внутри)
+   - Position: 2px offset from outer
+   - Label: visible below
+
+3. **Inactive/Default (неактивный шаг):**
+   - Dot: 14px × 14px, Background: #EAEEF2 (светло-серый)
+   - Container: 18px × 18px, padding top 2px
+   - Label: visible below
+
+4. **Error (шаг с ошибкой):**
+   - Dot: 14px × 14px, Background: #E24949 (красный)
+   - Container: 18px × 18px, offset 2px
+   - Label: visible below
+
+5. **With Icon (с иконкой):**
+   - Container: 17px × 17px (для иконки)
+   - Position: 0.50px top padding
+   - Spacing: 3px before label
+
+**CSS Variables:**
+
+```css
+/* Step Indicator Dimensions */
+--step-indicator-size: 18px;
+--step-indicator-dot-size: 14px;
+--step-indicator-padding: 2px;
+--step-indicator-radius: 3px;
+--step-indicator-spacing: 5px; /* spacing to label */
+
+/* Step Indicator Colors */
+--step-indicator-active: #4141E6;
+--step-indicator-completed: #4141E6;
+--step-indicator-completed-border: #FFFFFF;
+--step-indicator-inactive: #EAEEF2;
+--step-indicator-error: #E24949;
+--step-indicator-label-color: #09101D;
+```
+
+---
+
+### Circular Progress Indicators (Круговые прогресс-бары)
+
+Круговые индикаторы прогресса с отображением процентов или времени внутри.
+
+#### Sizes & Specifications
+
+**Extra Large (64px):**
+- **Size**: 64px × 64px
+- **Border Width**: 5px
+- **Background Ring**: #F4F6F9 (светло-серый)
+- **Progress Ring**: #4141E6 (синий)
+- **Text Inside**: 13px, Weight: 600, Family: Archivo
+- **Text Position**: Centered (19px left, 23px top для "1:35")
+- **Text Examples**: "1:35" (время), "15%" (процент)
+
+**Large (48px):**
+- **Size**: 48px × 48px
+- **Border Width**: 4px
+- **Background Ring**: #F4F6F9
+- **Progress Ring**: #4141E6
+- **Text Inside**: 11px, Weight: 600, Family: Archivo
+- **Text Position**: Centered (12.33px left, 16px top)
+- **Text Examples**: "1:35", "48%"
+
+**Medium (36px):**
+- **Size**: 36px × 36px
+- **Border Width**: 3px
+- **Background Ring**: #F4F6F9
+- **Progress Ring**: #4141E6
+- **Text Inside**: 10px, Weight: 600, Family: Archivo
+- **Text Position**: Centered (7.67px left, 11px top)
+- **Text Examples**: "1:35", "72%"
+
+**Small (24px):**
+- **Size**: 24px × 24px
+- **Border Width**: 2px
+- **Background Ring**: #F4F6F9
+- **Progress Ring**: #4141E6
+- **Text Inside**: 7px, Weight: 600, Family: Archivo
+- **Text Position**: Centered (5px left, 7px top)
+- **Text Examples**: "1:35", "85%"
+
+**Structure:**
+- **Background Ring**: Полный круг (360°), светло-серый фон
+- **Progress Ring**: Частичный круг (0-360° в зависимости от прогресса), синий
+- **OvalBorder**: Border side с указанным width
+
+**CSS Variables:**
+
+```css
+/* Circular Progress Dimensions */
+--circular-progress-xl-size: 64px;
+--circular-progress-xl-border: 5px;
+--circular-progress-lg-size: 48px;
+--circular-progress-lg-border: 4px;
+--circular-progress-md-size: 36px;
+--circular-progress-md-border: 3px;
+--circular-progress-sm-size: 24px;
+--circular-progress-sm-border: 2px;
+
+/* Circular Progress Colors */
+--circular-progress-bg: #F4F6F9;
+--circular-progress-fill: #4141E6;
+--circular-progress-text-color: #000000; /* черный для контраста */
+
+/* Circular Progress Text Sizes */
+--circular-progress-text-xl: 13px;
+--circular-progress-text-lg: 11px;
+--circular-progress-text-md: 10px;
+--circular-progress-text-sm: 7px;
+```
+
+---
+
+### Linear Progress Bars (Линейные прогресс-бары)
+
+Вертикальные или горизонтальные линейные индикаторы прогресса.
+
+#### Vertical Linear Progress
+
+**Размеры:**
+- **Width**: 60px
+- **Height**: 2px
+- **Border Radius**: 10px (на концах)
+- **Spacing между барами**: 58px
+
+**States:**
+
+1. **Active (полная заливка):**
+   - Background: #0B24FB (синий, solid)
+   - BorderRadius:
+     - First bar: topLeft + bottomLeft: 10px
+     - Middle bars: без radius
+     - Last bar: topRight + bottomRight: 10px
+   - Opacity: 1.0
+
+2. **Partial Active (частично активный):**
+   - Background: rgba(11, 36, 251, 0.30) - 30% opacity
+   - BorderRadius: topRight + bottomRight: 10px (если последний в группе)
+   - Opacity: 0.30
+
+3. **Inactive (неактивный):**
+   - Background: rgba(9, 16, 29, 0.10) - 10% opacity
+   - BorderRadius: topRight + bottomRight: 10px (если последний в группе)
+   - Opacity: 0.10
+
+**Layout:**
+- **Container**: Column с spacing 58px между барами
+- **Padding**: 50px (all sides) в контейнере
+
+#### Horizontal Linear Progress
+
+**Размеры:**
+- **Height**: 4px
+- **Width**: Expanded (растягивается)
+- **Border Radius**: 10px
+- **Spacing между барами**: 50px
+
+**States:**
+
+1. **Filled (заполненный):**
+   - Background: #4141E6 (синий)
+   - BorderRadius: 10px
+
+2. **Unfilled (незаполненный):**
+   - Background: #F4F6F9 (светло-серый)
+   - BorderRadius: 10px
+
+**CSS Variables:**
+
+```css
+/* Linear Progress Dimensions */
+--linear-progress-height-vertical: 2px;
+--linear-progress-width-vertical: 60px;
+--linear-progress-height-horizontal: 4px;
+--linear-progress-radius: 10px;
+
+/* Linear Progress Colors */
+--linear-progress-active: #0B24FB; /* solid blue */
+--linear-progress-partial: rgba(11, 36, 251, 0.30); /* 30% opacity */
+--linear-progress-inactive: rgba(9, 16, 29, 0.10); /* 10% opacity */
+--linear-progress-filled: #4141E6;
+--linear-progress-unfilled: #F4F6F9;
+```
+
+---
+
+### Stepper Progress (Пошаговый индикатор)
+
+Горизонтальный степпер с точками и соединяющими линиями для многошаговых процессов.
+
+#### Container
+
+**Размеры:**
+- **Width**: 375px (мобильный экран)
+- **Padding**: 32px horizontal, 5px vertical
+- **Height**: 30px (для step row)
+
+#### Step Structure
+
+**Elements:**
+- **Step Dot**: 14px × 14px круг
+- **Connector Line**: 4px height, Expanded width
+- **Spacing between elements**: 3px
+
+**Step Dot Container:**
+- **Size**: 18px × 18px
+- **Padding**: 2px top (для большинства)
+- **Border Radius**: 3px (для контейнера)
+
+**Connector Line:**
+- **Height**: 4px
+- **Width**: Expanded (автоматическое заполнение)
+- **Border Radius**: 10px
+- **Shape**: RoundedRectangleBorder
+
+#### States
+
+1. **Completed Step:**
+   - **Dot**: 14px × 14px, Background: #4141E6 (синий)
+   - **Connector Line**: Background: #4141E6 (синий)
+   - Пример: первые 4 шага
+
+2. **Active/Current Step:**
+   - **Outer Circle**: 18px × 18px, Background: #4141E6
+   - **Inner Circle**: 14px × 14px, Background: #4141E6
+   - **Border**: 1px solid #FFFFFF (белая обводка)
+   - **Connector Line After**: Background: #4141E6 (если текущий прогресс завершен)
+   - Пример: 1-й шаг (с белой обводкой)
+
+3. **Inactive/Future Step:**
+   - **Dot**: 14px × 14px, Background: #F4F6F9 (светло-серый)
+   - **Connector Line**: Background: #F4F6F9 (светло-серый)
+   - Пример: последние 3 шага
+
+**Layout Pattern:**
+```
+[Dot] —Line— [Dot] —Line— [Dot] —Line— [Dot] —Line— [Dot] —Line— [Dot] —Line— [Dot]
+```
+
+**Example Configuration (7 steps):**
+- Step 1: Active (с белой обводкой) + синяя линия
+- Steps 2-4: Completed (синие точки + синие линии)
+- Step 5: Transition (последняя синяя точка + серая линия)
+- Steps 6-7: Inactive (серые точки + серые линии)
+
+**CSS Variables:**
+
+```css
+/* Stepper Dimensions */
+--stepper-container-width: 375px;
+--stepper-padding-horizontal: 32px;
+--stepper-padding-vertical: 5px;
+--stepper-dot-size: 14px;
+--stepper-dot-container-size: 18px;
+--stepper-line-height: 4px;
+--stepper-line-radius: 10px;
+--stepper-element-spacing: 3px;
+
+/* Stepper Colors */
+--stepper-completed-dot: #4141E6;
+--stepper-completed-line: #4141E6;
+--stepper-active-outer: #4141E6;
+--stepper-active-inner: #4141E6;
+--stepper-active-border: #FFFFFF;
+--stepper-inactive-dot: #F4F6F9;
+--stepper-inactive-line: #F4F6F9;
+```
+
+---
+
+### Использование Progress Indicators
+
+#### Step Indicators
+
+**Когда использовать:**
+- Обзор многошагового процесса
+- Навигация между шагами
+- Отображение статуса выполнения
+- Простая визуализация прогресса (3-5 шагов)
+
+**Best Practices:**
+- Использовать для 3-7 шагов максимум
+- Четко обозначать текущий шаг
+- Показывать завершенные шаги отдельным цветом/стилем
+- Добавлять метки под каждой точкой
+- Использовать красный цвет для шагов с ошибками
+
+#### Circular Progress
+
+**Когда использовать:**
+- Загрузка файлов
+- Таймеры и обратный отсчет
+- Процент выполнения задачи
+- Компактная визуализация прогресса
+
+**Best Practices:**
+- Показывать текст внутри (проценты или время)
+- Использовать анимацию при изменении прогресса
+- Выбирать размер в зависимости от контекста:
+  - 64px - для крупных акцентов
+  - 48px - для карточек
+  - 36px - для списков
+  - 24px - для компактных UI
+- Контрастный цвет для текста (черный на светлом фоне)
+
+#### Linear Progress
+
+**Когда использовать:**
+- Загрузка контента
+- Заполнение форм
+- Прогресс установки/обновления
+- Последовательные действия
+
+**Best Practices:**
+- Вертикальные - для вертикальных списков или боковых панелей
+- Горизонтальные - для полноэкранного прогресса или верхней панели
+- Использовать скругленные концы
+- Анимировать переходы между состояниями
+- Показывать несколько уровней активности (active, partial, inactive)
+
+#### Stepper Progress
+
+**Когда использовать:**
+- Регистрация/онбординг
+- Оформление заказа
+- Многошаговые формы
+- Прогресс настройки
+
+**Best Practices:**
+- Показывать все шаги сразу (макс 7-8)
+- Соединять шаги линиями
+- Четко выделять текущий шаг (белая обводка)
+- Использовать разные цвета для completed/active/inactive
+- Добавлять названия шагов при наличии места
+
+#### Accessibility
+
+**Для всех индикаторов:**
+- **ARIA Labels**: `aria-label="Progress: 48%"`, `aria-label="Step 3 of 7"`
+- **Role**: `role="progressbar"` для progress indicators
+- **aria-valuenow**: Текущее значение (например, 48)
+- **aria-valuemin**: Минимальное значение (обычно 0)
+- **aria-valuemax**: Максимальное значение (обычно 100)
+- **aria-current**: `aria-current="step"` для текущего шага
+- **Live Region**: `aria-live="polite"` для объявления изменений прогресса
+- **Color Contrast**: Достаточный контраст между прогрессом и фоном
+- **Text Alternative**: Текстовое описание для screen readers
+
+#### Примеры кода
+
+**Step Indicator (Active):**
+```css
+.step-indicator {
+  width: var(--step-indicator-size);
+  height: var(--step-indicator-size);
+  border-radius: var(--step-indicator-radius);
+  position: relative;
+}
+
+.step-indicator__dot {
+  width: var(--step-indicator-dot-size);
+  height: var(--step-indicator-dot-size);
+  border-radius: 50%;
+  background: var(--step-indicator-inactive);
+  margin-top: var(--step-indicator-padding);
+}
+
+.step-indicator__dot--active {
+  background: var(--step-indicator-active);
+}
+
+.step-indicator__dot--completed {
+  background: var(--step-indicator-completed);
+  border: 1px solid var(--step-indicator-completed-border);
+  box-shadow: 0 0 0 4px var(--step-indicator-completed);
+}
+
+.step-indicator__label {
+  font: 600 10px/1.4 'Archivo', sans-serif;
+  color: var(--step-indicator-label-color);
+  text-align: center;
+  margin-top: var(--step-indicator-spacing);
+}
+```
+
+**Circular Progress:**
+```css
+.circular-progress {
+  position: relative;
+  width: var(--circular-progress-lg-size);
+  height: var(--circular-progress-lg-size);
+}
+
+.circular-progress__bg {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: var(--circular-progress-lg-border) solid var(--circular-progress-bg);
+}
+
+.circular-progress__fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: var(--circular-progress-lg-border) solid var(--circular-progress-fill);
+  clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 0%, 50% 0%);
+  transform: rotate(calc(3.6deg * var(--progress-value)));
+}
+
+.circular-progress__text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font: 600 var(--circular-progress-text-lg)/1.4 'Archivo', sans-serif;
+  color: var(--circular-progress-text-color);
+}
+```
+
+**Stepper Progress:**
+```css
+.stepper {
+  width: var(--stepper-container-width);
+  padding: var(--stepper-padding-vertical) var(--stepper-padding-horizontal);
+  display: flex;
+  align-items: center;
+  gap: var(--stepper-element-spacing);
+}
+
+.stepper__dot {
+  width: var(--stepper-dot-size);
+  height: var(--stepper-dot-size);
+  border-radius: 50%;
+  background: var(--stepper-inactive-dot);
+  flex-shrink: 0;
+}
+
+.stepper__dot--completed {
+  background: var(--stepper-completed-dot);
+}
+
+.stepper__dot--active {
+  background: var(--stepper-active-inner);
+  border: 1px solid var(--stepper-active-border);
+  box-shadow: 0 0 0 2px var(--stepper-active-outer);
+}
+
+.stepper__line {
+  height: var(--stepper-line-height);
+  flex: 1;
+  border-radius: var(--stepper-line-radius);
+  background: var(--stepper-inactive-line);
+}
+
+.stepper__line--completed {
+  background: var(--stepper-completed-line);
+}
+```
+
+---
+
 ## Как использовать эту дизайн-систему
 
 ### Для дизайнеров
@@ -1996,9 +2498,38 @@ End date in range:
 
 ## Версионирование и обновления
 
-**Текущая версия**: v5.4.0
+**Текущая версия**: v5.5.0
 
 ### Changelog
+
+#### v5.5.0 (2025-11-19)
+- **Добавлена новая секция "Progress Indicators & Steppers"** - система индикаторов прогресса:
+  - **Step Indicators** - точечные индикаторы для многошаговых процессов:
+    - Container: 18px × 18px, Dot: 14px × 14px
+    - 5 состояний: Active (#4141E6), Completed (с белой обводкой), Inactive (#EAEEF2), Error (#E24949), With Icon
+    - Label: 10px/600, spacing 5px below dot
+  - **Circular Progress Indicators** - круговые прогресс-бары:
+    - 4 размера: 64px (5px border), 48px (4px border), 36px (3px border), 24px (2px border)
+    - Background ring: #F4F6F9, Progress ring: #4141E6
+    - Текст внутри: 13px, 11px, 10px, 7px соответственно
+    - Примеры значений: время ("1:35") или проценты ("15%", "48%", "72%", "85%")
+  - **Linear Progress Bars** - линейные прогресс-бары:
+    - Vertical: 60px × 2px, borderRadius 10px, spacing 58px
+    - Horizontal: 4px height, Expanded width, borderRadius 10px
+    - 3 состояния: Active (#0B24FB solid), Partial (30% opacity), Inactive (10% opacity)
+    - Conditional borderRadius на начале/конце
+  - **Stepper Progress** - пошаговый индикатор с линиями:
+    - Container: 375px width, padding 32px/5px
+    - Dot: 14px × 14px, Connector line: 4px height
+    - Spacing: 3px between elements
+    - 3 состояния: Completed (#4141E6), Active (с белой обводкой), Inactive (#F4F6F9)
+    - Layout: [Dot] —Line— [Dot] pattern
+  - **CSS переменные** для всех компонентов
+  - **Accessibility** рекомендации: ARIA attributes, live regions
+  - **Best Practices** для каждого типа индикатора
+  - **Примеры CSS кода** для всех состояний
+- **Расширена цветовая палитра**:
+  - `--color-primary-alt: #0B24FB` - альтернативный синий для прогресс-баров
 
 #### v5.4.0 (2025-11-19)
 - **Добавлена новая секция "Date & Time Pickers"** - система компонентов для выбора даты и времени:
