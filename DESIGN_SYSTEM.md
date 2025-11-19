@@ -47,6 +47,7 @@
 --color-text-dark: #09101D;        /* Основной темный текст (Flutter) */
 --color-text-gray: #373940;        /* Серый текст для подписей (Flutter) */
 --color-text-subtitle: #414249;    /* Темно-серый для subtitle/вторичного текста в списках */
+--color-text-muted: #747B84;       /* Приглушенный серый для timestamps и метаданных */
 ```
 
 ### Accent Colors
@@ -57,6 +58,9 @@
 --color-accent-purple: #7B61FF;    /* Фиолетовый из Flutter кода */
 --color-link-blue: #4141E6;        /* Синий для ссылок и активных элементов */
 --color-success-green: #11BB8D;    /* Зеленый для активного toggle и success состояний */
+--color-accent-yellow: #FFC043;    /* Желтый для date dividers */
+--color-accent-dark-green: #05944F; /* Темно-зеленый для date dividers */
+--color-accent-orange: #FF6937;    /* Оранжевый для date dividers и new messages */
 ```
 
 ### Background Colors
@@ -1235,7 +1239,271 @@ Container(
 
 ---
 
-### 12. Messages / Notifications
+### 12. Chat / Messaging (Flutter)
+
+Компоненты для чата и мессенджера из Flutter кода.
+
+#### Chat Message Bubbles
+
+**Incoming Message (Left)**
+- **Width**: 248px
+- **Padding**: 10px
+- **Border Radius**: 15px
+- **Background**: #F4F6F9 (светло-серый)
+- **Text**:
+  - Font: Archivo Regular
+  - Size: 16px
+  - Color: #09101D
+  - Line Height: 1.40
+- **Layout**:
+  - Avatar (left): 32×32px outer, 24×24px inner
+  - Spacing: 5px between avatar and bubble
+  - Alignment: Start (left)
+
+**Outgoing Message (Right)**
+- **Width**: 260px
+- **Padding**: Horizontal 16px, Vertical 10px
+- **Border Radius**: 15px
+- **Background**: #414249 (темно-серый)
+- **Text**:
+  - Font: Archivo Regular
+  - Size: 16px
+  - Color: White (#FFFFFF)
+  - Line Height: 1.40
+- **Layout**:
+  - Avatar (right): 32×32px outer, 24×24px inner
+  - Spacing: 5px between avatar and bubble
+  - Alignment: End (right)
+
+**Metadata Footer:**
+- **Time Stamps**:
+  - Font: Archivo Regular
+  - Size: 11px
+  - Color: #747B84 (incoming), White (outgoing)
+  - Line Height: 1.40
+  - Text Align: Right
+  - Spacing: 3px before icon (if present)
+- **Layout**: Two time stamps with 5px spacing, aligned start/end
+
+```dart
+// Incoming Message
+Container(
+  width: 248,
+  padding: const EdgeInsets.all(10),
+  decoration: ShapeDecoration(
+    color: const Color(0xFFF4F6F9),
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+  ),
+  child: Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    spacing: 5,
+    children: [
+      Text(
+        'Hi I want to book some desk, is it\npossible?',
+        style: TextStyle(
+          color: const Color(0xFF09101D),
+          fontSize: 16,
+          fontFamily: 'Archivo',
+          fontWeight: FontWeight.w400,
+          height: 1.40,
+        ),
+      ),
+      Row(
+        children: [
+          Text(
+            '3:00PM ',
+            style: TextStyle(
+              color: const Color(0xFF747B84),
+              fontSize: 11,
+              fontFamily: 'Archivo',
+              fontWeight: FontWeight.w400,
+              height: 1.40,
+            ),
+          ),
+        ],
+      ),
+    ],
+  ),
+)
+
+// Outgoing Message
+Container(
+  width: 260,
+  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+  decoration: ShapeDecoration(
+    color: const Color(0xFF414249),
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+  ),
+  child: Column(
+    crossAxisAlignment: CrossAxisAlignment.end,
+    spacing: 5,
+    children: [
+      Text(
+        'Yes of cource, we have a huge amount of desks and offices',
+        style: TextStyle(
+          color: Colors.white,
+          fontSize: 16,
+          fontFamily: 'Archivo',
+          fontWeight: FontWeight.w400,
+          height: 1.40,
+        ),
+      ),
+      Row(
+        children: [
+          Text(
+            '3:00PM ',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 11,
+              fontFamily: 'Archivo',
+              fontWeight: FontWeight.w400,
+              height: 1.40,
+            ),
+          ),
+        ],
+      ),
+    ],
+  ),
+)
+```
+
+#### Chat Avatar (Small)
+
+Маленький вариант аватара для чата.
+
+- **Outer Container**: 32px × 32px
+- **Inner Image**: 24px × 24px
+  - Position: Left 4px, Top 4px
+- **Border Radius**: 40px (circle)
+- **Placeholder Background**: #D9DDE2
+- **Image Fit**: BoxFit.cover
+- **Spacing**: 5px from message bubble
+
+```dart
+Container(
+  width: 32,
+  height: 32,
+  child: Stack(
+    children: [
+      Positioned(
+        left: 4,
+        top: 4,
+        child: Container(
+          width: 24,
+          height: 24,
+          decoration: ShapeDecoration(
+            color: const Color(0xFFD9DDE2),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
+          ),
+        ),
+      ),
+      Positioned(
+        left: 4,
+        top: 4,
+        child: Container(
+          width: 24,
+          height: 24,
+          decoration: ShapeDecoration(
+            image: DecorationImage(
+              image: NetworkImage("https://placehold.co/24x24"),
+              fit: BoxFit.cover,
+            ),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
+          ),
+        ),
+      ),
+    ],
+  ),
+)
+```
+
+#### Date Dividers / Separators
+
+Разделители дат и новых сообщений для чата.
+
+**Specs:**
+- **Container Width**: 375px (full width)
+- **Padding**: Vertical 5px
+- **Badge Padding**: Horizontal 10px, Vertical 2px
+- **Border Radius**: 10px
+- **Text**:
+  - Font: Archivo SemiBold
+  - Size: 10px
+  - Color: #09101D
+  - Line Height: 1.40
+  - Text Align: Center
+
+**Варианты:**
+
+1. **"Yesterday"**
+   - Background: rgba(255, 192, 67, 0.10) - желтый с 10% opacity
+
+2. **"Mon 30"**
+   - Background: rgba(5, 148, 79, 0.10) - темно-зеленый с 10% opacity
+
+3. **"June, 2021"**
+   - Background: rgba(11, 36, 251, 0.10) - синий с 10% opacity
+
+4. **"2021"**
+   - Background: rgba(255, 105, 55, 0.10) - оранжевый с 10% opacity
+
+5. **"NEW MESSAGES"**
+   - No background
+   - Text Color: #FF6937 (orange)
+   - Text: uppercase
+
+```dart
+// Date Divider
+Container(
+  width: 375,
+  padding: const EdgeInsets.symmetric(vertical: 5),
+  child: Row(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      Container(
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
+        decoration: ShapeDecoration(
+          color: const Color(0x19FFC043), // Yellow with 10% opacity
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        ),
+        child: Text(
+          'Yesterday',
+          style: TextStyle(
+            color: const Color(0xFF09101D),
+            fontSize: 10,
+            fontFamily: 'Archivo',
+            fontWeight: FontWeight.w600,
+            height: 1.40,
+          ),
+        ),
+      ),
+    ],
+  ),
+)
+
+// "NEW MESSAGES" Text
+Container(
+  width: 375,
+  padding: const EdgeInsets.symmetric(vertical: 5),
+  child: Text(
+    'NEW MESSAGES',
+    textAlign: TextAlign.center,
+    style: TextStyle(
+      color: const Color(0xFFFF6937),
+      fontSize: 10,
+      fontFamily: 'Archivo',
+      fontWeight: FontWeight.w600,
+      height: 1.40,
+    ),
+  ),
+)
+```
+
+**Usage:** Чат, мессенджер, сообщения между пользователями.
+
+---
+
+### 13. Messages / Notifications
 
 #### Toast Notification
 
@@ -1256,7 +1524,7 @@ Container(
 
 ---
 
-### 13. Panels & Cards
+### 14. Panels & Cards
 
 #### Side Panel
 
@@ -1279,7 +1547,7 @@ Container(
 
 ---
 
-### 14. Accordion / FAQ
+### 15. Accordion / FAQ
 
 #### Accordion Item
 
@@ -1294,7 +1562,7 @@ Container(
 
 ---
 
-### 15. Loading States
+### 16. Loading States
 
 #### Skeleton Loader
 
@@ -1311,7 +1579,7 @@ Container(
 
 ---
 
-### 16. Empty States
+### 17. Empty States
 
 #### Empty State Layout
 
@@ -1326,7 +1594,7 @@ Container(
 
 ---
 
-### 17. Special Effects
+### 18. Special Effects
 
 #### Focus Ring
 
@@ -1521,9 +1789,28 @@ Container(
 
 ## Версионирование и обновления
 
-**Текущая версия**: v5.3.0
+**Текущая версия**: v5.4.0
 
 ### Changelog
+
+#### v5.4.0 (2025-11-19)
+- **Добавлена секция Chat / Messaging (Flutter):**
+  - Chat Message Bubbles (incoming 248px, outgoing 260px)
+  - Chat Avatar Small variant (32×32px outer, 24×24px inner, circle)
+  - Date Dividers с 5 вариантами (Yesterday, Mon 30, June 2021, 2021, NEW MESSAGES)
+- **Новые цвета для чата:**
+  - `#747B84` - Приглушенный серый для timestamps и метаданных
+  - `#FFC043` - Желтый для date dividers
+  - `#05944F` - Темно-зеленый для date dividers
+  - `#FF6937` - Оранжевый для date dividers и new messages
+- **Спецификации Chat/Messaging:**
+  - Incoming message: light gray background (#F4F6F9), left aligned
+  - Outgoing message: dark gray background (#414249), right aligned
+  - Message text: Archivo Regular 16px
+  - Time stamps: Archivo Regular 11px
+  - Date divider badges с цветными backgrounds (10% opacity)
+  - NEW MESSAGES divider без фона, оранжевый текст
+- **Перенумерация секций:** Chat/Messaging стала секцией 12, последующие секции сдвинуты (Messages → 13, Panels → 14, Accordion → 15, Loading → 16, Empty → 17, Special Effects → 18)
 
 #### v5.3.0 (2025-11-19)
 - **Добавлены Flutter List Items:**
