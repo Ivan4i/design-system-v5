@@ -73,6 +73,11 @@
 --color-green-badge: #11BB8D;      /* Color(0xFF11BB8D) - зеленый для эко-бейджей */
 --color-cyan-light: #7CC5D6;       /* Color(0xFF7CC5D6) - голубой для цветовых селекторов */
 --color-red-accent: #E24949;       /* Color(0xFFE24949) - красный акцент */
+--color-red-validation: #DA1414;   /* Color(0xFFDA1414) - красный для validation errors */
+
+/* Validation background colors с прозрачностью */
+--color-positive-bg: rgba(17, 187, 141, 0.05);  /* Color(0x0C11BB8D) - светло-зеленый для positive state */
+--color-negative-bg: rgba(218, 20, 20, 0.05);   /* Color(0x0CDA1414) - светло-красный для negative state */
 
 /* Текстовые цвета */
 --color-text-tertiary: #747B84;    /* Color(0xFF747B84) - третичный текст (метаданные) */
@@ -1212,6 +1217,157 @@
 
 **Использование**: Checkout flow, multi-step forms, онбординг, регистрация
 
+#### Password Input Field
+
+Полноценный input field для ввода пароля с validation states и show/hide функционалом.
+
+##### Field Container
+
+- **Width**: 375px (full mobile width)
+- **Container Padding**: symmetric(horizontal: 16px, vertical: 5px)
+- **Spacing**: 8px между label, input и helper text
+
+##### Label
+
+- **Font**: 14px Archivo
+- **Weight**: 600 (Semibold)
+- **Color**: #09101D (black) или #D9DDE2 (disabled)
+- **Line Height**: 1.40
+- **Width**: 343px
+- **Spacing**: 13px справа
+
+##### Input Field Specs
+
+**Размеры:**
+- **Width**: 343px (100% of container minus padding)
+- **Height**: 36px
+- **Padding**: left 16px, right 20px
+- **Border Radius**: 15px
+
+**Typography:**
+- **Font**: 14px Archivo для текста, 24px для dots
+- **Weight**: 400 (Regular)
+- **Line Height**: 1.40
+- **Text Align**: Left
+
+**Cursor:**
+- **Width**: 2px
+- **Height**: 16px
+- **Spacing**: 15px от текста
+
+**Icons:**
+- **Size**: 20×20px
+- **Spacing**: 20px между иконками
+- **Position**: Right-aligned внутри поля
+
+##### Field States
+
+**1. Enabled (Default)**
+- Background: #F4F6F9 (background-light)
+- Border: None
+- Placeholder: "Create a password…" (#747B84)
+- Helper text: "Helper" (#747B84)
+
+**2. Focus**
+- Background: #F4F6F9
+- Border: 2px solid #09101D (black)
+- Placeholder: "Create a password…" (#747B84)
+- Icons: Eye icon visible (20×20px)
+
+**3. Pressed**
+- Background: #EAEEF2 (gray-lighter)
+- Border: None
+- Placeholder: "Create a password…" (#747B84)
+
+**4. Active - Typing - Show**
+- Background: #F4F6F9
+- Border: None
+- Text: "CaTsSayMeoW!23" (#09101D, 14px)
+- Icons: 2 icons (eye-off + icon)
+- Cursor: visible (2px, 16px)
+
+**5. Active - Typing - Hide**
+- Background: #F4F6F9
+- Border: None
+- Text: "••••••••••••••••••••" (#09101D, 24px - larger dots)
+- Icons: 2 icons (eye + icon)
+- Cursor: visible after dots
+
+**6. Complete - Hide**
+- Background: #F4F6F9
+- Border: None
+- Text: "••••••••••••••••••••" (#09101D, 24px)
+- Icons: 1 icon (eye)
+
+**7. Incomplete**
+- Background: #F4F6F9
+- Border: None
+- Placeholder: "Create a password…" (#747B84)
+- Icons: 1 icon (eye)
+
+**8. Positive - Show**
+- Background: rgba(17, 187, 141, 0.05) - light green
+- Border: 2px solid #11BB8D (green-badge)
+- Text: "CaTsSayMeoW!23" (#09101D, 14px)
+- Icons: 2 icons (eye-off + checkmark)
+- Cursor: visible
+- Helper: "Helper" (#747B84)
+
+**9. Positive - Hide**
+- Background: rgba(17, 187, 141, 0.05)
+- Border: 2px solid #11BB8D
+- Text: "••••••••••••••••••••" (#09101D, 24px)
+- Icons: 2 icons (eye + checkmark)
+- Cursor: visible
+
+**10. Negative - Show**
+- Background: rgba(218, 20, 20, 0.05) - light red
+- Border: 2px solid #DA1414 (red-validation)
+- Text: "CaTsSay" (#09101D, 14px)
+- Icons: 2 icons (eye-off + error)
+- Cursor: visible
+- Helper: "You need to use "A, a, !, 1" symbols" (#E24949 red)
+
+**11. Negative - Hide**
+- Background: rgba(218, 20, 20, 0.05)
+- Border: 2px solid #DA1414
+- Text: "••••••••••••••" (#09101D, 24px)
+- Icons: 2 icons (eye + error)
+- Cursor: visible
+- Helper: "You need to use "A, a, !, 1" symbols" (#E24949)
+
+**12. Disabled - Show/Hide**
+- Background: #F4F6F9
+- Border: None
+- Text: "WoOfLikEaDOg345" or dots (#D9DDE2 gray)
+- Label: #D9DDE2
+- Helper: #D9DDE2
+- Icons: 1 icon disabled state
+
+##### Password Masking
+
+**Visible mode:**
+- Text: 14px Regular, normal characters
+- Example: "CaTsSayMeoW!23"
+
+**Hidden mode:**
+- Text: 24px, bullet points "•"
+- Each character replaced with "•"
+- Example: "••••••••••••••••••••"
+
+##### Helper Text
+
+- **Font**: 14px Archivo
+- **Weight**: 400 (Regular)
+- **Line Height**: 1.40
+- **Width**: 343px
+- **Colors**:
+  - Default: #747B84 (tertiary)
+  - Error: #E24949 (red-accent)
+  - Disabled: #D9DDE2 (gray-light)
+
+**Использование**: Password fields, authentication forms, registration, security settings
+
 ---
 
 ### 17. Hero Image Carousel (Flutter)
@@ -1685,9 +1841,43 @@
 
 ## Версионирование и обновления
 
-**Текущая версия**: v5.7.0
+**Текущая версия**: v5.8.0
 
 ### Changelog
+
+#### v5.8.0 (2025-11-19)
+- 🔐 Добавлен **Password Input Field** компонент с полной системой состояний
+- 🎨 Новые цвета для validation states:
+  - Red Validation (#DA1414) - для validation errors
+  - Positive Background rgba(17, 187, 141, 0.05) - светло-зеленый для success
+  - Negative Background rgba(218, 20, 20, 0.05) - светло-красный для errors
+- 📝 Добавлена полная документация **Password Input Field** с 12 состояниями:
+  1. **Enabled (Default)** - пустое поле с placeholder
+  2. **Focus** - фокус с 2px черной обводкой
+  3. **Pressed** - нажатие, серый background (#EAEEF2)
+  4. **Active - Typing - Show** - ввод видимого пароля
+  5. **Active - Typing - Hide** - ввод скрытого пароля (dots)
+  6. **Complete - Hide** - заполнено, скрыто
+  7. **Incomplete** - неполный ввод
+  8. **Positive - Show** - успешная валидация, видимый (зеленая обводка)
+  9. **Positive - Hide** - успешная валидация, скрытый
+  10. **Negative - Show** - ошибка валидации, видимый (красная обводка)
+  11. **Negative - Hide** - ошибка валидация, скрытый
+  12. **Disabled** - выключенное состояние (серый текст)
+- 👁️ **Password Masking спецификации**:
+  - Visible mode: 14px Regular text
+  - Hidden mode: 24px bullet points "•"
+- 🔧 **Field спецификации**:
+  - Dimensions: 343px width, 36px height
+  - Border radius: 15px
+  - Padding: left 16px, right 20px
+  - Icons: 20×20px (eye, checkmark, error)
+  - Cursor: 2px width, 16px height
+- 📋 **Label & Helper Text**:
+  - Label: 14px Semibold (#09101D или #D9DDE2 disabled)
+  - Helper: 14px Regular (#747B84 default, #E24949 error, #D9DDE2 disabled)
+  - Spacing: 8px между элементами
+- 📊 Все данные извлечены из реального Flutter кода password input системы
 
 #### v5.7.0 (2025-11-19)
 - 📊 Добавлен **Progress Stepper / Track Bar** компонент
