@@ -119,6 +119,18 @@
 --chart-label-text: #09101D;         /* Черный для подписей */
 ```
 
+### Progress & Stepper Colors
+
+```css
+/* Цвета для прогресс-баров и степперов из Flutter кода */
+--color-progress-blue: #0B24FB;             /* Синий для активного прогресса */
+--color-progress-inactive: rgba(9, 16, 29, 0.10);  /* Неактивный сегмент - #1909101D */
+--color-progress-partial: rgba(11, 36, 251, 0.30); /* Частичный прогресс - #4C0B24FB */
+--color-stepper-active: #4141E6;            /* Активный шаг (синий) */
+--color-stepper-inactive: #EAEEF2;          /* Неактивный шаг (светло-серый) */
+--color-stepper-current: #4141E6;           /* Текущий шаг (синий с кольцом) */
+```
+
 ### Shadow Colors
 
 ```css
@@ -1113,7 +1125,230 @@ Level 5:   84px left padding
 
 ---
 
-### 19. Badges (из Flutter кода)
+### 19. Progress Bars & Steppers (из Flutter кода)
+
+#### Linear Progress Bar
+
+**Container:**
+- **Width**: 375px (full width на mobile)
+- **Padding**: 16px horizontal
+- **Background**: Transparent
+
+**Progress Bar Specifications:**
+- **Height**: 3px
+- **Border Radius**: 10px (pill shape)
+- **Spacing между сегментами**: 5px
+- **Colors**:
+  - Active (completed): #0B24FB
+  - In-progress / Partial: rgba(11, 36, 251, 0.30) - #4C0B24FB
+  - Inactive (not started): rgba(9, 16, 29, 0.10) - #1909101D
+
+**Варианты по количеству шагов:**
+- **2 Steps**: Два сегмента 50/50
+- **3 Steps**: Три сегмента 33/33/33
+- **4 Steps**: Четыре сегмента 25/25/25/25
+- **5 Steps**: Пять сегментов 20/20/20/20/20
+- **6 Steps**: Шесть сегментов по ~16.67%
+
+**Layout:**
+```
+[Segment 1] 5px [Segment 2] 5px [Segment 3] 5px [Segment 4]
+```
+
+#### Stepper (Horizontal)
+
+**Container:**
+- **Width**: 375px (mobile full width)
+- **Padding**: 32px left/right
+- **Background**: Transparent
+- **Spacing между шагами**: Auto-distribute (Expanded widgets)
+
+**Step Indicator:**
+- **Outer Circle**: 18px × 18px
+- **Inner Dot**: 14px × 14px (fill для completed)
+- **Border**: 2px (для current step)
+- **Colors**:
+  - **Completed**: #4141E6 solid fill
+  - **Current**: #4141E6 outer ring (2px) + white center + #4141E6 inner dot (4px)
+  - **Inactive**: #EAEEF2 fill
+- **Spacing**: 3px между элементами
+
+**Connector Line:**
+- **Height**: 4px
+- **Width**: Expanded (заполняет пространство между шагами)
+- **Border Radius**: 10px (pill)
+- **Colors**:
+  - Completed: #4141E6
+  - Incomplete: #EAEEF2
+
+**Step Label:**
+- **Text**: "Step name"
+- **Font Size**: 10px
+- **Font Weight**: 600 (semibold)
+- **Color**: #09101D
+- **Text Align**: Center
+- **Margin Top**: 8px (от индикатора)
+
+**Stepper Layout:**
+```
+(●)━━━━━(●)━━━━━(○)━━━━━(○)
+Step 1  Step 2  Step 3  Step 4
+```
+
+#### Circular Progress
+
+**Specifications:**
+- **Size**: 64px × 64px
+- **Stroke Width**: 5px
+- **Border Radius**: Full circle (100px)
+- **Colors**:
+  - Active (progress): #4141E6
+  - Track (background): #F4F6F9
+- **Center Content**: Optional text, percentage, or icon
+
+**With Labels:**
+- **Title**:
+  - Font: 15px
+  - Weight: 600
+  - Color: #09101D
+  - Margin Top: 8px
+- **Subtitle**:
+  - Font: 14px
+  - Weight: 400
+  - Color: #414249
+  - Margin Top: 4px
+
+#### Progress Typography
+
+**Labels:**
+- Font: 10px, Weight: 600, Color: #09101D
+
+**Title (для circular):**
+- Font: 15px, Weight: 600, Color: #09101D
+
+**Subtitle:**
+- Font: 14px, Weight: 400, Color: #414249
+
+#### Использование
+
+```css
+/* Linear Progress Bar */
+.progress-bar {
+  width: 100%;
+  max-width: 343px; /* 375px - 32px padding */
+  height: 3px;
+  display: flex;
+  gap: 5px;
+}
+
+.progress-bar__segment {
+  flex: 1;
+  height: 3px;
+  border-radius: 10px;
+}
+
+.progress-bar__segment--active {
+  background: #0B24FB;
+}
+
+.progress-bar__segment--partial {
+  background: rgba(11, 36, 251, 0.30);
+}
+
+.progress-bar__segment--inactive {
+  background: rgba(9, 16, 29, 0.10);
+}
+
+/* Stepper */
+.stepper {
+  display: flex;
+  align-items: center;
+  padding: 0 32px;
+  gap: auto;
+}
+
+.stepper__step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+
+.stepper__indicator {
+  width: 18px;
+  height: 18px;
+  border-radius: 100px;
+}
+
+.stepper__indicator--completed {
+  background: #4141E6;
+}
+
+.stepper__indicator--current {
+  border: 2px solid #4141E6;
+  background: white;
+  position: relative;
+}
+
+.stepper__indicator--current::after {
+  content: '';
+  width: 14px;
+  height: 14px;
+  background: #4141E6;
+  border-radius: 100px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.stepper__indicator--inactive {
+  background: #EAEEF2;
+}
+
+.stepper__connector {
+  flex: 1;
+  height: 4px;
+  border-radius: 10px;
+}
+
+.stepper__connector--completed {
+  background: #4141E6;
+}
+
+.stepper__connector--incomplete {
+  background: #EAEEF2;
+}
+
+.stepper__label {
+  font-size: 10px;
+  font-weight: 600;
+  color: #09101D;
+  margin-top: 8px;
+}
+
+/* Circular Progress */
+.circular-progress {
+  width: 64px;
+  height: 64px;
+  position: relative;
+}
+
+.circular-progress__track {
+  stroke: #F4F6F9;
+  stroke-width: 5px;
+}
+
+.circular-progress__fill {
+  stroke: #4141E6;
+  stroke-width: 5px;
+  stroke-linecap: round;
+}
+```
+
+---
+
+### 20. Badges (из Flutter кода)
 
 #### Live Badge (Instagram-style)
 - **Size**: 28px × 14px
@@ -1131,7 +1366,7 @@ Level 5:   84px left padding
 
 ---
 
-### 20. Screen Container (из Flutter кода)
+### 21. Screen Container (из Flutter кода)
 
 #### Mobile Screen Container
 - **Width**: 375px (iPhone-like width)
@@ -1395,9 +1630,27 @@ decoration: BoxDecoration(
 
 ## Версионирование и обновления
 
-**Текущая версия**: v5.3.0
+**Текущая версия**: v5.4.0
 
 ### Changelog
+
+#### v5.4.0 (2025-11-19)
+- **Progress Bars & Steppers**: Добавлена полная спецификация прогресс-баров и степперов
+  - Linear Progress Bar: 3px height, 10px border-radius, 5px gaps между сегментами
+  - Stepper (Horizontal): 18px outer circle, 14px inner dot, 4px connector lines
+  - Circular Progress: 64px × 64px, 5px stroke width
+  - Варианты: 2-6 шагов для linear progress
+  - Typography: 10px labels (weight 600), 15px titles, 14px subtitles
+- **Цвета**: Добавлены цвета для прогресс-баров и степперов
+  - Progress blue: #0B24FB (активный прогресс)
+  - Progress inactive: rgba(9, 16, 29, 0.10)
+  - Progress partial: rgba(11, 36, 251, 0.30)
+  - Stepper active: #4141E6
+  - Stepper inactive: #EAEEF2
+- **Компоненты**: Добавлен раздел "Progress Bars & Steppers" с CSS примерами
+  - Linear progress с сегментами
+  - Horizontal stepper с индикаторами и коннекторами
+  - Circular progress с метками
 
 #### v5.3.0 (2025-11-19)
 - **Dividers (Разделители)**: Добавлена полная спецификация разделителей
