@@ -85,10 +85,13 @@ MaterialApp(
 ```css
 /* Акцентные цвета из Flutter кода */
 --color-accent-purple: #7B61FF;    /* Color(0xFF7B61FF) - фиолетовый для borders */
---color-accent-blue-dark: #0B24FB; /* Color(0xFF0B24FB) - темно-синий для outlined buttons */
+--color-accent-blue-dark: #0B24FB; /* Color(0xFF0B24FB) - темно-синий для outlined buttons и primary actions */
+--color-accent-purple-medium: #7356BF; /* Color(0xFF7356BF) - средний фиолетовый для folder colors */
+--color-accent-purple-dark: #221874; /* Color(0xFF221874) - темно-фиолетовый для folder colors */
 --color-accent-gold: #FFC043;      /* Color(0xFFFFC043) - золотой/желтый для toast buttons и actions */
 --color-accent-blue-primary: #2E5AAC; /* Color(0xFF2E5AAC) - синий для auth buttons и primary actions */
 --color-accent-green: #05944F;     /* Color(0xFF05944F) - зеленый для links и primary buttons */
+--color-accent-green-bright: #0AFB6B; /* Color(0xFF0AFB6B) - яркий зеленый для folder colors */
 --color-accent-orange: #FF9500;    /* Color(0xFFFF9500) - оранжевый для notifications */
 --color-accent-facebook: #4C69AB;  /* Color(0xFF4C69AB) - facebook blue (darker) */
 --color-accent-facebook-light: #425993; /* Color(0xFF425993) - facebook blue (lighter) */
@@ -2063,6 +2066,41 @@ Container(
 
 ---
 
+### 22. Productivity / Task Management (из ProductivityLight)
+
+#### Add Folder Modal
+
+- **Modal Screen**: 375x712px (full), 422px (visible)
+- **Modal Overlay**: rgba(0, 0, 0, 0.25)
+- **Modal Card**: 20px border radius
+- **Modal Padding**: 8/16/16/16 (top/left/right/bottom)
+- **Header Height**: 44px
+- **Close Icon**: 24x24px container, 14.40x14.40px icon
+- **Input Height**: 46px
+- **Icon Button**: 34x34px
+- **Icon Padding**: 10px
+- **Icon Size**: 16.80x16.80px
+- **Color Swatch**: 34x34px
+- **Swatch Padding**: 8px
+- **Button Height**: 44px
+
+#### Task List
+
+- **Task List**: 375x526px
+- **Checkbox**: 16x16px container
+- **Checkbox Unchecked**: 14.40x14.40px (border 2px)
+- **Checkbox Checked**: 19.20x19.20px icon
+- **Task Title**: 15px
+- **Task Time**: 13px
+- **Metadata Label**: 12px
+- **Tag Height**: 24px
+- **Tag Padding**: 6px horizontal (or 2px/8px for count)
+- **Tag Text**: 11px
+- **Tag Spacing**: 10px
+- **Divider**: 1px
+
+---
+
 ### 16. Special Effects
 
 #### Focus Ring
@@ -2815,6 +2853,323 @@ Screen Container (375px width, radius: 30):
 
 ---
 
+### Productivity Components (из ProductivityLight)
+
+Компоненты для productivity-приложений - задачи, списки дел, организация контента.
+
+#### Add Folder Modal
+
+**Из ProductivityLight - Create folder dialog**
+
+Модальное окно для создания новой папки с выбором иконки и цвета.
+
+- **Screen Width**: 375px (mobile)
+- **Screen Height**: 712px (full), 422px (visible portion)
+- **Border Radius**: 30px
+- **Background**: #FAFAFB
+- **Clip**: antiAlias
+
+**Overlay** (positioned: 0, 0):
+- **Size**: 375x712px
+- **Background**: Colors.black with alpha: 0.25 (rgba(0, 0, 0, 0.25))
+- **Border Radius**: 30px
+
+**Modal Content** (positioned: 0, 20):
+- **Container Width**: 375px
+- **Padding**: left 8, right 8, bottom 8
+- **Spacing**: 8px (vertical between children)
+
+**Modal Card**:
+- **Padding**: top 8, left 16, right 16, bottom 16
+- **Background**: #FAFAFB (--color-bg-input-light)
+- **Border**: 0.50px transparent (black with alpha: 0)
+- **Border Radius**: 20px
+
+**Header Section** (44px height):
+- **Title**:
+  - Text: "Add New Folder"
+  - Font: Archivo, 16px, weight: 700
+  - Color: #09101D (--color-text-primary)
+- **Close Button** (right aligned):
+  - Padding: top 10, left 10, bottom 10
+  - Border radius: 12px
+  - Icon Container: 24x24px, padding: 6px
+    - Background: #747B84 (--color-text-secondary)
+    - Border Radius: 100px (circular)
+    - Icon: 14.40x14.40px (positioned -1.20, -1.20)
+
+**Divider**:
+- **Height**: 1px
+- **Color**: #EAEEF2 (--color-bg-step-inactive)
+- **Padding**: vertical 2px
+
+**Folder Name Input** (padding: vertical 10px):
+- **Height**: 46px
+- **Padding**: left 16, right 20
+- **Background**: Colors.white (#FFFFFF)
+- **Border**: 1px solid #EAEEF2
+- **Border Radius**: 15px
+- **Text**: "Awesome Folde"
+  - Font: Archivo, 16px, weight: 400
+  - Color: #23262B (--color-text-description)
+- **Cursor** (right side):
+  - Size: 2x16px
+  - Spacing from text: 15px
+- **Icon** (far right): 20x20px
+
+**"Select icon" Section** (44px height):
+- **Label**:
+  - Text: "Select icon"
+  - Font: Archivo, 16px, weight: 700
+  - Color: #09101D (--color-text-primary)
+
+**Icon Grid** (padding: top 5, bottom 15):
+- **Layout**: Row, space-between
+- **Spacing**: 10px between icons
+- **Icon Button**: 34x34px
+  - Padding: 10px
+  - Border Radius: 10px
+  - Icon Size: 16.80x16.80px (positioned -1.40, -1.40)
+- **Total Icons**: 9 buttons
+- **Selected State**: Background #FFC043 (gold)
+- **Unselected State**: Background #FAFAFB (light gray)
+
+**"Select color" Section** (44px height):
+- **Label**:
+  - Text: "Select color"
+  - Font: Archivo, 16px, weight: 700
+  - Color: #09101D (--color-text-primary)
+
+**Color Grid** (padding: top 5, bottom 15):
+- **Layout**: Row, space-between
+- **Spacing**: 10px between swatches
+- **Color Swatch**: 34x34px
+  - Padding: 8px
+  - Border Radius: 10px
+- **Total Swatches**: 9 colors
+- **Selected State**: 2px white border (на #FFC043)
+- **Color Options**:
+  1. #0B24FB - bright blue
+  2. #4141E6 - primary blue
+  3. #7356BF - medium purple
+  4. #221874 - dark purple
+  5. #FFC043 - gold (selected with white border)
+  6. #FF6937 - orange
+  7. #05944F - green
+  8. #11BB8D - success green/teal
+  9. #0AFB6B - bright green
+
+**Divider** (same as above):
+- **Height**: 1px
+- **Color**: #EAEEF2
+- **Padding**: vertical 2px
+
+**Create Button** (padding: top 10):
+- **Height**: 44px
+- **Padding**: horizontal 16, vertical 10
+- **Background**: #0B24FB (--color-accent-blue-dark)
+- **Border Radius**: 15px
+- **Text**: "Create"
+  - Font: Archivo, 14px, weight: 600
+  - Color: Colors.white (#FFFFFF)
+- **Spacing**: 70px (for layout)
+
+**Structure**:
+```
+Screen Container (375x712, clipped to 422px):
+  - Overlay (375x712, black alpha 0.25)
+  - Modal Content (position: 0, 20, padding: 8):
+    - Modal Card (padding: 8/16/16/16, radius: 20, bg: #FAFAFB):
+      - Header (44px):
+        - Title: "Add New Folder" (16px weight 700)
+        - Close: 24x24 icon (#747B84 bg, 14.40px icon)
+      - Divider (1px #EAEEF2)
+      - Input (46px, padding: 16/20):
+        - Text: "Awesome Folde" (16px weight 400)
+        - Cursor: 2x16px
+        - Icon: 20x20px
+      - "Select icon" (44px height)
+      - Icon Grid (9 icons, 34x34, padding: 10, radius: 10):
+        - Selected: #FFC043
+        - Others: #FAFAFB
+      - "Select color" (44px height)
+      - Color Grid (9 colors, 34x34, padding: 8, radius: 10):
+        - #0B24FB, #4141E6, #7356BF, #221874
+        - #FFC043 (selected, white border)
+        - #FF6937, #05944F, #11BB8D, #0AFB6B
+      - Divider (1px #EAEEF2)
+      - Create Button (44px, #0B24FB, "Create" 14px weight 600)
+```
+
+**Usage**: Создание папок для организации контента (задачи, файлы, заметки) с кастомизацией иконки и цвета.
+
+**Гибкость**: Можно добавить поле описания, выбор родительской папки, настройку приватности, добавить больше цветов/иконок, добавить предпросмотр, добавить шаблоны папок.
+
+#### Task List
+
+**Из ProductivityLight - Task items with tags**
+
+Список задач с чекбоксами, метаданными, тегами и состояниями.
+
+- **Screen Width**: 375px (mobile)
+- **Screen Height**: 526px
+- **Background**: Colors.white (#FFFFFF)
+- **Border Radius**: 30px
+- **Top Offset**: 30px
+
+**Task Item Structure**:
+
+**Main Row** (padding: horizontal 16):
+- **Checkbox** (left side):
+  - Container: 16x16px
+  - Padding: vertical 3px
+  - Border Radius: 100px (circular)
+  - **Unchecked State**:
+    - Inner size: 14.40x14.40px at position (2.57, 2.40)
+    - Border: 2px solid #747B84
+    - Border Radius: 2px
+  - **Checked State**:
+    - Icon: 19.20x19.20px
+    - Checkmark icon (filled)
+- **Spacing**: 10px from checkbox to content
+
+**Task Content**:
+- **Title** (left, expanded):
+  - Font: Archivo, 15px, weight: 600
+  - Color: #09101D (--color-text-primary)
+  - Width: 246px (standard) / 280px (no metadata) / 287px (with hashtag)
+  - **Completed State**: text-decoration: lineThrough
+  - **Rich Text Support**:
+    - Normal text: 15px weight 600, #09101D
+    - Hashtag: 15px weight 700, italic, #FF6937
+- **Time/Date** (below title):
+  - Text: "🗓 Today 8:00 PM" format
+  - Font: Archivo, 13px, weight: 400
+  - Color: #11BB8D (--color-success, green)
+
+**Metadata** (right side):
+- **Label** (top right):
+  - Text: "Inbox" / "12h" / "1d"
+  - Font: Archivo, 12px, weight: 500
+  - Color: #747B84 (--color-text-secondary)
+  - Height: 20px, padding: vertical 2px
+  - Text Align: right
+- **Icon** (far right):
+  - Container: 24x24px, padding: 6px
+  - Border Radius: 100px
+  - Icon: 14.40x14.40px (positioned -1.20, -1.20)
+- **Spacing**: 16px from content to metadata
+
+**Tags Row** (padding: top 5, left 44, right 16):
+- **Layout**: Row
+- **Spacing**: 10px between tags
+
+**Tag Variants** (height: 24px):
+
+1. **Status Tag** (colored):
+   - Height: 24px
+   - Padding: horizontal 6px
+   - Border Radius: 11px
+   - Text: Archivo, 11px, weight: 600, white
+   - **Tag Colors**:
+     - "reading": #E24949 (red)
+     - "in progress": #4141E6 (blue)
+     - "social": #7CC5D6 (cyan)
+     - "important!!": #FF6937 (orange)
+
+2. **Count Tag** (icon + number):
+   - Height: 24px
+   - Padding: left 2, right 8
+   - Background: #F4F6F9 (--color-bg-tab, gray)
+   - Border Radius: 11px
+   - Icon Container: 24x24px, padding: 6px
+     - Icon: 14.40x14.40px (positioned -1.20, -1.20)
+   - Text: "1"
+     - Font: Archivo, 11px, weight: 600
+     - Color: #09101D (--color-text-primary)
+   - Spacing: 2px between icon and text
+
+**Divider** (padding: top 10, left 44, right 16, bottom 5):
+- **Height**: 1px
+- **Color**: #EAEEF2 (--color-bg-step-inactive)
+
+**Task Positions** (Stack positioning):
+- Task 1: top 30px
+- Task 2: top 134px
+- Task 3: top 233px
+- Task 4: top 332px (completed)
+- Task 5: top 414px
+
+**Task Examples**:
+
+1. **Task with Time + Multiple Tags**:
+   - Title: "Read book"
+   - Time: "🗓 Today 8:00 PM" (#11BB8D green)
+   - Right: "Inbox" + icon
+   - Tags: "reading" (red) + "1" count
+
+2. **Task with Status Tag**:
+   - Title: "Write journal"
+   - Time: "🗓 Today 11:30 PM"
+   - Right: "Inbox" + icon
+   - Tag: "in progress" (blue)
+
+3. **Task with Single Tag**:
+   - Title: "Meet with Jennie ☕️"
+   - Time: "🗓 Today 12:30 PM"
+   - Right: "Inbox" + icon
+   - Tag: "social" (cyan)
+
+4. **Completed Task**:
+   - Checkbox: checked (checkmark)
+   - Title: "Kickstart SMM project" (strikethrough)
+   - Right: "12h" (time ago, no icon)
+   - Tag: "1" count (gray)
+
+5. **Task with Rich Text**:
+   - Title: "Buy #tickets to LA 🎟"
+     - "Buy " - normal
+     - "#tickets" - italic bold orange
+     - " to LA 🎟" - normal
+   - Right: "1d" (time ago)
+   - Tag: "important!!" (orange)
+
+**Structure**:
+```
+Task List Container (375x526, white bg, radius: 30):
+  - Task Items (positioned at top: 30, 134, 233, 332, 414):
+    - Padding: top 10
+      - Main Row (padding: horizontal 16):
+        - Checkbox: 16x16 (unchecked: 14.40x14.40 border 2px #747B84)
+        - spacing: 10
+        - Content (expanded):
+          - Title: "Read book" (15px weight 600, #09101D)
+          - Time: "🗓 Today 8:00 PM" (13px weight 400, #11BB8D)
+        - spacing: 16
+        - Metadata:
+          - Label: "Inbox" (12px weight 500, #747B84)
+          - Icon: 24x24 (14.40x14.40 icon)
+      - Tags Row (padding: top 5, left 44, right 16):
+        - spacing: 10
+        - Tag: "reading" (24px, #E24949, white text 11px weight 600)
+        - Tag: icon + "1" (24px, #F4F6F9, #09101D text)
+      - Divider (padding: top 10, left 44, right 16, bottom 5):
+        - 1px #EAEEF2
+```
+
+**Tag Color Mapping**:
+- **Red** (#E24949): reading, urgent
+- **Blue** (#4141E6): in progress, active
+- **Cyan** (#7CC5D6): social, communication
+- **Orange** (#FF6937): important, priority, hashtags
+- **Gray** (#F4F6F9): counts, neutral metadata
+
+**Usage**: Списки задач для productivity-приложений с тегами, временем выполнения, категориями и состояниями.
+
+**Гибкость**: Можно добавить приоритеты (звездочки, флаги), подзадачи (nested items), прикрепленные файлы, назначенных пользователей, drag-and-drop для reordering, групповые операции (bulk actions), фильтры по тегам/датам, сортировку.
+
+---
+
 ## Состояния
 
 ### Interactive States
@@ -3046,9 +3401,57 @@ Screen Container (375px width, radius: 30):
 
 ## Версионирование и обновления
 
-**Текущая версия**: v5.7.0
+**Текущая версия**: v5.8.0
 
 ### Changelog
+
+#### v5.8.0 (2025-11-19)
+- Добавлен новый раздел **Productivity Components** из ProductivityLight с задачами и организацией контента:
+  - **Add Folder Modal** (375x712px, visible 422px):
+    - Модальное окно создания папки с выбором иконки и цвета
+    - Overlay: rgba(0, 0, 0, 0.25) semi-transparent black
+    - Modal card: 20px radius, #FAFAFB bg, padding 8/16/16/16
+    - Header: "Add New Folder", 16px weight 700, close button 24x24px (#747B84)
+    - Input field: 46px height, white bg, border 1px #EAEEF2, radius 15px
+    - Icon grid: 9 icons, 34x34px, padding 10px, icon 16.80x16.80px
+      - Selected: #FFC043 gold background
+      - Unselected: #FAFAFB light gray
+    - Color grid: 9 swatches, 34x34px, padding 8px
+      - Colors: #0B24FB, #4141E6, #7356BF, #221874, #FFC043, #FF6937, #05944F, #11BB8D, #0AFB6B
+      - Selected: 2px white border
+    - Create button: 44px, #0B24FB bg, "Create" 14px weight 600 white
+  - **Task List** (375x526px):
+    - Список задач с чекбоксами, тегами, временем
+    - Checkbox: 16x16px container
+      - Unchecked: 14.40x14.40px, border 2px #747B84, radius 2px
+      - Checked: 19.20x19.20px checkmark icon
+    - Task title: 15px weight 600, #09101D
+      - Rich text: hashtags в italic bold #FF6937
+      - Completed: strikethrough
+    - Time: "🗓 Today 8:00 PM", 13px weight 400, #11BB8D green
+    - Metadata: "Inbox"/"12h"/"1d", 12px weight 500, #747B84
+    - Tags: 24px height, radius 11px, text 11px weight 600
+      - Status tags: colored background, white text
+        - "reading": #E24949 red
+        - "in progress": #4141E6 blue
+        - "social": #7CC5D6 cyan
+        - "important!!": #FF6937 orange
+      - Count tag: #F4F6F9 gray, #09101D text, icon + number
+    - Divider: 1px #EAEEF2, padding top 10, left 44, bottom 5
+  - **Гибкость**: Folder modal - добавить описание, parent folder, privacy. Task list - приоритеты, подзадачи, файлы, assignees, drag-and-drop, bulk actions, фильтры
+- **Новые accent colors**:
+  - #7356BF - средний фиолетовый для folder colors
+  - #221874 - темно-фиолетовый для folder colors
+  - #0AFB6B - яркий зеленый для folder colors
+- **Новые component sizes**:
+  - Modal screen: 375x712px (full), 422px (visible)
+  - Modal card: 20px radius
+  - Icon button: 34x34px, icon 16.80x16.80px
+  - Color swatch: 34x34px
+  - Task checkbox: 16x16px (14.40x14.40 unchecked, 19.20x19.20 checked)
+  - Task title: 15px
+  - Task time: 13px
+  - Task tag: 24px height, 11px text
 
 #### v5.7.0 (2025-11-19)
 - Добавлен компонент **Group/Event Header** в раздел Social Components из SocialLight:
