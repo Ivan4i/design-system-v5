@@ -62,6 +62,8 @@ MaterialApp(
 /* Цвета текста из Flutter кода */
 --color-text-primary: #09101D;     /* Color(0xFF09101D) - основной темный текст */
 --color-text-secondary: #D9DDE2;   /* Color(0xFFD9DDE2) - вторичный светлый текст */
+--color-text-tertiary: #747B84;    /* Color(0xFF747B84) - серый текст для описаний (из View2) */
+--color-text-dark: #2A2B2F;        /* Color(0xFF2A2B2F) - темный текст для активной цены (из View2) */
 --color-text-white: #FFFFFF;       /* Colors.white - белый текст */
 --color-text-blue: #4141E6;        /* Color(0xFF4141E6) - синий текст для акцентов */
 ```
@@ -87,9 +89,19 @@ MaterialApp(
 ```css
 /* Фоны для компонентов из Flutter кода */
 --color-bg-dark: #12202F;          /* Темный фон scaffold */
---color-bg-light: #F4F6F9;         /* Светлый фон кнопок */
---color-bg-primary: #4141E6;       /* Фон primary кнопок */
+--color-bg-light: #F4F6F9;         /* Светлый фон кнопок и карточек */
+--color-bg-primary: #4141E6;       /* Фон primary кнопок и rating badge */
 --color-bg-disabled: #D9DDE2;      /* Фон disabled состояний */
+```
+
+### Badge Colors (из View2)
+
+```css
+/* Цвета для badges из карточек View2 */
+--color-badge-orange: #F7B68A;     /* Color(0xFFF7B68A) - оранжевый для Special offer и Native */
+--color-badge-red: #E24949;        /* Color(0xFFE24949) - красный для скидок */
+--color-badge-cyan: #7CC5D6;       /* Color(0xFF7CC5D6) - бирюзовый для Seasonal */
+--color-badge-blue: #4141E6;       /* Color(0xFF4141E6) - синий для рейтинга */
 ```
 
 ### Shadow Colors
@@ -121,11 +133,13 @@ MaterialApp(
 ### Font Sizes
 
 ```css
---font-size-10: 0.625rem;     /* 10px */
---font-size-11: 0.6875rem;    /* 11px */
---font-size-12: 0.75rem;      /* 12px */
---font-size-13: 0.8125rem;    /* 13px */
---font-size-14: 0.875rem;     /* 14px */
+/* Font Sizes из Flutter кода (SmallButtonLarge + View2) */
+--font-size-8: 0.5rem;        /* 8px - для badge text (emoji + text) */
+--font-size-10: 0.625rem;     /* 10px - для rating и мелкого текста */
+--font-size-11: 0.6875rem;    /* 11px - для discount/seasonal badges */
+--font-size-12: 0.75rem;      /* 12px - для цены и описаний */
+--font-size-13: 0.8125rem;    /* 13px - для кнопок и заголовков карточек */
+--font-size-14: 0.875rem;     /* 14px - для названий продуктов и цен */
 --font-size-15: 0.9375rem;    /* 15px */
 --font-size-16: 1rem;         /* 16px */
 --font-size-18: 1.125rem;     /* 18px */
@@ -138,11 +152,13 @@ MaterialApp(
 ### Font Weights
 
 ```css
---font-weight-regular: 400;
---font-weight-medium: 500;
---font-weight-semibold: 600;
---font-weight-bold: 700;
---font-weight-extrabold: 800;
+/* Font Weights из Flutter кода (SmallButtonLarge + View2) */
+--font-weight-regular: 400;    /* Regular text, descriptions */
+--font-weight-medium: 500;     /* Medium emphasis */
+--font-weight-semibold: 600;   /* Кнопки, rating, имена */
+--font-weight-bold: 700;       /* Заголовки карточек, badges */
+--font-weight-extrabold: 800;  /* Названия продуктов, Native badge */
+--font-weight-black: 900;      /* Цены, emoji в badges */
 ```
 
 ### Line Heights
@@ -282,16 +298,19 @@ MaterialApp(
 ### Border Radius (из Flutter кода)
 
 ```css
-/* Border Radius из компонента SmallButtonLarge */
+/* Border Radius из компонента SmallButtonLarge и View2 */
 --radius-none: 0;
+--radius-xs: 0.3125rem;   /* 5px - для rating badge (View2) */
 --radius-sm: 0.25rem;     /* 4px */
 --radius-base: 0.5rem;    /* 8px */
---radius-md: 0.75rem;     /* 12px - BorderRadius.circular(12) для Ghost Button */
---radius-lg: 0.9375rem;   /* 15px - BorderRadius.circular(15) основной для кнопок и showcase container */
---radius-xl: 1rem;        /* 16px */
+--radius-badge: 0.6875rem; /* 11px - для большинства badges (View2) */
+--radius-md: 0.75rem;     /* 12px - для Ghost Button */
+--radius-lg: 0.9375rem;   /* 15px - для кнопок, showcase container, product cards (View2) */
+--radius-xl: 1rem;        /* 16px - для image containers в карточках (View2) */
+--radius-counter: 1.25rem; /* 20px - для price counter badge (View2) */
 --radius-2xl: 1.25rem;    /* 20px */
 --radius-3xl: 1.5rem;     /* 24px */
---radius-full: 9999px;    /* BorderRadius.circular(100) для круглых элементов и иконок */
+--radius-full: 9999px;    /* BorderRadius.circular(100) для круглых кнопок и иконок */
 ```
 
 ### Shadows
@@ -371,43 +390,154 @@ MaterialApp(
 
 ## Компоненты
 
-### 1. Cards
+### 1. Product Cards (из View2)
 
-#### Basic Card
+#### Small Product Card (Квадратная)
 
-- **Padding**: 24px (space-6)
-- **Border Radius**: 8px (radius-lg)
-- **Background**: color-bg-primary (#FFFFFF)
-- **Shadow**: shadow-base
-- **Border**: 1px solid color-border-primary
+**Из View2 - первая карточка (Coca Cola)**
 
-**Варианты:**
-- **Elevated Card**: Shadow: shadow-md, No border
-- **Outlined Card**: Border: 1px solid color-border-primary, Shadow: none
-- **Interactive Card**: Hover: shadow-hover-md, Cursor: pointer, Transition: all 0.2s ease
+- **Container Width**: 166.50px
+- **Image Container**:
+  - Size: 166.50x166.50px
+  - Background: #F4F6F9
+  - Border Radius: 16px
+  - Image Fit: cover
+  - Clip Behavior: antiAlias
+- **Content Padding**: left: 5px
+- **Spacing**: 5px между элементами
+- **Typography**:
+  - Title: Archivo, 13px, weight: 700, color: #09101D, line-height: 1.40
+  - Description: Archivo, 12px, weight: 400, color: #747B84, line-height: 1.40
+  - Price (old): Archivo, 12px, weight: 400, color: #747B84, line-through
+  - Price (new): Archivo, 12px, weight: 400, color: #2A2B2F
+- **Price Counter**:
+  - Background: #F4F6F9
+  - Border Radius: 20px
+  - Padding: horizontal: 5px, vertical: 2px
+  - Icon Size: 24x24px (padding: 4px)
+  - Spacing: 2px between elements
+- **Structure**:
+  ```
+  Column:
+    - Image Container (166.50x166.50)
+    - Content (padding-left: 5)
+      - Title (padding-top: 3)
+      - Description (padding-top: 3, padding-bottom: 5)
+      - Price Counter (spacing: 4)
+  ```
 
-#### Пример использования
+#### Vertical Restaurant Card
 
-```css
-.card {
-  padding: var(--space-6);
-  border-radius: var(--radius-lg);
-  background: var(--color-bg-primary);
-  box-shadow: var(--shadow-base);
-  border: var(--border-width-1) solid var(--color-border-primary);
-  transition: all 0.2s ease;
-}
+**Из View2 - вторая карточка (ресторан)**
 
-.card--elevated {
-  box-shadow: var(--shadow-md);
-  border: none;
-}
+- **Container Size**: 140x240px
+- **Image Container**:
+  - Expanded height: ~177px
+  - Background: #F4F6F9
+  - Border Radius: 16px
+  - Image Fit: cover
+  - Clip Behavior: antiAlias
+- **Spacing**: 5px между элементами
+- **Badge**:
+  - Special Offer Badge (#F7B68A)
+  - Font: 8px, weight: 700/900
+  - Padding: 5px
+  - Border Radius: 11px
+  - Spacing: 6px (между emoji и текстом)
+- **Rating Stars**: 12x12px icons (padding: 2px)
+- **Typography**:
+  - Title: Archivo, 13px, weight: 700, color: #09101D
+  - Location: Archivo, 13px, weight: 700, color: #D9DDE2
+- **Layout**:
+  - MainAxisAlignment: spaceBetween (badge и stars)
+  - Spacing: 5px между badge и stars
+- **Structure**:
+  ```
+  Column (spacing: 5):
+    - Image Container (expanded)
+    - Content
+      - Row: Special Offer Badge + Rating Stars
+      - Title + Location
+  ```
 
-.card--interactive:hover {
-  box-shadow: var(--shadow-hover-md);
-  transform: translateY(-2px);
-}
-```
+#### Product Card with Discount
+
+**Из View2 - третья карточка (Watermelon)**
+
+- **Container Size**: 140x230px
+- **Image Container**:
+  - Expanded height: ~132px
+  - Border Radius: 15px
+  - Image Fit: cover
+  - Decoration: ShapeDecoration with image
+- **Badges** (top padding: 5px):
+  - Discount Badge: #E24949, 11px, weight: 600, height: 24px, padding-h: 6px
+  - Seasonal Badge: #7CC5D6, 11px, weight: 600, height: 24px, padding-h: 6px
+  - Border Radius: 11px
+  - Spacing: 10px between badges
+- **Content Padding**: 5px
+- **Spacing**: 5px между элементами
+- **Typography**:
+  - Brand: Archivo, 13px, weight: 400, color: #D9DDE2
+  - Title: Archivo, 14px, weight: 800, color: #09101D
+  - Weight: Archivo, 13px, weight: 400, color: #D9DDE2
+  - Price (old): Archivo, 14px, weight: 900, color: #D9DDE2, line-through
+  - Price (new): Archivo, 14px, weight: 900, color: #09101D
+- **Add Button**:
+  - Size: 32x32px
+  - Background: #4141E6
+  - Border Radius: 100px (circular)
+  - Padding: 10px
+  - Icon: 14.40x14.40px (positioned -1.20)
+- **Structure**:
+  ```
+  Column:
+    - Image Container (with badges overlay)
+    - Content (padding: 5)
+      - Brand name
+      - Product title
+      - Weight
+      - Row: Old price + New price + Add button (spacing: 5)
+  ```
+
+#### Teacher/Profile Card
+
+**Из View2 - четвертая карточка (Teacher)**
+
+- **Container Size**: 140x230px
+- **Image Container**:
+  - Expanded height: ~138px
+  - Border Radius: 15px
+  - Image Fit: cover
+  - MainAxisAlignment: end (badge at bottom)
+- **Badge** (bottom padding: 5px):
+  - Native Badge: #F7B68A, 8px, weight: 800
+  - Padding: 5px
+  - Border Radius: 11px
+  - With flag emoji (🇺🇸)
+- **Content Padding**: 5px
+- **Spacing**: 5px между элементами
+- **Typography**:
+  - Role: Archivo, 13px, weight: 400, color: #D9DDE2
+  - Name: Archivo, 14px, weight: 600, color: #09101D
+  - Rating: Archivo, 10px, weight: 600
+    - Badge: #4141E6, padding: 3px, radius: 5px, color: white
+    - Good: color: #09101D
+    - Count: color: #D9DDE2
+  - Price: Archivo, 13px, weight: 600, color: #09101D
+- **Rating Section** (padding-v: 3px):
+  - Badge: #4141E6, 3px padding, 5px radius
+  - Text: "Good (41)", spacing: 5px
+- **Structure**:
+  ```
+  Column:
+    - Image Container (with badge at bottom)
+    - Content (padding: 5, spacing: 5)
+      - Role
+      - Name
+      - Rating row (padding-v: 3, spacing: 5)
+      - Price
+  ```
 
 ---
 
@@ -545,19 +675,86 @@ MaterialApp(
 
 ---
 
-### 4. Badges & Tags
+### 4. Badges & Tags (из View2)
 
-#### Badge
+#### Discount Badge (Скидка)
 
-- **Padding**: 4px 8px
-- **Radius**: radius-full (9999px)
-- **Font Size**: font-size-xs (12px)
-- **Variants**:
-  - Success: Background: color-success-bg, Color: color-success, Border: 1px solid color-success-border
-  - Error: Background: color-error-bg, Color: color-error, Border: 1px solid color-error-border
-  - Warning: Background: color-warning-bg, Color: color-warning, Border: 1px solid color-warning-border
-  - Info: Background: color-info-bg, Color: color-info, Border: 1px solid color-info-border
-  - Neutral: Background: color-gray-100, Color: color-gray-700, Border: 1px solid color-gray-300
+**Из View2 - карточка продукта**
+
+- **Background**: #E24949 (Color(0xFFE24949))
+- **Text Color**: #FFFFFF (Colors.white)
+- **Font**: Archivo, 11px, weight: 600
+- **Line Height**: 1.40
+- **Padding**: horizontal: 6px, vertical: auto (height: 24px)
+- **Border Radius**: 11px
+- **Height**: 24px
+- **Usage**: Отображение процента скидки (-27%)
+
+#### Special Offer Badge
+
+**Из View2 - карточка ресторана**
+
+- **Background**: #F7B68A (Color(0xFFF7B68A))
+- **Text Color**: #FFFFFF (Colors.white)
+- **Font**: Archivo, 8px, weight: 700 (текст) / 900 (emoji)
+- **Line Height**: 1
+- **Padding**: 5px
+- **Border Radius**: 11px
+- **Spacing**: 6px между emoji и текстом
+- **Usage**: Специальные предложения с emoji (🍹 Special offer)
+
+#### Seasonal Badge
+
+**Из View2 - карточка продукта**
+
+- **Background**: #7CC5D6 (Color(0xFF7CC5D6))
+- **Text Color**: #FFFFFF (Colors.white)
+- **Font**: Archivo, 11px, weight: 600
+- **Line Height**: 1.40
+- **Padding**: horizontal: 6px, vertical: auto (height: 24px)
+- **Border Radius**: 11px
+- **Height**: 24px
+- **Usage**: Сезонные товары
+
+#### Native Badge (с флагом)
+
+**Из View2 - карточка учителя**
+
+- **Background**: #F7B68A (Color(0xFFF7B68A))
+- **Text Color**: #FFFFFF (Colors.white)
+- **Font**: Archivo, 8px, weight: 800
+- **Line Height**: 1
+- **Padding**: 5px
+- **Border Radius**: 11px
+- **Spacing**: 6px между emoji и текстом
+- **Usage**: Указание происхождения с флагом (🇺🇸 Native)
+
+#### Rating Badge
+
+**Из View2 - карточка учителя**
+
+- **Background**: #4141E6 (Color(0xFF4141E6))
+- **Text Color**: #FFFFFF (Colors.white)
+- **Font**: Archivo, 10px, weight: 600
+- **Line Height**: 1.40
+- **Padding**: 3px
+- **Border Radius**: 5px
+- **Usage**: Отображение рейтинга (4.59)
+
+#### Price Counter Badge (с иконками)
+
+**Из View2 - карточка товара Coca Cola**
+
+- **Background**: #F4F6F9 (Color(0xFFF4F6F9))
+- **Text Color**: #747B84 (старая цена), #2A2B2F (новая цена)
+- **Font**: Archivo, 12px, weight: 400
+- **Line Height**: 1.40
+- **Padding**: horizontal: 5px, vertical: 2px
+- **Border Radius**: 20px
+- **Icon Size**: 24x24px (padding: 4px)
+- **Spacing**: 2px между элементами
+- **Text Decoration**: line-through для старой цены
+- **Usage**: Счетчик количества с ценой и кнопками +/-
 
 #### Tag
 
@@ -928,12 +1125,32 @@ MaterialApp(
 ### Component Sizes (из Flutter кода)
 
 ```css
-/* Размеры из компонента SmallButtonLarge */
+/* Размеры из компонента SmallButtonLarge и View2 */
 --component-button-height: 36px;        /* Высота кнопки */
 --component-button-icon: 16px;          /* Размер иконки в кнопке */
 --component-container-width: 375px;     /* Стандартная ширина mobile container */
 --component-showcase-width: 2145px;     /* Ширина showcase container */
 --component-showcase-height: 436px;     /* Высота showcase container */
+
+/* Card Sizes из View2 */
+--card-small-width: 166.50px;           /* Квадратная карточка товара */
+--card-small-height: 166.50px;          /* Высота image container */
+--card-vertical-width: 140px;           /* Вертикальная карточка */
+--card-vertical-height-1: 240px;        /* Высота карточки ресторана */
+--card-vertical-height-2: 230px;        /* Высота карточки продукта/учителя */
+
+/* Icon Sizes из View2 */
+--icon-rating-star: 12px;               /* Размер звездочки рейтинга */
+--icon-badge-24: 24px;                  /* Размер иконки в badge (padding: 4px) */
+--icon-badge-12: 12px;                  /* Размер маленькой иконки (padding: 2px) */
+
+/* Button Sizes из View2 */
+--button-add-size: 32px;                /* Круглая кнопка добавления в корзину */
+--button-add-icon: 14.40px;             /* Размер иконки в кнопке добавления */
+
+/* Badge Heights из View2 */
+--badge-height-24: 24px;                /* Высота discount/seasonal badge */
+--badge-height-auto: auto;              /* Special offer/native badge (padding: 5px) */
 ```
 
 ### Flutter-Specific Properties (из кода)
@@ -1008,18 +1225,31 @@ MaterialApp(
 
 #### v5.0.0 (2025-11-19)
 - Первая версия дизайн-системы
-- Полная цветовая палитра из реального Flutter кода (SmallButtonLarge)
-- Компонент кнопок с 5 вариантами: Primary, Secondary, Outlined, Ghost, Disabled
-- 6 layout паттернов для иконок в кнопках
-- Базовые компоненты с реальными размерами и spacing
-- Layout patterns из Flutter виджетов
-- Иконочная система (16x16px для кнопок)
-- Theme configuration (ThemeData.dark с custom scaffold background)
-- Typography: Archivo, 13px, weight 600, line-height 1.40 для кнопок
-- Border radius: 15px (primary), 12px (ghost), 100px (circular)
-- Spacing values: 8px, 10px, 16px, 70px
-- Real color values: #4141E6, #F4F6F9, #0B24FB, #7B61FF, #09101D, #D9DDE2, #12202F
-- Flutter-specific properties: Clip.antiAlias, MainAxisAlignment, CrossAxisAlignment
+- Полная цветовая палитра из реального Flutter кода (SmallButtonLarge + View2)
+- **Кнопки**: 5 вариантов (Primary, Secondary, Outlined, Ghost, Disabled) с 6 layout паттернами
+- **Product Cards**: 4 типа карточек из View2:
+  - Small Product Card (166.50x166.50) - квадратная с price counter
+  - Vertical Restaurant Card (140x240) - с special offer badge и rating stars
+  - Product Card with Discount (140x230) - с badges и круглой кнопкой добавления
+  - Teacher/Profile Card (140x230) - с rating badge и ценой
+- **Badges**: 6 типов (Discount, Special Offer, Seasonal, Native, Rating, Price Counter)
+- **Typography**:
+  - Font sizes: 8px, 10px, 11px, 12px, 13px, 14px
+  - Font weights: 400, 500, 600, 700, 800, 900
+  - Usage: кнопки, карточки, badges, цены
+- **Colors**:
+  - Text: #09101D, #D9DDE2, #747B84, #2A2B2F
+  - Badges: #F7B68A (orange), #E24949 (red), #7CC5D6 (cyan), #4141E6 (blue)
+  - Background: #F4F6F9, #4141E6, #12202F
+- **Border Radius**: 5px, 11px, 12px, 15px, 16px, 20px, 100px (circular)
+- **Spacing**: 2px, 3px, 4px, 5px, 6px, 8px, 10px
+- **Component Sizes**:
+  - Cards: 166.50x166.50, 140x240, 140x230
+  - Icons: 12px, 16px, 24px
+  - Buttons: 32px, 36px
+  - Badges: 24px height
+- Theme configuration (ThemeData.dark с scaffold background #12202F)
+- Flutter-specific properties: Clip.antiAlias, MainAxisAlignment, CrossAxisAlignment, ShapeDecoration
 
 ---
 
