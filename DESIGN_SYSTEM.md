@@ -51,13 +51,25 @@
 ```css
 /* Акцентные цвета */
 --color-accent-blue: #1D4ED8;      /* blue-700 */
+--color-accent-purple: #7B61FF;    /* Фиолетовый из Flutter кода */
+```
+
+### Background Colors
+
+```css
+/* Фоны для компонентов */
+--color-bg-light: #F4F6F9;         /* Светлый фон */
+--color-bg-card-light: #D9DDE2;    /* Светлая карточка */
+--color-bg-card-dark: #23262B;     /* Темная карточка */
 ```
 
 ### Shadow Colors
 
 ```css
 /* Тени */
---shadow-light: rgba(240, 241, 242, 1.00);  /* из кода: shadow-[0px_1px_1px_0px_rgba(240,241,242,1.00)] */
+--shadow-light: rgba(240, 241, 242, 1.00);
+--shadow-text: rgba(0, 0, 0, 0.40);         /* Тень для текста */
+--shadow-box: rgba(0, 0, 0, 0.40);          /* Тень для контейнеров */
 ```
 
 ---
@@ -68,11 +80,14 @@
 
 ```css
 --font-primary: 'Archivo', sans-serif;
+--font-ocr: 'OCR-A', monospace;             /* Для номеров карт и специальных данных */
 ```
 
 **Ссылка**: [Archivo on Google Fonts](https://fonts.google.com/specimen/Archivo#standard-styles)
 
 **Описание**: Archivo is a grotesque sans serif typeface family originally designed for highlights and headlines. This family is reminiscent of late nineteenth century American typefaces. The technical and aesthetic characteristics of the font are both crafted for high performance typography. It was designed to be used simultaneously in print and online platforms and supports over 200 world languages.
+
+**OCR-A**: Моноширинный шрифт для отображения номеров кредитных карт и цифровых данных.
 
 ### Font Sizes
 
@@ -85,6 +100,7 @@
 --font-size-15: 0.9375rem;    /* 15px */
 --font-size-16: 1rem;         /* 16px */
 --font-size-18: 1.125rem;     /* 18px */
+--font-size-22: 1.375rem;     /* 22px - для номеров карт */
 --font-size-24: 1.5rem;       /* 24px */
 --font-size-26: 1.625rem;     /* 26px */
 --font-size-32: 2rem;         /* 32px */
@@ -162,6 +178,30 @@
 #### Caption 3
 - **Semibold**: Font: 10px (0.625rem), Weight: 600, Line Height: 12px
 
+### Letter Spacing
+
+```css
+--letter-spacing-1: 0.0625rem;    /* 1px */
+--letter-spacing-2: 0.125rem;     /* 2px */
+--letter-spacing-2-59: 0.162rem;  /* 2.59px - для номеров карт */
+```
+
+### OCR-A Text Styles (для карточек и цифровых данных)
+
+#### Card Number
+- **Font**: OCR-A, 22px (1.375rem)
+- **Weight**: 400 (Regular)
+- **Line Height**: 1.40
+- **Letter Spacing**: 2.59px
+- **Shadow**: 0 1px 1px rgba(0, 0, 0, 0.40)
+
+#### Card Data (имя, дата)
+- **Font**: OCR-A, 11px (0.6875rem)
+- **Weight**: 400 (Regular)
+- **Line Height**: 1.40
+- **Letter Spacing**: 1px - 2px
+- **Shadow**: 0 1px 1px rgba(0, 0, 0, 0.40)
+
 ---
 
 ## Spacing & Layout
@@ -176,6 +216,7 @@
 --space-4: 1rem;      /* 16px */
 --space-5: 1.25rem;   /* 20px */
 --space-6: 1.5rem;    /* 24px */
+--space-7: 1.75rem;   /* 28px - из Flutter spacing: 7 */
 --space-8: 2rem;      /* 32px */
 --space-10: 2.5rem;   /* 40px */
 --space-12: 3rem;     /* 48px */
@@ -188,12 +229,13 @@
 
 ```css
 --radius-none: 0;
---radius-sm: 0.125rem;    /* 2px */
---radius-base: 0.25rem;   /* 4px */
---radius-md: 0.375rem;    /* 6px */
---radius-lg: 0.5rem;      /* 8px */
---radius-xl: 0.75rem;     /* 12px */
---radius-2xl: 1rem;       /* 16px */
+--radius-sm: 0.25rem;     /* 4px */
+--radius-base: 0.5rem;    /* 8px */
+--radius-md: 0.75rem;     /* 12px */
+--radius-lg: 0.9375rem;   /* 15px - из Flutter кода (основной для карточек) */
+--radius-xl: 1rem;        /* 16px */
+--radius-2xl: 1.25rem;    /* 20px */
+--radius-3xl: 1.5rem;     /* 24px */
 --radius-full: 9999px;
 ```
 
