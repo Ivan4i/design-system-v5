@@ -71,6 +71,16 @@
 --color-accent-pink: #FC466B;        /* Розовый градиент */
 ```
 
+### Brand Colors
+
+```css
+/* Brand цвета из Flutter кода (Start Screens) */
+--color-brand-orange: #FF6937;       /* Основной оранжевый (primary actions) */
+--color-brand-red: #E24949;          /* Красный (secondary actions) */
+--color-social-facebook: #4C69AB;    /* Facebook синий */
+--color-social-apple: #23262B;       /* Apple темно-серый */
+```
+
 ### Gradient Colors
 
 ```css
@@ -538,22 +548,38 @@
 
 ### 2. Buttons (из Flutter кода)
 
+#### Button Sizes
+
+**Standard Button:**
+- Height: 44px
+- Padding: 16px horizontal, 10px vertical
+- Font Size: 14px, Weight: 600
+
+**Large Button (Onboarding/CTA):**
+- Height: 52px
+- Padding: 16px horizontal, 10px vertical
+- Font Size: 15px, Weight: 600
+
+**Social Button:**
+- Height: 44px
+- Padding: 16px horizontal, 10px vertical
+- Border Radius: 4px (меньше!)
+- Icon: 20px
+
 #### Primary Button
 
-- **Size**:
-  - Height: 44px (standard mobile)
-  - Padding: 16px horizontal, 10px vertical
-  - Width: 100% (full-width) или 327px
-  - Gap между элементами: 8px
+- **Size**: 44px height (standard), 52px (large CTA)
+- **Padding**: 16px horizontal, 10px vertical
 - **Border Radius**: 15px
 - **Typography**:
-  - Font Size: 14px
+  - Font Size: 14px (standard), 15px (large)
   - Font Weight: 600 (semibold)
   - Line Height: 140%
 - **Colors**:
   - Background: #4141E6
   - Text: #FFFFFF
   - Shadow: None (flat design)
+- **Width**: 100% (full-width)
 - **Alignment**: Center (text и иконки)
 
 **States:**
@@ -561,6 +587,25 @@
 - **Hover**: Легкое затемнение (opacity: 0.9)
 - **Active**: Затемнение (opacity: 0.8)
 - **Disabled**: Background: #D9DDE2, Text: rgba(0,0,0,0.4), Cursor: not-allowed
+
+#### Brand Orange Button (Primary CTA)
+
+- **Size**: 52px height (large)
+- **Padding**: 16px horizontal, 10px vertical
+- **Border Radius**: 15px
+- **Background**: #FF6937 (brand orange)
+- **Text**: white, 15px, weight 600
+- **Usage**: "Sign up", главные CTA
+
+#### Brand Red Button (Secondary CTA)
+
+- **Size**: 52px height (large)
+- **Padding**: 16px horizontal, 10px vertical
+- **Border Radius**: 15px
+- **Background**: #E24949 (brand red)
+- **Text**: white, 15px, weight 600
+- **Icon**: 24px (left side), spacing 8px
+- **Usage**: "Sign in via mobile number"
 
 #### Secondary Button / Text Button
 
@@ -602,6 +647,34 @@
 - **123 Key**: Smaller width
 - **Border Radius**: 5px
 - **Shadow**: 0 1px 0 0 (varies by type)
+
+#### Social Auth Buttons
+
+**Layout:**
+- **Container**: Row with equal spacing (gap: 10px)
+- **Buttons**: Expanded (равная ширина, flex: 1)
+- **Width**: 3 buttons per row
+- **Padding**: 16px horizontal, 10px vertical (container)
+
+**Button Specifications:**
+- **Height**: 44px
+- **Border Radius**: 4px (меньше чем у обычных!)
+- **Padding**: 16px horizontal, 10px vertical
+- **Icon**: 20px (centered)
+
+**Варианты:**
+
+**Google Button:**
+- Background: #F4F6F9 (светло-серый)
+- Icon: Google logo (20px)
+
+**Facebook Button:**
+- Background: #4C69AB (Facebook blue)
+- Icon: Facebook logo (20px, white)
+
+**Apple Button:**
+- Background: #23262B (темно-серый/черный)
+- Icon: Apple logo (20px, white)
 
 #### Close Button (в карточках)
 - **Size**: 24px × 24px
@@ -1607,7 +1680,223 @@ Step 1  Step 2  Step 3  Step 4
 
 ---
 
-### 22. Tooltips (из Flutter кода)
+### 22. Progress Dots Indicator (из Flutter кода)
+
+#### Specifications
+
+**Container:**
+- **Padding**: 20px vertical
+- **Alignment**: Center
+- **Spacing**: 6px между точками
+
+**Dot:**
+- **Size**: 20px width × 4px height (pill shape)
+- **Border Radius**: 5px
+- **Colors**:
+  - Active: #09101D (черный)
+  - Inactive: rgba(9, 16, 29, 0.10) - #1909101D
+
+**Layout:**
+```
+● ○ ○ ○ ○  (5 dots)
+```
+
+**Usage:**
+- Onboarding screens
+- Multi-step forms
+- Image carousels/sliders
+
+#### CSS Example
+
+```css
+.progress-dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 20px 0;
+}
+
+.progress-dots__dot {
+  width: 20px;
+  height: 4px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.progress-dots__dot--active {
+  background: #09101D;
+}
+
+.progress-dots__dot--inactive {
+  background: rgba(9, 16, 29, 0.10);
+}
+```
+
+---
+
+### 23. Onboarding / Start Screens (из Flutter кода)
+
+#### Screen Container
+
+**Specifications:**
+- **Width**: 375px (mobile full width)
+- **Background**: white
+- **Border Radius**: 30px
+- **Clip**: antiAlias
+
+**Варианты высот:**
+- Full onboarding: 369px
+- Compact (social only): 265px
+
+#### Layout Structure
+
+**1. Gradient Overlay (Optional)**
+```css
+background: linear-gradient(180deg, rgba(255,255,255,0) 0%, #FFFFFF 100%);
+padding-top: 50px;
+```
+
+**2. Content Section**
+- **Padding**: 20px top, 16px left/right, 10px bottom
+
+**Title:**
+- Font Size: 32px
+- Font Weight: 700 (bold)
+- Line Height: 140%
+- Color: #09101D
+- Text Align: Center
+- Max Width: 343px
+
+**Description:**
+- Font Size: 14px
+- Font Weight: 400
+- Line Height: 140%
+- Color: #09101D
+- Text Align: Center
+- Max Width: 343px
+
+**Spacing:** 10px between title and description
+
+**3. Progress Dots**
+- Padding: 20px vertical
+- See Progress Dots Indicator above
+
+**4. Actions Section**
+
+**Primary CTA (Large):**
+- Button: 52px height, brand orange (#FF6937) or red (#E24949)
+- Full width (with 16px side padding)
+- Spacing: 10px between buttons
+
+**Secondary Link:**
+- Height: 44px
+- Text with link style
+- Regular: #09101D, 12px, weight 500
+- Link: #FF6937 (brand orange), 12px, weight 500
+
+**Social Auth Row:**
+- 3 equal buttons (Google, Facebook, Apple)
+- Gap: 10px
+- Padding: 16px horizontal, 10px vertical
+
+**Text Link:**
+- Text: "Sign up later"
+- Font: 14px, weight 600, #09101D
+- No background
+- Padding: 16px horizontal
+
+**5. Home Indicator**
+- Width: 134px
+- Height: 5px
+- Border Radius: 100px (pill)
+- Background: #09101D
+- Position: Bottom center, 21px from bottom
+
+#### Usage Example
+
+```css
+/* Onboarding Screen Container */
+.onboarding-screen {
+  width: 375px;
+  background: white;
+  border-radius: 30px;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Gradient Overlay */
+.onboarding-screen__overlay {
+  background: linear-gradient(180deg, rgba(255,255,255,0) 0%, #FFFFFF 100%);
+  padding-top: 50px;
+}
+
+/* Content */
+.onboarding-screen__content {
+  padding: 20px 16px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.onboarding-screen__title {
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.4;
+  color: #09101D;
+  text-align: center;
+  max-width: 343px;
+}
+
+.onboarding-screen__description {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: #09101D;
+  text-align: center;
+  max-width: 343px;
+}
+
+/* Actions */
+.onboarding-screen__actions {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px 0;
+}
+
+/* Social Auth Row */
+.social-auth-row {
+  display: flex;
+  gap: 10px;
+  padding: 10px 16px;
+}
+
+.social-auth-row__button {
+  flex: 1;
+  height: 44px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+```
+
+#### Flexible Blocks
+
+**Гибкие элементы для адаптации:**
+
+1. **Количество действий:** Легко добавить/убрать кнопки в секции actions
+2. **Social buttons:** Можно добавить больше провайдеров (GitHub, Twitter и т.д.)
+3. **Progress dots:** Количество точек адаптируется под количество шагов
+4. **Gradient overlay:** Опциональный, можно отключить
+5. **Spacing:** Все отступы вынесены в переменные, легко настраиваются
+
+---
+
+### 24. Tooltips (из Flutter кода)
 
 #### Tooltip Specifications
 
@@ -2082,9 +2371,39 @@ decoration: BoxDecoration(
 
 ## Версионирование и обновления
 
-**Текущая версия**: v5.6.0
+**Текущая версия**: v5.7.0
 
 ### Changelog
+
+#### v5.7.0 (2025-11-19)
+- **Onboarding/Start Screens**: Добавлена секция с готовыми блоками
+  - Screen container: 375px width, 30px border-radius, white background
+  - Gradient overlay: от прозрачного к белому (опциональный)
+  - Content section: Title (32px, bold), Description (14px)
+  - Actions: Primary CTA, Social auth, Text links
+  - Home indicator: 134px × 5px pill
+  - Flexible blocks: Легко адаптируемые секции (добавить/убрать кнопки, провайдеры)
+- **Progress Dots Indicator**: Новый компонент
+  - Dot: 20px width × 4px height, 5px border-radius
+  - Active: #09101D, Inactive: rgba(9, 16, 29, 0.10)
+  - Spacing: 6px, padding: 20px vertical
+  - Usage: Onboarding, multi-step forms, carousels
+- **Brand Colors**: Добавлены новые цвета
+  - Brand orange: #FF6937 (primary CTA)
+  - Brand red: #E24949 (secondary CTA)
+  - Social Facebook: #4C69AB
+  - Social Apple: #23262B
+- **Buttons**: Обновлена секция с новыми вариантами
+  - Large button: 52px height (вместо 44px) для onboarding/CTA
+  - Brand Orange Button: #FF6937, 52px, "Sign up"
+  - Brand Red Button: #E24949, 52px, with icon
+  - Social Auth Buttons: Google, Facebook, Apple (44px, 4px radius, equal width)
+  - Button sizes: Standard (44px), Large (52px), Social (44px)
+- **Компоненты**: Добавлены CSS примеры для всех новых элементов
+  - Onboarding screen layout
+  - Progress dots animation
+  - Social auth row
+  - Flexible blocks примеры
 
 #### v5.6.0 (2025-11-19)
 - **Tooltips (Всплывающие подсказки)**: Добавлен компонент Tooltips
