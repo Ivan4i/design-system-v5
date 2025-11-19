@@ -57,6 +57,7 @@
 --color-text-secondary: #23262B;     /* Вторичный темный текст */
 --color-text-tertiary: #2A2B2F;      /* Третичный темный текст */
 --color-text-gray: #373940;          /* Серый текст (из Content Card) */
+--color-text-label: #747B84;         /* Серый для labels (Product Grid) */
 --color-text-muted: rgba(0, 0, 0, 0.55);  /* Приглушенный текст */
 ```
 
@@ -646,6 +647,22 @@
 - **Background**: white
 - **Text**: 14px, weight 600, color #E24949
 - **Usage**: Secondary pricing option, alternative CTA
+
+#### Success/Cart Button (из Product Grid)
+
+- **Size**: 44px height (standard)
+- **Padding**: 16px horizontal, 10px vertical
+- **Border Radius**: 10px (меньше!)
+- **Background**: #11BB8D (зеленый)
+- **Text**: 14px, weight 600, white
+- **Usage**: "Add To Cart", success actions, positive CTAs
+- **Layout**: Usually full-width or flex-grow
+
+**States:**
+- **Default**: Background #11BB8D
+- **Hover**: Opacity 0.9
+- **Active**: Opacity 0.8
+- **Disabled**: Background #D9DDE2, text rgba(0,0,0,0.4)
 
 #### Secondary Button / Text Button
 
@@ -2543,6 +2560,377 @@ padding-top: 50px;
 
 ---
 
+### 26. Quantity Selector (из Product Grid)
+
+#### Component Structure
+
+**Container:**
+- **Layout**: Horizontal row (minus, number, plus)
+- **Spacing**: 10px между элементами
+- **Padding**: 5px (top/right/bottom)
+- **Background**: white
+
+**Minus Button:**
+- **Size**: 52px × 44px
+- **Padding**: 16px horizontal, 10px vertical
+- **Border Radius**: 10px
+- **Background**: #F4F6F9 (светло-серый)
+- **Icon**: 20px × 20px (minus icon)
+- **Icon padding**: 2px
+
+**Number Display:**
+- **Height**: 44px
+- **Padding**: 16px horizontal, 10px vertical
+- **Font**: 14px, weight 600
+- **Color**: #09101D
+- **Alignment**: Center
+- **Min Width**: auto (зависит от числа)
+
+**Plus Button:**
+- **Size**: 52px × 44px
+- **Padding**: 16px horizontal, 10px vertical
+- **Border Radius**: 10px
+- **Background**: #F4F6F9 (светло-серый)
+- **Icon**: 20px × 20px (plus icon)
+- **Icon padding**: 2px
+
+#### Usage
+
+- Product quantity selection
+- Shopping cart items
+- Form numeric inputs
+- Inventory management
+
+#### CSS Example
+
+```css
+.quantity-selector {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px 5px 5px 0;
+  background: white;
+}
+
+.quantity-selector__button {
+  width: 52px;
+  height: 44px;
+  padding: 10px 16px;
+  border-radius: 10px;
+  background: #F4F6F9;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.quantity-selector__button:hover {
+  background: #E8EBF0;
+}
+
+.quantity-selector__button:active {
+  background: #DDE1E8;
+}
+
+.quantity-selector__button:disabled {
+  background: #F4F6F9;
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.quantity-selector__icon {
+  width: 20px;
+  height: 20px;
+  padding: 2px;
+  color: #09101D;
+}
+
+.quantity-selector__number {
+  height: 44px;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 600;
+  color: #09101D;
+  min-width: 24px;
+  text-align: center;
+}
+```
+
+#### HTML Example
+
+```html
+<div class="quantity-selector">
+  <button class="quantity-selector__button" aria-label="Decrease quantity">
+    <svg class="quantity-selector__icon"><!-- minus icon --></svg>
+  </button>
+
+  <div class="quantity-selector__number">1</div>
+
+  <button class="quantity-selector__button" aria-label="Increase quantity">
+    <svg class="quantity-selector__icon"><!-- plus icon --></svg>
+  </button>
+</div>
+```
+
+#### Layout with Add to Cart
+
+**Combined Layout:**
+- Quantity selector: Fixed width (164px)
+- Add to Cart button: flex-grow (остаток ширины)
+- Container gap: 5px between elements
+- Container padding: 10px all
+
+```css
+.product-actions {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 10px;
+}
+
+.product-actions__quantity {
+  /* quantity selector */
+}
+
+.product-actions__cart-button {
+  flex: 1;
+  /* success button styles */
+}
+```
+
+---
+
+### 27. Product Grid (из Product Grid)
+
+#### Grid Layout
+
+**Container:**
+- **Width**: 375px (mobile full width)
+- **Padding**: 30px top, 10px left (для grid), 16px right
+- **Background**: white
+- **Border Radius**: 30px (top)
+- **Clip**: antiAlias
+
+**Grid Specifications:**
+- **Columns**: 2 (равной ширины)
+- **Spacing**: 10px column gap
+- **Row Gap**: 10px (между рядами)
+- **Padding bottom**: 10px per item
+
+#### Product Card
+
+**Card Container:**
+- **Width**: Flex (50% минус gap)
+- **Spacing**: 5px между image и content
+- **Background**: transparent
+
+**Image:**
+- **Size**: 166.5px × 166.5px (square)
+- **Background**: #F4F6F9 (светло-серый)
+- **Border Radius**: 16px
+- **Object Fit**: cover
+- **Clip**: antiAlias
+
+**Content Section:**
+- **Padding**: left 5px
+
+**Price:**
+- **Font**: 13px, weight 700
+- **Color**: #09101D (черный)
+- **Line Height**: 140%
+- **Padding**: 3px top
+
+**Product Name/Label:**
+- **Font**: 12px, weight 500
+- **Color**: #747B84 (серый)
+- **Line Height**: 140%
+- **Padding**: 3px top, 5px bottom
+- **Format**: "Lemons, 1 pcs", "Olives, 100 g"
+
+#### Actions Section
+
+**Container:**
+- **Width**: 100% (full width)
+- **Padding**: 10px all
+- **Layout**: Horizontal row
+- **Spacing**: 5px между quantity selector и button
+
+**Components:**
+1. Quantity Selector (see section 26)
+2. Success/Cart Button (flex-grow, see Buttons section)
+
+**Layout:**
+```
+[- 1 +] [  Add To Cart  ]
+ 164px      flex-grow
+```
+
+#### Flexible Elements
+
+**Adaptations:**
+1. **Grid columns**: Можно изменить на 3 или 4 колонки для планшета/десктопа
+2. **Product cards**: Количество товаров гибкое (2, 4, 6, 8, и т.д.)
+3. **Actions**: Можно убрать quantity selector для простого "Add to Cart"
+4. **Card content**: Можно добавить rating, badges, labels
+5. **Image**: Можно добавить overlay для quick view или favorites
+6. **Price**: Можно добавить old price (strikethrough) для скидок
+
+#### CSS Example
+
+```css
+/* Grid Container */
+.product-grid {
+  width: 375px;
+  padding: 30px 16px 0 10px;
+  background: white;
+  border-radius: 30px 30px 0 0;
+  overflow: hidden;
+}
+
+/* Grid Layout */
+.product-grid__items {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+/* Product Card */
+.product-card {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding-bottom: 10px;
+}
+
+.product-card__image {
+  width: 166.5px;
+  height: 166.5px;
+  border-radius: 16px;
+  background: #F4F6F9;
+  object-fit: cover;
+  overflow: hidden;
+}
+
+.product-card__content {
+  padding-left: 5px;
+  display: flex;
+  flex-direction: column;
+}
+
+.product-card__price {
+  font-size: 13px;
+  font-weight: 700;
+  color: #09101D;
+  line-height: 1.4;
+  padding-top: 3px;
+}
+
+.product-card__name {
+  font-size: 12px;
+  font-weight: 500;
+  color: #747B84;
+  line-height: 1.4;
+  padding: 3px 0 5px;
+}
+
+/* Actions Section */
+.product-grid__actions {
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.product-grid__quantity {
+  /* Quantity Selector component */
+}
+
+.product-grid__cart-button {
+  flex: 1;
+  /* Success/Cart Button component */
+}
+
+/* Responsive */
+@media (min-width: 768px) {
+  .product-grid__items {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .product-grid__items {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+```
+
+#### HTML Example
+
+```html
+<div class="product-grid">
+  <!-- Products Grid -->
+  <div class="product-grid__items">
+    <!-- Product 1 -->
+    <div class="product-card">
+      <img src="lemons.jpg" alt="Lemons" class="product-card__image" />
+      <div class="product-card__content">
+        <div class="product-card__price">$ 0.55</div>
+        <div class="product-card__name">Lemons, 1 pcs</div>
+      </div>
+    </div>
+
+    <!-- Product 2 -->
+    <div class="product-card">
+      <img src="olives.jpg" alt="Olives" class="product-card__image" />
+      <div class="product-card__content">
+        <div class="product-card__price">$ 1.65</div>
+        <div class="product-card__name">Olives, 100 g</div>
+      </div>
+    </div>
+
+    <!-- More products... -->
+  </div>
+
+  <!-- Actions -->
+  <div class="product-grid__actions">
+    <div class="product-grid__quantity">
+      <!-- Quantity Selector component -->
+      <div class="quantity-selector">...</div>
+    </div>
+
+    <button class="product-grid__cart-button success-button">
+      Add To Cart
+    </button>
+  </div>
+
+  <!-- Home Indicator -->
+  <div class="home-indicator"></div>
+</div>
+```
+
+#### Usage Examples
+
+**E-commerce Product Listing:**
+- Grocery items
+- Marketplace products
+- Menu items (restaurants)
+- Catalog browsing
+
+**Best Practices:**
+1. Keep image ratio 1:1 (square) для consistency
+2. Use placeholder background (#F4F6F9) while loading
+3. Price всегда bold для visibility
+4. Product name должно быть descriptive (item + quantity)
+5. Actions section фиксирована внизу для easy access
+
+---
+
 ## Паттерны
 
 ### Dashboard Layouts
@@ -2786,9 +3174,36 @@ decoration: BoxDecoration(
 
 ## Версионирование и обновления
 
-**Текущая версия**: v5.8.0
+**Текущая версия**: v5.9.0
 
 ### Changelog
+
+#### v5.9.0 (2025-11-19)
+- **Product Grid**: Добавлена секция с grid товаров для e-commerce
+  - Grid layout: 2 колонки (mobile), 3-4 для tablet/desktop
+  - Product Card: 166.5px × 166.5px image, price (13px bold), name (12px)
+  - Image background: #F4F6F9, border-radius 16px
+  - Responsive grid с адаптацией под разные экраны
+  - Flexible: Количество товаров, колонок, card content легко адаптируется
+- **Quantity Selector**: Новый компонент для выбора количества
+  - Button size: 52px × 44px, background #F4F6F9, radius 10px
+  - Number display: 14px weight 600, height 44px
+  - Icon: 20px × 20px (plus/minus)
+  - Spacing: 10px между элементами
+  - States: hover, active, disabled
+  - Usage: Product selection, cart items, form inputs
+- **Success/Cart Button**: Новый вариант кнопки
+  - Background: #11BB8D (зеленый)
+  - Border radius: 10px (меньше чем у других кнопок)
+  - Text: 14px weight 600, white
+  - Usage: "Add To Cart", success actions, positive CTAs
+  - States: default, hover, active, disabled
+- **Цвета**: Добавлен новый текстовый цвет
+  - Text label: #747B84 (серый для product labels/descriptions)
+- **Компоненты**: CSS и HTML примеры для всех новых элементов
+  - Product Grid layout с responsive grid
+  - Quantity Selector с accessibility
+  - Combined layout (quantity + cart button)
 
 #### v5.8.0 (2025-11-19)
 - **Content Cards**: Добавлена секция с карточками контента и pricing
