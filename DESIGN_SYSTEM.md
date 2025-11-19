@@ -104,9 +104,11 @@
 --color-bg-secondary: #EAEEF2;
 --color-bg-tertiary: #F3F4F6;
 --color-bg-quaternary: #F4F6F9;  /* Из TabBar кода */
+--color-bg-light: #FAFAFB;  /* Из Message кода - showcase background */
 --color-bg-elevated: #FFFFFF;
 --color-bg-overlay: rgba(0, 0, 0, 0.5);
 --color-bg-dark: #12202F;
+--color-bg-message-outgoing: #303239;  /* Из Message кода - outgoing message bubble */
 
 /* Stroke / Borders */
 --color-border-primary: #E5E7EB;
@@ -302,6 +304,7 @@
 --radius-md: 0.375rem;    /* 6px */
 --radius-lg: 0.5rem;      /* 8px - из Flutter кода */
 --radius-lg-plus: 0.625rem; /* 10px - из InformationCardSlider кода */
+--radius-reaction: 0.6875rem; /* 11px - из Message кода (reaction badges) */
 --radius-xl: 0.75rem;     /* 12px - из TabBar кода */
 --radius-xl-plus: 0.8125rem; /* 13px - из StoriesTextOutside кода (active story border) */
 --radius-2xl: 1rem;       /* 16px */
@@ -1641,6 +1644,270 @@ Spacing: 5px between avatars
 
 ---
 
+### 26. Chat Messages
+
+Компонент Chat Messages для отображения сообщений в чате, извлеченный из Flutter приложения Message.
+
+#### Характеристики Showcase Container:
+
+- **Width**: 929px
+- **Height**: 970px
+- **Padding**: 50px (all sides)
+- **Background**: #FAFAFB (color-bg-light)
+- **Border**: 1px solid #7B61FF (color-primary)
+- **Border Radius**: 15px (radius-3xl)
+- **Clip Behavior**: antiAlias
+- **Message Spacing**: 98px between messages
+
+#### Variant 1: Incoming Message with Header (Large Avatar)
+
+**Container:**
+- **Width**: 375px
+- **Padding**: Horizontal: 16px
+
+**Avatar:**
+- **Container Size**: 40px × 40px
+- **Image Size**: 32px × 32px
+- **Border Radius**: 40px (circular)
+- **Background**: #D9DDE2 (color-text-disabled) - placeholder
+- **Position**: Offset 4px from container edges
+- **Spacing**: 6px от аватара до содержимого
+
+**Message Header:**
+- **Container Width**: 147px (auto)
+- **Name**: "Helena"
+  - Font: Archivo
+  - Size: 14px (font-size-sm)
+  - Weight: 600 (semibold)
+  - Color: #4141E6 (color-accent)
+  - Line Height: 1.40
+- **Timestamp**: "14:40 PM"
+  - Font: Archivo
+  - Size: 10px (font-size-2xs)
+  - Weight: 400 (normal)
+  - Color: #747B84 (color-text-secondary)
+  - Line Height: 1.40
+  - Padding bottom: 1px
+- **Spacing**: 5px между именем и временем
+
+**Message Content:**
+- **Text**: "Hi I want to book some desk, is it possible?"
+  - Font: Archivo
+  - Size: 14px (font-size-sm)
+  - Weight: 400 (normal)
+  - Color: #09101D (color-text-primary)
+  - Line Height: 1.40
+  - Max Width: 293px
+
+**Reaction Section:**
+- **Padding**: Vertical: 5px
+- **Spacing**: 10px between reactions
+
+**Reaction Badge:**
+- **Height**: 24px
+- **Padding**: Horizontal: 6px
+- **Background**: #F4F6F9 (color-bg-quaternary)
+- **Border Radius**: 11px (radius-reaction)
+- **Text**: "🌱 1"
+  - Font: Archivo
+  - Size: 11px (font-size-2xs-plus)
+  - Weight: 600 (semibold)
+  - Color: #414249 (color-text-muted)
+  - Line Height: 1.40
+
+**Reaction Icon Button:**
+- **Size**: 24px × 24px
+- **Padding**: 6px
+- **Background**: #F4F6F9 (color-bg-quaternary)
+- **Border Radius**: 11px (radius-reaction)
+- **Icon Size**: 12px × 12px (after 6px padding)
+
+#### Variant 2: Incoming Message Bubble (Small Avatar)
+
+**Container:**
+- **Width**: 375px
+- **Padding**: Left: 16px
+
+**Avatar:**
+- **Container Size**: 32px × 32px
+- **Image Size**: 24px × 24px
+- **Border Radius**: 40px (circular)
+- **Position**: Offset 4px
+- **Spacing**: 4px от аватара до bubble
+
+**Message Bubble:**
+- **Width**: 248px
+- **Padding**: 10px (all sides)
+- **Background**: #F4F6F9 (color-bg-quaternary)
+- **Border Radius**: 15px (radius-3xl)
+- **Spacing**: 5px внутренний
+
+**Message Text:**
+- **Text**: "Hi I want to book some desk, is it possible?"
+  - Font: Archivo
+  - Size: 16px (font-size-base)
+  - Weight: 400 (normal)
+  - Color: #09101D (color-text-primary)
+  - Line Height: 1.40
+  - Max Width: 228px (with 10px padding)
+
+**Timestamp:**
+- **Icon Container**: 16px × 16px, padding 2px
+- **Text**: "3:00PM"
+  - Font: Archivo
+  - Size: 11px (font-size-2xs-plus)
+  - Weight: 400 (normal)
+  - Color: #747B84 (color-text-secondary)
+  - Alignment: Right
+  - Spacing: 3px от иконки
+
+#### Variant 3: Incoming Message Bubble (No Avatar)
+
+**Message Bubble:**
+- **Width**: 248px
+- **Padding**: 10px
+- **Background**: #F4F6F9 (color-bg-quaternary)
+- **Border Radius**: 15px (radius-3xl)
+- **Positioned**: Left aligned (16px from container edge)
+- Same text and timestamp styling as Variant 2
+
+#### Variant 4: Outgoing Message (With Avatar)
+
+**Container:**
+- **Width**: 375px
+- **Padding**: Right: 16px
+- **Alignment**: Right (end)
+
+**Avatar:**
+- **Container Size**: 32px × 32px
+- **Image Size**: 24px × 24px
+- **Border Radius**: 40px (circular)
+- **Position**: Offset 4px, right side
+- **Spacing**: 5px от bubble
+
+**Message Bubble:**
+- **Width**: 260px
+- **Padding**: Horizontal: 16px, Vertical: 10px
+- **Background**: #303239 (color-bg-message-outgoing)
+- **Border Radius**: 15px (radius-3xl)
+- **Alignment**: Right
+- **Spacing**: 5px внутренний
+
+**Message Text:**
+- **Text**: "Yes of course, we have a huge amount of desks and offices"
+  - Font: Archivo
+  - Size: 16px (font-size-base)
+  - Weight: 400 (normal)
+  - Color: white (color-text-inverse)
+  - Line Height: 1.40
+  - Max Width: 228px
+
+**Timestamp:**
+- **Text**: "3:00PM"
+  - Font: Archivo
+  - Size: 11px (font-size-2xs-plus)
+  - Weight: 400 (normal)
+  - Color: white (color-text-inverse)
+  - Alignment: Right
+  - Spacing: 3px
+
+#### Variant 5: Outgoing Message (No Avatar)
+
+**Message Bubble:**
+- **Width**: 260px
+- **Padding**: Horizontal: 16px, Vertical: 10px
+- **Background**: #303239 (color-bg-message-outgoing)
+- **Border Radius**: 15px (radius-3xl)
+- **Alignment**: Right (16px from edge)
+- Same text and timestamp styling as Variant 4
+
+#### Layout Structure:
+
+**Incoming Message with Header:**
+```
+┌──────────────────────────────────────────┐
+│ [40px Avatar]  Name          Time        │
+│                Message text...           │
+│                [🌱 1] [+]                │
+└──────────────────────────────────────────┘
+Padding: 16px horizontal, 10px from avatar
+```
+
+**Incoming Message Bubble:**
+```
+┌──────────────────────────────────────────┐
+│ [32px] ┌────────────────────┐            │
+│        │ Message text...    │            │
+│        │ [icon] 3:00PM      │            │
+│        └────────────────────┘            │
+└──────────────────────────────────────────┘
+Width: 248px, Padding: 10px, Radius: 15px
+```
+
+**Outgoing Message:**
+```
+┌──────────────────────────────────────────┐
+│            ┌────────────────────┐ [32px] │
+│            │ Message text...    │        │
+│            │          3:00PM    │        │
+│            └────────────────────┘        │
+└──────────────────────────────────────────┘
+Width: 260px, Background: #303239, Aligned right
+```
+
+#### Avatar Sizes:
+
+- **Large Avatar (with header)**: 40px × 40px container, 32px × 32px image
+- **Small Avatar (in bubble)**: 32px × 32px container, 24px × 24px image
+- Both use 4px offset and 40px border radius (circular)
+
+#### Message Bubble Widths:
+
+- **Incoming**: 248px
+- **Outgoing**: 260px
+- **Max text width**: 228px (accounting for padding)
+
+#### Color Scheme:
+
+**Incoming Messages:**
+- Background: #F4F6F9 (color-bg-quaternary) - light gray
+- Text: #09101D (color-text-primary) - dark
+- Timestamp: #747B84 (color-text-secondary) - gray
+
+**Outgoing Messages:**
+- Background: #303239 (color-bg-message-outgoing) - dark gray
+- Text: white (color-text-inverse)
+- Timestamp: white (color-text-inverse)
+
+**Reactions:**
+- Background: #F4F6F9 (color-bg-quaternary)
+- Text: #414249 (color-text-muted)
+- Border radius: 11px (radius-reaction)
+
+#### Use Cases:
+
+1. **Chat Applications**: One-on-one or group messaging
+2. **Support Chat**: Customer service conversations
+3. **Comments/Replies**: Threaded discussions
+4. **Collaborative Tools**: Team communication
+5. **Social Messaging**: Direct messages in social apps
+
+#### Best Practices:
+
+- Use large avatar (40px) with header for first message in sequence
+- Use small avatar (32px) for subsequent messages from same user
+- Remove avatar for consecutive messages from same user
+- Incoming messages aligned left, outgoing aligned right
+- Maintain 248px/260px bubble widths for consistency
+- Use reactions sparingly, max 2-3 per message
+- Include timestamps for context (11px Archivo)
+- Light background (#F4F6F9) for received, dark (#303239) for sent
+- Message spacing: 98px between different conversations
+- Border radius: 15px for bubbles, 11px for reactions
+- Avatar placeholder: #D9DDE2 (disabled color)
+
+---
+
 ## Как использовать эту дизайн-систему
 
 ### Для дизайнеров
@@ -1668,9 +1935,31 @@ Spacing: 5px between avatars
 
 ## Версионирование и обновления
 
-**Текущая версия**: v5.5.0
+**Текущая версия**: v5.6.0
 
 ### Changelog
+
+#### v5.6.0 (2025-11-19)
+- Добавлены данные из Message компонента Flutter (Chat Messages)
+- Добавлены новые design tokens:
+  - Background: #FAFAFB (color-bg-light) для showcase containers
+  - Background: #303239 (color-bg-message-outgoing) для исходящих сообщений
+  - Border radius: 11px (radius-reaction) для reaction badges
+- Добавлен компонент Chat Messages с 5 вариантами:
+  - Incoming Message with Header: Large avatar 40×40px (32×32px image), name + timestamp header
+  - Incoming Message Bubble: Small avatar 32×32px (24×24px image), 248px bubble
+  - Incoming Message Bubble (No Avatar): 248px bubble without avatar
+  - Outgoing Message with Avatar: 260px bubble, dark background (#303239)
+  - Outgoing Message (No Avatar): 260px bubble without avatar
+- Avatar sizes:
+  - Large: 40×40px container, 32×32px image (for message headers)
+  - Small: 32×32px container, 24×24px image (for bubbles)
+- Message bubbles:
+  - Incoming: 248px width, #F4F6F9 background, 15px radius
+  - Outgoing: 260px width, #303239 background, 15px radius, white text
+- Reaction badges: 24px height, 11px radius, #F4F6F9 background
+- Showcase container: 929×970px, #FAFAFB background, 50px padding
+- Документированы use cases и best practices для Chat Messages
 
 #### v5.5.0 (2025-11-19)
 - Добавлены данные из Basic компонента Flutter (User Profile Cards)
