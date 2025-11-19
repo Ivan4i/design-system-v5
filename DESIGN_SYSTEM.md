@@ -61,6 +61,8 @@
 --color-accent-purple: #7B61FF;    /* Фиолетовый из Flutter кода */
 --color-accent-purple-dark: #5E38BA; /* Темно-фиолетовый для premium badges */
 --color-link-blue: #4141E6;        /* Синий для ссылок и активных элементов */
+--color-accent-cyan: #7CC5D6;      /* Светло-голубой для calendar appointments */
+--color-accent-peach: #F7B68A;     /* Персиковый для calendar appointments */
 --color-success-green: #11BB8D;    /* Зеленый для активного toggle и success состояний */
 --color-error-red: #E24949;        /* Красный для ошибок и негативных значений */
 --color-error-border: #DA1414;     /* Темно-красный для error borders */
@@ -2292,6 +2294,522 @@ Row(
 
 ---
 
+<!-- COMPONENT: Flutter Calendar/Schedule | CATEGORY: Calendar, Schedule, Time Management | TAGS: calendar, schedule, timetable, appointments, time-grid, resources | RELATED: Flutter Online Status Badge, Flutter Appointment Blocks -->
+### 4.5. Calendar/Schedule Components
+
+Компоненты календаря и расписания для систем бронирования, тайм-менеджмента и планирования.
+
+#### Flutter Time Grid with Labels
+
+Временная сетка с метками времени и разделительными линиями для календарного view.
+
+**Time Label:**
+- **Padding**: 8px horizontal, 5px vertical
+- **Border Radius**: 10px
+- **Typography**: 11px Archivo Regular (w400) #09101D, line-height 1.40
+- **Text**: "10:00", "11:00", "12:00" и т.д.
+- **Alignment**: Center
+
+**Divider Line:**
+- **Width**: 442px (или flexible для responsive)
+- **Border**: 0.5px solid #D9DDE2
+- **Stroke Align**: Center
+- **Position**: После time label
+
+**Row Layout:**
+- **Spacing**: 10px между label и line
+- **Direction**: Horizontal
+- **Row Spacing**: 15px между rows (vertical)
+
+```dart
+// Time Grid Row
+Row(
+  spacing: 10,
+  children: [
+    // Time label
+    Container(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+      decoration: ShapeDecoration(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+      ),
+      child: Text(
+        '10:00',
+        textAlign: TextAlign.center,
+        style: TextStyle(
+          color: const Color(0xFF09101D),
+          fontSize: 11,
+          fontFamily: 'Archivo',
+          fontWeight: FontWeight.w400,
+          height: 1.40,
+        ),
+      ),
+    ),
+    // Divider line
+    Container(
+      width: 442,
+      decoration: ShapeDecoration(
+        shape: RoundedRectangleBorder(
+          side: BorderSide(
+            width: 0.50,
+            strokeAlign: BorderSide.strokeAlignCenter,
+            color: const Color(0xFFD9DDE2),
+          ),
+        ),
+      ),
+    ),
+  ],
+)
+```
+
+**Usage Notes:**
+- Используется как фоновая сетка для календаря
+- Time labels могут быть sticky для прокрутки
+- Интервалы обычно 1 час (может быть 30 мин, 15 мин)
+- Border 0.5px создает subtle разделение
+
+---
+
+<!-- COMPONENT: Flutter Resource Column Header | CATEGORY: Calendar, Schedule, User Interface | TAGS: calendar, staff, resource, avatar, header | RELATED: Flutter Online Status Badge, Flutter Avatar Groups -->
+#### Flutter Resource/Staff Column Headers
+
+Заголовки колонок с аватарами специалистов/ресурсов для календаря бронирования.
+
+**Header Container:**
+- **Padding**: 10px vertical
+- **Spacing**: 5px internal, 10px between headers
+
+**Avatar Variants:**
+
+**1. Large Avatar (без статуса):**
+- **Outer Size**: 56×56px
+- **Inner Avatar**: 48×48px (positioned at 4px offset)
+- **Background**: #D9DDE2 (placeholder)
+- **Image**: 48×48px, border-radius 40px
+- **Usage**: Для основного специалиста или без online status
+
+**2. Medium Avatar (со статусом):**
+- **Size**: 48×48px (full image)
+- **Border Radius**: 38.40px
+- **Online Status Badge**: 14×14px at bottom-left (see Flutter Online Status Badge)
+
+**Name Label:**
+- **Width**: 50px
+- **Typography**: 11px Archivo SemiBold (w600) #09101D, line-height 1.40
+- **Alignment**: Center
+- **Text**: "Molly", "Jimmy", "Daniel"
+
+**Header Spacing:**
+- **Avatar to Name**: 5px
+- **Between Headers**: 10px (in horizontal layout)
+
+```dart
+// Resource Column Header - Large Avatar
+Column(
+  spacing: 5,
+  children: [
+    // Avatar
+    Container(
+      width: 56,
+      height: 56,
+      child: Stack(
+        children: [
+          Positioned(
+            left: 4,
+            top: 4,
+            child: Container(
+              width: 48,
+              height: 48,
+              decoration: ShapeDecoration(
+                color: const Color(0xFFD9DDE2),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(40),
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            left: 4,
+            top: 4,
+            child: Container(
+              width: 48,
+              height: 48,
+              decoration: ShapeDecoration(
+                image: DecorationImage(
+                  image: NetworkImage("https://placehold.co/48x48"),
+                  fit: BoxFit.cover,
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(40),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    ),
+    // Name
+    SizedBox(
+      width: 50,
+      child: Text(
+        'Molly',
+        textAlign: TextAlign.center,
+        style: TextStyle(
+          color: const Color(0xFF09101D),
+          fontSize: 11,
+          fontFamily: 'Archivo',
+          fontWeight: FontWeight.w600,
+          height: 1.40,
+        ),
+      ),
+    ),
+  ],
+)
+
+// Resource Column Header - With Online Status
+Column(
+  spacing: 5,
+  children: [
+    // Avatar with status badge
+    Container(
+      width: 48,
+      height: 48,
+      child: Stack(
+        children: [
+          Container(
+            width: 48,
+            height: 48,
+            decoration: ShapeDecoration(
+              image: DecorationImage(
+                image: NetworkImage("https://placehold.co/48x48"),
+                fit: BoxFit.cover,
+              ),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(38.40),
+              ),
+            ),
+          ),
+          // Online status badge
+          Positioned(
+            left: 0,
+            top: 34,
+            child: Container(
+              width: 14,
+              height: 14,
+              decoration: ShapeDecoration(
+                color: const Color(0xFF11BB8D),
+                shape: RoundedRectangleBorder(
+                  side: BorderSide(width: 3, color: Colors.white),
+                  borderRadius: BorderRadius.circular(19.20),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    ),
+    // Name
+    SizedBox(
+      width: 50,
+      child: Text(
+        'Jimmy',
+        textAlign: TextAlign.center,
+        style: TextStyle(
+          color: const Color(0xFF09101D),
+          fontSize: 11,
+          fontFamily: 'Archivo',
+          fontWeight: FontWeight.w600,
+          height: 1.40,
+        ),
+      ),
+    ),
+  ],
+)
+```
+
+**Usage Notes:**
+- Large avatar (56px) для акцента на главном специалисте
+- Medium avatar (48px) со статусом для показа availability
+- Name label ограничен 50px width для компактности
+- Online status badge позиционируется bottom-left для видимости
+
+---
+
+<!-- COMPONENT: Flutter Online Status Badge | CATEGORY: Status, Indicator, User Interface | TAGS: online, status, availability, badge, indicator | RELATED: Flutter Resource Column Header, Avatar -->
+#### Flutter Online Status Badge
+
+Индикатор онлайн статуса для аватаров в календаре и профилях.
+
+**Badge Specifications:**
+- **Size**: 14×14px
+- **Background**: #11BB8D (success green) - online status
+- **Border**: 3px solid white (#FFFFFF)
+- **Border Radius**: 19.20px (full circle)
+- **Position**: Bottom-left corner of avatar (left 0, top 34 for 48px avatar)
+
+**Positioning:**
+- **For 48×48px avatar**: left 0, top 34
+- **For other sizes**: Adjust top = avatar_height - badge_height - border
+
+```dart
+// Online Status Badge
+Container(
+  width: 14,
+  height: 14,
+  decoration: ShapeDecoration(
+    color: const Color(0xFF11BB8D),
+    shape: RoundedRectangleBorder(
+      side: BorderSide(width: 3, color: Colors.white),
+      borderRadius: BorderRadius.circular(19.20),
+    ),
+  ),
+)
+
+// Positioned on avatar
+Stack(
+  children: [
+    // Avatar 48×48px
+    Container(width: 48, height: 48, ...),
+    // Status badge
+    Positioned(
+      left: 0,
+      top: 34,
+      child: /* Online Status Badge */,
+    ),
+  ],
+)
+```
+
+**Color Variants:**
+- **Online**: #11BB8D (green) - currently used
+- **Busy/In Meeting**: #E24949 (red) - can be used
+- **Away**: #FFC043 (yellow) - can be used
+- **Offline**: #D9DDE2 (gray) - can be used
+
+**Usage Notes:**
+- Border 3px white создает visual separation от avatar
+- Позиция bottom-left стандартная для status indicators
+- Размер 14px оптимален для visibility без overlapping
+- Можно использовать разные цвета для разных статусов
+
+---
+
+<!-- COMPONENT: Flutter Appointment Block | CATEGORY: Calendar, Schedule, Events | TAGS: appointment, event, booking, calendar-block, time-slot | RELATED: Flutter Calendar/Schedule, Flutter Available Slot -->
+#### Flutter Appointment Blocks
+
+Блоки событий/встреч для календарного расписания с поддержкой multi-slot appointments.
+
+**Block Specifications:**
+- **Size**: 130px width × 40px height (per time slot)
+- **Padding**: Top 4px, Left 2px, Right 5px, Bottom 6px (for blocks with content)
+- **Spacing**: 5px internal between avatar and text
+
+**Single Slot Appointment:**
+- **Border Radius**: 15px (all corners)
+- **Content**: Avatar + Time + Name
+
+**Multi-Slot Appointment (spanning multiple hours):**
+- **Top Block**: topLeft and topRight radius 15px, bottom squared
+- **Middle Blocks**: No border radius (squared all sides)
+- **Bottom Block**: bottomLeft and bottomRight radius 15px, top squared
+
+**Color Palette:**
+- **#5E38BA**: Темно-фиолетовый (purple) - premium appointments
+- **#7CC5D6**: Светло-голубой (cyan) - standard appointments
+- **#F7B68A**: Персиковый (peach) - wellness appointments
+- **#4141E6**: Синий (blue) - regular appointments
+- **#E24949**: Красный (red) - urgent/priority appointments
+
+**Content Layout:**
+- **Avatar**: 32×32px outer, 24×24px image at 4px offset
+- **Time**: 11px Archivo Regular (w400) white
+- **Client/Name**: 10px Archivo SemiBold (w600) white
+- **Spacing**: 5px between avatar and text column
+
+```dart
+// Single Slot Appointment (1 hour)
+Container(
+  width: 130,
+  height: 40,
+  padding: const EdgeInsets.only(top: 4, left: 2, right: 5, bottom: 6),
+  decoration: ShapeDecoration(
+    color: const Color(0xFF5E38BA), // Purple
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(15),
+    ),
+  ),
+  child: Row(
+    spacing: 5,
+    children: [
+      // Avatar
+      Container(
+        width: 32,
+        height: 32,
+        child: Stack(
+          children: [
+            Positioned(
+              left: 4,
+              top: 4,
+              child: Container(
+                width: 24,
+                height: 24,
+                decoration: ShapeDecoration(
+                  image: DecorationImage(
+                    image: NetworkImage("https://placehold.co/24x24"),
+                    fit: BoxFit.cover,
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(40),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+      // Text info
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            '10:00 - 11:00',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 11,
+              fontFamily: 'Archivo',
+              fontWeight: FontWeight.w400,
+              height: 1.40,
+            ),
+          ),
+          Text(
+            'Helena',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 10,
+              fontFamily: 'Archivo',
+              fontWeight: FontWeight.w600,
+              height: 1.40,
+            ),
+          ),
+        ],
+      ),
+    ],
+  ),
+)
+
+// Multi-Slot Appointment - Top Block
+Container(
+  width: 130,
+  height: 40,
+  padding: const EdgeInsets.only(top: 4, left: 2, right: 5, bottom: 6),
+  decoration: ShapeDecoration(
+    color: const Color(0xFF4141E6), // Blue
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.only(
+        topLeft: Radius.circular(15),
+        topRight: Radius.circular(15),
+      ),
+    ),
+  ),
+  child: /* Same content */,
+)
+
+// Multi-Slot Appointment - Middle Block
+Container(
+  width: 130,
+  height: 40,
+  padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 6),
+  decoration: BoxDecoration(color: const Color(0xFF4141E6)), // No border radius
+)
+
+// Multi-Slot Appointment - Bottom Block
+Container(
+  width: 130,
+  height: 40,
+  padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 6),
+  decoration: ShapeDecoration(
+    color: const Color(0xFF4141E6),
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.only(
+        bottomLeft: Radius.circular(15),
+        bottomRight: Radius.circular(15),
+      ),
+    ),
+  ),
+)
+```
+
+**Usage Notes:**
+- Single slot appointments (1 hour): full 15px border radius
+- Multi-slot appointments: top block с top radius, middle без radius, bottom с bottom radius
+- Цвета используются для категоризации: premium, standard, wellness, regular, urgent
+- Avatar 24×24px достаточно для identification в компактном view
+- White text обеспечивает contrast на всех background colors
+- Padding варьируется: blocks с content имеют asymmetric padding, middle blocks symmetric
+
+**Color Usage Guidelines:**
+- **Purple (#5E38BA)**: VIP clients, premium services
+- **Cyan (#7CC5D6)**: Standard appointments, consultations
+- **Peach (#F7B68A)**: Wellness, spa, relaxation services
+- **Blue (#4141E6)**: Regular appointments, meetings
+- **Red (#E24949)**: Urgent, priority, critical appointments
+
+---
+
+<!-- COMPONENT: Flutter Available Time Slot | CATEGORY: Calendar, Schedule, Availability | TAGS: available, free-slot, booking, calendar, add-appointment | RELATED: Flutter Appointment Block, Calendar/Schedule -->
+#### Flutter Available Time Slot
+
+Индикатор доступного времени для бронирования в календаре.
+
+**Slot Specifications:**
+- **Size**: 130px width × 40px height
+- **Padding**: Top 6px, Left 10px, Right 5px, Bottom 6px
+- **Background**: #F4F6F9 (light gray)
+- **Border Radius**: 15px
+- **Icon**: 24×24px (plus icon or add indicator)
+
+```dart
+// Available Time Slot
+Container(
+  width: 130,
+  height: 40,
+  padding: const EdgeInsets.only(top: 6, left: 10, right: 5, bottom: 6),
+  decoration: ShapeDecoration(
+    color: const Color(0xFFF4F6F9),
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(15),
+    ),
+  ),
+  child: Row(
+    mainAxisAlignment: MainAxisAlignment.center,
+    crossAxisAlignment: CrossAxisAlignment.center,
+    spacing: 5,
+    children: [
+      Container(
+        width: 24,
+        height: 24,
+        // Plus icon placeholder
+      ),
+    ],
+  ),
+)
+```
+
+**Interaction States:**
+- **Default**: #F4F6F9 background с plus icon
+- **Hover**: Можно добавить slightly darker background
+- **Active/Clicked**: Открывает форму добавления appointment
+
+**Usage Notes:**
+- Light gray background (#F4F6F9) контрастирует с colored appointments
+- Plus icon 24×24px центрирован в slot
+- Clicking opens appointment creation dialog
+- Можно показывать только на hover для cleaner view
+- Border radius 15px соответствует appointment blocks
+
+---
+
 ### 5. Forms
 
 #### Form Layout
@@ -3728,9 +4246,58 @@ Container(
 
 ## Версионирование и обновления
 
-**Текущая версия**: v5.9.0
+**Текущая версия**: v5.10.0
 
 ### Changelog
+
+#### v5.10.0 (2025-11-19)
+- **Добавлена новая секция Calendar/Schedule Components:**
+  - Комплексная система для календарей и расписаний бронирования
+  - 5 специализированных компонентов с IDE AI navigation
+- **Flutter Time Grid with Labels:**
+  - Временная сетка с labels (10:00-23:00)
+  - Time label: padding 8×5px, 11px Regular #09101D
+  - Divider line: 442px width, border 0.5px #D9DDE2
+  - Row spacing: 10px label-to-line, 15px vertical between rows
+- **Flutter Resource/Staff Column Headers:**
+  - Large avatar: 56×56px outer, 48×48px inner (without status)
+  - Medium avatar: 48×48px with online status badge
+  - Name label: 50px width, 11px SemiBold #09101D
+  - Spacing: 5px avatar-to-name, 10px between headers
+- **Flutter Online Status Badge:**
+  - Size: 14×14px circle
+  - Background: #11BB8D (green) for online
+  - Border: 3px white
+  - Position: bottom-left (left 0, top 34 for 48px avatar)
+  - Color variants: green (online), red (busy), yellow (away), gray (offline)
+- **Flutter Appointment Blocks:**
+  - Block size: 130×40px per time slot
+  - Single slot: full 15px border-radius
+  - Multi-slot: top block (top radius), middle (no radius), bottom (bottom radius)
+  - 5 color variants for categorization
+  - Content: avatar 32×32px + time 11px + name 10px SemiBold white
+  - Spacing: 5px internal
+- **Flutter Available Time Slot:**
+  - Size: 130×40px
+  - Background: #F4F6F9 (light gray)
+  - Icon: 24×24px plus icon centered
+  - Border radius: 15px
+  - Usage: indicates free time for booking
+- **Новые цвета:**
+  - `#7CC5D6` - светло-голубой (cyan) для standard appointments
+  - `#F7B68A` - персиковый (peach) для wellness appointments
+- **Appointment color palette:**
+  - Purple (#5E38BA): VIP/premium services
+  - Cyan (#7CC5D6): Standard appointments
+  - Peach (#F7B68A): Wellness/spa services
+  - Blue (#4141E6): Regular appointments
+  - Red (#E24949): Urgent/priority appointments
+- **Typography спецификации:**
+  - Time labels: 11px Archivo Regular #09101D
+  - Staff names: 11px Archivo SemiBold #09101D
+  - Appointment time: 11px Archivo Regular white
+  - Appointment client: 10px Archivo SemiBold white
+- **IDE AI Navigation markers:** Все 5 компонентов с COMPONENT, CATEGORY, TAGS, RELATED
 
 #### v5.9.0 (2025-11-19)
 - **Добавлена секция Flutter Video/Content Card with Social Proof:**
