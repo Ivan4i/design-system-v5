@@ -41,8 +41,9 @@
 ### Text Colors
 
 ```css
-/* Текст из Tailwind CSS */
---color-text-primary: #020617;     /* slate-950 */
+/* Текст из Flutter кода */
+--color-text-primary: #09101D;     /* Основной темный текст из Flutter */
+--color-text-disabled: #D9DDE2;    /* Disabled text из Flutter */
 --color-text-secondary: #27272A;   /* zinc-800 */
 ```
 
@@ -50,6 +51,8 @@
 
 ```css
 /* Акцентные цвета */
+--color-primary: #4141E6;          /* Основной primary цвет из Flutter */
+--color-primary-border: #0B24FB;   /* Primary border variant из Flutter */
 --color-accent-blue: #1D4ED8;      /* blue-700 */
 --color-accent-purple: #7B61FF;    /* Фиолетовый из Flutter кода */
 ```
@@ -58,7 +61,8 @@
 
 ```css
 /* Фоны для компонентов */
---color-bg-light: #F4F6F9;         /* Светлый фон */
+--color-bg-light: #F4F6F9;         /* Светлый фон из Flutter */
+--color-bg-dark: #18202F;          /* Темный scaffold background из Flutter */
 --color-bg-card-light: #D9DDE2;    /* Светлая карточка */
 --color-bg-card-dark: #23262B;     /* Темная карточка */
 ```
@@ -218,11 +222,12 @@
 --space-6: 1.5rem;    /* 24px */
 --space-7: 1.75rem;   /* 28px - из Flutter spacing: 7 */
 --space-8: 2rem;      /* 32px */
---space-10: 2.5rem;   /* 40px */
+--space-10: 2.5rem;   /* 40px - из Flutter spacing: 10 */
 --space-12: 3rem;     /* 48px */
 --space-16: 4rem;     /* 64px */
 --space-20: 5rem;     /* 80px */
 --space-24: 6rem;     /* 96px */
+--space-70: 4.375rem; /* 70px - из Flutter spacing: 70 (для Row spacing) */
 ```
 
 ### Border Radius
@@ -231,8 +236,8 @@
 --radius-none: 0;
 --radius-sm: 0.25rem;     /* 4px */
 --radius-base: 0.5rem;    /* 8px */
---radius-md: 0.75rem;     /* 12px */
---radius-lg: 0.9375rem;   /* 15px - из Flutter кода (основной для карточек) */
+--radius-md: 0.75rem;     /* 12px - из Flutter кода (альтернативный для buttons) */
+--radius-lg: 0.9375rem;   /* 15px - из Flutter кода (основной для buttons/карточек) */
 --radius-xl: 1rem;        /* 16px */
 --radius-2xl: 1.25rem;    /* 20px */
 --radius-3xl: 1.5rem;     /* 24px */
@@ -347,41 +352,102 @@
 
 ---
 
-### 2. Buttons
+### 2. Buttons (Flutter Mobile)
 
-#### Primary Button
+#### Button Sizes
 
-- **Size**:
-  - Small: Height: 32px, Padding: 8px 16px, Font: 14px
-  - Medium: Height: 40px, Padding: 10px 20px, Font: 16px
-  - Large: Height: 48px, Padding: 12px 24px, Font: 18px
-- **Radius**: radius-md (6px)
+- **Small (36px)**: Height: 36px, Padding: 10px 16px, Font: 13px
+- **Medium (40px)**: Height: 40px, Padding: 10px 20px, Font: 16px
+- **Large (48px)**: Height: 48px, Padding: 12px 24px, Font: 18px
+
+#### Button Widths
+
+- **Full Width (Large)**: width: 100% (double.infinity)
+- **Medium**: width: 165px
+- **Auto (Small)**: width: auto (wrap content)
+
+#### Button Typography
+
+- **Font Family**: Archivo
+- **Font Size**: 13px (small buttons), 16px (medium), 18px (large)
+- **Font Weight**: 600 (Semibold)
+- **Line Height**: 1.40
+
+#### Button Border Radius
+
+- **Primary**: 15px (radius-lg)
+- **Alternative**: 12px (radius-md)
+
+#### Filled Button (Primary)
+
+- **Background**: #4141E6 (color-primary)
+- **Text Color**: #FFFFFF (white)
+- **Border**: none
+- **Icon Size**: 16px
+- **Icon Spacing**: 8px (between icon and text)
 - **States**:
-  - Default: Background: color-primary, Color: white, Shadow: shadow-button
-  - Hover: Background: color-primary-hover, Shadow: shadow-button-hover, Transform: translateY(-1px)
-  - Active: Background: color-primary-active, Shadow: shadow-button-active, Transform: translateY(0)
-  - Disabled: Background: color-gray-300, Color: color-text-disabled, Cursor: not-allowed, Opacity: 0.6
+  - Default: Background: #4141E6, Text: white
+  - Hover: Background: lighter variant of #4141E6
+  - Active: Background: darker variant of #4141E6
+  - Disabled: Background: #F4F6F9, Text: #D9DDE2
 
-#### Secondary Button
+#### Filled Button (Secondary)
 
-- **Size**: Same as Primary
-- **Radius**: radius-md (6px)
+- **Background**: #F4F6F9 (color-bg-light)
+- **Text Color**: #09101D (color-text-primary)
+- **Border**: none
 - **States**:
-  - Default: Background: color-secondary, Color: white
-  - Hover: Background: color-secondary-hover
+  - Default: Background: #F4F6F9, Text: #09101D
+  - Hover: Background: lighter/darker variant
+  - Disabled: Background: #F4F6F9, Text: #D9DDE2
 
-#### Outline Button
+#### Outlined Button
 
-- **Border**: 1px solid color-primary
 - **Background**: transparent
+- **Border**: 1px solid #4141E6 или #0B24FB (color-primary-border)
+- **Text Color**: #4141E6 (color-primary)
+- **Icon Size**: 16px
 - **States**:
-  - Hover: Background: color-primary-light, Border-color: color-primary-hover
+  - Default: Border: #4141E6 или #0B24FB, Text: #4141E6
+  - Hover: Background: rgba(65, 65, 230, 0.05)
+  - Active: Background: rgba(65, 65, 230, 0.1)
 
-#### Ghost Button
+#### Ghost/Text Button
 
-- **Background**: transparent
+- **Background**: transparent или minimal background
+- **Border**: none
+- **Text Color**: #09101D (color-text-primary)
+- **Border Radius**: 12px или 15px
 - **States**:
-  - Hover: Background: color-gray-100
+  - Default: Background: transparent, Text: #09101D
+  - Hover: Background: #F4F6F9
+
+#### Icon Button (Icon Only)
+
+- **Size**: 40px × 40px (icon button container)
+- **Icon Size**: 16px (internal icon)
+- **Padding**: 12px
+- **Border Radius**: 15px (radius-lg)
+- **Variants**:
+  - Filled Primary: Background: #4141E6, Icon: white
+  - Filled Secondary: Background: #F4F6F9, Icon: #09101D
+  - Outlined: Border: 1px solid #4141E6, Icon: #4141E6, Background: transparent
+  - Disabled: Background: #F4F6F9, Icon: #D9DDE2
+
+#### Button Layout Patterns
+
+- **With Leading Icon**: Icon (16px) + spacing (8px) + Text
+- **With Trailing Icon**: Text + spacing (8px) + Icon (16px)
+- **With Both Icons**: Icon (16px) + spacing (8px) + Text + spacing (8px) + Icon (16px)
+- **Icon Only**: Icon (16px) centered in 40px container
+
+#### Button Spacing in Containers
+
+- **Container Width (Mobile)**: 375px
+- **Container Horizontal Padding**: 16px
+- **Effective Button Width**: 343px (for full-width buttons)
+- **Spacing Between Button Groups**: 10px vertical
+- **Spacing Inside Button Row**: 70px horizontal (for spaceBetween layout)
 
 ---
 
@@ -671,6 +737,43 @@
 
 ## Паттерны
 
+### Mobile Layout Patterns (Flutter)
+
+#### Container Configuration
+
+- **Mobile Screen Width**: 375px (стандартная ширина для мобильных экранов)
+- **Container Padding**: 16px horizontal
+- **Content Width**: 343px (375px - 32px padding)
+- **Column Spacing**: 10px (spacing между элементами)
+
+#### Button States Matrix (из Flutter кода)
+
+| State | Background | Text Color | Border | Description |
+|-------|------------|------------|--------|-------------|
+| **Filled (Primary)** | #4141E6 | #FFFFFF | none | Основное действие |
+| **Filled (Secondary)** | #F4F6F9 | #09101D | none | Вторичное действие |
+| **Outlined (Primary)** | transparent | #4141E6 | 1px #0B24FB или #4141E6 | Альтернативное действие |
+| **Disabled** | #F4F6F9 | #D9DDE2 | none | Неактивное состояние |
+| **Ghost/Text** | transparent или minimal | #09101D | none | Минимальный акцент |
+
+#### Button Dimensions Reference
+
+```
+Small Button (36px):
+├─ Height: 36px
+├─ Padding: 10px vertical, 16px horizontal
+├─ Border Radius: 15px или 12px
+├─ Font: Archivo 13px, Weight 600, Line-height 1.40
+└─ Icon: 16px with 8px spacing
+
+Icon Button (40px):
+├─ Size: 40px × 40px
+├─ Padding: 12px
+├─ Border Radius: 15px
+├─ Icon Size: 16px (centered)
+└─ States: Filled, Outlined, Secondary, Disabled
+```
+
 ### Dashboard Layouts
 
 #### Grid Dashboard
@@ -789,11 +892,12 @@
 - **Library**: Heroicons, Lucide Icons или Phosphor Icons (рекомендация)
 - **Sizes**:
   - XS: 12px
-  - SM: 16px
+  - SM: 16px (используется в Flutter buttons)
   - Base: 20px
   - MD: 24px
   - LG: 32px
   - XL: 48px
+- **Button Icons**: 16px × 16px (из Flutter кода)
 - **Stroke Width**: 1.5px (regular), 2px (medium), 2.5px (bold)
 - **Style**: Outline (default), Solid (emphasis)
 - **Color**: Inherit from parent или explicit (color-text-primary, color-text-secondary)
@@ -851,10 +955,21 @@
 
 #### v5.0.0 (2025-11-19)
 - Первая версия дизайн-системы
-- Полная цветовая палитра
-- Базовые компоненты
-- Layout patterns
-- Иконочная система
+- Полная цветовая палитра с реальными значениями из Flutter кода
+- Компонент Button с всеми состояниями (Filled, Outlined, Ghost, Disabled)
+- Icon Button (40px) с вариантами
+- Mobile Layout Patterns (375px width)
+- Spacing values из Flutter (10px, 70px)
+- Border radius values (15px primary, 12px alternative)
+- Реальные цвета из Flutter:
+  - Primary: #4141E6
+  - Primary border: #0B24FB
+  - Background light: #F4F6F9
+  - Background dark: #18202F
+  - Text primary: #09101D
+  - Text disabled: #D9DDE2
+- Typography: Archivo 13px, weight 600, line-height 1.40
+- Layout patterns и Best practices
 
 ---
 
