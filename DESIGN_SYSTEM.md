@@ -67,6 +67,12 @@
 --color-swatch-brown: #905846;      /* Color(0xFF905846) - brown product color variant */
 --color-swatch-teal: #4E9381;       /* Color(0xFF4E9381) - teal/green product color variant */
 
+/* Financial/Banking Colors */
+--color-coinbase-blue: #1652F0;     /* Color(0xFF1652F0) - Coinbase brand blue for cards */
+--color-bank-navy: #00318C;         /* Color(0xFF00318C) - dark navy blue for bank cards */
+--color-financial-positive: #05944F; /* Color(0xFF05944F) - dark green for positive changes */
+--color-financial-neutral: #414249;  /* Color(0xFF414249) - dark gray for neutral values */
+
 /* Error/Negative State Colors */
 --color-error-border: #DA1414;      /* Color(0xFFDA1414) - negative/error border for PIN */
 --color-error-bg-light: #0CDA1414;  /* Color(0x0CDA1414) - error background with ~5% opacity (0x0C = 12) */
@@ -92,6 +98,8 @@
 - **Button gradients**: #EB001B to #DD2476 (red to pink gradient for CTA buttons)
 - **PIN input states**: #F4F6F9 (enabled), #EAEEF2 (pressed), #0C11BB8D + #11BB8D border (positive), #0CDA1414 + #DA1414 border (negative)
 - **Product swatches**: #905846 (brown), #09101D (black), #4E9381 (teal) - color variant indicators for products
+- **Financial cards**: #1652F0 (Coinbase blue), #00318C (bank navy) - card backgrounds
+- **Financial indicators**: #05944F (positive change), #FF6937 (negative change), #D9DDE2 (neutral/no change), #414249 (amount text)
 
 ### Primary Colors
 
@@ -258,6 +266,9 @@
 - **Captions**: Size: 11px, Weight: 400, Line Height: 1.40, Color: white
 - **Avatar Labels**: Size: 11px, Weight: 600, Line Height: 1.40, Color: #09101D
 - **Badge Counter**: Size: 10px, Weight: 600, Line Height: 1.40, Color: white
+- **Card Numbers**: Font: OCR-A, Size: 11px, Weight: 400, Line Height: 1.40, Letter Spacing: 1, Color: #09101D / white (masked format: •••• 1234)
+- **Financial Labels**: Size: 10px, Weight: 600, Line Height: 1.40, Color: #747B84 (AVAILABLE, CHANGE)
+- **Financial Values**: Size: 13px, Weight: 600, Line Height: 1.40, Color: #414249 (amounts), #05944F (positive), #FF6937 (negative), #D9DDE2 (neutral)
 
 ### Font Family
 
@@ -266,6 +277,7 @@
 --font-secondary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 --font-mono: 'JetBrains Mono', 'Fira Code', 'Monaco', 'Consolas', 'Courier New', monospace;
 --font-archivo: 'Archivo', sans-serif;  /* Project-specific font */
+--font-ocr-a: 'OCR-A', 'Courier New', monospace;  /* Banking/Card numbers font */
 ```
 
 ### Font Sizes
@@ -1348,6 +1360,274 @@ Ready-made e-commerce product card with image, color variants, action button, an
 - Search results pages
 - Category browsing pages
 - Related products recommendations
+
+#### FinanceLight (Financial Dashboard) - Complete Flexible UI Block
+
+<!-- AI_NAVIGATION_TAGS: financial, banking, dashboard, accounts, cards, investment, wallet, fintech -->
+<!-- AI_CATEGORIES: finance | banking | dashboard | account-management | investment-portfolio | wallet | payments -->
+<!-- AI_USE_CASES: financial-dashboard, banking-app, investment-tracking, account-overview, wallet-management, personal-finance, multi-account-view -->
+
+**Block Purpose:**
+Ready-made financial dashboard interface showing multiple account types with card previews, balance information, and performance indicators. Designed for banking apps, investment platforms, and personal finance management.
+
+**AI Context for IDE:**
+This component is ideal for:
+- 🏦 **Banking Applications** - Multi-account overview with card management
+- 💰 **Investment Platforms** - Portfolio tracking with performance metrics
+- 💳 **Digital Wallets** - Payment method management with balance display
+- 📊 **Financial Dashboards** - Comprehensive account summary interfaces
+- 🏢 **Corporate Finance** - Expense tracking and account monitoring
+- 📱 **Personal Finance Apps** - Budget management and savings tracking
+
+**Container Layout:**
+- **Size**: 375px width × 700px height
+- **Background**: white (#FFFFFF)
+- **Border Radius**: 30px (circular(30))
+- **Clip Behavior**: Clip.antiAlias
+- **Layout**: Stack with positioned account sections
+- **Padding**: horizontal 16px (gutters)
+
+**Account Section Types:**
+
+1. **Section Header Row**
+   - **Layout**: Row with spaceBetween alignment
+   - **Left Side**:
+     - **Category Icon**: 16×16px (optional)
+     - **Title**: e.g., "Depository", "Investments", "Loans", "Others"
+       - **Font**: 'Archivo', Size: 16px, Weight: 700, Color: #09101D, Line Height: 1.40
+     - **Total Amount**: e.g., "$ 2,049.98"
+       - **Font**: 'Archivo', Size: 16px, Weight: 700, Color: #D9DDE2, Line Height: 1.40
+       - **Spacing**: 4 spaces between title and amount (inline text)
+   - **Right Side**:
+     - **"Add" Button**: "Add" text (11px/600, #4141E6) + plus icon (24×24px)
+     - **Action Icon**: 24×24px chevron or menu icon
+   - **Spacing**: top padding 20px, bottom padding 10px
+   - **Extensibility**: Icon can be category-specific (wallet, investment, loan, other)
+
+2. **Card Preview (Optional - for accounts with physical/virtual cards)**
+   - **Container**: 136px × 84px
+   - **Border**: 1px solid rgba(0, 0, 0, 0.05)
+   - **Border Radius**: 15px (circular(15))
+   - **Padding**: 10px (all sides)
+   - **Background Options**:
+     - **Image Background**: BoxFit.cover with gradient overlay
+     - **Solid Color**: #1652F0 (Coinbase blue), #00318C (bank navy), custom brand colors
+   - **Card Elements**:
+     - **Logo/Brand Icon**: 40×40px, positioned top-left
+       - **Border Radius**: 15px (circular(15))
+       - **Image Fit**: BoxFit.contain
+     - **Card Action Icon**: 20×20px, positioned top-right
+     - **Card Number** (masked): "•••• 1794" format
+       - **Font**: 'OCR-A', Size: 11px, Weight: 400, Letter Spacing: 1, Line Height: 1.40
+       - **Color**: #09101D (on light background) or white (on dark/colored background)
+       - **Shadow**: 0px 1px 1px rgba(0, 0, 0, 0.4) for depth
+     - **Payment Network Logo**: 40×24px (Visa, Mastercard, etc.), positioned bottom-right
+   - **Vertical Padding**: 10px (container spacing)
+   - **Extensibility**:
+     - Can show multiple cards with horizontal scroll
+     - Can be replaced with account icon for non-card accounts
+     - Can add card status indicators (active, frozen, expired)
+
+3. **Account Information Row**
+   - **Layout**: Row with spaceBetween alignment, left padding 30px
+   - **Left Side - Balance**:
+     - **Label**: "AVAILABLE" (uppercase)
+       - **Font**: 'Archivo', Size: 10px, Weight: 600, Color: #747B84, Line Height: 1.40
+     - **Amount**: e.g., "$ 2,049.98"
+       - **Font**: 'Archivo', Size: 13px, Weight: 600, Color: #414249, Line Height: 1.40
+     - **Spacing**: Label above amount (vertical column)
+   - **Right Side - Performance**:
+     - **Label**: "CHANGE" (uppercase)
+       - **Font**: 'Archivo', Size: 10px, Weight: 600, Color: #747B84, Line Height: 1.40, Align: right
+     - **Percentage**: e.g., "+31.45%", "-1.15%", "00.00%"
+       - **Font**: 'Archivo', Size: 13px, Weight: 600, Line Height: 1.40, Align: right
+       - **Colors**:
+         - Positive: #05944F (dark green) - gains, increases
+         - Negative: #FF6937 (orange) - losses, decreases
+         - Neutral: #D9DDE2 (light gray) - no change
+     - **Trend Icon**: 24×24px (arrow up, arrow down, or dash)
+     - **Spacing**: 4px between percentage and icon
+   - **Container Spacing**: vertical 12px padding, spacing 30px between columns
+   - **Extensibility**:
+     - Balance can show multiple currencies
+     - Can add "Last Updated" timestamp
+     - Can display additional metrics (interest rate, due date, credit limit)
+
+**Account Type Variants:**
+
+1. **Depository Account** (Banking)
+   - Header: "Depository" + total
+   - Card: Optional physical card with image background
+   - Metrics: Available balance + change percentage
+
+2. **Investment Account** (Brokerage)
+   - Header: "Investments" + portfolio value
+   - Card: Branded card (e.g., Coinbase blue #1652F0)
+   - Metrics: Current value + performance percentage
+   - Extensibility: Can add asset breakdown, allocation chart
+
+3. **Loan Account** (Credit)
+   - Header: "Loans" + total owed
+   - Card: Optional credit card
+   - Metrics: Available credit + utilization or payment status
+   - Extensibility: Can show due date, minimum payment
+
+4. **Other Accounts** (Miscellaneous)
+   - Header: "Others" + total
+   - Card: Dark navy card (#00318C) or custom
+   - Metrics: Balance + change
+   - Extensibility: Can represent savings, crypto, rewards, etc.
+
+**Typography:**
+- **Section Headers**: Font: 'Archivo', Size: 16px, Weight: 700, Color: #09101D
+- **Total Amounts**: Font: 'Archivo', Size: 16px, Weight: 700, Color: #D9DDE2
+- **"Add" Button**: Font: 'Archivo', Size: 11px, Weight: 600, Color: #4141E6
+- **Card Numbers**: Font: 'OCR-A', Size: 11px, Weight: 400, Letter Spacing: 1
+- **Metric Labels**: Font: 'Archivo', Size: 10px, Weight: 600, Color: #747B84
+- **Metric Values**: Font: 'Archivo', Size: 13px, Weight: 600, Color: #414249 (balance) or status color (change)
+
+**Color Palette:**
+- **Backgrounds**: #FFFFFF (container), #1652F0 (Coinbase), #00318C (navy), custom brand colors
+- **Text**: #09101D (headers), #D9DDE2 (totals), #747B84 (labels), #414249 (amounts)
+- **Accent**: #4141E6 (Add button)
+- **Performance**: #05944F (positive), #FF6937 (negative), #D9DDE2 (neutral)
+- **Card Elements**: white or #09101D (card numbers depending on background)
+- **Borders**: rgba(0, 0, 0, 0.05) - subtle card borders
+
+**Spacing:**
+- **Section padding**: top 20px, horizontal 16px (gutters)
+- **Card padding**: 10px internal
+- **Row spacing**: 20px between sections
+- **Column gap**: 30px between balance and performance
+- **Icon spacing**: 4px between text and icons
+
+**Dimensions:**
+- **Container**: 375px × 700px (full mobile screen)
+- **Card**: 136px × 84px
+- **Brand Logo**: 40×40px
+- **Card Number Shadow**: 0px 1px 1px rgba(0, 0, 0, 0.4)
+- **Payment Logo**: 40×24px
+- **Action Icons**: 16×16px, 20×20px, 24×24px (depending on context)
+
+**Flexibility & Extensibility Notes:**
+- **Account Types**: Unlimited - can add Crypto, Savings, Credit, Rewards, Foreign Currency accounts
+- **Card Display**: Supports 0 to multiple cards per account with horizontal scroll
+- **Metrics**: Customizable - can show APY, APR, rewards points, transaction count, etc.
+- **Multi-Currency**: Can display amounts in multiple currencies with conversion rates
+- **Real-time Updates**: Designed for live balance and performance updates via websocket/API
+- **Interactive Actions**:
+  - Tap section header → expand/collapse details
+  - Tap card → view full card details, transactions, or actions (freeze, replace)
+  - Tap "Add" → add new account or link external account
+  - Swipe card → quick actions (pay, transfer, freeze)
+- **Additional Features**:
+  - Transaction history preview (last 3-5 transactions)
+  - Quick action buttons (transfer, pay bill, deposit)
+  - Goal progress bars (savings goals, debt payoff)
+  - Alerts and notifications (low balance, unusual activity)
+  - Filtering and sorting (by balance, type, institution)
+- **Responsive**: Adapts to tablet (2-column grid), desktop (3-4 columns), or compact mobile (single column list)
+- **Accessibility**: High contrast mode support, screen reader friendly, large tap targets
+
+**AI Implementation Hints:**
+```javascript
+// Example data structure for AI to understand
+const accountSections = [
+  {
+    id: "depository",
+    title: "Depository",
+    icon: "wallet",
+    totalAmount: 2049.98,
+    cards: [
+      {
+        number: "•••• 1794",
+        brand: "visa",
+        background: "image-url",
+        logo: "bank-logo-url"
+      }
+    ],
+    available: 2049.98,
+    change: +31.45, // positive percentage
+    changeColor: "positive" // maps to #05944F
+  },
+  {
+    id: "investments",
+    title: "Investments",
+    icon: "trending-up",
+    totalAmount: 103.98,
+    cards: [
+      {
+        number: "•••• 4917",
+        brand: "coinbase",
+        background: "#1652F0",
+        logo: "coinbase-logo-url"
+      }
+    ],
+    available: 103.98,
+    change: +95.23,
+    changeColor: "positive"
+  },
+  {
+    id: "loans",
+    title: "Loans",
+    totalAmount: 4000.98,
+    cards: [
+      {
+        number: "•••• 9471",
+        background: "image-url"
+      }
+    ],
+    available: 4000.98,
+    change: 0.00,
+    changeColor: "neutral" // maps to #D9DDE2
+  },
+  {
+    id: "others",
+    title: "Others",
+    cards: [
+      {
+        number: "•••• 9417",
+        background: "#00318C"
+      }
+    ],
+    available: 12049.98,
+    change: -1.15,
+    changeColor: "negative" // maps to #FF6937
+  }
+];
+```
+
+**Usage Examples & Categories:**
+
+**🏦 Banking & Finance:**
+- Multi-account dashboard for retail banking
+- Corporate treasury management interface
+- Family banking with multiple member accounts
+
+**💰 Investment & Wealth:**
+- Portfolio overview with asset performance
+- Retirement account tracking (401k, IRA, etc.)
+- Crypto wallet with multiple blockchains
+
+**💳 Payments & Wallets:**
+- Digital wallet with linked payment methods
+- Prepaid card management dashboard
+- Business expense account overview
+
+**📊 Personal Finance:**
+- Budget tracking with category accounts
+- Savings goal progress dashboard
+- Debt payoff tracker with multiple loans
+
+**🏢 Business & Corporate:**
+- Multi-entity account management
+- Expense reimbursement tracking
+- Vendor payment account overview
+
+**🌍 International Finance:**
+- Multi-currency account dashboard
+- Foreign exchange wallet
+- Cross-border payment accounts
 
 ---
 
