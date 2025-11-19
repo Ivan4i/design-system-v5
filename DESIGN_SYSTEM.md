@@ -279,6 +279,7 @@
 
 ```css
 --space-0: 0;
+--space-0-5: 0.125rem; /* 2px */
 --space-1: 0.25rem;   /* 4px */
 --space-1-25: 0.3125rem; /* 5px */
 --space-1-5: 0.375rem; /* 6px */
