@@ -164,6 +164,7 @@
 --color-brand-facebook: #1877F2;
 --color-brand-twitter: #1DA1F2;
 --color-brand-instagram: #E4405F;
+--color-brand-instagram-gradient: #833AB4;  /* Из StoriesTextOutside - Instagram purple gradient */
 --color-brand-linkedin: #0A66C2;
 --color-brand-youtube: #FF0000;
 --color-brand-github: #181717;
@@ -300,6 +301,7 @@
 --radius-lg: 0.5rem;      /* 8px - из Flutter кода */
 --radius-lg-plus: 0.625rem; /* 10px - из InformationCardSlider кода */
 --radius-xl: 0.75rem;     /* 12px - из TabBar кода */
+--radius-xl-plus: 0.8125rem; /* 13px - из StoriesTextOutside кода (active story border) */
 --radius-2xl: 1rem;       /* 16px */
 --radius-3xl: 0.9375rem;  /* 15px - из Flutter кода */
 --radius-badge: 1.25rem;  /* 20px - из TabBar кода (badge radius) */
@@ -1313,6 +1315,139 @@ theme: ThemeData.dark().copyWith(
 
 ---
 
+### 24. Stories (Text Outside)
+
+Компонент Stories с текстовыми подписями снаружи, извлеченный из Flutter приложения StoriesTextOutside.
+
+#### Характеристики Showcase Container:
+
+- **Width**: 1290px
+- **Height**: 322px
+- **Padding**: 50px (all sides)
+- **Border**: 1px solid #7B61FF (color-primary)
+- **Border Radius**: 15px (radius-3xl)
+- **Clip Behavior**: antiAlias
+- **Content Spacing**: 200px between story variants
+
+#### Variant 1: Vertical Stories (Portrait)
+
+**Container:**
+- **Width**: 375px
+- **Padding**: Top: 10px, Left: 16px, Bottom: 20px
+- **Item Spacing**: 10px horizontal
+
+**Story Item:**
+- **Image Size**: Width: 100px, Height: 120px
+- **Border Radius**: 10px (radius-lg-plus)
+- **Aspect Ratio**: 5:6 (portrait)
+- **Spacing from Label**: 10px
+
+**Active Story Border:**
+- **Container Size**: 100px × 120px
+- **Border**: 2px solid #833AB4 (color-brand-instagram-gradient)
+- **Border Radius**: 13px (radius-xl-plus)
+- **Inner Image**: 94px × 114px (accounts for 2px border + 3px padding)
+- **Inner Border Radius**: 10px (radius-lg-plus)
+
+**Story Label:**
+- **Container Width**: 100px
+- **Text Width**: 90px (with 10px left padding)
+- **Font**: Archivo
+- **Font Size**: 13px (font-size-xs-plus)
+- **Font Weight**: 700 (bold)
+- **Color**: #09101D (color-text-primary)
+- **Line Height**: 1.40
+- **Spacing from Image**: 3px internal
+- **Text**: "Category or service"
+
+#### Variant 2: Horizontal Stories (Landscape)
+
+**Container:**
+- **Width**: 375px
+- **Padding**: Top: 10px, Left: 16px, Bottom: 20px
+- **Item Spacing**: 10px horizontal
+
+**Story Item:**
+- **Image Size**: Width: 130px, Height: 80px
+- **Border Radius**: 10px (radius-lg-plus)
+- **Aspect Ratio**: 13:8 (landscape)
+- **Spacing from Label**: 10px
+
+**Active Story Border:**
+- **Container Size**: 130px × 80px
+- **Border**: 2px solid #833AB4 (color-brand-instagram-gradient)
+- **Border Radius**: 13px (radius-xl-plus)
+- **Inner Image**: 124px × 74px (accounts for 2px border + 3px padding)
+- **Inner Border Radius**: 10px (radius-lg-plus)
+
+**Story Label:**
+- **Container Width**: 130px
+- **Text Width**: 110px (with 10px left padding)
+- **Font**: Archivo
+- **Font Size**: 13px (font-size-xs-plus)
+- **Font Weight**: 700 (bold)
+- **Color**: #09101D (color-text-primary)
+- **Line Height**: 1.40
+- **Spacing from Image**: 3px internal
+- **Text**: "Category or service"
+
+#### Layout Structure:
+
+**Vertical (Portrait) Layout:**
+```
+┌──────────────────────────────────────┐
+│ [100×120] [100×120] [100×120] [100×120]
+│   Label     Label     Label     Label │
+└──────────────────────────────────────┘
+Spacing: 10px between items
+```
+
+**Horizontal (Landscape) Layout:**
+```
+┌──────────────────────────────────────┐
+│ [130×80] [130×80] [130×80] [130×80] │
+│  Label    Label    Label    Label   │
+└──────────────────────────────────────┘
+Spacing: 10px between items
+```
+
+#### States:
+
+**Default (Inactive) Story:**
+- Image with radius 10px
+- No border
+- Label below with 3px spacing
+
+**Active (Viewed/Current) Story:**
+- White container with 2px purple border (#833AB4)
+- Border radius 13px on container
+- Image scaled to fit inside (accounts for border width)
+- Purple gradient indicates active/viewed state
+- Label below remains same
+
+**Row Configuration:**
+- 4 stories per row (both variants)
+- Horizontal scroll if more items
+- Equal spacing between all items
+
+#### Use Cases:
+
+1. **Categories/Services**: Display categories with visual preview
+2. **Instagram-style Stories**: Social media story highlights
+3. **Content Preview**: Quick visual navigation to content sections
+4. **User Stories**: Personal or brand story collections
+
+#### Best Practices:
+
+- Use portrait (100×120) for vertical content, people, products
+- Use landscape (130×80) for wide content, scenes, events
+- Active border indicates viewed or current story
+- Keep labels concise (2-3 words max)
+- Maintain 10px spacing for visual consistency
+- Text outside reduces visual clutter on images
+
+---
+
 ## Как использовать эту дизайн-систему
 
 ### Для дизайнеров
@@ -1340,9 +1475,24 @@ theme: ThemeData.dark().copyWith(
 
 ## Версионирование и обновления
 
-**Текущая версия**: v5.3.0
+**Текущая версия**: v5.4.0
 
 ### Changelog
+
+#### v5.4.0 (2025-11-19)
+- Добавлены данные из StoriesTextOutside компонента Flutter
+- Добавлен Instagram gradient цвет (#833AB4) для активных stories
+- Добавлен новый border radius:
+  - 13px (radius-xl-plus) для активного контейнера stories
+- Добавлен компонент Stories (Text Outside):
+  - Vertical Stories (Portrait): 100×120px изображения
+  - Horizontal Stories (Landscape): 130×80px изображения
+  - Active story border: 2px solid Instagram gradient (#833AB4)
+  - Story labels: 13px Archivo bold, text outside images
+  - 4 stories per row layout с 10px spacing
+  - Showcase container: 1290×322px с 50px padding
+- Документированы 2 варианта компонента с детальными спецификациями
+- Добавлены use cases и best practices для Stories компонента
 
 #### v5.3.0 (2025-11-19)
 - Добавлены данные из InformationCardSlider компонента Flutter
