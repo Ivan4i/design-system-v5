@@ -59,6 +59,7 @@
 --color-accent-blue: #1D4ED8;      /* blue-700 */
 --color-accent-navy: #46467F;      /* Темно-синий для флагов и декоративных элементов */
 --color-accent-purple: #7B61FF;    /* Фиолетовый из Flutter кода */
+--color-accent-purple-dark: #5E38BA; /* Темно-фиолетовый для premium badges */
 --color-link-blue: #4141E6;        /* Синий для ссылок и активных элементов */
 --color-success-green: #11BB8D;    /* Зеленый для активного toggle и success состояний */
 --color-error-red: #E24949;        /* Красный для ошибок и негативных значений */
@@ -92,7 +93,9 @@
 ```css
 /* Overlay цвета для Flutter компонентов */
 --overlay-black-30: rgba(0, 0, 0, 0.30);    /* Черный overlay 30% для бейджей и play button */
+--overlay-black-50: rgba(29, 29, 29, 0.50); /* Черный overlay 50% (#7F1D1D1D) для градиентов на карточках */
 --overlay-white-50: rgba(255, 255, 255, 0.50); /* Белый overlay 50% для текстовых блоков */
+--overlay-yellow-40: rgba(255, 192, 67, 0.40); /* Желтый overlay 40% (#66FFC043) для points badge */
 
 /* Тени */
 --shadow-light: rgba(240, 241, 242, 1.00);
@@ -1153,6 +1156,442 @@ Container(
 - **Border**: 1px solid #4141E6
 - **Border Radius**: 15px
 - **Spacing**: 50px between radio buttons
+
+---
+
+#### Flutter Navigation Header
+
+Навигационный заголовок для социального/сервисного приложения с аватаром и бейджами.
+
+**Общие спецификации:**
+- **Container Height**: 44px
+- **Background**: White (#FFFFFF)
+- **Layout**: Horizontal row with space-between alignment
+
+**Компоненты:**
+
+**1. Avatar Section:**
+- **Container**: Padding left 16px, top/bottom 10px
+- **Avatar Outer**: 32px × 32px
+- **Avatar Inner**: 24px × 24px (positioned at 4px offset)
+- **Avatar Border Radius**: 40px (full circle)
+- **Avatar Background**: #D9DDE2 (placeholder)
+- **Avatar Image**: 24px × 24px, border-radius 40px
+
+**2. Premium Badge ("Get $5"):**
+- **Container Height**: 24px (calculated from 44px - 10px padding × 2)
+- **Padding**: 10px horizontal
+- **Background**: #5E38BA (темно-фиолетовый)
+- **Border Radius**: 11px
+- **Typography**: 11px, Archivo SemiBold (w600), white, line-height 1.40
+- **Text**: "Get $5"
+- **Spacing**: 6px (internal spacing for content)
+
+```dart
+Container(
+  height: 24,
+  padding: const EdgeInsets.symmetric(horizontal: 10),
+  decoration: ShapeDecoration(
+    color: const Color(0xFF5E38BA),
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(11),
+    ),
+  ),
+  child: Row(
+    mainAxisSize: MainAxisSize.min,
+    mainAxisAlignment: MainAxisAlignment.center,
+    crossAxisAlignment: CrossAxisAlignment.center,
+    spacing: 6,
+    children: [
+      Text(
+        'Get \$5',
+        style: TextStyle(
+          color: Colors.white,
+          fontSize: 11,
+          fontFamily: 'Archivo',
+          fontWeight: FontWeight.w600,
+          height: 1.40,
+        ),
+      ),
+    ],
+  ),
+)
+```
+
+**3. Points Badge:**
+- **Container Height**: 36px
+- **Container Padding**: 16px horizontal, 10px vertical (outer container)
+- **Badge Padding**: 10px horizontal, 5px vertical
+- **Background**: #FFC043 with 40% opacity (0x66FFC043)
+- **Border Radius**: 15px
+- **Icon**: 24px × 24px, padding 2px, border-radius 100px
+- **Typography**: 16px, Archivo ExtraBold (w800), #23262B, line-height 1.40
+- **Text**: "Points"
+- **Spacing**: 6px between icon and text
+
+```dart
+Container(
+  height: 36,
+  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+  decoration: ShapeDecoration(
+    color: const Color(0x66FFC043), // 40% opacity
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(15),
+    ),
+  ),
+  child: Row(
+    mainAxisSize: MainAxisSize.min,
+    mainAxisAlignment: MainAxisAlignment.center,
+    crossAxisAlignment: CrossAxisAlignment.center,
+    spacing: 6,
+    children: [
+      Container(
+        width: 24,
+        height: 24,
+        padding: const EdgeInsets.all(2),
+        decoration: ShapeDecoration(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(100),
+          ),
+        ),
+      ),
+      Text(
+        'Points',
+        style: TextStyle(
+          color: const Color(0xFF23262B),
+          fontSize: 16,
+          fontFamily: 'Archivo',
+          fontWeight: FontWeight.w800,
+          height: 1.40,
+        ),
+      ),
+    ],
+  ),
+)
+```
+
+**Usage Notes:**
+- Premium badge (#5E38BA) используется для промо-акций и специальных предложений
+- Points badge с полупрозрачным желтым фоном для визуального акцента без яркости
+- Avatar 32×32px (outer) стандартный размер для compact headers
+- Все бейджи используют rounded углы для мягкого дизайна
+
+---
+
+#### Flutter Search Input
+
+Поисковое поле для мобильного приложения.
+
+**Общие спецификации:**
+- **Container Height**: 44px
+- **Container Padding**: Horizontal 16px, Vertical 4px
+- **Input Container Height**: 36px (calculated: 44 - 4×2)
+- **Input Padding**: Horizontal 8px, Vertical 7px
+- **Background**: #F4F6F9 (light gray)
+- **Border Radius**: 15px
+- **Border**: none
+
+**Внутренний контент:**
+- **Content Padding**: Left 5px, Right 10px
+- **Icon**: 14px × 14px
+- **Text**: "Search", #747B84 (placeholder gray)
+- **Typography**: 16px, Archivo Regular (w400), line-height 1.40
+- **Spacing**: 10px between icon and text
+
+```dart
+Container(
+  width: double.infinity,
+  height: 44,
+  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+  child: Row(
+    mainAxisSize: MainAxisSize.min,
+    mainAxisAlignment: MainAxisAlignment.start,
+    crossAxisAlignment: CrossAxisAlignment.center,
+    children: [
+      Expanded(
+        child: Container(
+          height: double.infinity,
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 7),
+          decoration: ShapeDecoration(
+            color: const Color(0xFFF4F6F9),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15),
+            ),
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Expanded(
+                child: Container(
+                  padding: const EdgeInsets.only(left: 5, right: 10),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    spacing: 10,
+                    children: [
+                      Container(
+                        width: 14,
+                        height: 14,
+                      ),
+                      Text(
+                        'Search',
+                        style: TextStyle(
+                          color: const Color(0xFF747B84),
+                          fontSize: 16,
+                          fontFamily: 'Archivo',
+                          fontWeight: FontWeight.w400,
+                          height: 1.40,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    ],
+  ),
+)
+```
+
+**Usage Notes:**
+- Input height 36px (меньше чем у dropdown 46px) для компактного search поля
+- Icon 14×14px меньше стандартных 20×20px для визуального баланса
+- Placeholder text 16px для лучшей читаемости
+- Отсутствие border для минималистичного дизайна
+
+---
+
+#### Flutter Category Cards (Horizontal Scroll)
+
+Горизонтальная прокручиваемая галерея карточек категорий для сервисного приложения.
+
+**Общие спецификации:**
+- **Container Padding**: Top 10px, Left 16px, Bottom 10px
+- **Card Size**: 100px × 120px
+- **Border Radius**: 12px
+- **Card Spacing**: 10px between cards
+- **Scroll Direction**: Horizontal
+
+**Card Variants:**
+
+**1. Selected State (Active Card):**
+- **Border**: 2px solid #4141E6 (blue)
+- **Container**: 100px × 120px
+- **Inner Padding**: 4px (from border to image)
+- **Image Size**: 92px × 112px (100 - 4×2 padding)
+- **Image Border Radius**: 10px (inner)
+- **Gradient Overlay**: Starts at 51.16px from top, height 64.84px
+- **Gradient Colors**: transparent (#00C4C4C4) → semi-dark (#7F1D1D1D - 50% opacity)
+- **Text Position**: 83.08px from top, 10px padding left/bottom
+- **Text Width**: 80px
+- **Text**: 10px, Archivo SemiBold (w600), white, line-height 1.40
+- **Example**: "Manicure"
+
+```dart
+Container(
+  width: 100,
+  height: 120,
+  clipBehavior: Clip.antiAlias,
+  decoration: ShapeDecoration(
+    color: Colors.white,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(12),
+    ),
+  ),
+  child: Stack(
+    children: [
+      // Border container
+      Container(
+        width: 100,
+        height: 120,
+        decoration: ShapeDecoration(
+          color: Colors.white,
+          shape: RoundedRectangleBorder(
+            side: BorderSide(
+              width: 2,
+              color: const Color(0xFF4141E6),
+            ),
+            borderRadius: BorderRadius.circular(14),
+          ),
+        ),
+      ),
+      // Image with 4px offset
+      Positioned(
+        left: 4,
+        top: 4,
+        child: Container(
+          width: 92,
+          height: 112,
+          decoration: ShapeDecoration(
+            image: DecorationImage(
+              image: NetworkImage("https://placehold.co/92x112"),
+              fit: BoxFit.cover,
+            ),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+          ),
+        ),
+      ),
+      // Gradient overlay
+      Positioned(
+        left: 4,
+        top: 51.16,
+        child: Container(
+          width: 92,
+          height: 64.84,
+          decoration: ShapeDecoration(
+            gradient: LinearGradient(
+              begin: Alignment(0.50, -0.00),
+              end: Alignment(0.50, 1.00),
+              colors: [const Color(0x00C4C4C4), const Color(0x7F1D1D1D)],
+            ),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(10),
+                bottomRight: Radius.circular(10),
+              ),
+            ),
+          ),
+        ),
+      ),
+      // Text label
+      Positioned(
+        left: 0,
+        top: 83.08,
+        child: Container(
+          width: 100,
+          height: 36.92,
+          padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
+          child: Row(
+            children: [
+              SizedBox(
+                width: 80,
+                child: Text(
+                  'Manicure',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 10,
+                    fontFamily: 'Archivo',
+                    fontWeight: FontWeight.w600,
+                    height: 1.40,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    ],
+  ),
+)
+```
+
+**2. Normal State (Unselected Card):**
+- **Border**: none
+- **Image Size**: 100px × 120px (full card size)
+- **Image Border Radius**: 12px (matches card)
+- **Gradient Overlay**: Starts at 50px from top, height 70px
+- **Gradient Colors**: transparent (#00C4C4C4) → semi-dark (#7F1D1D1D - 50% opacity)
+- **Text Position**: 83.08px from top, 10px padding left, bottom 10px
+- **Text Width**: 90px
+- **Text**: 10px, Archivo SemiBold (w600), white, line-height 1.40
+- **Examples**: "Pedicure", "Makeup", "Hair cut", "Category or\nservice"
+
+```dart
+Container(
+  width: 100,
+  height: 120,
+  clipBehavior: Clip.antiAlias,
+  decoration: ShapeDecoration(
+    color: Colors.white,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(12),
+    ),
+  ),
+  child: Stack(
+    children: [
+      // Full image
+      Container(
+        width: 100,
+        height: 120,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: NetworkImage("https://placehold.co/100x120"),
+            fit: BoxFit.cover,
+          ),
+        ),
+      ),
+      // Gradient overlay
+      Positioned(
+        left: 0,
+        top: 50,
+        child: Container(
+          width: 100,
+          height: 70,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment(0.50, -0.00),
+              end: Alignment(0.50, 1.00),
+              colors: [const Color(0x00C4C4C4), const Color(0x7F1D1D1D)],
+            ),
+          ),
+        ),
+      ),
+      // Text label
+      Positioned(
+        left: 0,
+        top: 83.08,
+        child: Container(
+          width: 100,
+          height: 36.92,
+          padding: const EdgeInsets.only(left: 10, bottom: 10),
+          child: Row(
+            children: [
+              SizedBox(
+                width: 90,
+                child: Text(
+                  'Pedicure',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 10,
+                    fontFamily: 'Archivo',
+                    fontWeight: FontWeight.w600,
+                    height: 1.40,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    ],
+  ),
+)
+```
+
+**Category Examples:**
+1. Manicure (selected with border)
+2. Pedicure
+3. Makeup
+4. Hair cut
+5. Category or service (двухстрочный текст)
+
+**Usage Notes:**
+- Selected card имеет border 2px #4141E6 и уменьшенное изображение (92×112px) из-за padding
+- Normal cards используют полное изображение 100×120px без border
+- Gradient overlay начинается примерно на 42-50% высоты карточки для читаемости текста
+- Text label всегда белый цвет поверх темного gradient
+- Horizontal scroll с padding left 16px для первой карточки
+- Spacing 10px между карточками для визуального разделения
+- Small text 10px оптимален для компактных карточек
+- Поддержка многострочного текста в label ("Category or\nservice")
 
 ---
 
@@ -2668,9 +3107,54 @@ Container(
 
 ## Версионирование и обновления
 
-**Текущая версия**: v5.7.0
+**Текущая версия**: v5.8.0
 
 ### Changelog
+
+#### v5.8.0 (2025-11-19)
+- **Добавлена секция Flutter Navigation Header:**
+  - Навигационный header для социальных/сервисных приложений
+  - Container height: 44px, white background
+  - Avatar section: 32×32px outer, 24×24px inner, border-radius 40px, background #D9DDE2
+  - Premium Badge "Get $5": height 24px, background #5E38BA, border-radius 11px, text 11px w600 white
+  - Points Badge: height 36px, background #FFC043 40% opacity, border-radius 15px, text 16px w800 #23262B
+  - Badge spacing: 6px internal spacing между icon и text
+  - Complete Flutter код для обоих badges
+- **Добавлена секция Flutter Search Input:**
+  - Компактное search поле для мобильного приложения
+  - Container: 44px height, padding 16px horizontal / 4px vertical
+  - Input: 36px height, padding 8×7px, background #F4F6F9, border-radius 15px
+  - Icon: 14×14px (меньше стандартных 20px)
+  - Placeholder: "Search", #747B84, 16px Archivo Regular
+  - Content padding: 5px left / 10px right, spacing 10px
+  - Без border для минималистичного дизайна
+- **Добавлена секция Flutter Category Cards (Horizontal Scroll):**
+  - Горизонтальная галерея карточек категорий
+  - Card size: 100×120px, border-radius 12px
+  - Spacing: 10px между карточками
+  - Container padding: 10px top/bottom, 16px left
+  - Selected State: border 2px #4141E6, image 92×112px (с 4px padding), gradient overlay 51.16px from top
+  - Normal State: no border, image 100×120px full, gradient overlay 50px from top
+  - Gradient: transparent (#00C4C4C4) → semi-dark (#7F1D1D1D - 50% opacity), height 70px
+  - Text label: 10px Archivo SemiBold white, padding 10px left/bottom, width 80-90px
+  - Categories: Manicure, Pedicure, Makeup, Hair cut, Category or service
+  - Complete Flutter код для selected и normal states
+- **Новые цвета:**
+  - `#5E38BA` - Темно-фиолетовый для premium badges и промо-акций
+  - `rgba(255, 192, 67, 0.40)` (#66FFC043) - Желтый 40% opacity для points badge
+  - `rgba(29, 29, 29, 0.50)` (#7F1D1D1D) - Черный 50% opacity для gradient overlays на карточках
+- **Новые overlay цвета:**
+  - `--overlay-black-50`: rgba(29, 29, 29, 0.50) для градиентов на карточках
+  - `--overlay-yellow-40`: rgba(255, 192, 67, 0.40) для points badge background
+- **Typography спецификации:**
+  - Premium badge: 11px Archivo SemiBold (w600) white
+  - Points badge: 16px Archivo ExtraBold (w800) #23262B
+  - Search placeholder: 16px Archivo Regular (w400) #747B84
+  - Category card label: 10px Archivo SemiBold (w600) white
+- **Icon спецификации:**
+  - Avatar: 32×32px outer, 24×24px inner (circle)
+  - Points badge icon: 24×24px, padding 2px, border-radius 100px
+  - Search icon: 14×14px (компактный для баланса)
 
 #### v5.7.0 (2025-11-19)
 - **Добавлена секция Flutter Dropdown/Select Fields:**
