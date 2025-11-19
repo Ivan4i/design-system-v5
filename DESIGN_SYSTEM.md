@@ -65,6 +65,8 @@
 /* Акцентные цвета из Flutter */
 --color-success: #11BB8D;          /* Зеленый для badge (Discount, Rating) */
 --color-warning: #FFC043;          /* Желтый/золотой для price button */
+--color-accent-purple: #7B61FF;    /* Фиолетовый для border и акцентов */
+--color-error: #DA1414;            /* Красный для destructive actions (delete) */
 ```
 
 ### Chart Colors
@@ -416,9 +418,13 @@ background: linear-gradient(90deg,
 --icon-xs: 12px;
 --icon-sm: 15px;        /* Маленькие иконки в карточках */
 --icon-md: 20px;        /* Размер 21x20 округлен до 20px */
---icon-lg: 24px;        /* Иконка overlay */
+--icon-lg: 24px;        /* Иконка overlay, checkbox, menu icon */
 --icon-xl: 30px;        /* Большая иконка избранного */
 --icon-2xl: 32px;
+
+/* Размеры file type иконок */
+--icon-file-width: 34px;   /* Ширина иконки типа файла */
+--icon-file-height: 40px;  /* Высота иконки типа файла */
 ```
 
 ### Cards Sizes (из Flutter кода)
@@ -464,6 +470,11 @@ background: linear-gradient(90deg,
 --divider-height: 1px;         /* Высота разделителя */
 --home-indicator: 5px;         /* Высота home indicator */
 --home-indicator-width: 134px; /* Ширина home indicator */
+
+/* Размеры контейнеров из Flutter кода */
+--container-showcase-height: 318px;  /* Высота showcase контейнера */
+--menu-width: 333px;                 /* Ширина dropdown/context menu */
+--container-padding-lg: 50px;        /* Большой padding для showcase */
 ```
 
 ### Spacing между элементами
@@ -950,6 +961,87 @@ background: linear-gradient(90deg,
 
 ---
 
+### 17. File Type Icons Grid - из Flutter кода
+
+#### Showcase Container
+
+- **Layout**: Горизонтальный Row с иконками файлов
+- **Container Height**: 318px (container-showcase-height)
+- **Padding**: 50px all sides (container-padding-lg)
+- **Background**: white (#FFFFFF)
+- **Border**: 1px solid #7B61FF (color-accent-purple)
+- **Border Radius**: 15px (radius-lg)
+- **Clip Behavior**: antiAlias
+
+#### File Type Icon
+
+- **Width**: 34px (icon-file-width)
+- **Height**: 40px (icon-file-height)
+- **Spacing между иконками**: 10px (spacing-10)
+- **Layout**: Row с равномерным spacing
+
+**Особенности:**
+- Контейнер может содержать множество иконок (19+ в примере)
+- Иконки расположены в одну линию с равным spacing
+- Используется для демонстрации различных типов файлов
+
+**Использование:**
+- Showcase панель для отображения поддерживаемых форматов файлов
+- Галерея иконок типов файлов
+- Визуализация file type picker
+
+---
+
+### 18. Context Menu / Dropdown - из Flutter кода
+
+#### Menu Container
+
+- **Layout**: Вертикальная Column с опциями
+- **Container Height**: 318px (container-showcase-height) - адаптивная
+- **Padding**: 50px all sides (container-padding-lg)
+- **Background**: white (#FFFFFF)
+- **Border**: 1px solid #7B61FF (color-accent-purple)
+- **Border Radius**: 15px (radius-lg)
+- **Clip Behavior**: antiAlias
+
+#### Menu Item (Option)
+
+- **Width**: 333px (menu-width)
+- **Padding**: 16px horizontal, 8px vertical
+- **Background**: #F4F6F9 (color-bg-light)
+- **Border Radius**:
+  - Первый элемент: 15px только top corners (topLeft, topRight)
+  - Средние элементы: 0px (прямые углы)
+  - Последний элемент: 15px только bottom corners (bottomLeft, bottomRight)
+
+**Layout элемента:**
+- **Row с spacing**: 16px между иконкой и текстом
+- **Icon Container**: 24x24px (icon-lg) для checkbox/menu icon
+- **Text**:
+  - Font: Archivo
+  - Size: 14px (font-size-14)
+  - Weight: 600 (semibold)
+  - Color: #09101D (color-text-primary) - для обычных опций
+  - Color: #DA1414 (color-error) - для destructive actions (например, delete)
+  - Line Height: 1.40
+
+**Варианты опций:**
+- **Default Option**: черный текст (#09101D)
+- **Destructive Option**: красный текст (#DA1414) для опасных действий (удаление, отмена)
+
+**Особенности:**
+- Первый и последний элементы имеют rounded corners
+- Средние элементы имеют прямые углы для цельного вида
+- Destructive actions выделяются красным цветом
+
+**Использование:**
+- Dropdown меню с опциями
+- Context menu при клике правой кнопкой
+- Action sheets для выбора действия
+- Радио-группа или чекбокс список
+
+---
+
 ## Паттерны
 
 ### Dashboard Layouts
@@ -1126,9 +1218,19 @@ background: linear-gradient(90deg,
 
 ## Версионирование и обновления
 
-**Текущая версия**: v5.0.3
+**Текущая версия**: v5.0.4
 
 ### Changelog
+
+#### v5.0.4 (2025-11-19)
+- Добавлены акцентные цвета: accent-purple (#7B61FF), error (#DA1414)
+- Добавлены размеры для file type иконок: 34x40px
+- Добавлены размеры контейнеров: showcase height (318px), menu width (333px)
+- Добавлен container-padding-lg: 50px для showcase контейнеров
+- Добавлен полный File Type Icons Grid компонент с showcase container
+- Добавлен полный Context Menu/Dropdown компонент с вариантами опций (default, destructive)
+- Описаны rounded corners для первого/последнего элемента меню
+- Добавлена поддержка destructive actions с красным цветом текста
 
 #### v5.0.3 (2025-11-19)
 - Добавлены цвета для графиков: chart-primary (#4141E6), chart-success (#0AFB6B), chart-blue-light (#0B24FB)
