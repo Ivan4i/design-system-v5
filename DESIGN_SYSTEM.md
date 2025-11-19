@@ -121,6 +121,7 @@
 --color-bg-pressed: #EAEFF2;  /* Из SmallLeadingSelector кода - pressed state */
 --color-bg-elevated: #FFFFFF;
 --color-bg-overlay: rgba(0, 0, 0, 0.5);
+--color-bg-overlay-light: rgba(9, 16, 29, 0.1);  /* Из FinanceLight кода - 10% opacity black для navigation icons и segmented control */
 --color-bg-dark: #12202F;
 --color-bg-message-outgoing: #303239;  /* Из Message кода - outgoing message bubble */
 
@@ -3153,6 +3154,431 @@ Background: White, Border Radius: 30px
 
 ---
 
+### 31. Finance Dashboard with Performance Chart (Complete Block)
+
+<!-- @block-id: finance-dashboard -->
+<!-- @category: finance, dashboard, chart, data-visualization, analytics -->
+<!-- @components: line-chart, segmented-control, stat-display, chart-tooltip, status-bar -->
+<!-- @use-cases: crypto-wallet, stock-portfolio, investment-tracking, financial-analytics, performance-monitoring -->
+<!-- @related-blocks: Block#29-social-program-card, Block#30-movie-event-card -->
+<!-- @keywords: график, финансы, дашборд, аналитика, портфолио, инвестиции, криптовалюта, акции -->
+
+Готовый блок финансового дашборда с графиком производительности аккаунта, извлеченный из Flutter приложения FinanceLight. Это целостный UI-блок для отображения финансовых метрик, графика изменения стоимости и выбора временного диапазона.
+
+**🔧 Гибкость блока**: Блок модульный и может быть адаптирован для различных финансовых приложений. Можно изменять метрики (Account Value, Market Gain/Loss), добавлять дополнительные показатели, менять временные диапазоны (1D, 1M, 3M, 1Y, All time), стилизовать график под разные типы данных (линейный, area chart, candlestick для акций).
+
+#### 📍 Куда подходит этот блок:
+
+**Основное применение:**
+1. **Crypto Wallet Apps** - отображение баланса кошелька и изменения стоимости портфеля
+2. **Stock Trading Apps** - просмотр performance акционного портфеля
+3. **Investment Platforms** - tracking инвестиционных доходов
+4. **Banking Apps** - отображение баланса счета и истории транзакций
+5. **Analytics Dashboards** - любые финансовые или числовые метрики с графиками
+
+**Переиспользуемые компоненты:**
+- **Line Chart Component** → Можно использовать отдельно в любых блоках с данными
+- **Segmented Control** → Переключатель периодов времени (используется в Block#31:3207)
+- **Stat Display Card** → Отображение метрик с заголовком и значением
+- **Chart Tooltip** → Всплывающая подсказка для отображения точного значения на графике
+
+**Связанные блоки:**
+- Block #29 (Social Program Card) - схожая структура header с иконками навигации
+- Block #30 (Movie/Event Card) - похожий pattern использования badges и info rows
+
+#### Общая структура блока:
+
+**Main Container:**
+- **Width**: 375px (mobile)
+- **Height**: 587px
+- **Background**: #4141E6 (color-accent) - фирменный синий
+- **Border Radius**: 30px (radius-card-large)
+- **Clip**: antiAlias
+
+#### 1. Status Bar (iOS-style)
+
+**Status Bar:**
+- **Width**: 375px
+- **Height**: 44px
+- **Position**: Top of block
+- **Purpose**: iOS status bar для full-screen модалов или standalone экранов
+
+**🔧 Гибкость**: Можно скрыть для Android или web версий
+
+#### 2. Header Section (Title with Navigation)
+
+**Header Container:**
+- **Width**: 375px
+- **Height**: 44px
+- **Padding**: Horizontal 10px
+- **Position**: Below status bar (top 44px)
+
+**Leading Icon Button (Left):**
+- **Size**: 24×24px icon container
+- **Padding**: 16px horizontal, 10px vertical (total 56×44px touch target)
+- **Icon**: 24×24px (back arrow or menu)
+- **Border Radius**: 12px
+- **Background**: Transparent
+
+**Title:**
+- **Text**: "Performance" (example)
+- **Width**: 239px (center area)
+- **Font**: Archivo
+- **Font Size**: 16px (font-size-base)
+- **Font Weight**: 700 (bold)
+- **Color**: White (#FFFFFF)
+- **Alignment**: Center
+- **Line Height**: 1.40
+
+**Trailing Icon Button (Right):**
+- **Size**: 24×24px icon container
+- **Padding**: 16px horizontal, 10px vertical (total 56×44px touch target)
+- **Icon**: 24×24px (settings, more, or info)
+- **Border Radius**: 12px
+- **Background**: Transparent
+
+**🔧 Гибкость**: Иконки могут быть любыми (back, close, menu, settings, info, share)
+
+#### 3. Account Value Display (Primary Metric)
+
+**Metric Container:**
+- **Width**: 375px
+- **Padding**: Horizontal 16px, Top 20px, Vertical 10px
+- **Alignment**: Center
+
+**Label:**
+- **Text**: "Account Value" (example)
+- **Width**: 160px
+- **Font**: Archivo
+- **Font Size**: 14px (font-size-sm)
+- **Font Weight**: 400 (normal)
+- **Color**: White (#FFFFFF)
+- **Alignment**: Center
+- **Line Height**: 1.40
+
+**Value:**
+- **Text**: "$28.98" (example)
+- **Width**: 160px
+- **Font**: Archivo
+- **Font Size**: 32px (font-size-2xl-plus)
+- **Font Weight**: 700 (bold)
+- **Color**: White (#FFFFFF)
+- **Alignment**: Center
+- **Line Height**: 1.40
+
+**🔧 Гибкость**: Можно отображать любую основную метрику (Balance, Net Worth, Total Value, Portfolio)
+
+#### 4. Market Gain/Loss Section (Secondary Metric with Navigation)
+
+**Section Container:**
+- **Width**: 375px
+- **Height**: 44px
+- **Padding**: Horizontal 32px, Vertical 10px
+- **Position**: Below Account Value (top 193px)
+
+**Leading Navigation Icon:**
+- **Container**: 24×24px
+- **Padding**: 16px horizontal, 10px vertical (total touch target)
+- **Background**: rgba(9, 16, 29, 0.1) - 10% opacity black (#1909101D)
+- **Border Radius**: 100px (circular)
+- **Icon**: 16×16px (chevron left or arrow)
+
+**Metric Display (Center):**
+- **Width**: 215px (expanded, takes available space)
+- **Padding**: Horizontal 16px, Vertical 10px
+- **Alignment**: Center
+
+**Change Value:**
+- **Text**: "+$1.47 (+0.63%)" (example)
+- **Width**: 215px
+- **Font**: Archivo
+- **Font Size**: 13px (font-size-xs-plus)
+- **Font Weight**: 600 (semibold)
+- **Color**: White (#FFFFFF)
+- **Alignment**: Center
+- **Line Height**: 1.40
+
+**Change Label:**
+- **Text**: "Market Gain/Loss" (example)
+- **Width**: 215px
+- **Font**: Archivo
+- **Font Size**: 10px (font-size-2xs)
+- **Font Weight**: 400 (normal)
+- **Color**: White (#FFFFFF)
+- **Alignment**: Center
+- **Line Height**: 1.40
+
+**Trailing Navigation Icon:**
+- **Container**: 24×24px
+- **Padding**: 16px horizontal, 10px vertical
+- **Background**: rgba(9, 16, 29, 0.1) - 10% opacity black
+- **Border Radius**: 100px (circular)
+- **Icon**: 16×16px (chevron right or arrow)
+
+**🔧 Гибкость**:
+- Change value цвет может быть динамическим (зеленый для прибыли, красный для убытка)
+- Можно добавить дополнительные метрики (ROI, Annual Return, etc.)
+- Navigation icons опциональны (для просмотра разных метрик или периодов)
+
+#### 5. Performance Chart (Line Chart with Tooltip)
+
+**Chart Container:**
+- **Width**: 375px
+- **Height**: 260px
+- **Padding**: Horizontal 16px, Vertical 20px
+- **Position**: Below Market Gain/Loss (top 257px)
+- **Clip**: antiAlias
+
+**Chart Line:**
+- **Type**: Line chart (linear gradient path)
+- **Width**: Responsive within container
+- **Height**: 260px
+- **Stroke**: 1px white line
+- **Rotation**: -90° (vertical orientation, rotated to horizontal)
+- **Position**: Right side of container (left 268px for vertical line)
+
+**Chart Tooltip (Hover/Tap State):**
+- **Position**: Left 248px, Top 257px (follows chart line on interaction)
+- **Container**: Auto width × 30.16px height
+- **Padding**: Horizontal 10px, Vertical 5px
+- **Background**: #09101D (color-text-primary) - темный
+- **Border Radius**: 8px (radius-sm)
+
+**Tooltip Content:**
+- **Value**: "$24.24" (example)
+  - Font: Archivo 11px (font-size-2xs-plus) semibold
+  - Color: White (#FFFFFF)
+  - Line Height: 1.40
+- **Time**: "12:45 PM" (example)
+  - Font: Archivo 10px (font-size-2xs) normal
+  - Color: White (#FFFFFF)
+  - Line Height: 1.40
+- **Alignment**: Center
+- **Format**: Rich text with line break between value and time
+
+**🔧 Гибкость**:
+- Chart type может быть изменен (line, area, candlestick, bar)
+- Можно добавить grid lines для лучшей читаемости
+- Multiple lines для сравнения нескольких активов
+- Tooltip может показывать дополнительные данные (volume, high/low, change)
+- Chart может быть интерактивным (zoom, pan, pinch to zoom)
+
+#### 6. Time Range Selector (Segmented Control)
+
+**Selector Container:**
+- **Width**: 375px
+- **Padding**: Horizontal 16px, Vertical 20px
+- **Position**: Bottom section (top 517px)
+
+**Segmented Control:**
+- **Container Padding**: 3px all sides
+- **Background**: rgba(9, 16, 29, 0.1) - 10% opacity black (#1909101D)
+- **Border Radius**: 10px (radius-lg-plus)
+- **Layout**: Horizontal row with 5 equal segments
+
+**Segment Button (×5):**
+- **Height**: 24px
+- **Padding**: Horizontal 6px
+- **Spacing**: 10px gap between segments
+- **Border Radius**: 10px (для selected), 11px (для unselected)
+- **Font**: Archivo 11px (font-size-2xs-plus) semibold
+- **Line Height**: 1.40
+
+**Segment States:**
+
+1. **Selected (Active) - "1D":**
+   - **Background**: White (#FFFFFF)
+   - **Text Color**: #23262B (color-text-dark)
+   - **Border Radius**: 10px
+
+2. **Unselected (Inactive) - "1M", "3M", "1Y", "All time":**
+   - **Background**: Transparent
+   - **Text Color**: White (#FFFFFF)
+   - **Border Radius**: 11px
+
+**Time Range Options:**
+- **1D** - One Day (24 hours)
+- **1M** - One Month (30 days)
+- **3M** - Three Months (90 days)
+- **1Y** - One Year (365 days)
+- **All time** - Complete history
+
+**🔧 Гибкость**:
+- Количество segments от 3 до 7 (1H, 1D, 1W, 1M, 3M, 6M, 1Y, All)
+- Можно добавить custom date range picker
+- Можно заменить на dropdown для экономии пространства
+- Labels можно локализовать (1D/1Д, 1M/1М, etc.)
+
+#### Complete Block Layout:
+
+```
+┌─────────────────────────────────────────┐
+│ ▓▓▓▓▓▓▓▓ Status Bar ▓▓▓▓▓▓▓▓▓▓▓▓        │ 44px (#4141E6 bg)
+├─────────────────────────────────────────┤
+│ [←]      Performance              [⋮]   │ 44px Header
+├─────────────────────────────────────────┤
+│                                          │
+│           Account Value                  │ 20px padding
+│              $28.98                      │ Primary metric
+│                                          │
+├─────────────────────────────────────────┤
+│ [◄]    +$1.47 (+0.63%)          [►]     │ Secondary metric
+│         Market Gain/Loss                 │ with navigation
+├─────────────────────────────────────────┤
+│                                          │
+│                                   [$24.24│ 260px Chart
+│              ╱╲    ╱╲            12:45PM]│ with tooltip
+│         ╱╲  ╱  ╲  ╱  ╲  ╱               │
+│    ╱╲  ╱  ╲╱    ╲╱    ╲╱                │
+│───╱──╲╱──────────────────────────────│  │ White line
+│                                          │
+├─────────────────────────────────────────┤
+│ ┌───────────────────────────────────┐   │
+│ │ [1D] [1M] [3M] [1Y] [All time]    │   │ 24px Segmented
+│ └───────────────────────────────────┘   │ Control
+└─────────────────────────────────────────┘
+
+Container: 375×587px
+Background: #4141E6
+Border Radius: 30px
+All text: White on colored background
+```
+
+#### Spacing Summary:
+
+- **Container**: 375×587px, 30px border radius
+- **Status Bar**: 44px height
+- **Header**: 44px height, 10px horizontal padding
+- **Account Value**: 20px top padding, 16px horizontal padding
+- **Market Gain/Loss**: 32px horizontal padding, 10px vertical padding
+- **Navigation Icons**: 24×24px, rgba(9,16,29,0.1) background, 100px radius
+- **Chart Area**: 260px height, 16px horizontal padding, 20px vertical padding
+- **Chart Tooltip**: 8px border radius, 10px horizontal padding, 5px vertical padding
+- **Segmented Control**: 20px vertical padding, 16px horizontal padding, 3px internal padding
+- **Segment Buttons**: 24px height, 6px horizontal padding, 10px gap
+
+#### Typography Summary:
+
+- **Header Title**: 16px bold white (Archivo)
+- **Account Label**: 14px normal white (Archivo)
+- **Account Value**: 32px bold white (Archivo)
+- **Change Value**: 13px semibold white (Archivo)
+- **Change Label**: 10px normal white (Archivo)
+- **Tooltip Value**: 11px semibold white (Archivo)
+- **Tooltip Time**: 10px normal white (Archivo)
+- **Segment Text**: 11px semibold (white/dark based on state) (Archivo)
+
+#### Color Palette:
+
+**Primary Background:**
+- **#4141E6** - color-accent (main container background)
+
+**Text & Icons:**
+- **#FFFFFF** - White (all text and icons on colored background)
+- **#23262B** - color-text-dark (selected segment text)
+
+**Overlays:**
+- **rgba(9, 16, 29, 0.1)** - 10% opacity black for navigation icons and segmented control background
+
+**Tooltip:**
+- **#09101D** - color-text-primary (tooltip background)
+
+#### Use Cases:
+
+1. **Cryptocurrency Wallets**: Bitcoin/Ethereum wallet balance tracking with price charts
+2. **Stock Trading Apps**: Portfolio performance visualization with market data
+3. **Investment Platforms**: Track ROI and investment growth over time
+4. **Banking Apps**: Account balance history and transaction analytics
+5. **Savings Apps**: Savings goal progress with historical data
+6. **Budget Trackers**: Income/expense trends over different periods
+7. **Revenue Dashboards**: Business revenue tracking for SaaS or e-commerce
+8. **Analytics Platforms**: Any numerical metric with time-series data
+
+#### Best Practices:
+
+**Flexibility & Extensibility:**
+- Chart type is interchangeable (line, area, candlestick, bar chart)
+- Metrics can be customized (replace Account Value with any KPI)
+- Time ranges are configurable (add/remove periods like 1H, 1W, 6M)
+- Can add multiple metrics row (display 2-4 key metrics instead of one)
+- Navigation icons optional (remove if no additional views needed)
+- Color scheme adaptable (change #4141E6 to brand color)
+
+**Responsive Behavior:**
+- Fixed 375px width for mobile (scale proportionally for tablet/desktop)
+- Chart maintains aspect ratio when scaled
+- Segmented control adapts to available width (equal distribution)
+- Tooltip follows touch/hover position on chart
+- All touch targets meet 44px minimum (icons have padding)
+
+**Interactive States:**
+- **Chart**: Tap or hover to show tooltip with exact value and time
+- **Segmented Control**: Tap segment to change time range, chart updates
+- **Navigation Icons**: Tap to cycle through different metrics or views
+- **Header Icons**: Back/close navigation, settings, or info modal
+- **Smooth Transitions**: 200-300ms ease-in-out for state changes
+
+**Data Visualization:**
+- White line chart provides high contrast on colored background
+- Tooltip appears on demand, doesn't clutter the view
+- Time range selector gives quick access to different zoom levels
+- Primary metric (large value) draws attention immediately
+- Secondary metric provides additional context
+- Chart fills available space for maximum readability
+
+**Accessibility:**
+- All interactive elements have 44×44px minimum touch targets
+- High contrast white text on #4141E6 background
+- Chart tooltip has dark background (#09101D) for readability
+- Selected segment has clear visual distinction (white background)
+- Semantic labels for screen readers ("Account Value", "Market Gain/Loss")
+- Chart data should be available in alternative format (table, list)
+
+**Design Tokens Used:**
+- Colors: #4141E6, #FFFFFF, #09101D, #23262B, rgba(9,16,29,0.1)
+- Border Radius: 8px, 10px, 11px, 12px, 30px, 100px
+- Font Sizes: 10px, 11px, 13px, 14px, 16px, 32px
+- Font Weights: 400 (normal), 600 (semibold), 700 (bold)
+- Spacing: 3px, 5px, 6px, 10px, 16px, 20px, 32px
+- Line Heights: 1.40 (consistent across all text)
+
+**Common Modifications:**
+
+**Metrics Enhancements:**
+- **Add Multiple Metrics Row**: Show 3-4 key metrics in a grid below Account Value
+- **Add Percentage Change Badge**: Color-coded badge (green/red) next to change value
+- **Add Comparison Baseline**: Show "vs. yesterday" or "vs. last month" comparison
+- **Add Goal Indicator**: Show target value or goal progress bar
+
+**Chart Enhancements:**
+- **Add Grid Lines**: Horizontal lines for value reference
+- **Add Area Fill**: Fill under line with gradient for visual weight
+- **Add Multiple Lines**: Compare multiple assets or metrics
+- **Add Zoom Controls**: Pinch to zoom, pan chart horizontally
+- **Add Volume Bars**: Show trading volume below main chart
+- **Add Technical Indicators**: Moving averages, Bollinger bands, RSI
+
+**Time Range Enhancements:**
+- **Add Custom Date Picker**: "Custom" button opens date range picker
+- **Add Quick Filters**: "Today", "This Week", "This Month" presets
+- **Add Comparison Mode**: "Compare to last period" toggle
+- **Add Hour View**: Intraday chart with hourly data
+
+**Navigation Enhancements:**
+- **Add Asset Switcher**: Navigate between different currencies/stocks
+- **Add Period Comparison**: Show overlay of previous period
+- **Add Notifications Badge**: Indicator for alerts or updates
+- **Add Quick Actions**: Buy/Sell buttons in header
+
+**Additional Features:**
+- **Add News Feed**: Latest news affecting the asset below chart
+- **Add Transaction History**: List of recent transactions
+- **Add Holdings Breakdown**: Pie chart or list of assets
+- **Add Performance Summary**: Daily/Weekly/Monthly/Yearly summary cards
+- **Add Price Alerts**: Set alert thresholds with notification toggle
+
+---
+
 ## Как использовать эту дизайн-систему
 
 ### Для дизайнеров
@@ -3180,9 +3606,71 @@ Background: White, Border Radius: 30px
 
 ## Версионирование и обновления
 
-**Текущая версия**: v5.10.0
+**Текущая версия**: v5.11.0
 
 ### Changelog
+
+#### v5.11.0 (2025-11-19)
+- Добавлен готовый **UI-блок** из Flutter приложения FinanceLight (Finance Dashboard with Performance Chart)
+- **Новый формат документации**: Добавлены навигационные метки для IDE AI
+- Block #31: Finance Dashboard with Performance Chart (Complete Block):
+  - Финансовый дашборд с графиком производительности аккаунта (375×587px, #4141E6 background)
+  - Включает 6 секций: Status Bar (44px), Header (44px), Account Value Display, Market Gain/Loss, Performance Chart (260px), Time Range Selector
+  - **📍 Куда подходит блок**: Детальная секция с 5 основными применениями (Crypto Wallet, Stock Trading, Investment, Banking, Analytics)
+  - **Переиспользуемые компоненты**: Line Chart, Segmented Control, Stat Display Card, Chart Tooltip
+- Навигационные метки для IDE AI:
+  - @block-id: finance-dashboard
+  - @category: finance, dashboard, chart, data-visualization, analytics
+  - @components: line-chart, segmented-control, stat-display, chart-tooltip, status-bar
+  - @use-cases: crypto-wallet, stock-portfolio, investment-tracking, financial-analytics, performance-monitoring
+  - @related-blocks: Block#29, Block#30
+  - @keywords: график, финансы, дашборд, аналитика, портфолио, инвестиции, криптовалюта, акции
+- Добавлен новый design token:
+  - Background overlay: rgba(9, 16, 29, 0.1) - 10% opacity black для navigation icons и segmented control
+- Компоненты блока:
+  - **Header**: Title "Performance" (16px bold white) с navigation icons (24×24px)
+  - **Account Value**: Label (14px) + Value "$28.98" (32px bold), centered
+  - **Market Gain/Loss**: Change "+$1.47 (+0.63%)" (13px semibold) + Label (10px) + Navigation icons (rgba black 10%)
+  - **Performance Chart**: 260px height, white line chart, tooltip "$24.24 / 12:45 PM" (#09101D bg, 8px radius)
+  - **Segmented Control**: 5 segments (1D, 1M, 3M, 1Y, All time), 24px height, 10px radius container
+- Segment states:
+  - Selected: White background (#FFFFFF), dark text (#23262B)
+  - Unselected: Transparent background, white text
+- Interactive features:
+  - Chart tooltip on hover/tap with value and timestamp
+  - Segmented control для выбора временного диапазона
+  - Navigation icons для переключения метрик
+- Spacing:
+  - Container: 30px border radius
+  - Header/Account Value: 20px top padding
+  - Market Gain/Loss: 32px horizontal padding
+  - Chart: 16px horizontal, 20px vertical padding
+  - Segmented Control: 3px internal padding, 6px segment padding
+- Typography:
+  - Header: 16px bold, Account Label: 14px normal, Account Value: 32px bold
+  - Change: 13px semibold, Label: 10px normal
+  - Tooltip: 11px semibold value + 10px normal time
+  - Segments: 11px semibold
+- Color Palette:
+  - Primary: #4141E6 (container background)
+  - Text: White (#FFFFFF) для всех элементов на цветном фоне
+  - Overlay: rgba(9,16,29,0.1) для icons и control
+  - Tooltip: #09101D (dark background)
+- Common Modifications (17 модификаций):
+  - Metrics: Multiple metrics row, percentage badge, comparison baseline, goal indicator
+  - Chart: Grid lines, area fill, multiple lines, zoom controls, volume bars, technical indicators
+  - Time Range: Custom date picker, quick filters, comparison mode, hour view
+  - Navigation: Asset switcher, period comparison, notifications, quick actions
+  - Features: News feed, transaction history, holdings breakdown, performance summary, price alerts
+- Документированы 8 use cases (Crypto Wallets, Stock Trading, Investment, Banking, Savings, Budget Trackers, Revenue Dashboards, Analytics)
+- Best Practices для блока:
+  - Flexible chart types (line, area, candlestick, bar)
+  - Customizable metrics и time ranges
+  - Responsive (375px mobile → tablet/desktop scaling)
+  - Interactive states (chart tooltip, segmented control, navigation)
+  - Data visualization с high contrast white on color
+  - Accessibility (44px touch targets, semantic labels, alternative data formats)
+- ASCII-диаграмма полной структуры блока с графиком и элементами управления
 
 #### v5.10.0 (2025-11-19)
 - Добавлен готовый **UI-блок** из Flutter приложения CardsLight (Movie/Event Card)
