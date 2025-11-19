@@ -155,6 +155,7 @@
 --shadow-keyboard-dark: #898A8D;
 --shadow-keyboard-light: rgba(4, 4, 15, 0.36);
 --shadow-button-dark: rgba(0, 0, 0, 0.35);
+--shadow-tooltip: rgba(0, 0, 0, 0.10);      /* Тень для светлых tooltips - #19000000 */
 ```
 
 ---
@@ -385,6 +386,13 @@
 --shadow-hover-sm: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
 --shadow-hover-md: 0 8px 16px 0 rgba(0, 0, 0, 0.12);
 --shadow-hover-lg: 0 12px 24px 0 rgba(0, 0, 0, 0.15);
+```
+
+#### Tooltip Shadows
+
+```css
+/* Тень для светлых tooltips из Flutter кода */
+--shadow-tooltip: 0 6px 15px 0 rgba(0, 0, 0, 0.10);
 ```
 
 ### Borders
@@ -1599,6 +1607,238 @@ Step 1  Step 2  Step 3  Step 4
 
 ---
 
+### 22. Tooltips (из Flutter кода)
+
+#### Tooltip Specifications
+
+**Container:**
+- **Padding**: 16px horizontal, 12px vertical
+- **Border Radius**: 8px
+- **Max Width**: Auto (адаптируется к контенту)
+
+**Typography:**
+- **Font Size**: 13px
+- **Font Weight**: 400 (regular)
+- **Line Height**: 140% (1.40)
+- **Font Family**: Archivo
+
+**Arrow/Pointer:**
+- **Size**: 4px height (треугольник)
+- **Spacing от tooltip**: 10px
+- **Position**: Top, Bottom, Left, Right, Center (8 направлений)
+
+#### Tooltip Variants
+
+**1. Dark Tooltip (Темная)**
+
+```css
+.tooltip--dark {
+  background: #09101D;
+  color: white;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.4;
+  box-shadow: none;
+}
+```
+
+**Спецификации:**
+- Background: #09101D (черный)
+- Text Color: white
+- Padding: 12px vertical, 16px horizontal
+- Border Radius: 8px
+- Shadow: None
+
+**2. Light Tooltip (Светлая)**
+
+```css
+.tooltip--light {
+  background: white;
+  color: #09101D;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.4;
+  box-shadow: 0 6px 15px 0 rgba(0, 0, 0, 0.10);
+}
+```
+
+**Спецификации:**
+- Background: white
+- Text Color: #09101D (черный)
+- Padding: 12px vertical, 16px horizontal
+- Border Radius: 8px
+- Shadow: 0 6px 15px 0 rgba(0, 0, 0, 0.10)
+
+#### Tooltip Positioning
+
+**Arrow Positions (8 направлений):**
+
+1. **Top Left** - стрелка слева сверху
+2. **Top Center** - стрелка по центру сверху
+3. **Top Right** - стрелка справа сверху
+4. **Right Top** - стрелка справа сверху (боковая)
+5. **Right Center** - стрелка справа по центру
+6. **Right Bottom** - стрелка справа снизу (боковая)
+7. **Bottom Left** - стрелка слева снизу
+8. **Bottom Center** - стрелка по центру снизу
+9. **Bottom Right** - стрелка справа снизу
+10. **Left Top** - стрелка слева сверху (боковая)
+11. **Left Center** - стрелка слева по центру
+12. **Left Bottom** - стрелка слева снизу (боковая)
+
+**Spacing:**
+- От элемента до tooltip: 10px
+- Arrow height: 4px
+- Arrow padding: 16px от края (для left/right aligned)
+
+#### Tooltip Usage Example
+
+```css
+/* Base Tooltip */
+.tooltip {
+  position: absolute;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.4;
+  font-family: 'Archivo', sans-serif;
+  white-space: nowrap;
+  z-index: 1000;
+}
+
+/* Dark variant */
+.tooltip--dark {
+  background: #09101D;
+  color: white;
+}
+
+/* Light variant */
+.tooltip--light {
+  background: white;
+  color: #09101D;
+  box-shadow: 0 6px 15px 0 rgba(0, 0, 0, 0.10);
+}
+
+/* Arrow base */
+.tooltip::before {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-style: solid;
+}
+
+/* Top arrow (pointing down) */
+.tooltip--arrow-top::before {
+  bottom: -4px;
+  border-width: 4px 4px 0 4px;
+}
+
+.tooltip--dark.tooltip--arrow-top::before {
+  border-color: #09101D transparent transparent transparent;
+}
+
+.tooltip--light.tooltip--arrow-top::before {
+  border-color: white transparent transparent transparent;
+}
+
+/* Bottom arrow (pointing up) */
+.tooltip--arrow-bottom::before {
+  top: -4px;
+  border-width: 0 4px 4px 4px;
+}
+
+.tooltip--dark.tooltip--arrow-bottom::before {
+  border-color: transparent transparent #09101D transparent;
+}
+
+.tooltip--light.tooltip--arrow-bottom::before {
+  border-color: transparent transparent white transparent;
+}
+
+/* Left arrow (pointing right) */
+.tooltip--arrow-left::before {
+  right: -4px;
+  border-width: 4px 0 4px 4px;
+}
+
+.tooltip--dark.tooltip--arrow-left::before {
+  border-color: transparent transparent transparent #09101D;
+}
+
+.tooltip--light.tooltip--arrow-left::before {
+  border-color: transparent transparent transparent white;
+}
+
+/* Right arrow (pointing left) */
+.tooltip--arrow-right::before {
+  left: -4px;
+  border-width: 4px 4px 4px 0;
+}
+
+.tooltip--dark.tooltip--arrow-right::before {
+  border-color: transparent #09101D transparent transparent;
+}
+
+.tooltip--light.tooltip--arrow-right::before {
+  border-color: transparent white transparent transparent;
+}
+
+/* Arrow alignment */
+.tooltip--arrow-left-align::before {
+  left: 16px;
+}
+
+.tooltip--arrow-center-align::before {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.tooltip--arrow-right-align::before {
+  right: 16px;
+}
+
+.tooltip--arrow-top-align::before {
+  top: 18px;
+}
+
+.tooltip--arrow-middle-align::before {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.tooltip--arrow-bottom-align::before {
+  bottom: 18px;
+}
+```
+
+#### Tooltip Behavior
+
+**Show/Hide:**
+- Trigger: Hover (desktop), Tap (mobile)
+- Delay: 200ms перед показом
+- Duration: Visible пока hover активен
+- Animation: Fade in/out (150ms)
+
+**Accessibility:**
+- Role: tooltip
+- Aria-describedby: связь с элементом
+- Keyboard: Показывается при фокусе
+- Screen readers: Читается автоматически
+
+**Best Practices:**
+- Текст: Краткий и информативный (1-2 строки)
+- Размещение: Не перекрывает важный контент
+- Контраст: Достаточный для читабельности
+- Responsive: Адаптируется к границам экрана
+
+---
+
 ## Паттерны
 
 ### Dashboard Layouts
@@ -1842,9 +2082,24 @@ decoration: BoxDecoration(
 
 ## Версионирование и обновления
 
-**Текущая версия**: v5.5.0
+**Текущая версия**: v5.6.0
 
 ### Changelog
+
+#### v5.6.0 (2025-11-19)
+- **Tooltips (Всплывающие подсказки)**: Добавлен компонент Tooltips
+  - 2 варианта: Dark (черная) и Light (светлая с тенью)
+  - Container: 8px border-radius, 16px/12px padding
+  - Typography: 13px, weight 400, line-height 140%
+  - Arrow/Pointer: 4px height, 10px spacing, 12 направлений позиционирования
+  - Dark tooltip: #09101D background, white text, no shadow
+  - Light tooltip: white background, #09101D text, shadow 0 6px 15px rgba(0,0,0,0.10)
+- **Shadows**: Добавлена тень для tooltips
+  - Tooltip shadow: 0 6px 15px 0 rgba(0, 0, 0, 0.10)
+- **Компоненты**: Добавлены CSS примеры для tooltips
+  - Arrow positioning (top, bottom, left, right)
+  - Arrow alignment (left, center, right, top, middle, bottom)
+  - Accessibility и behavior спецификации
 
 #### v5.5.0 (2025-11-19)
 - **Input Fields (Текстовые поля)**: Полностью переработана секция Inputs
