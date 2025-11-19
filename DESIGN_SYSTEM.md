@@ -59,6 +59,11 @@
 --color-accent-blue: #1D4ED8;      /* blue-700 */
 --color-accent-purple: #7B61FF;    /* Фиолетовый из Flutter кода */
 --color-accent-yellow: #FFC043;    /* Желтый/золотой для charts из Flutter */
+--color-accent-green-light: #D4FC79; /* Светло-зеленый для градиентов Cash Card */
+--color-accent-green: #96E6A1;     /* Зеленый для градиентов Cash Card */
+--color-accent-green-tab: #98E7A0; /* Зеленый для активных табов Cash Card */
+--color-accent-green-border: #9AE89F; /* Зеленая рамка аватара Cash Card */
+--color-accent-green-button: #D2FC7B; /* Светло-зеленая кнопка Activate */
 --color-success: #11BB8D;          /* Зеленый для success badges из Flutter */
 --color-error: #DA1414;            /* Красный для destructive actions из Flutter (delete, remove) */
 --color-notification: #E24949;     /* Красный для notification badges из Flutter (active notifications, alerts) */
@@ -251,6 +256,7 @@
 /* Градиенты из Flutter кода */
 --gradient-live-badge: linear-gradient(90deg, #833AB4 0%, #FD1D1D 50%, #FCB045 100%);
 --gradient-image-overlay: linear-gradient(180deg, rgba(196, 196, 196, 0) 0%, rgba(29, 29, 29, 0.50) 100%);
+--gradient-cash-card: linear-gradient(90deg, #D4FC79 0%, #96E6A1 100%); /* Зеленый градиент для Cash Card */
 ```
 
 ### Border Radius
@@ -1636,6 +1642,172 @@
 
 ---
 
+## Financial Components (Flutter Mobile)
+
+### Cash Card Component
+
+**Container**:
+- Width: 375px (full mobile width)
+- Padding: 16px horizontal, 10px vertical
+- Background: white
+
+**Header Section**:
+- **Height**: 44px
+- **Padding**: 16px horizontal
+- **Layout**: Row with spaceBetween
+- **Elements**:
+  - **Title**: "Cash Card"
+    - Font: Archivo 24px, weight 700
+    - Color: #09101D (color-text-primary)
+    - Line Height: 1.40
+  - **Avatar with Actions**:
+    - Avatar Container: 40px × 40px
+    - Border: 2px solid #9AE89F (color-accent-green-border)
+    - Border Radius: 30px
+    - Inner Avatar: 32px × 32px (4px offset)
+    - Background: #D9DDE2 (placeholder)
+    - Image: NetworkImage, fit cover
+    - Border Radius: 40px
+    - Settings Icon: 24px × 24px, background #F4F6F9, border-radius 10px
+    - Spacing: 6px between avatar and icon
+
+**Card Section** (padding: top 50px, bottom 10px):
+- **Container**: Full width, padding 16px horizontal, 10px vertical
+- **Card Container**:
+  - Padding: 10px all
+  - Background: linear-gradient(90deg, #D4FC79 0%, #96E6A1 100%)
+  - Border: 1px solid rgba(0, 0, 0, 0.05)
+  - Border Radius: 15px
+  - Clip Behavior: antiAlias
+
+**Card Inner Layout**:
+- **Top Section** (padding: 10px):
+  - **Logo Container**: 60px × 60px
+    - Border Radius: 15px
+    - Image: NetworkImage, fit contain
+    - Position: left
+  - **Menu Icon**: 20px × 20px
+    - Position: right
+    - Padding: 10px (container)
+
+- **Card Data Section** (padding: 10px, bottom section):
+  - **Card Number**:
+    - Text: "1234 5678 9000 0000"
+    - Font: OCR-A 22px, weight 400
+    - Color: #09101D
+    - Line Height: 1.40
+    - Letter Spacing: 2.59px
+    - Shadow: 0px 1px 1px rgba(0, 0, 0, 0.40)
+    - Width: 303px
+
+  - **Card Details Row** (spacing: 20px, layout: spaceBetween):
+    - **Name**: "JANE APPK"
+      - Font: OCR-A 11px, weight 400
+      - Color: #09101D
+      - Letter Spacing: 2px
+      - Shadow: 0px 1px 1px rgba(0, 0, 0, 0.40)
+    - **Expiry Date**: "04 / 23"
+      - Font: OCR-A 11px, weight 400
+      - Color: #09101D
+      - Letter Spacing: 1px
+      - Shadow: 0px 1px 1px rgba(0, 0, 0, 0.40)
+    - **Card Logo**: 40px × 24px (Visa/Mastercard logo)
+      - Position: right
+
+**Notification Item** (padding: 10px horizontal):
+- **Container**: Full width
+- **Background**: white
+- **Clip Behavior**: antiAlias
+- **Layout**: Row
+
+**Notification Content** (padding: left 16px, vertical 12px):
+- **Width**: 160px
+- **Title**: "Cash Card Shipped"
+  - Font: Archivo 14px, weight 600
+  - Color: #09101D (color-text-primary)
+  - Line Height: 1.40
+- **Time**: "19 hours ago"
+  - Font: Archivo 11px, weight 600
+  - Color: #23262B (color-bg-dark-secondary)
+  - Line Height: 1.40
+
+**Activate Button** (padding: 16px horizontal, right aligned):
+- **Height**: 36px
+- **Padding**: 16px horizontal, 10px vertical
+- **Background**: #D2FC7B (color-accent-green-button)
+- **Border Radius**: 15px
+- **Text**: "Activate"
+  - Font: Archivo 11px, weight 600
+  - Color: #09101D
+  - Line Height: 1.40
+
+**Tabs Section** (padding: 16px horizontal):
+- **Container**: Full width
+- **Spacing**: 20px between tabs
+- **Clip Behavior**: antiAlias
+
+**Tab Item**:
+- **Height**: 52px
+- **Padding**: 10px horizontal (text container)
+- **Clip Behavior**: antiAlias
+- **Spacing**: 8px (internal)
+
+**Tab States**:
+- **Active Tab** ("Cashback"):
+  - Text: "Cashback"
+    - Font: Archivo 13px, weight 600
+    - Color: #98E7A0 (color-accent-green-tab)
+    - Line Height: 1.40
+  - Underline: 2px solid #98E7A0
+  - Position: bottom
+
+- **Inactive Tabs** ("Boosts slots", "Special offers"):
+  - Text Font: Archivo 11px, weight 600
+  - Color: #09101D (color-text-primary)
+  - Line Height: 1.40
+  - Underline: 2px transparent
+
+**Cashback Section** (padding: 16px horizontal, 20px vertical):
+- **Container**: Full width
+- **Spacing**: 10px between items
+- **Clip Behavior**: antiAlias
+
+**Cashback Item**:
+- **Container**: Column layout
+- **Padding**: 10px all
+- **Background**: rgba(212, 252, 122, 0.50) (#D4FC7A with 50% opacity)
+- **Border Radius**: 15px
+- **Clip Behavior**: antiAlias
+- **Spacing**: 5px (between icon and percentage)
+
+**Cashback Elements**:
+- **Icon Container**: 44px × 44px
+  - Padding: 15px (for icon)
+  - Background: Store logo image
+  - Border Radius: 15px
+  - Image Fit: contain
+- **Percentage Text**: "5%"
+  - Font: Archivo 13px, weight 600
+  - Color: #09101D
+  - Line Height: 1.40
+  - Centered
+
+**Empty Cashback Slot**:
+- Same container specs
+- Icon: 44px × 44px with 1px solid #09101D border
+- Border Radius: 15px
+- Plus icon: 16.80px × 16.80px (centered, -1.40px offset positioning)
+
+**Layout Notes**:
+- Card gradient can be customized per card type
+- OCR-A font used for authentic card number display
+- Card supports both network images and placeholder states
+- Notification can be dismissed or have different actions
+- Tabs are horizontally scrollable if more than 3
+- Cashback slots flexible (add/remove based on active offers)
+
+---
+
 ## Onboarding & Authentication Screens (Flutter Mobile)
 
 ### Common Elements
@@ -2218,6 +2390,29 @@ Icon Button (40px):
     - Code Fields: 4 fields, 46px height, #FAFAFB background, border 2px #2E5AAC (focus)
     - Helper text: "Didn't get the code?" with link #2E5AAC
   - Usage Notes: Flexible forms (add/remove fields), adjustable progress (3-7 steps), 375px width standard
+- Financial Components (Cash Card - Flutter Mobile):
+  - New colors: #D4FC79 (accent-green-light), #96E6A1 (accent-green), #98E7A0 (accent-green-tab), #9AE89F (accent-green-border), #D2FC7B (accent-green-button)
+  - New gradient: linear-gradient(90deg, #D4FC79 0%, #96E6A1 100%) for Cash Card background
+  - Cash Card Component:
+    - Header: Title "Cash Card" (Archivo 24px weight 700), Avatar 40px with 2px green border (#9AE89F), Settings icon 24px
+    - Card Section: Gradient background, 10px padding, 15px border-radius, 1px border rgba(0,0,0,0.05)
+    - Logo: 60px × 60px, border-radius 15px, fit contain
+    - Card Number: OCR-A 22px, letter-spacing 2.59px, shadow 0px 1px 1px rgba(0,0,0,0.40)
+    - Card Details: Name (OCR-A 11px, letter-spacing 2px), Expiry (OCR-A 11px, letter-spacing 1px), Card logo 40×24px
+  - Notification Item:
+    - Container: full width, white background
+    - Title: Archivo 14px weight 600 #09101D
+    - Time: Archivo 11px weight 600 #23262B
+    - Activate Button: 36px height, #D2FC7B background, Archivo 11px weight 600
+  - Tabs Section:
+    - Active Tab: Archivo 13px weight 600, color #98E7A0, 2px underline
+    - Inactive Tabs: Archivo 11px weight 600, color #09101D
+    - Height: 52px, spacing 20px
+  - Cashback Section:
+    - Item: 44×44px icon container, rgba(212,252,122,0.50) background, 15px border-radius
+    - Percentage: Archivo 13px weight 600, centered
+    - Empty Slot: 44×44px with 1px border #09101D, plus icon centered
+  - Usage: Flexible cashback slots (add/remove), customizable card gradients, OCR-A font for authenticity
 - Layout patterns и Best practices
 
 ---
