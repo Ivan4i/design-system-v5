@@ -44,6 +44,8 @@
 /* Текст из Tailwind CSS */
 --color-text-primary: #020617;     /* slate-950 */
 --color-text-secondary: #27272A;   /* zinc-800 */
+--color-text-dark: #09101D;        /* Основной темный текст (Flutter) */
+--color-text-gray: #373940;        /* Серый текст для подписей (Flutter) */
 ```
 
 ### Accent Colors
@@ -52,6 +54,7 @@
 /* Акцентные цвета */
 --color-accent-blue: #1D4ED8;      /* blue-700 */
 --color-accent-purple: #7B61FF;    /* Фиолетовый из Flutter кода */
+--color-link-blue: #4141E6;        /* Синий для ссылок и активных элементов */
 ```
 
 ### Background Colors
@@ -63,13 +66,35 @@
 --color-bg-card-dark: #23262B;     /* Темная карточка */
 ```
 
-### Shadow Colors
+### Overlay & Shadow Colors
 
 ```css
+/* Overlay цвета для Flutter компонентов */
+--overlay-black-30: rgba(0, 0, 0, 0.30);    /* Черный overlay 30% для бейджей и play button */
+--overlay-white-50: rgba(255, 255, 255, 0.50); /* Белый overlay 50% для текстовых блоков */
+
 /* Тени */
 --shadow-light: rgba(240, 241, 242, 1.00);
 --shadow-text: rgba(0, 0, 0, 0.40);         /* Тень для текста */
 --shadow-box: rgba(0, 0, 0, 0.40);          /* Тень для контейнеров */
+```
+
+### Gradients
+
+```css
+/* Градиенты для Flutter компонентов */
+--gradient-black-vertical: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
+/* Используется в карточках категорий для затемнения снизу */
+/* Alignment: начало (0.50, -0.00), конец (0.50, 1.00) */
+```
+
+**Flutter код градиента:**
+```dart
+gradient: LinearGradient(
+  begin: Alignment(0.50, -0.00),
+  end: Alignment(0.50, 1.00),
+  colors: [Colors.black.withValues(alpha: 0), Colors.black],
+)
 ```
 
 ---
@@ -225,6 +250,13 @@
 --space-24: 6rem;     /* 96px */
 ```
 
+**Flutter Spacing Values (из кода):**
+- `spacing: 2` → 2px - минимальный отступ между элементами
+- `spacing: 5` → 5px - отступ в заголовках
+- `spacing: 6` → 6px - отступ между аватаром и текстом
+- `spacing: 7` → 7px - отступ в layout
+- `spacing: 10` → 10px - стандартный отступ между секциями
+
 ### Border Radius
 
 ```css
@@ -347,6 +379,138 @@
 
 ---
 
+#### Flutter Mobile Cards
+
+Специальные карточки для мобильного приложения, извлеченные из Flutter кода.
+
+##### Category Card with Gradient (Tall)
+- **Size**: 230px × 330px
+- **Border Radius**: 16px
+- **Background**: Image with gradient overlay
+- **Gradient**: Linear gradient (top to bottom): `rgba(0, 0, 0, 0)` → `rgba(0, 0, 0, 1)`
+- **Padding**:
+  - Top: 15px
+  - Left: 15px, Right: 10px, Bottom: 30px
+- **Title**:
+  - Font: Archivo Bold
+  - Size: 32px
+  - Color: White (#FFFFFF)
+  - Line Height: 1.40
+- **Usage**: Категории (BBQ, и т.д.)
+
+```dart
+Container(
+  width: 230,
+  height: 330,
+  decoration: ShapeDecoration(
+    gradient: LinearGradient(
+      begin: Alignment(0.50, -0.00),
+      end: Alignment(0.50, 1.00),
+      colors: [Colors.black.withValues(alpha: 0), Colors.black],
+    ),
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+  ),
+)
+```
+
+##### Category Card (Square)
+- **Size**: 230px × 230px
+- **Border Radius**: 15px
+- **Background**: Image with gradient overlay
+- **Gradient**: Linear gradient (top to bottom): `rgba(0, 0, 0, 0)` → `rgba(0, 0, 0, 1)`
+- **Padding**: 10px
+- **Title**:
+  - Font: Archivo Bold
+  - Size: 26px
+  - Color: White (#FFFFFF)
+  - Line Height: 1.40
+- **Usage**: Локации (Berlin, и т.д.)
+
+##### Info Card with Semi-transparent Overlay
+- **Size**: 230px × 230px
+- **Border Radius**: 16px
+- **Background**: Image (BoxFit.cover)
+- **Overlay**: White with 50% opacity (`rgba(255, 255, 255, 0.50)`)
+- **Padding**: 20px
+- **Text**:
+  - Font: Archivo SemiBold
+  - Size: 13px
+  - Color: Dark (#09101D)
+  - Line Height: 1.40
+  - Max Width: 190px
+- **Usage**: Информационные блоки с описанием
+
+```dart
+Container(
+  padding: const EdgeInsets.all(20),
+  decoration: BoxDecoration(
+    color: Colors.white.withValues(alpha: 0.50),
+  ),
+)
+```
+
+##### Recipe Card with Author
+- **Size**: 270px × 300px
+- **Border Radius**: 15px
+- **Image**: 270px × 203px (top section)
+- **Badges**:
+  - Two badges on image (views/likes count, duration)
+  - Height: 24px
+  - Padding: left 5px, right 10px
+  - Background: `rgba(0, 0, 0, 0.30)`
+  - Border Radius: 10px
+  - Text: White, 11px, Archivo SemiBold
+- **Title**:
+  - Font: Archivo SemiBold
+  - Size: 15px
+  - Color: #09101D
+  - Line Height: 1.40
+  - Padding Top: 10px
+- **Author Section**:
+  - Avatar: 40px container with 32px image
+  - Avatar Border Radius: 10px
+  - Name: Color #4141E6, 13px, Archivo Regular
+  - Role: Color #373940, 12px, Archivo Regular
+  - Spacing: 6px between avatar and text
+- **Usage**: Карточки рецептов с информацией об авторе
+
+##### Video Card with Play Button
+- **Size**: 260px × 200px
+- **Border Radius**: 15px
+- **Image**: 260px × 168px
+- **Play Button**:
+  - Size: 40px × 40px
+  - Padding: 12px
+  - Background: `rgba(0, 0, 0, 0.30)`
+  - Border Radius: 100px (circle)
+  - Position: Centered on image
+- **Badges**: Similar to Recipe Card (14k views, 10 min)
+- **Title**:
+  - Font: Archivo Bold
+  - Size: 16px
+  - Color: #09101D
+  - Line Height: 1.40
+  - Padding: 5px
+- **Usage**: Видео контент
+
+##### Full Image Card with Gradient Text
+- **Size**: 230px × 330px
+- **Border Radius**: 16px
+- **Background**: Full image (230px × 330px)
+- **Gradient Overlay**: Linear gradient at bottom
+  - From: `rgba(0, 0, 0, 0)`
+  - To: `rgba(0, 0, 0, 1)`
+- **Text**:
+  - Font: Archivo SemiBold
+  - Size: 13px
+  - Color: White (#FFFFFF)
+  - Line Height: 1.40
+  - Max Width: 190px
+  - Padding: 20px
+- **Usage**: Промо карточки с текстом поверх изображения
+
+---
+
 ### 2. Buttons
 
 #### Primary Button
@@ -436,6 +600,59 @@
 - **Radius**: radius-base (4px)
 - **Font Size**: font-size-sm (14px)
 - **Close Button**: Size: 14px, Margin-left: 8px, Color: color-text-tertiary, Hover: color-text-primary
+
+---
+
+#### Flutter Overlay Badges
+
+Бейджи для отображения на изображениях (из Flutter кода).
+
+- **Height**: 24px
+- **Padding**: Left 5px, Right 10px
+- **Border Radius**: 10px
+- **Background**: `rgba(0, 0, 0, 0.30)` (черный с 30% прозрачностью)
+- **Icon**:
+  - Size: 24px × 24px
+  - Padding: 8px
+  - Border Radius: 100px (circle)
+- **Text**:
+  - Font: Archivo SemiBold
+  - Size: 11px
+  - Color: White (#FFFFFF)
+  - Line Height: 1.40
+- **Examples**: '134', '30 min', '14k', '10 min'
+- **Usage**: Счетчики просмотров, лайков, продолжительность видео/рецептов
+
+```dart
+Container(
+  height: 24,
+  padding: const EdgeInsets.only(left: 5, right: 10),
+  decoration: ShapeDecoration(
+    color: Colors.black.withValues(alpha: 0.30),
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+  ),
+  child: Row(
+    children: [
+      Container(
+        width: 24,
+        height: 24,
+        padding: const EdgeInsets.all(8),
+        // Icon here
+      ),
+      Text(
+        '134',
+        style: TextStyle(
+          color: Colors.white,
+          fontSize: 11,
+          fontFamily: 'Archivo',
+          fontWeight: FontWeight.w600,
+          height: 1.40,
+        ),
+      ),
+    ],
+  ),
+)
+```
 
 ---
 
@@ -545,7 +762,113 @@
 
 ---
 
-### 10. List Items
+#### Flutter Avatar (Recipe Author)
+
+Avatar компонент из Flutter кода для карточек рецептов.
+
+- **Outer Container**: 40px × 40px
+- **Inner Image**: 32px × 32px
+  - Position: Left 4px, Top 4px
+- **Border Radius**: 10px (rounded square)
+- **Placeholder Background**: #D9DDE2
+- **Image Fit**: BoxFit.cover
+
+```dart
+Container(
+  width: 40,
+  height: 40,
+  child: Stack(
+    children: [
+      Positioned(
+        left: 4,
+        top: 4,
+        child: Container(
+          width: 32,
+          height: 32,
+          decoration: ShapeDecoration(
+            color: const Color(0xFFD9DDE2),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+          ),
+        ),
+      ),
+      Positioned(
+        left: 4,
+        top: 4,
+        child: Container(
+          width: 32,
+          height: 32,
+          decoration: ShapeDecoration(
+            image: DecorationImage(
+              image: NetworkImage("https://placehold.co/32x32"),
+              fit: BoxFit.cover,
+            ),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+          ),
+        ),
+      ),
+    ],
+  ),
+)
+```
+
+**Author Info Layout:**
+- **Spacing**: 6px between avatar and text
+- **Name**:
+  - Font: Archivo Regular
+  - Size: 13px
+  - Color: #4141E6 (link blue)
+  - Line Height: 1.40
+- **Role**:
+  - Font: Archivo Regular
+  - Size: 12px
+  - Color: #373940 (gray)
+  - Line Height: 1.40
+
+---
+
+### 10. Media Controls (Flutter)
+
+#### Play Button Overlay
+
+Кнопка воспроизведения для видео карточек из Flutter кода.
+
+- **Size**: 40px × 40px
+- **Padding**: 12px (внутри кнопки для иконки)
+- **Border Radius**: 100px (perfect circle)
+- **Background**: `rgba(0, 0, 0, 0.30)` (черный с 30% прозрачностью)
+- **Position**: Center of video thumbnail
+- **Icon Size**: 16px × 16px (after padding)
+- **Usage**: Overlay на превью видео
+
+```dart
+Container(
+  width: 40,
+  height: 40,
+  padding: const EdgeInsets.all(12),
+  decoration: ShapeDecoration(
+    color: Colors.black.withValues(alpha: 0.30),
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
+  ),
+  child: Row(
+    mainAxisSize: MainAxisSize.min,
+    mainAxisAlignment: MainAxisAlignment.center,
+    crossAxisAlignment: CrossAxisAlignment.center,
+    spacing: 10,
+    children: [
+      // Play icon here (16px × 16px)
+    ],
+  ),
+)
+```
+
+**Позиционирование на Video Card:**
+- Position: Absolute
+- Left: 110px (centered on 260px width)
+- Top: 64px (centered on 168px height)
+
+---
+
+### 11. List Items
 
 #### List Item
 
@@ -845,9 +1168,30 @@
 
 ## Версионирование и обновления
 
-**Текущая версия**: v5.0.0
+**Текущая версия**: v5.1.0
 
 ### Changelog
+
+#### v5.1.0 (2025-11-19)
+- **Добавлены Flutter Mobile компоненты:**
+  - Category Card with Gradient (Tall) - 230×330px
+  - Category Card (Square) - 230×230px
+  - Info Card with Semi-transparent Overlay - 230×230px
+  - Recipe Card with Author - 270×300px
+  - Video Card with Play Button - 260×200px
+  - Full Image Card with Gradient Text - 230×330px
+- **Новые цвета:**
+  - `#4141E6` - Синий для ссылок и активных элементов
+  - `#09101D` - Основной темный текст
+  - `#373940` - Серый текст для подписей
+  - Overlay цвета: `rgba(0, 0, 0, 0.30)` и `rgba(255, 255, 255, 0.50)`
+- **Градиенты:**
+  - Linear gradient (черный вертикальный) для карточек категорий
+- **Flutter компоненты:**
+  - Overlay Badges (24px height, полупрозрачный черный фон)
+  - Play Button Overlay (40×40px, круглая кнопка)
+  - Flutter Avatar для карточек рецептов (40px outer, 32px inner)
+- **Spacing values:** Добавлены spacing значения из Flutter (2px, 5px, 6px, 7px, 10px)
 
 #### v5.0.0 (2025-11-19)
 - Первая версия дизайн-системы
