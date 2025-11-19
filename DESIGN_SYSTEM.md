@@ -33,12 +33,31 @@
 ### Real Project Colors (Extracted from Flutter Code)
 
 ```css
-/* Реальные цвета из проекта */
+/* Реальные цвета из проекта - Основные */
 --color-bg-dark: #12202F;           /* Color.fromARGB(255, 18, 32, 47) - scaffold background */
---color-text-dark: #09101D;         /* Color(0xFF09101D) - text and border color */
+--color-bg-light: #F4F6F9;          /* Color(0xFFF4F6F9) - light background */
+--color-text-dark: #09101D;         /* Color(0xFF09101D) - dark text and border */
+--color-text-gray: #747B84;         /* Color(0xFF747B84) - secondary text color */
 --color-white: #FFFFFF;             /* Colors.white */
---color-border-dark: #09101D;       /* Border color */
+--color-border-dark: #09101D;       /* Border color dark */
+--color-border-purple: #7B61FF;     /* Color(0xFF7B61FF) - purple border/accent */
+
+/* Semantic Colors - Status States */
+--color-success: #11BB8D;           /* Color(0xFF11BB8D) - green/success */
+--color-success-light: #0AFB6B;     /* Color(0xFF0AFB6B) - light green indicator */
+--color-info: #0B24FB;              /* Color(0xFF0B24FB) - blue/info */
+--color-info-transparent: #0B24FBCC; /* Color(0xCC0B24FB) - blue with 80% opacity */
+--color-error: #E24949;             /* Color(0xFFE24949) - red/error */
+--color-warning: #FF9500;           /* Color(0xFFFF9500) - orange/warning */
+--color-warning-alt: #FF9F0A;       /* Color(0xFFFF9F0A) - orange alternative */
 ```
+
+**Использование цветов в проекте:**
+- **Backgrounds**: #12202F (dark theme), #F4F6F9 (light containers), #FFFFFF (white cards)
+- **Text**: #09101D (primary), #747B84 (secondary/placeholder), #FFFFFF (inverse)
+- **Borders**: #09101D (dark), #7B61FF (purple accent), 1px width
+- **Status Indicators**: #11BB8D (success), #0B24FB (info), #E24949 (error), #FF9500 (warning)
+- **Badge dots**: 6×6px oval shapes with status colors
 
 ### Primary Colors
 
@@ -160,13 +179,24 @@
 ```css
 /* Реальная типографика из проекта */
 --font-project: 'Archivo';          /* fontFamily: 'Archivo' */
---font-size-display: 4.5rem;        /* 72px - fontSize: 72 */
+--font-size-display: 4.5rem;        /* 72px - fontSize: 72 - Display headers */
+--font-size-base: 1rem;             /* 16px - fontSize: 16 - Body text, buttons */
+--font-size-small: 0.75rem;         /* 12px - fontSize: 12 - Status bar, small text */
 --font-weight-ultra: 800;           /* fontWeight: FontWeight.w800 */
---line-height-tight: 0.70;          /* height: 0.70 */
+--font-weight-semibold: 600;        /* fontWeight: FontWeight.w600 */
+--font-weight-normal: 400;          /* fontWeight: FontWeight.w400 */
+--line-height-tight: 0.70;          /* height: 0.70 - Display headers */
+--line-height-compact: 1.33;        /* height: 1.33 - Small text */
+--line-height-normal: 1.40;         /* height: 1.40 - Body text */
+--letter-spacing-tight: -0.05em;    /* letterSpacing: -0.05 - Tight spacing */
 ```
 
 **Использование в проекте:**
-- **Grid Title**: Font: 'Archivo', Size: 72px (4.5rem), Weight: 800 (extrabold), Line Height: 0.70, Color: #09101D
+- **Grid Title**: Font: 'Archivo', Size: 72px, Weight: 800 (extrabold), Line Height: 0.70, Color: #09101D
+- **Status Bar Time**: Font: 'Archivo', Size: 12px, Weight: 600 (semibold), Line Height: 1.33, Color: #09101D / white
+- **Status Bar Text**: Font: 'Archivo', Size: 12px, Weight: 400 (normal), Line Height: 1.33, Letter Spacing: -0.05, Color: #09101D / white
+- **Search Placeholder**: Font: 'Archivo', Size: 16px, Weight: 400, Line Height: 1.40, Color: #747B84
+- **Cancel Button**: Font: 'Archivo', Size: 16px, Weight: 400, Line Height: 1.40, Color: #0B24FB
 
 ### Font Family
 
@@ -250,17 +280,24 @@
 
 ```css
 /* Реальные отступы из проекта */
---space-project-xs: 0.625rem;   /* 10px - spacing: 10, EdgeInsets.all(10) */
---space-project-sm: 1rem;       /* 16px - left: 16 */
---space-project-lg: 6.25rem;    /* 100px - left: 100, top: 100 */
+--space-project-1: 0.25rem;     /* 4px - Row spacing, vertical padding */
+--space-project-1-25: 0.3125rem; /* 5px - left padding */
+--space-project-1-75: 0.4375rem; /* 7px - vertical padding */
+--space-project-2: 0.5rem;      /* 8px - padding */
+--space-project-xs: 0.625rem;   /* 10px - spacing: 10, EdgeInsets.all(10), Row spacing */
+--space-project-sm: 1rem;       /* 16px - horizontal padding, positioning */
+--space-project-md: 3.125rem;   /* 50px - container padding, Row/Column gap */
+--space-project-lg: 6.25rem;    /* 100px - left: 100, top: 100, Row gap */
 --space-project-xl: 12.5rem;    /* 200px - top: 200 */
 ```
 
 **Использование в проекте:**
-- **Column spacing**: 10px (gap между элементами)
-- **Container padding**: 10px (EdgeInsets.all)
-- **Grid positioning**: left: 100px, top: 100px, 200px
-- **Content positioning**: left: 16px
+- **Micro spacing**: 4px (Row spacing), 5px (left padding), 7px (vertical padding), 8px (padding)
+- **Small spacing**: 10px (gap между элементами, EdgeInsets.all, Row spacing)
+- **Medium spacing**: 16px (horizontal padding, content positioning)
+- **Large spacing**: 50px (container padding all(), Row/Column gap: 50, 100)
+- **XLarge spacing**: 100px (grid positioning left/top)
+- **XXLarge spacing**: 200px (top positioning)
 
 ### Spacing Scale
 
@@ -289,13 +326,17 @@
 
 ```css
 /* Реальные border radius из проекта */
---radius-project-container: 6.25rem;  /* 100px - BorderRadius.circular(100) - main container */
---radius-project-phone: 2.5rem;       /* 40px - BorderRadius.circular(40) - phone container */
+--radius-project-sm: 0.9375rem;       /* 15px - BorderRadius.circular(15) - containers, search bars */
+--radius-project-md: 2rem;            /* 32px - BorderRadius.circular(32) - badges, pills */
+--radius-project-lg: 2.5rem;          /* 40px - BorderRadius.circular(40) - phone container */
+--radius-project-xl: 6.25rem;         /* 100px - BorderRadius.circular(100) - main container */
 ```
 
 **Использование в проекте:**
-- **Main Container**: BorderRadius.circular(100) = 100px radius
+- **Container/Cards**: BorderRadius.circular(15) = 15px radius (main containers, search bars)
+- **Badges/Pills**: BorderRadius.circular(32) = 32px radius (status badges, rounded elements)
 - **Phone Container**: BorderRadius.circular(40) = 40px radius
+- **Main Container**: BorderRadius.circular(100) = 100px radius
 
 #### Standard Border Radius
 
@@ -429,6 +470,73 @@
 - **Position**: left: 100px, top: 100px
 - **Alignment**: crossAxisAlignment: start
 - **Spacing**: 10px (gap между элементами колонки)
+
+#### Status Bar Container (iPhone X or Newer)
+- **Size**: 950px × 614px
+- **Background**: #F4F6F9
+- **Border**: 1px solid #7B61FF
+- **Border Radius**: 15px (circular(15))
+- **Clip Behavior**: Clip.antiAlias
+- **Content**: Multiple status bar variants at different positions
+
+#### Status Bar
+- **Size**: 375px × 44px (full height) / 375px × 20px (content)
+- **Background**: transparent
+- **Components**:
+  - **Time Display**: "9:41 AM", Font: 'Archivo', Size: 12px, Weight: 600, Color: #09101D / white, Position: center (left: 164px)
+  - **Battery Percentage**: "100%", Font: 'Archivo', Size: 12px, Weight: 400, Align: right, Position: right (left: 308-309px)
+  - **Carrier Text**: "MTT", Font: 'Archivo', Size: 12px, Weight: 400, Letter Spacing: -0.05, Position: left (left: 4px)
+  - **Icons**: 14×14px, spacing: 4px
+- **Variants**: Light (dark text #09101D) and Dark (white text)
+
+#### Status Badge/Pill
+- **Size**: 54px × 21px
+- **Border Radius**: 32px (circular(32))
+- **Position**: left: 21px, top: 12px (inside status bar container)
+- **Color Variants**:
+  - **Success**: #11BB8D (solid background)
+  - **Info**: #0B24FBCC (blue with 80% opacity)
+  - **Error**: #E24949 (red solid)
+  - **Default**: transparent (no background)
+
+#### Status Indicator Dot
+- **Size**: 6px × 6px
+- **Shape**: OvalBorder() (perfect circle)
+- **Position**: left: 298px, top: 8px (inside status bar)
+- **Colors**:
+  - **Warning**: #FF9500 / #FF9F0A (orange)
+  - **Success**: #11BB8D / #0AFB6B (green)
+
+#### Search Bar
+- **Container Size**: 375px × 44px
+- **Background**: white (#FFFFFF)
+- **Input Field**:
+  - **Height**: 36px (with 4px vertical padding)
+  - **Background**: #F4F6F9
+  - **Border Radius**: 15px (circular(15))
+  - **Padding**: horizontal: 8px, vertical: 7px
+  - **Inner Padding**: left: 5px, right: 10px
+  - **Icon**: 14×14px
+  - **Placeholder**: "Search", Font: 'Archivo', Size: 16px, Weight: 400, Color: #747B84, Line Height: 1.40
+  - **Icon-Text Spacing**: 10px
+
+#### Search Bar with Cancel Button
+- **Container**: Same as Search Bar
+- **Cancel Button**:
+  - **Text**: "Cancel"
+  - **Font**: 'Archivo', Size: 16px, Weight: 400, Color: #0B24FB, Line Height: 1.40
+  - **Align**: Right
+  - **Padding**: left: 10px, right: 16px
+- **Layout**: Row with search field (Expanded) + Cancel button
+
+#### Main Demo Container
+- **Size**: 950px × variable height
+- **Background**: #F4F6F9
+- **Border**: 1px solid #7B61FF
+- **Border Radius**: 15px (circular(15))
+- **Padding**: 50px (all sides)
+- **Content Layout**: Column/Row with spacing: 50px, 100px
+- **Clip Behavior**: Clip.antiAlias
 
 ---
 
