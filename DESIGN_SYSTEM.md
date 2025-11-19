@@ -131,6 +131,23 @@
 --color-stepper-current: #4141E6;           /* Текущий шаг (синий с кольцом) */
 ```
 
+### Input Field Colors
+
+```css
+/* Цвета для текстовых полей из Flutter кода */
+--input-bg-normal: #F4F6F9;                 /* Обычный фон input */
+--input-bg-pressed: #EAEEF2;                /* Фон при нажатии */
+--input-bg-disabled: #EAEEF2;               /* Фон disabled состояния */
+--input-bg-success: rgba(17, 187, 141, 0.05);  /* Фон успешного ввода - #0C11BB8D */
+--input-bg-error: rgba(218, 20, 20, 0.05);     /* Фон ошибки - #0CDA1414 */
+--input-placeholder: #747B84;               /* Цвет placeholder */
+--input-border-focus: #09101D;              /* Черная граница при фокусе */
+--input-border-success: #11BB8D;            /* Зеленая граница (success) */
+--input-border-error: #DA1414;              /* Красная граница (error) */
+--input-text-error: #E24949;                /* Красный текст ошибки */
+--input-text-disabled: #D9DDE2;             /* Серый текст disabled */
+```
+
 ### Shadow Colors
 
 ```css
@@ -587,21 +604,216 @@
 
 ---
 
-### 3. Inputs
+### 3. Inputs (из Flutter кода)
 
-#### Text Input
+#### Text Input Field
 
-- **Height**:
-  - Small: 32px
-  - Medium: 40px
-  - Large: 48px
-- **Padding**: 10px 12px (medium)
-- **Radius**: radius-md (6px)
-- **Border**: 1px solid color-border-primary
-- **States**:
-  - Focus: Border: 2px solid color-border-focus, Outline: none
-  - Error: Border: 1px solid color-error
-  - Disabled: Background: color-bg-tertiary, Cursor: not-allowed, Opacity: 0.6
+**Container:**
+- **Width**: 375px (mobile full width)
+- **Padding**: 16px horizontal, 5px vertical
+- **Spacing**: 8px между элементами (label, input, helper)
+
+**Input Field:**
+- **Height**: 36px
+- **Padding**: left: 16px, right: 20px
+- **Border Radius**: 15px
+- **Font**: 14px, weight: 400, line-height: 140%
+
+**Label:**
+- **Font Size**: 14px
+- **Font Weight**: 600 (semibold)
+- **Color**: #09101D
+- **Line Height**: 140%
+
+**Helper Text:**
+- **Font Size**: 14px
+- **Font Weight**: 400
+- **Color**: #747B84
+- **Line Height**: 140%
+
+**Placeholder:**
+- **Text**: "Enter here..."
+- **Font Size**: 14px
+- **Font Weight**: 400
+- **Color**: #747B84
+- **Line Height**: 140%
+
+**Clear/Action Icon:**
+- **Size**: 20px × 20px
+- **Position**: Right side of input
+
+#### Input States
+
+**1. Enabled (Default):**
+```css
+.input--enabled {
+  background: #F4F6F9;
+  border: none;
+  color: #09101D;
+}
+.input--enabled::placeholder {
+  color: #747B84;
+}
+```
+
+**2. Focus:**
+```css
+.input--focus {
+  background: #F4F6F9;
+  border: 2px solid #09101D;
+  outline: none;
+}
+```
+
+**3. Pressed:**
+```css
+.input--pressed {
+  background: #EAEEF2;
+  border: none;
+}
+```
+
+**4. Active - Typing:**
+```css
+.input--active {
+  background: #F4F6F9;
+  border: 2px solid #09101D;
+}
+/* With clear icon visible */
+```
+
+**5. Complete (Filled):**
+```css
+.input--complete {
+  background: #F4F6F9;
+  border: none;
+  color: #09101D;
+}
+/* Clear icon (X) visible on right */
+```
+
+**6. Incomplete:**
+```css
+.input--incomplete {
+  background: #F4F6F9;
+  border: none;
+}
+/* Clear icon visible */
+```
+
+**7. Positive (Success):**
+```css
+.input--success {
+  background: rgba(17, 187, 141, 0.05);
+  border: 2px solid #11BB8D;
+  color: #09101D;
+}
+/* Check icon visible on right */
+```
+
+**8. Negative (Error):**
+```css
+.input--error {
+  background: rgba(218, 20, 20, 0.05);
+  border: 2px solid #DA1414;
+  color: #09101D;
+}
+.input--error + .helper-text {
+  color: #E24949;
+}
+/* Error icon visible on right */
+```
+
+**9. Disabled:**
+```css
+.input--disabled {
+  background: #EAEEF2;
+  border: none;
+  color: #D9DDE2;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+.input--disabled::placeholder {
+  color: #D9DDE2;
+}
+.label--disabled {
+  color: #D9DDE2;
+}
+.helper-text--disabled {
+  color: #D9DDE2;
+}
+```
+
+#### Input Usage Example
+
+```css
+/* Base Input */
+.input-field {
+  width: 100%;
+  max-width: 375px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.input-field__label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #09101D;
+  line-height: 1.4;
+}
+
+.input-field__input {
+  width: 100%;
+  height: 36px;
+  padding: 0 20px 0 16px;
+  border-radius: 15px;
+  background: #F4F6F9;
+  border: none;
+  font-size: 14px;
+  font-weight: 400;
+  color: #09101D;
+  line-height: 1.4;
+  transition: all 0.2s ease;
+}
+
+.input-field__input::placeholder {
+  color: #747B84;
+}
+
+.input-field__input:focus {
+  border: 2px solid #09101D;
+  outline: none;
+}
+
+.input-field__input:disabled {
+  background: #EAEEF2;
+  color: #D9DDE2;
+  cursor: not-allowed;
+}
+
+.input-field__helper {
+  font-size: 14px;
+  font-weight: 400;
+  color: #747B84;
+  line-height: 1.4;
+}
+
+.input-field__input.error {
+  background: rgba(218, 20, 20, 0.05);
+  border: 2px solid #DA1414;
+}
+
+.input-field__helper.error {
+  color: #E24949;
+}
+
+.input-field__input.success {
+  background: rgba(17, 187, 141, 0.05);
+  border: 2px solid #11BB8D;
+}
+```
 
 #### Textarea
 
@@ -1630,9 +1842,30 @@ decoration: BoxDecoration(
 
 ## Версионирование и обновления
 
-**Текущая версия**: v5.4.0
+**Текущая версия**: v5.5.0
 
 ### Changelog
+
+#### v5.5.0 (2025-11-19)
+- **Input Fields (Текстовые поля)**: Полностью переработана секция Inputs
+  - 9 состояний: Enabled, Focus, Pressed, Active-Typing, Complete, Incomplete, Positive, Negative, Disabled
+  - Container: 375px width, 16px horizontal padding, 8px spacing
+  - Input: 36px height, 15px border-radius, 16px/20px padding
+  - Label: 14px (weight 600), Helper: 14px (weight 400)
+  - Placeholder: 14px (weight 400), color #747B84
+  - Action icons: 20px × 20px (clear, check, error)
+- **Цвета**: Добавлены цвета для input полей
+  - Input backgrounds: #F4F6F9 (normal), #EAEEF2 (pressed/disabled)
+  - Success: rgba(17, 187, 141, 0.05) background, #11BB8D border
+  - Error: rgba(218, 20, 20, 0.05) background, #DA1414 border
+  - Placeholder: #747B84
+  - Border focus: #09101D
+  - Error text: #E24949
+  - Disabled text: #D9DDE2
+- **Компоненты**: Добавлены CSS примеры для всех состояний inputs
+  - Base input styles
+  - State modifiers (enabled, focus, error, success, disabled)
+  - Helper text variations
 
 #### v5.4.0 (2025-11-19)
 - **Progress Bars & Steppers**: Добавлена полная спецификация прогресс-баров и степперов
