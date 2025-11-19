@@ -46,6 +46,7 @@
 --color-text-secondary: #27272A;   /* zinc-800 */
 --color-text-dark: #09101D;        /* Основной темный текст (Flutter) */
 --color-text-gray: #373940;        /* Серый текст для подписей (Flutter) */
+--color-text-subtitle: #414249;    /* Темно-серый для subtitle/вторичного текста в списках */
 ```
 
 ### Accent Colors
@@ -55,6 +56,7 @@
 --color-accent-blue: #1D4ED8;      /* blue-700 */
 --color-accent-purple: #7B61FF;    /* Фиолетовый из Flutter кода */
 --color-link-blue: #4141E6;        /* Синий для ссылок и активных элементов */
+--color-success-green: #11BB8D;    /* Зеленый для активного toggle и success состояний */
 ```
 
 ### Background Colors
@@ -647,9 +649,9 @@ Container(
 
 Два размера переключателей из Flutter кода.
 
-**Large Toggle (52px × 31px):**
-- **Track Width**: 52px
-- **Track Height**: 31px
+**Large Toggle (51px × 31px):**
+- **Track Width**: 51px
+- **Track Height**: 31px (height не указан явно, определяется thumb)
 - **Track Border Radius**: 40px (fully rounded)
 - **Thumb Size**: 31px × 31px
 - **Thumb Border**: 2px solid (matches track color)
@@ -657,7 +659,7 @@ Container(
 
 **Small Toggle (32px × 20px):**
 - **Track Width**: 32px
-- **Track Height**: 20px
+- **Track Height**: 20px (height не указан явно, определяется thumb)
 - **Track Border Radius**: 40px (fully rounded)
 - **Thumb Size**: 20px × 20px
 - **Thumb Border**: 2px solid (matches track color)
@@ -669,8 +671,15 @@ Container(
   - Thumb Color: White (#FFFFFF)
   - Thumb Border: #EAEEF2
   - Alignment: Left (mainAxisAlignment: start)
+  - Spacing: 10px (для small toggle)
 
-- **On State**:
+- **On State (Active)**:
+  - Track Color: #11BB8D (зеленый для active state)
+  - Thumb Color: White (#FFFFFF)
+  - Thumb Border: #11BB8D
+  - Alignment: Right (mainAxisAlignment: end)
+
+- **On State (Alternative - Blue)**:
   - Track Color: #4141E6
   - Thumb Color: White (#FFFFFF)
   - Thumb Border: #4141E6
@@ -678,17 +687,17 @@ Container(
 
 - **Disabled State**:
   - Opacity: 0.30
-  - Track Color: #4141E6
+  - Track Color: #11BB8D или #4141E6
   - Thumb Color: #F4F6F9
-  - Thumb Border: #4141E6
+  - Thumb Border: matches track color
+  - Spacing: 10px
 
 ```dart
-// Large Toggle - On State
+// Large Toggle - On State (Active/Green)
 Container(
-  width: 52,
-  height: 31,
+  width: 51,
   decoration: ShapeDecoration(
-    color: const Color(0xFF4141E6),
+    color: const Color(0xFF11BB8D),
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
   ),
   child: Row(
@@ -701,7 +710,7 @@ Container(
         decoration: ShapeDecoration(
           color: Colors.white,
           shape: RoundedRectangleBorder(
-            side: BorderSide(width: 2, color: const Color(0xFF4141E6)),
+            side: BorderSide(width: 2, color: const Color(0xFF11BB8D)),
             borderRadius: BorderRadius.circular(40),
           ),
         ),
@@ -1062,19 +1071,171 @@ Container(
 
 ### 11. List Items
 
-#### List Item
+#### List Item (Flutter Mobile)
 
-- **Height**: 48px (medium)
-- **Padding**: 12px 16px
-- **Border Bottom**: 1px solid color-border-primary
-- **States**:
-  - Hover: Background: color-bg-secondary
-  - Active: Background: color-primary-light
-  - Selected: Background: color-primary-light, Border-left: 3px solid color-primary
+Полноценные элементы списка из Flutter кода с integrated form controls.
+
+**Container:**
+- **Width**: 375px (full mobile width)
+- **Background**: White (#FFFFFF)
+- **Padding**: Horizontal 16px
+- **Spacing**: 10px between items
+
+**Layout Structure:**
+- **Control Area** (left):
+  - Padding Right: 16px (для toggle)
+  - Padding Right: 10px (для radio/checkbox)
+  - Vertical: full height
+
+- **Content Area** (right):
+  - Padding: Vertical 10px
+  - Expanded: true (fills remaining space)
+
+**Text Content:**
+- **Title**:
+  - Font: Archivo SemiBold
+  - Size: 14px
+  - Color: #09101D
+  - Line Height: 1.40
+  - Width: 276px (для toggle items), 309px (для radio/checkbox items)
+
+- **Subtitle**:
+  - Font: Archivo Regular
+  - Size: 13px
+  - Color: #414249
+  - Line Height: 1.40
+  - States: "Active", "Default", "Selected", "Disabled"
+  - Spacing: 16px horizontal from title
+
+**Divider:**
+- **Width**: Full width
+- **Height**: 1px
+- **Color**: #EAEEF2
+- **Padding**:
+  - Top: 5px
+  - Left: 64px (для toggle), 36px (для radio/checkbox)
+  - Bottom: 5px
+  - Right: 16px (для radio/checkbox)
+
+**Integrated Controls:**
+1. **Toggle Switch List Item**:
+   - Control: 51px × 31px toggle
+   - Control Padding Right: 16px
+   - Title width: 276px
+   - Active color: #11BB8D
+
+2. **Radio Button List Item**:
+   - Control: 24px × 24px radio
+   - Control Padding Right: 10px
+   - Title width: 309px
+   - Divider left offset: 36px
+
+3. **Checkbox List Item**:
+   - Control: 24px × 24px checkbox
+   - Control Padding Right: 10px
+   - Title width: 309px
+   - Divider left offset: 36px
+
+```dart
+// List Item with Toggle (Active State)
+Container(
+  width: 375,
+  child: Column(
+    children: [
+      Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        decoration: BoxDecoration(color: Colors.white),
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Container(
+                  padding: const EdgeInsets.only(right: 16),
+                  child: Container(
+                    width: 51,
+                    decoration: ShapeDecoration(
+                      color: const Color(0xFF11BB8D),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(40),
+                      ),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Container(
+                          width: 31,
+                          height: 31,
+                          decoration: ShapeDecoration(
+                            color: Colors.white,
+                            shape: RoundedRectangleBorder(
+                              side: BorderSide(width: 2, color: const Color(0xFF11BB8D)),
+                              borderRadius: BorderRadius.circular(40),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          width: 276,
+                          child: Text(
+                            'Toggle',
+                            style: TextStyle(
+                              color: const Color(0xFF09101D),
+                              fontSize: 14,
+                              fontFamily: 'Archivo',
+                              fontWeight: FontWeight.w600,
+                              height: 1.40,
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 276,
+                          child: Text(
+                            'Active',
+                            style: TextStyle(
+                              color: const Color(0xFF414249),
+                              fontSize: 13,
+                              fontFamily: 'Archivo',
+                              fontWeight: FontWeight.w400,
+                              height: 1.40,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            Container(
+              padding: const EdgeInsets.only(top: 5, left: 64, bottom: 5),
+              child: Container(
+                width: double.infinity,
+                height: 1,
+                decoration: BoxDecoration(color: const Color(0xFFEAEEF2)),
+              ),
+            ),
+          ],
+        ),
+      ),
+    ],
+  ),
+)
+```
+
+**Usage:** Списки с настройками, переключателями, выбором опций в мобильном приложении.
 
 ---
 
-### 11. Messages / Notifications
+### 12. Messages / Notifications
 
 #### Toast Notification
 
@@ -1095,7 +1256,7 @@ Container(
 
 ---
 
-### 12. Panels & Cards
+### 13. Panels & Cards
 
 #### Side Panel
 
@@ -1118,7 +1279,7 @@ Container(
 
 ---
 
-### 13. Accordion / FAQ
+### 14. Accordion / FAQ
 
 #### Accordion Item
 
@@ -1133,7 +1294,7 @@ Container(
 
 ---
 
-### 14. Loading States
+### 15. Loading States
 
 #### Skeleton Loader
 
@@ -1150,7 +1311,7 @@ Container(
 
 ---
 
-### 15. Empty States
+### 16. Empty States
 
 #### Empty State Layout
 
@@ -1165,7 +1326,7 @@ Container(
 
 ---
 
-### 16. Special Effects
+### 17. Special Effects
 
 #### Focus Ring
 
@@ -1360,9 +1521,32 @@ Container(
 
 ## Версионирование и обновления
 
-**Текущая версия**: v5.2.0
+**Текущая версия**: v5.3.0
 
 ### Changelog
+
+#### v5.3.0 (2025-11-19)
+- **Добавлены Flutter List Items:**
+  - List Item компонент (375px width) с integrated form controls
+  - Toggle Switch List Item (51px toggle, title width 276px)
+  - Radio Button List Item (title width 309px)
+  - Checkbox List Item (title width 309px)
+  - Divider спецификации (1px height, color #EAEEF2)
+- **Обновлен Toggle Switch:**
+  - Исправлена ширина Large Toggle: 51px (было 52px)
+  - Добавлен зеленый active state (#11BB8D)
+  - Обновлены все состояния (off, on active, on blue, disabled)
+- **Новые цвета:**
+  - `#11BB8D` - Зеленый для активного toggle и success состояний
+  - `#414249` - Темно-серый для subtitle/вторичного текста в списках
+- **Text спецификации:**
+  - Title: Archivo SemiBold 14px, color #09101D
+  - Subtitle: Archivo Regular 13px, color #414249
+- **Layout детали:**
+  - Padding specs для controls (16px для toggle, 10px для radio/checkbox)
+  - Divider left offset (64px для toggle, 36px для radio/checkbox)
+  - Vertical padding 10px для content area
+- **Перенумерация секций:** List Items теперь секция 11, последующие сдвинуты
 
 #### v5.2.0 (2025-11-19)
 - **Добавлены Flutter Form Controls:**
