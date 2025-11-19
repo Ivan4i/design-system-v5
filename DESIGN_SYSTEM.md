@@ -66,6 +66,20 @@
 /* UI элементы из Flutter кода */
 --color-gray-light: #D9DDE2;       /* Color(0xFFD9DDE2) - светло-серый для разделителей */
 --color-background-light: #F4F6F9; /* Color(0xFFF4F6F9) - светлый фон для inactive кнопок */
+
+/* Цвета для карточек и контента */
+--color-yellow-accent: #FFC043;    /* Color(0xFFFFC043) - желтый для скидок, CTA кнопок */
+--color-green-badge: #11BB8D;      /* Color(0xFF11BB8D) - зеленый для эко-бейджей */
+--color-cyan-light: #7CC5D6;       /* Color(0xFF7CC5D6) - голубой для цветовых селекторов */
+--color-red-accent: #E24949;       /* Color(0xFFE24949) - красный акцент */
+
+/* Текстовые цвета */
+--color-text-tertiary: #747B84;    /* Color(0xFF747B84) - третичный текст (метаданные) */
+--color-text-quaternary: #414249;  /* Color(0xFF414249) - четвертичный текст */
+--color-text-dark-gray: #373940;   /* Color(0xFF373940) - темно-серый текст */
+
+/* Overlay цвета для видео/медиа */
+--color-overlay-black-30: rgba(0, 0, 0, 0.30);  /* Черный с 30% прозрачностью */
 ```
 
 ### Shadow Colors
@@ -221,6 +235,49 @@
 - **Line Height**: 1.40
 - **Использование**: Заголовки уведомлений, важные сообщения (например, "Price is up!")
 
+#### Micro Text (Badge Text)
+- **Font**: 9px (0.5625rem), Archivo
+- **Weight**: 600 (Semibold)
+- **Color**: White (#FFFFFF) на темном фоне
+- **Line Height**: 1.40
+- **Использование**: Маленькие бейджи ("New", "Join Life"), статусы
+
+#### Mini Text (Avatar Counter)
+- **Font**: 10px (0.625rem), Archivo
+- **Weight**: 600 (Semibold)
+- **Color**: White (#FFFFFF)
+- **Line Height**: 1.40
+- **Text Align**: Center
+- **Использование**: Счетчики в аватарах ("1k"), малые индикаторы
+
+#### Video Badge Text
+- **Font**: 11px (0.6875rem), Archivo
+- **Weight**: 600 (Semibold)
+- **Color**: White (#FFFFFF)
+- **Line Height**: 1.40
+- **Использование**: Продолжительность видео, статистика просмотров
+
+#### Metadata Text
+- **Font**: 13px (0.8125rem), Archivo
+- **Weight**: 400 (Regular)
+- **Color**: #747B84 (tertiary gray)
+- **Line Height**: 1.40
+- **Использование**: Даты, время чтения, дополнительная информация
+
+#### Card Title (Medium)
+- **Font**: 16px (1rem), Archivo
+- **Weight**: 700 (Bold)
+- **Color**: #09101D (black)
+- **Line Height**: 1.40
+- **Использование**: Заголовки блог-карточек, видео-карточек
+
+#### Card Title (Large)
+- **Font**: 18px (1.125rem), Archivo
+- **Weight**: 700 (Bold)
+- **Color**: #09101D (black)
+- **Line Height**: 1.40
+- **Использование**: Заголовки товарных карточек, крупные заголовки
+
 ---
 
 ## Spacing & Layout
@@ -264,6 +321,24 @@
 --mobile-width: 375px;      /* Стандартная ширина мобильного экрана */
 --mobile-height: 812px;     /* Стандартная высота мобильного экрана (iPhone) */
 --status-bar-height: 44px;  /* Высота статус бара iOS */
+
+/* Размеры карточек */
+--card-width-small: 170px;  /* Узкая карточка (продукты) */
+--card-width-medium: 230px; /* Средняя карточка (стандарт) */
+
+/* Размеры изображений в карточках */
+--card-image-small: 170px;  /* Изображение для узкой карточки */
+--card-image-medium: 230px; /* Изображение для средней карточки */
+
+/* Размеры аватаров */
+--avatar-size-small: 24px;  /* Маленький аватар */
+--avatar-size-medium: 32px; /* Средний аватар */
+--avatar-size-large: 40px;  /* Большой аватар */
+
+/* Размеры иконок */
+--icon-size-small: 16px;    /* Маленькая иконка */
+--icon-size-medium: 24px;   /* Средняя иконка */
+--icon-size-large: 30px;    /* Большая иконка */
 ```
 
 ### Border Radius
@@ -283,9 +358,11 @@
 
 ```css
 /* Border radius используемые в мобильном приложении */
---radius-mobile-sm: 0.625rem;     /* 10px - маленькие элементы */
+--radius-mobile-xs: 0.3125rem;    /* 5px - мелкие элементы, badges */
+--radius-mobile-sm: 0.625rem;     /* 10px - маленькие элементы, video badges */
 --radius-mobile-md: 0.9375rem;    /* 15px - карточки, контейнеры, иконки */
---radius-mobile-lg: 1.875rem;     /* 30px - bottom sheets, модальные окна */
+--radius-mobile-lg: 1.875rem;     /* 30px - bottom sheets, модальные окна, avatars */
+--radius-mobile-xl: 2.5rem;       /* 40px - крупные аватары */
 --radius-mobile-pill: 6.25rem;    /* 100px - полностью скругленные элементы (pill) */
 ```
 
@@ -840,9 +917,224 @@
   - 21px from top of container (13px from bottom)
 - **Использование**: Навигационный индикатор на iPhone без физической кнопки Home
 
+#### Badge (Status/Label)
+
+Маленький бейдж для статусов и меток.
+
+- **Padding**: symmetric(horizontal: 5px, vertical: 3px)
+- **Border Radius**: 5px (radius-mobile-xs)
+- **Font**: 9px Archivo Semibold
+- **Line Height**: 1.40
+- **Варианты**:
+  - **New Badge**: Background: #09101D, Text: White, может содержать emoji "🔥 New"
+  - **Join Life Badge**: Background: #11BB8D (green), Text: White
+  - **Strikethrough**: Используется для перечеркнутой старой цены
+- **Использование**: Статусы товаров, специальные метки
+
+#### Discount Badge
+
+Большой бейдж со скидкой и ценой.
+
+- **Width**: 70px
+- **Border Radius**: 10px (radius-mobile-sm)
+- **Background**: #FFC043 (yellow)
+- **Padding**: spacing: 4px между элементами
+- **Content**:
+  - Price: 14px Regular Black
+  - Расположен над изображением товара
+- **Использование**: Отображение скидочной цены на карточках товаров
+
+#### Avatar (Small)
+
+Маленький круглый аватар для списков.
+
+- **Size**: 24px × 24px (inner), 32px × 32px (with border)
+- **Border**: 4px solid White
+- **Border Radius**: 30px или 40px (круг)
+- **Image**: Border Radius 10px или 40px (для изображения)
+- **Placeholder**: Background #D9DDE2
+- **Использование**: Avatar groups, социальные индикаторы
+
+#### Avatar Group
+
+Группа наложенных аватаров с счетчиком.
+
+- **Avatar Size**: 32px × 32px (with 4px white border)
+- **Spacing**: 10px между аватарами
+- **Counter Avatar**:
+  - Background: #D9DDE2
+  - Text: "1k" (10px Semibold White, centered)
+  - Border: 4px White
+- **Layout**: Horizontal Row
+- **Использование**: Показ участников, лайков, просмотров
+
+#### Avatar with Info
+
+Крупный аватар с текстовой информацией.
+
+- **Avatar Size**: 40px × 40px
+- **Border Radius**: 40px (круг)
+- **Spacing**: 6px между аватаром и текстом
+- **Text Layout**:
+  - Name: 13px Semibold Black (#09101D)
+  - Role/Subtitle: 12px Regular Dark Gray (#373940)
+- **Использование**: Автор видео, профили пользователей
+
+#### Color Selector
+
+Цветовые круги для выбора цвета товара.
+
+- **Size**: 24px × 24px (inner: 14.4px × 14.4px)
+- **Padding**: 6px
+- **Border**: 2px solid White
+- **Border Radius**: 20px (круг)
+- **Colors**: Различные (black #09101D, cyan #7CC5D6, etc.)
+- **Spacing**: Нет gap (плотное размещение)
+- **Использование**: Выбор цвета в карточках товаров
+
+#### Favorite Button
+
+Кнопка "избранное" для карточек.
+
+- **Size**: 30px × 30px
+- **Padding**: 8px
+- **Background**: White
+- **Border Radius**: 100px (круг)
+- **Icon**: 14px × 14px (heart icon)
+- **Position**: Top-left corner карточки с padding 10px
+- **Использование**: Добавление в избранное
+
+#### Video Stats Badge
+
+Бейдж с информацией о видео (продолжительность, просмотры).
+
+- **Height**: 24px
+- **Padding**: left 5px, right 10px
+- **Background**: rgba(0, 0, 0, 0.30) - черный с 30% прозрачностью
+- **Border Radius**: 10px (radius-mobile-sm)
+- **Icon**: 24px × 24px (padding 8px)
+- **Text**: 11px Semibold White
+- **Spacing**: Иконка + текст в ряд
+- **Варианты**:
+  - Duration: Clock icon + "2:12"
+  - Views: Eye icon + "1.342"
+- **Position**: Top corners на изображении видео
+- **Использование**: Метаданные видео
+
 ---
 
-### 17. Special Effects
+### 17. Card Patterns (Flutter)
+
+Полноценные паттерны карточек для различных типов контента.
+
+#### Product Card with Discount (230px width)
+
+Карточка товара со скидкой и социальными индикаторами.
+
+**Структура:**
+- **Container**: Width: 230px, spacing: 5px между секциями
+- **Discount Badge Section** (spacing: 10px horizontal):
+  - Discount Badge: 70px wide, #FFC043 background, 10px border-radius
+  - Price Text: $26.99 (14px Regular Black)
+  - Old Price: $35.99 (14px Regular, #D9DDE2, strikethrough) - spacing 10px
+- **Product Image**: 230×230px, border-radius 15px
+- **Content Section** (padding: 5px horizontal and 10px bottom, spacing: 5px):
+  - Avatar Group: 5 avatars (32×32 with 4px white border), spacing 10px, последний показывает "1k"
+  - Title: 18px Bold Black, 220px max-width
+  - CTA Button: "BUY ON ALIEXPRESS"
+    - Height: 36px
+    - Padding: 16px horizontal, 10px vertical
+    - Background: #FFC043
+    - Text: 13px Semibold Black
+    - Border Radius: 15px
+    - Icon: 16×16 (spacing 8px)
+
+**Использование**: E-commerce карточки с социальным proof, акционные товары
+
+#### Blog Card (230px width)
+
+Карточка блог-поста с категорией и метаданными.
+
+**Структура:**
+- **Container**: Width: 230px, Height: 370px, border-radius 16px
+- **Image**: 230×230px, border-radius 15px
+- **Content Section** (padding: 5px, spacing: 5px):
+  - Category Badge:
+    - Avatar: 32×32 with 10px border-radius (or 24×24 image inside)
+    - Label: "Landscape design" (13px Semibold Black)
+    - Spacing: 5px между аватаром и текстом
+  - Title: 16px Bold Black, 220px max-width
+  - Metadata Row (spacing: 10px):
+    - Date: Icon 24×24 + "31 July" (13px Regular #747B84)
+    - Reading Time: Icon 24×24 + "15 min to read" (13px Regular #747B84)
+
+**Использование**: Блог-посты, статьи, образовательный контент
+
+#### Product Card Vertical - Variant A (170px width)
+
+Компактная вертикальная карточка товара (Nike shoes).
+
+**Структура:**
+- **Container**: Width: 170px, Height: 360px, border-radius 15px
+- **Image Section**: 170×253px, border-radius 5px
+  - Favorite Button: 30×30px circle, white background, top-left 10px padding
+  - Status Badge: Bottom-left 5px padding
+    - "🔥 New": 9px Semibold White, #09101D background, 5px border-radius
+    - Padding: 5px horizontal, 3px vertical
+- **Content Section** (padding: 10px top, 5px left, 10px right/bottom, spacing: 5px):
+  - Rating: "👌 4.8 (130)" (13px, rating Semibold, count Regular #747B84)
+  - Details (spacing: 4px):
+    - Price: "$350" (14px Semibold Black)
+    - Brand: "Nike 👟" (14px, "Nike" Semibold, emoji Regular)
+    - Sizes: "36 ・ 37・ 38・ 39" (13px Regular #747B84)
+    - Spacing: 2px между price и brand
+
+**Использование**: Product listings, узкие сетки товаров
+
+#### Product Card Vertical - Variant B (170px width)
+
+Компактная вертикальная карточка товара с выбором цвета (H&M).
+
+**Структура:**
+- **Container**: Width: 170px, Height: 380px, border-radius 15px
+- **Image Section**: 170×259px, border-radius 5px, spacing 192px между элементами
+  - Favorite Button: top-left (30×30px circle)
+  - Eco Badge: Bottom-left 5px padding
+    - "Join Life": 9px Semibold White, #11BB8D background, 5px border-radius
+- **Content Section** (padding: 5px top, 10px right/bottom):
+  - Color Selector: 2 circles (24×24, 2px white border, colors: #09101D, #7CC5D6)
+  - Product Name: "CONTRAST PRINT T-SHIRT" (14px Regular #414249)
+  - Details (spacing: 2px):
+    - Price: "USD 30" (14px Semibold Black)
+    - Brand: "H&M" (14px Semibold Black)
+
+**Использование**: Fashion товары с вариантами цветов
+
+#### Video Card (230px width)
+
+Карточка видео с автором и статистикой.
+
+**Структура:**
+- **Container**: Width: 230px, Height: 400px, border-radius 16px
+- **Video Thumbnail**: 230×230px, border-radius 15px
+  - Video Stats Badges (top corners, padding 10px, spacing 90px between):
+    - Duration Badge: "2:12" (11px Semibold White, black 30% opacity, 10px border-radius)
+    - Views Badge: "1.342" (same style)
+    - Badge structure: Icon 24×24 + text, left padding 5px, right padding 10px
+- **Content Section** (padding: 5px, spacing: 5px):
+  - Avatar Group: 5 avatars (32×32), последний "1k"
+  - Title: "Home fitness program, 2 minutes per day" (16px Bold Black, 220px max-width)
+  - Author Section (spacing: 6px):
+    - Avatar: 40×40px, border-radius 40px
+    - Info:
+      - Name: "Nicole Dowson" (13px Semibold Black)
+      - Role: "Fitness App Team" (12px Regular #373940)
+
+**Использование**: Видео-контент, уроки, туториалы
+
+---
+
+### 18. Special Effects
 
 #### Focus Ring
 
@@ -1037,9 +1329,45 @@
 
 ## Версионирование и обновления
 
-**Текущая версия**: v5.2.0
+**Текущая версия**: v5.3.0
 
 ### Changelog
+
+#### v5.3.0 (2025-11-19)
+- 🎨 Добавлены **новые цвета** для карточек и контента:
+  - Yellow Accent (#FFC043) - скидки, CTA кнопки
+  - Green Badge (#11BB8D) - эко-бейджи
+  - Cyan Light (#7CC5D6) - цветовые селекторы
+  - Red Accent (#E24949)
+  - Текстовые цвета: Tertiary (#747B84), Quaternary (#414249), Dark Gray (#373940)
+  - Overlay Black 30%
+- 📝 Добавлены **новые текстовые стили**:
+  - Micro Text (9px) - для бейджей
+  - Mini Text (10px) - для счетчиков аватаров
+  - Video Badge Text (11px)
+  - Metadata Text (13px)
+  - Card Title Medium (16px) и Large (18px)
+- 📐 Добавлены **размеры карточек и элементов**:
+  - Card widths: 170px, 230px
+  - Avatar sizes: 24px, 32px, 40px
+  - Icon sizes: 16px, 24px, 30px
+- 🔄 Обновлены **border radius** значения: добавлен 5px и 40px
+- 🎭 Добавлены **вспомогательные компоненты**:
+  - Badge (Status/Label) - статусные бейджи
+  - Discount Badge - бейдж со скидкой
+  - Avatar (Small) - маленький аватар
+  - Avatar Group - группа аватаров с счетчиком
+  - Avatar with Info - аватар с текстом
+  - Color Selector - выбор цвета товара
+  - Favorite Button - кнопка избранного
+  - Video Stats Badge - бейдж с метаданными видео
+- 📦 Добавлена новая секция **Card Patterns** с полноценными паттернами карточек:
+  - **Product Card with Discount** (230px) - товар со скидкой и социальными индикаторами
+  - **Blog Card** (230px) - блог-пост с категорией и метаданными
+  - **Product Card Vertical - Variant A** (170px) - компактная карточка товара (Nike)
+  - **Product Card Vertical - Variant B** (170px) - карточка товара с выбором цвета (H&M)
+  - **Video Card** (230px) - видео с автором и статистикой
+- 📊 Все данные извлечены из реального Flutter кода готовых дизайн-макетов
 
 #### v5.2.0 (2025-11-19)
 - 🔘 Добавлены **спецификации мобильных кнопок** из Flutter кода
