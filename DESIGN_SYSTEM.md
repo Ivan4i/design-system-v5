@@ -59,6 +59,7 @@
 --color-accent-purple: #7B61FF;    /* Фиолетовый из Flutter кода */
 --color-accent-yellow: #FFC043;    /* Желтый/золотой для charts из Flutter */
 --color-success: #11BB8D;          /* Зеленый для success badges из Flutter */
+--color-error: #DA1414;            /* Красный для destructive actions из Flutter (delete, remove) */
 ```
 
 ### Background Colors
@@ -576,7 +577,83 @@
 
 ---
 
-### 5. Badges & Tags (Flutter Mobile)
+### 5. File Type & Dropdown Components (Flutter Mobile)
+
+#### File Type Icons Grid
+
+**Container**:
+- Height: 318px
+- Padding: 50px all
+- Background: white (#FFFFFF)
+- Border: 1px solid #7B61FF (color-accent-purple)
+- Border Radius: 15px
+- Clip Behavior: antiAlias
+
+**Layout**:
+- Type: Row
+- Spacing: 10px (между элементами)
+- Main Axis: start
+- Cross Axis: center
+
+**File Type Item**:
+- Width: 34px
+- Height: 40px
+- Container: Stack (для иконки и контента)
+
+**Usage**: Grid для отображения различных типов файлов (PDF, DOC, XLS, etc.)
+
+#### Dropdown/Context Menu
+
+**Container**:
+- Height: 318px (или auto)
+- Padding: 50px all
+- Background: white (#FFFFFF)
+- Border: 1px solid #7B61FF (color-accent-purple)
+- Border Radius: 15px
+- Clip Behavior: antiAlias
+
+**Layout**:
+- Type: Column
+- Main Axis: center
+- Cross Axis: center
+
+**Menu Item**:
+- Width: 333px
+- Padding: 16px horizontal, 8px vertical
+- Background: #F4F6F9 (color-bg-light)
+- Row spacing: 16px (между иконкой и текстом)
+
+**Menu Item Variants**:
+- **First Item (Top)**:
+  - Border Radius: 15px (только top-left и top-right)
+  - Text Color: #09101D (color-text-primary)
+- **Middle Item**:
+  - Border Radius: none (прямоугольный)
+  - Text Color: #09101D (color-text-primary)
+- **Last Item (Bottom)**:
+  - Border Radius: 15px (только bottom-left и bottom-right)
+  - Text Color: может быть обычный (#09101D) или destructive (#DA1414)
+- **Destructive Item**:
+  - Background: #F4F6F9 (color-bg-light)
+  - Text Color: #DA1414 (color-error) - для опасных действий (Delete, Remove)
+
+**Icon**:
+- Size: 24px × 24px
+- Clip Behavior: antiAlias
+
+**Typography**:
+- Font: Archivo 14px, weight 600
+- Line Height: 1.40
+- Text Width: 192px
+- Colors:
+  - Normal: #09101D (color-text-primary)
+  - Destructive: #DA1414 (color-error)
+
+**Usage**: Dropdown меню, контекстные меню, action sheets с возможностью destructive действий
+
+---
+
+### 6. Badges & Tags (Flutter Mobile)
 
 #### Live Badge (Instagram-style)
 
@@ -617,7 +694,7 @@
 
 ---
 
-### 5. Forms
+### 7. Forms
 
 #### Form Layout
 
@@ -637,7 +714,7 @@
 
 ---
 
-### 6. Tables
+### 8. Tables
 
 #### Table Structure
 
@@ -656,7 +733,7 @@
 
 ---
 
-### 7. Navigation
+### 9. Navigation
 
 #### Main Navigation
 
@@ -680,7 +757,7 @@
 
 ---
 
-### 8. Charts
+### 10. Charts
 
 #### Line Chart
 
@@ -737,7 +814,7 @@
 
 ---
 
-### 9. Avatars (Flutter Mobile)
+### 11. Avatars (Flutter Mobile)
 
 #### Sizes
 
@@ -774,7 +851,7 @@
 
 ---
 
-### 10. List Items
+### 12. List Items
 
 #### List Item
 
@@ -788,7 +865,7 @@
 
 ---
 
-### 11. Messages / Notifications
+### 13. Messages / Notifications
 
 #### Toast Notification
 
@@ -809,7 +886,7 @@
 
 ---
 
-### 12. Panels & Cards
+### 14. Panels & Cards
 
 #### Side Panel
 
@@ -832,7 +909,7 @@
 
 ---
 
-### 13. Accordion / FAQ
+### 15. Accordion / FAQ
 
 #### Accordion Item
 
@@ -847,7 +924,7 @@
 
 ---
 
-### 14. Loading States
+### 16. Loading States
 
 #### Skeleton Loader
 
@@ -864,7 +941,7 @@
 
 ---
 
-### 15. Empty States
+### 17. Empty States
 
 #### Empty State Layout
 
@@ -879,7 +956,7 @@
 
 ---
 
-### 16. Special Effects
+### 18. Special Effects
 
 #### Focus Ring
 
@@ -1483,10 +1560,23 @@ Icon Button (40px):
   - Data points: 5×5px with borders
   - Colors: #4141E6 и #FFC043
   - Labels: Archivo 10px, center aligned
+- Picker Components (Flutter Mobile):
+  - Day Picker: 50px padding, 15px radius, border #7B61FF
+  - Time Picker: states (Primary Selected, Dark, Disabled, Light)
+  - Typography: Archivo 12px/14px
+  - Spacing: 50px между элементами
+- File Type & Dropdown Components (Flutter Mobile):
+  - File Type Icons Grid: 34×40px items, spacing 10px, white background
+  - Dropdown/Context Menu: 333px width items, 16px/8px padding
+  - Destructive actions: #DA1414 (color-error)
+  - Menu item variants: top rounded, middle flat, bottom rounded
 - Mobile Layout Patterns (375px width)
-- Spacing values: 5px, 10px, 15px, 20px, 70px
+- Spacing values: 5px, 10px, 15px, 20px, 50px, 70px
 - Border radius values: 10px, 11px, 12px, 15px, 16px
 - Typography: Archivo (10px-16px, weights 400-900, line-height 1.20-1.40)
+- Colors:
+  - Added #23262B (bg-dark-secondary) для picker items
+  - Added #DA1414 (error) для destructive actions
 - Layout patterns и Best practices
 
 ---
