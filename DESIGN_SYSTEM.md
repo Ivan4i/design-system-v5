@@ -14,6 +14,7 @@
 10. [Date & Time Pickers](#date--time-pickers)
 11. [Progress Indicators & Steppers](#progress-indicators--steppers)
 12. [Input Fields](#input-fields)
+13. [Snackbars & Toasts](#snackbars--toasts)
 
 ---
 
@@ -3402,6 +3403,592 @@ End date in range:
 
 ---
 
+## Snackbars & Toasts
+
+Система уведомлений snackbar/toast для мобильного приложения с поддержкой различных layouts, иконок, аватаров и action buttons.
+
+### Container Specifications
+
+```css
+/* Snackbar Container */
+--snackbar-container-width: 375px;
+--snackbar-container-padding: 16px;
+--snackbar-border-radius: 15px;
+
+/* Success/Positive Snackbar */
+--snackbar-success-bg: rgba(5, 148, 79, 0.90);  /* #05944F с 90% opacity */
+--snackbar-text-color: #FFFFFF;
+```
+
+**Структура**:
+- **Container**: 375px width, padding 16px
+- **Border Radius**: 15px для всех элементов
+- **Background**: rgba(5, 148, 79, 0.90) для positive/success snackbar
+- **Text Color**: White (#FFFFFF)
+
+### Typography
+
+```css
+/* Snackbar Message Text */
+--snackbar-message-font-size: 14px;
+--snackbar-message-font-weight: 600;
+--snackbar-message-font-family: 'Archivo';
+--snackbar-message-line-height: 1.40;
+--snackbar-message-color: #FFFFFF;
+
+/* Action Button Text */
+--snackbar-action-font-size: 13px;
+--snackbar-action-font-weight: 600;
+--snackbar-action-font-family: 'Archivo';
+--snackbar-action-line-height: 1.40;
+--snackbar-action-color: #FFFFFF;
+```
+
+**Характеристики**:
+- **Message Text**: 14px / 600 Archivo, white color
+- **Action Button Text**: 13px / 600 Archivo, white color
+- **Line Height**: 1.40 для всех текстов
+
+### Snackbar Elements
+
+#### 1. Icon Element
+
+Иконка слева от сообщения.
+
+```css
+--snackbar-icon-size: 24px;
+--snackbar-icon-padding: 16px;
+```
+
+**Характеристики**:
+- **Size**: 24px × 24px
+- **Padding**: 16px вокруг иконки
+- **Position**: Left side of message
+- **Use Case**: Status icons (success, error, info, warning)
+
+#### 2. Avatar Element
+
+Аватар пользователя слева от сообщения.
+
+```css
+/* Avatar Specifications */
+--snackbar-avatar-container: 56px;
+--snackbar-avatar-image: 48px;
+--snackbar-avatar-offset: 4px;
+--snackbar-avatar-border-radius: 40px;
+--snackbar-avatar-bg: #FFFFFF;
+--snackbar-avatar-padding: 16px;
+```
+
+**Структура**:
+- **Container**: 56px × 56px
+- **Image**: 48px × 48px
+- **Offset**: 4px от краев контейнера (создает white border эффект)
+- **Border Radius**: 40px (highly rounded)
+- **Background**: White (#FFFFFF) под изображением
+- **Padding**: 16px вокруг avatar container
+
+**Visual Effect**:
+- 48px image positioned at 4px offset creates visible white background
+- Appears as 48px image with 4px white border
+
+#### 3. Close Icon
+
+Иконка закрытия справа.
+
+```css
+/* Close Icon */
+--snackbar-close-icon-size: 20px;
+--snackbar-close-height-small: 36px;
+--snackbar-close-height-large: 44px;
+--snackbar-close-padding-h: 16px;
+--snackbar-close-padding-v: 10px;
+```
+
+**Характеристики**:
+- **Icon Size**: 20px × 20px
+- **Container Height**: 36px или 44px
+- **Padding**: 16px horizontal, 10px vertical
+- **Border Radius**: 15px
+- **Position**: Right side, vertically centered
+
+#### 4. Action Button
+
+Кнопка действия справа от сообщения.
+
+```css
+/* Action Button */
+--snackbar-action-height-small: 36px;
+--snackbar-action-height-large: 44px;
+--snackbar-action-padding-h: 16px;
+--snackbar-action-padding-v: 10px;
+--snackbar-action-border-radius: 15px;
+--snackbar-action-text-color: #FFFFFF;
+```
+
+**Характеристики**:
+- **Height**: 36px (compact) или 44px (comfortable)
+- **Padding**: 16px horizontal, 10px vertical
+- **Border Radius**: 15px
+- **Text**: "Action", 13px / 600, white
+- **Background**: Transparent (inherit from snackbar)
+- **Hover/Press**: Add visual feedback
+
+### Snackbar Layout Variants
+
+#### Variant 1: Simple Message
+
+Простое текстовое сообщение без дополнительных элементов.
+
+```css
+/* Simple Layout */
+.snackbar--simple {
+  padding: 16px;
+}
+
+.snackbar__message--simple {
+  width: 311px;  /* Max width for simple message */
+}
+```
+
+**Structure**:
+```html
+<div class="snackbar snackbar--simple" style="width: 375px; padding: 16px; background: rgba(5, 148, 79, 0.90); border-radius: 15px;">
+  <span style="font: 600 14px/1.4 Archivo; color: white;">Message that takes 2 lines to explain and goes on</span>
+</div>
+```
+
+#### Variant 2: Icon + Message
+
+Иконка слева + текстовое сообщение.
+
+```css
+.snackbar--with-icon {
+  display: flex;
+  align-items: center;
+}
+
+.snackbar__icon-wrapper {
+  padding: 16px;
+}
+
+.snackbar__message--with-icon {
+  padding: 16px 16px 16px 0;
+  width: 271px;
+}
+```
+
+**Structure**:
+- Icon container: padding 16px all sides
+- Message: padding 16px top/right/bottom
+- Message width: 271px
+
+#### Variant 3: Icon + Message + Close
+
+Иконка слева + сообщение + close icon справа.
+
+```css
+.snackbar--with-icon-close {
+  display: flex;
+  align-items: center;
+}
+
+.snackbar__message--with-close {
+  flex: 1;
+  padding: 16px 0;
+  width: 235px;
+}
+
+.snackbar__close {
+  height: 44px;
+  padding: 10px 16px;
+}
+```
+
+**Structure**:
+- Icon: padding 16px
+- Message: vertical padding 16px, width 235px
+- Close: height 44px, padding 10px/16px
+
+#### Variant 4: Avatar + Message
+
+Avatar слева + текстовое сообщение.
+
+```css
+.snackbar--with-avatar {
+  display: flex;
+  align-items: center;
+}
+
+.snackbar__avatar-wrapper {
+  padding: 16px;
+}
+
+.snackbar__message--with-avatar {
+  padding: 16px 16px 16px 0;
+  width: 239px;
+}
+```
+
+**Structure**:
+- Avatar container: padding 16px
+- Message: padding 16px top/right/bottom
+- Message width: 239px
+
+#### Variant 5: Avatar + Message + Close
+
+Avatar + сообщение + close icon справа.
+
+```css
+.snackbar--with-avatar-close {
+  display: flex;
+  align-items: center;
+}
+
+.snackbar__message--avatar-close {
+  flex: 1;
+  padding: 16px 0;
+  width: 203px;
+}
+```
+
+**Structure**:
+- Avatar: padding 16px
+- Message: vertical padding 16px, width 203px
+- Close: height 44px, padding 10px/16px
+
+#### Variant 6: Message + Action
+
+Сообщение + action button справа.
+
+```css
+.snackbar--with-action {
+  display: flex;
+  align-items: center;
+  padding-right: 16px;
+}
+
+.snackbar__message--with-action {
+  flex: 1;
+  padding: 16px;
+  width: 267px;
+}
+
+.snackbar__action {
+  height: 36px;
+  padding: 10px 16px;
+  border-radius: 15px;
+}
+```
+
+**Structure**:
+- Container: padding-right 16px
+- Message: padding 16px, width 267px (or less)
+- Action: height 36px, padding 10px/16px
+
+#### Variant 7: Icon + Message + Action
+
+Иконка + сообщение + action button.
+
+```css
+.snackbar--icon-action {
+  display: flex;
+  align-items: center;
+  padding-right: 16px;
+}
+
+.snackbar__message--icon-action {
+  flex: 1;
+  padding: 16px 8px 16px 0;
+  width: 223px;
+}
+```
+
+**Structure**:
+- Icon: padding 16px
+- Message: padding 16px/8px/16px/0, width 223px
+- Action: height 36px
+
+#### Variant 8: Avatar + Message + Action
+
+Avatar + сообщение + action button.
+
+```css
+.snackbar--avatar-action {
+  display: flex;
+  align-items: center;
+  padding-right: 16px;
+}
+
+.snackbar__message--avatar-action-2line {
+  flex: 1;
+  padding: 16px 0;
+  width: 159px;  /* For 3-line message */
+}
+
+.snackbar__message--avatar-action {
+  width: 191px;  /* For 2-line message */
+}
+```
+
+**Structure**:
+- Avatar: padding 16px
+- Message: variable width based on lines (159px for 3-line, 191px for 2-line)
+- Action: height 36px
+
+### Accessibility
+
+```html
+<!-- Success Snackbar with ARIA -->
+<div class="snackbar"
+     role="status"
+     aria-live="polite"
+     aria-atomic="true">
+  <img src="success-icon.svg" alt="" aria-hidden="true" />
+  <span class="snackbar__message">Operation completed successfully</span>
+  <button class="snackbar__close" aria-label="Close notification">
+    <img src="close-icon.svg" alt="" />
+  </button>
+</div>
+
+<!-- Snackbar with Action -->
+<div class="snackbar"
+     role="alert"
+     aria-live="assertive"
+     aria-atomic="true">
+  <span class="snackbar__message">Changes saved</span>
+  <button class="snackbar__action" onclick="undoChanges()">
+    Undo
+  </button>
+</div>
+```
+
+**ARIA Guidelines**:
+- Use `role="status"` для информационных уведомлений
+- Use `role="alert"` для важных уведомлений с действиями
+- `aria-live="polite"` для обычных уведомлений
+- `aria-live="assertive"` для срочных уведомлений
+- `aria-atomic="true"` для чтения всего сообщения целиком
+- `aria-label` для close кнопки
+- Icons должны иметь `aria-hidden="true"`
+
+### Best Practices
+
+1. **Duration & Timing**:
+   - Информационные snackbars: 3-4 seconds auto-dismiss
+   - Snackbars с action: 7-10 seconds или manual dismiss
+   - Error messages: manual dismiss only
+
+2. **Positioning**:
+   - Bottom center для мобильных приложений (стандарт)
+   - Top center для desktop web
+   - Avoid blocking important content
+
+3. **Content**:
+   - Краткие сообщения: 1-3 строки максимум
+   - Clear, actionable language
+   - Avoid technical jargon
+
+4. **Visual Hierarchy**:
+   - Avatar используйте для user-specific notifications
+   - Icon используйте для status/category indicators
+   - Action button только для reversible actions или важных переходов
+
+5. **Color Coding** (будущие варианты):
+   - Success: rgba(5, 148, 79, 0.90) - зеленый
+   - Error: rgba(226, 73, 73, 0.90) - красный (#E24949)
+   - Warning: желтый/оранжевый
+   - Info: синий (#4141E6)
+
+### CSS Implementation
+
+```css
+/* CSS Variables */
+:root {
+  /* Container */
+  --snackbar-width: 375px;
+  --snackbar-padding: 16px;
+  --snackbar-border-radius: 15px;
+
+  /* Colors */
+  --snackbar-success-bg: rgba(5, 148, 79, 0.90);
+  --snackbar-text-white: #FFFFFF;
+
+  /* Typography */
+  --snackbar-message-text: 600 14px/1.4 'Archivo';
+  --snackbar-action-text: 600 13px/1.4 'Archivo';
+
+  /* Elements */
+  --snackbar-icon-size: 24px;
+  --snackbar-avatar-container: 56px;
+  --snackbar-avatar-image: 48px;
+  --snackbar-avatar-offset: 4px;
+  --snackbar-avatar-radius: 40px;
+  --snackbar-close-icon: 20px;
+  --snackbar-action-height-sm: 36px;
+  --snackbar-action-height-lg: 44px;
+}
+
+/* Base Snackbar */
+.snackbar {
+  width: var(--snackbar-width);
+  padding: var(--snackbar-padding);
+  background: var(--snackbar-success-bg);
+  border-radius: var(--snackbar-border-radius);
+  display: flex;
+  align-items: center;
+}
+
+/* Message */
+.snackbar__message {
+  font: var(--snackbar-message-text);
+  color: var(--snackbar-text-white);
+}
+
+/* Icon */
+.snackbar__icon {
+  width: var(--snackbar-icon-size);
+  height: var(--snackbar-icon-size);
+  padding: var(--snackbar-padding);
+  flex-shrink: 0;
+}
+
+/* Avatar */
+.snackbar__avatar-wrapper {
+  width: var(--snackbar-avatar-container);
+  height: var(--snackbar-avatar-container);
+  padding: var(--snackbar-padding);
+  flex-shrink: 0;
+  position: relative;
+}
+
+.snackbar__avatar-bg {
+  position: absolute;
+  left: var(--snackbar-avatar-offset);
+  top: var(--snackbar-avatar-offset);
+  width: var(--snackbar-avatar-image);
+  height: var(--snackbar-avatar-image);
+  background: var(--snackbar-text-white);
+  border-radius: var(--snackbar-avatar-radius);
+}
+
+.snackbar__avatar-image {
+  position: absolute;
+  left: var(--snackbar-avatar-offset);
+  top: var(--snackbar-avatar-offset);
+  width: var(--snackbar-avatar-image);
+  height: var(--snackbar-avatar-image);
+  border-radius: var(--snackbar-avatar-radius);
+  object-fit: cover;
+}
+
+/* Close Button */
+.snackbar__close {
+  height: var(--snackbar-action-height-lg);
+  padding: 10px 16px;
+  border-radius: var(--snackbar-border-radius);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.snackbar__close-icon {
+  width: var(--snackbar-close-icon);
+  height: var(--snackbar-close-icon);
+}
+
+/* Action Button */
+.snackbar__action {
+  height: var(--snackbar-action-height-sm);
+  padding: 10px 16px;
+  border-radius: var(--snackbar-border-radius);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font: var(--snackbar-action-text);
+  color: var(--snackbar-text-white);
+  white-space: nowrap;
+}
+
+.snackbar__action:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.snackbar__action:active {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Layout Variants */
+.snackbar--simple {
+  padding: var(--snackbar-padding);
+}
+
+.snackbar--with-icon .snackbar__message,
+.snackbar--with-avatar .snackbar__message {
+  padding: 16px 16px 16px 0;
+  flex: 1;
+}
+
+.snackbar--with-close .snackbar__message,
+.snackbar--with-action .snackbar__message {
+  flex: 1;
+  padding: 16px 0;
+}
+
+.snackbar--with-action {
+  padding-right: 16px;
+}
+```
+
+### Usage Examples
+
+```html
+<!-- Simple Success Message -->
+<div class="snackbar snackbar--simple">
+  <span class="snackbar__message">Message that takes 2 lines to explain and goes on</span>
+</div>
+
+<!-- With Icon -->
+<div class="snackbar snackbar--with-icon">
+  <div class="snackbar__icon">
+    <img src="success-icon.svg" alt="" />
+  </div>
+  <span class="snackbar__message">Message that takes 2 lines to explain and goes on</span>
+</div>
+
+<!-- With Avatar and Close -->
+<div class="snackbar snackbar--with-avatar snackbar--with-close">
+  <div class="snackbar__avatar-wrapper">
+    <div class="snackbar__avatar-bg"></div>
+    <img class="snackbar__avatar-image" src="avatar.jpg" alt="User avatar" />
+  </div>
+  <span class="snackbar__message">Message that takes 2 lines to explain and goes on</span>
+  <button class="snackbar__close" aria-label="Close">
+    <img class="snackbar__close-icon" src="close-icon.svg" alt="" />
+  </button>
+</div>
+
+<!-- With Action Button -->
+<div class="snackbar snackbar--with-action">
+  <span class="snackbar__message">Message that takes 2 lines to explain and goes on</span>
+  <button class="snackbar__action">Action</button>
+</div>
+
+<!-- Icon + Message + Action -->
+<div class="snackbar snackbar--with-icon snackbar--with-action">
+  <div class="snackbar__icon">
+    <img src="info-icon.svg" alt="" />
+  </div>
+  <span class="snackbar__message">Changes saved successfully</span>
+  <button class="snackbar__action">View</button>
+</div>
+```
+
+---
+
 ## Как использовать эту дизайн-систему
 
 ### Для дизайнеров
@@ -3429,9 +4016,53 @@ End date in range:
 
 ## Версионирование и обновления
 
-**Текущая версия**: v5.7.0
+**Текущая версия**: v5.8.0
 
 ### Changelog
+
+#### v5.8.0 (2025-11-19)
+- **Добавлена новая секция "Snackbars & Toasts"** - система уведомлений для мобильного приложения:
+  - **Container Specifications**:
+    - Container: 375px width, padding 16px
+    - Border radius: 15px для всех элементов
+    - Background: rgba(5, 148, 79, 0.90) для success snackbar (#05944F с 90% opacity)
+    - Text color: white (#FFFFFF)
+  - **Typography**:
+    - Message text: 14px / 600 Archivo, white
+    - Action button text: 13px / 600 Archivo, white
+    - Line height: 1.40 для всех текстов
+  - **Snackbar Elements**:
+    - Icon Element: 24px × 24px, padding 16px, для status icons
+    - Avatar Element:
+      - Container: 56px × 56px
+      - Image: 48px × 48px с offset 4px (создает white border эффект)
+      - Border radius: 40px (highly rounded)
+      - Background: white (#FFFFFF)
+    - Close Icon: 20px × 20px, height 36px/44px, padding 16px/10px
+    - Action Button: height 36px/44px, text "Action" 13px/600, padding 16px/10px
+  - **8 Layout Variants**:
+    1. Simple Message (311px text width)
+    2. Icon + Message (271px text width)
+    3. Icon + Message + Close (235px text width)
+    4. Avatar + Message (239px text width)
+    5. Avatar + Message + Close (203px text width)
+    6. Message + Action (267px text width)
+    7. Icon + Message + Action (223px text width)
+    8. Avatar + Message + Action (159px/191px text width для 3/2 lines)
+  - **Accessibility Guidelines**:
+    - ARIA roles: `role="status"` или `role="alert"`
+    - ARIA live regions: `aria-live="polite"` или `aria-live="assertive"`
+    - `aria-atomic="true"` для полного чтения сообщения
+    - `aria-label` для close кнопки
+    - Icons с `aria-hidden="true"`
+  - **Best Practices**:
+    - Duration & Timing: 3-4s для info, 7-10s для action, manual для errors
+    - Positioning: bottom center для mobile, top center для desktop
+    - Content: 1-3 строки максимум, clear actionable language
+    - Visual Hierarchy: avatar для user notifications, icon для status
+    - Color Coding: success/error/warning/info варианты
+  - **Complete CSS Implementation** с variables, layout variants, hover/active states
+  - **Usage Examples** для всех 8 layout вариантов
 
 #### v5.7.0 (2025-11-19)
 - **Расширена секция "Input Fields"** с Advanced Variants, State Variations и Complex Field Types:
