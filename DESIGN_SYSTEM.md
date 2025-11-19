@@ -750,6 +750,221 @@ Container(
 
 ---
 
+#### Flutter Dropdown/Select Fields
+
+Поля выбора (dropdown/select) из Flutter кода для мобильного приложения с различными вариантами компоновки.
+
+**Общие спецификации:**
+- **Container Width**: 375px
+- **Container Padding**: Horizontal 16px, Vertical 10px
+- **Input Height**: 46px (выше чем у text input!)
+- **Input Padding**: Top 4px, Bottom 4px, Left 20px, Right 15px
+- **Border Radius**: 15px
+- **Border**: 2px solid #F4F6F9 (disabled state)
+- **Icon Size**: 30px × 30px (квадратные и круглые)
+- **Chevron Icon**: 24px × 24px
+- **Spacing**: 5px, 8px, 10px между элементами
+
+**Typography:**
+- **Label**: 12px, Archivo Regular (w400), Line Height: 1.67
+- **Value Text**: 14px, Archivo SemiBold (w600), Line Height: 1.43
+- **Helper Text**: 12px, Archivo Regular (w400), Line Height: 1.67
+
+**Icon Specifications:**
+- **Square Icons**: 30×30px, border-radius 10px
+- **Circle Icons**: 30×30px, border-radius 50% (full circle)
+- **Chevron Icons**: 24×24px, positioned right
+
+##### Variants:
+
+**1. Single Line with Square Icon**
+- **Layout**: Square icon (30px) + Single line text
+- **Text Color**: #D9DDE2 (disabled)
+- **Example**: Netflix service selector
+- **Icon**: Square with 10px border-radius
+- **Spacing**: 8px between icon and text
+
+**2. Two-Line with Circle Icon + Chevron**
+- **Layout**: Circle icon (30px) + Label + Value + Chevron (24px)
+- **Label**: 12px, positioned above value
+- **Value**: 14px SemiBold, main text
+- **Text Color**: #D9DDE2 (disabled)
+- **Example**: Company/Dropbox selector
+- **Icon**: Circle (border-radius 50px)
+- **Spacing**: 5px between label and value, 8px between icon and text
+
+```dart
+Container(
+  width: 375,
+  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+  decoration: BoxDecoration(color: Colors.white),
+  child: Container(
+    height: 46,
+    padding: const EdgeInsets.only(top: 4, bottom: 4, left: 20, right: 15),
+    decoration: ShapeDecoration(
+      color: const Color(0xFFF4F6F9),
+      shape: RoundedRectangleBorder(
+        side: BorderSide(width: 2, color: const Color(0xFFF4F6F9)),
+        borderRadius: BorderRadius.circular(15),
+      ),
+    ),
+    child: Row(
+      children: [
+        // Circle icon 30×30
+        Container(
+          width: 30,
+          height: 30,
+          decoration: ShapeDecoration(
+            shape: OvalBorder(),
+          ),
+        ),
+        SizedBox(width: 8),
+        // Label + Value
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text('Company', style: TextStyle(fontSize: 12)), // Label
+              SizedBox(height: 5),
+              Text('Dropbox', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600)), // Value
+            ],
+          ),
+        ),
+        // Chevron icon 24×24
+        Container(width: 24, height: 24),
+      ],
+    ),
+  ),
+)
+```
+
+**3. Two-Line without Icon**
+- **Layout**: Label + Value only
+- **Label**: 12px, positioned above value
+- **Value**: 14px SemiBold, main text
+- **Text Color**: #D9DDE2 (disabled)
+- **Example**: Your email field
+- **Spacing**: 5px between label and value
+
+**4. Two-Line without Icon + Helper Text**
+- **Layout**: Label + Value with helper text below container
+- **Label**: 12px, positioned above value
+- **Value**: 14px SemiBold, main text
+- **Helper**: 12px, positioned below input, color #747B84
+- **Text Color**: #D9DDE2 (disabled)
+- **Example**: Your name field with helper
+- **Spacing**: 5px between label and value, 8px after container
+
+**5. Two-Line with Square Icon + Chevron**
+- **Layout**: Square icon (30px) + Label + Value + Chevron (24px)
+- **Label**: 12px, positioned above value
+- **Value**: 14px SemiBold, main text
+- **Text Color**: #D9DDE2 (disabled)
+- **Example**: Crypto amount selector
+- **Icon**: Square with 10px border-radius
+- **Spacing**: 5px between label and value, 8px between icon and text
+
+**6. Two-Line with Circle Icon + Chevron (Crypto)**
+- **Layout**: Circle icon (30px) + Label + Value + Chevron (24px)
+- **Label**: 12px, positioned above value
+- **Value**: 14px SemiBold, main text
+- **Text Color**: #D9DDE2 (disabled)
+- **Example**: Bitcoin amount selector
+- **Icon**: Circle (border-radius 50px)
+- **Spacing**: 5px between label and value, 8px between icon and text
+
+**7. Single Line Long Text + Circle Icon + Ticker + Chevron**
+- **Layout**: Circle icon (30px) + Long text value + Ticker + Chevron (24px)
+- **Value**: 14px SemiBold, truncated if needed
+- **Ticker**: Small badge/label
+- **Text Color**: #D9DDE2 (disabled)
+- **Example**: Bitcoin address selector
+- **Icon**: Circle (border-radius 50px)
+- **Spacing**: 8px between elements
+
+**8. Circle Icon Only + Chevron on Left**
+- **Layout**: Chevron left (24px) + Circle icon (30px) + Chevron right (24px)
+- **Text**: Minimal or icon-based (e.g., BTC ticker)
+- **Text Color**: #D9DDE2 (disabled)
+- **Example**: Currency switcher
+- **Icon**: Circle (border-radius 50px)
+- **Special**: Chevrons on both sides for navigation
+
+**9. Circle Icon with Two Chevrons**
+- **Layout**: Circle icon (30px) + Chevrons for conversion
+- **Text Color**: #D9DDE2 (disabled)
+- **Example**: Currency conversion selector
+- **Icon**: Circle (border-radius 50px)
+- **Special**: Indicates conversion or exchange functionality
+
+**10. Circle Icon + Chevron + Two-Line Right-Aligned**
+- **Layout**: Circle icon (30px) + Chevron + Label + Value (right-aligned)
+- **Label**: 12px, positioned above value, right-aligned
+- **Value**: 14px SemiBold, right-aligned
+- **Text Color**: #D9DDE2 (disabled)
+- **Example**: Price conversion display
+- **Icon**: Circle (border-radius 50px)
+- **Spacing**: 5px between label and value
+
+```dart
+Container(
+  width: 375,
+  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+  decoration: BoxDecoration(color: Colors.white),
+  child: Container(
+    height: 46,
+    padding: const EdgeInsets.only(top: 4, bottom: 4, left: 20, right: 15),
+    decoration: ShapeDecoration(
+      color: const Color(0xFFF4F6F9),
+      shape: RoundedRectangleBorder(
+        side: BorderSide(width: 2, color: const Color(0xFFF4F6F9)),
+        borderRadius: BorderRadius.circular(15),
+      ),
+    ),
+    child: Row(
+      children: [
+        // Circle icon 30×30
+        Container(
+          width: 30,
+          height: 30,
+          decoration: ShapeDecoration(
+            shape: OvalBorder(),
+          ),
+        ),
+        SizedBox(width: 8),
+        // Chevron icon 24×24
+        Container(width: 24, height: 24),
+        SizedBox(width: 8),
+        // Right-aligned Label + Value
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text('Label', style: TextStyle(fontSize: 12)), // Label
+              SizedBox(height: 5),
+              Text('Value', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600)), // Value
+            ],
+          ),
+        ),
+      ],
+    ),
+  ),
+)
+```
+
+**Usage Notes:**
+- Input height 46px отличается от text input (36px) для лучшей читаемости dropdown содержимого
+- В disabled state все тексты используют цвет #D9DDE2
+- Квадратные иконки с border-radius 10px, круглые с border-radius 50px
+- Chevron иконки всегда 24×24px для унификации
+- Двухстрочные варианты (label + value) используют spacing 5px между строками
+- Container padding 10px vertical (больше чем у text input) для dropdown content
+- Border 2px в disabled state совпадает с background color (#F4F6F9)
+
+---
+
 #### Flutter Form Controls
 
 Компоненты форм из Flutter кода для мобильного приложения.
@@ -2453,9 +2668,44 @@ Container(
 
 ## Версионирование и обновления
 
-**Текущая версия**: v5.6.0
+**Текущая версия**: v5.7.0
 
 ### Changelog
+
+#### v5.7.0 (2025-11-19)
+- **Добавлена секция Flutter Dropdown/Select Fields:**
+  - Поля выбора для мобильного приложения с 10 различными вариантами компоновки
+  - Общие спецификации: Container 375px, Input height 46px (выше чем text input!)
+  - Container padding: 16px horizontal / 10px vertical
+  - Input padding: 4px top/bottom, 20px left, 15px right
+  - Border radius: 15px, Border: 2px solid #F4F6F9 (disabled state)
+  - Icon size: 30×30px (квадратные с border-radius 10px, круглые с border-radius 50px)
+  - Chevron icons: 24×24px
+  - Typography: Label 12px Regular, Value 14px SemiBold, Helper 12px Regular
+  - Spacing: 5px, 8px, 10px между элементами
+- **10 Вариантов Dropdown/Select:**
+  1. Single Line with Square Icon - одна строка с квадратной иконкой (Netflix)
+  2. Two-Line with Circle Icon + Chevron - двухстрочный с круглой иконкой (Company/Dropbox)
+  3. Two-Line without Icon - двухстрочный без иконки (Your email)
+  4. Two-Line without Icon + Helper Text - с helper текстом (Your name)
+  5. Two-Line with Square Icon + Chevron - криптовалюта с квадратной иконкой
+  6. Two-Line with Circle Icon + Chevron - Bitcoin amount selector
+  7. Single Line Long Text + Circle Icon + Ticker + Chevron - Bitcoin address
+  8. Circle Icon Only + Chevron on Left - переключатель валюты (BTC)
+  9. Circle Icon with Two Chevrons - конвертация валюты
+  10. Circle Icon + Chevron + Two-Line Right-Aligned - отображение цены
+- **Ключевые отличия от Text Input:**
+  - Input height 46px вместо 36px для лучшей читаемости dropdown содержимого
+  - Container padding 10px vertical вместо 5px
+  - Больше вариантов компоновки с иконками (30×30px вместо 20×20px)
+  - Поддержка двухстрочных значений (label + value) с spacing 5px
+- **Disabled State спецификации:**
+  - Text color: #D9DDE2 для всех текстовых элементов
+  - Background: #F4F6F9
+  - Border: 2px solid #F4F6F9 (совпадает с фоном)
+- **Flutter код примеры:**
+  - Complete код для Two-Line with Circle Icon + Chevron
+  - Complete код для Circle Icon + Chevron + Two-Line Right-Aligned
 
 #### v5.6.0 (2025-11-19)
 - **Добавлена секция Flutter Text Input Fields:**
