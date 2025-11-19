@@ -80,6 +80,34 @@
 --shadow-primary: rgba(101, 99, 255, 0.40);  /* #6563FF с 40% opacity для теней кнопок */
 ```
 
+### Gradient Colors
+
+```css
+/* Градиенты из TinyCards компонентов */
+
+/* Сине-фиолетовый градиент */
+--gradient-purple-blue-start: #7F7FD5;
+--gradient-purple-blue-end: #86A8E7;
+
+/* Светло-голубой градиент */
+--gradient-light-blue-start: #E0EAFC;
+--gradient-light-blue-end: #CFDEF3;
+
+/* Темный сине-серый градиент */
+--gradient-dark-blue-start: #141E30;
+--gradient-dark-blue-end: #243B55;
+```
+
+### Additional UI Colors
+
+```css
+/* Дополнительные цвета для UI элементов */
+--color-border-accent: #7B61FF;            /* Фиолетовая граница для контейнеров */
+--color-bg-card: #F4F6F9;                  /* Фон для карточек */
+--color-bg-icon-button: #EAEEF2;           /* Фон для иконочных кнопок */
+--color-border-white-transparent: rgba(255, 255, 255, 0.07);  /* Белая граница с прозрачностью */
+```
+
 ---
 
 ## Типографика
@@ -986,6 +1014,282 @@ Bottom sheet - модальное окно, которое выдвигаетс�
 
 ---
 
+## Tiny Cards (компактные карточки для desktop/tablet)
+
+Система компактных карточек различных размеров для отображения информации, статистики, продуктов и профилей.
+
+### Container Wrapper
+
+**Основной контейнер для коллекции карточек:**
+- **Width**: 2950px (широкий контейнер)
+- **Height**: 460px
+- **Padding**: 100px (все стороны)
+- **Border**: 1px solid #7B61FF (фиолетовая рамка)
+- **Border Radius**: 15px
+- **Layout**: Row с spacing 100px между карточками
+
+---
+
+### 1. Product Card (с градиентом)
+
+**Размер**: 160px × 160px
+
+**Стили:**
+- **Padding**: 10px
+- **Border Radius**: 20px
+- **Gradient**: Linear (#7F7FD5 → #86A8E7)
+- **Direction**: Horizontal (left to right)
+
+**Изображение продукта:**
+- **Size**: 98.77px × 98.77px
+- **Border Radius**: 15px
+- **Position**: Top left
+
+**Иконка действия:**
+- **Size**: 24px × 24px
+- **Padding**: 8px контейнер, 2px внутри
+- **Border Radius**: 20px контейнер, 100px иконка
+- **Position**: Top right
+
+**Текст описания:**
+- **Font**: 16px, Weight: 400, Color: #FFFFFF
+- **Line Height**: 1.40
+- **Max Width**: 140px
+- **Position**: Bottom
+
+**Пример**: "Select delivery by drone"
+
+---
+
+### 2. Product Card (светлая)
+
+**Размер**: 160px × 160px
+
+**Стили:**
+- **Padding**: 15px
+- **Background**: #F4F6F9
+- **Border**: 0.50px solid rgba(255, 255, 255, 0.07)
+- **Border Radius**: 20px
+
+**Изображение продукта:**
+- **Size**: 79.01px × 79.01px
+- **Border Radius**: 15px
+- **Fit**: Cover
+
+**Иконка действия:**
+- **Size**: 14px × 14px
+- **Padding**: 8px контейнер
+- **Position**: Top right
+
+**Текст:**
+- **Title**: 16px, Weight: 700, Color: #09101D
+- **Subtitle**: 14px, Weight: 400, Color: #747B84
+- **Gap**: 8px между title и subtitle
+- **Max Width**: 130px
+
+**Пример**: "Apple Watch" / "Add in wishlist"
+
+---
+
+### 3. Balance Card
+
+**Размер**: 160px × 120px
+
+**Стили:**
+- **Padding**: 12px
+- **Background**: #F4F6F9
+- **Border**: 0.50px solid rgba(255, 255, 255, 0.07)
+- **Border Radius**: 20px
+
+**Структура:**
+1. **Дата**: 13px, Weight: 400, Color: #D9DDE2
+2. **Заголовок**: 18px, Weight: 700, Color: #09101D
+3. **Значение**: 14px, Weight: 600, Color: #09101D
+
+**Пример**: "Jun 28, 2021" / "Balance" / "1452$"
+
+---
+
+### 4. User Profile Card (с градиентом)
+
+**Размер**: 160px × 120px
+
+**Стили:**
+- **Padding**: 12px
+- **Gradient**: Linear (#E0EAFC → #CFDEF3)
+- **Border**: 0.50px solid rgba(255, 255, 255, 0.07)
+- **Border Radius**: 20px
+
+**Header:**
+- **Name**: 16px, Weight: 700, Color: #09101D
+- **Location**: 12px, Weight: 400, Color: #09101D
+- **Icon**: 14px, Padding: 5px
+
+**Avatar:**
+- **Size**: 56px × 56px (outer), 48px × 48px (inner)
+- **Border Radius**: 40px (круг)
+- **Background fallback**: #D9DDE2
+
+**Gap**: 5px между header и avatar
+
+---
+
+### 5. Product Card Dark (горизонтальная)
+
+**Размер**: 160px × 80px
+
+**Стили:**
+- **Padding**: 10px top/bottom, 15px left
+- **Gradient**: Linear (#141E30 → #243B55) - темный
+- **Border**: 0.50px solid rgba(255, 255, 255, 0.07)
+- **Border Radius**: 20px
+
+**Layout**: Horizontal row
+
+**Текст:**
+- **Font**: 14px, Weight: 600, Color: #FFFFFF
+- **Max Width**: 67.50px
+
+**Изображение:**
+- **Size**: 60px × 60px
+- **Border Radius**: 15px
+- **Fit**: Contain
+- **Position**: Right side
+
+**Пример**: "Apple Watch"
+
+---
+
+### 6. Growth Indicator Card
+
+**Размер**: 160px × 60px
+
+**Стили:**
+- **Padding**: 10px
+- **Background**: #F4F6F9
+- **Border**: 0.50px solid rgba(255, 255, 255, 0.07)
+- **Border Radius**: 20px
+
+**Иконка:**
+- **Container**: 40px × 40px, Padding: 8px
+- **Background**: #EAEEF2
+- **Border Radius**: 20px
+- **Icon Size**: 24px × 24px
+
+**Текст:**
+- **Value**: 18px, Weight: 700, Color: #11BB8D (зеленый)
+- **Label**: 13px, Weight: 600, Color: #09101D
+- **Max Width**: 90px
+
+**Gap**: 10px между иконкой и текстом
+
+**Пример**: "21%" / "Growth"
+
+---
+
+### 7. Icon Label Card
+
+**Размер**: 160px × 60px
+
+**Стили:**
+- **Padding**: 10px
+- **Background**: #F4F6F9
+- **Border Radius**: 15px
+
+**Иконка:**
+- **Container**: 40px × 40px, Padding: 8px
+- **Background**: rgba(11, 36, 251, 0.10) - светло-синий
+- **Border Radius**: 30px
+- **Icon Size**: 24px × 24px, Padding: 4px внутри
+
+**Текст:**
+- **Font**: 14px, Weight: 600, Color: #09101D
+
+**Gap**: 10px между иконкой и текстом
+
+**Пример**: "Database"
+
+---
+
+### 8. User Info Card (вертикальная)
+
+**Размер**: 160px × auto (минимум 50px)
+
+**Стили:**
+- **Padding**: 10px top/bottom, 15px left, 10px right
+- **Background**: #F4F6F9
+- **Border**: 0.50px solid rgba(255, 255, 255, 0.07)
+- **Border Radius**: 20px
+
+**Текст:**
+- **Name**: 16px, Weight: 700, Color: #09101D
+- **Location**: 14px, Weight: 400, Color: #414249
+- **Max Width**: 135px
+
+**Gap**: 8px между name и location
+
+---
+
+### 9. Avatar with Status
+
+**Компонент для отображения аватара со статусом.**
+
+**Avatar:**
+- **Size**: 56px × 56px (outer), 48px × 48px (inner)
+- **Border Radius**: 40px (круг)
+- **Background fallback**: #D9DDE2
+
+**Status Indicator:**
+- **Size**: 12px × 12px
+- **Padding**: 2px horizontal, 4px vertical (внутри)
+- **Background**: #4141E6
+- **Border**: 2px solid #FFFFFF
+- **Border Radius**: 20px
+- **Position**: Bottom right of avatar
+
+**Text Label:**
+- **Font**: 13px, Weight: 400, Color: #09101D
+- **Text Align**: Center
+
+**Layout:**
+- Avatar сверху
+- Gap 5px
+- Status indicator + Name снизу (horizontal row, gap 5px)
+
+---
+
+### Общие параметры для Tiny Cards
+
+**Размеры карточек:**
+- **Extra Small**: 160px × 60px
+- **Small**: 160px × 80px
+- **Medium**: 160px × 120px
+- **Large**: 160px × 160px
+
+**Border Radius:**
+- **Card**: 15px или 20px
+- **Images**: 15px
+- **Avatars**: 40px (круг)
+- **Icon buttons**: 20px или 30px
+- **Small elements**: 100px (полный круг)
+
+**Spacing:**
+- **Card padding**: 10px, 12px, 15px (зависит от размера)
+- **Between cards**: 100px
+- **Internal gaps**: 5px, 8px, 10px
+
+**Border:**
+- **Standard**: 0.50px solid rgba(255, 255, 255, 0.07)
+- **Accent**: 1px solid #7B61FF
+
+**Gradients:**
+Все градиенты - Linear, Horizontal (0° to 180°):
+- Purple-Blue: #7F7FD5 → #86A8E7
+- Light-Blue: #E0EAFC → #CFDEF3
+- Dark-Blue: #141E30 → #243B55
+
+---
+
 ## Как использовать эту дизайн-систему
 
 ### Для дизайнеров
@@ -1013,9 +1317,25 @@ Bottom sheet - модальное окно, которое выдвигаетс�
 
 ## Версионирование и обновления
 
-**Текущая версия**: v5.1.0
+**Текущая версия**: v5.2.0
 
 ### Changelog
+
+#### v5.2.0 (2025-11-19)
+- **Добавлены градиенты** из TinyCards компонентов:
+  - Purple-Blue (#7F7FD5 → #86A8E7)
+  - Light-Blue (#E0EAFC → #CFDEF3)
+  - Dark-Blue (#141E30 → #243B55)
+- **Расширена цветовая палитра**:
+  - Border accent (#7B61FF)
+  - Card background (#F4F6F9)
+  - Icon button background (#EAEEF2)
+  - White transparent border (rgba(255, 255, 255, 0.07))
+- **Добавлена новая секция "Tiny Cards"** (компактные карточки для desktop/tablet):
+  - 9 типов карточек: Product (gradient & light), Balance, User Profile, Product Dark, Growth Indicator, Icon Label, User Info, Avatar with Status
+  - Размеры: 160px × 60px, 80px, 120px, 160px
+  - Полная спецификация всех параметров: padding, borders, typography, spacing
+  - Container wrapper с фиолетовой рамкой
 
 #### v5.1.0 (2025-11-19)
 - **Обновлена цветовая палитра** с реальными данными из Flutter приложения
