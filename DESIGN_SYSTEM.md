@@ -89,9 +89,11 @@ MaterialApp(
 --color-accent-gold: #FFC043;      /* Color(0xFFFFC043) - золотой/желтый для toast buttons и actions */
 --color-accent-blue-primary: #2E5AAC; /* Color(0xFF2E5AAC) - синий для auth buttons и primary actions */
 --color-accent-green: #05944F;     /* Color(0xFF05944F) - зеленый для links и primary buttons */
+--color-accent-orange: #FF9500;    /* Color(0xFFFF9500) - оранжевый для notifications */
 --color-accent-facebook: #4C69AB;  /* Color(0xFF4C69AB) - facebook blue (darker) */
 --color-accent-facebook-light: #425993; /* Color(0xFF425993) - facebook blue (lighter) */
 --color-accent-google: #5384EC;    /* Color(0xFF5384EC) - google blue */
+--color-accent-instagram-purple: #833AB4; /* Color(0xFF833AB4) - Instagram gradient purple */
 ```
 
 ### Background Colors
@@ -1954,6 +1956,68 @@ Container(
 
 ---
 
+### 20. Stories / Status Row (из SocialLight)
+
+#### Story Avatar Container
+
+- **Container Size**: 56x56px
+- **Avatar Size**: 48x48px
+- **Avatar Offset**: 4px (top/left from container)
+- **Story Spacing**: 10px между stories в horizontal row
+- **Border Width**: 2px (для gradient border и blue border)
+
+#### Story Badges
+
+- **Active Badge**: 14x14px
+  - Position: Bottom right
+  - Background: #11BB8D (success green)
+  - Border: 1px white
+  - Icon: Checkmark 9.60x9.60px
+
+- **Live Badge**: 28x14px
+  - Position: Bottom right
+  - Padding: 4px horizontal, 2px vertical
+  - Background: LinearGradient [#833AB4, #FD1D1D, #FCB045] (Instagram gradient)
+  - Border: 1px white
+  - Border Radius: 12px
+  - Text: "Live", 10px, weight: 600, white
+
+- **New Badge**: 20px height
+  - Position: Top right (offset: 36px left, 0px top)
+  - Padding: 4px horizontal, 2px vertical
+  - Background: #4141E6 (primary blue)
+  - Border Radius: 12px
+  - Text: "New", 10px, weight: 600, white
+
+#### Story Border States
+
+- **Gradient Border** (unviewed):
+  - Border: 2px #833AB4 (Instagram purple)
+  - Border Radius: 30px
+
+- **Blue Border** (current/active):
+  - Border: 2px #4141E6 (primary blue)
+  - Border Radius: 30px
+
+- **No Border** (viewed/default):
+  - Без decorations
+
+#### Notification Dot
+
+- **Size**: 6x6px
+- **Shape**: OvalBorder
+- **Color**: #FF9500 (accent orange)
+- **Position**: Top bar (notification indicator)
+
+#### Section Header
+
+- **Title**: "Stories", 24px, weight: 700, #09101D
+- **Link**: "See all", 14px, weight: 600, #4141E6
+- **Padding**: 16px horizontal, 10px vertical
+- **Layout**: space-between (flex justify)
+
+---
+
 ### 16. Special Effects
 
 #### Focus Ring
@@ -2405,6 +2469,159 @@ Screen Container (375x646, radius: 30):
 
 ---
 
+### Social Components (из SocialLight)
+
+Компоненты для социальных сетей - Stories, статусы, активности.
+
+#### Stories / Status Row
+
+**Из SocialLight - Stories section**
+
+Горизонтальный список Stories с различными состояниями и индикаторами.
+
+- **Screen Width**: 375px (mobile)
+- **Border Radius**: 30px
+- **Background**: Colors.white
+- **Clip**: antiAlias
+
+**Top Bar** (height: 44px):
+- **Notification Dot** (position: left 298, top 8):
+  - Size: 6x6px
+  - Background: #FF9500 (--color-accent-orange)
+  - Shape: OvalBorder (круглый)
+- **Time/Status Element** (position: left 21, top 12):
+  - Size: 54x21px
+  - Border Radius: 32px
+
+**Section Header** (padding: horizontal 16, vertical 10):
+- **Row Layout**: space-between
+- **Title**:
+  - Text: "Stories"
+  - Font: Archivo, 24px, weight: 700
+  - Color: #09101D (--color-text-primary)
+  - Position: left side
+- **See All Link**:
+  - Text: "See all"
+  - Font: Archivo, 14px, weight: 600
+  - Color: #4141E6 (--color-text-blue)
+  - Text Align: right
+  - Position: right side
+- **Spacing**: 10px (Row spacing)
+
+**Stories Row** (padding: horizontal 16, vertical 10):
+- **Layout**: Horizontal Row
+- **Spacing**: 10px между stories
+- **Scroll**: Horizontal scroll (7 visible items)
+
+#### Story Avatar States
+
+**Base Story Avatar**:
+- **Container**: 56x56px
+- **Avatar Image**: 48x48px, positioned at (4, 4)
+- **Background Placeholder**: #D9DDE2 (--color-bg-disabled)
+- **Border Radius**: 40px (avatar), 30px (container with border)
+- **NetworkImage**: 48x48px, fit: cover
+
+**1. Story with Active Badge** (Verified/Online):
+- **Container**: 56x56px
+- **Avatar**: 48x48px at (4, 4)
+- **Badge** (bottom right, position: 0, 36):
+  - Container: 20x20px, radius: 15px
+  - Inner Badge: 14x14px
+    - Background: #11BB8D (--color-success)
+    - Border: 1px solid white
+    - Border Radius: 20px
+  - Icon Container: 12x12px, padding: 2px, radius: 100px
+    - Icon: 9.60x9.60px (checkmark, positioned -0.80, -0.80)
+
+**2. Story with Live Badge**:
+- **Container**: 56x56px
+- **Avatar**: 48x48px at (4, 4)
+- **Live Badge** (bottom right, position: 0, 36):
+  - Container: expanded, height 20px
+  - Inner Badge: 28x14px
+    - Padding: horizontal 4px, vertical 2px
+    - **LinearGradient (Instagram)**:
+      - Begin: Alignment(0.00, 0.50) - left center
+      - End: Alignment(1.00, 0.50) - right center
+      - Colors: [#833AB4, #FD1D1D, #FCB045] (horizontal gradient)
+    - Border: 1px solid white
+    - Border Radius: 12px
+  - Text: "Live"
+    - Width: 20px
+    - Font: Archivo, 10px, weight: 600
+    - Color: white
+
+**3. Story with Gradient Border** (Unviewed/New Story):
+- **Outer Container**: 56x56px
+  - Border: 2px solid #833AB4 (--color-accent-instagram-purple)
+  - Border Radius: 30px
+- **Avatar**: 48x48px at (4, 4)
+- **Background**: #D9DDE2
+- **NetworkImage**: 48x48px
+
+**4. Story with New Badge** (top right):
+- **Container**: 56x56px
+- **Avatar**: 48x48px at (4, 4)
+- **New Badge** (top right, position: 36, 0):
+  - Container: 20x20px, padding: 4px, radius: 15px
+  - Inner Badge: height 20px
+    - Padding: horizontal 4px, vertical 2px
+    - Background: #4141E6 (--color-primary)
+    - Border Radius: 12px
+  - Text: "New"
+    - Font: Archivo, 10px, weight: 600
+    - Color: white
+
+**5. Story with Blue Border** (Current/Active Story):
+- **Outer Container**: 56x56px
+  - Border: 2px solid #4141E6 (--color-primary)
+  - Border Radius: 30px
+- **Avatar**: 48x48px at (4, 4)
+
+**6. Story without Border** (Viewed/Default):
+- **Container**: 56x56px
+- **Avatar**: 48x48px at (4, 4)
+- **No border, no badges**
+
+**Structure**:
+```
+Screen Container (375px width, radius: 30):
+  - Top Bar (44px):
+    - Notification Dot (6x6, #FF9500, left 298, top 8)
+    - Time Element (54x21, left 21, top 12)
+  - Section Header (padding: 16/10):
+    - Row (space-between):
+      - Title: "Stories" (24px weight 700, #09101D)
+      - Link: "See all" (14px weight 600, #4141E6)
+  - Stories Row (padding: 16/10, spacing: 10):
+    - Story 1: Active Badge (verified, #11BB8D)
+    - Story 2: Live Badge (gradient, "Live" text)
+    - Story 3: Gradient Border (unviewed, #833AB4)
+    - Story 4: New Badge (top right, #4141E6, "New" text)
+    - Story 5: Blue Border (current, #4141E6)
+    - Story 6: No Border (viewed)
+    - Story 7: No Border (viewed)
+```
+
+**Badge Types**:
+1. **Active/Verified Badge** (bottom right):
+   - Size: 14x14px, #11BB8D, white border, checkmark icon
+2. **Live Badge** (bottom right):
+   - Size: 28x14px, Instagram gradient, "Live" text 10px white
+3. **New Badge** (top right):
+   - Size: 20px height, #4141E6, "New" text 10px white
+4. **Gradient Border** (outer ring):
+   - Border: 2px #833AB4, indicates unviewed story
+5. **Blue Border** (outer ring):
+   - Border: 2px #4141E6, indicates current/active story
+
+**Usage**: Stories row для социальных сетей с различными индикаторами статуса.
+
+**Гибкость**: Можно добавить/убрать stories, изменить размер аватаров, добавить имена под аватарами, изменить badges (например добавить count badge для multiple stories), изменить gradient цвета, добавить "Add Story" button в начале списка.
+
+---
+
 ## Состояния
 
 ### Interactive States
@@ -2636,9 +2853,47 @@ Screen Container (375x646, radius: 30):
 
 ## Версионирование и обновления
 
-**Текущая версия**: v5.5.0
+**Текущая версия**: v5.6.0
 
 ### Changelog
+
+#### v5.6.0 (2025-11-19)
+- Добавлен раздел **Social Components / Социальные компоненты** с Stories/Status Row из SocialLight:
+  - **Stories / Status Row** - горизонтальный ряд аватаров со статусами (Instagram/WhatsApp style)
+  - **6 состояний Story Avatar**:
+    - **Active Badge**: 14x14px, #11BB8D, checkmark icon, bottom right
+    - **Live Badge**: 28x14px, Instagram gradient [#833AB4, #FD1D1D, #FCB045], "Live" text, bottom right
+    - **Gradient Border**: 2px #833AB4, unviewed stories
+    - **New Badge**: 20px height, #4141E6, "New" text, top right
+    - **Blue Border**: 2px #4141E6, current/active story
+    - **No Border**: viewed/default state
+  - **Story Container**:
+    - Container: 56x56px
+    - Avatar: 48x48px (offset 4px from container)
+    - Spacing: 10px between stories
+    - Border width: 2px для borders
+  - **Top Bar**:
+    - Notification dot: 6x6px, #FF9500, OvalBorder
+    - Height: 44px
+  - **Section Header**:
+    - Title: "Stories", 24px weight 700, #09101D
+    - Link: "See all", 14px weight 600, #4141E6
+    - Padding: 16px horizontal, 10px vertical
+    - Layout: space-between
+  - **Гибкость**: Можно добавлять/удалять stories, менять размер аватаров, добавлять имена под аватарами, добавлять count badges, менять gradient colors, добавлять кнопку "Add Story"
+- **Новые accent colors**:
+  - #FF9500 - оранжевый для notifications и badges
+  - #833AB4 - Instagram purple для gradients и story borders
+- **Новые component sizes**:
+  - Story container: 56x56px
+  - Story avatar: 48x48px
+  - Story avatar offset: 4px
+  - Active badge: 14x14px
+  - Live badge: 28x14px
+  - New badge: 20px height
+  - Story border: 2px
+  - Story spacing: 10px
+  - Notification dot: 6x6px
 
 #### v5.5.0 (2025-11-19)
 - Добавлен новый раздел **Screens / Готовые UI блоки** с комплектом Auth Screens из StartScreensLight:
