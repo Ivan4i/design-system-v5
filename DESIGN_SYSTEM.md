@@ -65,6 +65,7 @@
 ```css
 /* UI элементы из Flutter кода */
 --color-gray-light: #D9DDE2;       /* Color(0xFFD9DDE2) - светло-серый для разделителей */
+--color-gray-lighter: #EAEEF2;     /* Color(0xFFEAEEF2) - очень светло-серый для inactive steps */
 --color-background-light: #F4F6F9; /* Color(0xFFF4F6F9) - светлый фон для inactive кнопок */
 
 /* Цвета для карточек и контента */
@@ -1133,6 +1134,84 @@
 - **Position**: Top corners на изображении видео
 - **Использование**: Метаданные видео
 
+#### Progress Stepper / Track Bar
+
+Индикатор прогресса с шагами для multi-step процессов (оформление заказа, регистрация).
+
+- **Container**:
+  - Width: 375px (full mobile width)
+  - Padding: left 32px, right 32px, bottom 10px
+  - Vertical padding: 5px
+  - Row height: 30px
+- **Border Radius**: 10px для основного контейнера
+- **Spacing между элементами**: 3px (между step indicators и progress lines)
+
+##### Step Indicator (Active)
+
+Активный текущий шаг.
+
+- **Outer Circle**: 18×18px
+  - Background: #09101D (black)
+  - Shape: OvalBorder (круг)
+- **Inner Circle**: 14×14px
+  - Background: #09101D (black)
+  - Border: 1px solid White
+  - Position: 2px from outer edge
+- **Label**: Positioned at top: 21px from outer circle
+- **Использование**: Текущий активный шаг
+
+##### Step Indicator (Inactive)
+
+Неактивный будущий шаг.
+
+- **Size**: 14×14px
+- **Background**: #EAEEF2 (очень светло-серый)
+- **Shape**: OvalBorder (круг)
+- **Padding**: top 2px
+- **Label Spacing**: 5px между кружком и текстом
+- **Использование**: Будущие шаги, еще не достигнутые
+
+##### Step Indicator (Completed)
+
+Завершенный шаг с иконкой.
+
+- **Container**: 18×18px
+  - Padding top: 0.5px
+  - Border radius: 3px
+- **Icon**: 17×17px (checkmark/галочка)
+  - clipBehavior: Clip.antiAlias
+- **Label Spacing**: 3px между иконкой и текстом
+- **Использование**: Пройденные шаги
+
+##### Progress Line
+
+Линия между шагами.
+
+- **Height**: 4px
+- **Background**: #F4F6F9 (color-background-light)
+- **Border Radius**: 10px
+- **Layout**: Expanded (заполняет доступное пространство между steps)
+- **Использование**: Визуальная связь между шагами
+
+##### Step Labels
+
+Подписи шагов.
+
+- **Font**: 10px Archivo
+- **Weight**: 600 (Semibold)
+- **Color**: #09101D (black)
+- **Text Align**: Center
+- **Line Height**: 1.40
+- **Position**: Below step indicators
+- **Примеры текстов**: "Shipping", "Payment", "Review"
+
+**Состояния прогресса:**
+- **State 1**: Step 1 active, Steps 2-3 inactive
+- **State 2**: Step 1 completed (icon), Step 2 active, Step 3 inactive
+- **State 3**: Steps 1-2 completed (icons), Step 3 active
+
+**Использование**: Checkout flow, multi-step forms, онбординг, регистрация
+
 ---
 
 ### 17. Hero Image Carousel (Flutter)
@@ -1606,9 +1685,34 @@
 
 ## Версионирование и обновления
 
-**Текущая версия**: v5.6.0
+**Текущая версия**: v5.7.0
 
 ### Changelog
+
+#### v5.7.0 (2025-11-19)
+- 📊 Добавлен **Progress Stepper / Track Bar** компонент
+- 🎨 Новый цвет для UI элементов:
+  - Gray Lighter (#EAEEF2) - очень светло-серый для inactive steps
+- 🔄 Добавлена полная спецификация **Progress Stepper** компонента:
+  - **Step Indicator (Active)** - 18×18px черный с белой обводкой
+    - Outer circle: 18×18px (#09101D)
+    - Inner circle: 14×14px с 1px white border
+  - **Step Indicator (Inactive)** - 14×14px светло-серый
+    - Background: #EAEEF2 (gray-lighter)
+  - **Step Indicator (Completed)** - 17×17px с иконкой checkmark
+    - Container: 18×18px, padding top 0.5px
+  - **Progress Line** - 4px height, #F4F6F9 background
+    - Border radius: 10px
+    - Layout: Expanded между steps
+  - **Step Labels** - 10px Semibold Archivo
+    - Position: Below indicators
+    - Text align: Center
+- 🎯 Документированы **3 состояния прогресса**:
+  - State 1: Step 1 active, Steps 2-3 inactive
+  - State 2: Step 1 completed, Step 2 active, Step 3 inactive
+  - State 3: Steps 1-2 completed, Step 3 active
+- 📱 Container specs: 375px width, 32px horizontal padding, 30px row height
+- 📊 Все данные извлечены из реального Flutter кода track bar системы
 
 #### v5.6.0 (2025-11-19)
 - 🖼️ Добавлена **полная система Hero Image Carousel**
