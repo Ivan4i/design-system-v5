@@ -84,6 +84,7 @@ MaterialApp(
 /* Акцентные цвета из Flutter кода */
 --color-accent-purple: #7B61FF;    /* Color(0xFF7B61FF) - фиолетовый для borders */
 --color-accent-blue-dark: #0B24FB; /* Color(0xFF0B24FB) - темно-синий для outlined buttons */
+--color-accent-gold: #FFC043;      /* Color(0xFFFFC043) - золотой/желтый для toast buttons и actions */
 ```
 
 ### Background Colors
@@ -91,6 +92,7 @@ MaterialApp(
 ```css
 /* Фоны для компонентов из Flutter кода */
 --color-bg-dark: #12202F;          /* Темный фон scaffold */
+--color-bg-toast: #09101D;         /* Color(0xFF09101D) - темный фон toast/snackbar */
 --color-bg-light: #F4F6F9;         /* Светлый фон кнопок и карточек */
 --color-bg-primary: #4141E6;       /* Фон primary кнопок и rating badge */
 --color-bg-disabled: #D9DDE2;      /* Фон disabled состояний */
@@ -941,7 +943,264 @@ Container (padding: 16/5):
 
 ---
 
-### 4. Badges & Tags (из View2)
+### 4. Toast / Snackbar (из Toast)
+
+Компонент для отображения временных уведомлений и сообщений с опциональными кнопками действий.
+
+**Из Toast - showcase containers**
+
+- **Showcase Container 1 (Row)**:
+  - Padding: horizontal: 36px, vertical: 20px
+  - Border: 1px solid #7B61FF
+  - Border Radius: 15px
+  - Clip: antiAlias
+  - Row spacing: 100px между toast компонентами
+  - 3 варианта toast в Row
+
+- **Showcase Container 2 (Stack)**:
+  - Width: 1301px
+  - Height: 202px
+  - Border: 1px solid #7B61FF
+  - Border Radius: 15px
+  - Clip: antiAlias
+  - 6 вариантов toast с позиционированием
+
+#### Toast Base Structure
+
+**Из Toast - базовая структура**
+
+- **Width**: 343px (fixed)
+- **Background**: #09101D (Color(0xFF09101D))
+- **Border Radius**: 15px
+- **Message Text**:
+  - Font: Archivo, 15px, weight: 600
+  - Color: #FFFFFF (Colors.white)
+  - Line Height: 1.40
+
+#### Toast Variants
+
+**1. Toast Text Only** (без кнопок):
+
+**Из Toast - третий вариант в Row**
+
+- **Width**: 343px
+- **Padding**: 16px (all sides)
+- **Background**: #09101D
+- **Border Radius**: 15px
+- **Message**:
+  - Width: 311px
+  - Text: "This is a toast message"
+  - Font: Archivo, 15px, weight: 600, color: white
+
+**Structure**:
+```
+Container (343px, padding: 16):
+  - Row:
+    - Message (311px, white text, 15px weight 600)
+```
+
+**2. Toast with Single Button** (горизонтальный layout):
+
+**Из Toast - второй вариант в Row**
+
+- **Width**: 343px
+- **Padding**: horizontal: 16px, vertical: 12px
+- **Background**: #09101D
+- **Border Radius**: 15px
+- **Row spacing**: 8px между message и button
+- **Message**:
+  - Width: 231px
+  - Text: "This is a toast message with button"
+  - Font: Archivo, 15px, weight: 600, color: white
+- **Button**:
+  - Type: Filled (accent button)
+  - Background: #FFC043
+  - Text: "Action", color: #09101D
+  - Height: 36px
+  - Padding: horizontal: 16px, vertical: 10px
+  - Border Radius: 15px
+  - Font: Archivo, 13px, weight: 600
+
+**Structure**:
+```
+Container (343px, padding: 16/12):
+  - Row (spacing: 8):
+    - Message (231px, white text)
+    - Button (36px height, #FFC043 bg, dark text)
+```
+
+**3. Toast with Two Buttons** (вертикальный layout):
+
+**Из Toast - первый вариант в Row**
+
+- **Width**: 343px
+- **Padding**: top: 16px, left: 16px, right: 16px, bottom: 12px
+- **Background**: #09101D
+- **Border Radius**: 15px
+- **Column spacing**: 12px между message и buttons
+- **Message**:
+  - Width: 311px
+  - Text: "This is a toast message with a lenght of two lines of text and buttons"
+  - Font: Archivo, 15px, weight: 600, color: white
+- **Buttons Row**:
+  - Spacing: 8px между кнопками
+  - Alignment: end (right-aligned)
+  - **Button 1 (Ghost/Text)**:
+    - Background: transparent
+    - Text: "Action", color: #FFC043
+    - Height: 36px
+    - Padding: horizontal: 16px, vertical: 10px
+    - Border Radius: 15px
+    - Font: Archivo, 13px, weight: 600
+  - **Button 2 (Filled)**:
+    - Background: #FFC043
+    - Text: "Action", color: #09101D
+    - Height: 36px
+    - Padding: horizontal: 16px, vertical: 10px
+    - Border Radius: 15px
+    - Font: Archivo, 13px, weight: 600
+
+**Structure**:
+```
+Container (343px, padding: 16/16/16/12):
+  - Column (spacing: 12):
+    - Message (311px, white text)
+    - Row (spacing: 8, align: end):
+      - Button 1 (ghost, #FFC043 text)
+      - Button 2 (filled, #FFC043 bg)
+```
+
+**4. Toast with Icon** (иконка слева):
+
+**Из Toast - positioned варианты с иконками**
+
+- **Width**: 343px
+- **Background**: #09101D
+- **Border Radius**: 15px
+- **Row layout**: icon container + message
+- **Icon Container**:
+  - Size: 24x24px
+  - Padding: 16px (around icon)
+  - Clip: antiAlias
+- **Message**:
+  - Width: 271px
+  - Padding: top: 16px, right: 16px, bottom: 16px
+  - Font: Archivo, 15px, weight: 600, color: white
+  - Text: "A thing happened"
+
+**Structure**:
+```
+Container (343px):
+  - Row:
+    - Icon Container (24x24, padding: 16)
+    - Message (271px, padding: 16/16/16)
+```
+
+**5. Toast with Icon and Button** (иконка + текст + кнопка):
+
+**Из Toast - positioned варианты с иконкой и Undo**
+
+- **Width**: 343px
+- **Padding**: only right: 4px
+- **Background**: #09101D
+- **Border Radius**: 15px
+- **Row layout**: icon + message + button
+- **Icon Container**:
+  - Size: 24x24px
+  - Padding: 16px
+- **Message** (expanded):
+  - Width: 210px
+  - Padding: top: 16px, right: 8px, bottom: 16px
+  - Font: Archivo, 15px, weight: 600, color: white
+- **Button (Ghost)**:
+  - Background: transparent
+  - Text: "Undo", color: white
+  - Height: 36px
+  - Padding: horizontal: 16px, vertical: 10px
+  - Border Radius: 15px
+  - Font: Archivo, 13px, weight: 600
+
+**Structure**:
+```
+Container (343px, padding-right: 4):
+  - Row:
+    - Icon Container (24x24, padding: 16)
+    - Message (210px expanded, padding: 16/8/16)
+    - Button (ghost, white text "Undo")
+```
+
+**6. Toast with Text and Undo Button** (текст + кнопка Undo):
+
+**Из Toast - positioned вариант с Undo без иконки**
+
+- **Width**: 343px
+- **Padding**: only right: 4px
+- **Background**: #09101D
+- **Border Radius**: 15px
+- **Row layout**: message (expanded) + button
+- **Message** (expanded):
+  - Width: 250px
+  - Padding: top: 16px, left: 16px, right: 8px, bottom: 16px
+  - Font: Archivo, 15px, weight: 600, color: white
+  - Text: "A thing happened"
+- **Button (Ghost)**:
+  - Background: transparent
+  - Text: "Undo", color: white
+  - Height: 36px
+  - Padding: horizontal: 16px, vertical: 10px
+  - Border Radius: 15px
+  - Font: Archivo, 13px, weight: 600
+
+**Structure**:
+```
+Container (343px, padding-right: 4):
+  - Row:
+    - Message (250px expanded, padding: 16/16/8/16)
+    - Button (ghost, white text "Undo")
+```
+
+#### Toast Button Types
+
+**Filled Button (Accent)**:
+- Background: #FFC043 (Color(0xFFFFC043))
+- Text Color: #09101D
+- Height: 36px
+- Padding: horizontal: 16px, vertical: 10px
+- Border Radius: 15px
+- Font: Archivo, 13px, weight: 600
+- Usage: Primary action в toast
+
+**Ghost/Text Button (Accent)**:
+- Background: transparent
+- Text Color: #FFC043 (для "Action") или white (для "Undo")
+- Height: 36px
+- Padding: horizontal: 16px, vertical: 10px
+- Border Radius: 15px
+- Font: Archivo, 13px, weight: 600
+- Usage: Secondary action в toast
+
+#### Toast Layout Patterns
+
+1. **Text only**: Просто сообщение без действий
+2. **Text + 1 Button**: Горизонтальный layout (message + button в Row)
+3. **Text + 2 Buttons**: Вертикальный layout (message сверху, buttons внизу в Column)
+4. **Icon + Text**: Иконка слева + сообщение
+5. **Icon + Text + Button**: Иконка + сообщение + кнопка действия
+6. **Text + Undo**: Сообщение + кнопка отмены
+
+#### Toast Message Widths (зависит от layout)
+
+- **311px**: Text only, Two buttons (multiline)
+- **271px**: With icon (no button)
+- **250px**: With Undo button (no icon)
+- **231px**: With single button (no icon)
+- **210px**: With icon and button
+
+**Usage**: Toast/Snackbar используются для временных уведомлений, подтверждений действий, undo операций, ошибок, успешных операций, информационных сообщений.
+
+---
+
+### 5. Badges & Tags (из View2)
 
 #### Discount Badge (Скидка)
 
@@ -1031,7 +1290,7 @@ Container (padding: 16/5):
 
 ---
 
-### 5. Chips (из Master)
+### 6. Chips (из Master)
 
 Chips - компактные интерактивные элементы для выбора, фильтрации или действий. Три размера: Large (36px), Medium (30px), Small (24px).
 
@@ -1129,7 +1388,7 @@ Chips - компактные интерактивные элементы для 
 
 ---
 
-### 6. Avatars (из ImagePlaceholders)
+### 7. Avatars (из ImagePlaceholders)
 
 Avatars - круглые или скругленные изображения для отображения профилей пользователей. Пять размеров: 30px, 40px, 60px, 79px, 98px. Два стиля: Circular (OvalBorder) и Rounded Square.
 
@@ -1200,7 +1459,7 @@ Column (spacing: 50):
 
 ---
 
-### 7. Forms
+### 8. Forms
 
 #### Form Layout
 
@@ -1220,7 +1479,7 @@ Column (spacing: 50):
 
 ---
 
-### 6. Tables
+### 9. Tables
 
 #### Table Structure
 
@@ -1239,7 +1498,7 @@ Column (spacing: 50):
 
 ---
 
-### 7. Navigation
+### 10. Navigation
 
 #### Main Navigation
 
@@ -1263,7 +1522,7 @@ Column (spacing: 50):
 
 ---
 
-### 8. Charts
+### 11. Charts
 
 #### Line Chart
 
@@ -1306,7 +1565,7 @@ Column (spacing: 50):
 
 ---
 
-### 10. List Items
+### 12. List Items
 
 #### List Item (из ImagePlaceholders)
 
@@ -1359,7 +1618,7 @@ Row (spacing: 8):
 
 ---
 
-### 11. Profile Header (из ImagePlaceholders)
+### 13. Profile Header (из ImagePlaceholders)
 
 Компонент заголовка профиля с большим аватаром и текстовой информацией.
 
@@ -1384,7 +1643,7 @@ Row (spacing: 20):
 
 ---
 
-### 12. Vertical Steps / Stepper (из StepsGroups)
+### 14. Vertical Steps / Stepper (из StepsGroups)
 
 Вертикальный компонент отображения этапов процесса (multi-step form, onboarding, checkout). Три варианта индикаторов: Icon, Numbered Badge, Avatar Image.
 
@@ -1535,7 +1794,7 @@ Showcase Container (1565x?, padding: 50, border: 1px #7B61FF, radius: 15):
 
 ---
 
-### 13. Messages / Notifications
+### 15. Messages / Notifications
 
 #### Toast Notification
 
@@ -1556,7 +1815,7 @@ Showcase Container (1565x?, padding: 50, border: 1px #7B61FF, radius: 15):
 
 ---
 
-### 12. Panels & Cards
+### 16. Panels & Cards
 
 #### Side Panel
 
@@ -1638,7 +1897,7 @@ Container(
 
 ---
 
-### 13. Accordion / FAQ
+### 17. Accordion / FAQ
 
 #### Accordion Item
 
@@ -1653,7 +1912,7 @@ Container(
 
 ---
 
-### 14. Loading States
+### 18. Loading States
 
 #### Skeleton Loader
 
@@ -1670,7 +1929,7 @@ Container(
 
 ---
 
-### 15. Empty States
+### 19. Empty States
 
 #### Empty State Layout
 
@@ -1910,6 +2169,17 @@ Container(
 --phone-input-icon-size: 20px;          /* Icon size (checkmark/clear/chevron) */
 --phone-input-cursor-width: 2px;        /* Cursor width */
 --phone-input-cursor-height: 16px;      /* Cursor height */
+
+/* Toast Sizes из Toast */
+--toast-width: 343px;                   /* Toast/Snackbar width */
+--toast-showcase-stack-width: 1301px;   /* Toast showcase Stack container width */
+--toast-showcase-stack-height: 202px;   /* Toast showcase Stack container height */
+--toast-icon-size: 24px;                /* Icon size в toast */
+--toast-message-width-full: 311px;      /* Message width (text only, two buttons) */
+--toast-message-width-icon: 271px;      /* Message width (with icon) */
+--toast-message-width-undo: 250px;      /* Message width (with undo button) */
+--toast-message-width-button: 231px;    /* Message width (with single button) */
+--toast-message-width-icon-button: 210px; /* Message width (icon + button) */
 ```
 
 ### Flutter-Specific Properties (из кода)
@@ -1978,9 +2248,41 @@ Container(
 
 ## Версионирование и обновления
 
-**Текущая версия**: v5.3.0
+**Текущая версия**: v5.4.0
 
 ### Changelog
+
+#### v5.4.0 (2025-11-19)
+- Добавлен компонент Toast / Snackbar из Toast:
+  - **Временные уведомления** с опциональными кнопками действий
+  - **6 вариантов layout**:
+    - Text only: Просто сообщение без кнопок (311px message)
+    - Text + 1 Button: Горизонтальный layout (231px message + button)
+    - Text + 2 Buttons: Вертикальный layout (311px message, 2 buttons в Row)
+    - Icon + Text: Иконка 24x24 слева + сообщение (271px message)
+    - Icon + Text + Button: Иконка + сообщение + кнопка (210px message)
+    - Text + Undo Button: Сообщение + кнопка отмены (250px message)
+  - **Toast Base**:
+    - Width: 343px (fixed)
+    - Background: #09101D (темный фон)
+    - Border radius: 15px
+    - Message: Archivo 15px weight 600, white text
+  - **Toast Buttons**:
+    - Filled Button: #FFC043 background, #09101D text
+    - Ghost Button: transparent, #FFC043 или white text
+    - Height: 36px, padding: 16/10, radius: 15px
+  - **Showcase Containers**:
+    - Row container: padding 36/20, spacing 100px
+    - Stack container: 1301x202px
+  - **Usage**: Временные уведомления, подтверждения, undo операции, ошибки, успешные операции
+- **Новые цвета**:
+  - Accent gold: #FFC043 (для toast buttons и actions)
+  - Toast background: #09101D (темный фон toast/snackbar)
+- **Новые component sizes**:
+  - Toast width: 343px
+  - Toast showcase: 1301x202px
+  - Toast icon: 24x24px
+  - Message widths: 311px, 271px, 250px, 231px, 210px (зависит от layout)
 
 #### v5.3.0 (2025-11-19)
 - Добавлен компонент Phone Input из SmallMobilePhone:
