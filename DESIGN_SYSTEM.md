@@ -33,100 +33,138 @@
 ### Primary Colors
 
 ```css
-/* Основной цвет бренда */
---color-primary: #3B82F6;
---color-primary-hover: #2563EB;
---color-primary-active: #1D4ED8;
---color-primary-light: #DBEAFE;
---color-primary-dark: #1E40AF;
+/* Blue - Основной цвет */
+--color-blue: #0B24FB;
+--color-blue-90: rgba(11, 36, 251, 0.9);
+--color-blue-80: rgba(11, 36, 251, 0.8);
+--color-blue-70: rgba(11, 36, 251, 0.7);
+--color-blue-60: rgba(11, 36, 251, 0.6);
+--color-blue-50: rgba(11, 36, 251, 0.5);
+--color-blue-40: rgba(11, 36, 251, 0.4);
+--color-blue-30: rgba(11, 36, 251, 0.3);
+--color-blue-20: rgba(11, 36, 251, 0.2);
+--color-blue-10: rgba(11, 36, 251, 0.1);
 
-/* Вторичный цвет */
---color-secondary: #8B5CF6;
---color-secondary-hover: #7C3AED;
---color-secondary-active: #6D28D9;
+/* Purple - Вторичный цвет */
+--color-purple: #7356BF;
+--color-purple-90: rgba(115, 86, 191, 0.9);
+--color-purple-80: rgba(115, 86, 191, 0.8);
+--color-purple-70: rgba(115, 86, 191, 0.7);
+--color-purple-60: rgba(115, 86, 191, 0.6);
+--color-purple-50: rgba(115, 86, 191, 0.5);
+--color-purple-40: rgba(115, 86, 191, 0.4);
+--color-purple-30: rgba(115, 86, 191, 0.3);
+--color-purple-20: rgba(115, 86, 191, 0.2);
+--color-purple-10: rgba(115, 86, 191, 0.1);
+
+/* Yellow */
+--color-yellow: #FFC043;
+--color-yellow-90: rgba(255, 192, 67, 0.9);
+--color-yellow-80: rgba(255, 192, 67, 0.8);
+--color-yellow-70: rgba(255, 192, 67, 0.7);
+--color-yellow-60: rgba(255, 192, 67, 0.6);
+--color-yellow-50: rgba(255, 192, 67, 0.5);
+--color-yellow-40: rgba(255, 192, 67, 0.4);
+--color-yellow-30: rgba(255, 192, 67, 0.3);
+--color-yellow-20: rgba(255, 192, 67, 0.2);
+--color-yellow-10: rgba(255, 192, 67, 0.1);
+
+/* Green */
+--color-green: #05944F;
+--color-green-90: rgba(5, 148, 79, 0.9);
+--color-green-80: rgba(5, 148, 79, 0.8);
+--color-green-70: rgba(5, 148, 79, 0.7);
+--color-green-60: rgba(5, 148, 79, 0.6);
+--color-green-50: rgba(5, 148, 79, 0.5);
+--color-green-40: rgba(5, 148, 79, 0.4);
+--color-green-30: rgba(5, 148, 79, 0.3);
+--color-green-20: rgba(5, 148, 79, 0.2);
+--color-green-10: rgba(5, 148, 79, 0.1);
+
+/* Orange */
+--color-orange: #FF6937;
+--color-orange-90: rgba(255, 105, 55, 0.9);
+--color-orange-80: rgba(255, 105, 55, 0.8);
+--color-orange-70: rgba(255, 105, 55, 0.7);
+--color-orange-60: rgba(255, 105, 55, 0.6);
+--color-orange-50: rgba(255, 105, 55, 0.5);
+--color-orange-40: rgba(255, 105, 55, 0.4);
+--color-orange-30: rgba(255, 105, 55, 0.3);
+--color-orange-20: rgba(255, 105, 55, 0.2);
+--color-orange-10: rgba(255, 105, 55, 0.1);
 ```
 
 ### Semantic Colors
 
 ```css
 /* Success / Trend Up */
---color-success: #10B981;
---color-success-bg: #D1FAE5;
---color-success-border: #6EE7B7;
+--color-success: #11BB8D;
+--color-success-bg-5: rgba(17, 187, 141, 0.05);
 
 /* Error / Trend Down */
---color-error: #EF4444;
---color-error-bg: #FEE2E2;
---color-error-border: #FCA5A5;
+--color-error: #DA1414;
+--color-error-bg-5: rgba(218, 20, 20, 0.05);
 
 /* Warning / Hot */
---color-warning: #F59E0B;
---color-warning-bg: #FEF3C7;
---color-warning-border: #FCD34D;
+--color-warning: #B95000;
 
 /* Info */
---color-info: #3B82F6;
---color-info-bg: #DBEAFE;
---color-info-border: #93C5FD;
+--color-info: #2E5AAC;
+
+/* Visited */
+--color-visited: #5E38BA;
 ```
 
 ### Neutral Colors
 
 ```css
-/* Text */
---color-text-primary: #111827;
---color-text-secondary: #6B7280;
---color-text-tertiary: #9CA3AF;
---color-text-disabled: #D1D5DB;
---color-text-inverse: #FFFFFF;
+/* Black */
+--color-black: #09101D;
+--color-black-90: rgba(9, 16, 29, 0.9);
+--color-black-80: rgba(9, 16, 29, 0.8);
+--color-black-70: rgba(9, 16, 29, 0.7);
+--color-black-60: rgba(9, 16, 29, 0.6);
+--color-black-50: rgba(9, 16, 29, 0.5);
+--color-black-40: rgba(9, 16, 29, 0.4);
+--color-black-30: rgba(9, 16, 29, 0.3);
+--color-black-20: rgba(9, 16, 29, 0.2);
+--color-black-10: rgba(9, 16, 29, 0.1);
 
-/* Backgrounds */
---color-bg-primary: #FFFFFF;
---color-bg-secondary: #F9FAFB;
---color-bg-tertiary: #F3F4F6;
---color-bg-elevated: #FFFFFF;
---color-bg-overlay: rgba(0, 0, 0, 0.5);
+/* White */
+--color-white: #FFFFFF;
 
-/* Stroke / Borders */
---color-border-primary: #E5E7EB;
---color-border-secondary: #D1D5DB;
---color-border-focus: #3B82F6;
---color-border-disabled: #F3F4F6;
-
-/* Shades */
---color-gray-50: #F9FAFB;
---color-gray-100: #F3F4F6;
---color-gray-200: #E5E7EB;
---color-gray-300: #D1D5DB;
---color-gray-400: #9CA3AF;
---color-gray-500: #6B7280;
---color-gray-600: #4B5563;
---color-gray-700: #374151;
---color-gray-800: #1F2937;
---color-gray-900: #111827;
+/* Gray Scale */
+--color-gray-1: #23262B;
+--color-gray-2: #2A2B2F;
+--color-gray-3: #303239;
+--color-gray-4: #373940;
+--color-gray-5: #414249;
+--color-gray-6: #747B84;
+--color-gray-7: #D9DDE2;
+--color-gray-8: #EAEEF2;
+--color-gray-9: #F4F6F9;
+--color-gray-10: #FAFAFB;
 ```
 
-### Chart Colors
+### Chart Colors / Accent Colors
 
 ```css
 /* Для графиков и визуализации данных */
---color-chart-1: #3B82F6;
---color-chart-2: #8B5CF6;
---color-chart-3: #EC4899;
---color-chart-4: #F59E0B;
---color-chart-5: #10B981;
---color-chart-6: #06B6D4;
---color-chart-7: #6366F1;
---color-chart-8: #F43F5E;
+--color-accent-1: #4141E6;
+--color-accent-2: #0AFB6B;
+--color-accent-3: #F7B68A;
+--color-accent-4: #221874;
+--color-accent-5: #7CC5D6;
+--color-accent-6: #E24949;
 ```
 
 ### Gradients
 
 ```css
-/* Градиенты для специальных элементов */
---gradient-primary: linear-gradient(135deg, #667EEA 0%, #764BA2 100%);
---gradient-secondary: linear-gradient(135deg, #F093FB 0%, #F5576C 100%);
---gradient-accent: linear-gradient(135deg, #4FACFE 0%, #00F2FE 100%);
+/* Градиенты для специальных элементов (Accent Ring) */
+--gradient-ring-1: linear-gradient(90deg, #F09819 0%, #EDDE5D 100%);
+--gradient-ring-2: linear-gradient(90deg, #FC466B 0%, #3F5EFB 100%);
+--gradient-ring-3: linear-gradient(90deg, #833AB4 0%, #FD1D1D 50%, #FCB045 100%);
 ```
 
 ### Brand Icon Colors
@@ -148,8 +186,8 @@
 ### Font Family
 
 ```css
---font-primary: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
---font-secondary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+--font-primary: 'Archivo', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+--font-secondary: 'Archivo', -apple-system, BlinkMacSystemFont, sans-serif;
 --font-mono: 'JetBrains Mono', 'Fira Code', 'Monaco', 'Consolas', 'Courier New', monospace;
 ```
 
@@ -166,6 +204,7 @@
 --font-size-3xl: 2.25rem;     /* 36px */
 --font-size-4xl: 3rem;        /* 48px */
 --font-size-5xl: 3.75rem;     /* 60px */
+--font-size-6xl: 4.5rem;      /* 72px */
 ```
 
 ### Font Weights
@@ -184,8 +223,9 @@
 ### Line Heights
 
 ```css
+--line-height-heading: 0.70;
 --line-height-tight: 1.25;
---line-height-snug: 1.375;
+--line-height-body: 1.40;
 --line-height-normal: 1.5;
 --line-height-relaxed: 1.625;
 --line-height-loose: 2;
@@ -250,6 +290,8 @@
 --radius-lg: 0.5rem;      /* 8px */
 --radius-xl: 0.75rem;     /* 12px */
 --radius-2xl: 1rem;       /* 16px */
+--radius-3xl: 1.875rem;   /* 30px */
+--radius-4xl: 6.25rem;    /* 100px */
 --radius-full: 9999px;
 ```
 
