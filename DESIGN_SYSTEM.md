@@ -2522,6 +2522,331 @@ Avatar: 30×30px circular
 
 ---
 
+### 29. Social Program Card (Complete Block)
+
+Готовый блок карточки социальной программы/курса, извлеченный из Flutter приложения SocialLight. Это целостный UI-блок с галереей, информацией, участниками и действиями.
+
+**🔧 Гибкость блока**: Количество элементов (изображения, аватары, кнопки) может быть изменено в зависимости от требований бэкенда. Например, галерея может содержать 1+4, 1+6 или только 1 изображение; аватары могут быть от 3 до неограниченного количества с горизонтальным скроллом.
+
+#### Общая структура блока:
+
+**Main Container:**
+- **Width**: 375px (mobile)
+- **Background**: White (#FFFFFF, color-bg-primary)
+- **Border Radius**: 30px (top corners)
+- **Clip Behavior**: antiAlias
+
+#### 1. Status Bar (iOS-style)
+
+**Container:**
+- **Width**: 375px
+- **Height**: 44px
+- **Background**: #09101D (color-text-primary) - черный
+- **Position**: Top of card
+- **Purpose**: Имитация iOS status bar для полноэкранного модального окна
+
+#### 2. Top Decoration (Rounded Element)
+
+**Decoration Bar:**
+- **Width**: 343px
+- **Height**: 10px
+- **Background**: #D9DDE2 (color-text-disabled)
+- **Border Radius**: 10px (только верхние углы)
+- **Position**: Left 16px, Top 1px from status bar bottom
+- **Purpose**: Декоративный элемент верхней части
+
+#### 3. Drag Handle (Modal Indicator)
+
+**Handle:**
+- **Width**: 40px
+- **Height**: 3px
+- **Background**: #D9DDE2 (color-text-disabled)
+- **Border Radius**: 100px (fully rounded)
+- **Position**: Centered horizontally (padding left/right 167px)
+- **Padding Bottom**: 8px
+- **Purpose**: Визуальный индикатор для свайпа/закрытия модала
+
+#### 4. Header Section (Username)
+
+**Header Container:**
+- **Width**: Full (343px content width)
+- **Height**: 44px
+- **Padding**: Horizontal 16px
+
+**Leading Icon:**
+- **Size**: 24×24px
+- **Padding**: 4px
+- **Border Radius**: 100px (circular)
+- **Background**: White
+- **Purpose**: Иконка слева (например, back button или logo)
+
+**Username:**
+- **Text**: "@crossfit" (example)
+- **Font**: Archivo
+- **Font Size**: 16px (font-size-base)
+- **Font Weight**: 700 (bold)
+- **Color**: #09101D (color-text-primary)
+- **Width**: 243px (center area)
+- **Alignment**: Center
+
+**Trailing Space:**
+- **Width**: Flexible (для будущей иконки/меню)
+
+**🔧 Гибкость**: Можно добавить trailing icon (меню, share, close)
+
+#### 5. Image Gallery (Flexible Grid)
+
+**Gallery Container:**
+- **Width**: Full (343px content width)
+- **Height**: 176px (171px images + 5px bottom padding)
+- **Padding**: Left 16px, Right 16px, Bottom 5px
+- **Spacing**: 10px between images
+
+**Layout**: 1 Large + 4 Small Grid (2×2)
+
+**Main Image (Large):**
+- **Size**: 166.5×171px
+- **Border Radius**: 20px (radius-badge)
+- **Background**: #F4F6F9 (color-bg-quaternary) - placeholder
+- **Position**: Left side
+- **Overlay Icon**: 24×24px centered (play button for video)
+
+**Grid Images (Small):**
+- **Size**: 78.25×80.5px each
+- **Count**: 4 images
+- **Layout**: 2 rows × 2 columns
+- **Border Radius**: 20px (radius-badge)
+- **Background**: #F4F6F9 - placeholder
+- **Spacing**: 10px horizontal and vertical gap
+- **Overlay Icon**: 24×24px centered (for each)
+
+**🔧 Гибкость**:
+- Галерея может содержать 1+4 (default), 1+6 (3×2), или только 1 большое изображение
+- Можно добавить counter badge "1/5" для навигации
+- Grid может быть заменен на horizontal scroll для большего количества
+
+#### 6. Profile Avatar with Badge
+
+**Avatar Container:**
+- **Size**: 56×56px container
+- **Image**: 48×48px (offset 4px)
+- **Border Radius**: 40px (circular)
+- **Background**: #D9DDE2 (placeholder)
+- **Padding**: Vertical 10px
+
+**Badge (Top-Right):**
+- **Text**: "Trainer" (example)
+- **Size**: 20×20px container
+- **Padding**: Horizontal 4px, Vertical 2px
+- **Background**: #4141E6 (color-accent)
+- **Border Radius**: 12px (radius-xl)
+- **Font**: Archivo 10px (font-size-2xs) semibold
+- **Color**: White
+- **Position**: Left 36px, Top 0 (top-right corner of avatar)
+
+**🔧 Гибкость**: Badge может отображать роль (Trainer, Admin, VIP) или статус
+
+#### 7. Title Section
+
+**Title:**
+- **Text**: "Intro to Crossfit on Bali" (example)
+- **Font**: Archivo
+- **Font Size**: 18px (font-size-md)
+- **Font Weight**: 700 (bold)
+- **Color**: #09101D (color-text-primary)
+- **Alignment**: Center
+- **Padding**: Horizontal 16px
+- **Spacing**: 5px gap to subtitle
+
+**Subtitle:**
+- **Text**: "4 weeks ・ 5.042 members" (example)
+- **Font**: Archivo
+- **Font Size**: 12px (font-size-xs)
+- **Font Weight**: 400 (normal)
+- **Color**: #09101D (color-text-primary)
+- **Alignment**: Center
+- **Width**: 343px
+
+**🔧 Гибкость**: Subtitle может содержать различные метаданные (duration, members, price, rating)
+
+#### 8. Participants Row (Avatar List)
+
+**Row Container:**
+- **Width**: 375px
+- **Padding**: Horizontal 16px, Vertical 10px
+- **Layout**: Horizontal row
+
+**Avatar Types:**
+
+**1. Avatar with Live Badge (×2):**
+- **Container**: 56×56px
+- **Image**: 48×48px, offset 4px, radius 40px
+- **Live Badge**:
+  - Size: 28×14px
+  - Background: Instagram gradient (linear-gradient #833AB4 → #FD1D1D → #FCB045)
+  - Border: 1px white
+  - Border Radius: 12px (radius-xl)
+  - Text: "Live", 10px semibold, white
+  - Position: Left 0, Top 36px (bottom of avatar)
+
+**2. Avatar with Active Border:**
+- **Outer Container**: 56×56px
+- **Border**: 2px solid #833AB4 (color-brand-instagram-gradient)
+- **Border Radius**: 30px
+- **Image**: 48×48px, offset 4px, radius 40px
+
+**3. Regular Avatars (×4):**
+- **Container**: 56×56px
+- **Image**: 48×48px, offset 4px, radius 40px
+- **Background**: #D9DDE2 (placeholder)
+
+**🔧 Гибкость**:
+- Количество аватаров: от 3 до неограниченного с horizontal scroll
+- Можно показать "+25 more" badge в конце
+- Live badge опционален
+- Active border показывает текущего пользователя
+
+#### 9. Action Buttons
+
+**Buttons Container:**
+- **Padding**: Vertical 10px, Horizontal 16px
+- **Spacing**: 10px gap between buttons
+
+**Primary Button (Join program):**
+- **Height**: 36px
+- **Padding**: Horizontal 16px, Vertical 10px
+- **Background**: #09101D (color-text-primary) - черный
+- **Border Radius**: 15px (radius-3xl)
+- **Text**: "Join program"
+- **Font**: Archivo 13px (font-size-xs-plus) semibold
+- **Color**: White
+- **Alignment**: SpaceBetween with 70px spacing
+- **Flex**: Expanded (takes available space)
+
+**Icon Button (Share/More):**
+- **Height**: 36px
+- **Width**: Auto (fits icon + padding)
+- **Padding**: Horizontal 16px, Vertical 10px
+- **Background**: #F4F6F9 (color-bg-quaternary) - светло-серый
+- **Border Radius**: 15px (radius-3xl)
+- **Icon**: 16×16px, padding 2px, radius 100px
+
+**🔧 Гибкость**:
+- Можно добавить третью кнопку (Save, Share, More)
+- Primary button текст меняется в зависимости от статуса (Join, Joined, Continue)
+- Icon button может быть Share, Bookmark, Menu
+
+#### Complete Block Layout:
+
+```
+┌─────────────────────────────────────────┐
+│ ███████████ Status Bar ██████████████   │ 44px
+├─────────────────────────────────────────┤
+│ ▓▓▓▓▓▓▓▓ Top Decoration ▓▓▓▓▓▓▓▓        │ 10px
+│             ─── Handle ───               │ 3px + 8px
+├─────────────────────────────────────────┤
+│ [Icon]     @crossfit           [ ]       │ 44px Header
+├─────────────────────────────────────────┤
+│ ┌────────┐ ┌──┐ ┌──┐                    │
+│ │        │ └──┘ └──┘  176px Gallery     │
+│ │  Main  │ ┌──┐ ┌──┐                    │
+│ │ Image  │ └──┘ └──┘                    │
+│ └────────┘                               │
+├─────────────────────────────────────────┤
+│        [@Trainer]                        │ 56px + padding
+├─────────────────────────────────────────┤
+│   Intro to Crossfit on Bali             │ Title
+│   4 weeks ・ 5.042 members               │ Subtitle
+├─────────────────────────────────────────┤
+│ [@Live] [@Live] [@*] [@] [@] [@] [@]    │ Avatars row
+├─────────────────────────────────────────┤
+│ [ Join program           ] [📤]         │ Buttons 36px
+└─────────────────────────────────────────┘
+
+Width: 375px (mobile)
+Border Radius: 30px (top corners)
+Background: White
+```
+
+#### Spacing Summary:
+
+- **Outer Padding**: 16px horizontal (most sections)
+- **Status Bar**: 44px height
+- **Top Decoration**: 10px height, 1px top offset
+- **Drag Handle**: 3px height, 8px bottom padding
+- **Header**: 44px height
+- **Gallery**: 176px height (171px + 5px bottom)
+- **Image Spacing**: 10px gaps
+- **Avatar**: 56×56px with 10px vertical padding
+- **Title/Subtitle**: 5px gap, 16px horizontal padding
+- **Avatars Row**: 10px vertical padding
+- **Buttons**: 10px vertical padding, 36px height
+
+#### Typography Summary:
+
+- **Header Username**: 16px bold #09101D
+- **Title**: 18px bold #09101D
+- **Subtitle**: 12px normal #09101D
+- **Button Text**: 13px semibold white
+- **Badge Text**: 10px semibold white
+
+#### Use Cases:
+
+1. **Fitness Programs**: Crossfit classes, yoga courses, training programs
+2. **Educational Courses**: Online classes, workshops, tutorials
+3. **Social Events**: Meetups, conferences, group activities
+4. **Community Groups**: Interest groups, clubs, communities
+5. **Memberships**: Subscription programs, exclusive groups
+6. **Live Streaming**: Scheduled live events with participant previews
+
+#### Best Practices:
+
+**Flexibility & Extensibility:**
+- Image gallery is modular: support 1 main + 2-6 grid images or single image
+- Avatar row can show 3-20+ participants with horizontal scroll
+- Button row can accommodate 2-3 action buttons
+- Title and subtitle can be multi-line with ellipsis
+- Badges and statuses are optional overlays
+
+**Responsive Behavior:**
+- Fixed 375px width for mobile (can scale to 768px for tablet)
+- Gallery maintains aspect ratios when scaled
+- Avatar row scrolls horizontally on overflow
+- Buttons stack vertically on narrow screens (<320px)
+
+**Interactive States:**
+- Drag handle indicates modal can be dismissed by swipe down
+- Primary button shows hover/pressed states
+- Gallery images are tappable for fullscreen view
+- Avatars are tappable to show user profiles
+- Live badges blink or animate to indicate active status
+
+**Accessibility:**
+- Status bar provides context for full-screen modal
+- Drag handle is 44px minimum touch target (including padding)
+- Button text is clear and actionable
+- Image alt text describes gallery content
+- Avatar badges have semantic meaning
+
+**Design Tokens Used:**
+- Colors: #09101D, #D9DDE2, #F4F6F9, #4141E6, #833AB4, White
+- Border Radius: 10px, 12px, 15px, 20px, 30px, 40px, 100px
+- Font Sizes: 10px, 12px, 13px, 16px, 18px
+- Spacing: 3px, 5px, 8px, 10px, 16px, 44px
+- Shadows: Optional card shadow for elevation
+
+**Common Modifications:**
+- **Add Price Tag**: Insert price badge in title area
+- **Add Rating**: Show stars/rating below subtitle
+- **Add Progress**: Show completion bar for courses
+- **Add More Images**: Extend grid to 2×3 or add horizontal scroll
+- **Add More Buttons**: Insert secondary actions (Save, Share, Report)
+- **Add Labels**: Category, Difficulty, Duration badges
+- **Add Countdown**: For limited-time events
+- **Add Capacity**: Show "23/50 spots left" in subtitle
+
+---
+
 ## Как использовать эту дизайн-систему
 
 ### Для дизайнеров
@@ -2549,9 +2874,40 @@ Avatar: 30×30px circular
 
 ## Версионирование и обновления
 
-**Текущая версия**: v5.8.0
+**Текущая версия**: v5.9.0
 
 ### Changelog
+
+#### v5.9.0 (2025-11-19)
+- Добавлен первый готовый **UI-блок** из Flutter приложения SocialLight (Social Program Card)
+- **Новый подход**: Документирование целостных блоков дизайна, а не отдельных компонентов
+- Block #29: Social Program Card (Complete Block):
+  - Полноэкранная карточка социальной программы/курса для модального окна
+  - Включает 9 секций: Status Bar, Top Decoration, Drag Handle, Header, Image Gallery, Profile Avatar, Title, Participants Row, Action Buttons
+  - **🔧 Гибкость блока**: Количество элементов настраивается (1+4 или 1+6 изображений, 3-20+ аватаров, 2-3 кнопки)
+- Структура блока:
+  - Status Bar: 375×44px, #09101D, iOS-style для полноэкранных модалов
+  - Top Decoration: 343×10px, #D9DDE2, radius 10px (top only)
+  - Drag Handle: 40×3px, #D9DDE2, radius 100px, centered
+  - Header: 44px height, username "@crossfit" 16px bold, leading icon 24×24px
+  - Image Gallery: 176px height, 1 large (166.5×171px) + 4 small grid (78.25×80.5px each), radius 20px, spacing 10px
+  - Profile Avatar: 56×56px with "Trainer" badge (#4141E6, 10px semibold)
+  - Title: "Intro to Crossfit on Bali" 18px bold, center aligned
+  - Subtitle: "4 weeks ・ 5.042 members" 12px normal, center aligned
+  - Participants: 7 avatars (2 with Live badges, 1 with active border, 4 regular)
+  - Buttons: Primary "Join program" (#09101D, 36px, 13px semibold) + Icon button (#F4F6F9, 16×16px icon)
+- Гибкость и расширяемость:
+  - Gallery: 1+4 (default), 1+6 (3×2), или single image
+  - Avatars: от 3 до неограниченного с horizontal scroll, "+25 more" badge
+  - Buttons: 2-3 action buttons, состояния (Join/Joined/Continue)
+  - Metadata: price, rating, progress, countdown, capacity
+- Best Practices для блоков:
+  - Модульная структура с возможностью добавления/удаления секций
+  - Responsive behavior (375px mobile → 768px tablet)
+  - Interactive states (drag to dismiss, tap gallery, tap avatars)
+  - Accessibility (44px touch targets, semantic badges, clear CTAs)
+- Документированы 6 use cases и common modifications для адаптации блока
+- ASCII-диаграмма полной структуры блока с размерами
 
 #### v5.8.0 (2025-11-19)
 - Добавлены данные из ContentTextTopHelperNoBottomHelperNoStateDisabled компонента Flutter (Text Input Fields - Disabled States)
