@@ -10,6 +10,7 @@
 6. [Паттерны](#паттерны)
 7. [Состояния](#состояния)
 8. [Иконки](#иконки)
+9. [Flutter Компоненты](#flutter-компоненты-из-реального-кода)
 
 ---
 
@@ -33,12 +34,12 @@
 ### Primary Colors
 
 ```css
-/* Основной цвет бренда */
---color-primary: #3B82F6;
---color-primary-hover: #2563EB;
---color-primary-active: #1D4ED8;
---color-primary-light: #DBEAFE;
---color-primary-dark: #1E40AF;
+/* Основной цвет бренда - из Flutter кода */
+--color-primary: #7B61FF;
+--color-primary-hover: #6B51EF;
+--color-primary-active: #5B41DF;
+--color-primary-light: #E8E3FF;
+--color-primary-dark: #4B31BF;
 
 /* Вторичный цвет */
 --color-secondary: #8B5CF6;
@@ -73,19 +74,20 @@
 ### Neutral Colors
 
 ```css
-/* Text */
---color-text-primary: #111827;
+/* Text - из Flutter кода */
+--color-text-primary: #09101D;
 --color-text-secondary: #6B7280;
 --color-text-tertiary: #9CA3AF;
 --color-text-disabled: #D1D5DB;
 --color-text-inverse: #FFFFFF;
 
-/* Backgrounds */
+/* Backgrounds - из Flutter кода */
 --color-bg-primary: #FFFFFF;
---color-bg-secondary: #F9FAFB;
+--color-bg-secondary: #EAEEF2;
 --color-bg-tertiary: #F3F4F6;
 --color-bg-elevated: #FFFFFF;
 --color-bg-overlay: rgba(0, 0, 0, 0.5);
+--color-bg-dark: #12202F;
 
 /* Stroke / Borders */
 --color-border-primary: #E5E7EB;
@@ -148,7 +150,8 @@
 ### Font Family
 
 ```css
---font-primary: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+/* Из Flutter кода - основной шрифт Archivo */
+--font-primary: 'Archivo', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
 --font-secondary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 --font-mono: 'JetBrains Mono', 'Fira Code', 'Monaco', 'Consolas', 'Courier New', monospace;
 ```
@@ -158,7 +161,7 @@
 ```css
 --font-size-xs: 0.75rem;      /* 12px */
 --font-size-sm: 0.875rem;     /* 14px */
---font-size-base: 1rem;       /* 16px */
+--font-size-base: 1rem;       /* 16px - из Flutter кода */
 --font-size-md: 1.125rem;     /* 18px */
 --font-size-lg: 1.25rem;      /* 20px */
 --font-size-xl: 1.5rem;       /* 24px */
@@ -166,6 +169,7 @@
 --font-size-3xl: 2.25rem;     /* 36px */
 --font-size-4xl: 3rem;        /* 48px */
 --font-size-5xl: 3.75rem;     /* 60px */
+--font-size-6xl: 4.5rem;      /* 72px - из Flutter кода */
 ```
 
 ### Font Weights
@@ -184,8 +188,10 @@
 ### Line Heights
 
 ```css
+--line-height-super-tight: 0.70;  /* Из Flutter кода - для больших заголовков */
 --line-height-tight: 1.25;
 --line-height-snug: 1.375;
+--line-height-comfortable: 1.40;  /* Из Flutter кода */
 --line-height-normal: 1.5;
 --line-height-relaxed: 1.625;
 --line-height-loose: 2;
@@ -195,6 +201,7 @@
 
 #### Headings
 
+- **Display (Super H1)**: Font: 72px/4.5rem, Weight: 800 (Extrabold), Line Height: 0.70, Letter Spacing: -0.02em (Из Flutter кода)
 - **H1**: Font: 48px/3rem, Weight: 700 (Bold), Line Height: 1.2, Letter Spacing: -0.02em
 - **H2**: Font: 36px/2.25rem, Weight: 700 (Bold), Line Height: 1.25, Letter Spacing: -0.01em
 - **H3**: Font: 30px/1.875rem, Weight: 600 (Semibold), Line Height: 1.3, Letter Spacing: -0.01em
@@ -205,7 +212,8 @@
 #### Body Text
 
 - **Body Large**: Font: 18px/1.125rem, Weight: 400 (Normal), Line Height: 1.625
-- **Body**: Font: 16px/1rem, Weight: 400 (Normal), Line Height: 1.5
+- **Body**: Font: 16px/1rem, Weight: 700 (Bold), Line Height: 1.40 (Из Flutter кода)
+- **Body Regular**: Font: 16px/1rem, Weight: 400 (Normal), Line Height: 1.5
 - **Body Small**: Font: 14px/0.875rem, Weight: 400 (Normal), Line Height: 1.5
 - **Caption**: Font: 12px/0.75rem, Weight: 400 (Normal), Line Height: 1.4, Color: text-secondary
 
@@ -225,31 +233,40 @@
 ### Spacing Scale
 
 ```css
+/* Из Flutter кода - базовые значения spacing */
 --space-0: 0;
 --space-1: 0.25rem;   /* 4px */
---space-2: 0.5rem;    /* 8px */
+--space-1-5: 0.375rem;  /* 6px - из Flutter кода */
+--space-2: 0.5rem;    /* 8px - из Flutter кода */
+--space-2-5: 0.625rem;  /* 10px - из Flutter кода */
 --space-3: 0.75rem;   /* 12px */
---space-4: 1rem;      /* 16px */
---space-5: 1.25rem;   /* 20px */
+--space-4: 1rem;      /* 16px - из Flutter кода */
+--space-5: 1.25rem;   /* 20px - из Flutter кода */
 --space-6: 1.5rem;    /* 24px */
 --space-8: 2rem;      /* 32px */
 --space-10: 2.5rem;   /* 40px */
 --space-12: 3rem;     /* 48px */
+--space-12-5: 3.125rem;  /* 50px - из Flutter кода */
 --space-16: 4rem;     /* 64px */
 --space-20: 5rem;     /* 80px */
 --space-24: 6rem;     /* 96px */
+--space-25: 6.25rem;  /* 100px - из Flutter кода */
 ```
 
 ### Border Radius
 
 ```css
+/* Из Flutter кода - border radius значения */
 --radius-none: 0;
 --radius-sm: 0.125rem;    /* 2px */
 --radius-base: 0.25rem;   /* 4px */
 --radius-md: 0.375rem;    /* 6px */
---radius-lg: 0.5rem;      /* 8px */
+--radius-lg: 0.5rem;      /* 8px - из Flutter кода */
 --radius-xl: 0.75rem;     /* 12px */
 --radius-2xl: 1rem;       /* 16px */
+--radius-3xl: 0.9375rem;  /* 15px - из Flutter кода */
+--radius-4xl: 5rem;       /* 80px - из Flutter кода */
+--radius-5xl: 6.25rem;    /* 100px - из Flutter кода */
 --radius-full: 9999px;
 ```
 
@@ -832,6 +849,143 @@
 
 ---
 
+## Flutter Компоненты (Из реального кода)
+
+### 17. Loading Circle
+
+Компонент индикатора загрузки, извлеченный из Flutter приложения.
+
+#### Характеристики:
+
+- **Container Size**: Width: 719px, Height: 550px
+- **Background**: color-bg-primary (#FFFFFF)
+- **Border Radius**: radius-5xl (100px)
+- **Clip Behavior**: antiAlias
+
+#### Заголовок
+
+- **Text**: "Loading Circle"
+- **Font**: Archivo
+- **Font Size**: 72px (font-size-6xl)
+- **Font Weight**: 800 (extrabold)
+- **Color**: #09101D (color-text-primary)
+- **Line Height**: 0.70 (line-height-super-tight)
+- **Position**: Left: 100px, Top: 100px
+- **Spacing**: 10px между элементами
+
+#### Контейнеры состояний
+
+**Контейнер 1 (Default State):**
+- **Position**: Left: 100px, Top: 200px
+- **Padding**: 20px (space-5)
+- **Border**: 1px solid #7B61FF (color-primary)
+- **Border Radius**: 15px (radius-3xl)
+- **Spacing между элементами**: 100px
+
+**Контейнер 2 (Active State):**
+- **Position**: Left: 100px, Top: 386px
+- **Padding**: 20px (space-5)
+- **Background**: #09101D (color-text-primary)
+- **Border**: 1px solid #7B61FF (color-primary)
+- **Border Radius**: 15px (radius-3xl)
+- **Spacing между элементами**: 100px
+
+---
+
+### 18. Logos Section
+
+Секция отображения логотипов и текстовых элементов.
+
+#### Характеристики:
+
+- **Padding**: 100px (space-25)
+- **Background**: color-bg-primary (#FFFFFF)
+- **Border Radius**: radius-5xl (100px)
+- **Clip Behavior**: antiAlias
+
+#### Заголовок
+
+- **Text**: "Logos"
+- **Font**: Archivo
+- **Font Size**: 72px (font-size-6xl)
+- **Font Weight**: 800 (extrabold)
+- **Color**: #09101D (color-text-primary)
+- **Line Height**: 0.70 (line-height-super-tight)
+- **Spacing**: 50px до следующего элемента
+
+#### Контейнер логотипов
+
+- **Padding**: 100px (space-25)
+- **Background**: #EAEEF2 (color-bg-secondary)
+- **Border**: 1px solid #7B61FF (color-primary)
+- **Border Radius**: 15px (radius-3xl)
+- **Spacing между элементами**: 50px
+
+#### Текстовый элемент "Mountains"
+
+**Вариант 1 (Dark Background):**
+- **Text**: "Mountains"
+- **Font**: Archivo
+- **Font Size**: 16px (font-size-base)
+- **Font Weight**: 700 (bold)
+- **Color**: #09101D (color-text-primary)
+- **Line Height**: 1.40 (line-height-comfortable)
+- **Padding**: Horizontal: 16px, Vertical: 10px
+- **Border Radius**: 8px (radius-lg)
+
+**Вариант 2 (Light Text):**
+- **Text**: "Mountains"
+- **Font**: Archivo
+- **Font Size**: 16px (font-size-base)
+- **Font Weight**: 700 (bold)
+- **Color**: #FFFFFF (color-text-inverse)
+- **Line Height**: 1.40 (line-height-comfortable)
+- **Padding**: Horizontal: 16px, Vertical: 10px
+
+---
+
+### 19. Title Section
+
+Простая секция заголовка.
+
+#### Характеристики:
+
+- **Padding**: 100px (space-25)
+- **Background**: color-bg-primary (#FFFFFF)
+- **Border Radius**: radius-4xl (80px)
+- **Clip Behavior**: antiAlias
+- **Spacing**: 10px между элементами
+
+#### Заголовок
+
+- **Text**: "Title"
+- **Font**: Archivo
+- **Font Size**: 72px (font-size-6xl)
+- **Font Weight**: 800 (extrabold)
+- **Color**: #09101D (color-text-primary)
+- **Line Height**: 0.70 (line-height-super-tight)
+
+---
+
+### 20. App Theme (Dark Mode)
+
+Тема приложения, извлеченная из MaterialApp.
+
+#### Характеристики:
+
+- **Base Theme**: ThemeData.dark()
+- **Scaffold Background**: #12202F (color-bg-dark) - RGB(18, 32, 47)
+
+#### Использование
+
+```dart
+theme: ThemeData.dark().copyWith(
+  scaffoldBackgroundColor: const Color.fromARGB(255, 18, 32, 47),
+)
+```
+
+---
+
 ## Как использовать эту дизайн-систему
 
 ### Для дизайнеров
@@ -859,9 +1013,20 @@
 
 ## Версионирование и обновления
 
-**Текущая версия**: v5.0.0
+**Текущая версия**: v5.1.0
 
 ### Changelog
+
+#### v5.1.0 (2025-11-19)
+- Добавлены данные из реального Flutter приложения
+- Обновлен основной цвет бренда (#7B61FF)
+- Добавлен шрифт Archivo как основной
+- Добавлены новые размеры spacing (6px, 10px, 50px, 100px)
+- Добавлены новые border radius (15px, 80px, 100px)
+- Добавлены Flutter компоненты: Loading Circle, Logos Section, Title Section
+- Добавлен темный фон (#12202F)
+- Обновлены line heights (0.70, 1.40)
+- Добавлен Display heading (72px, weight 800)
 
 #### v5.0.0 (2025-11-19)
 - Первая версия дизайн-системы
