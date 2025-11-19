@@ -65,6 +65,7 @@
 ```css
 /* UI элементы из Flutter кода */
 --color-gray-light: #D9DDE2;       /* Color(0xFFD9DDE2) - светло-серый для разделителей */
+--color-background-light: #F4F6F9; /* Color(0xFFF4F6F9) - светлый фон для inactive кнопок */
 ```
 
 ### Shadow Colors
@@ -198,6 +199,13 @@
 - **Color**: White (#FFFFFF)
 - **Line Height**: 1.40
 - **Использование**: Информационные панели, вторичный текст
+
+#### Button Text
+- **Font**: 13px (0.8125rem), Archivo
+- **Weight**: 600 (Semibold)
+- **Color**: White (#FFFFFF) на primary фоне, Black (#09101D) на light фоне
+- **Line Height**: 1.40
+- **Использование**: Текст на кнопках, активные элементы
 
 #### Body Text
 - **Font**: 14px (0.875rem), Archivo
@@ -793,6 +801,45 @@
 - **Border Radius**: 30px (для preview) или 40px
 - **Status Bar**: Height: 44px на верху экрана
 
+#### Button (Mobile)
+
+Кнопка для мобильного интерфейса с двумя вариантами.
+
+- **Height**: 36px
+- **Padding**: symmetric(horizontal: 16px, vertical: 10px)
+- **Border Radius**: 15px (radius-mobile-md)
+- **Text Style**:
+  - Font: 13px Archivo
+  - Weight: 600 (Semibold)
+  - Line Height: 1.40
+- **Spacing**: 8px между иконкой и текстом (если есть иконка)
+- **States/Variants**:
+  - **Primary (Active)**:
+    - Background: #4141E6 (color-primary-blue)
+    - Text Color: White (#FFFFFF)
+    - Использование: Активная выбранная кнопка
+  - **Secondary (Inactive)**:
+    - Background: #F4F6F9 (color-background-light)
+    - Text Color: Black (#09101D)
+    - Использование: Неактивные кнопки, secondary actions
+- **Layout**: Обычно в группах с padding: 16px horizontal от краев экрана
+
+#### iOS Home Indicator
+
+Индикатор домашнего жеста iOS (появляется внизу экрана).
+
+- **Width**: 134px
+- **Height**: 5px
+- **Border Radius**: 100px (полностью скругленный pill)
+- **Color**:
+  - White (#FFFFFF) на темном фоне
+  - Black (#09101D) на светлом фоне
+- **Container Height**: 34px (общая высота области индикатора)
+- **Position**:
+  - Centered horizontally
+  - 21px from top of container (13px from bottom)
+- **Использование**: Навигационный индикатор на iPhone без физической кнопки Home
+
 ---
 
 ### 17. Special Effects
@@ -990,9 +1037,24 @@
 
 ## Версионирование и обновления
 
-**Текущая версия**: v5.1.0
+**Текущая версия**: v5.2.0
 
 ### Changelog
+
+#### v5.2.0 (2025-11-19)
+- 🔘 Добавлены **спецификации мобильных кнопок** из Flutter кода
+- 🎨 Новый цвет: Background Light (#F4F6F9) для inactive кнопок
+- 📝 Добавлен **Button Text Style** (13px, Semibold, line-height 1.40)
+- 📱 Новые мобильные компоненты:
+  - **Button (Mobile)** с Primary и Secondary вариантами
+    - Height: 36px
+    - Padding: 16px horizontal, 10px vertical
+    - Border Radius: 15px
+    - Text: 13px Semibold
+  - **iOS Home Indicator** (134×5px, pill shape)
+    - Контейнер: 34px height
+    - Цвета: White/Black в зависимости от фона
+- 🔄 Все данные извлечены из реального Flutter кода кнопочных компонентов
 
 #### v5.1.0 (2025-11-19)
 - ✨ Добавлены **реальные данные из Flutter мобильного приложения**
