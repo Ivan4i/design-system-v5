@@ -62,6 +62,7 @@
 --color-link-blue: #4141E6;        /* Синий для ссылок и активных элементов */
 --color-success-green: #11BB8D;    /* Зеленый для активного toggle и success состояний */
 --color-error-red: #E24949;        /* Красный для ошибок и негативных значений */
+--color-error-border: #DA1414;     /* Темно-красный для error borders */
 --color-accent-yellow: #FFC043;    /* Желтый для date dividers */
 --color-accent-dark-green: #05944F; /* Темно-зеленый для date dividers */
 --color-accent-orange: #FF6937;    /* Оранжевый для date dividers и new messages */
@@ -597,6 +598,155 @@ Container(
 - **Height**: 40px (medium)
 - **Padding**: 10px 36px 10px 12px
 - **Icon**: Chevron down, Right: 12px, Size: 16px
+
+---
+
+#### Flutter Text Input Fields
+
+Текстовые поля ввода из Flutter кода с полным набором состояний для мобильного приложения.
+
+**Общие спецификации:**
+- **Container Width**: 375px
+- **Container Padding**: Horizontal 16px, Vertical 5px
+- **Input Height**: 36px
+- **Input Padding**: Left 16px, Right 20px
+- **Border Radius**: 15px
+- **Icon Size**: 20px × 20px
+- **Cursor Width**: 2px, Height: 16px
+- **Spacing**: 8px between label/input/helper
+
+**Typography:**
+- **Label**: 14px, Archivo SemiBold (w600), Line Height: 1.40
+- **Input Text**: 14px, Archivo Regular (w400), Line Height: 1.40
+- **Helper Text**: 14px, Archivo Regular (w400), Line Height: 1.40
+- **Error Message**: 14px, Archivo Regular (w400), Line Height: 1.40
+
+##### States:
+
+**1. Enabled (Default)**
+- **Background**: #F4F6F9 (light gray)
+- **Border**: none
+- **Label Color**: #09101D
+- **Placeholder**: "00.00", color #747B84
+- **Helper Color**: #747B84
+- **Left Icon**: 20px, color depends on icon
+- **Usage**: Начальное состояние, поле готово к вводу
+
+```dart
+Container(
+  width: double.infinity,
+  height: 36,
+  padding: const EdgeInsets.only(left: 16, right: 20),
+  decoration: ShapeDecoration(
+    color: const Color(0xFFF4F6F9),
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(15),
+    ),
+  ),
+)
+```
+
+**2. Focus**
+- **Background**: #F4F6F9 (light gray)
+- **Border**: 2px solid #09101D (dark)
+- **Label Color**: #09101D
+- **Placeholder**: "00.00", color #747B84
+- **Helper Color**: #747B84
+- **Cursor**: Visible (2px × 16px)
+- **Usage**: Поле получило фокус, готово к вводу
+
+**3. Active - Typing**
+- **Background**: #F4F6F9 (light gray)
+- **Border**: 2px solid #09101D (dark)
+- **Label Color**: #09101D
+- **Input Text**: "00.00", color #747B84
+- **Helper Color**: #747B84
+- **Cursor**: Visible (2px × 16px)
+- **Right Icon**: 20px (close/clear icon)
+- **Usage**: Активный ввод текста, возможность очистить
+
+**4. Pressed**
+- **Background**: #EAEEF2 (darker gray)
+- **Border**: none
+- **Label Color**: #09101D
+- **Placeholder**: "00.00", color #747B84
+- **Helper Color**: #747B84
+- **Usage**: Момент нажатия на поле
+
+**5. Complete**
+- **Background**: #F4F6F9 (light gray)
+- **Border**: none
+- **Label Color**: #09101D
+- **Input Text**: "14.95", color #09101D (dark, not placeholder)
+- **Helper Color**: #747B84
+- **Right Icon**: 20px (checkmark icon)
+- **Usage**: Поле успешно заполнено
+
+**6. Incomplete**
+- **Background**: #F4F6F9 (light gray)
+- **Border**: none
+- **Label Color**: #09101D
+- **Placeholder**: "00.00", color #747B84
+- **Helper Color**: #747B84
+- **Right Icon**: 20px (warning icon)
+- **Usage**: Поле требует заполнения
+
+**7. Positive (Success)**
+- **Background**: rgba(17, 187, 141, 0.05) - #11BB8D with 5% opacity
+- **Border**: 2px solid #11BB8D (success green)
+- **Label Color**: #09101D
+- **Input Text**: "14.95", color #09101D
+- **Helper Color**: #747B84
+- **Cursor**: Visible (2px × 16px)
+- **Usage**: Успешная валидация значения
+
+```dart
+Container(
+  decoration: ShapeDecoration(
+    color: const Color(0x0C11BB8D), // rgba(17, 187, 141, 0.05)
+    shape: RoundedRectangleBorder(
+      side: BorderSide(width: 2, color: const Color(0xFF11BB8D)),
+      borderRadius: BorderRadius.circular(15),
+    ),
+  ),
+)
+```
+
+**8. Negative (Error)**
+- **Background**: rgba(218, 20, 20, 0.05) - #DA1414 with 5% opacity
+- **Border**: 2px solid #DA1414 (error red)
+- **Label Color**: #09101D
+- **Input Text**: "99.999", color #747B84
+- **Helper Text**: "Error message", color #E24949 (error red)
+- **Cursor**: Visible (2px × 16px)
+- **Usage**: Ошибка валидации, некорректное значение
+
+```dart
+Container(
+  decoration: ShapeDecoration(
+    color: const Color(0x0CDA1414), // rgba(218, 20, 20, 0.05)
+    shape: RoundedRectangleBorder(
+      side: BorderSide(width: 2, color: const Color(0xFFDA1414)),
+      borderRadius: BorderRadius.circular(15),
+    ),
+  ),
+)
+```
+
+**9. Disabled**
+- **Background**: #EAEEF2 (gray)
+- **Border**: none
+- **Label Color**: #D9DDE2 (light gray)
+- **Placeholder**: "00.00", color #747B84
+- **Helper Color**: #D9DDE2 (light gray)
+- **Usage**: Поле отключено, ввод невозможен
+
+**Usage Notes:**
+- Используйте Positive state для подтверждения корректного ввода
+- Negative state всегда с error message внизу
+- Complete state показывает успешное заполнение без валидации
+- Active - Typing включает иконку очистки справа
+- Focus отличается от Active наличием введенного текста
 
 ---
 
@@ -2303,9 +2453,37 @@ Container(
 
 ## Версионирование и обновления
 
-**Текущая версия**: v5.5.0
+**Текущая версия**: v5.6.0
 
 ### Changelog
+
+#### v5.6.0 (2025-11-19)
+- **Добавлена секция Flutter Text Input Fields:**
+  - Полный набор из 9 состояний текстовых полей для мобильного приложения
+  - Enabled (Default) - начальное состояние с серым фоном #F4F6F9
+  - Focus - фокус с border 2px #09101D, видимый курсор
+  - Active - Typing - активный ввод с курсором и иконкой очистки
+  - Pressed - момент нажатия с темным фоном #EAEEF2
+  - Complete - успешное заполнение с checkmark иконкой
+  - Incomplete - требует заполнения с warning иконкой
+  - Positive (Success) - успешная валидация, зеленая граница #11BB8D, фон rgba(17, 187, 141, 0.05)
+  - Negative (Error) - ошибка валидации, красная граница #DA1414, фон rgba(218, 20, 20, 0.05)
+  - Disabled - отключенное состояние, светло-серый #D9DDE2
+- **Новый цвет:**
+  - `#DA1414` - Темно-красный для error borders в input полях
+- **Спецификации Input полей:**
+  - Container: 375px width, padding 16px horizontal / 5px vertical
+  - Input: 36px height, padding 16px left / 20px right, border-radius 15px
+  - Icon: 20px × 20px для left/right иконок
+  - Cursor: 2px × 16px
+  - Typography: Label/Input/Helper - 14px Archivo (w600/w400/w400)
+  - Spacing: 8px между label, input и helper text
+- **Validation States:**
+  - Positive: border 2px #11BB8D, background 5% opacity
+  - Negative: border 2px #DA1414, background 5% opacity, error text #E24949
+- **Flutter код примеры:**
+  - Complete код для Positive (Success) state
+  - Complete код для Negative (Error) state
 
 #### v5.5.0 (2025-11-19)
 - **Добавлено 15 Advanced List Item Variants:**
