@@ -1543,7 +1543,556 @@ Right: Icon 30×30 + Text label "BTC" + Icon 24×24
 
 ---
 
-### 4. Badges & Tags (из реального Flutter кода)
+### 5. Bottom Sheet Components (из реального Flutter кода)
+
+#### Bottom Sheet Container Specification
+
+**Спецификация из кода:**
+- **Container Width**: 375px
+- **Border Radius**: 30px (top corners)
+- **Background**: #FFFFFF (--color-bg-primary)
+- **Clip Behavior**: antiAlias
+
+**Pull Indicator (Drag Handle):**
+- **Size**: 40px × 3px
+- **Background**: #D9DDE2 (--color-bg-tertiary)
+- **Border Radius**: 100px (fully rounded)
+- **Container Padding**: 167px horizontal, 8px bottom (центрирование)
+- **Top Spacing**: 10px
+
+**Top Rounded Area (Decorative):**
+- **Size**: 343px × 10px
+- **Background**: #D9DDE2 (--color-bg-tertiary)
+- **Border Radius**: 10px (только top-left и top-right)
+- **Position**: 16px from left, 1px from top
+- **Использование**: Декоративный элемент для визуального разделения
+
+**Структура Bottom Sheet:**
+
+```
+Container: 375px, border-radius 30px (top)
+├─ Status Bar Area: 375×44, background #09101D (optional)
+│
+├─ Top Rounded Decoration: 343×10, #D9DDE2
+│  └─ Position: 16px left, 1px top
+│
+├─ Pull Indicator Container: padding 167px/8px
+│  └─ Drag Handle: 40×3, #D9DDE2, border-radius 100px
+│
+└─ Content Area:
+   ├─ Header (optional)
+   ├─ Search (optional)
+   └─ Main Content
+```
+
+**CSS пример:**
+
+```css
+.bottom-sheet {
+  width: 375px;
+  background: var(--color-bg-primary); /* white */
+  border-radius: 30px 30px 0 0;
+  clip-path: inset(0 round 30px 30px 0 0);
+  overflow: hidden;
+}
+
+.bottom-sheet__top-decoration {
+  width: 343px;
+  height: 10px;
+  margin: 1px 0 0 16px;
+  background: var(--color-bg-tertiary); /* #D9DDE2 */
+  border-radius: 10px 10px 0 0;
+}
+
+.bottom-sheet__pull-indicator-container {
+  padding: 0 167px 8px;
+  background: white;
+  display: flex;
+  justify-content: center;
+}
+
+.bottom-sheet__drag-handle {
+  width: 40px;
+  height: 3px;
+  background: var(--color-bg-tertiary); /* #D9DDE2 */
+  border-radius: 100px;
+}
+
+.bottom-sheet__content {
+  background: white;
+  padding: 0;
+}
+```
+
+**Usage Guidelines:**
+- **Pull Indicator**: Всегда включать для bottom sheet, чтобы показать drag interaction
+- **Top Decoration**: Опциональный декоративный элемент для визуального разделения
+- **Border Radius**: 30px для modern iOS-style bottom sheet
+- **Background**: Всегда white для contrast с затемненным фоном
+- **Accessibility**: Поддержка swipe down для закрытия, tap outside для dismiss
+
+#### Section Title (Medium Heading)
+
+**Спецификация из кода:**
+- **Font Size**: 18px (1.125rem)
+- **Font Weight**: 700 (Bold)
+- **Font Family**: 'Archivo'
+- **Line Height**: 1.40 (25.2px)
+- **Color**: #09101D (--color-text-primary)
+- **Padding**: 16px horizontal, 10px top
+- **Spacing**: 10px bottom (column spacing)
+- **Использование**: Заголовки секций внутри bottom sheet или content areas ("Select training date", "Choose category")
+
+**CSS пример:**
+
+```css
+.section-title {
+  font-family: 'Archivo';
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.40;
+  color: var(--color-text-primary); /* #09101D */
+  padding: 10px 16px 0;
+}
+
+.section-title + * {
+  margin-top: 10px; /* spacing after title */
+}
+```
+
+---
+
+### 6. User/Trainer Card Grid (из реального Flutter кода)
+
+#### User Card Grid Specification
+
+**Спецификация из кода:**
+- **Container Padding**: 16px horizontal
+- **Row Padding**: 10px vertical
+- **Horizontal Spacing**: 10px (между карточками)
+- **Vertical Spacing**: 5px (между рядами) или 10px (между секциями)
+- **Cards per Row**: 4 (равномерно Expanded)
+- **Grid Layout**: Flexible wrap, responsive
+
+**User/Trainer Card:**
+- **Padding**: 10px (all sides)
+- **Background**: #F4F6F9 (--color-bg-secondary)
+- **Border Radius**: 15px (--radius-badge)
+- **Spacing**: 5px (между avatar и name)
+- **Layout**: Column (center aligned)
+
+**Avatar Container:**
+- **Outer Size**: 56×56
+- **Inner Avatar Size**: 48×48
+- **Inner Position**: left 4px, top 4px (создает padding 4px)
+- **Background Placeholder**: #D9DDE2 (--color-bg-tertiary)
+- **Border Radius**: 40px (--radius-avatar)
+- **Image Fit**: cover
+- **Использование**: User/trainer photos, team members, contacts
+
+**Name Label:**
+- **Font Size**: 11px (0.6875rem)
+- **Font Weight**: 600 (Semibold)
+- **Font Family**: 'Archivo'
+- **Line Height**: 1.40 (15.4px)
+- **Color**: #09101D (--color-text-primary)
+- **Text Align**: center
+- **Max Width**: 50px (с overflow ellipsis)
+
+**Структура User Card:**
+
+```
+Card Container: padding 10px, background #F4F6F9
+├─ Spacing: 5px vertical
+│
+├─ Avatar Container: 56×56
+│  ├─ Background padding area: 4px
+│  └─ Avatar: 48×48
+│     ├─ Placeholder: #D9DDE2
+│     ├─ Image: cover fit
+│     └─ Border Radius: 40px
+│
+└─ Name Label: 11px, weight 600, centered
+   └─ Max width: 50px
+```
+
+**Grid Layout:**
+
+```
+Container: padding 16px horizontal
+└─ Row: padding 10px vertical, spacing 10px
+   ├─ Card 1: Expanded (flex 1)
+   ├─ Card 2: Expanded (flex 1)
+   ├─ Card 3: Expanded (flex 1)
+   └─ Card 4: Expanded (flex 1)
+```
+
+**CSS пример:**
+
+```css
+.user-card-grid {
+  padding: 0 16px;
+}
+
+.user-card-row {
+  display: flex;
+  gap: 10px;
+  padding: 10px 0;
+}
+
+.user-card {
+  flex: 1;
+  padding: 10px;
+  background: var(--color-bg-secondary); /* #F4F6F9 */
+  border-radius: var(--radius-badge); /* 15px */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.user-card__avatar-container {
+  width: 56px;
+  height: 56px;
+  position: relative;
+}
+
+.user-card__avatar {
+  width: 48px;
+  height: 48px;
+  position: absolute;
+  left: 4px;
+  top: 4px;
+  background: var(--color-bg-tertiary); /* #D9DDE2 */
+  border-radius: var(--radius-avatar); /* 40px */
+  object-fit: cover;
+}
+
+.user-card__name {
+  max-width: 50px;
+  font-family: 'Archivo';
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.40;
+  color: var(--color-text-primary);
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+```
+
+**Usage Guidelines:**
+- **4 Cards per Row**: Стандартная сетка для mobile 375px
+- **Avatar Padding**: 4px создает визуальный breathing room
+- **Name Truncation**: Используйте ellipsis для длинных имен
+- **Background**: Светлый #F4F6F9 для subtle emphasis на карточках
+- **Spacing**: 10px horizontal, 5px между avatar и name
+- **Accessibility**: Touch target 56×56 для avatar, tap на всю card для selection
+
+#### Story Badge (Instagram-style Indicator)
+
+**Спецификация из кода:**
+- **Size**: 20×20
+- **Position**: Top-right corner (left 36px, top 0 относительно 56×56 контейнера)
+- **Border**: 2px solid #F4F6F9 (цвет фона карточки для отделения)
+- **Border Radius**: 20px (--radius-notification)
+- **Background**: Linear gradient #833AB4 → #FD1D1D → #FCB045 (Instagram colors)
+- **Gradient Direction**: horizontal (0.00, 0.50) → (1.00, 0.50)
+
+**Inner Icon Container:**
+- **Size**: 12×12
+- **Border Radius**: 100px
+- **Padding**: 4px (container padding)
+- **Icon Size**: 14.40×14.40 (внутри 12×12 container, с offset -1.20)
+- **Использование**: Plus icon, play icon для story indicator
+
+**Структура Story Badge:**
+
+```
+Avatar Container: 56×56 (relative positioning)
+└─ Story Badge: 20×20, position absolute
+   ├─ Position: left 36px, top 0 (right-top corner)
+   ├─ Border: 2px solid #F4F6F9
+   ├─ Gradient Background: #833AB4 → #FD1D1D → #FCB045
+   └─ Icon Container: 12×12
+      ├─ Border Radius: 100px
+      └─ Icon: 14.40×14.40 (centered)
+```
+
+**CSS пример:**
+
+```css
+.user-card__avatar-container {
+  width: 56px;
+  height: 56px;
+  position: relative;
+}
+
+.user-card__story-badge {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  left: 36px;
+  top: 0;
+  border: 2px solid var(--color-bg-secondary); /* #F4F6F9 - matches card bg */
+  border-radius: var(--radius-notification); /* 20px */
+  background: linear-gradient(90deg, #833AB4 0%, #FD1D1D 50%, #FCB045 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.user-card__story-badge__icon-container {
+  width: 12px;
+  height: 12px;
+  border-radius: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.user-card__story-badge__icon {
+  width: 14.40px;
+  height: 14.40px;
+  /* Plus or play icon SVG */
+}
+```
+
+**Варианты Story Badge:**
+
+**1. Active Story (Gradient)**
+```
+Background: linear-gradient(90deg, #833AB4, #FD1D1D, #FCB045)
+Border: 2px solid (background color)
+Icon: Plus или Play (white or dark)
+```
+
+**2. Viewed Story (Gray)**
+```
+Background: #D9DDE2 (--color-bg-tertiary)
+Border: 2px solid (background color)
+Icon: Check или empty
+```
+
+**3. Live Story (Red)**
+```
+Background: #FC466B (--color-accent-pink)
+Border: 2px solid (background color)
+Icon: Camera или Live icon
+```
+
+**Usage Guidelines:**
+- **Position**: Всегда top-right corner avatar для consistency
+- **Border Color**: Должен совпадать с фоном карточки для visual separation
+- **Gradient**: Instagram-style gradient для active/unwatched stories
+- **Size**: 20×20 достаточно заметный, но не overwhelming
+- **Z-Index**: Должен быть выше avatar
+- **Accessibility**: Указать в aria-label "Has active story" или similar
+
+---
+
+### 7. Calendar Component (из реального Flutter кода)
+
+#### Calendar Specification (Date Picker)
+
+**Спецификация из кода:**
+- **Container Padding**: 16px horizontal, 10px vertical
+- **Layout**: Column с spacing 30px (?)
+- **Grid**: 7 columns (days of week) × 5-6 rows
+
+**Calendar Header:**
+- **Height**: 40px
+- **Month Text**: "February", 14px, weight 700, color #09101D
+- **Month Container Padding**: 5px top/right/bottom
+- **Spacing**: 10px между элементами
+- **Year Container**: 40×40, padding 5px
+- **Year Text**: "2022", 14px, weight 700, color #09101D
+- **Dropdown Icon**: 24×24
+- **Alignment**: Left-aligned month, year, icon в одной строке
+
+**Calendar Cell (Day):**
+- **Size**: 40×40
+- **Text**: 12px (0.75rem), weight 500, line-height 1.40
+- **Padding**: 5px (default state) или 10px (selected filled state)
+- **Border Radius**: 15px (selected states only)
+
+**Date States:**
+
+**1. Other Month (Disabled/Inactive)**
+```
+Text: 12px, weight 500, no color (transparent/gray)
+Background: transparent
+Padding: 5px
+Использование: Даты предыдущего/следующего месяца
+```
+
+**2. Current Month (Default)**
+```
+Text: #09101D (--color-text-primary)
+Background: transparent
+Padding: 5px
+Cursor: pointer
+```
+
+**3. Unavailable (Disabled)**
+```
+Text: #D9DDE2 (--color-bg-tertiary)
+Background: transparent
+Padding: 5px
+Cursor: not-allowed
+Использование: Прошедшие даты или недоступные слоты
+```
+
+**4. Selected Outline (Hover/Focus)**
+```
+Border: 2px solid #09101D (--color-text-primary)
+Border Radius: 15px
+Text: #09101D
+Background: transparent
+Padding: adjusted for border (to maintain size)
+```
+
+**5. Selected Filled (Active/Confirmed)**
+```
+Background: #09101D (--color-text-primary)
+Text: white
+Border Radius: 15px
+Padding: 10px
+No border
+```
+
+**Структура Calendar:**
+
+```
+Calendar Container: padding 16px/10px
+│
+├─ Header: 40px height
+│  ├─ Month: "February", 14px/700, padding 5px
+│  ├─ Year: "2022", 14px/700, container 40×40
+│  └─ Icon: 24×24 (dropdown)
+│
+└─ Grid: 7 columns
+   ├─ Row padding: 4px vertical
+   │
+   └─ Cell: 40×40
+      ├─ Default: padding 5px
+      ├─ Selected outline: border 2px #09101D, radius 15px
+      └─ Selected filled: padding 10px, bg #09101D, radius 15px
+```
+
+**CSS пример:**
+
+```css
+.calendar {
+  padding: 10px 16px;
+}
+
+.calendar__header {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+.calendar__month {
+  padding: 5px 5px 5px 0;
+  font-family: 'Archivo';
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.calendar__year {
+  width: 40px;
+  height: 40px;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Archivo';
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.calendar__dropdown-icon {
+  width: 24px;
+  height: 24px;
+  margin-left: auto;
+}
+
+.calendar__grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px 0; /* 4px vertical, 0 horizontal */
+}
+
+.calendar__cell {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  font-family: 'Archivo';
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.40;
+  text-align: center;
+  cursor: pointer;
+  transition: all 150ms;
+}
+
+.calendar__cell--current-month {
+  color: var(--color-text-primary); /* #09101D */
+}
+
+.calendar__cell--other-month {
+  color: transparent;
+  cursor: default;
+}
+
+.calendar__cell--unavailable {
+  color: var(--color-bg-tertiary); /* #D9DDE2 */
+  cursor: not-allowed;
+}
+
+.calendar__cell--selected-outline {
+  border: 2px solid var(--color-text-primary); /* #09101D */
+  border-radius: 15px;
+  padding: 3px; /* 5px - 2px border */
+}
+
+.calendar__cell--selected-filled {
+  background: var(--color-text-primary); /* #09101D */
+  color: white;
+  border-radius: 15px;
+  padding: 10px;
+}
+
+.calendar__cell:not(.calendar__cell--unavailable):not(.calendar__cell--other-month):hover {
+  border: 2px solid var(--color-text-primary);
+  border-radius: 15px;
+  padding: 3px;
+}
+```
+
+**Usage Guidelines:**
+- **Cell Size**: 40×40 для comfortable touch target
+- **Selected Outline**: Для hover/focus состояния
+- **Selected Filled**: Для confirmed/active выбора
+- **Unavailable Dates**: Светло-серый #D9DDE2 для past dates или disabled slots
+- **Border Radius**: 15px matching input field style
+- **Spacing**: 4px vertical между рядами для density
+- **Month/Year**: Bold 14px для clear hierarchy
+- **Accessibility**: Keyboard navigation (arrow keys), ARIA labels для dates
+- **Range Selection**: Можно расширить для date range picker с start/end states
+
+---
+
+### 8. Badges & Tags (из реального Flutter кода)
 
 #### Notification Badge (Counter)
 
