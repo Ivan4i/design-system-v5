@@ -10,6 +10,7 @@
 6. [Паттерны](#паттерны)
 7. [Состояния](#состояния)
 8. [Иконки](#иконки)
+9. [Charts & Graphs](#charts--graphs)
 
 ---
 
@@ -1290,6 +1291,176 @@ Bottom sheet - модальное окно, которое выдвигаетс�
 
 ---
 
+## Charts & Graphs
+
+Система визуализации данных на основе bar chart компонентов для мобильных экранов.
+
+### Bar Chart (Hourly View)
+
+Вертикальный bar chart для отображения почасовых данных с 60 точками измерений.
+
+#### Container
+
+**Размеры:**
+- **Width**: 375px (полная ширина мобильного экрана)
+- **Height**: auto (зависит от высоты баров)
+
+**Padding варианты:**
+1. **Вариант 1** (компактный):
+   - Horizontal: 16px
+   - Vertical: 10px
+2. **Вариант 2** (расширенный):
+   - Horizontal: 16px
+   - Top: 40px
+   - Bottom: 10px (или auto)
+
+#### Bar Specifications
+
+**Структура:**
+- **Количество баров**: 60 (Expanded widgets)
+- **Layout**: Horizontal Row
+- **Alignment**: `crossAxisAlignment.end` (выравнивание по нижнему краю)
+- **Spacing**: 1px между барами
+
+**Стили баров:**
+- **Color**: #D9DDE2 (светло-серый)
+- **Border Radius**:
+  - Вариант 1: 1px (минимальное закругление)
+  - Вариант 2: 4px (заметное закругление)
+- **Shape**: `RoundedRectangleBorder`
+
+**Высоты баров:**
+Вариативные высоты от 38px до 155px в зависимости от данных.
+
+Полный набор высот (60 значений):
+```
+60, 96, 63, 70, 100, 118, 96, 63, 38, 118,
+96, 63, 70, 79, 155, 96, 63, 38, 118, 96,
+63, 70, 79, 155, 96, 63, 70, 79, 118, 96,
+63, 38, 79, 96, 63, 70, 100, 118, 96, 63,
+38, 118, 96, 63, 70, 79, 155, 96, 63, 38,
+118, 96, 63, 70, 79, 155, 96, 63, 38, 118
+```
+
+#### Layout Patterns
+
+**Pattern 1: Компактный график (малый padding)**
+- Используется для карточек с ограниченным пространством
+- Vertical padding: 10px
+- Высота баров визуально занимает большую часть карточки
+- BorderRadius: 1px для более "плотного" вида
+
+**Pattern 2: Расширенный график (большой padding)**
+- Используется для полноэкранных view или секций с акцентом
+- Top padding: 40px (пространство для заголовков)
+- BorderRadius: 4px для более "мягкого" вида
+- Больше визуального пространства вокруг графика
+
+#### Использование в UI
+
+**Контекст применения:**
+- Отображение почасовых метрик (просмотры, активность, трафик)
+- Краткосрочные тренды (последний час, текущий день)
+- Мониторинг реального времени
+- Компактные дашборды на мобильных устройствах
+
+**CSS Variables:**
+
+```css
+/* Bar Chart Colors */
+--chart-bar-color-primary: #D9DDE2;
+
+/* Bar Chart Dimensions */
+--chart-bar-gap: 1px;
+--chart-bar-radius-compact: 1px;
+--chart-bar-radius-comfortable: 4px;
+
+/* Bar Chart Container */
+--chart-container-width-mobile: 375px;
+--chart-padding-horizontal: 16px;
+--chart-padding-vertical-compact: 10px;
+--chart-padding-vertical-expanded: 40px;
+```
+
+#### Интерактивность
+
+**Рекомендации для взаимодействия:**
+- **Tap/Click**: Показать tooltip с точным значением
+- **Hover** (desktop): Highlight бара при наведении
+- **Animation**: Анимация появления баров снизу вверх (0.3s ease-out)
+- **Loading state**: Skeleton loader с серыми барами одинаковой высоты
+
+#### Адаптивность
+
+**Mobile (375px):**
+- Полная ширина контейнера
+- 60 баров с gap 1px
+- Horizontal scroll при необходимости
+
+**Tablet (768px+):**
+- Может использоваться та же компоновка
+- Или увеличение количества баров для большей детализации
+
+**Desktop (1024px+):**
+- Рассмотреть альтернативные визуализации (line chart, area chart)
+- Или группировка нескольких bar charts side-by-side
+
+#### Accessibility
+
+**Доступность графиков:**
+- **ARIA Label**: `aria-label="Hourly data visualization chart"`
+- **Role**: `role="img"` для всего графика
+- **Alt description**: Текстовое описание данных для screen readers
+- **Keyboard navigation**: Tab для перемещения между барами (если интерактивные)
+- **Color contrast**: Цвет #D9DDE2 на белом фоне - достаточный контраст
+
+#### Примеры кода
+
+**Вариант 1 (Компактный):**
+```css
+.bar-chart-container {
+  width: var(--chart-container-width-mobile);
+  padding: var(--chart-padding-vertical-compact) var(--chart-padding-horizontal);
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  gap: var(--chart-bar-gap);
+}
+
+.bar-chart-item {
+  flex: 1;
+  background: var(--chart-bar-color-primary);
+  border-radius: var(--chart-bar-radius-compact);
+  min-height: 38px;
+  max-height: 155px;
+}
+```
+
+**Вариант 2 (Расширенный):**
+```css
+.bar-chart-container--expanded {
+  width: var(--chart-container-width-mobile);
+  padding: var(--chart-padding-vertical-expanded) var(--chart-padding-horizontal) var(--chart-padding-vertical-compact);
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  gap: var(--chart-bar-gap);
+}
+
+.bar-chart-item--rounded {
+  flex: 1;
+  background: var(--chart-bar-color-primary);
+  border-radius: var(--chart-bar-radius-comfortable);
+  transition: opacity 0.2s ease;
+}
+
+.bar-chart-item--rounded:hover {
+  opacity: 0.8;
+}
+```
+
+---
+
 ## Как использовать эту дизайн-систему
 
 ### Для дизайнеров
@@ -1317,9 +1488,29 @@ Bottom sheet - модальное окно, которое выдвигаетс�
 
 ## Версионирование и обновления
 
-**Текущая версия**: v5.2.0
+**Текущая версия**: v5.3.0
 
 ### Changelog
+
+#### v5.3.0 (2025-11-19)
+- **Добавлена новая секция "Charts & Graphs"** - система визуализации данных для мобильных экранов:
+  - Bar Chart (Hourly View) для отображения почасовых метрик
+  - 60 вертикальных баров с высотами от 38px до 155px
+  - Два варианта padding: компактный (10px vertical) и расширенный (40px top)
+  - Два варианта border-radius: 1px (компактный) и 4px (комфортный)
+  - Цвет баров: #D9DDE2
+  - Gap между барами: 1px
+  - Container: 375px width (мобильный экран)
+  - Alignment: по нижнему краю (flex-end)
+  - Рекомендации по интерактивности, адаптивности и accessibility
+  - Примеры CSS кода для обоих вариантов
+- **Добавлены CSS переменные для графиков**:
+  - `--chart-bar-color-primary: #D9DDE2`
+  - `--chart-bar-gap: 1px`
+  - `--chart-bar-radius-compact: 1px`
+  - `--chart-bar-radius-comfortable: 4px`
+  - `--chart-container-width-mobile: 375px`
+  - Padding переменные для компактного и расширенного режимов
 
 #### v5.2.0 (2025-11-19)
 - **Добавлены градиенты** из TinyCards компонентов:
