@@ -162,6 +162,8 @@
 --color-accent-5: #7CC5D6;
 --color-accent-6: #E24949;
 --color-accent-7: #7B61FF;
+--color-accent-8: #F79E1C;
+--color-accent-9: #46467F;
 ```
 
 ### Gradients
@@ -288,6 +290,7 @@
 --space-3: 0.75rem;   /* 12px */
 --space-3-75: 0.9375rem; /* 15px */
 --space-4: 1rem;      /* 16px */
+--space-4-5: 1.125rem; /* 18px */
 --space-5: 1.25rem;   /* 20px */
 --space-6: 1.5rem;    /* 24px */
 --space-7-5: 1.875rem; /* 30px */
@@ -318,7 +321,8 @@
 --radius-2xl-plus: 1.25rem; /* 20px */
 --radius-3xl: 1.875rem;   /* 30px */
 --radius-3xl-plus: 2.5rem; /* 40px */
---radius-4xl: 6.25rem;    /* 100px */
+--radius-4xl: 5rem;       /* 80px */
+--radius-5xl: 6.25rem;    /* 100px */
 --radius-full: 9999px;
 ```
 
