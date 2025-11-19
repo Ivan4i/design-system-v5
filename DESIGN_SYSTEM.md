@@ -45,6 +45,7 @@
 /* Основной акцентный цвет из Flutter */
 --color-primary: #4141E6;          /* Основной синий/фиолетовый цвет */
 --color-primary-light: rgba(11, 36, 251, 0.1); /* #0B24FB с opacity 0.1 */
+--color-primary-dark: #221874;     /* Темно-фиолетовый для rating badge */
 ```
 
 ### Text Colors
@@ -58,6 +59,14 @@
 --color-text-dark-2: #2A2B2F;      /* Темный текст вариант 2 */
 ```
 
+### Accent Colors
+
+```css
+/* Акцентные цвета из Flutter */
+--color-success: #11BB8D;          /* Зеленый для badge (Discount, Rating) */
+--color-warning: #FFC043;          /* Желтый/золотой для price button */
+```
+
 ### Background Colors
 
 ```css
@@ -66,6 +75,8 @@
 --color-bg-card-light: #D9DDE2;    /* Светлая карточка/разделитель */
 --color-bg-divider: #EAEEF2;       /* Цвет разделителей */
 --color-bg-card-dark: #23262B;     /* Темная карточка */
+--color-bg-overlay-dark: rgba(0, 0, 0, 0.2); /* Темный overlay с opacity */
+--color-bg-icon-overlay: rgba(17, 187, 141, 0.05); /* #11BB8D с opacity 0.05 */
 ```
 
 ### Gradient Colors
@@ -271,10 +282,11 @@ background: linear-gradient(90deg,
 /* Радиусы скругления из Flutter кода */
 --radius-none: 0;
 --radius-xs: 0.125rem;     /* 2px */
---radius-sm: 0.5rem;       /* 8px */
---radius-md: 0.6875rem;    /* 11px */
+--radius-sm: 0.3125rem;    /* 5px - для маленьких карточек */
+--radius-badge: 0.4375rem; /* 7px - для badge компонентов */
+--radius-md: 0.5rem;       /* 8px */
 --radius-base: 0.75rem;    /* 12px */
---radius-lg: 0.9375rem;    /* 15px - основной для кнопок и карточек */
+--radius-lg: 0.9375rem;    /* 15px - основной для кнопок и больших карточек */
 --radius-xl: 1.25rem;      /* 20px */
 --radius-2xl: 1.875rem;    /* 30px - для больших контейнеров */
 --radius-3xl: 2.5rem;      /* 40px */
@@ -391,10 +403,21 @@ background: linear-gradient(90deg,
 ```css
 /* Размеры иконок */
 --icon-xs: 12px;
---icon-sm: 16px;
---icon-md: 20px;
---icon-lg: 24px;
---icon-xl: 32px;
+--icon-sm: 15px;        /* Маленькие иконки в карточках */
+--icon-md: 20px;        /* Размер 21x20 округлен до 20px */
+--icon-lg: 24px;        /* Иконка overlay */
+--icon-xl: 30px;        /* Большая иконка избранного */
+--icon-2xl: 32px;
+```
+
+### Cards Sizes (из Flutter кода)
+
+```css
+/* Размеры карточек */
+--card-image-width-lg: 120px;   /* Ширина изображения большой карточки */
+--card-image-height-lg: 202px;  /* Высота изображения большой карточки */
+--card-image-width-sm: 120px;   /* Ширина изображения маленькой карточки */
+--card-image-height-sm: 107px;  /* Высота изображения маленькой карточки */
 ```
 
 ### Containers & Panels
@@ -428,47 +451,63 @@ background: linear-gradient(90deg,
 
 ## Компоненты
 
-### 1. Cards
+### 1. Cards (из Flutter кода)
 
-#### Basic Card
+#### Hotel Card Large
 
-- **Padding**: 24px (space-6)
-- **Border Radius**: 8px (radius-lg)
-- **Background**: color-bg-primary (#FFFFFF)
-- **Shadow**: shadow-base
-- **Border**: 1px solid color-border-primary
+- **Layout**: Row с изображением слева и контентом справа
+- **Container Width**: 375px
+- **Padding**: 16px horizontal, 5px vertical
+- **Spacing**: 5px между изображением и контентом
 
-**Варианты:**
-- **Elevated Card**: Shadow: shadow-md, No border
-- **Outlined Card**: Border: 1px solid color-border-primary, Shadow: none
-- **Interactive Card**: Hover: shadow-hover-md, Cursor: pointer, Transition: all 0.2s ease
+**Image Container:**
+- **Width**: 120px
+- **Height**: 202px (динамическая)
+- **Border Radius**: 15px (radius-lg)
+- **Image Fit**: cover
 
-#### Пример использования
+**Content Container:**
+- **Padding**: 10px
+- **Border Radius**: 15px (radius-lg)
+- **Background**: #F4F6F9 (color-bg-light)
+- **Spacing**: 5px между элементами
 
-```css
-.card {
-  padding: var(--space-6);
-  border-radius: var(--radius-lg);
-  background: var(--color-bg-primary);
-  box-shadow: var(--shadow-base);
-  border: var(--border-width-1) solid var(--color-border-primary);
-  transition: all 0.2s ease;
-}
+**Elements:**
+- Title: 11px, weight 600, color #09101D
+- Location: 10px, weight 400, color #09101D
+- Rating badge: 10px, background #221874
+- Review text: 10px, weight 600/400
+- Tags: 8px, background #11BB8D, radius 5px
+- Price button: 11px, background #FFC043, radius 15px, height 36px
 
-.card--elevated {
-  box-shadow: var(--shadow-md);
-  border: none;
-}
+#### Hotel Card Small
 
-.card--interactive:hover {
-  box-shadow: var(--shadow-hover-md);
-  transform: translateY(-2px);
-}
-```
+- **Layout**: Row с изображением слева и контентом справа
+- **Container Width**: 375px
+- **Padding**: 16px horizontal, 5px vertical
+- **Spacing**: 5px между изображением и контентом
+
+**Image Container:**
+- **Width**: 120px
+- **Height**: 107px (динамическая)
+- **Border Radius**: 5px (radius-sm)
+- **Image Fit**: cover
+
+**Content Container:**
+- **Padding**: 10px
+- **Border Radius**: 5px (radius-sm)
+- **Background**: #F4F6F9 (color-bg-light)
+- **Spacing**: 5px между элементами
+
+**Elements:**
+- Title: 11px, weight 600, color #09101D
+- Badge: 8px, background #23262B, radius 7px
+- Rating badge: 10px, background #11BB8D, radius 7px
+- Description: 11px, weight 400, color #747B84
 
 ---
 
-### 2. Buttons
+### 2. Buttons (из Flutter кода)
 
 #### Primary Button
 
@@ -482,6 +521,17 @@ background: linear-gradient(90deg,
   - Hover: Background: color-primary-hover, Shadow: shadow-button-hover, Transform: translateY(-1px)
   - Active: Background: color-primary-active, Shadow: shadow-button-active, Transform: translateY(0)
   - Disabled: Background: color-gray-300, Color: color-text-disabled, Cursor: not-allowed, Opacity: 0.6
+
+#### Price Button (Из Flutter кода)
+
+- **Height**: 36px
+- **Padding**: 16px horizontal, 10px vertical
+- **Radius**: 15px (radius-lg)
+- **Background**: #FFC043 (color-warning)
+- **Color**: #09101D (color-text-primary)
+- **Font Size**: 11px
+- **Font Weight**: 600 (semibold) для цены, 400 (regular) для валюты
+- **Text Format**: "235 USD" (цена bold, валюта regular)
 
 #### Secondary Button
 
@@ -537,19 +587,36 @@ background: linear-gradient(90deg,
 
 ---
 
-### 4. Badges & Tags
+### 4. Badges & Tags (из Flutter кода)
 
-#### Badge
+#### Badge Variants
 
-- **Padding**: 4px 8px
-- **Radius**: radius-full (9999px)
-- **Font Size**: font-size-xs (12px)
-- **Variants**:
-  - Success: Background: color-success-bg, Color: color-success, Border: 1px solid color-success-border
-  - Error: Background: color-error-bg, Color: color-error, Border: 1px solid color-error-border
-  - Warning: Background: color-warning-bg, Color: color-warning, Border: 1px solid color-warning-border
-  - Info: Background: color-info-bg, Color: color-info, Border: 1px solid color-info-border
-  - Neutral: Background: color-gray-100, Color: color-gray-700, Border: 1px solid color-gray-300
+**Rating Badge (Темный)**
+- **Padding**: 3px horizontal, 3px vertical
+- **Radius**: 5px (radius-sm) или 7px (radius-badge)
+- **Font Size**: 10px (font-size-10)
+- **Font Weight**: 600 (semibold)
+- **Background**: #221874 (color-primary-dark)
+- **Color**: white
+- **Использование**: Рейтинг отелей/мест
+
+**Success Badge (Зеленый)**
+- **Padding**: 5px horizontal, 3px vertical
+- **Radius**: 5px (radius-sm) или 7px (radius-badge)
+- **Font Size**: 8px или 10px
+- **Font Weight**: 600 (semibold)
+- **Background**: #11BB8D (color-success)
+- **Color**: white
+- **Использование**: Discount, Secret Deal, Good rating
+
+**Dark Badge**
+- **Padding**: 5px horizontal, 3px vertical
+- **Radius**: 7px (radius-badge)
+- **Font Size**: 8px
+- **Font Weight**: 600 (semibold)
+- **Background**: #23262B (color-bg-card-dark)
+- **Color**: white
+- **Использование**: Native speaker
 
 #### Tag
 
@@ -966,9 +1033,20 @@ background: linear-gradient(90deg,
 
 ## Версионирование и обновления
 
-**Текущая версия**: v5.0.1
+**Текущая версия**: v5.0.2
 
 ### Changelog
+
+#### v5.0.2 (2025-11-19)
+- Добавлены акцентные цвета: success (#11BB8D), warning (#FFC043)
+- Добавлен темно-фиолетовый primary-dark (#221874) для rating badge
+- Добавлены overlay цвета с прозрачностью
+- Обновлены border radius: добавлены 5px и 7px для badge
+- Добавлены размеры карточек: Large (120x202) и Small (120x107)
+- Обновлены размеры иконок: 15px, 30px
+- Добавлены реальные Badge компоненты из кода (Rating, Success, Dark)
+- Добавлены Hotel Card Large и Small с полным описанием
+- Добавлен Price Button компонент (#FFC043)
 
 #### v5.0.1 (2025-11-19)
 - Обновлены цвета из реального Flutter кода
