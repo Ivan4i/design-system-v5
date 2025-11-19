@@ -324,6 +324,38 @@
 - **Color**: #09101D (--color-text-primary)
 - **Использование**: Введенный пользователем текст в input полях ("Hello!", etc.)
 
+#### Form Label (Search/Input Label)
+- **Font Size**: 14px (0.875rem)
+- **Font Weight**: 600 (Semibold)
+- **Font Family**: 'Archivo'
+- **Line Height**: 1.40 (19.6px)
+- **Color**: #09101D (--color-text-primary) normal, #D9DDE2 (--color-bg-tertiary) disabled
+- **Использование**: Label для search input и form fields ("Enabled", "Focus", "Complete")
+
+#### Form Helper Text
+- **Font Size**: 14px (0.875rem)
+- **Font Weight**: 400 (Regular)
+- **Font Family**: 'Archivo'
+- **Line Height**: 1.40 (19.6px)
+- **Color**: #747B84 (--color-text-placeholder) normal, #D9DDE2 (--color-bg-tertiary) disabled
+- **Использование**: Вспомогательный текст под input полями ("Helper", инструкции, подсказки)
+
+#### Search Placeholder Text
+- **Font Size**: 14px (0.875rem)
+- **Font Weight**: 400 (Regular)
+- **Font Family**: 'Archivo'
+- **Line Height**: 1.40 (19.6px)
+- **Color**: #747B84 (--color-text-placeholder)
+- **Использование**: Placeholder текст в search полях ("Search here...", "Type to search...")
+
+#### Search Filled Text
+- **Font Size**: 14px (0.875rem)
+- **Font Weight**: 400 (Regular)
+- **Font Family**: 'Archivo'
+- **Line Height**: 1.40 (19.6px)
+- **Color**: #09101D (--color-text-primary)
+- **Использование**: Введенный текст в search полях ("Request", "Text", поисковые запросы)
+
 ---
 
 ## Spacing & Layout
@@ -1086,6 +1118,289 @@ Left icon button + Input field имеют одинаковый background:
 - **Icon Buttons**: 1-4 icons total, balanced left/right
 - **Background Variants**: Match with container background for visual hierarchy
 - **Accessibility**: Label, placeholder, focus states, keyboard support
+
+#### Search Input Field Specification
+
+**Спецификация из кода:**
+- **Field Size**: 375px × 36px (компактнее стандартного input 44px)
+- **Container Padding**: 16px horizontal, 5px vertical
+- **Field Padding**: 16px left, 20px right
+- **Background**: #F4F6F9 (--color-bg-secondary) enabled
+- **Background Pressed/Disabled**: #EAEEF2 (--color-bg-toggle)
+- **Border Radius**: 15px (--radius-badge)
+- **Focus Border**: 2px solid #09101D (--color-text-primary)
+- **Spacing**: 8px (между label, input и helper text)
+
+**Typography (Label):**
+- **Font Size**: 14px (0.875rem)
+- **Font Weight**: 600 (Semibold)
+- **Font Family**: 'Archivo'
+- **Line Height**: 1.40 (19.6px)
+- **Color**: #09101D (--color-text-primary) normal, #D9DDE2 (--color-bg-tertiary) disabled
+- **Использование**: "Enabled", "Focus", "Complete"
+
+**Typography (Placeholder):**
+- **Font Size**: 14px (0.875rem)
+- **Font Weight**: 400 (Regular)
+- **Font Family**: 'Archivo'
+- **Line Height**: 1.40 (19.6px)
+- **Color**: #747B84 (--color-text-placeholder)
+- **Использование**: "Search here..."
+
+**Typography (Filled Text):**
+- **Font Size**: 14px (0.875rem)
+- **Font Weight**: 400 (Regular)
+- **Font Family**: 'Archivo'
+- **Line Height**: 1.40 (19.6px)
+- **Color**: #09101D (--color-text-primary)
+- **Использование**: "Request", "Text"
+
+**Typography (Helper Text):**
+- **Font Size**: 14px (0.875rem)
+- **Font Weight**: 400 (Regular)
+- **Font Family**: 'Archivo'
+- **Line Height**: 1.40 (19.6px)
+- **Color**: #747B84 (--color-text-placeholder) normal, #D9DDE2 (--color-bg-tertiary) disabled
+- **Использование**: "Helper"
+
+**Icons:**
+- **Search Icon**: 20×20 (left side)
+- **Clear Button Icon**: 20×20 (right side, появляется при filled/incomplete)
+- **Icon Spacing**: 20px (row spacing), 15px (между icon и text)
+
+**Cursor:**
+- **Size**: 2px × 16px
+- **Color**: #09101D (--color-text-primary)
+- **Position**: After text (blinking vertical bar)
+
+**Структура Search Input:**
+
+```
+Container: 375px width, padding 16px/5px
+├─ Spacing: 8px vertical
+│
+├─ Label: 14px, weight 600, color #09101D
+│  └─ Text: "Enabled", "Focus", "Complete", etc.
+│
+├─ Search Field: 375×36
+│  ├─ Background: #F4F6F9 or #EAEEF2
+│  ├─ Border: 2px solid #09101D (focus only)
+│  ├─ Border Radius: 15px
+│  ├─ Padding: 16px left, 20px right
+│  │
+│  └─ Row Layout:
+│     ├─ Search Icon: 20×20 (spacing: 20px)
+│     ├─ Text/Placeholder: 14px, weight 400
+│     │  └─ Cursor: 2×16 (when active)
+│     └─ Clear Button: 20×20 (right, optional)
+│
+└─ Helper Text: 14px, weight 400, color #747B84
+   └─ Text: "Helper"
+```
+
+**States:**
+
+**1. Enabled (Default)**
+```
+Label: #09101D, weight 600
+Field Background: #F4F6F9
+Border: none
+Search Icon: 20×20 (left)
+Placeholder: "Search here...", #747B84
+Clear Button: hidden
+Helper: #747B84
+```
+
+**2. Focus**
+```
+Label: #09101D, weight 600
+Field Background: #F4F6F9
+Border: 2px solid #09101D
+Search Icon: 20×20 (left)
+Placeholder: "Search here...", #747B84
+Cursor: 2×16 visible
+Clear Button: hidden
+Helper: #747B84
+```
+
+**3. Pressed**
+```
+Label: #09101D, weight 600
+Field Background: #EAEEF2 (darker)
+Border: none
+Search Icon: 20×20 (left)
+Placeholder: "Search here...", #747B84
+Clear Button: hidden
+Helper: #747B84
+```
+
+**4. Active - Typing**
+```
+Label: #09101D, weight 600
+Field Background: #F4F6F9
+Border: 2px solid #09101D
+Search Icon: 20×20 (left)
+Text: "Text", #09101D
+Cursor: 2×16 at end of text
+Clear Button: 20×20 visible (right)
+Helper: #747B84
+```
+
+**5. Complete (Filled)**
+```
+Label: #09101D, weight 600
+Field Background: #F4F6F9
+Border: none
+Search Icon: 20×20 (left)
+Text: "Request", #09101D
+Clear Button: 20×20 visible (right)
+Helper: #747B84
+```
+
+**6. Incomplete (Placeholder + Clear)**
+```
+Label: #09101D, weight 600
+Field Background: #F4F6F9
+Border: none
+Search Icon: 20×20 (left)
+Placeholder: "Search here...", #747B84
+Clear Button: 20×20 visible (right)
+Helper: #747B84
+```
+
+**7. Disabled**
+```
+Label: #D9DDE2 (disabled color)
+Field Background: #EAEEF2
+Border: none
+Search Icon: 20×20 (left, disabled)
+Placeholder: "Search here...", #747B84
+Clear Button: hidden
+Helper: #D9DDE2 (disabled color)
+Cursor: not-allowed
+```
+
+**CSS пример:**
+
+```css
+.search-input-container {
+  width: 375px;
+  padding: 5px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.search-input__label {
+  font-family: 'Archivo';
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.40;
+  color: var(--color-text-primary); /* #09101D */
+}
+
+.search-input__label--disabled {
+  color: var(--color-bg-tertiary); /* #D9DDE2 */
+}
+
+.search-input__field {
+  width: 100%;
+  height: 36px;
+  padding: 0 20px 0 16px;
+  background: var(--color-bg-secondary); /* #F4F6F9 */
+  border: none;
+  border-radius: var(--radius-badge); /* 15px */
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  transition: background 150ms, border 150ms;
+}
+
+.search-input__field--focus,
+.search-input__field--active {
+  border: 2px solid var(--color-text-primary); /* #09101D */
+  padding: 0 18px 0 14px; /* Adjust for 2px border */
+}
+
+.search-input__field--pressed,
+.search-input__field--disabled {
+  background: var(--color-bg-toggle); /* #EAEEF2 */
+}
+
+.search-input__field--disabled {
+  cursor: not-allowed;
+}
+
+.search-input__icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.search-input__text {
+  flex: 1;
+  font-family: 'Archivo';
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.40;
+  color: var(--color-text-primary);
+  border: none;
+  background: transparent;
+  outline: none;
+}
+
+.search-input__text::placeholder {
+  color: var(--color-text-placeholder); /* #747B84 */
+}
+
+.search-input__cursor {
+  width: 2px;
+  height: 16px;
+  background: var(--color-text-primary);
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+.search-input__clear {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  cursor: pointer;
+  display: none;
+}
+
+.search-input__field--filled .search-input__clear,
+.search-input__field--incomplete .search-input__clear {
+  display: block;
+}
+
+.search-input__helper {
+  font-family: 'Archivo';
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.40;
+  color: var(--color-text-placeholder); /* #747B84 */
+}
+
+.search-input__helper--disabled {
+  color: var(--color-bg-tertiary); /* #D9DDE2 */
+}
+```
+
+**Usage Guidelines:**
+- **Search Field**: Global search, filter lists, quick find
+- **Label**: Always include descriptive label for accessibility
+- **Helper Text**: Provide context or instructions ("Start typing to search...")
+- **Clear Button**: Show when user has entered text (filled/incomplete states)
+- **Focus State**: Strong 2px border for clear visual feedback
+- **Disabled State**: Use disabled colors for label and helper
+- **Icon Size**: 20×20 for compact design
+- **Height**: 36px (более компактный чем стандартный 44px)
+- **Accessibility**: Label, aria-label, keyboard support (Enter to search, Esc to clear)
 
 ---
 
