@@ -43,8 +43,10 @@
 ```css
 /* Текст из Flutter кода */
 --color-text-primary: #09101D;     /* Основной темный текст из Flutter */
+--color-text-secondary: #747B84;   /* Вторичный текст из Flutter (метаданные, время) */
+--color-text-tertiary: #414249;    /* Третичный текст (username, labels) */
+--color-text-muted: #50555C;       /* Приглушенный текст (цены, данные) */
 --color-text-disabled: #D9DDE2;    /* Disabled text из Flutter */
---color-text-secondary: #27272A;   /* zinc-800 */
 ```
 
 ### Accent Colors
@@ -55,16 +57,18 @@
 --color-primary-border: #0B24FB;   /* Primary border variant из Flutter */
 --color-accent-blue: #1D4ED8;      /* blue-700 */
 --color-accent-purple: #7B61FF;    /* Фиолетовый из Flutter кода */
+--color-success: #11BB8D;          /* Зеленый для success badges из Flutter */
 ```
 
 ### Background Colors
 
 ```css
 /* Фоны для компонентов */
---color-bg-light: #F4F6F9;         /* Светлый фон из Flutter */
+--color-bg-light: #F4F6F9;         /* Светлый фон из Flutter (основной для cards) */
 --color-bg-dark: #18202F;          /* Темный scaffold background из Flutter */
---color-bg-card-light: #D9DDE2;    /* Светлая карточка */
---color-bg-card-dark: #23262B;     /* Темная карточка */
+--color-bg-overlay: rgba(0, 0, 0, 0.10);  /* Overlay для изображений */
+--color-bg-card-light: #D9DDE2;    /* Светлая карточка (avatar placeholder) */
+--color-bg-card-dark: #09101D;     /* Темная карточка (dark buttons, dark elements) */
 ```
 
 ### Shadow Colors
@@ -215,6 +219,7 @@
 ```css
 --space-0: 0;
 --space-1: 0.25rem;   /* 4px */
+--space-1-25: 0.3125rem; /* 5px - из Flutter spacing: 5 */
 --space-2: 0.5rem;    /* 8px */
 --space-3: 0.75rem;   /* 12px */
 --space-4: 1rem;      /* 16px */
@@ -225,9 +230,17 @@
 --space-10: 2.5rem;   /* 40px - из Flutter spacing: 10 */
 --space-12: 3rem;     /* 48px */
 --space-16: 4rem;     /* 64px */
---space-20: 5rem;     /* 80px */
+--space-20: 5rem;     /* 80px - из Flutter spacing: 20 */
 --space-24: 6rem;     /* 96px */
 --space-70: 4.375rem; /* 70px - из Flutter spacing: 70 (для Row spacing) */
+```
+
+### Gradient Colors
+
+```css
+/* Градиенты из Flutter кода */
+--gradient-live-badge: linear-gradient(90deg, #833AB4 0%, #FD1D1D 50%, #FCB045 100%);
+--gradient-image-overlay: linear-gradient(180deg, rgba(196, 196, 196, 0) 0%, rgba(29, 29, 29, 0.50) 100%);
 ```
 
 ### Border Radius
@@ -482,19 +495,37 @@
 
 ---
 
-### 4. Badges & Tags
+### 4. Badges & Tags (Flutter Mobile)
 
-#### Badge
+#### Live Badge (Instagram-style)
 
-- **Padding**: 4px 8px
-- **Radius**: radius-full (9999px)
-- **Font Size**: font-size-xs (12px)
-- **Variants**:
-  - Success: Background: color-success-bg, Color: color-success, Border: 1px solid color-success-border
-  - Error: Background: color-error-bg, Color: color-error, Border: 1px solid color-error-border
-  - Warning: Background: color-warning-bg, Color: color-warning, Border: 1px solid color-warning-border
-  - Info: Background: color-info-bg, Color: color-info, Border: 1px solid color-info-border
-  - Neutral: Background: color-gray-100, Color: color-gray-700, Border: 1px solid color-gray-300
+- **Size**: 28px width × 14px height
+- **Padding**: 4px horizontal, 2px vertical
+- **Border Radius**: 12px
+- **Border**: 1px solid white
+- **Background**: Linear gradient (#833AB4 → #FD1D1D → #FCB045)
+- **Font**: Archivo, 10px, weight 600, line-height 1.40
+- **Text Color**: white
+- **Text**: "Live"
+- **Использование**: Overlay на аватаре (позиция: bottom-right)
+
+#### New Badge (Success)
+
+- **Size**: auto width × 24px height
+- **Padding**: 6px horizontal
+- **Border Radius**: 11px
+- **Background**: #11BB8D (color-success)
+- **Font**: Archivo, 11px, weight 600, line-height 1.40
+- **Text Color**: white
+- **Text**: "New" или "new"
+- **Использование**: Overlay на изображениях (позиция: top-left с padding 10px)
+
+#### Badge Common Properties
+
+- **Font Family**: Archivo
+- **Font Weight**: 600 (Semibold)
+- **Line Height**: 1.40
+- **Text Transform**: none (сохраняет оригинальный регистр)
 
 #### Tag
 
@@ -591,23 +622,40 @@
 
 ---
 
-### 9. Avatars
+### 9. Avatars (Flutter Mobile)
 
 #### Sizes
 
 - **XS**: 24px × 24px
 - **Small**: 32px × 32px
-- **Medium**: 40px × 40px
+- **Medium**: 40px × 40px (основной размер из Flutter)
+- **Medium with Container**: 48px × 48px container (40px avatar + 4px offset)
 - **Large**: 48px × 48px
 - **XL**: 64px × 64px
-- **2XL**: 96px × 96px
+- **2XL**: 80px × 80px (из User Profile Card)
+- **3XL**: 96px × 96px
 
 #### Styles
 
-- **Border Radius**: radius-full (circle) или radius-md (rounded square)
+- **Border Radius**: radius-full (40px для 40px avatar, 50px для 40px в container)
 - **Border**: 2px solid white (для группировки)
-- **Placeholder**: Background: color-gray-300, Icon/Initials: color-gray-600
-- **Status Indicator**: Size: 25% of avatar, Border: 2px solid white, Position: bottom-right
+- **Placeholder**: Background: #D9DDE2 (color-bg-card-light), Icon/Initials: color-gray-600
+- **Image Fit**: cover
+
+#### Avatar with Live Badge
+
+- **Container**: 48px × 48px
+- **Avatar**: 40px × 40px (позиция: left 4px, top 4px)
+- **Live Badge**: 28px × 14px (позиция: bottom-right of container)
+- **Badge Offset**: bottom 0, right 0
+- **Usage**: Для live streaming, active users
+
+#### Avatar Variants
+
+- **Circle Avatar**: border-radius: 40px (для 40px avatar) или 50px (для контейнера)
+- **Rounded Square**: border-radius: 15px (для profile cards)
+- **With Image**: NetworkImage с fit: BoxFit.cover
+- **Placeholder**: Solid color background (#D9DDE2)
 
 ---
 
@@ -732,6 +780,332 @@
 --backdrop-blur-md: blur(12px);
 --backdrop-blur-lg: blur(16px);
 ```
+
+---
+
+## Mobile Card Components (Flutter)
+
+### 1. User Card with Live Badge
+
+**Размер**: 140px × 68px
+
+**Структура**:
+- Container: width 140px, height 68px
+- Padding: 10px all
+- Background: #F4F6F9
+- Border Radius: 10px
+
+**Элементы**:
+- Avatar Container: 48px × 48px
+  - Avatar: 40px × 40px (offset: left 4px, top 4px)
+  - Border Radius: 40px
+  - Placeholder: #D9DDE2
+  - Live Badge: 28px × 14px (bottom-right position)
+    - Gradient: #833AB4 → #FD1D1D → #FCB045
+    - Border: 1px white
+    - Border Radius: 12px
+    - Text: "Live", 10px, weight 600, white
+    - Padding: 4px/2px
+
+- Text Section (spacing: 10px from avatar):
+  - Name: "Anna S."
+    - Font: Archivo 13px, weight 600
+    - Color: #09101D
+    - Line Height: 1.40
+  - Role: "Teacher"
+    - Font: Archivo 12px, weight 400
+    - Color: #747B84
+    - Line Height: 1.40
+
+---
+
+### 2. User Comment Card
+
+**Размер**: 140px × auto height
+
+**Структура**:
+- Container: width 140px
+- Padding: 10px all
+- Background: #F4F6F9
+- Border Radius: 10px
+- Column spacing: 10px
+
+**Элементы**:
+- Header Row (spacing: 5px):
+  - Avatar: 48px × 48px (40px + 4px offset)
+    - Border Radius: 40px
+    - Background: #D9DDE2
+  - Text Column:
+    - Name: "James Dowson"
+      - Font: Archivo 12px, weight 900
+      - Color: #09101D
+      - Line Height: 1.20
+    - Role: "Expert"
+      - Font: Archivo 11px, weight 400
+      - Color: #747B84
+      - Line Height: 1.40
+
+- Comment Text:
+  - Font: Archivo 12px, weight 400
+  - Color: #09101D
+  - Line Height: 1.40
+  - Width: 120px
+  - Example: "In 1975, the market cap of gold peaked at $1.2 trillion USD..."
+
+---
+
+### 3. Crypto/Bitcoin Card
+
+**Размер**: 140px × 170px
+
+**Структура**:
+- Container: width 140px, height 170px
+- Padding: 15px all
+- Background: #F4F6F9
+- Border Radius: 10px
+- Column spacing: 15px (between elements)
+
+**Элементы**:
+- Logo: 40px × 40px
+  - Border Radius: 50px
+  - Image: NetworkImage
+
+- Title Section:
+  - Title: "Bitcoin"
+    - Font: Archivo 13px, weight 700
+    - Color: #09101D
+    - Line Height: 1.40
+  - Price: "3,715 USD M"
+    - Font: Archivo 12px, weight 400
+    - Color: #50555C
+    - Line Height: 1.40
+
+- Buy Button:
+  - Height: 36px
+  - Padding: 16px/10px
+  - Background: #09101D
+  - Border Radius: 15px
+  - Text: "Buy"
+    - Font: Archivo 13px, weight 600
+    - Color: white
+    - Line Height: 1.40
+
+---
+
+### 4. Category Image Card
+
+**Размер**: 166.5px × 166.5px
+
+**Структура**:
+- Container: width 166.5px, height 166.5px
+- Border Radius: 16px
+- Background: #F4F6F9
+
+**Элементы**:
+- Image: 166.5px × 166.5px
+  - Fit: cover
+
+- Gradient Overlay:
+  - Position: bottom (от top 96px до bottom)
+  - Height: 70px
+  - Gradient: transparent → rgba(29, 29, 29, 0.50)
+
+- Title:
+  - Position: bottom (top 129px)
+  - Padding: left 10px
+  - Text: "Vegetables"
+    - Font: Archivo 16px, weight 600
+    - Color: white
+    - Line Height: 1.40
+  - Width: 157px
+
+---
+
+### 5. User Profile Card
+
+**Размер**: 140px × auto height
+
+**Структура**:
+- Container: width 140px
+- Background: #F4F6F9
+- Border Radius: 15px
+- Clip Behavior: antiAlias
+
+**Элементы**:
+- Top Section:
+  - Padding: 10px (top, left, right), 5px (bottom)
+  - Image: 80px × 80px
+    - Border Radius: 15px
+    - Fit: cover
+  - Favorite Icon: 14px × 14px (top-right)
+    - Padding: 8px in container
+    - Border Radius: 20px
+
+- Bottom Section:
+  - Padding: bottom 10px
+  - Column spacing: 5px
+
+  - Text Section (padding: left 10px):
+    - Name: "Nicole"
+      - Font: Archivo 13px, weight 600
+      - Color: #09101D
+      - Line Height: 1.40
+    - Username: "@nicole"
+      - Font: Archivo 11px, weight 600
+      - Color: #414249
+      - Line Height: 1.40
+
+  - Follow Button (padding: horizontal 10px):
+    - Height: 36px
+    - Width: 100%
+    - Padding: 16px/10px
+    - Background: #09101D
+    - Border Radius: 15px
+    - Text: "Follow"
+      - Font: Archivo 11px, weight 600
+      - Color: white
+      - Line Height: 1.40
+
+---
+
+### 6. Story/Post Card
+
+**Размер**: 140px × 190px
+
+**Структура**:
+- Container: width 140px, height 190px
+- Border Radius: 15px
+- Clip Behavior: antiAlias
+
+**Элементы**:
+- Background Image:
+  - Size: 140px × 190px
+  - Fit: cover
+
+- Overlay:
+  - Background: rgba(0, 0, 0, 0.10)
+  - Padding: 10px (top, left, right), 20px (bottom)
+  - Position: bottom
+  - Column spacing: 2px
+
+- Text Content:
+  - Title: "Breath into it"
+    - Font: Archivo 14px, weight 600
+    - Color: white
+    - Line Height: 1.40
+  - Subtitle: "with Maria Mendez"
+    - Font: Archivo 12px, weight 400
+    - Color: white
+    - Line Height: 1.40
+  - Width: 120px
+
+---
+
+### 7. Product Card
+
+**Размер**: 140px × 210px
+
+**Структура**:
+- Container: width 140px, height 210px
+- Clip Behavior: none
+- Column layout
+
+**Элементы**:
+- Image Section (expanded):
+  - Image: cover fit
+  - Border Radius: 15px
+
+  - New Badge (padding: 10px):
+    - Background: #11BB8D
+    - Height: 24px
+    - Padding: 6px horizontal
+    - Border Radius: 11px
+    - Text: "New"
+      - Font: Archivo 11px, weight 600
+      - Color: white
+      - Line Height: 1.40
+
+- Info Section (padding: top 5px):
+  - Column spacing: 2px
+
+  - Title: "Chuck's Donuts"
+    - Font: Archivo 13px, weight 600
+    - Color: #09101D
+    - Line Height: 1.40
+    - Width: 106px
+
+  - Price: "1.95 USD"
+    - Font: Archivo 14px, weight 600
+    - Color: #09101D
+    - Line Height: 1.40
+
+  - Location: "New-York"
+    - Font: Archivo 13px, weight 400
+    - Color: #414249
+    - Line Height: 1.40
+
+  - Date: "31 July, 12:10 PM"
+    - Font: Archivo 12px, weight 400
+    - Color: #747B84
+    - Line Height: 1.40
+
+  - Action Icons (right side):
+    - Size: 24px × 24px each
+    - Padding: 5px-6px
+    - Border Radius: 100px
+    - Icon Size: internal (14px-16px)
+
+---
+
+### 8. Course Card
+
+**Размер**: 140px × 150px
+
+**Структура**:
+- Container: width 140px, height 150px
+- Border Radius: 16px
+- Clip Behavior: antiAlias
+
+**Элементы**:
+- Image Section (expanded):
+  - Height: ~92px
+  - Image: cover fit
+  - Border Radius: 15px
+
+  - New Badge (padding: 10px):
+    - Background: #11BB8D
+    - Height: 24px
+    - Padding: 6px horizontal
+    - Border Radius: 11px
+    - Text: "new"
+      - Font: Archivo 11px, weight 600
+      - Color: white
+      - Line Height: 1.40
+
+- Info Section:
+  - Padding: 5px (top, right, bottom), 5px (left in text)
+  - Column spacing: 2px
+
+  - Title: "Graphic Tools"
+    - Font: Archivo 16px, weight 700
+    - Color: #09101D
+    - Line Height: 1.40
+    - Width: 130px
+
+  - Metadata Row (spacing: 5px):
+    - Duration Icon + Text:
+      - Icon: 24px (padding 7px, internal 12px)
+      - Text: "3h 15m"
+        - Font: Archivo 11px, weight 600
+        - Color: #747B84
+        - Line Height: 1.40
+
+    - Students Icon + Text:
+      - Icon: 24px (padding 7px, internal 12px)
+      - Text: "280"
+        - Font: Archivo 11px, weight 600
+        - Color: #747B84
+        - Line Height: 1.40
 
 ---
 
@@ -955,20 +1329,43 @@ Icon Button (40px):
 
 #### v5.0.0 (2025-11-19)
 - Первая версия дизайн-системы
-- Полная цветовая палитра с реальными значениями из Flutter кода
-- Компонент Button с всеми состояниями (Filled, Outlined, Ghost, Disabled)
-- Icon Button (40px) с вариантами
-- Mobile Layout Patterns (375px width)
-- Spacing values из Flutter (10px, 70px)
-- Border radius values (15px primary, 12px alternative)
-- Реальные цвета из Flutter:
+- Полная цветовая палитра с реальными значениями из Flutter кода:
   - Primary: #4141E6
   - Primary border: #0B24FB
   - Background light: #F4F6F9
   - Background dark: #18202F
+  - Background overlay: rgba(0, 0, 0, 0.10)
   - Text primary: #09101D
+  - Text secondary: #747B84
+  - Text tertiary: #414249
+  - Text muted: #50555C
   - Text disabled: #D9DDE2
-- Typography: Archivo 13px, weight 600, line-height 1.40
+  - Success: #11BB8D
+- Градиенты:
+  - Live Badge: #833AB4 → #FD1D1D → #FCB045
+  - Image Overlay: transparent → rgba(29, 29, 29, 0.50)
+- Компонент Button с всеми состояниями (Filled, Outlined, Ghost, Disabled)
+- Icon Button (40px) с вариантами
+- Badges:
+  - Live Badge (Instagram-style): 28×14px, gradient background
+  - New Badge: 24px height, #11BB8D background
+- Avatar компонент:
+  - Размеры: 40px, 48px, 80px
+  - Варианты: Circle, Rounded Square, With Live Badge
+  - Placeholder: #D9DDE2
+- Mobile Card Components (8 готовых блоков):
+  1. User Card with Live Badge (140×68px)
+  2. User Comment Card (140px width)
+  3. Crypto/Bitcoin Card (140×170px)
+  4. Category Image Card (166.5×166.5px)
+  5. User Profile Card (140px width)
+  6. Story/Post Card (140×190px)
+  7. Product Card (140×210px)
+  8. Course Card (140×150px)
+- Mobile Layout Patterns (375px width)
+- Spacing values: 5px, 10px, 15px, 20px, 70px
+- Border radius values: 10px, 11px, 12px, 15px, 16px
+- Typography: Archivo (10px-16px, weights 400-900, line-height 1.20-1.40)
 - Layout patterns и Best practices
 
 ---
