@@ -106,6 +106,20 @@
 --color-gray-900: #09101D;
 ```
 
+### Accent & Decorative Colors
+
+```css
+/* Accent colors из View4 */
+--color-accent-orange: #FFC043;
+--color-accent-orange-light: rgba(255, 192, 67, 0.2);  /* #33FFC043 - 20% opacity */
+--color-accent-brown: #905846;
+--color-accent-teal: #4E9381;
+
+/* Badge backgrounds */
+--color-badge-light: #EAEEF2;
+--color-badge-dark: #2A2B2F;
+```
+
 ### Chart Colors
 
 ```css
@@ -127,6 +141,9 @@
 --gradient-primary: linear-gradient(135deg, #667EEA 0%, #764BA2 100%);
 --gradient-secondary: linear-gradient(135deg, #F093FB 0%, #F5576C 100%);
 --gradient-accent: linear-gradient(135deg, #4FACFE 0%, #00F2FE 100%);
+
+/* Градиент для оверлея изображений (View4) */
+--gradient-image-overlay: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 100%);
 ```
 
 ### Brand Icon Colors
@@ -157,6 +174,7 @@
 ### Font Sizes
 
 ```css
+--font-size-11: 0.6875rem;     /* 11px - для badge текста */
 --font-size-xs: 0.75rem;       /* 12px */
 --font-size-13: 0.8125rem;     /* 13px - для мелких subtitle */
 --font-size-sm: 0.875rem;      /* 14px */
@@ -386,6 +404,26 @@
 - **Shadows**: 7 уровней elevation (от shadow-elevation-1 до shadow-elevation-7)
 - **Использование**: Для демонстрации глубины и иерархии в интерфейсе
 
+#### Content Cards (View4)
+
+Карточки для отображения контента с изображениями, текстом и действиями.
+
+- **Ширина**: 375px (фиксированная для мобильных экранов)
+- **Border Radius**: 15px (radius-15)
+- **Padding**: 16px (horizontal), 10px (vertical)
+- **Варианты высот**:
+  - Recipe Card: 355px
+  - Hotel Card: 360px
+  - Movie Card: 400px
+  - Product Card: 531px
+- **Компоненты внутри карточек**:
+  - Badges: View4 Style (24px height)
+  - Buttons: Accent Button (36px height, #FFC043)
+  - Images: С градиентным оверлеем (gradient-image-overlay)
+  - Text Colors: #2A2B2F (заголовки), #905846 (описание), #4E9381 (цена/особые данные)
+  - Icons: 28px для действий
+  - Color Picker Dots: 14.40px × 14.40px, border 2px white, radius 20px
+
 #### Пример использования
 
 ```css
@@ -463,6 +501,17 @@
 - **States**:
   - Hover: Background: color-gray-100
 
+#### Accent Button (View4 Orange)
+
+- **Size**: Height: 36px, Padding: 10px 16px (vertical 10px, horizontal 16px)
+- **Radius**: 15px (radius-15)
+- **Font Size**: 18px (font-size-md)
+- **Font Weight**: 700 (bold)
+- **States**:
+  - Default: Background: #FFC043 (color-accent-orange), Color: white
+  - Hover: Background: darken(#FFC043, 10%), Transform: translateY(-1px)
+  - Active: Transform: translateY(0)
+
 ---
 
 ### 3. Inputs
@@ -498,7 +547,21 @@
 
 ### 4. Badges & Tags
 
-#### Badge
+#### Badge (View4 Style)
+
+- **Height**: 24px
+- **Padding**: 0px 10px (horizontal padding)
+- **Radius**: 10px (radius-10)
+- **Font Size**: 11px (font-size-11)
+- **Font Weight**: 600 (semibold)
+- **Variants**:
+  - Success: Background: #11BB8D, Color: white
+  - Light: Background: #EAEEF2, Color: color-text-primary
+  - Dark: Background: #23262B, Color: white
+  - Orange (semi-transparent): Background: rgba(255, 192, 67, 0.2), Color: #FFC043
+  - Custom: Background: любой цвет, Color: контрастный
+
+#### Badge (Classic Style)
 
 - **Padding**: 4px 8px
 - **Radius**: radius-full (9999px)
@@ -931,6 +994,7 @@
   - SM: 16px
   - Base: 20px (используется в NavBar)
   - MD: 24px (стандартный размер в NavBar)
+  - 28px: 28px (для действий в View4 карточках)
   - LG: 32px
   - XL: 48px
 - **Container Padding**: 2px для иконок 24px
