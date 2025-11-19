@@ -67,6 +67,17 @@
 --color-warning: #FFC043;          /* Желтый/золотой для price button */
 ```
 
+### Chart Colors
+
+```css
+/* Цвета для графиков из Flutter кода */
+--color-chart-primary: #4141E6;           /* Основной цвет для графиков */
+--color-chart-success: #0AFB6B;           /* Зеленый для графиков */
+--color-chart-blue-light: #0B24FB;        /* Светло-синий для точек */
+--color-chart-overlay-10: rgba(11, 36, 251, 0.1);  /* 0x190B24FB - прозрачность 10% */
+--color-chart-overlay-40: rgba(11, 36, 251, 0.4);  /* 0x660B24FB - прозрачность 40% */
+```
+
 ### Background Colors
 
 ```css
@@ -420,6 +431,29 @@ background: linear-gradient(90deg,
 --card-image-height-sm: 107px;  /* Высота изображения маленькой карточки */
 ```
 
+### Chart Elements Sizes (из Flutter кода)
+
+```css
+/* Размеры элементов графиков */
+--chart-bar-height: 16px;         /* Высота горизонтальных баров */
+--chart-dot-xs: 9px;              /* Минимальный размер точки */
+--chart-dot-sm: 12px;             /* Маленькая точка */
+--chart-dot-md: 14px;             /* Средняя точка */
+--chart-dot-lg: 17px;             /* Большая точка */
+--chart-dot-xl: 24px;             /* Очень большая точка */
+--chart-dot-2xl: 28px;            /* Максимальный размер точки */
+
+/* Размеры контейнеров графиков */
+--chart-bar-container-width: 375px;      /* Ширина Bar Chart */
+--chart-bar-container-height: 160px;     /* Высота Bar Chart */
+--chart-circular-container-width: 375px;  /* Ширина Circular Chart */
+--chart-circular-container-height: 240px; /* Высота Circular Chart */
+
+/* Spacing для графиков */
+--chart-bar-spacing-inline: 5px;   /* Spacing между барами в одной строке */
+--chart-bar-spacing-block: 20px;   /* Spacing между строками баров */
+```
+
 ### Containers & Panels
 
 ```css
@@ -699,11 +733,70 @@ background: linear-gradient(90deg,
 - **Grid Lines**: Color: color-gray-200, Width: 1px
 - **Colors**: Use chart colors (--color-chart-1 to --color-chart-8)
 
-#### Bar Chart
+#### Bar Chart (Horizontal Bars) - из Flutter кода
 
-- **Bar Spacing**: 8px
-- **Border Radius**: radius-sm (2px) на верхних углах
-- **Colors**: Use chart colors
+- **Layout**: Вертикальная колонка с горизонтальными барами
+- **Container Width**: 375px (chart-bar-container-width)
+- **Container Height**: 160px (chart-bar-container-height)
+- **Padding**: 16px horizontal, 0px vertical
+
+**Bar Element:**
+- **Height**: 16px (chart-bar-height)
+- **Border Radius**: 100px только на правой стороне (topRight, bottomRight)
+- **Border Radius Left**: 0px (прямые углы слева)
+- **Width**: Динамическая, зависит от значения данных
+
+**Colors:**
+- **Primary Bar**: #4141E6 (color-chart-primary)
+- **Success Bar**: #0AFB6B (color-chart-success)
+- **Варианты**: Цвета чередуются в зависимости от данных
+
+**Spacing:**
+- **Между барами в одной строке**: 5px (chart-bar-spacing-inline)
+- **Между строками баров**: 20px (chart-bar-spacing-block)
+
+**Использование:**
+- Горизонтальные bar charts для визуализации данных
+- Показ прогресса или сравнение значений
+- Двухцветная схема для категоризации данных
+
+#### Circular/Dot Chart - из Flutter кода
+
+- **Layout**: Позиционированные точки (dots) в контейнере
+- **Container Width**: 375px (chart-circular-container-width)
+- **Container Height**: 240px (chart-circular-container-height)
+- **Positioning**: Absolute positioning для каждой точки
+
+**Dot Elements (Точки):**
+- **Size XS**: 9px (chart-dot-xs)
+- **Size SM**: 12px (chart-dot-sm)
+- **Size MD**: 14px (chart-dot-md)
+- **Size LG**: 17px (chart-dot-lg)
+- **Size XL**: 24px (chart-dot-xl)
+- **Size 2XL**: 28px (chart-dot-2xl)
+- **Shape**: Круг (border-radius: 50%)
+
+**Colors с вариациями прозрачности:**
+- **Primary Solid**: #4141E6 (color-chart-primary) - для основных точек
+- **Blue Light Solid**: #0B24FB (color-chart-blue-light) - альтернативный синий
+- **Overlay 10%**: rgba(11, 36, 251, 0.1) (color-chart-overlay-10) - минимальная прозрачность
+- **Overlay 40%**: rgba(11, 36, 251, 0.4) (color-chart-overlay-40) - средняя прозрачность
+
+**Text Labels:**
+- **Font Size**: 10px (font-size-10)
+- **Font Weight**: 400 (regular)
+- **Color**: #09101D (color-text-primary)
+- **Использование**: Год или категория под точками
+
+**Особенности:**
+- Размер точек зависит от значения данных
+- Прозрачность используется для визуализации вторичных или фоновых данных
+- Абсолютное позиционирование позволяет создавать кастомные паттерны
+
+**Использование:**
+- Визуализация данных по временным периодам (годы, месяцы)
+- Показ трендов и распределения
+- Создание кастомных circular layouts для данных
 
 #### Pie/Donut Chart
 
@@ -1033,9 +1126,18 @@ background: linear-gradient(90deg,
 
 ## Версионирование и обновления
 
-**Текущая версия**: v5.0.2
+**Текущая версия**: v5.0.3
 
 ### Changelog
+
+#### v5.0.3 (2025-11-19)
+- Добавлены цвета для графиков: chart-primary (#4141E6), chart-success (#0AFB6B), chart-blue-light (#0B24FB)
+- Добавлены цвета overlay для графиков с прозрачностью 10% и 40%
+- Добавлены размеры элементов графиков: dots (9px-28px), bars (16px height)
+- Добавлены размеры контейнеров для графиков: Bar Chart (375x160), Circular Chart (375x240)
+- Добавлен spacing для графиков: 5px между барами, 20px между строками
+- Добавлен полный Bar Chart компонент с горизонтальными барами из Flutter кода
+- Добавлен полный Circular/Dot Chart компонент с различными размерами точек и прозрачностью
 
 #### v5.0.2 (2025-11-19)
 - Добавлены акцентные цвета: success (#11BB8D), warning (#FFC043)
