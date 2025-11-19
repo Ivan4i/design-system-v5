@@ -60,6 +60,7 @@
 --color-accent-yellow: #FFC043;    /* Желтый/золотой для charts из Flutter */
 --color-success: #11BB8D;          /* Зеленый для success badges из Flutter */
 --color-error: #DA1414;            /* Красный для destructive actions из Flutter (delete, remove) */
+--color-notification: #E24949;     /* Красный для notification badges из Flutter (active notifications, alerts) */
 ```
 
 ### Background Colors
@@ -653,7 +654,99 @@
 
 ---
 
-### 6. Badges & Tags (Flutter Mobile)
+### 6. Segmented Control (Flutter Mobile)
+
+#### Segmented Control (2-3 Segments)
+
+**Container**:
+- Width: 375px (mobile screen width)
+- Height: 41px
+- Padding: 16px-17px horizontal, 5px vertical
+- Clip Behavior: antiAlias
+
+**Background Track**:
+- Background: #F4F6F9 (color-bg-light)
+- Border Radius: 8px
+- Padding: 2px all (inner padding для сегментов)
+
+**Segment (Selected)**:
+- Background: white (#FFFFFF)
+- Border Radius: 8px
+- Shadow: rgba(0, 0, 0, 0.10) blur 4px, offset (0, 1), spread 0
+- Text: Archivo 13px, weight 600, color #09101D
+- Padding: 5px vertical
+- Text Align: center
+
+**Segment (Unselected)**:
+- Background: transparent
+- Border Radius: 8px
+- Text: Archivo 13px, weight 600, color #09101D
+- Padding: 5px vertical
+- Text Align: center
+
+**Layouts**:
+- **2 Segments**: Row with 2 expanded items, spacing 10px
+- **3 Segments**: Row with 3 expanded items, spacing 2px
+
+**Usage**: Toggle между двумя или тремя опциями (например, выбор валюты, периода, режима)
+
+---
+
+### 7. Tabs (Flutter Mobile)
+
+#### Tab Bar
+
+**Container**:
+- Width: 375px (mobile screen width)
+- Background: white (#FFFFFF)
+- Clip Behavior: antiAlias
+
+**Tab Item**:
+- Height: 52px
+- Padding: 10px horizontal
+- Row spacing: 8px (между элементами)
+
+**Tab Variants**:
+- **2 Tabs**: Row with 2 expanded items
+- **3 Tabs**: Row with 3 expanded items
+- **4+ Tabs**: Row with start alignment (scrollable)
+
+**Tab Elements**:
+- **Icon** (optional):
+  - Size: 20px × 20px
+  - Padding: 2px
+  - Border Radius: 100px
+  - Container: Stack для иконки
+- **Text**:
+  - Font: Archivo 14px, weight 600
+  - Color: #09101D (color-text-primary)
+  - Line Height: 1.40
+- **Badge** (optional):
+  - Height: 20px
+  - Padding: 4px horizontal, 2px vertical
+  - Border Radius: 20px
+  - Text: white, 10px, weight 600, line-height 1.40
+  - Content: число (например, "11")
+
+**Badge Variants**:
+- **Active/Notification**:
+  - Background: #E24949 (color-notification)
+  - Text: white
+- **Inactive/Count**:
+  - Background: #414249 (color-text-tertiary)
+  - Text: white
+
+**Tab States**:
+- **Active**:
+  - Bottom border: 2px solid #23262B (color-bg-dark-secondary)
+- **Inactive**:
+  - Bottom border: 2px solid #F4F6F9 (color-bg-light)
+
+**Usage**: Навигация между разделами, с опциональными иконками и счетчиками уведомлений
+
+---
+
+### 8. Badges & Tags (Flutter Mobile)
 
 #### Live Badge (Instagram-style)
 
@@ -694,7 +787,7 @@
 
 ---
 
-### 7. Forms
+### 9. Forms
 
 #### Form Layout
 
@@ -714,7 +807,7 @@
 
 ---
 
-### 8. Tables
+### 10. Tables
 
 #### Table Structure
 
@@ -733,7 +826,7 @@
 
 ---
 
-### 9. Navigation
+### 11. Navigation
 
 #### Main Navigation
 
@@ -757,7 +850,7 @@
 
 ---
 
-### 10. Charts
+### 12. Charts
 
 #### Line Chart
 
@@ -814,7 +907,7 @@
 
 ---
 
-### 11. Avatars (Flutter Mobile)
+### 13. Avatars (Flutter Mobile)
 
 #### Sizes
 
@@ -851,7 +944,7 @@
 
 ---
 
-### 12. List Items
+### 14. List Items
 
 #### List Item
 
@@ -865,7 +958,7 @@
 
 ---
 
-### 13. Messages / Notifications
+### 15. Messages / Notifications
 
 #### Toast Notification
 
@@ -886,7 +979,7 @@
 
 ---
 
-### 14. Panels & Cards
+### 16. Panels & Cards
 
 #### Side Panel
 
@@ -909,7 +1002,7 @@
 
 ---
 
-### 15. Accordion / FAQ
+### 17. Accordion / FAQ
 
 #### Accordion Item
 
@@ -924,7 +1017,7 @@
 
 ---
 
-### 16. Loading States
+### 18. Loading States
 
 #### Skeleton Loader
 
@@ -941,7 +1034,7 @@
 
 ---
 
-### 17. Empty States
+### 19. Empty States
 
 #### Empty State Layout
 
@@ -956,7 +1049,7 @@
 
 ---
 
-### 18. Special Effects
+### 20. Special Effects
 
 #### Focus Ring
 
@@ -1570,13 +1663,26 @@ Icon Button (40px):
   - Dropdown/Context Menu: 333px width items, 16px/8px padding
   - Destructive actions: #DA1414 (color-error)
   - Menu item variants: top rounded, middle flat, bottom rounded
+- Segmented Control (Flutter Mobile):
+  - Container: 375×41px, padding 16-17px/5px
+  - Background track: #F4F6F9, border-radius 8px, padding 2px
+  - Selected segment: white background, shadow, Archivo 13px weight 600
+  - Layouts: 2 segments (spacing 10px), 3 segments (spacing 2px)
+- Tabs Component (Flutter Mobile):
+  - Tab bar: 375px width, white background, height 52px
+  - Tab padding: 10px horizontal, spacing 8px
+  - Optional elements: icon (20px), badge (20px height)
+  - Badge variants: Active (#E24949 notification), Inactive (#414249)
+  - Tab states: Active (2px border #23262B), Inactive (2px border #F4F6F9)
+  - Typography: Archivo 14px weight 600, badge text 10px weight 600
 - Mobile Layout Patterns (375px width)
 - Spacing values: 5px, 10px, 15px, 20px, 50px, 70px
-- Border radius values: 10px, 11px, 12px, 15px, 16px
+- Border radius values: 8px, 10px, 11px, 12px, 15px, 16px
 - Typography: Archivo (10px-16px, weights 400-900, line-height 1.20-1.40)
 - Colors:
   - Added #23262B (bg-dark-secondary) для picker items
   - Added #DA1414 (error) для destructive actions
+  - Added #E24949 (notification) для активных уведомлений и badges
 - Layout patterns и Best practices
 
 ---
