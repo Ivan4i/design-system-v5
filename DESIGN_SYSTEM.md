@@ -45,19 +45,29 @@
 /* Semantic Colors - Status States */
 --color-success: #11BB8D;           /* Color(0xFF11BB8D) - green/success */
 --color-success-light: #0AFB6B;     /* Color(0xFF0AFB6B) - light green indicator */
+--color-success-overlay: #0C11BB8D; /* Color(0x0C11BB8D) - green with ~5% opacity (0x0C = 12) */
 --color-info: #0B24FB;              /* Color(0xFF0B24FB) - blue/info */
 --color-info-transparent: #0B24FBCC; /* Color(0xCC0B24FB) - blue with 80% opacity */
 --color-error: #E24949;             /* Color(0xFFE24949) - red/error */
 --color-warning: #FF9500;           /* Color(0xFFFF9500) - orange/warning */
 --color-warning-alt: #FF9F0A;       /* Color(0xFFFF9F0A) - orange alternative */
+
+/* Accent Colors */
+--color-accent-orange: #FF6937;     /* Color(0xFFFF6937) - orange accent for labels */
+
+/* Overlay/Gradient Colors */
+--color-overlay-start: #00080808;   /* Color(0x00080808) - transparent black (gradient start) */
+--color-overlay-end: #7F080808;     /* Color(0x7F080808) - semi-transparent black ~50% (gradient end, 0x7F = 127) */
 ```
 
 **Использование цветов в проекте:**
-- **Backgrounds**: #12202F (dark theme), #F4F6F9 (light containers), #FFFFFF (white cards)
-- **Text**: #09101D (primary), #747B84 (secondary/placeholder), #FFFFFF (inverse)
+- **Backgrounds**: #12202F (dark theme), #F4F6F9 (light containers), #FFFFFF (white cards), #09101D (dark cards)
+- **Text**: #09101D (primary), #747B84 (secondary/placeholder), #FFFFFF (inverse), #FF6937 (orange accent)
 - **Borders**: #09101D (dark), #7B61FF (purple accent), 1px width
 - **Status Indicators**: #11BB8D (success), #0B24FB (info), #E24949 (error), #FF9500 (warning)
 - **Badge dots**: 6×6px oval shapes with status colors
+- **Overlays**: Linear gradients from transparent to semi-transparent black for image overlays
+- **Tinted backgrounds**: #0C11BB8D (5% green tint)
 
 ### Primary Colors
 
@@ -156,6 +166,12 @@
 --gradient-primary: linear-gradient(135deg, #667EEA 0%, #764BA2 100%);
 --gradient-secondary: linear-gradient(135deg, #F093FB 0%, #F5576C 100%);
 --gradient-accent: linear-gradient(135deg, #4FACFE 0%, #00F2FE 100%);
+
+/* Реальные градиенты из проекта */
+--gradient-image-overlay: linear-gradient(180deg, rgba(8, 8, 8, 0) 0%, rgba(8, 8, 8, 0.5) 100%);
+/* begin: Alignment(0.50, -0.00), end: Alignment(0.50, 1.00)
+   colors: [Color(0x00080808), Color(0x7F080808)]
+   Vertical gradient from transparent to 50% black */
 ```
 
 ### Brand Icon Colors
@@ -180,23 +196,34 @@
 /* Реальная типографика из проекта */
 --font-project: 'Archivo';          /* fontFamily: 'Archivo' */
 --font-size-display: 4.5rem;        /* 72px - fontSize: 72 - Display headers */
+--font-size-h1: 2rem;               /* 32px - fontSize: 32 - Large card titles */
+--font-size-h2: 1.625rem;           /* 26px - fontSize: 26 - Medium card titles */
+--font-size-h3: 1.5rem;             /* 24px - fontSize: 24 - Card headers, section titles */
 --font-size-base: 1rem;             /* 16px - fontSize: 16 - Body text, buttons */
+--font-size-small-plus: 0.8125rem;  /* 13px - fontSize: 13 - Small buttons, secondary text */
 --font-size-small: 0.75rem;         /* 12px - fontSize: 12 - Status bar, small text */
+--font-size-xs: 0.6875rem;          /* 11px - fontSize: 11 - Captions, fine print */
 --font-weight-ultra: 800;           /* fontWeight: FontWeight.w800 */
+--font-weight-bold: 700;            /* fontWeight: FontWeight.w700 */
 --font-weight-semibold: 600;        /* fontWeight: FontWeight.w600 */
 --font-weight-normal: 400;          /* fontWeight: FontWeight.w400 */
 --line-height-tight: 0.70;          /* height: 0.70 - Display headers */
 --line-height-compact: 1.33;        /* height: 1.33 - Small text */
---line-height-normal: 1.40;         /* height: 1.40 - Body text */
+--line-height-normal: 1.40;         /* height: 1.40 - Body text, all cards */
 --letter-spacing-tight: -0.05em;    /* letterSpacing: -0.05 - Tight spacing */
 ```
 
 **Использование в проекте:**
-- **Grid Title**: Font: 'Archivo', Size: 72px, Weight: 800 (extrabold), Line Height: 0.70, Color: #09101D
-- **Status Bar Time**: Font: 'Archivo', Size: 12px, Weight: 600 (semibold), Line Height: 1.33, Color: #09101D / white
-- **Status Bar Text**: Font: 'Archivo', Size: 12px, Weight: 400 (normal), Line Height: 1.33, Letter Spacing: -0.05, Color: #09101D / white
-- **Search Placeholder**: Font: 'Archivo', Size: 16px, Weight: 400, Line Height: 1.40, Color: #747B84
-- **Cancel Button**: Font: 'Archivo', Size: 16px, Weight: 400, Line Height: 1.40, Color: #0B24FB
+- **Display Headers**: Size: 72px, Weight: 800, Line Height: 0.70, Color: #09101D
+- **Large Card Titles**: Size: 32px, Weight: 700, Line Height: 1.40, Color: white (on images)
+- **Medium Card Titles**: Size: 26px, Weight: 700, Line Height: 1.40, Color: white
+- **Card Headers**: Size: 24px, Weight: 700, Line Height: 1.40, Color: white / #09101D
+- **Body Text**: Size: 16px, Weight: 400, Line Height: 1.40, Color: white / #747B84
+- **Card Labels**: Size: 16px, Weight: 700, Line Height: 1.40, Color: #FF6937 (orange accent)
+- **Small Buttons**: Size: 13px, Weight: 600, Line Height: 1.40, Color: #09101D / white
+- **Status Bar Time**: Size: 12px, Weight: 600, Line Height: 1.33, Color: #09101D / white
+- **Status Bar Text**: Size: 12px, Weight: 400, Line Height: 1.33, Letter Spacing: -0.05
+- **Captions**: Size: 11px, Weight: 400, Line Height: 1.40, Color: white
 
 ### Font Family
 
@@ -280,24 +307,28 @@
 
 ```css
 /* Реальные отступы из проекта */
---space-project-1: 0.25rem;     /* 4px - Row spacing, vertical padding */
---space-project-1-25: 0.3125rem; /* 5px - left padding */
+--space-project-1: 0.25rem;     /* 4px - Row spacing, vertical padding, Column spacing */
+--space-project-1-25: 0.3125rem; /* 5px - left padding, Column spacing */
 --space-project-1-75: 0.4375rem; /* 7px - vertical padding */
---space-project-2: 0.5rem;      /* 8px - padding */
---space-project-xs: 0.625rem;   /* 10px - spacing: 10, EdgeInsets.all(10), Row spacing */
---space-project-sm: 1rem;       /* 16px - horizontal padding, positioning */
---space-project-md: 3.125rem;   /* 50px - container padding, Row/Column gap */
---space-project-lg: 6.25rem;    /* 100px - left: 100, top: 100, Row gap */
---space-project-xl: 12.5rem;    /* 200px - top: 200 */
+--space-project-2: 0.5rem;      /* 8px - padding, Row/Column spacing */
+--space-project-xs: 0.625rem;   /* 10px - spacing: 10, EdgeInsets.all(10), Row/Column spacing, padding */
+--space-project-sm: 1rem;       /* 16px - horizontal padding, positioning, icon padding */
+--space-project-md: 1.25rem;    /* 20px - padding: 20, all sides */
+--space-project-lg: 2rem;       /* 32px - padding: 32, all sides */
+--space-project-xl: 3.125rem;   /* 50px - container padding, Row/Column gap */
+--space-project-2xl: 4.375rem;  /* 70px - Row spacing */
+--space-project-3xl: 6.25rem;   /* 100px - padding: 100, Row/Column gap, positioning */
+--space-project-4xl: 12.5rem;   /* 200px - top: 200 */
+--space-project-5xl: 14.75rem;  /* 236px - Column spacing (for large gaps) */
 ```
 
 **Использование в проекте:**
-- **Micro spacing**: 4px (Row spacing), 5px (left padding), 7px (vertical padding), 8px (padding)
-- **Small spacing**: 10px (gap между элементами, EdgeInsets.all, Row spacing)
-- **Medium spacing**: 16px (horizontal padding, content positioning)
-- **Large spacing**: 50px (container padding all(), Row/Column gap: 50, 100)
-- **XLarge spacing**: 100px (grid positioning left/top)
-- **XXLarge spacing**: 200px (top positioning)
+- **Micro**: 4px (Row/Column spacing), 5px (padding), 8px (spacing, padding)
+- **Small**: 10px (gap, EdgeInsets, Row/Column spacing)
+- **Medium**: 16px (horizontal padding, icon padding), 20px (padding all sides, card padding)
+- **Large**: 32px (padding all sides), 50px (container padding)
+- **XLarge**: 70px (Row spacing between elements), 100px (padding all, Row/Column gap, positioning)
+- **XXLarge**: 200px (top positioning), 236px (Column spacing for large gaps)
 
 ### Spacing Scale
 
@@ -326,17 +357,19 @@
 
 ```css
 /* Реальные border radius из проекта */
---radius-project-sm: 0.9375rem;       /* 15px - BorderRadius.circular(15) - containers, search bars */
+--radius-project-sm: 0.9375rem;       /* 15px - BorderRadius.circular(15) - containers, search bars, buttons */
+--radius-project-base: 1.25rem;       /* 20px - BorderRadius.circular(20) - cards, images */
 --radius-project-md: 2rem;            /* 32px - BorderRadius.circular(32) - badges, pills */
 --radius-project-lg: 2.5rem;          /* 40px - BorderRadius.circular(40) - phone container */
---radius-project-xl: 6.25rem;         /* 100px - BorderRadius.circular(100) - main container */
+--radius-project-xl: 6.25rem;         /* 100px - BorderRadius.circular(100) - main container, icons */
 ```
 
 **Использование в проекте:**
-- **Container/Cards**: BorderRadius.circular(15) = 15px radius (main containers, search bars)
-- **Badges/Pills**: BorderRadius.circular(32) = 32px radius (status badges, rounded elements)
+- **Buttons/Search**: BorderRadius.circular(15) = 15px radius
+- **Cards/Images**: BorderRadius.circular(20) = 20px radius (most common for content cards)
+- **Badges/Pills**: BorderRadius.circular(32) = 32px radius
 - **Phone Container**: BorderRadius.circular(40) = 40px radius
-- **Main Container**: BorderRadius.circular(100) = 100px radius
+- **Main Container/Icons**: BorderRadius.circular(100) = 100px radius (fully rounded)
 
 #### Standard Border Radius
 
@@ -537,6 +570,58 @@
 - **Padding**: 50px (all sides)
 - **Content Layout**: Column/Row with spacing: 50px, 100px
 - **Clip Behavior**: Clip.antiAlias
+
+#### Big Vertical Card (Image Card with Overlay)
+- **Container Size**: 375px width, 430px height
+- **Padding**: horizontal: 16px, vertical: 10px
+- **Border Radius**: 20px (circular(20))
+- **Image Card**:
+  - **Size**: 343px × 430px (Expanded)
+  - **Border Radius**: 20px
+  - **Image Fit**: BoxFit.cover
+  - **Layout**: Column with spaceBetween alignment, spacing: 236px
+- **Top Section** (padding: 20px):
+  - **Title**: "Open your eyes", Font: 'Archivo', Size: 24px, Weight: 700, Color: white
+  - **Label**: "Serial", Font: 'Archivo', Size: 16px, Weight: 700, Color: #FF6937 (orange)
+  - **Spacing**: 4px between title and label
+- **Bottom Section** (padding: 20px):
+  - **Button Row**: spacing: 10px, alignment: end
+  - **Icon Button**: Height: 44px, Background: #747B84 (gray), Border Radius: 15px, Padding: 16×10, Icon: 20×20px
+  - **Text Button**: "Save", Height: 44px, Background: #747B84, Border Radius: 15px, Padding: 16×10, Font: 'Archivo', Size: 16px, Weight: 700, Color: white
+
+#### Medium Card with Gradient Overlay
+- **Container**: 375px × 420px, padding: 16×10, Border Radius: 20px
+- **Image**: 343px × 400px, Border Radius: 20px
+- **Gradient Overlay**: Linear gradient (0.50, -0.00) to (0.50, 1.00), colors: #00080808 to #7F080808
+- **Content Container** (positioned over gradient):
+  - **Width**: 343px, clipBehavior: Clip.antiAlias, spacing: 5px
+  - **Title**: "Get your Kitchen Crew recipe", Size: 32px, Weight: 700, Color: white, padding-left: 10px
+  - **CTA Section**: Background: #0C11BB8D (5% green tint), padding: 20px
+    - **Description**: "Join 1M+ Kitchen Crew community...", Size: 11px, Weight: 400, Color: white, Width: 239px
+    - **Button**: "Get", Height: 36px, Background: #F4F6F9, Border Radius: 15px, Padding: 16×10, Font: Size: 13px, Weight: 600, Color: #09101D
+
+#### Article Card with Gradient
+- **Container**: 375px × 380px, padding: 16×10
+- **Image**: 343px × 360px, Border Radius: 20px
+- **Gradient Overlay**: Same as medium card (#00080808 to #7F080808)
+- **Content** (positioned at bottom, padding: 10px, spacing: 5px):
+  - **Title**: "4 Muscle Recovery Smoothies...", Size: 26px, Weight: 700, Color: white, Width: 323px
+  - **Excerpt**: "After a grueling gym session...", Size: 16px, Weight: 400, Color: white, Width: 323px
+
+#### Promotional Card (Dark Background)
+- **Container**: 375px width, padding: 16×10, Border Radius: 20px
+- **Top Section**: Background: #09101D, padding: 32px, Border Radius: top-left/top-right: 20px
+  - **Title**: "New program", Size: 24px, Weight: 700, Color: white, Align: center
+  - **Subtitle**: "Try our new crossfit program...", Size: 13px, Weight: 400, Color: white, Align: center
+  - **Spacing**: 20px between sections, 4px between title/subtitle
+  - **Button**: "Learn more", Height: 36px, Background: white, Border Radius: 15px, Padding: 16×10, Icon: 16×16px, Font: Size: 13px, Weight: 600, Color: #09101D
+- **Bottom Section**: Image 343px × 174px, Border Radius: bottom-left/bottom-right: 20px
+
+#### Button Variants from Cards
+- **Icon Button**: Height: 44px, Background: #747B84, Border Radius: 15px, Padding: 16×10, Icon: 20×20px (rounded: 100px)
+- **Text Button**: Height: 44px, Background: #747B84, Border Radius: 15px, Padding: 16×10, Font: 16px/700
+- **Small Button**: Height: 36px, Background: white/#F4F6F9, Border Radius: 15px, Padding: 16×10, Font: 13px/600
+- **Button with Icon**: Icon: 16×16px (padding: 2px, rounded: 100px), spacing: 8px
 
 ---
 
